@@ -1,0 +1,40 @@
+
+<div class="card card-product">
+    <div class="card-image" data-header-animation="true">
+        <a href="#pablo">
+            <img class="img" src="http://res.cloudinary.com/privadia/image/upload/c_fill,h_280,w_430/c_fill,q_80/{{villa.ImageId}}.jpg">
+        </a>
+    </div>
+    <div class="card-content">
+        <div class="card-actions">
+            <button type="button" class="btn btn-danger btn-simple fix-broken-card">
+                <i class="material-icons">build</i> Fix Header!
+            </button>
+            <button type="button" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="View">
+                <i class="material-icons">art_track</i>
+            </button>
+            <button type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Edit">
+                <i class="material-icons">edit</i>
+            </button>
+            <button type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Remove">
+                <i class="material-icons">close</i>
+            </button>
+        </div>
+        <h4 class="card-title">
+            <a href="#pablo">{{villa.Name}}</a>
+        </h4>
+        <div class="card-description">
+            <span>{{villa.Bedrooms}}</span> Bedrooms
+            <span>{{villa.Bathrooms}}</span> Bathrooms
+            <span>{{villa.Sleeps}}</span> Sleeps
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="rate">
+            <h4>Rate: {{roundRate(villa.TotalRate)}}</h4>
+        </div>
+        <div class="stats pull-right">
+            <p class="category"><i class="material-icons">place</i> London, UK</p>
+        </div>
+    </div>
+</div>

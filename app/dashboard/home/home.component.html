@@ -1,0 +1,12 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row filter">
+            
+        </div>
+
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor=" let item of villas; let i = index " >
+            <villa-cmp [villa]="item"></villa-cmp>
+        </div>
+
+    </div>
+</div>
