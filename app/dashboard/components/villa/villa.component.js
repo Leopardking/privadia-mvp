@@ -13,14 +13,43 @@ var VillaComponent = (function () {
     function VillaComponent() {
     }
     VillaComponent.prototype.ngOnInit = function () {
+        this.villaInfo = this.getInfo();
     };
     VillaComponent.prototype.roundRate = function (rate) {
         return parseFloat(rate).toFixed(2);
+    };
+    VillaComponent.prototype.getRichInfo = function () {
+        return "<b>" + this.villa.Name + "</b>" +
+            "<br>" + this.villa.Bedrooms.toString() +
+            ((this.villa.Bedrooms === 1) ? " Bedroom" : " Bedrooms") +
+            " | " + this.villa.CollaboratorInitials +
+            "<br>Area: " + this.region +
+            "<br>Full Info: <a href='" + this.villa.BoxUrl + "'>" +
+            this.villa.BoxUrl + "</a>" +
+            "<br><b><u>Price: €" + this.villa.TotalRate + "</u></b><br><br><br>";
+    };
+    VillaComponent.prototype.getInfo = function () {
+        return this.villa.Name +
+            "\n" + this.villa.Bedrooms.toString() +
+            ((this.villa.Bedrooms === 1) ? " Bedroom" : " Bedrooms") +
+            " | " + this.villa.CollaboratorInitials +
+            "\nArea: " + this.region +
+            "\nFull Info: " + this.villa.BoxUrl +
+            "\nPrice: €" + this.villa.TotalRate + '\n\n';
+    };
+    VillaComponent.prototype.copy = function () {
+        /// TS_IGNORE
+        //document.getElementById('villainfo-'+this.villa.Id).select();
+        document.execCommand('copy');
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
     ], VillaComponent.prototype, "villa", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], VillaComponent.prototype, "region", void 0);
     VillaComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

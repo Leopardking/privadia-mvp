@@ -9,16 +9,50 @@ import { Component, OnInit, Input } from '@angular/core';
 export class VillaComponent implements OnInit{
 
     @Input() villa;
+    @Input() region;
 
-    constructor ( ) {
+    public villaInfo: string;
+    private villaRegion: string;
+
+    constructor (  ) {
 
     }
 
     ngOnInit() {
+        this.villaInfo = this.getInfo();
         
     }
 
     public roundRate(rate) {
         return parseFloat(rate).toFixed(2);
+    }
+
+    private getRichInfo() {
+        return "<b>" + this.villa.Name + "</b>" +
+            "<br>" + this.villa.Bedrooms.toString() +
+            ((this.villa.Bedrooms === 1) ? " Bedroom" : " Bedrooms") +
+            " | " + this.villa.CollaboratorInitials +
+            "<br>Area: " + this.region +
+            "<br>Full Info: <a href='" + this.villa.BoxUrl + "'>" +
+            this.villa.BoxUrl + "</a>" +
+            "<br><b><u>Price: €" + this.villa.TotalRate + "</u></b><br><br><br>";
+    }
+
+    private getInfo() {
+        return this.villa.Name +
+            "\n" + this.villa.Bedrooms.toString() +
+            ((this.villa.Bedrooms === 1) ? " Bedroom" : " Bedrooms") +
+            " | " + this.villa.CollaboratorInitials +
+            "\nArea: " + this.region +
+            "\nFull Info: " + this.villa.BoxUrl +
+            "\nPrice: €" + this.villa.TotalRate + '\n\n';
+    }
+
+    private copy() {
+
+        /// TS_IGNORE
+        //document.getElementById('villainfo-'+this.villa.Id).select();
+
+        document.execCommand('copy');
     }
 }

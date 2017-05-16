@@ -10,11 +10,11 @@
             <button type="button" class="btn btn-danger btn-simple fix-broken-card">
                 <i class="material-icons">build</i> Fix Header!
             </button>
-            <button type="button" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="View">
+            <a href="{{villa.BoxUrl}}" target="_blank" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="View">
                 <i class="material-icons">art_track</i>
-            </button>
-            <button type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Edit">
-                <i class="material-icons">edit</i>
+            </a>
+            <button type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Copy" (click)="copy()">
+                <i class="material-icons">copyright</i>
             </button>
             <button type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Remove">
                 <i class="material-icons">close</i>
@@ -34,7 +34,8 @@
             <h4>Rate: {{roundRate(villa.TotalRate)}}</h4>
         </div>
         <div class="stats pull-right">
-            <p class="category"><i class="material-icons">place</i> London, UK</p>
+            <p class="category"><i class="material-icons">place</i> {{region}}</p>
         </div>
+        <textarea id="villainfo-{{villa.Id}}" class="villainfotext" readonly="true" name="villainfo-{{villa.Id}}">{{villaInfo}}</textarea>
     </div>
 </div>
