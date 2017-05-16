@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var homeservice_1 = require('../../../app/services/homeservice');
 var login_service_1 = require('../../../app/services/login/login.service');
+var properties_service_1 = require('../../../app/services/properties/properties.service');
 var HomeComponent = (function () {
-    function HomeComponent(mainService, loginService) {
+    function HomeComponent(mainService, loginService, propertiesService) {
         this.mainService = mainService;
         this.loginService = loginService;
+        this.propertiesService = propertiesService;
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     HomeComponent.prototype.ngOnInit = function () {
@@ -22,7 +24,12 @@ var HomeComponent = (function () {
         this.loginService.login("steve@freelancemvc.net", "password")
             .subscribe(function (d) {
             _this.mainService.setToken(d.token_type + ' ' + d.access_token);
-            _this.mainService.getVillas().subscribe(function (d) { _this.villas = d; }, function (e) { console.log("error:", e); });
+            _this.mainService.getVillas().subscribe(function (d) {
+                _this.villas = d;
+            }, function (e) { console.log("error:", e); });
+            _this.propertiesService.getregions().subscribe(function (d) {
+                _this.regions = d;
+            }, function (e) { console.log(e); });
         }, function (e) { console.log("error:", e); });
     };
     HomeComponent = __decorate([
@@ -31,7 +38,7 @@ var HomeComponent = (function () {
             selector: ' home-cmp ',
             templateUrl: 'home.component.html'
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, login_service_1.LoginService])
+        __metadata('design:paramtypes', [homeservice_1.MainService, login_service_1.LoginService, properties_service_1.PropertiesService])
     ], HomeComponent);
     return HomeComponent;
 }());
