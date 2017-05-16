@@ -20,6 +20,10 @@ export class MainService {
 		this.token = token;
 	}
 
+	public getToken() {
+		return this.token;
+	}
+
 	// Fixes Local Time to UTC offsets.
 	private dateToDateTime(pDate) {
 		var mDate = new Date(pDate);
@@ -37,8 +41,6 @@ export class MainService {
 		header.append('Authorization', this.token );
 
 		let options = new RequestOptions({ headers: header });
-
-		console.log(options);
 
 		return this.http.post(this.apiUrl + '/api/properties/searchavailable', this.filter.getCompat(), options)
 			.map(this.extractVillaData)

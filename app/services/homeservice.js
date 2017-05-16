@@ -23,6 +23,9 @@ var MainService = (function () {
     MainService.prototype.setToken = function (token) {
         this.token = token;
     };
+    MainService.prototype.getToken = function () {
+        return this.token;
+    };
     // Fixes Local Time to UTC offsets.
     MainService.prototype.dateToDateTime = function (pDate) {
         var mDate = new Date(pDate);
@@ -37,7 +40,6 @@ var MainService = (function () {
         var header = new http_1.Headers();
         header.append('Authorization', this.token);
         var options = new http_1.RequestOptions({ headers: header });
-        console.log(options);
         return this.http.post(this.apiUrl + '/api/properties/searchavailable', this.filter.getCompat(), options)
             .map(this.extractVillaData)
             .catch(this.handleError);
