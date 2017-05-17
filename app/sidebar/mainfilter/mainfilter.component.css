@@ -1,0 +1,48 @@
+#main-filter .card {
+	margin: 0 0 0 20px;
+	width: calc(100% - 40px);
+}
+
+#main-filter .card .card-content {
+	padding: 5px 15px;
+}
+
+#main-filter .card .card-content .form-group .budget {
+	height: 110px;
+}
+
+#main-filter .card .card-content .form-group .date {
+	height: 170px;
+}
+
+#main-filter .card .card-content .form-group .date .check-in {
+	padding-bottom: 5px;
+}
+
+#main-filter .card .card-content .form-group .filter-title-text {
+	padding-bottom: 8px;
+}
+
+#main-filter .card .card-content .form-group .bedrooms {
+	height: 70px;
+}
+
+#main-filter .card .card-content .form-group .bedrooms #sliderBedroom {
+	position: relative;
+	left: 20px;
+	width: calc(100% - 40px);
+}
+
+#main-filter .card .card-content .form-group .locations >div {
+	margin-left: 15px;
+	margin-bottom: 0;
+}
+
+#main-filter .card .card-content .form-group .locations >div label {
+	margin-left: 10px;
+}
+
+#main-filter .card .apply-button {
+	margin: 10px 20px;
+	width: calc(100% - 40px);
+}
