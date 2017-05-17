@@ -10,95 +10,96 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var homeservice_1 = require('../../../app/services/homeservice');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var PropertiesService = (function () {
-    function PropertiesService(http, mainService) {
+    function PropertiesService(http) {
         this.http = http;
-        this.mainService = mainService;
         this.apiUrl = 'http://privadia-production.azurewebsites.net';
     }
+    PropertiesService.prototype.setToken = function (str) {
+        this.token = str;
+    };
     PropertiesService.prototype.getAllProperties = function () {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/properties/', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.getPropertyById = function (id) {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/properties/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.updateProperty = function (data) {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.post(this.apiUrl + '/api/properties/', data, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.addProperty = function (data) {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.post(this.apiUrl + '/api/properties/', data, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.deleteProperty = function (id) {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.delete(this.apiUrl + '/api/properties/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.getregions = function () {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/lookups/getregions', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.getOwners = function () {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/lookups/getowners', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.getPoITypes = function () {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/lookups/getPointOfInterestTypes', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.getMetaData = function () {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/lookups/getMetaData', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.getChildrenAllowed = function () {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetChildrenOptions', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.getBookings = function (id) {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/bookings/property/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     PropertiesService.prototype.getHousekeepingOptions = function () {
-        var header = new http_1.Headers({ 'Authorization': this.mainService.getToken() });
+        var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetHousekeepingOptions/', options)
             .map(this.extractData)
@@ -122,7 +123,7 @@ var PropertiesService = (function () {
     };
     PropertiesService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, homeservice_1.MainService])
+        __metadata('design:paramtypes', [http_1.Http])
     ], PropertiesService);
     return PropertiesService;
 }());

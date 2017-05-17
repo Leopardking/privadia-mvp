@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 
-import { MainService } from '../../../app/services/homeservice';
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -10,12 +8,17 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PropertiesService {
 	private apiUrl: string = 'http://privadia-production.azurewebsites.net';
+	private token: string;
 
-	constructor ( private http: Http, private mainService: MainService ) {
+	public setToken(str) {
+		this.token = str;
+	}
+
+	constructor ( private http: Http ) {
 	}
 
 	public getAllProperties() {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/properties/', options )
@@ -24,7 +27,7 @@ export class PropertiesService {
 	}
 
 	public getPropertyById(id) {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/properties/' + id, options )
@@ -33,7 +36,7 @@ export class PropertiesService {
 	}
 
 	public updateProperty(data) {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.post( this.apiUrl + '/api/properties/', data, options)
@@ -42,7 +45,7 @@ export class PropertiesService {
 	}
 
 	public addProperty(data) {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.post( this.apiUrl + '/api/properties/', data, options )
@@ -51,7 +54,7 @@ export class PropertiesService {
 	}
 
 	public deleteProperty(id) {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.delete( this.apiUrl + '/api/properties/' + id, options )
@@ -60,7 +63,7 @@ export class PropertiesService {
 	}
 
 	public getregions() {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/lookups/getregions', options )
@@ -69,7 +72,7 @@ export class PropertiesService {
 	}
 
 	public getOwners() {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/lookups/getowners', options )
@@ -78,7 +81,7 @@ export class PropertiesService {
 	}
 
 	public getPoITypes() {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/lookups/getPointOfInterestTypes', options )
@@ -87,7 +90,7 @@ export class PropertiesService {
 	}
 
 	public getMetaData() {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/lookups/getMetaData', options )
@@ -96,7 +99,7 @@ export class PropertiesService {
 	}
 
 	public getChildrenAllowed() {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/Lookups/GetChildrenOptions', options )
@@ -105,7 +108,7 @@ export class PropertiesService {
 	}
 
 	public getBookings(id) {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/bookings/property/' + id, options)
@@ -114,7 +117,7 @@ export class PropertiesService {
 	}
 
 	public getHousekeepingOptions() {
-		let header = new Headers( {'Authorization': this.mainService.getToken()} );
+		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/Lookups/GetHousekeepingOptions/', options )

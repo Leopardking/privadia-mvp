@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 
+import { LoginService } from '../../app/services/login/login.service';
+import { PropertiesService } from '../../app/services/properties/properties.service';
+
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -11,9 +14,39 @@ export class MainService {
 	private apiUrl:string = 'http://privadia-production.azurewebsites.net';
 	public filter: Filter;
 
-	constructor (private http: Http) {
+	public regions;
+	public villas;
+
+	public isReading;
+
+	constructor (private http: Http, private loginService: LoginService, private propertiesService: PropertiesService) {
 		this.filter = new Filter(1, [1,2,3,4,5,6,7,8], this.dateToDateTime(new Date('05-01-2017')), this.dateToDateTime(new Date('05-31-2017'))
 				, 0, 0, [], 0);
+
+		this.loginService.login("steve@freelancemvc.net", "password")
+        		.subscribe( 
+                    d => { 
+            			this.setToken(d.token_type + ' ' + d.access_token); 
+            			this.propertiesService.setToken(this.token);
+
+						this.isReading = true;
+
+                        this.propertiesService.getregions().subscribe( 
+                            d => {
+                                this.regions = d;
+                                this.getVillas().subscribe( 
+		                            d => { 
+		                                this.villas = d; 
+		                                this.isReading = false;
+		                            }, 
+		                            e => { console.log("error:", e); } 
+		                        );
+                            },
+                            e => { console.log(e); }
+                        );
+        		    }, 
+                    e => { console.log("error:", e)} 
+                );
 	}
 
 	public setToken(token) {
@@ -37,6 +70,8 @@ export class MainService {
 	};
 
 	public getVillas() {
+		this.isReading = true;
+
 		let header = new Headers();
 		header.append('Authorization', this.token );
 
@@ -67,7 +102,32 @@ export class MainService {
 	      errMsg = error.message ? error.message : error.toString();
 	    }
 
+		this.isReading = false;
+
 	    return Observable.throw(errMsg);
+	}
+
+	public setFilter(filter, type) {
+		if (type == 1) {
+			this.filter.bedrooms = filter.bedrooms;
+			this.filter.locations = filter.locations;
+			this.filter.checkIn = filter.checkIn;
+			this.filter.checkOut = filter.checkOut;
+			this.filter.minRate = filter.minRate;
+			this.filter.maxRate = filter.maxRate;
+		} else if (type == 2) {
+			this.filter.MetaDataFilters = filter.MetaDataFilters;
+			this.filter.orderBy = filter.orderBy;
+		}
+
+		this.isReading = true;
+		this.getVillas().subscribe( 
+            d => { 
+                this.villas = d; 
+                this.isReading = false;
+            }, 
+            e => { console.log("error:", e); } 
+        );
 	}
 }
 

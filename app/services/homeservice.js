@@ -10,15 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var login_service_1 = require('../../app/services/login/login.service');
+var properties_service_1 = require('../../app/services/properties/properties.service');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var MainService = (function () {
-    function MainService(http) {
+    function MainService(http, loginService, propertiesService) {
+        var _this = this;
         this.http = http;
+        this.loginService = loginService;
+        this.propertiesService = propertiesService;
         this.token = "";
         this.apiUrl = 'http://privadia-production.azurewebsites.net';
         this.filter = new Filter(1, [1, 2, 3, 4, 5, 6, 7, 8], this.dateToDateTime(new Date('05-01-2017')), this.dateToDateTime(new Date('05-31-2017')), 0, 0, [], 0);
+        this.loginService.login("steve@freelancemvc.net", "password")
+            .subscribe(function (d) {
+            _this.setToken(d.token_type + ' ' + d.access_token);
+            _this.propertiesService.setToken(_this.token);
+            _this.isReading = true;
+            _this.propertiesService.getregions().subscribe(function (d) {
+                _this.regions = d;
+                _this.getVillas().subscribe(function (d) {
+                    _this.villas = d;
+                    _this.isReading = false;
+                }, function (e) { console.log("error:", e); });
+            }, function (e) { console.log(e); });
+        }, function (e) { console.log("error:", e); });
     }
     MainService.prototype.setToken = function (token) {
         this.token = token;
@@ -37,6 +55,7 @@ var MainService = (function () {
     };
     ;
     MainService.prototype.getVillas = function () {
+        this.isReading = true;
         var header = new http_1.Headers();
         header.append('Authorization', this.token);
         var options = new http_1.RequestOptions({ headers: header });
@@ -61,11 +80,32 @@ var MainService = (function () {
         else {
             errMsg = error.message ? error.message : error.toString();
         }
+        this.isReading = false;
         return Observable_1.Observable.throw(errMsg);
+    };
+    MainService.prototype.setFilter = function (filter, type) {
+        var _this = this;
+        if (type == 1) {
+            this.filter.bedrooms = filter.bedrooms;
+            this.filter.locations = filter.locations;
+            this.filter.checkIn = filter.checkIn;
+            this.filter.checkOut = filter.checkOut;
+            this.filter.minRate = filter.minRate;
+            this.filter.maxRate = filter.maxRate;
+        }
+        else if (type == 2) {
+            this.filter.MetaDataFilters = filter.MetaDataFilters;
+            this.filter.orderBy = filter.orderBy;
+        }
+        this.isReading = true;
+        this.getVillas().subscribe(function (d) {
+            _this.villas = d;
+            _this.isReading = false;
+        }, function (e) { console.log("error:", e); });
     };
     MainService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService, properties_service_1.PropertiesService])
     ], MainService);
     return MainService;
 }());
