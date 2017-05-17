@@ -11,20 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var sidebar_routes_config_1 = require('./sidebar-routes.config');
 var sidebar_metadata_1 = require('./sidebar.metadata');
+var homeservice_1 = require('../../app/services/homeservice');
 var SidebarComponent = (function () {
-    function SidebarComponent() {
+    function SidebarComponent(mainService) {
+        this.mainService = mainService;
     }
     SidebarComponent.prototype.ngOnInit = function () {
         $.getScript('../../assets/js/sidebar-moving-tab.js');
+        $.getScript('../../assets/js/plugins/bootstrap-datetimepicker.js');
         this.menuItems = sidebar_routes_config_1.ROUTES.filter(function (menuItem) { return menuItem.menuType !== sidebar_metadata_1.MenuType.BRAND; });
     };
     SidebarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'sidebar-cmp',
-            templateUrl: 'sidebar.component.html',
+            templateUrl: 'sidebar.component.html'
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [homeservice_1.MainService])
     ], SidebarComponent);
     return SidebarComponent;
 }());

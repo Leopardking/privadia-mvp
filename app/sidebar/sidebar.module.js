@@ -12,13 +12,14 @@ var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
 var router_1 = require('@angular/router');
 var sidebar_component_1 = require('./sidebar.component');
+var mainfilter_component_1 = require('./mainfilter/mainfilter.component');
 var SidebarModule = (function () {
     function SidebarModule() {
     }
     SidebarModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule, common_1.CommonModule],
-            declarations: [sidebar_component_1.SidebarComponent],
+            declarations: [sidebar_component_1.SidebarComponent, mainfilter_component_1.MainfilterComponent],
             exports: [sidebar_component_1.SidebarComponent]
         }), 
         __metadata('design:paramtypes', [])
