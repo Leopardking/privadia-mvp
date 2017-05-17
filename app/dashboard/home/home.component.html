@@ -1,12 +1,15 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row filter">
-            
         </div>
 
-        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor=" let item of villas; let i = index " >
-            <villa-cmp [villa]="item" [region]="regions[item.RegionId-1].Name"></villa-cmp>
+        <div class="col-lg-3 col-md-6 col-sm-6" *ngFor=" let item of mainService.villas; let i = index " >
+            <villa-cmp [villa]="item" [region]="mainService.regions[item.RegionId-1].Name"></villa-cmp>
         </div>
 
     </div>
+</div>
+
+<div class="loading-gif" [hidden]="!mainService.isReading">
+	<img src="../assets/img/loading.gif"/>
 </div>
