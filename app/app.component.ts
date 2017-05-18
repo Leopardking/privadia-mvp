@@ -5,7 +5,8 @@ import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 declare var $:any;
 @Component({
     selector: 'my-app',
-    templateUrl: 'app/app.component.html'
+    templateUrl: 'app/app.component.html',
+    styleUrls: ['app/app.component.css']
 })
 
 export class AppComponent implements OnInit{

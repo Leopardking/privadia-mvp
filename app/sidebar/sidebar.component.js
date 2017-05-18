@@ -25,7 +25,8 @@ var SidebarComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: 'sidebar-cmp',
-            templateUrl: 'sidebar.component.html'
+            templateUrl: 'sidebar.component.html',
+            styleUrls: ['sidebar.component.css']
         }), 
         __metadata('design:paramtypes', [homeservice_1.MainService])
     ], SidebarComponent);

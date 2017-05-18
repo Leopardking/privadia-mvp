@@ -3,7 +3,7 @@
         <div class="card-header">
             <h4 class="card-title">
                 <span>{{mainService.villas.length}} Villas Found</span>
-                <span (click)="filterDisplayChange()" class="pull-right metafilter-expand {{ collapsed ? ' collapsed' : ''}}"> Metadata Filters </span>
+                <span (click)="filterDisplayChange()" class="pull-right metafilter-expand {{ collapsed ? ' collapsed' : ''}}">More Filters </span>
                 <div class="order-type pull-right">
                     <select class="selectpicker" data-style="select-with-transition" (change)="orderChange($event)">
                         <option value="0">Price High to Low</option>
@@ -14,36 +14,35 @@
         </div>
         <div class="card-content" [hidden]="collapsed">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <ul class="nav nav-pills nav-pills-icons nav-pills-rose nav-stacked" role="tablist">
-                        <li *ngFor="let metadata of mainService.metadata; let i = index" class="{{ i == 0 ? 'active' : ''}}">
+                        <li *ngFor="let metadata of mainService.metadata; let i = index" class="{{ i == 0 ? 'active' : ''}} showtick">
                             <a href="#metatab-{{metadata.Id}}" role="tab" data-toggle="tab">
                                 {{metadata.Name}}
                             </a>
                         </li>
-                        <li class="text-center">                        
+                        <li class="text-center li-applybutton">                        
                             <button class="btn button btn-success" (click)="applyMetafilter()">
                                 Apply Filter
                             </button>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-9">
                     <div class="tab-content">
                         <div class="" *ngFor="let metadata of mainService.metadata; let i = index; let last = last" class="tab-pane {{ i == 0 ? 'active' : ''}}"  id="metatab-{{metadata.Id}}">
                             {{last ? finished() : ""}}
                             <div class="card meta-filter" *ngFor="let subtype of metadata.MetaDataSubTypes" id="{{subtype.Id}}">
-                                <div class="card-header card-header-text" data-background-color="orange">
-                                    <h4 class="card-title">{{subtype.Name}}</h4>
-                                </div>
+                                
+                                    <h6 class="card-title">{{subtype.Name}}</h6>
                                 <div class="card-content">
-                                    <button class="hidden subtype-filter btn btn-xs {{ metafilters[option.Id] ? 'btn-success' : 'btn-default'}}" *ngFor="let option of subtype.MetaData" id="{{option.Id}}" (click)="subfilterChange($event)">
+                                    <button class="subtype-filter btn btn-xs {{ metafilters[option.Id] ? 'btn-success' : 'btn-default'}}" *ngFor="let option of subtype.MetaData" id="{{option.Id}}" (click)="subfilterChange($event)">
                                         <span class="btn-label">
                                             <i class="material-icons">{{ metafilters[option.Id] ? 'check' : 'close' }}</i>
                                         </span>
                                         {{option.Name}}
                                     </button>
-                                    <select class="selectpicker" multiple data-style="select-with-transition" multiple title="Choose Metadata">
+                                    <select class="hidden selectpicker" multiple data-style="select-with-transition" multiple title="Choose Metadata">
                                         <option *ngFor="let option of subtype.MetaData; let last = last" value="{{option.Id}}">{{option.Name}}</option>
                                     </select>
                                 </div>

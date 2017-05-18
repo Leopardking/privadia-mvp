@@ -50,7 +50,8 @@
 }
 
 .meta-filter {
-	margin-top: 7px;
+	margin-top: 0px;
+	margin-bottom: 7px;
 }
 
 .meta-filter .subtype-name {
@@ -62,7 +63,7 @@
 }
 
 .meta-filter .card-header.card-header-text {
-	height: 35px;
+	height: 27px;
     padding: 5px 10px;
 }
 
@@ -76,5 +77,45 @@
 }
 
 .metafilter-container-header .card-header {
-	margin-top: 10px;
+	margin-top: 8px;
+	padding: 15px;
+}
+
+.card .tab-content {
+	margin-top: 0;
+}
+
+.metafilter-container .nav-pills > li > a, .metafilter-container .nav-pills > li > a:focus, .metafilter-container .nav-pills.nav-pills-rose > li > a:hover
+{
+	padding: 3px;
+	height: 30px;
+}
+
+.metafilter-container .nav-pills > li.active > a, .metafilter-container .nav-pills > li.active > a:focus, .metafilter-container .nav-pills.nav-pills-rose > li.active > a:hover {
+	background-color: #0b5a7c;
+}
+
+.metafilter-container .nav-pills > li.active > a:after {
+	content: "";
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.metafilter-container .nav-pills > li {
+	height: 30px;
+	margin: 5px;
+}
+
+.metafilter-container .nav-pills > li.li-applybutton {
+	height: 40px;
+}
+
+.meta-filter .card-title {
+	margin: 2px 10px;
 }
