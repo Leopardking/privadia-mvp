@@ -16,7 +16,7 @@ var VillaComponent = (function () {
         this.villaInfo = this.getInfo();
     };
     VillaComponent.prototype.roundRate = function (rate) {
-        return parseFloat(rate).toFixed(2);
+        return this.numberWithCommas(parseFloat(rate).toFixed(2));
     };
     VillaComponent.prototype.getRichInfo = function () {
         return "<b>" + this.villa.Name + "</b>" +
@@ -41,6 +41,9 @@ var VillaComponent = (function () {
         /// TS_IGNORE
         //document.getElementById('villainfo-'+this.villa.Id).select();
         document.execCommand('copy');
+    };
+    VillaComponent.prototype.numberWithCommas = function (x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
     __decorate([
         core_1.Input(), 

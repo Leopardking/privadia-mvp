@@ -24,7 +24,7 @@ export class VillaComponent implements OnInit{
     }
 
     public roundRate(rate) {
-        return parseFloat(rate).toFixed(2);
+        return this.numberWithCommas(parseFloat(rate).toFixed(2));
     }
 
     private getRichInfo() {
@@ -55,4 +55,8 @@ export class VillaComponent implements OnInit{
 
         document.execCommand('copy');
     }
+
+    private numberWithCommas(x) {
+       return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }  
 }
