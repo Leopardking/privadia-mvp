@@ -14,14 +14,18 @@ export class MainService {
 	private apiUrl:string = 'http://privadia-production.azurewebsites.net';
 	public filter: Filter;
 
-	public regions;
-	public villas;
+	public regions = [];
+	public villas = [];
+	public metadata;
+	public subfilter;
 
 	public isReading;
 
 	constructor (private http: Http, private loginService: LoginService, private propertiesService: PropertiesService) {
-		this.filter = new Filter(1, [1,2,3,4,5,6,7,8], this.dateToDateTime(new Date('05-01-2017')), this.dateToDateTime(new Date('05-31-2017'))
+		this.filter = new Filter(1, [1,2,3,4,5,6,7,8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow())
 				, 0, 0, [], 0);
+
+		this.metadata = [];
 
 		this.loginService.login("steve@freelancemvc.net", "password")
         		.subscribe( 
@@ -34,13 +38,25 @@ export class MainService {
                         this.propertiesService.getregions().subscribe( 
                             d => {
                                 this.regions = d;
-                                this.getVillas().subscribe( 
-		                            d => { 
-		                                this.villas = d; 
-		                                this.isReading = false;
-		                            }, 
-		                            e => { console.log("error:", e); } 
-		                        );
+                                
+                        this.getVillas().subscribe( 
+                            d => { 
+                                this.villas = d; 
+
+                        this.propertiesService.getMetaData().subscribe(
+                        	d => {
+                        		this.metadata = d;
+
+                        		console.log(d);
+
+                        		this.isReading = false;
+                        	},
+                        	e => { console.log("error: ", e); }
+                        );
+                            }, 
+                            e => { console.log("error:", e); } 
+                        );
+
                             },
                             e => { console.log(e); }
                         );
@@ -48,6 +64,13 @@ export class MainService {
                     e => { console.log("error:", e)} 
                 );
 	}
+
+    private getTomorrow() {
+    	let today = new Date();
+    	let tomorrow = new Date();
+    	tomorrow.setTime(today.getTime() + (24 * 60 * 60 * 1000));
+    	return tomorrow;	
+    }
 
 	public setToken(token) {
 		this.token = token;

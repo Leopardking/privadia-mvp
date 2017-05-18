@@ -1,6 +1,10 @@
 <div class="main-content">
     <div class="container-fluid">
+    	<div class="row">
+    		<span>{{mainService.villas.length}} Result</span>
+    	</div>
         <div class="row filter">
+        	<metafilter-cmp></metafilter-cmp>
         </div>
 
         <div class="col-lg-3 col-md-6 col-sm-6" *ngFor=" let item of mainService.villas; let i = index " >

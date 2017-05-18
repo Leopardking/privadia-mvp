@@ -23,7 +23,10 @@ var MainService = (function () {
         this.propertiesService = propertiesService;
         this.token = "";
         this.apiUrl = 'http://privadia-production.azurewebsites.net';
-        this.filter = new Filter(1, [1, 2, 3, 4, 5, 6, 7, 8], this.dateToDateTime(new Date('05-01-2017')), this.dateToDateTime(new Date('05-31-2017')), 0, 0, [], 0);
+        this.regions = [];
+        this.villas = [];
+        this.filter = new Filter(1, [1, 2, 3, 4, 5, 6, 7, 8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow()), 0, 0, [], 0);
+        this.metadata = [];
         this.loginService.login("steve@freelancemvc.net", "password")
             .subscribe(function (d) {
             _this.setToken(d.token_type + ' ' + d.access_token);
@@ -33,11 +36,21 @@ var MainService = (function () {
                 _this.regions = d;
                 _this.getVillas().subscribe(function (d) {
                     _this.villas = d;
-                    _this.isReading = false;
+                    _this.propertiesService.getMetaData().subscribe(function (d) {
+                        _this.metadata = d;
+                        console.log(d);
+                        _this.isReading = false;
+                    }, function (e) { console.log("error: ", e); });
                 }, function (e) { console.log("error:", e); });
             }, function (e) { console.log(e); });
         }, function (e) { console.log("error:", e); });
     }
+    MainService.prototype.getTomorrow = function () {
+        var today = new Date();
+        var tomorrow = new Date();
+        tomorrow.setTime(today.getTime() + (24 * 60 * 60 * 1000));
+        return tomorrow;
+    };
     MainService.prototype.setToken = function (token) {
         this.token = token;
     };
