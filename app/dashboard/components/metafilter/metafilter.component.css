@@ -6,36 +6,47 @@
 	cursor: pointer;
 }
 
+.order-type {
+	position: absolute;
+    right: 200px;
+    top: 10px;
+}
+
+.card-header .card-title .metafilter-expand {
+	margin-right: 20px;
+}
+
+.card-header .card-title .metafilter-expand:after {
+	content: "";
+    width: 0;
+    height: 0;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-top: 15px solid;
+    position: absolute;
+    right: 13px;
+    top: 32px;
+}
+
+.card-header .card-title .metafilter-expand.collapsed:after {
+ 	content: "";
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 15px solid;
+    position: absolute;
+    right: 5px;
+    top: 27px;
+}
+
+
 .card.collapsed .card-header {
 	padding: 10px 20px;
 }
 
 .card.collapsed .card-header .card-title {
 	padding-top: 5px;
-}
-
-.metafilter-container-header.card > .card-header > .card-title:after {
-	content: "";
-	width: 0;
-	height: 0;
-	border-right: 15px solid transparent;
-	border-left: 15px solid transparent;
-	border-top: 15px solid;
-	position: absolute;
-	right: 20px;
-	top: 17px;
-}
-
-.metafilter-container-header.card.collapsed > .card-header > .card-title:after {
-	content: "";
-	width: 0;
-	height: 0;
-	border-top: 15px solid transparent;
-	border-bottom: 15px solid transparent;
-	border-left: 15px solid;
-	position: absolute;
-	right: 8px;
-	top: 13px;
 }
 
 .meta-filter {

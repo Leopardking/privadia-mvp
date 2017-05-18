@@ -35,9 +35,42 @@ var MetafilterComponent = (function () {
                 metadataFilter.push(i);
             }
         }
-        var filter = new homeservice_1.Filter(0, 0, 0, 0, 0, 0, metadataFilter, 0);
+        var filter = new homeservice_1.Filter(0, 0, 0, 0, 0, 0, metadataFilter, this.order);
         this.mainService.setFilter(filter, 2);
         this.collapsed = true;
+    };
+    MetafilterComponent.prototype.orderChange = function (evt) {
+        var t = evt.target;
+        this.order = t.value;
+        this.sortVillas(t.value);
+    };
+    MetafilterComponent.prototype.sortVillas = function (orderType) {
+        var comparefunc = function (a, b) {
+            if (a.TotalRate > b.TotalRate)
+                return 1;
+            else if (a.TotalRate == b.TotalRate)
+                return 0;
+            else
+                return -1;
+        };
+        var comparefunc1 = function (a, b) {
+            if (a.TotalRate > b.TotalRate)
+                return -1;
+            else if (a.TotalRate == b.TotalRate)
+                return 0;
+            else
+                return 1;
+        };
+        if (orderType == 0) {
+            this.mainService.villas.sort(comparefunc1);
+        }
+        else {
+            this.mainService.villas.sort(comparefunc);
+        }
+    };
+    MetafilterComponent.prototype.finished = function () {
+        $(".selectpicker").selectpicker();
+        return "";
     };
     MetafilterComponent = __decorate([
         core_1.Component({

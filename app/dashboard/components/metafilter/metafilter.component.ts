@@ -15,6 +15,7 @@ export class MetafilterComponent implements OnInit{
     private collapsed:boolean;
     private subfilters;
     private metafilters;
+    private order;
 
     constructor ( private mainService: MainService ) {
 
@@ -47,8 +48,40 @@ export class MetafilterComponent implements OnInit{
             }
         }
 
-        let filter = new Filter(0,0,0,0,0,0,metadataFilter,0);
+        let filter = new Filter(0,0,0,0,0,0,metadataFilter,this.order);
         this.mainService.setFilter(filter, 2);
         this.collapsed = true;
+    }
+
+    private orderChange(evt) {
+        let t = evt.target;
+        this.order = t.value;
+
+        this.sortVillas(t.value);
+    }
+
+    private sortVillas(orderType) {
+        let comparefunc = function(a, b) {
+            if (a.TotalRate > b.TotalRate) return 1;
+            else if (a.TotalRate == b.TotalRate) return 0;
+            else return -1;
+        }
+
+        let comparefunc1 = function(a, b) {
+            if (a.TotalRate > b.TotalRate) return -1;
+            else if (a.TotalRate == b.TotalRate) return 0;
+            else return 1;
+        }
+
+        if (orderType == 0) {
+            this.mainService.villas.sort(comparefunc1);
+        } else {
+            this.mainService.villas.sort(comparefunc);
+        }
+    }
+
+    private finished() {
+        $(".selectpicker").selectpicker();
+        return "";
     }
 }
