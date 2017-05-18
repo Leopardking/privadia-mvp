@@ -14,6 +14,7 @@ var VillaComponent = (function () {
     }
     VillaComponent.prototype.ngOnInit = function () {
         this.villaInfo = this.getInfo();
+        console.log(this.villa);
     };
     VillaComponent.prototype.roundRate = function (rate) {
         return this.numberWithCommas(parseFloat(rate).toFixed(2));
@@ -57,7 +58,8 @@ var VillaComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: ' villa-cmp ',
-            templateUrl: 'villa.component.html'
+            templateUrl: 'villa1.component.html',
+            styleUrls: ['villa.component.css']
         }), 
         __metadata('design:paramtypes', [])
     ], VillaComponent);

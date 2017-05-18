@@ -1,0 +1,22 @@
+.card-description span{
+	display: block;
+	margin: 5px 0px;
+}
+
+.card-description span:first-child {
+	margin-top: 20px;
+}
+
+.card-content {
+	height: 150px;
+}
+
+.card-title {
+	margin-top: 20px;
+}
+
+.card-title p {
+	font-size: 11px;
+	line-height: 14px;
+	margin-top: 4px;
+}
