@@ -9,6 +9,15 @@
 
 #main-filter .card .card-content .form-group .budget {
 	height: 110px;
+	margin-top: 10px;
+}
+
+#main-filter .card .card-content .form-group .budget .form-group{
+	padding: 0 2px;
+}
+
+#main-filter .card .card-content .form-group .label-control {
+	margin: 0;
 }
 
 #main-filter .card .card-content .form-group .date {
@@ -16,11 +25,11 @@
 }
 
 #main-filter .card .card-content .form-group .date .check-in {
-	padding-bottom: 5px;
+	
 }
 
 #main-filter .card .card-content .form-group .filter-title-text {
-	padding-bottom: 8px;
+	
 }
 
 #main-filter .card .card-content .form-group .bedrooms {
@@ -35,7 +44,11 @@
 
 #main-filter .card .card-content .form-group .locations >div {
 	margin-left: 15px;
-	margin-bottom: 0;
+	margin-bottom: 5px;
+}
+
+#main-filter .card .card-content .form-group .locations >div.first-child {
+	margin-top: 5px;
 }
 
 #main-filter .card .card-content .form-group .locations >div label {
@@ -45,4 +58,9 @@
 #main-filter .card .apply-button {
 	margin: 10px 20px;
 	width: calc(100% - 40px);
+}
+
+.form-group {
+	margin: 0;
+	padding: 0;
 }

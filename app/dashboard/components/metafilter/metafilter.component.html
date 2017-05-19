@@ -15,16 +15,11 @@
         <div class="card-content" [hidden]="collapsed">
             <div class="row">
                 <div class="col-md-3">
-                    <ul class="nav nav-pills nav-pills-icons nav-pills-rose nav-stacked" role="tablist">
+                    <ul class="nav nav-pills nav-pills-icons nav-pills-info nav-stacked" role="tablist">
                         <li *ngFor="let metadata of mainService.metadata; let i = index" class="{{ i == 0 ? 'active' : ''}} showtick">
-                            <a href="#metatab-{{metadata.Id}}" role="tab" data-toggle="tab">
+                            <a href="#metatab-{{metadata.Id}}" role="tab" data-toggle="tab" class="primary-color">
                                 {{metadata.Name}}
                             </a>
-                        </li>
-                        <li class="text-center li-applybutton">                        
-                            <button class="btn button btn-success" (click)="applyMetafilter()">
-                                Apply Filter
-                            </button>
                         </li>
                     </ul>
                 </div>
@@ -47,6 +42,11 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="text-right li-applybutton">                        
+                            <button class="btn button btn-success primary-color" (click)="applyMetafilter()">
+                                Apply Filter
+                            </button>
                         </div>
                     </div>
                 </div>

@@ -91,10 +91,6 @@
 	height: 30px;
 }
 
-.metafilter-container .nav-pills > li.active > a, .metafilter-container .nav-pills > li.active > a:focus, .metafilter-container .nav-pills.nav-pills-rose > li.active > a:hover {
-	background-color: #0b5a7c;
-}
-
 .metafilter-container .nav-pills > li.active > a:after {
 	content: "";
     width: 0;

@@ -21,7 +21,6 @@ export class VillaComponent implements OnInit{
 
     ngOnInit() {
         this.villaInfo = this.getInfo();
-        console.log(this.villa);
     }
 
     public roundRate(rate) {
@@ -52,7 +51,7 @@ export class VillaComponent implements OnInit{
     private copy() {
 
         /// TS_IGNORE
-        //document.getElementById('villainfo-'+this.villa.Id).select();
+        document.getElementById('villainfo-'+this.villa.Id).select();
 
         document.execCommand('copy');
     }

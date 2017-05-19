@@ -14,7 +14,6 @@ var VillaComponent = (function () {
     }
     VillaComponent.prototype.ngOnInit = function () {
         this.villaInfo = this.getInfo();
-        console.log(this.villa);
     };
     VillaComponent.prototype.roundRate = function (rate) {
         return this.numberWithCommas(parseFloat(rate).toFixed(2));
@@ -40,7 +39,7 @@ var VillaComponent = (function () {
     };
     VillaComponent.prototype.copy = function () {
         /// TS_IGNORE
-        //document.getElementById('villainfo-'+this.villa.Id).select();
+        document.getElementById('villainfo-' + this.villa.Id).select();
         document.execCommand('copy');
     };
     VillaComponent.prototype.numberWithCommas = function (x) {
