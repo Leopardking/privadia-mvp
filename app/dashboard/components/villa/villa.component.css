@@ -12,11 +12,14 @@
 }
 
 .card-title {
-	margin-top: 20px;
 }
 
 .card-title p {
 	font-size: 11px;
 	line-height: 16px;
 	margin-top: 4px;
+}
+
+.p-r-10 {
+	padding-right: 10px;
 }
