@@ -9,7 +9,7 @@
 .order-type {
 	position: absolute;
     right: 200px;
-    top: -14px;
+    top: -5px;
 }
 
 .order-type button {
@@ -18,6 +18,14 @@
 
 .card-header .card-title .metafilter-expand {
 	margin-right: 20px;
+}
+
+.metafilter-names ul {
+    margin-top: 0;
+}
+
+.subtype-filters-names {
+    padding-top: 5px;
 }
 
 .card-header .card-title .metafilter-expand:after {
@@ -29,7 +37,7 @@
     border-top: 5px solid;
     position: absolute;
     right: 13px;
-    top: 17px;
+    top: 23px;
 }
 
 .card-header .card-title .metafilter-expand.collapsed:after {
@@ -41,12 +49,12 @@
     border-left: 5px solid;
     position: absolute;
     right: 10px;
-    top: 13px;
+    top: 20px;
 }
 
 
 .card.collapsed .card-header {
-	padding: 0px 20px;
+	padding: 10px 30px;
 }
 
 .card.collapsed .card-header .card-title {
@@ -81,12 +89,12 @@
 }
 
 .metafilter-container-header {
-    border-radius: 0;
+    
 }
 
 .metafilter-container-header .card-header {
 	margin-top: 8px;
-	padding: 0px 20px;
+	padding: 7px 20px;
 }
 
 .card .tab-content {
@@ -97,6 +105,10 @@
 {
 	padding: 3px;
 	height: 30px;
+}
+
+.metafilter-container .nav-pills > li.active > a, .metafilter-container .nav-pills > li > a:hover {
+    background-color: #0b5a7c !important;
 }
 
 .metafilter-container .nav-pills > li.active > a:after {

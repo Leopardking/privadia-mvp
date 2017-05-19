@@ -1,7 +1,11 @@
-p, span {
-	color: black;
+.logo a {
+	color: white !important;
 }
 
-.active p, .active span {
+p, span, a {
+	color: white;
+}
+
+.active.visible p, .active.visible span {
 	color: black;
 }

@@ -14,16 +14,16 @@
         </div>
         <div class="card-content" [hidden]="collapsed">
             <div class="row">
-                <div class="col-md-3 p-b-15">
+                <div class="col-md-3 p-b-15 metafilter-names">
                     <ul class="nav nav-pills nav-pills-icons nav-pills-grey nav-stacked" role="tablist">
                         <li *ngFor="let metadata of mainService.metadata; let i = index" class="{{ i == 0 ? 'active' : ''}} showtick">
-                            <a href="#metatab-{{metadata.Id}}" role="tab" data-toggle="tab" class="primary-color">
+                            <a href="#metatab-{{metadata.Id}}" role="tab" data-toggle="tab" class="secondary-color">
                                 {{metadata.Name}}
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-9 subtype-filters-names">
                     <div class="tab-content">
                         <div class="" *ngFor="let metadata of mainService.metadata; let i = index; let last = last" class="tab-pane {{ i == 0 ? 'active' : ''}}"  id="metatab-{{metadata.Id}}">
                             {{last ? finished() : ""}}
