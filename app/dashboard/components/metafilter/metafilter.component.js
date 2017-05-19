@@ -69,7 +69,7 @@ var MetafilterComponent = (function () {
         }
     };
     MetafilterComponent.prototype.finished = function () {
-        //$(".selectpicker").selectpicker();
+        $(".selectpicker").selectpicker();
         return "";
     };
     MetafilterComponent = __decorate([

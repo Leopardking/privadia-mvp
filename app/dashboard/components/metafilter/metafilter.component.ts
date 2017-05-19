@@ -81,7 +81,7 @@ export class MetafilterComponent implements OnInit{
     }
 
     private finished() {
-        //$(".selectpicker").selectpicker();
+        $(".selectpicker").selectpicker();
         return "";
     }
 }
