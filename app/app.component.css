@@ -1,3 +1,4 @@
-.sidebar-background {
-	background-color: #0b5a7c;
+.sidebar-background:after {
+	width: 0;
+	height: 0;
 }

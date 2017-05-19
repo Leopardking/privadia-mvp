@@ -1,0 +1,7 @@
+p, span {
+	color: black;
+}
+
+.active p, .active span {
+	color: black;
+}
