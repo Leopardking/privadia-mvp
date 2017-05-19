@@ -1,9 +1,9 @@
 import { MenuType, RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
-    { path: 'dashboard', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'material-icons' },
-    { path: 'dashboard', title: 'Bookings', menuType: MenuType.LEFT, icon:'material-icons' },
-    { path: 'dashboard', title: 'Properties', menuType: MenuType.LEFT, icon:'material-icons' },
-    { path: 'dashboard', title: 'Notifications', menuType: MenuType.LEFT, icon:'material-icons' },
-    { path: 'dashboard', title: 'Users', menuType: MenuType.LEFT, icon:'material-icons' },
+    { path: 'home', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'material-icons' },
+    { path: 'booking', title: 'Bookings', menuType: MenuType.LEFT, icon:'material-icons' },
+    { path: 'properties', title: 'Properties', menuType: MenuType.LEFT, icon:'material-icons' },
+    { path: 'home', title: 'Notifications', menuType: MenuType.LEFT, icon:'material-icons' },
+    { path: 'home', title: 'Users', menuType: MenuType.LEFT, icon:'material-icons' },
 ];

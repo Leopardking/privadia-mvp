@@ -21,6 +21,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { MainService } from './services/homeservice';
 import { LoginService } from './services/login/login.service';
 import { PropertiesService } from './services/properties/properties.service';
+import { BookingService } from './services/booking/booking.service';
 
 @NgModule({
     imports:      [
@@ -36,7 +37,7 @@ import { PropertiesService } from './services/properties/properties.service';
     declarations: [ AppComponent, DashboardComponent, UsersComponent ],
     providers: [
         {provide: LocationStrategy, useClass: HashLocationStrategy },
-        MainService, LoginService, PropertiesService
+        MainService, LoginService, PropertiesService, BookingService
     ],
     bootstrap:    [ AppComponent ]
 })

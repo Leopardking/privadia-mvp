@@ -7,11 +7,15 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PropertiesService {
-	private apiUrl: string = 'http://privadia-production.azurewebsites.net';
+	private apiUrl: string;
 	private token: string;
 
 	public setToken(str) {
 		this.token = str;
+	}
+
+	public setApiURL(url) {
+		this.apiUrl = url;
 	}
 
 	constructor ( private http: Http ) {

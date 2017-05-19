@@ -16,10 +16,12 @@ require('rxjs/add/operator/map');
 var PropertiesService = (function () {
     function PropertiesService(http) {
         this.http = http;
-        this.apiUrl = 'http://privadia-production.azurewebsites.net';
     }
     PropertiesService.prototype.setToken = function (str) {
         this.token = str;
+    };
+    PropertiesService.prototype.setApiURL = function (url) {
+        this.apiUrl = url;
     };
     PropertiesService.prototype.getAllProperties = function () {
         var header = new http_1.Headers({ 'Authorization': this.token });

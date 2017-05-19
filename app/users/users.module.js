@@ -21,7 +21,8 @@ var UsersModule = (function () {
                 platform_browser_1.BrowserModule,
                 router_1.RouterModule.forChild(users_routes_1.MODULE_ROUTES)
             ],
-            declarations: [users_routes_1.MODULE_COMPONENTS]
+            declarations: [users_routes_1.MODULE_COMPONENTS],
+            providers: []
         }), 
         __metadata('design:paramtypes', [])
     ], UsersModule);

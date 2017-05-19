@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 
 import { LoginService } from '../../app/services/login/login.service';
 import { PropertiesService } from '../../app/services/properties/properties.service';
+import { BookingService } from '../../app/services/booking/booking.service';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -16,12 +17,13 @@ export class MainService {
 
 	public regions = [];
 	public villas = [];
+
 	public metadata;
 	public subfilter;
 
 	public isReading;
 
-	constructor (private http: Http, private loginService: LoginService, private propertiesService: PropertiesService) {
+	constructor (private http: Http, private loginService: LoginService, private propertiesService: PropertiesService, private bookingService: BookingService) {
 		this.filter = new Filter(1, [1,2,3,4,5,6,7,8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow())
 				, 0, 0, [], 0);
 
@@ -32,9 +34,15 @@ export class MainService {
                     d => { 
             			this.setToken(d.token_type + ' ' + d.access_token); 
             			this.propertiesService.setToken(this.token);
+            			this.bookingService.setToken(this.token);
+
+            			this.propertiesService.setApiURL(this.apiUrl);
+            			this.bookingService.setApiURL(this.apiUrl);
 
 						this.isReading = true;
 
+
+						//--------------		Reading data of villas		-----------///////////
                         this.propertiesService.getregions().subscribe( 
                             d => {
                                 this.regions = d;

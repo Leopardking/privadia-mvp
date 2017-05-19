@@ -12,15 +12,17 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 var login_service_1 = require('../../app/services/login/login.service');
 var properties_service_1 = require('../../app/services/properties/properties.service');
+var booking_service_1 = require('../../app/services/booking/booking.service');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var MainService = (function () {
-    function MainService(http, loginService, propertiesService) {
+    function MainService(http, loginService, propertiesService, bookingService) {
         var _this = this;
         this.http = http;
         this.loginService = loginService;
         this.propertiesService = propertiesService;
+        this.bookingService = bookingService;
         this.token = "";
         this.apiUrl = 'http://privadia-production.azurewebsites.net';
         this.regions = [];
@@ -31,7 +33,11 @@ var MainService = (function () {
             .subscribe(function (d) {
             _this.setToken(d.token_type + ' ' + d.access_token);
             _this.propertiesService.setToken(_this.token);
+            _this.bookingService.setToken(_this.token);
+            _this.propertiesService.setApiURL(_this.apiUrl);
+            _this.bookingService.setApiURL(_this.apiUrl);
             _this.isReading = true;
+            //--------------		Reading data of villas		-----------///////////
             _this.propertiesService.getregions().subscribe(function (d) {
                 _this.regions = d;
                 _this.getVillas().subscribe(function (d) {
@@ -118,7 +124,7 @@ var MainService = (function () {
     };
     MainService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService, properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService, properties_service_1.PropertiesService, booking_service_1.BookingService])
     ], MainService);
     return MainService;
 }());
