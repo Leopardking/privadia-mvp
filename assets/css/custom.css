@@ -18,7 +18,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 
 .nav-pills.nav-pills-grey > li.active > a, .nav-pills.nav-pills-grey > li.active > a:focus, .nav-pills.nav-pills-grey > li.active > a:hover {
   	background-color: #00bcd4;
-  	box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 1), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
+  	box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 1), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
 }
 
 .shadow-grey {
@@ -26,5 +26,5 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 }
 
 .shadow-grey:hover {
-  	box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 1), 0 7px 10px -5px rgba(0, 188, 212, 0.4) !important;	
+  	box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 1), 0 7px 10px -5px rgba(0, 188, 212, 0.4) !important;	
 }

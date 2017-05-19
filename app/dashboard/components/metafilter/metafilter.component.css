@@ -9,7 +9,11 @@
 .order-type {
 	position: absolute;
     right: 200px;
-    top: 10px;
+    top: -14px;
+}
+
+.order-type button {
+    padding-bottom: 0;
 }
 
 .card-header .card-title .metafilter-expand {
@@ -20,29 +24,29 @@
 	content: "";
     width: 0;
     height: 0;
-    border-right: 10px solid transparent;
-    border-left: 10px solid transparent;
-    border-top: 15px solid;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-top: 5px solid;
     position: absolute;
     right: 13px;
-    top: 32px;
+    top: 17px;
 }
 
 .card-header .card-title .metafilter-expand.collapsed:after {
  	content: "";
     width: 0;
     height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 15px solid;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid;
     position: absolute;
-    right: 5px;
-    top: 27px;
+    right: 10px;
+    top: 13px;
 }
 
 
 .card.collapsed .card-header {
-	padding: 10px 20px;
+	padding: 0px 20px;
 }
 
 .card.collapsed .card-header .card-title {
@@ -76,9 +80,13 @@
     padding: 2px 15px;
 }
 
+.metafilter-container-header {
+    border-radius: 0;
+}
+
 .metafilter-container-header .card-header {
 	margin-top: 8px;
-	padding: 15px;
+	padding: 0px 20px;
 }
 
 .card .tab-content {
@@ -95,12 +103,12 @@
 	content: "";
     width: 0;
     height: 0;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    border-left: 15px solid;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid;
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 10px;
+    top: 10px;
 }
 
 .metafilter-container .nav-pills > li {
@@ -114,4 +122,8 @@
 
 .meta-filter .card-title {
 	margin: 2px 10px;
+}
+
+.p-b-15 {
+    padding-bottom: 15px;
 }

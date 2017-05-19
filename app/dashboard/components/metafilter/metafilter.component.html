@@ -1,7 +1,7 @@
 <div class="col-md-12 col-lg-12 metafilter-container">
     <div class="metafilter-container-header card">
         <div class="card-header">
-            <h4 class="card-title">
+            <h6 class="card-title">
                 <span>{{mainService.villas.length}} Villas Found</span>
                 <span (click)="filterDisplayChange()" class="pull-right metafilter-expand {{ collapsed ? ' collapsed' : ''}}">More Filters </span>
                 <div class="order-type pull-right">
@@ -10,11 +10,11 @@
                         <option value="1">Price Low to High</option>
                     </select>
                 </div>
-            </h4>
+            </h6>
         </div>
         <div class="card-content" [hidden]="collapsed">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 p-b-15">
                     <ul class="nav nav-pills nav-pills-icons nav-pills-grey nav-stacked" role="tablist">
                         <li *ngFor="let metadata of mainService.metadata; let i = index" class="{{ i == 0 ? 'active' : ''}} showtick">
                             <a href="#metatab-{{metadata.Id}}" role="tab" data-toggle="tab" class="primary-color">
