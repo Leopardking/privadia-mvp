@@ -17,6 +17,7 @@ export class MainService {
 
 	public regions = [];
 	public villas = [];
+	public properties = [];
 
 	public metadata;
 	public subfilter;
@@ -68,6 +69,16 @@ export class MainService {
                             },
                             e => { console.log(e); }
                         );
+
+                        //------------	Reading all properties -------------//
+                        this.propertiesService.getAllProperties().subscribe(
+				            d => {
+				                this.properties = d;
+				            },
+				            e => {
+				                console.log("error: ", e);
+				            }
+				        );
         		    }, 
                     e => { console.log("error:", e)} 
                 );

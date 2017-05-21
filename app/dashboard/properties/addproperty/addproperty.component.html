@@ -1,0 +1,255 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 p-b-15 metafilter-names">
+                <ul class="nav nav-pills nav-pills-icons nav-pills-grey nav-stacked" role="tablist">
+                    <li class="active">
+                        <a href="#metatab-info" role="tab" data-toggle="tab" class="secondary-color">
+                            Property Info
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#metatab-images" role="tab" data-toggle="tab" class="secondary-color">
+                            Images
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#metatab-availability" role="tab" data-toggle="tab" class="secondary-color">
+                            Availability
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#metatab-marketing" role="tab" data-toggle="tab" class="secondary-color">
+                            Marketing
+                        </a>
+                    </li>
+                    <li *ngFor="let metadata of mainService.metadata; let i = index">
+                        <a href="#metatab-property-{{metadata.Id}}" role="tab" data-toggle="tab" class="secondary-color">
+                            {{metadata.Name}}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 subtype-filters-names">
+                <div class="tab-content">
+                <!--  Property Info  -->
+                    <div id="metatab-info" class="active">
+                        <div class="panel-group" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading-name_address">
+                                    <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#name_address" aria-expanded="true" attr.aria-controls="name_address">
+                                        <h4 class="panel-title">
+                                            Property Name & Address
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="name_address" class="panel-collapse collapse" role="tabpanel" attr.aria-labelledby="heading-name_address">
+                                    <div class="panel-body">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Select Owner</label>
+                                            <select class="form-control"></select>
+                                        </div>
+                                        <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 listing-name">
+                                            <label class="control-label">Listing Name</label>
+                                            <input type="text" class="form-control">
+                                        </div>                                                    
+                                        <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 official-name">
+                                            <label class="control-label">Official Name</label>
+                                            <input type="text" class="form-control">
+                                        </div>                                                   
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Address</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Select Region</label>
+                                            <select class="form-control"></select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-group" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading-description">
+                                    <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#description" aria-expanded="true" attr.aria-controls="description">
+                                        <h4 class="panel-title">
+                                            Description
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="description" class="panel-collapse collapse" role="tabpanel" attr.aria-labelledby="heading-description">
+                                    <div class="panel-body">                                        
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Headline</label>
+                                            <input type="text" class="form-control">
+                                        </div>  
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Summary</label>
+                                            <textarea class="form-control"></textarea>
+                                        </div>  
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Description</label>
+                                            <textarea class="form-control"></textarea>
+                                        </div>  
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Other Important Information</label>
+                                            <textarea class="form-control"></textarea>
+                                        </div>                                      
+                                        <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 collaborator-initial">
+                                            <label class="control-label">Collaborator Initials</label>
+                                            <input type="text" class="form-control">
+                                        </div>                                      
+                                        <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 box-url">
+                                            <label class="control-label">Box Url</label>
+                                            <input type="text" class="form-control">
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-group" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading-admin_info">
+                                    <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#admin_info" aria-expanded="true" attr.aria-controls="admin_info">
+                                        <h4 class="panel-title">
+                                            Admin Info
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="admin_info" class="panel-collapse collapse" role="tabpanel" attr.aria-labelledby="heading-admin_info">
+                                    <div class="panel-body">
+                                        <div class="contact" *ngFor="let item of contacts">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Job Title</label>
+                                                <input type="text" class="form-control">
+                                            </div>          
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">First Name</label>
+                                                <input type="text" class="form-control">
+                                            </div>                                     
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Last Name</label>
+                                                <input type="text" class="form-control">
+                                            </div>                                    
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Email Address</label>
+                                                <input type="email" class="form-control">
+                                            </div>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Telephone</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <a (click)="removeContact(item.id)"> Remove Contact </a>
+                                        </div>
+                                        <div class="add-contact">
+                                            <a (click)="showAddContact()"> Add Contact </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-group" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading-size_rooms">
+                                    <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#size_rooms" aria-expanded="true" attr.aria-controls="size_rooms">
+                                        <h4 class="panel-title">
+                                            Property Size and Rooms
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="size_rooms" class="panel-collapse collapse" role="tabpanel" attr.aria-labelledby="heading-size_rooms">
+                                    <div class="panel-body">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Number of Bathrooms</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Number of bedrooms</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Sleeps</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Maximum Capacity</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Living Area (m
+                                            <sup>2</sup>
+                                            )</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Dining Capacity</label>
+                                            <input type="text" class="form-control">
+                                        </div>
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Kitchen Information</label>
+                                            <textarea type="text" class="form-control"></textarea>
+                                        </div>
+                                        <div class="bedrooms">
+                                        </div>
+                                        <a class="add-bedroom" (click)="addBedroom()">Add Bedroom</a>
+                                        <div class="bathrooms">
+                                        </div>
+                                        <a class="add-bathroom" (click)="addBathroom()">Add Bathroom</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-group" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="heading-conditions">
+                                    <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#conditions" aria-expanded="true" attr.aria-controls="conditions">
+                                        <h4 class="panel-title">
+                                            Conditions
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="conditions" class="panel-collapse collapse" role="tabpanel" attr.aria-labelledby="heading-conditions">
+                                    <div class="panel-body">
+                                        Conditions inptus
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class=""  *ngFor="let metadata of mainService.metadata; let i = index; let last = last" id="metatab-property-{{metadata.Id}}">
+                        <div class="panel-group" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default" *ngFor="let subtype of metadata.MetaDataSubTypes">
+                                <div class="panel-heading" role="tab" id="heading-{{subtype.Id}}">
+                                    <a role="button" data-toggle="collapse" [attr.data-parent]="'#metadata-'+metadata.Id" href="#{{subtype.Id}}" aria-expanded="true" [attr.aria-controls]="subtype.Id">
+                                        <h4 class="panel-title">
+                                            {{subtype.Name}}
+                                            <i class="material-icons">keyboard_arrow_down</i>
+                                        </h4>
+                                    </a>
+                                </div>
+                                <div id="{{subtype.Id}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'heading-'+subtype.Id">
+                                    <div class="panel-body">
+                                        <button class="subtype-filter btn btn-sm {{ metafilters[option.Id] ? 'btn-success' : 'btn-default'}}" *ngFor="let option of subtype.MetaData" [attr.option-id]="option.Id" (click)="subfilterChange($event)">
+                                            <span class="btn-label">
+                                                <i class="material-icons">{{ metafilters[option.Id] ? 'check' : 'close' }}</i>
+                                            </span>
+                                            {{option.Name}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

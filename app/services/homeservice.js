@@ -27,6 +27,7 @@ var MainService = (function () {
         this.apiUrl = 'http://privadia-production.azurewebsites.net';
         this.regions = [];
         this.villas = [];
+        this.properties = [];
         this.filter = new Filter(1, [1, 2, 3, 4, 5, 6, 7, 8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow()), 0, 0, [], 0);
         this.metadata = [];
         this.loginService.login("steve@freelancemvc.net", "password")
@@ -49,6 +50,12 @@ var MainService = (function () {
                     }, function (e) { console.log("error: ", e); });
                 }, function (e) { console.log("error:", e); });
             }, function (e) { console.log(e); });
+            //------------	Reading all properties -------------//
+            _this.propertiesService.getAllProperties().subscribe(function (d) {
+                _this.properties = d;
+            }, function (e) {
+                console.log("error: ", e);
+            });
         }, function (e) { console.log("error:", e); });
     }
     MainService.prototype.getTomorrow = function () {

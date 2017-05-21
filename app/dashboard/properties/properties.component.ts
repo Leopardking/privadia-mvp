@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PropertiesService } from '../../../app/services/properties/properties.service';
+import { MainService } from '../../../app/services/homeservice';
+
 
 import initDataTable = require('../../../assets/js/init/initDataTable.js');
 
@@ -12,30 +13,21 @@ import initDataTable = require('../../../assets/js/init/initDataTable.js');
 })
 
 export class PropertiesComponent implements OnInit{
-    private reading = true;
+    private addproperty = false;
+
     private datatableInited = false;
     
     private properties = [];
+    private addPropertyLink = "addproperty";
 
-    constructor ( private propertyService: PropertiesService) {
+
+    constructor ( private mainService: MainService) {
 
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
 
-        //------------------    Reading data of properties        -----------------/
-        this.propertyService.getAllProperties().subscribe(
-            d => {
-                this.properties = d;
-                this.reading = false;
-                this.datatableInited = false;
-            },
-            e => {
-                console.log("error: ", e);
-                this.reading = false;
-            }
-        );
     }
     
     private finishReading() {

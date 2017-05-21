@@ -9,27 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var properties_service_1 = require('../../../app/services/properties/properties.service');
+var homeservice_1 = require('../../../app/services/homeservice');
 var initDataTable = require('../../../assets/js/init/initDataTable.js');
 var PropertiesComponent = (function () {
-    function PropertiesComponent(propertyService) {
-        this.propertyService = propertyService;
-        this.reading = true;
+    function PropertiesComponent(mainService) {
+        this.mainService = mainService;
+        this.addproperty = false;
         this.datatableInited = false;
         this.properties = [];
+        this.addPropertyLink = "addproperty";
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertiesComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        //------------------    Reading data of properties        -----------------/
-        this.propertyService.getAllProperties().subscribe(function (d) {
-            _this.properties = d;
-            _this.reading = false;
-            _this.datatableInited = false;
-        }, function (e) {
-            console.log("error: ", e);
-            _this.reading = false;
-        });
     };
     PropertiesComponent.prototype.finishReading = function () {
         initDataTable();
@@ -48,7 +39,7 @@ var PropertiesComponent = (function () {
             templateUrl: 'properties.component.html',
             styleUrls: ['properties.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [homeservice_1.MainService])
     ], PropertiesComponent);
     return PropertiesComponent;
 }());
