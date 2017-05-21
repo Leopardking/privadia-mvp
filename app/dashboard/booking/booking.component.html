@@ -10,7 +10,7 @@
                         <h4 class="card-title">Booking</h4>
                         <div class="toolbar">
                             <!--        Here you can write extra buttons/actions for the toolbar              -->
-                            <button class="btn btn-simple primary-color pull-right" (click)="addBooking">
+                            <button class="btn btn-simple secondary-color shadow-grey pull-right" (click)="addBooking">
                             	Add Booking
                             </button>
                         </div>
@@ -44,8 +44,8 @@
                                         <td>{{item.CheckIn}}</td>
                                         <td>{{item.CheckOut}}</td>
                                         <td class="text-right">
-                                            <button class="btn btn-simple btn-warning btn-icon"><i class="material-icons">edit</i></button>
-                                            <button class="btn btn-simple btn-danger btn-icon"><i class="material-icons">close</i></button>
+                                            <button class="btn btn-simple btn-warning btn-icon"><i class="material-icons shadow-grey">edit</i></button>
+                                            <button class="btn btn-simple btn-danger btn-icon"><i class="material-icons shadow-grey">close</i></button>
                                         </td>
 										{{ !reading && last && !datatableInited ? finishReading() : "" }}
                                     </tr>

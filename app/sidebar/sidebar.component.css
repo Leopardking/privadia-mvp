@@ -9,3 +9,11 @@ p, span, a {
 .active.visible p, .active.visible span {
 	color: black;
 }
+
+mainfilter-cmp {
+	display: none;
+}
+
+.active.visible mainfilter-cmp {
+	display: inherit;
+}

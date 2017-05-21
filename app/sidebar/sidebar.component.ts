@@ -28,4 +28,11 @@ export class SidebarComponent implements OnInit {
 
         this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
     }
+
+    private menuClick() {
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        $("dashboard-cmp .main-content").scrollTop(0);
+
+        return true;
+    }
 }
