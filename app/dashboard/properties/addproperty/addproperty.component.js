@@ -24,6 +24,8 @@ var AddpropertyComponent = (function () {
             this.metafilters.push(false);
         }
         this.contacts = [];
+        this.bedrooms = [];
+        this.bathrooms = [];
     };
     AddpropertyComponent.prototype.subfilterChange = function (e) {
         var optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
@@ -33,25 +35,72 @@ var AddpropertyComponent = (function () {
         //$(".selectpicker").selectpicker();
         return "";
     };
-    AddpropertyComponent.prototype.showAddContact = function () {
-        this.contacts.push({
-            id: this.contacts.length == 0 ? 0 : this.contacts[this.contacts.length - 1].id + 1,
-            jobTitle: "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            telephone: ""
-        });
+    AddpropertyComponent.prototype.saveInfo = function () {
+        var data = {
+            Active: true,
+            Address: this.propertyInfo.address,
+            AgencyPackUrl: null,
+            Bathrooms: this.propertyInfo.bathrooms,
+            Bedrooms: this.propertyInfo.bedrooms,
+            Benefits: null,
+            BoxUrl: this.propertyInfo.boxUrl,
+            Capacity: this.propertyInfo.maximumCapacity,
+            ChildrenAllowed: this.propertyInfo.allowChildren,
+            CollaboratorInitials: this.propertyInfo.collaboratorInitial,
+            Contacts: this.propertyInfo.contacts,
+            Description: this.propertyInfo.description,
+            DiningCapacity: this.propertyInfo.diningCapacity,
+            EventsAllowed: this.propertyInfo.eventsAllowed,
+            Headline: this.propertyInfo.headline,
+            Housekeeping: 0,
+            Id: 0,
+            Images: [],
+            InternalName: this.propertyInfo.listingName,
+            KitchenInfo: this.propertyInfo.kitchenInfo,
+            LAState: [],
+            LiftAvailable: false,
+            LivingAreaSize: this.propertyInfo.livingSquare,
+            ManagedBySupplier: false,
+            MetaData: [],
+            MinimumStay: 0,
+            Name: this.propertyInfo.officialName,
+            OtherHousekeepingInfo: null,
+            OtherInfo: this.propertyInfo.otherInfo,
+            OtherServicesState: null,
+            Owner: {},
+            OwnerName: this.propertyInfo.ownerName,
+            PetsAllowed: this.propertyInfo.petsAllowed,
+            PointsOfInterest: [],
+            Region: {},
+            RegionId: 1,
+            RegionName: this.propertyInfo.regionName,
+            Rooms: [],
+            Sleeps: this.propertyInfo.sleepCount,
+            SmokingAllowed: this.propertyInfo.smokeAllowed,
+            Summary: this.propertyInfo.summary,
+            TripState: [],
+            UserId: '',
+            ViaSupplier: false,
+            WheelchairAccessible: this.propertyInfo.wheelchairAllowed,
+            bathroomsInfo: this.propertyInfo.bathrooms,
+            bedroomsInfo: this.propertyInfo.bedrooms,
+            childrenAllowed: this.propertyInfo.allowChildren,
+            contactsInfo: this.propertyInfo.contacts,
+            featureState: [],
+            localServicesState: [],
+            propertyId: 14485,
+            propertyName: this.propertyInfo.officialName,
+            villaDescriptionState: []
+        };
     };
-    AddpropertyComponent.prototype.removeContact = function (id) {
-        var i;
-        for (i = 0; i < this.contacts.length; i++) {
-            if (this.contacts[i].id == id) {
-                break;
-            }
-        }
-        this.contacts.splice(i, 1);
+    AddpropertyComponent.prototype.continueInfo = function () {
     };
+    AddpropertyComponent.prototype.discardInfo = function () {
+    };
+    __decorate([
+        core_1.ViewChild('propertyInfo'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "propertyInfo", void 0);
     AddpropertyComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

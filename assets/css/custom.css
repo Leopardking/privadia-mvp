@@ -45,3 +45,8 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .shadow-grey:hover {
   	box-shadow: 0 3px 10px 0px rgba(100, 100, 100, 1), 0 7px 10px -5px rgba(0, 188, 212, 0.4) !important;	
 }
+
+.hover-primary-color:hover {	
+	background-color: #0b5a7c !important;
+	color: white !important;
+}

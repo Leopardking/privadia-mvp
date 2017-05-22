@@ -1,0 +1,274 @@
+<div class="panel-group" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-name_address">
+            <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#name_address" aria-expanded="false" attr.aria-controls="name_address">
+                <h4 class="panel-title">
+                    Property Name & Address
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </h4>
+            </a>
+        </div>
+        <div id="name_address" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-name_address">
+            <div class="panel-body">
+                <div>
+                    <div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="owners" (valueChanged)="ownerChanged($event)" [ngModel]="ownerName" class="form-group label-floating">
+                        <label class="control-label">Select Owner</label>
+                        <input class="form-control" id="owner-name">
+                    </div>
+                </div>
+                <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 listing-name">
+                    <label class="control-label">Listing Name</label>
+                    <input type="text" class="form-control" (blur)="listingNameChanged($event)">
+                </div>                                                    
+                <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 official-name">
+                    <label class="control-label">Official Name</label>
+                    <input type="text" class="form-control" (blur)="officialNameChanged($event)">
+                </div>                                                   
+                <div class="form-group label-floating">
+                    <label class="control-label">Address</label>
+                    <input type="text" class="form-control" (blur)="addressChanged($event)">
+                </div>
+                <div>
+                    <div ng2-auto-complete id="regionName" [max-num-list]="10" [source]="regions" (valueChanged)="regionChanged($event)" class="form-group label-floating">
+                        <label class="control-label">Select Region</label>
+                        <input class="form-control">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-group" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-description">
+            <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#description" aria-expanded="false" attr.aria-controls="description">
+                <h4 class="panel-title">
+                    Description
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </h4>
+            </a>
+        </div>
+        <div id="description" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-description">
+            <div class="panel-body">                                        
+                <div class="form-group label-floating">
+                    <label class="control-label">Headline</label>
+                    <input type="text" class="form-control" (blur)="headlineChanged($event)">
+                </div>  
+                <div class="form-group label-floating">
+                    <label class="control-label">Summary</label>
+                    <textarea class="form-control" (blur)="summaryChanged($event)"></textarea>
+                </div>  
+                <div class="form-group label-floating">
+                    <label class="control-label">Description</label>
+                    <textarea class="form-control" (blur)="descriptionChanged($event)"></textarea>
+                </div>  
+                <div class="form-group label-floating">
+                    <label class="control-label">Other Important Information</label>
+                    <textarea class="form-control" (blur)="otherInfoChanged($event)"></textarea>
+                </div>                                      
+                <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 collaborator-initial">
+                    <label class="control-label">Collaborator Initials</label>
+                    <input type="text" class="form-control" (blur)="collaboratorInitialChanged($event)">
+                </div>                                      
+                <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 box-url">
+                    <label class="control-label">Box Url</label>
+                    <input type="text" class="form-control" (blur)="boxUrlChanged($event)">
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-group" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-admin_info">
+            <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#admin_info" aria-expanded="false" attr.aria-controls="admin_info">
+                <h4 class="panel-title">
+                    Admin Info
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </h4>
+            </a>
+        </div>
+        <div id="admin_info" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-admin_info">
+            <div class="panel-body">
+                <div class="contact" *ngFor="let item of contacts">
+                    <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">Job Title</label>
+                        <input type="text" class="form-control" (blur)="adminInfoChanged(item.id, 'jobTitle', $event)">
+                    </div>          
+                    <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">First Name</label>
+                        <input type="text" class="form-control" (blur)="adminInfoChanged(item.id, 'firstName', $event)">
+                    </div>                                     
+                    <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">Last Name</label>
+                        <input type="text" class="form-control" (blur)="adminInfoChanged(item.id, 'lastName', $event)">
+                    </div>                                    
+                    <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">Email Address</label>
+                        <input type="email" class="form-control" (blur)="adminInfoChanged(item.id, 'email', $event)">
+                    </div>
+                    <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">Telephone</label>
+                        <input type="text" class="form-control" (blur)="adminInfoChanged(item.id, 'telephone', $event)">
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <a (click)="removeContact(item.id)"> Remove Contact </a>
+                    </div>
+                </div>
+                <div class="add-contact col-sm-12 col-md-12 col-lg-12">
+                    <a (click)="showAddContact()"> Add Contact </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-group" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-size_rooms">
+            <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#size_rooms" aria-expanded="false" attr.aria-controls="size_rooms">
+                <h4 class="panel-title">
+                    Property Size and Rooms
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </h4>
+            </a>
+        </div>
+        <div id="size_rooms" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-size_rooms">
+            <div class="panel-body">
+                <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                    <label class="control-label">Number of Bathrooms</label>
+                    <input type="number" class="form-control" (blur)="bathroomsCountChanged($event)">
+                </div>
+                <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                    <label class="control-label">Number of bedrooms</label>
+                    <input type="number" class="form-control" (blur)="bedroomsCountChanged($event)">
+                </div>
+                <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                    <label class="control-label">Sleeps</label>
+                    <input type="number" class="form-control" (blur)="sleepsChanged($event)">
+                </div>
+                <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                    <label class="control-label">Maximum Capacity</label>
+                    <input type="number" class="form-control" (blur)="maximumCapacityChanged($event)">
+                </div>
+                <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                    <label class="control-label">Living Area (m
+                    <sup>2</sup>
+                    )</label>
+                    <input type="number" class="form-control" (blur)="livingareaSquareChanged($event)">
+                </div>
+                <div class="form-group label-floating col-sm-12 col-md-6 col-lg-4">
+                    <label class="control-label">Dining Capacity</label>
+                    <input type="number" class="form-control" (blur)="diningCapacityChanged($event)">
+                </div>
+                <div class="form-group label-floating col-sm-12 col-md-12 col-lg-12">
+                    <label class="control-label">Kitchen Information</label>
+                    <textarea type="text" class="form-control" (blur)="kitchenInfoChanged($event)"></textarea>
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-lg-12 bedrooms">
+                    <label>Bedroom Information</label>
+                    <div class="" *ngFor="let item of bedrooms">
+                        <div class="form-group label-floating col-sm-12 col-md-3 col-lg-3">
+                            <label class="control-label">Bedroom Name</label>
+                            <input type="text" class="form-control" (blur)="bedroomChanged(item.id, 'name', $event)">
+                        </div>
+                        <div class="form-group label-floating col-sm-12 col-md-6 col-lg-6">
+                            <label class="control-label">Bedroom Description</label>
+                            <input type="text" class="form-control" (blur)="bedroomChanged(item.id, 'description', $event)">
+                        </div>
+                        <div class="col-sm-12 col-md-3 col-lg-3 remove-button">
+                            <a (click)="removeBedroom(item.id)">REMOVE BEDROOM</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <a class="add-bedroom" (click)="addBedroom()">Add Bedroom</a>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-12 col-lg-12 bathrooms">
+                    <label>Bathroom Information</label>
+                    <div class="" *ngFor="let item of bathrooms">
+                        <div class="form-group label-floating col-sm-12 col-md-3 col-lg-3">
+                            <label class="control-label">Bathroom Name</label>
+                            <input type="text" class="form-control" (blur)="bathroomChanged(item.id, 'name', $event)">
+                        </div>
+                        <div class="form-group label-floating col-sm-12 col-md-6 col-lg-6">
+                            <label class="control-label">Bathroom Description</label>
+                            <input type="text" class="form-control" (blur)="bathroomChanged(item.id, 'name', $event)">
+                        </div>
+                        <div class="col-sm-12 col-md-3 col-lg-3 remove-button">
+                            <a (click)="removeBathroom(item.id)">REMOVE BATHROOM</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <a class="add-bathroom" (click)="addBathroom()">Add Bathroom</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel-group" role="tablist" aria-multiselectable="true">
+    <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="heading-conditions">
+            <a role="button" data-toggle="collapse" attr.data-parent="#metadata-property-info" href="#conditions" aria-expanded="false" attr.aria-controls="conditions">
+                <h4 class="panel-title">
+                    Conditions
+                    <i class="material-icons">keyboard_arrow_down</i>
+                </h4>
+            </a>
+        </div>
+        <div id="conditions" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-conditions">
+            <div class="panel-body">
+                <div class="col-sm-12 col-md-12 col-lg-12"> 
+                    <h5 class="col-sm-12 col-md-12 col-lg-12">Children Allowed</h5>                                       
+                    <div id="childrenAllow" class="radio col-sm-12 col-md-4 col-lg-4">
+                        <label>
+                            <input type="radio" name="childrenAllow" checked="true" value="0" (blur)="childrenAllowChanged($event)"> Children Welcome
+                        </label>
+                    </div>
+                    <div class="radio col-sm-12 col-md-4 col-lg-4">
+                        <label>
+                            <input type="radio" name="childrenAllow" value="1" (blur)="childrenAllowChanged($event)"> Ask Owner
+                        </label>
+                    </div>
+                    <div class="radio col-sm-12 col-md-4 col-lg-4">
+                        <label>
+                            <input type="radio" name="childrenAllow" value="2" (blur)="childrenAllowChanged($event)"> Not Suitable For Children
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="checkbox col-sm-12 col-md-3 col-lg-3">
+                        <label>
+                            <input type="checkbox" name="optionsCheckboxes" (blur)="smokeAllowChange($event)"> Smoking Allowed
+                        </label>
+                    </div>
+                    <div class="checkbox col-sm-12 col-md-3 col-lg-3">
+                        <label>
+                            <input type="checkbox" name="optionsCheckboxes" (blur)="wheelchairAllowChange($event)"> Wheelchairs Allowed
+                        </label>
+                    </div>
+                    <div class="checkbox col-sm-12 col-md-3 col-lg-3">
+                        <label>
+                            <input type="checkbox" name="optionsCheckboxes" (blur)="petsAllowChange($event)"> Pets Allowed
+                        </label>
+                    </div>
+                    <div class="checkbox col-sm-12 col-md-3 col-lg-3">
+                        <label>
+                            <input type="checkbox" name="optionsCheckboxes" (blur)="eventsAllowChange($event)"> Events Allowed
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

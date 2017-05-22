@@ -10,25 +10,3 @@
 .metafilter-names .nav-pills > li.active > a, .metafilter-names .nav-pills > li > a:hover {
     background-color: #0b5a7c !important;
 }
-
-.official-name, .box-url {
-	float: none;
-	display: inline-block;
-	padding-right: 0;
-}
-
-.listing-name, .collaborator-initial {
-	padding-left: 0;
-}
-
-.contact {
-	padding: 0 10px 10px 10px;
-}
-
-a {
-	cursor: pointer;
-}
-
-.add-contact {
-	margin-top: 20px;
-}
