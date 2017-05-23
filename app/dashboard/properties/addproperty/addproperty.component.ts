@@ -5,6 +5,8 @@ import { PropertyinfoComponent } from '../propertyinfo/propertyinfo.component';
 import { MainService } from '../../../../app/services/homeservice';
 import { PropertiesService } from '../../../../app/services/properties/properties.service';
 
+declare var $:any;
+
 @Component({
     moduleId: module.id,
     selector: ' addproperty-cmp ',
@@ -88,7 +90,7 @@ export class AddpropertyComponent implements OnInit{
                 PropertyRoomType: 1
             }
         });
-
+        
         let poi = this.metafilterHeading.PoITypes.map( (item, index) => {
             return {
                 Available: item.checked ? 1 : 0,
@@ -99,7 +101,7 @@ export class AddpropertyComponent implements OnInit{
         })
 
         let data = {
-            Active: true,
+            Active: false,
             Address: this.propertyInfo.address,
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
             Bathrooms: parseInt(this.propertyInfo.bathroomCount),
@@ -140,7 +142,21 @@ export class AddpropertyComponent implements OnInit{
             propertyName: this.propertyInfo.officialName
         }
         this.propertyService.addProperty(data).subscribe(
-            d => { console.log(d) },
+            d => { 
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                this.mainService.readData();
+            },
             e => { console.log("error:", e); }
         );
     }

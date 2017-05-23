@@ -12,13 +12,13 @@ import { PropertiesService } from '../../../services/properties/properties.servi
 export class MetafilterheadingComponent implements OnInit{
 	@Input() name;
 
-	public PoITypes;
 
 	public housekeeperState = 0;
 	public housekeepOtherInfo = "";
 
 	public liftAvailable: boolean = false;
 	public uniqueBenefits: string = "";
+	public PoITypes = [];
 
 	constructor( private propertiesService: PropertiesService ) {
 	}

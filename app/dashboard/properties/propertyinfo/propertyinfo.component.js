@@ -45,6 +45,14 @@ var PropertyinfoComponent = (function () {
         this.regions = [];
         this.ownerName = "";
         this.regionName = "";
+        this.owner = {
+            Id: '',
+            Name: ''
+        };
+        this.region = {
+            Id: '',
+            Name: ''
+        };
         // description
         this.propertyService.getOwners().subscribe(function (d) {
             _this.owners = d;
@@ -110,6 +118,12 @@ var PropertyinfoComponent = (function () {
         this.ownerName = e;
         var owernIndex = this.ownerNames.indexOf(this.ownerName);
         this.owner = this.owners[owernIndex];
+        if (owernIndex == -1) {
+            this.owner = {
+                Id: "",
+                Name: e
+            };
+        }
         if (e) {
             $("#ownerName").removeClass('is-empty');
         }
@@ -118,6 +132,12 @@ var PropertyinfoComponent = (function () {
         this.regionName = e;
         var index = this.regions.indexOf(e);
         this.region = this.regionArray[index];
+        if (index == -1) {
+            this.region = {
+                Id: "",
+                Name: e
+            };
+        }
         if (e) {
             $("#regionName").removeClass('is-empty');
         }

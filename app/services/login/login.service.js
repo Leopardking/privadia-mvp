@@ -16,15 +16,14 @@ require('rxjs/add/operator/map');
 var LoginService = (function () {
     function LoginService(http) {
         this.http = http;
-        this.apiUrl = 'http://privadia-production.azurewebsites.net';
     }
-    LoginService.prototype.login = function (email, password) {
+    LoginService.prototype.login = function (apiUrl, email, password) {
         var grant_type = "password";
         if (email && password && grant_type) {
             var username = encodeURIComponent(email);
             var pwd = encodeURIComponent(password);
             var gtype = encodeURIComponent(grant_type);
-            return this.http.post(this.apiUrl + '/token', "grant_type=" + grant_type + "&username=" + username + "&password=" + pwd)
+            return this.http.post(apiUrl + '/token', "grant_type=" + grant_type + "&username=" + username + "&password=" + pwd)
                 .map(this.extractLoginData)
                 .catch(this.handleError);
         }

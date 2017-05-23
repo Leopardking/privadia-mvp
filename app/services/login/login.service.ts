@@ -7,13 +7,11 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class LoginService {
-	private apiUrl:string = 'http://privadia-production.azurewebsites.net';
-
 	constructor ( private http: Http ) {
 
 	}
 
-	public login(email, password) {
+	public login(apiUrl, email, password) {
 		var grant_type = "password";
 
 		if (email && password && grant_type) {
@@ -21,7 +19,7 @@ export class LoginService {
 			let pwd = encodeURIComponent(password);
 			let gtype = encodeURIComponent(grant_type);
 
-			return this.http.post(this.apiUrl + '/token', `grant_type=${grant_type}&username=${username}&password=${pwd}`)
+			return this.http.post(apiUrl + '/token', `grant_type=${grant_type}&username=${username}&password=${pwd}`)
 				.map(this.extractLoginData)
             	.catch(this.handleError);
         }

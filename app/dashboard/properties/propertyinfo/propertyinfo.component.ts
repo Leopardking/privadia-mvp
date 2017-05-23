@@ -69,6 +69,16 @@ export class PropertyinfoComponent implements OnInit{
         this.ownerName = "";
         this.regionName = "";
 
+        this.owner = {
+            Id: '',
+            Name: ''
+        }
+
+        this.region = {
+            Id: '',
+            Name: ''
+        }
+
         // description
 
 
@@ -151,6 +161,13 @@ export class PropertyinfoComponent implements OnInit{
         let owernIndex = this.ownerNames.indexOf(this.ownerName);
         this.owner = this.owners[owernIndex];
 
+        if (owernIndex == -1) {
+            this.owner = {
+                Id: "",
+                Name: e
+            }
+        }
+
         if (e) {
             $("#ownerName").removeClass('is-empty');
         }
@@ -160,6 +177,14 @@ export class PropertyinfoComponent implements OnInit{
         this.regionName = e;
         let index = this.regions.indexOf(e);
         this.region = this.regionArray[index];
+
+        if (index == -1) {
+            this.region = {
+                Id: "",
+                Name: e
+            }
+        }
+
         if (e) {
             $("#regionName").removeClass('is-empty');
         }

@@ -17,6 +17,7 @@ var MetafilterheadingComponent = (function () {
         this.housekeepOtherInfo = "";
         this.liftAvailable = false;
         this.uniqueBenefits = "";
+        this.PoITypes = [];
     }
     MetafilterheadingComponent.prototype.ngOnInit = function () {
         var _this = this;

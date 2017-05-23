@@ -38,6 +38,7 @@ var AddpropertyComponent = (function () {
         return "";
     };
     AddpropertyComponent.prototype.saveInfo = function () {
+        var _this = this;
         var metaData = [];
         for (var i = 1; i < 125; i++) {
             metaData.push({
@@ -77,7 +78,7 @@ var AddpropertyComponent = (function () {
             };
         });
         var data = {
-            Active: true,
+            Active: false,
             Address: this.propertyInfo.address,
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
             Bathrooms: parseInt(this.propertyInfo.bathroomCount),
@@ -117,7 +118,20 @@ var AddpropertyComponent = (function () {
             childrenAllowed: parseInt(this.propertyInfo.allowChildren),
             propertyName: this.propertyInfo.officialName
         };
-        this.propertyService.addProperty(data).subscribe(function (d) { console.log(d); }, function (e) { console.log("error:", e); });
+        this.propertyService.addProperty(data).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Property Added Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            _this.mainService.readData();
+        }, function (e) { console.log("error:", e); });
     };
     AddpropertyComponent.prototype.continueInfo = function () {
     };

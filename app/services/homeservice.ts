@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class MainService {
 	private token:string = "";
-	private apiUrl:string = 'http://privadia-production.azurewebsites.net';
+	private apiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
 	public filter: Filter;
 
 	public regions = [];
@@ -30,7 +30,7 @@ export class MainService {
 
 		this.metadata = [];
 
-		this.loginService.login("steve@freelancemvc.net", "password")
+		this.loginService.login(this.apiUrl, "steve@freelancemvc.net", "password")
         		.subscribe( 
                     d => { 
             			this.setToken(d.token_type + ' ' + d.access_token); 
@@ -40,48 +40,51 @@ export class MainService {
             			this.propertiesService.setApiURL(this.apiUrl);
             			this.bookingService.setApiURL(this.apiUrl);
 
-						this.isReading = true;
-
-
-						//--------------		Reading data of villas		-----------///////////
-                        this.propertiesService.getregions().subscribe( 
-                            d => {
-                                this.regions = d;
-                                
-                        this.getVillas().subscribe( 
-                            d => { 
-                                this.villas = d; 
-
-                        this.propertiesService.getMetaData().subscribe(
-                        	d => {
-                        		this.metadata = d;
-
-                        		console.log(d);
-
-                        		this.isReading = false;
-                        	},
-                        	e => { console.log("error: ", e); }
-                        );
-                            }, 
-                            e => { console.log("error:", e); } 
-                        );
-
-                            },
-                            e => { console.log(e); }
-                        );
-
-                        //------------	Reading all properties -------------//
-                        this.propertiesService.getAllProperties().subscribe(
-				            d => {
-				                this.properties = d;
-				            },
-				            e => {
-				                console.log("error: ", e);
-				            }
-				        );
+						this.readData();
         		    }, 
                     e => { console.log("error:", e)} 
                 );
+	}
+
+	public readData() {
+		this.isReading = true;
+
+		//--------------		Reading data of villas		-----------///////////
+        this.propertiesService.getregions().subscribe( 
+            d => {
+                this.regions = d;
+                
+        this.getVillas().subscribe( 
+            d => { 
+                this.villas = d; 
+
+        this.propertiesService.getMetaData().subscribe(
+        	d => {
+        		this.metadata = d;
+
+        		console.log(d);
+
+        		this.isReading = false;
+        	},
+        	e => { console.log("error: ", e); }
+        );
+            }, 
+            e => { console.log("error:", e); } 
+        );
+
+            },
+            e => { console.log(e); }
+        );
+
+        //------------	Reading all properties -------------//
+        this.propertiesService.getAllProperties().subscribe(
+            d => {
+                this.properties = d;
+            },
+            e => {
+                console.log("error: ", e);
+            }
+        );
 	}
 
     private getTomorrow() {
