@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var platform_browser_1 = require('@angular/platform-browser');
 var ng2_auto_complete_1 = require('ng2-auto-complete');
+var ng2_cloudinary_1 = require('ng2-cloudinary');
 var dashboard_routes_1 = require('./dashboard.routes');
 var DashboardModule = (function () {
     function DashboardModule() {
@@ -21,6 +22,7 @@ var DashboardModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 ng2_auto_complete_1.Ng2AutoCompleteModule,
+                ng2_cloudinary_1.Ng2CloudinaryModule,
                 router_1.RouterModule.forChild(dashboard_routes_1.MODULE_ROUTES)
             ],
             declarations: [dashboard_routes_1.MODULE_COMPONENTS]

@@ -1,0 +1,59 @@
+<div *ngIf="name == 'Services'" class="housekeeperstate">
+	<h5>Housekeeping</h5>
+    <div id="childrenAllow" class="radio">
+        <label>
+            <input type="radio" name="childrenAllow" checked="true" value="0" (click)="housekeeperStateChange(0)"> Not Available
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="childrenAllow" value="1" (click)="housekeeperStateChange(1)"> Housekeeper Included
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" name="childrenAllow" value="2" (click)="housekeeperStateChange(2)"> Housekeeper Optional
+        </label>
+    </div>
+
+    <div class="form-group label-floating">
+        <label class="control-label">Other Housekeeping Information</label>
+        <textarea class="form-control" (change)="housekeeperOtherInfoChange($event)"></textarea>
+    </div>
+</div>
+
+<div *ngIf="name == 'Points of Interest'" class="points-of-interest">
+    <table>
+        <thead>
+            <tr>
+                <th class="col-lg-1 text-center"> Available </th>
+                <th class="col-lg-3 text-center"> Points Of Interest Type </th>
+                <th class="col-lg-6 text-left"> Name </th>
+                <th class="col-lg-2 text-left"> Distance(km) </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of PoITypes; let index = index" class="">
+                <td class="text-center checkbox"> <label> <input type="checkbox" checked="{{ item.checked ? 'checked': '' }}" [attr.type-id]="index" class="checkbox" (click)="checkboxClick($event)"/> </label> </td>
+                <td class="form-group text-center"> {{item.Name}} </td>
+                <td class="form-group text-left"> <input type="text" [attr.type-id]="index" class="name form-control" disabled="{{ item.checked ? '' : 'disabled' }}" (change)="nameChanged($event)"> </td>
+                <td class="form-group text-left"> <input type="number" min="0" [attr.type-id]="index" class="distance form-control" value="0" disabled="{{ item.checked ? '' : 'disabled' }}" (change)="distanceChanged($event)"/> </td>
+            </tr>
+        </tbody>
+    </table>
+    <div >
+
+    </div>
+</div>
+
+<div *ngIf="name == 'Features'" class="features">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" (click)="liftAvailabilityChanged($event)"> Lift Available
+        </label>
+    </div>
+    <div class="form-group label-floating">
+        <label class="control-label">Unique Benefits</label>
+        <textarea class="form-control" (change)="uniqueBenefitsChange($event)"></textarea>
+    </div>
+</div>

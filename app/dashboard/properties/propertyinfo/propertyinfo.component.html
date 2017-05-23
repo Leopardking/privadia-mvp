@@ -11,7 +11,7 @@
         <div id="name_address" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-name_address">
             <div class="panel-body">
                 <div>
-                    <div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="owners" (valueChanged)="ownerChanged($event)" [ngModel]="ownerName" class="form-group label-floating">
+                    <div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames" (valueChanged)="ownerChanged($event)" [ngModel]="ownerName" class="form-group label-floating">
                         <label class="control-label">Select Owner</label>
                         <input class="form-control" id="owner-name">
                     </div>

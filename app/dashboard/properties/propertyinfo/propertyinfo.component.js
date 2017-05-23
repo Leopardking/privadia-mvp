@@ -21,9 +21,9 @@ var PropertyinfoComponent = (function () {
         this.collaboratorInitial = "";
         this.boxUrl = "";
         //property size and rooms
-        this.bathroomCount = "";
-        this.bedroomCount = "";
-        this.sleepCount = "";
+        this.bathroomCount = 0;
+        this.bedroomCount = 0;
+        this.sleepCount = 0;
         this.maximumCapacity = "";
         this.livingSquare = "";
         this.diningCapacity = "";
@@ -41,15 +41,17 @@ var PropertyinfoComponent = (function () {
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-        this.owners = [];
+        this.ownerNames = [];
         this.regions = [];
         this.ownerName = "";
         this.regionName = "";
         // description
         this.propertyService.getOwners().subscribe(function (d) {
-            _this.owners = d.map(function (item, i) { return item.Name; });
+            _this.owners = d;
+            _this.ownerNames = d.map(function (item, i) { return item.Name; });
         }, function (e) { console.log("error: ", e); });
         this.propertyService.getregions().subscribe(function (d) {
+            _this.regionArray = d;
             _this.regions = d.map(function (item, i) { return item.Name; });
         }, function (e) { console.log("error: ", e); });
     };
@@ -106,12 +108,16 @@ var PropertyinfoComponent = (function () {
     };
     PropertyinfoComponent.prototype.ownerChanged = function (e) {
         this.ownerName = e;
+        var owernIndex = this.ownerNames.indexOf(this.ownerName);
+        this.owner = this.owners[owernIndex];
         if (e) {
             $("#ownerName").removeClass('is-empty');
         }
     };
     PropertyinfoComponent.prototype.regionChanged = function (e) {
         this.regionName = e;
+        var index = this.regions.indexOf(e);
+        this.region = this.regionArray[index];
         if (e) {
             $("#regionName").removeClass('is-empty');
         }

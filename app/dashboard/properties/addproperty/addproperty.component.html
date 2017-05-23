@@ -31,14 +31,22 @@
                 </ul>
             </div>
             <div class="col-md-9 subtype-filters-names">
-                <div class="tab-content">
+                <div class="tab-content card col-sm-12 col-md-12 col-lg-12">
                 <!--  Property Info  -->
-                    <div id="metatab-info" class="active">
+                    <div id="metatab-info" class="active card-content">
                         <propertyinfo-cmp #propertyInfo></propertyinfo-cmp>
                     </div>
 
+                    <div id="metatab-images" class="card-content">
+                        <propertyimage-cmp #propertyImage></propertyimage-cmp>
+                    </div>
 
-                    <div class=""  *ngFor="let metadata of mainService.metadata; let i = index; let last = last" id="metatab-property-{{metadata.Id}}">
+                    <div id="metatab-marketing" class="card-content">
+                        <propertymarketing-cmp #propertyMargeting></propertymarketing-cmp>
+                    </div>
+
+                    <div class="card-content" *ngFor="let metadata of mainService.metadata; let i = index; let last = last" id="metatab-property-{{metadata.Id}}">
+                        <metafilter-heading-cmp [name]="metadata.Name" #metafilterHeading></metafilter-heading-cmp>
                         <div class="panel-group" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default" *ngFor="let subtype of metadata.MetaDataSubTypes">
                                 <div class="panel-heading" role="tab" id="heading-{{subtype.Id}}">
@@ -49,7 +57,7 @@
                                         </h4>
                                     </a>
                                 </div>
-                                <div id="{{subtype.Id}}" class="panel-collapse collapse" role="tabpanel" [attr.aria-labelledby]="'heading-'+subtype.Id">
+                                <div id="{{subtype.Id}}" class="panel-collapse collapse in" role="tabpanel" [attr.aria-labelledby]="'heading-'+subtype.Id">
                                     <div class="panel-body">
                                         <button class="subtype-filter btn btn-sm {{ metafilters[option.Id] ? 'btn-success' : 'btn-default'}}" *ngFor="let option of subtype.MetaData" [attr.option-id]="option.Id" (click)="subfilterChange($event)">
                                             <span class="btn-label">

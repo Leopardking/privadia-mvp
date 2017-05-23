@@ -10,9 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var homeservice_1 = require('../../../../app/services/homeservice');
+var properties_service_1 = require('../../../../app/services/properties/properties.service');
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(mainService) {
+    function AddpropertyComponent(mainService, propertyService) {
         this.mainService = mainService;
+        this.propertyService = propertyService;
         this.reading = false;
         this.datatableInited = false;
         this.properties = [];
@@ -36,62 +38,86 @@ var AddpropertyComponent = (function () {
         return "";
     };
     AddpropertyComponent.prototype.saveInfo = function () {
+        var metaData = [];
+        for (var i = 1; i < 125; i++) {
+            metaData.push({
+                Available: this.metafilters[i] == 0 ? 0 : 1,
+                MetaDataId: i
+            });
+        }
+        var contacts = this.propertyInfo.contacts.map(function (item, index) {
+            return {
+                EmailAddress: item.email,
+                FirstName: item.firstName,
+                JobTitle: item.jobTitle,
+                LastName: item.lastName,
+                Telephone: parseInt(item.telephone)
+            };
+        });
+        var bathrooms = this.propertyInfo.bathrooms.map(function (item, index) {
+            return {
+                Description: item.description,
+                Name: item.name,
+                PropertyRoomType: 2
+            };
+        });
+        var bedrooms = this.propertyInfo.bedrooms.map(function (item, index) {
+            return {
+                Description: item.description,
+                Name: item.name,
+                PropertyRoomType: 1
+            };
+        });
+        var poi = this.metafilterHeading.PoITypes.map(function (item, index) {
+            return {
+                Available: item.checked ? 1 : 0,
+                Distance: item.distance,
+                Name: item.typeName,
+                PointOfInterestTypeId: item.Id
+            };
+        });
         var data = {
             Active: true,
             Address: this.propertyInfo.address,
-            AgencyPackUrl: null,
-            Bathrooms: this.propertyInfo.bathrooms,
-            Bedrooms: this.propertyInfo.bedrooms,
-            Benefits: null,
+            AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
+            Bathrooms: parseInt(this.propertyInfo.bathroomCount),
+            Bedrooms: parseInt(this.propertyInfo.bedroomCount),
+            Benefits: this.metafilterHeading.uniqueBenefits,
             BoxUrl: this.propertyInfo.boxUrl,
-            Capacity: this.propertyInfo.maximumCapacity,
-            ChildrenAllowed: this.propertyInfo.allowChildren,
+            Capacity: parseInt(this.propertyInfo.maximumCapacity),
             CollaboratorInitials: this.propertyInfo.collaboratorInitial,
-            Contacts: this.propertyInfo.contacts,
+            Contacts: contacts,
             Description: this.propertyInfo.description,
-            DiningCapacity: this.propertyInfo.diningCapacity,
+            DiningCapacity: parseInt(this.propertyInfo.diningCapacity),
             EventsAllowed: this.propertyInfo.eventsAllowed,
             Headline: this.propertyInfo.headline,
-            Housekeeping: 0,
-            Id: 0,
+            Housekeeping: this.metafilterHeading.housekeeperState,
             Images: [],
             InternalName: this.propertyInfo.listingName,
             KitchenInfo: this.propertyInfo.kitchenInfo,
-            LAState: [],
             LiftAvailable: false,
-            LivingAreaSize: this.propertyInfo.livingSquare,
-            ManagedBySupplier: false,
-            MetaData: [],
-            MinimumStay: 0,
+            LivingAreaSize: parseInt(this.propertyInfo.livingSquare),
+            MetaData: metaData,
             Name: this.propertyInfo.officialName,
-            OtherHousekeepingInfo: null,
+            OtherHousekeepingInfo: this.metafilterHeading.housekeepOtherInfo,
             OtherInfo: this.propertyInfo.otherInfo,
-            OtherServicesState: null,
-            Owner: {},
+            Owner: this.propertyInfo.owner,
+            UserId: this.propertyInfo.owner.Id,
             OwnerName: this.propertyInfo.ownerName,
             PetsAllowed: this.propertyInfo.petsAllowed,
-            PointsOfInterest: [],
-            Region: {},
-            RegionId: 1,
+            PointsOfInterest: poi,
+            Region: this.propertyInfo.region,
+            RegionId: this.propertyInfo.region.Id,
             RegionName: this.propertyInfo.regionName,
-            Rooms: [],
-            Sleeps: this.propertyInfo.sleepCount,
+            Rooms: bedrooms.concat(bathrooms),
+            Sleeps: parseInt(this.propertyInfo.sleepCount),
             SmokingAllowed: this.propertyInfo.smokeAllowed,
             Summary: this.propertyInfo.summary,
-            TripState: [],
-            UserId: '',
-            ViaSupplier: false,
             WheelchairAccessible: this.propertyInfo.wheelchairAllowed,
-            bathroomsInfo: this.propertyInfo.bathrooms,
-            bedroomsInfo: this.propertyInfo.bedrooms,
-            childrenAllowed: this.propertyInfo.allowChildren,
-            contactsInfo: this.propertyInfo.contacts,
-            featureState: [],
-            localServicesState: [],
-            propertyId: 14485,
-            propertyName: this.propertyInfo.officialName,
-            villaDescriptionState: []
+            childrenAllowed: parseInt(this.propertyInfo.allowChildren),
+            propertyName: this.propertyInfo.officialName
         };
+        this.propertyService.addProperty(data).subscribe(function (d) { console.log(d); }, function (e) { console.log("error:", e); });
     };
     AddpropertyComponent.prototype.continueInfo = function () {
     };
@@ -101,6 +127,14 @@ var AddpropertyComponent = (function () {
         core_1.ViewChild('propertyInfo'), 
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "propertyInfo", void 0);
+    __decorate([
+        core_1.ViewChild('metafilterHeading'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "metafilterHeading", void 0);
+    __decorate([
+        core_1.ViewChild('propertyMargeting'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "propertyMargeting", void 0);
     AddpropertyComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -108,7 +142,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService])
+        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());

@@ -5,9 +5,17 @@ import { BookingComponent } from './booking/booking.component';
 import { PropertiesComponent } from './properties/properties.component';
 import { AddpropertyComponent } from './properties/addproperty/addproperty.component';
 
+
 import { VillaComponent } from './components/villa/villa.component';
-import { PropertyinfoComponent } from './properties/propertyinfo/propertyinfo.component';
 import { MetafilterComponent } from './components/metafilter/metafilter.component';
+
+
+// property components
+import { PropertyinfoComponent } from './properties/propertyinfo/propertyinfo.component';
+import { PropertyimageoComponent } from './properties/propertyimage/propertyimage.component';
+import { PropertymarketingComponent } from './properties/marketing/propertymarketing.component';
+import { MetafilterheadingComponent } from './properties/metafilterheading/metafilterheading.component';
+
 
 
 //
@@ -26,5 +34,8 @@ export const MODULE_COMPONENTS = [
     MetafilterComponent,
     PropertiesComponent,
     AddpropertyComponent,
-    PropertyinfoComponent
+    PropertyinfoComponent,
+    PropertyimageoComponent,
+    PropertymarketingComponent,
+    MetafilterheadingComponent,
 ]

@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { PropertyinfoComponent } from '../propertyinfo/propertyinfo.component';
 
 import { MainService } from '../../../../app/services/homeservice';
+import { PropertiesService } from '../../../../app/services/properties/properties.service';
 
 @Component({
     moduleId: module.id,
@@ -13,6 +14,8 @@ import { MainService } from '../../../../app/services/homeservice';
 
 export class AddpropertyComponent implements OnInit{
     @ViewChild('propertyInfo') propertyInfo;
+    @ViewChild('metafilterHeading') metafilterHeading;
+    @ViewChild('propertyMargeting') propertyMargeting;
 
     private reading:boolean = false;
     private datatableInited:boolean = false;
@@ -24,7 +27,7 @@ export class AddpropertyComponent implements OnInit{
     private bedrooms;
     private bathrooms;
 
-    constructor ( private mainService: MainService) {
+    constructor ( private mainService: MainService, private propertyService: PropertiesService ) {
 
     }
 
@@ -52,62 +55,94 @@ export class AddpropertyComponent implements OnInit{
     }
 
     private saveInfo() {
+        let metaData = [];
+        for (let i = 1; i < 125; i++) {
+            metaData.push({ 
+                Available: this.metafilters[i] == 0 ? 0 : 1,
+                MetaDataId: i
+            });
+        }
+
+        let contacts = this.propertyInfo.contacts.map( (item, index) => { 
+            return {
+                EmailAddress: item.email,
+                FirstName: item.firstName,
+                JobTitle: item.jobTitle,
+                LastName: item.lastName,
+                Telephone: parseInt(item.telephone)
+            };
+        });
+
+        let bathrooms = this.propertyInfo.bathrooms.map( (item, index) => {
+            return {
+                Description: item.description,
+                Name: item.name,
+                PropertyRoomType: 2
+            }
+        });
+
+        let bedrooms = this.propertyInfo.bedrooms.map( (item, index) => {
+            return {
+                Description: item.description,
+                Name: item.name,
+                PropertyRoomType: 1
+            }
+        });
+
+        let poi = this.metafilterHeading.PoITypes.map( (item, index) => {
+            return {
+                Available: item.checked ? 1 : 0,
+                Distance: item.distance,
+                Name: item.typeName,
+                PointOfInterestTypeId: item.Id
+            };
+        })
+
         let data = {
             Active: true,
             Address: this.propertyInfo.address,
-            AgencyPackUrl: null,
-            Bathrooms: this.propertyInfo.bathrooms,
-            Bedrooms: this.propertyInfo.bedrooms,
-            Benefits: null,
+            AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
+            Bathrooms: parseInt(this.propertyInfo.bathroomCount),
+            Bedrooms: parseInt(this.propertyInfo.bedroomCount),
+            Benefits: this.metafilterHeading.uniqueBenefits,
             BoxUrl: this.propertyInfo.boxUrl,
-            Capacity: this.propertyInfo.maximumCapacity,
-            ChildrenAllowed: this.propertyInfo.allowChildren,
+            Capacity: parseInt(this.propertyInfo.maximumCapacity),
             CollaboratorInitials: this.propertyInfo.collaboratorInitial,
-            Contacts: this.propertyInfo.contacts,
+            Contacts: contacts,
             Description: this.propertyInfo.description,
-            DiningCapacity: this.propertyInfo.diningCapacity,
+            DiningCapacity: parseInt(this.propertyInfo.diningCapacity),
             EventsAllowed: this.propertyInfo.eventsAllowed,
             Headline: this.propertyInfo.headline,
-            Housekeeping: 0,
-            Id: 0,
+            Housekeeping: this.metafilterHeading.housekeeperState,
             Images: [],
             InternalName: this.propertyInfo.listingName,
             KitchenInfo: this.propertyInfo.kitchenInfo,
-            LAState: [],
             LiftAvailable: false,
-            LivingAreaSize: this.propertyInfo.livingSquare,
-            ManagedBySupplier: false,
-            MetaData: [],
-            MinimumStay: 0,
+            LivingAreaSize: parseInt(this.propertyInfo.livingSquare),
+            MetaData: metaData,
             Name: this.propertyInfo.officialName,
-            OtherHousekeepingInfo: null,
+            OtherHousekeepingInfo: this.metafilterHeading.housekeepOtherInfo,
             OtherInfo: this.propertyInfo.otherInfo,
-            OtherServicesState: null,
-            Owner: {},
+            Owner: this.propertyInfo.owner,
+            UserId: this.propertyInfo.owner.Id,
             OwnerName: this.propertyInfo.ownerName,
             PetsAllowed: this.propertyInfo.petsAllowed,
-            PointsOfInterest: [],
-            Region: {},
-            RegionId: 1,
+            PointsOfInterest: poi,
+            Region: this.propertyInfo.region,
+            RegionId: this.propertyInfo.region.Id,
             RegionName: this.propertyInfo.regionName,
-            Rooms: [],
-            Sleeps: this.propertyInfo.sleepCount,
+            Rooms: bedrooms.concat(bathrooms),
+            Sleeps: parseInt(this.propertyInfo.sleepCount),
             SmokingAllowed: this.propertyInfo.smokeAllowed,
             Summary: this.propertyInfo.summary,
-            TripState: [],
-            UserId: '',
-            ViaSupplier: false,
             WheelchairAccessible: this.propertyInfo.wheelchairAllowed,
-            bathroomsInfo: this.propertyInfo.bathrooms,
-            bedroomsInfo: this.propertyInfo.bedrooms,
-            childrenAllowed: this.propertyInfo.allowChildren,
-            contactsInfo: this.propertyInfo.contacts,
-            featureState: [],
-            localServicesState: [],
-            propertyId: 14485,
-            propertyName: this.propertyInfo.officialName,
-            villaDescriptionState: []
+            childrenAllowed: parseInt(this.propertyInfo.allowChildren),
+            propertyName: this.propertyInfo.officialName
         }
+        this.propertyService.addProperty(data).subscribe(
+            d => { console.log(d) },
+            e => { console.log("error:", e); }
+        );
     }
 
     private continueInfo() {

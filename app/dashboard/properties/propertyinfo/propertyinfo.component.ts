@@ -17,11 +17,15 @@ export class PropertyinfoComponent implements OnInit{
     public contacts;
     public bedrooms;
     public bathrooms;
-    private owners;
+    private ownerNames;
     private regions;
+    private regionArray;
+    private owners;
 
+    public owner;
     public ownerName; 
     public regionName;
+    public region;
     public listingName;
     public officialName;
     public address;
@@ -35,9 +39,9 @@ export class PropertyinfoComponent implements OnInit{
     public boxUrl = "";
 
     //property size and rooms
-    public bathroomCount = "";
-    public bedroomCount = "";
-    public sleepCount = "";
+    public bathroomCount = 0;
+    public bedroomCount = 0;
+    public sleepCount = 0;
     public maximumCapacity = "";
     public livingSquare = "";
     public diningCapacity = "";
@@ -59,7 +63,7 @@ export class PropertyinfoComponent implements OnInit{
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-        this.owners = [];
+        this.ownerNames = [];
         this.regions = [];
 
         this.ownerName = "";
@@ -70,13 +74,15 @@ export class PropertyinfoComponent implements OnInit{
 
         this.propertyService.getOwners().subscribe(
             d => { 
-                this.owners = d.map( (item, i) => { return item.Name; } );
+                this.owners = d;
+                this.ownerNames = d.map( (item, i) => { return item.Name; } );
             },
             e => { console.log("error: ", e); }
         );
 
         this.propertyService.getregions().subscribe(
             d => {
+                this.regionArray = d;
                 this.regions = d.map( (item, i) => { return item.Name; } );
             },
             e => { console.log("error: ", e); }
@@ -142,6 +148,9 @@ export class PropertyinfoComponent implements OnInit{
 
     private ownerChanged(e) {
         this.ownerName = e;
+        let owernIndex = this.ownerNames.indexOf(this.ownerName);
+        this.owner = this.owners[owernIndex];
+
         if (e) {
             $("#ownerName").removeClass('is-empty');
         }
@@ -149,6 +158,8 @@ export class PropertyinfoComponent implements OnInit{
 
     private regionChanged(e) {
         this.regionName = e;
+        let index = this.regions.indexOf(e);
+        this.region = this.regionArray[index];
         if (e) {
             $("#regionName").removeClass('is-empty');
         }

@@ -10,3 +10,7 @@
 .metafilter-names .nav-pills > li.active > a, .metafilter-names .nav-pills > li > a:hover {
     background-color: #0b5a7c !important;
 }
+
+.card-content, .tab-content {
+	margin: 0;
+}

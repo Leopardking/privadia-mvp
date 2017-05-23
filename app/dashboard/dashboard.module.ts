@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { Ng2CloudinaryModule } from 'ng2-cloudinary';
 
 import { MODULE_ROUTES,MODULE_COMPONENTS } from './dashboard.routes';
 
@@ -9,6 +10,7 @@ import { MODULE_ROUTES,MODULE_COMPONENTS } from './dashboard.routes';
     imports: [
         BrowserModule,
         Ng2AutoCompleteModule,
+        Ng2CloudinaryModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS ]
