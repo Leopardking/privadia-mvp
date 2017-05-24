@@ -16,8 +16,13 @@ declare var $:any;
 
 export class AddpropertyComponent implements OnInit{
     @ViewChild('propertyInfo') propertyInfo;
-    @ViewChild('metafilterHeading') metafilterHeading;
     @ViewChild('propertyMargeting') propertyMargeting;
+
+    @ViewChild('pointsOfInterest') pointsOfInterest;
+    @ViewChild('pointsOfInterest') localActivities;
+    @ViewChild('pointsOfInterest') features;
+    @ViewChild('pointsOfInterest') services;
+    @ViewChild('pointsOfInterest') trip;
 
     private reading:boolean = false;
     private datatableInited:boolean = false;
@@ -43,17 +48,8 @@ export class AddpropertyComponent implements OnInit{
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-    }
 
-    private subfilterChange(e) {
-        let optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
-
-        this.metafilters[optionId] = !this.metafilters[optionId];
-    }
-
-    private finished() {
-        //$(".selectpicker").selectpicker();
-        return "";
+        console.log(this.mainService.metadata);
     }
 
     private saveInfo() {
@@ -91,7 +87,7 @@ export class AddpropertyComponent implements OnInit{
             }
         });
         
-        let poi = this.metafilterHeading.PoITypes.map( (item, index) => {
+        let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
             return {
                 Available: item.checked ? 1 : 0,
                 Distance: item.distance,
@@ -106,7 +102,7 @@ export class AddpropertyComponent implements OnInit{
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
             Bathrooms: parseInt(this.propertyInfo.bathroomCount),
             Bedrooms: parseInt(this.propertyInfo.bedroomCount),
-            Benefits: this.metafilterHeading.uniqueBenefits,
+            Benefits: this.features.metafilterHeading.uniqueBenefits,
             BoxUrl: this.propertyInfo.boxUrl,
             Capacity: parseInt(this.propertyInfo.maximumCapacity),
             CollaboratorInitials: this.propertyInfo.collaboratorInitial,
@@ -115,7 +111,7 @@ export class AddpropertyComponent implements OnInit{
             DiningCapacity: parseInt(this.propertyInfo.diningCapacity),
             EventsAllowed: this.propertyInfo.eventsAllowed,
             Headline: this.propertyInfo.headline,
-            Housekeeping: this.metafilterHeading.housekeeperState,
+            Housekeeping: this.services.metafilterHeading.housekeeperState,
             Images: [],
             InternalName: this.propertyInfo.listingName,
             KitchenInfo: this.propertyInfo.kitchenInfo,
@@ -123,7 +119,7 @@ export class AddpropertyComponent implements OnInit{
             LivingAreaSize: parseInt(this.propertyInfo.livingSquare),
             MetaData: metaData,
             Name: this.propertyInfo.officialName,
-            OtherHousekeepingInfo: this.metafilterHeading.housekeepOtherInfo,
+            OtherHousekeepingInfo: this.services.metafilterHeading.housekeepOtherInfo,
             OtherInfo: this.propertyInfo.otherInfo,
             Owner: this.propertyInfo.owner,
             UserId: this.propertyInfo.owner.Id,

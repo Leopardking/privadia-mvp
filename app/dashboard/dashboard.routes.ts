@@ -15,6 +15,7 @@ import { PropertyinfoComponent } from './properties/propertyinfo/propertyinfo.co
 import { PropertyimageoComponent } from './properties/propertyimage/propertyimage.component';
 import { PropertymarketingComponent } from './properties/marketing/propertymarketing.component';
 import { MetafilterheadingComponent } from './properties/metafilterheading/metafilterheading.component';
+import { PropertyMetafilterComponent } from './properties/metafiltercomponents/metafilter.component';
 
 
 
@@ -38,4 +39,5 @@ export const MODULE_COMPONENTS = [
     PropertyimageoComponent,
     PropertymarketingComponent,
     MetafilterheadingComponent,
+    PropertyMetafilterComponent,
 ]

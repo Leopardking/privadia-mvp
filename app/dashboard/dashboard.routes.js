@@ -11,6 +11,7 @@ var propertyinfo_component_1 = require('./properties/propertyinfo/propertyinfo.c
 var propertyimage_component_1 = require('./properties/propertyimage/propertyimage.component');
 var propertymarketing_component_1 = require('./properties/marketing/propertymarketing.component');
 var metafilterheading_component_1 = require('./properties/metafilterheading/metafilterheading.component');
+var metafilter_component_2 = require('./properties/metafiltercomponents/metafilter.component');
 //
 exports.MODULE_ROUTES = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,5 +32,6 @@ exports.MODULE_COMPONENTS = [
     propertyimage_component_1.PropertyimageoComponent,
     propertymarketing_component_1.PropertymarketingComponent,
     metafilterheading_component_1.MetafilterheadingComponent,
+    metafilter_component_2.PropertyMetafilterComponent,
 ];
 //# sourceMappingURL=dashboard.routes.js.map

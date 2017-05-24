@@ -28,14 +28,7 @@ var AddpropertyComponent = (function () {
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-    };
-    AddpropertyComponent.prototype.subfilterChange = function (e) {
-        var optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
-        this.metafilters[optionId] = !this.metafilters[optionId];
-    };
-    AddpropertyComponent.prototype.finished = function () {
-        //$(".selectpicker").selectpicker();
-        return "";
+        console.log(this.mainService.metadata);
     };
     AddpropertyComponent.prototype.saveInfo = function () {
         var _this = this;
@@ -69,7 +62,7 @@ var AddpropertyComponent = (function () {
                 PropertyRoomType: 1
             };
         });
-        var poi = this.metafilterHeading.PoITypes.map(function (item, index) {
+        var poi = this.pointsOfInterest.metafilterHeading.PoITypes.map(function (item, index) {
             return {
                 Available: item.checked ? 1 : 0,
                 Distance: item.distance,
@@ -83,7 +76,7 @@ var AddpropertyComponent = (function () {
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
             Bathrooms: parseInt(this.propertyInfo.bathroomCount),
             Bedrooms: parseInt(this.propertyInfo.bedroomCount),
-            Benefits: this.metafilterHeading.uniqueBenefits,
+            Benefits: this.features.metafilterHeading.uniqueBenefits,
             BoxUrl: this.propertyInfo.boxUrl,
             Capacity: parseInt(this.propertyInfo.maximumCapacity),
             CollaboratorInitials: this.propertyInfo.collaboratorInitial,
@@ -92,7 +85,7 @@ var AddpropertyComponent = (function () {
             DiningCapacity: parseInt(this.propertyInfo.diningCapacity),
             EventsAllowed: this.propertyInfo.eventsAllowed,
             Headline: this.propertyInfo.headline,
-            Housekeeping: this.metafilterHeading.housekeeperState,
+            Housekeeping: this.services.metafilterHeading.housekeeperState,
             Images: [],
             InternalName: this.propertyInfo.listingName,
             KitchenInfo: this.propertyInfo.kitchenInfo,
@@ -100,7 +93,7 @@ var AddpropertyComponent = (function () {
             LivingAreaSize: parseInt(this.propertyInfo.livingSquare),
             MetaData: metaData,
             Name: this.propertyInfo.officialName,
-            OtherHousekeepingInfo: this.metafilterHeading.housekeepOtherInfo,
+            OtherHousekeepingInfo: this.services.metafilterHeading.housekeepOtherInfo,
             OtherInfo: this.propertyInfo.otherInfo,
             Owner: this.propertyInfo.owner,
             UserId: this.propertyInfo.owner.Id,
@@ -142,13 +135,29 @@ var AddpropertyComponent = (function () {
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "propertyInfo", void 0);
     __decorate([
-        core_1.ViewChild('metafilterHeading'), 
-        __metadata('design:type', Object)
-    ], AddpropertyComponent.prototype, "metafilterHeading", void 0);
-    __decorate([
         core_1.ViewChild('propertyMargeting'), 
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "propertyMargeting", void 0);
+    __decorate([
+        core_1.ViewChild('pointsOfInterest'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "pointsOfInterest", void 0);
+    __decorate([
+        core_1.ViewChild('pointsOfInterest'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "localActivities", void 0);
+    __decorate([
+        core_1.ViewChild('pointsOfInterest'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "features", void 0);
+    __decorate([
+        core_1.ViewChild('pointsOfInterest'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "services", void 0);
+    __decorate([
+        core_1.ViewChild('pointsOfInterest'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "trip", void 0);
     AddpropertyComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
