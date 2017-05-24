@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { Ng2CloudinaryModule } from 'ng2-cloudinary';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { MODULE_ROUTES,MODULE_COMPONENTS } from './dashboard.routes';
 
@@ -11,6 +12,7 @@ import { MODULE_ROUTES,MODULE_COMPONENTS } from './dashboard.routes';
         BrowserModule,
         Ng2AutoCompleteModule,
         Ng2CloudinaryModule,
+        FileUploadModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS ]

@@ -1,8 +1,12 @@
 var jssor_1_slider;
 
-jQuery(document).ready(function ($) {
+var jssor_1_SlideshowTransitions;
 
-    var jssor_1_SlideshowTransitions = [
+var jssor_1_options;
+
+
+jQuery(document).ready(function ($) {
+    jssor_1_SlideshowTransitions = [
       {$Duration:1200,x:0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
       {$Duration:1200,x:-0.3,$SlideOut:true,$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
       {$Duration:1200,x:-0.3,$During:{$Left:[0.3,0.7]},$Easing:{$Left:$Jease$.$InCubic,$Opacity:$Jease$.$Linear},$Opacity:2},
@@ -27,7 +31,7 @@ jQuery(document).ready(function ($) {
       {$Duration:1200,$Delay:20,$Clip:12,$SlideOut:true,$Assembly:260,$Easing:{$Clip:$Jease$.$OutCubic,$Opacity:$Jease$.$Linear},$Opacity:2}
     ];
 
-    var jssor_1_options = {
+    jssor_1_options = {
       $AutoPlay: 0,
       $SlideshowOptions: {
         $Class: $JssorSlideshowRunner$,
@@ -46,20 +50,24 @@ jQuery(document).ready(function ($) {
       }
     };
 
-    jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-
     /*responsive code begin*/
     /*remove responsive code if you don't want the slider scales while window resizing*/
     function ScaleSlider() {
-        var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
-        if (refSize) {
-            refSize = Math.min(refSize, 800);
-            jssor_1_slider.$ScaleWidth(refSize);
-        }
-        else {
-            window.setTimeout(ScaleSlider, 30);
-        }
+      if (jssor_1_slider && jssor_1_slider.$Elmt && jssor_1_slider.$Elmt.parentNode) {
+          var refSize = jssor_1_slider.$Elmt.parentNode.clientWidth;
+          if (refSize) {
+              refSize = Math.min(refSize, 800);
+              jssor_1_slider.$ScaleWidth(refSize);
+          }
+          else {
+              window.setTimeout(ScaleSlider, 30);
+          }
+      }
     }
+
+    $("#jssor_1").html($("#jssor_2").html());
+    jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+
     ScaleSlider();
     $(window).bind("load", ScaleSlider);
     $(window).bind("resize", ScaleSlider);

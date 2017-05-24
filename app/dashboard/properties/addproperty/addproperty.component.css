@@ -19,3 +19,11 @@ li > a.has-error {
 	color: red !important;
 }
 
+.checkbox {
+	display: inline-block;
+	widows: 150px;
+}
+
+.checkbox label {
+	color: black;
+}

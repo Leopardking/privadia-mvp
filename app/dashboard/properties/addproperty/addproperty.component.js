@@ -118,7 +118,7 @@ var AddpropertyComponent = (function () {
             EventsAllowed: this.propertyInfo.eventsAllowed,
             Headline: this.propertyInfo.headline,
             Housekeeping: this.services.metafilterHeading.housekeeperState,
-            Images: [],
+            Images: this.propertyImage.images,
             InternalName: this.propertyInfo.listingName,
             KitchenInfo: this.propertyInfo.kitchenInfo,
             LiftAvailable: this.features.metafilterHeading.liftAvailable,
@@ -174,6 +174,10 @@ var AddpropertyComponent = (function () {
         core_1.ViewChild('propertyMargeting'), 
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "propertyMargeting", void 0);
+    __decorate([
+        core_1.ViewChild('propertyImage'), 
+        __metadata('design:type', Object)
+    ], AddpropertyComponent.prototype, "propertyImage", void 0);
     __decorate([
         core_1.ViewChild('pointsOfInterest'), 
         __metadata('design:type', Object)

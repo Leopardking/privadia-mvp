@@ -1,17 +1,20 @@
 <div>
 	<label class="form-control">Property Image</label>
-	<button class="btn btn-primary primary-color shadow-grey"> Upload Image </button>
+	<input type="file" class="btn btn-file" ng2FileSelect [uploader]="uploader" (change)="fileChange()" />
 </div>
 
 <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:800px;height:456px;overflow:hidden;visibility:hidden;background-color:#24262e;">
+</div>
+
+<div id="jssor_2" class="hidden" style="position:relative;margin:0 auto;top:0px;left:0px;width:800px;height:456px;overflow:hidden;visibility:hidden;background-color:#24262e;">
     <!-- Loading Screen -->
-    <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('img/loading.gif') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
+    <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
     <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:800px;height:356px;overflow:hidden;">
         <div *ngFor="let item of images">
-        	<cl-image data-u="image" public-id="{{item}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="560" width="860" format="jpg">
-			</cl-image>
-			<cl-image data-u="thumb" public-id="{{item}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="72" width="72" format="jpg">
-			</cl-image>
+            <cl-image data-u="image" public-id="{{item.ImageId}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="560" width="860" format="jpg">
+            </cl-image>
+            <cl-image data-u="thumb" public-id="{{item.ImageId}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="72" width="72" format="jpg">
+            </cl-image>
         </div>
         <a data-u="any" href="https://www.jssor.com" style="display:none">javascript slider</a>
     </div>
@@ -31,4 +34,9 @@
     <!-- Arrow Navigator -->
     <span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
     <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
+</div>
+
+
+<div class="loading-gif" [hidden]="!uploader.isUploading">
+    <img src="../assets/img/loading.gif"/>
 </div>

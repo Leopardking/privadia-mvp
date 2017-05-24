@@ -9,16 +9,60 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var ng2_cloudinary_1 = require('ng2-cloudinary');
 var homeservice_1 = require('../../../services/homeservice');
 var PropertyimageoComponent = (function () {
     function PropertyimageoComponent(mainService) {
         this.mainService = mainService;
         this.images = [];
+        this.uploader = new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
+            cloudName: 'privadia',
+            uploadPreset: 'blmelyur'
+        }));
     }
     PropertyimageoComponent.prototype.ngOnInit = function () {
-        this.images = this.mainService.villas.map(function (item, index) { return item.ImageId; });
+        var _this = this;
         $.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
-        $.getScript('../../../../assets/js/init/initImageGallery.js');
+        this.uploader.onSuccessItem = function (item, response, status, headers) {
+            $.notify({
+                icon: "notifications",
+                message: "Successfully uploaded"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            var img = JSON.parse(response);
+            _this.images.push({
+                FileName: img.url,
+                ImageId: img.public_id
+            });
+            $.getScript('../../../../assets/js/init/initImageGallery.js');
+            console.log(img);
+            return { item: item, response: response, status: status, headers: headers };
+        };
+        this.uploader.onErrorItem = function (item, response, status, headers) {
+            $.notify({
+                icon: "notifications",
+                message: "Image Upload Failed"
+            }, {
+                type: 'danger',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            return { item: item, response: response, status: status, headers: headers };
+        };
+    };
+    PropertyimageoComponent.prototype.uploadImage = function () {
+    };
+    PropertyimageoComponent.prototype.fileChange = function () {
+        this.uploader.uploadAll();
     };
     PropertyimageoComponent = __decorate([
         core_1.Component({

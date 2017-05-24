@@ -17,6 +17,7 @@ declare var $:any;
 export class AddpropertyComponent implements OnInit{
     @ViewChild('propertyInfo') propertyInfo;
     @ViewChild('propertyMargeting') propertyMargeting;
+    @ViewChild('propertyImage') propertyImage;
 
     @ViewChild('pointsOfInterest') pointsOfInterest;
     @ViewChild('localActivities') localActivities;
@@ -150,7 +151,7 @@ export class AddpropertyComponent implements OnInit{
             EventsAllowed: this.propertyInfo.eventsAllowed,
             Headline: this.propertyInfo.headline,
             Housekeeping: this.services.metafilterHeading.housekeeperState,
-            Images: [],
+            Images: this.propertyImage.images,
             InternalName: this.propertyInfo.listingName,
             KitchenInfo: this.propertyInfo.kitchenInfo,
             LiftAvailable: this.features.metafilterHeading.liftAvailable,
