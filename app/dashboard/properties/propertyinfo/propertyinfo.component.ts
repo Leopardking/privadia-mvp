@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { AutoComplete } from '../../components/autocomplete/autocomplete.component';
 import { AutoCompleteConfig } from '../../components/autocomplete/autocomplete.config';
+
 import { PropertiesService } from '../../../services/properties/properties.service';
+import { MainService } from '../../../services/homeservice';
 
 @Component({
     moduleId: module.id,
@@ -12,6 +14,7 @@ import { PropertiesService } from '../../../services/properties/properties.servi
 })
 
 export class PropertyinfoComponent implements OnInit{
+    @ViewChild('villadescription') villadescription;
 
     // name & address
     public contacts;
@@ -42,9 +45,9 @@ export class PropertyinfoComponent implements OnInit{
     public bathroomCount = 0;
     public bedroomCount = 0;
     public sleepCount = 0;
-    public maximumCapacity = "";
-    public livingSquare = "";
-    public diningCapacity = "";
+    public maximumCapacity = 0;
+    public livingSquare = 0;
+    public diningCapacity = 0;
     public kitchenInfo = "";
 
     //children
@@ -54,7 +57,7 @@ export class PropertyinfoComponent implements OnInit{
     public eventsAllowed = false;
     public wheelchairAllowed = false;
 
-    constructor ( private propertyService: PropertiesService ) {
+    constructor ( private propertyService: PropertiesService, private mainService: MainService ) {
 
     }
 
@@ -187,6 +190,7 @@ export class PropertyinfoComponent implements OnInit{
 
         if (e) {
             $("#regionName").removeClass('is-empty');
+            $("#regionName").removeClass('has-error');
         }
     }
 

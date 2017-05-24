@@ -4,47 +4,47 @@
             <div class="col-md-3 p-b-15 metafilter-names">
                 <ul class="nav nav-pills nav-pills-icons nav-pills-grey nav-stacked" role="tablist">
                     <li class="active">
-                        <a href="#metatab-info" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-info" role="tab" data-toggle="tab" class="secondary-color metatab-info-tab-name">
                             Property Info
                         </a>
                     </li>
                     <li class="">
-                        <a href="#metatab-images" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-images" role="tab" data-toggle="tab" class="secondary-color metatab-images-tab-name">
                             Images
                         </a>
                     </li>
                     <li class="">
-                        <a href="#metatab-availability" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-availability" role="tab" data-toggle="tab" class="secondary-color metatab-availability-tab-name">
                             Availability
                         </a>
                     </li>
                     <li class="">
-                        <a href="#metatab-marketing" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-marketing" role="tab" data-toggle="tab" class="secondary-color metatab-marketing-tab-name">
                             Marketing
                         </a>
                     </li>
                     <li>
-                        <a href="#metatab-property-4" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-property-4" role="tab" data-toggle="tab" class="secondary-color metatab-property-4-tab-name">
                             Points of Interests
                         </a>
                     </li>
                     <li>
-                        <a href="#metatab-property-3" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-property-3" role="tab" data-toggle="tab" class="secondary-color metatab-property-3-tab-name">
                             Local Activities
                         </a>
                     </li>
                     <li>
-                        <a href="#metatab-property-6" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-property-6" role="tab" data-toggle="tab" class="secondary-color metatab-property-6-tab-name">
                             Features
                         </a>
                     </li>
                     <li>
-                        <a href="#metatab-property-2" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-property-2" role="tab" data-toggle="tab" class="secondary-color metatab-property-2-tab-name">
                             Services
                         </a>
                     </li>
                     <li>
-                        <a href="#metatab-property-1" role="tab" data-toggle="tab" class="secondary-color">
+                        <a href="#metatab-property-1" role="tab" data-toggle="tab" class="secondary-color metatab-property-1-tab-name">
                             Trip
                         </a>
                     </li>
@@ -86,9 +86,14 @@
                     </div>
                 </div>
                 <div class="text-center">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" (click)="activeChange($event)" checked="checked"> Active
+                        </label>
+                    </div>
                     <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" (click)="saveInfo()">
                         <span class="btn-label">
-                            <i class="material-icons">save</i>
+                            <i class="material-icons">add</i>
                         </span>
                         Save
                     </button>

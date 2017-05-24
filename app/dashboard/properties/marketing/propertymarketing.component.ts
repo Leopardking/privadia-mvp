@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -11,6 +11,11 @@ export class PropertymarketingComponent implements OnInit{
 	public pdfUrl;
 	public agencyPackUrl;
 
+	private re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+
+	@ViewChild('pdfUrl') elePdfUrl;
+	@ViewChild('agencyUrl') eleAgencyUrl;
+
 	constructor(  ) {
 	}
 
@@ -20,9 +25,41 @@ export class PropertymarketingComponent implements OnInit{
 
 	private pdfUrlChanged(e) {
 		this.pdfUrl = e.target.value;
+
+		if (this.pdfUrl != "" && !this.re.test(this.pdfUrl)) {
+			$(this.elePdfUrl.nativeElement).parent().addClass('has-error');
+		} else {
+			$(this.elePdfUrl.nativeElement).parent().removeClass('has-error');
+		}
 	}
 
 	private agnecyPackUrl(e) {
 		this.agencyPackUrl = e.target.value;
+
+		if (this.agencyPackUrl != "" && !this.re.test(this.pdfUrl)) {
+			$(this.eleAgencyUrl.nativeElement).parent().addClass('has-error');
+		} else {
+			$(this.eleAgencyUrl.nativeElement).parent().removeClass('has-error');
+		}
+	}
+
+	public getValidation() {
+		let validate = true;
+
+		if (this.agencyPackUrl != "" && !this.re.test(this.agencyPackUrl)) { 
+		    $(this.eleAgencyUrl.nativeElement).parent().addClass('has-error');
+		    validate = false;
+		} else {
+			$(this.eleAgencyUrl.nativeElement).parent().removeClass('has-error');
+		}
+
+		if (this.pdfUrl != "" && !this.re.test(this.pdfUrl)) {
+			$(this.elePdfUrl.nativeElement).parent().addClass('has-error');
+		    validate = false;
+		} else {
+			$(this.elePdfUrl.nativeElement).parent().removeClass('has-error');
+		}
+
+		return validate;
 	}
 }

@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { PropertiesService } from '../../../services/properties/properties.service';
 
+declare var $:any;
+
 @Component({
     moduleId: module.id,
     selector: ' metafilter-heading-cmp ',
@@ -64,6 +66,21 @@ export class MetafilterheadingComponent implements OnInit{
 	private checkboxClick(e) {
 		let index = e.target.getAttribute('type-id');
 		this.PoITypes[index].checked = !this.PoITypes[index].checked;
+
+		let ele = $("input.name")[index];
+		if (ele.value == "" && this.PoITypes[index].checked) {
+			$(ele).parent().addClass("has-error");
+		} else {
+			$(ele).parent().removeClass("has-error");
+		}
+
+		ele = $("input.distance")[index];
+		if (ele.value == "" && this.PoITypes[index].checked) {
+			$(ele).parent().addClass("has-error");
+		} else {
+			$(ele).parent().removeClass("has-error");
+		}
+		
 	}
 
 	private nameChanged(e) {
@@ -79,7 +96,7 @@ export class MetafilterheadingComponent implements OnInit{
 
 ///////////////		Features		///////////
 	private uniqueBenefitsChange(e) {
-		this.uniqueBenefits = e.target.innerHTML;
+		this.uniqueBenefits = e.target.value;
 	}
 
 	private liftAvailabilityChanged(e) {

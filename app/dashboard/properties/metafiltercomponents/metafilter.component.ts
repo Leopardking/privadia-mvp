@@ -13,7 +13,7 @@ export class PropertyMetafilterComponent implements OnInit{
 	@Input('metadata') metadata;
 	@ViewChild('metafilterHeading') metafilterHeading;
 
-	private metafilters;
+	public metafilters;
 
 	constructor(  ) {
 	}

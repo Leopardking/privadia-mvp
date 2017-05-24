@@ -36,8 +36,8 @@
             <tr *ngFor="let item of PoITypes; let index = index" class="">
                 <td class="text-center checkbox"> <label> <input type="checkbox" checked="{{ item.checked ? 'checked': '' }}" [attr.type-id]="index" class="checkbox" (click)="checkboxClick($event)"/> </label> </td>
                 <td class="form-group text-center"> {{item.Name}} </td>
-                <td class="form-group text-left"> <input type="text" [attr.type-id]="index" class="name form-control" disabled="{{ item.checked ? '' : 'disabled' }}" (change)="nameChanged($event)"> </td>
-                <td class="form-group text-left"> <input type="number" min="0" [attr.type-id]="index" class="distance form-control" value="0" disabled="{{ item.checked ? '' : 'disabled' }}" (change)="distanceChanged($event)"/> </td>
+                <td class="form-group text-left"> <input type="text" [attr.type-id]="index" class="name form-control" disabled="{{ item.checked ? '' : 'disabled' }}" (change)="nameChanged($event)" required /> </td>
+                <td class="form-group text-left"> <input type="number" min="0" [attr.type-id]="index" class="distance form-control" value="0" disabled="{{ item.checked ? '' : 'disabled' }}" (change)="distanceChanged($event)" required /> </td>
             </tr>
         </tbody>
     </table>

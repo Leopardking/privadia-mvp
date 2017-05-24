@@ -10,9 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var properties_service_1 = require('../../../services/properties/properties.service');
+var homeservice_1 = require('../../../services/homeservice');
 var PropertyinfoComponent = (function () {
-    function PropertyinfoComponent(propertyService) {
+    function PropertyinfoComponent(propertyService, mainService) {
         this.propertyService = propertyService;
+        this.mainService = mainService;
         //description
         this.headline = "";
         this.summary = "";
@@ -24,9 +26,9 @@ var PropertyinfoComponent = (function () {
         this.bathroomCount = 0;
         this.bedroomCount = 0;
         this.sleepCount = 0;
-        this.maximumCapacity = "";
-        this.livingSquare = "";
-        this.diningCapacity = "";
+        this.maximumCapacity = 0;
+        this.livingSquare = 0;
+        this.diningCapacity = 0;
         this.kitchenInfo = "";
         //children
         this.allowChildren = 0;
@@ -140,6 +142,7 @@ var PropertyinfoComponent = (function () {
         }
         if (e) {
             $("#regionName").removeClass('is-empty');
+            $("#regionName").removeClass('has-error');
         }
     };
     PropertyinfoComponent.prototype.listingNameChanged = function (e) {
@@ -232,6 +235,10 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.wheelchairAllowChange = function (e) {
         this.wheelchairAllowed = e.target.checked;
     };
+    __decorate([
+        core_1.ViewChild('villadescription'), 
+        __metadata('design:type', Object)
+    ], PropertyinfoComponent.prototype, "villadescription", void 0);
     PropertyinfoComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -239,7 +246,7 @@ var PropertyinfoComponent = (function () {
             templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, homeservice_1.MainService])
     ], PropertyinfoComponent);
     return PropertyinfoComponent;
 }());

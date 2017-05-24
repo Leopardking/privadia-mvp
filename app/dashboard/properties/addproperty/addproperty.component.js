@@ -18,24 +18,56 @@ var AddpropertyComponent = (function () {
         this.reading = false;
         this.datatableInited = false;
         this.properties = [];
+        this.isActive = true;
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     AddpropertyComponent.prototype.ngOnInit = function () {
-        this.metafilters = [];
-        for (var i = 0; i < 10000; i++) {
-            this.metafilters.push(false);
-        }
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-        console.log(this.mainService.metadata);
+        this.villadescription = this.propertyInfo.villadescription;
     };
     AddpropertyComponent.prototype.saveInfo = function () {
         var _this = this;
+        $(".title-error").removeClass("title-error");
+        $(".metafilter-names li a.has-error").removeClass("has-error");
+        var validateErrors = $(".tab-content .has-error");
+        if (validateErrors.length) {
+            $.notify({
+                icon: "notifications",
+                message: $(".tab-content .has-error").length + " Validation Errors Found"
+            }, {
+                type: 'danger',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            for (var i = 0; i < validateErrors.length; i++) {
+                var ele = validateErrors[i];
+                while (!ele.className.includes('card-content')) {
+                    if (ele.className.includes('panel-group')) {
+                        $(ele).addClass('title-error');
+                    }
+                    ele = ele.parentElement;
+                }
+                var eleTabName = document.getElementsByClassName(ele.id + "-tab-name");
+                $(eleTabName).addClass("has-error");
+            }
+            return;
+        }
+        $('.has-error').removeClass("has-error");
         var metaData = [];
         for (var i = 1; i < 125; i++) {
+            var available = this.pointsOfInterest.metafilters[i]
+                || this.features.metafilters[i]
+                || this.services.metafilters[i]
+                || this.villadescription.metafilters[i]
+                || this.localActivities.metafilters[i]
+                || this.trip.metafilters[i];
             metaData.push({
-                Available: this.metafilters[i] == 0 ? 0 : 1,
+                Available: available ? 1 : 0,
                 MetaDataId: i
             });
         }
@@ -71,7 +103,7 @@ var AddpropertyComponent = (function () {
             };
         });
         var data = {
-            Active: false,
+            Active: this.isActive,
             Address: this.propertyInfo.address,
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
             Bathrooms: parseInt(this.propertyInfo.bathroomCount),
@@ -89,7 +121,7 @@ var AddpropertyComponent = (function () {
             Images: [],
             InternalName: this.propertyInfo.listingName,
             KitchenInfo: this.propertyInfo.kitchenInfo,
-            LiftAvailable: false,
+            LiftAvailable: this.features.metafilterHeading.liftAvailable,
             LivingAreaSize: parseInt(this.propertyInfo.livingSquare),
             MetaData: metaData,
             Name: this.propertyInfo.officialName,
@@ -125,10 +157,14 @@ var AddpropertyComponent = (function () {
             });
             _this.mainService.readData();
         }, function (e) { console.log("error:", e); });
+        console.log(data);
     };
     AddpropertyComponent.prototype.continueInfo = function () {
     };
     AddpropertyComponent.prototype.discardInfo = function () {
+    };
+    AddpropertyComponent.prototype.activeChange = function (e) {
+        this.isActive = e.target.checked;
     };
     __decorate([
         core_1.ViewChild('propertyInfo'), 
@@ -143,19 +179,19 @@ var AddpropertyComponent = (function () {
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "pointsOfInterest", void 0);
     __decorate([
-        core_1.ViewChild('pointsOfInterest'), 
+        core_1.ViewChild('localActivities'), 
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "localActivities", void 0);
     __decorate([
-        core_1.ViewChild('pointsOfInterest'), 
+        core_1.ViewChild('features'), 
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "features", void 0);
     __decorate([
-        core_1.ViewChild('pointsOfInterest'), 
+        core_1.ViewChild('services'), 
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "services", void 0);
     __decorate([
-        core_1.ViewChild('pointsOfInterest'), 
+        core_1.ViewChild('trip'), 
         __metadata('design:type', Object)
     ], AddpropertyComponent.prototype, "trip", void 0);
     AddpropertyComponent = __decorate([

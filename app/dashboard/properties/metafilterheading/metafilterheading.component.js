@@ -54,6 +54,20 @@ var MetafilterheadingComponent = (function () {
     MetafilterheadingComponent.prototype.checkboxClick = function (e) {
         var index = e.target.getAttribute('type-id');
         this.PoITypes[index].checked = !this.PoITypes[index].checked;
+        var ele = $("input.name")[index];
+        if (ele.value == "" && this.PoITypes[index].checked) {
+            $(ele).parent().addClass("has-error");
+        }
+        else {
+            $(ele).parent().removeClass("has-error");
+        }
+        ele = $("input.distance")[index];
+        if (ele.value == "" && this.PoITypes[index].checked) {
+            $(ele).parent().addClass("has-error");
+        }
+        else {
+            $(ele).parent().removeClass("has-error");
+        }
     };
     MetafilterheadingComponent.prototype.nameChanged = function (e) {
         var index = e.target.getAttribute('type-id');
@@ -65,7 +79,7 @@ var MetafilterheadingComponent = (function () {
     };
     ///////////////		Features		///////////
     MetafilterheadingComponent.prototype.uniqueBenefitsChange = function (e) {
-        this.uniqueBenefits = e.target.innerHTML;
+        this.uniqueBenefits = e.target.value;
     };
     MetafilterheadingComponent.prototype.liftAvailabilityChanged = function (e) {
         this.liftAvailable = !this.liftAvailable;

@@ -19,20 +19,22 @@ export class AddpropertyComponent implements OnInit{
     @ViewChild('propertyMargeting') propertyMargeting;
 
     @ViewChild('pointsOfInterest') pointsOfInterest;
-    @ViewChild('pointsOfInterest') localActivities;
-    @ViewChild('pointsOfInterest') features;
-    @ViewChild('pointsOfInterest') services;
-    @ViewChild('pointsOfInterest') trip;
+    @ViewChild('localActivities') localActivities;
+    @ViewChild('features') features;
+    @ViewChild('services') services;
+    @ViewChild('trip') trip;
 
+    private villadescription;
     private reading:boolean = false;
     private datatableInited:boolean = false;
     
     private properties = [];
-    private metafilters;
 
     private contacts;
     private bedrooms;
     private bathrooms;
+
+    private isActive = true;
 
     constructor ( private mainService: MainService, private propertyService: PropertiesService ) {
 
@@ -40,23 +42,60 @@ export class AddpropertyComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
-        this.metafilters = [];
-        for (let i = 0; i < 10000; i++) {
-            this.metafilters.push(false);
-        }
-
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-
-        console.log(this.mainService.metadata);
+        this.villadescription = this.propertyInfo.villadescription;
     }
 
     private saveInfo() {
+        $(".title-error").removeClass("title-error");
+        $(".metafilter-names li a.has-error").removeClass("has-error");
+
+        let validateErrors = $(".tab-content .has-error");
+        if ( validateErrors.length ) {
+            $.notify({
+                icon: "notifications",
+                message: $(".tab-content .has-error").length + " Validation Errors Found"
+
+            },{
+                type: 'danger',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+
+            for (let i = 0; i < validateErrors.length; i++) {
+                let ele = validateErrors[i];
+
+                while (!ele.className.includes('card-content')) {
+                    if (ele.className.includes('panel-group')) {
+                        $(ele).addClass('title-error');
+                    }
+                    ele = ele.parentElement;
+                }
+
+                let eleTabName = document.getElementsByClassName(ele.id + "-tab-name");
+                $(eleTabName).addClass("has-error");
+            }
+
+            return;
+        }
+
+        $('.has-error').removeClass("has-error");
+
         let metaData = [];
         for (let i = 1; i < 125; i++) {
+            let available = this.pointsOfInterest.metafilters[i] 
+                        ||  this.features.metafilters[i] 
+                        ||  this.services.metafilters[i] 
+                        ||  this.villadescription.metafilters[i] 
+                        ||  this.localActivities.metafilters[i] 
+                        ||  this.trip.metafilters[i] ;
             metaData.push({ 
-                Available: this.metafilters[i] == 0 ? 0 : 1,
+                Available: available ? 1 : 0,
                 MetaDataId: i
             });
         }
@@ -95,9 +134,8 @@ export class AddpropertyComponent implements OnInit{
                 PointOfInterestTypeId: item.Id
             };
         })
-
         let data = {
-            Active: false,
+            Active: this.isActive,
             Address: this.propertyInfo.address,
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
             Bathrooms: parseInt(this.propertyInfo.bathroomCount),
@@ -115,7 +153,7 @@ export class AddpropertyComponent implements OnInit{
             Images: [],
             InternalName: this.propertyInfo.listingName,
             KitchenInfo: this.propertyInfo.kitchenInfo,
-            LiftAvailable: false,
+            LiftAvailable: this.features.metafilterHeading.liftAvailable,
             LivingAreaSize: parseInt(this.propertyInfo.livingSquare),
             MetaData: metaData,
             Name: this.propertyInfo.officialName,
@@ -155,6 +193,8 @@ export class AddpropertyComponent implements OnInit{
             },
             e => { console.log("error:", e); }
         );
+
+        console.log(data);
     }
 
     private continueInfo() {
@@ -163,5 +203,9 @@ export class AddpropertyComponent implements OnInit{
 
     private discardInfo() {
 
+    }
+
+    private activeChange(e) {
+        this.isActive = e.target.checked;
     }
 }

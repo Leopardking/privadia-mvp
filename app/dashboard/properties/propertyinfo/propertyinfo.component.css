@@ -47,3 +47,7 @@ ng2-auto-complete {
 .checkbox, .radio {
 	margin-top: 10px;
 }
+
+.panel-group.title-error .panel-heading a {
+	color: red !important;
+}

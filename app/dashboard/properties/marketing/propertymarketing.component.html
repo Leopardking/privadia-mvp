@@ -1,10 +1,10 @@
 <div>
 	<div class="form-group label-floating marketing-url">
         <label class="control-label">Unbranded PDF Url</label>
-        <input type="text" class="form-control" (blur)="pdfUrlChanged($event)">
+        <input type="text" class="form-control" (blur)="pdfUrlChanged($event)" #pdfUrl>
     </div> 
 	<div class="form-group label-floating marketing-url">
         <label class="control-label">Agency Pack Download Url</label>
-        <input type="text" class="form-control" (blur)="agnecyPackUrl($event)">
+        <input type="text" class="form-control" (blur)="agnecyPackUrl($event)" #agencyUrl>
     </div>   
 </div>
