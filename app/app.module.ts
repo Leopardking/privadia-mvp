@@ -7,21 +7,21 @@ import { APP_BASE_HREF } from '@angular/common';
 // import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 import { AppComponent }   from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { UsersComponent } from './users/users.component';
+import { DashboardComponent } from './pages/dashboard.component';
+import { UsersComponent } from './pages/users/users.component';
 
-import { DashboardModule } from './dashboard/dashboard.module';
-import { UsersModule } from './users/users.module';
-import { SidebarModule } from './sidebar/sidebar.module';
-import { FooterModule } from './shared/footer/footer.module';
-import { NavbarModule} from './shared/navbar/navbar.module';
+import { DashboardModule } from './pages/dashboard.module';
+import { UsersModule } from './pages/users/users.module';
+import { SidebarModule } from './components/sidebar/sidebar.module';
+import { FooterModule } from './components/shared/footer/footer.module';
+import { NavbarModule} from './components/shared/navbar/navbar.module';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
-import { MainService } from './services/homeservice';
-import { LoginService } from './services/login/login.service';
-import { PropertiesService } from './services/properties/properties.service';
-import { BookingService } from './services/booking/booking.service';
+import { MainService } from './providers/homeservice';
+import { LoginService } from './providers/login/login.service';
+import { PropertiesService } from './providers/properties/properties.service';
+import { BookingService } from './providers/booking/booking.service';
 
 @NgModule({
     imports:      [

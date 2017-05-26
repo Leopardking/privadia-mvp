@@ -14,18 +14,18 @@ var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
 // import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 var app_component_1 = require('./app.component');
-var dashboard_component_1 = require('./dashboard/dashboard.component');
-var users_component_1 = require('./users/users.component');
-var dashboard_module_1 = require('./dashboard/dashboard.module');
-var users_module_1 = require('./users/users.module');
-var sidebar_module_1 = require('./sidebar/sidebar.module');
-var footer_module_1 = require('./shared/footer/footer.module');
-var navbar_module_1 = require('./shared/navbar/navbar.module');
+var dashboard_component_1 = require('./pages/dashboard.component');
+var users_component_1 = require('./pages/users/users.component');
+var dashboard_module_1 = require('./pages/dashboard.module');
+var users_module_1 = require('./pages/users/users.module');
+var sidebar_module_1 = require('./components/sidebar/sidebar.module');
+var footer_module_1 = require('./components/shared/footer/footer.module');
+var navbar_module_1 = require('./components/shared/navbar/navbar.module');
 var common_1 = require('@angular/common');
-var homeservice_1 = require('./services/homeservice');
-var login_service_1 = require('./services/login/login.service');
-var properties_service_1 = require('./services/properties/properties.service');
-var booking_service_1 = require('./services/booking/booking.service');
+var homeservice_1 = require('./providers/homeservice');
+var login_service_1 = require('./providers/login/login.service');
+var properties_service_1 = require('./providers/properties/properties.service');
+var booking_service_1 = require('./providers/booking/booking.service');
 var AppModule = (function () {
     function AppModule() {
     }
