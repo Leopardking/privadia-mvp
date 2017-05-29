@@ -1,0 +1,29 @@
+.tab-content >div {
+	display: none;
+}
+
+.tab-content >div.active {
+	display: inherit;
+}
+
+
+.metafilter-names .nav-pills > li.active > a, .metafilter-names .nav-pills > li > a:hover {
+    background-color: #0b5a7c !important;
+}
+
+.card-content, .tab-content {
+	margin: 0;
+}
+
+li > a.has-error {
+	color: red !important;
+}
+
+.checkbox {
+	display: inline-block;
+	widows: 150px;
+}
+
+.checkbox label {
+	color: black;
+}

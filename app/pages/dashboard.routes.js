@@ -4,6 +4,7 @@ var home_component_1 = require('./home/home.component');
 var booking_component_1 = require('./booking/booking.component');
 var properties_component_1 = require('./properties/properties.component');
 var addproperty_component_1 = require('./properties/addproperty/addproperty.component');
+var editproperty_component_1 = require('./properties/editproperty/editproperty.component');
 var villa_component_1 = require('../components/villa/villa.component');
 var metafilter_component_1 = require('../components/metafilter/metafilter.component');
 // property components
@@ -18,7 +19,8 @@ exports.MODULE_ROUTES = [
     { path: 'home', component: home_component_1.HomeComponent },
     { path: 'booking', component: booking_component_1.BookingComponent },
     { path: 'properties', component: properties_component_1.PropertiesComponent },
-    { path: 'properties/addproperty', component: addproperty_component_1.AddpropertyComponent }
+    { path: 'properties/addproperty', component: addproperty_component_1.AddpropertyComponent },
+    { path: 'properties/editproperty/:id', component: editproperty_component_1.EditpropertyComponent }
 ];
 //
 exports.MODULE_COMPONENTS = [
@@ -28,6 +30,7 @@ exports.MODULE_COMPONENTS = [
     metafilter_component_1.MetafilterComponent,
     properties_component_1.PropertiesComponent,
     addproperty_component_1.AddpropertyComponent,
+    editproperty_component_1.EditpropertyComponent,
     propertyinfo_component_1.PropertyinfoComponent,
     propertyimage_component_1.PropertyimageoComponent,
     propertymarketing_component_1.PropertymarketingComponent,

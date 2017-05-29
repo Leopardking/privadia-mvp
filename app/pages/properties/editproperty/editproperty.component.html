@@ -1,0 +1,116 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3 p-b-15 metafilter-names">
+                <ul class="nav nav-pills nav-pills-icons nav-pills-grey nav-stacked" role="tablist">
+                    <li class="active">
+                        <a href="#metatab-info" role="tab" data-toggle="tab" class="secondary-color metatab-info-tab-name">
+                            Property Info Edit
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#metatab-images" role="tab" data-toggle="tab" class="secondary-color metatab-images-tab-name">
+                            Images Edit
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#metatab-availability" role="tab" data-toggle="tab" class="secondary-color metatab-availability-tab-name">
+                            Availability Edit
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#metatab-marketing" role="tab" data-toggle="tab" class="secondary-color metatab-marketing-tab-name">
+                            Marketing Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#metatab-property-4" role="tab" data-toggle="tab" class="secondary-color metatab-property-4-tab-name">
+                            Points of Interests Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#metatab-property-3" role="tab" data-toggle="tab" class="secondary-color metatab-property-3-tab-name">
+                            Local Activities Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#metatab-property-6" role="tab" data-toggle="tab" class="secondary-color metatab-property-6-tab-name">
+                            Features Edit
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#metatab-property-2" role="tab" data-toggle="tab" class="secondary-color metatab-property-2-tab-name">
+                            Services
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#metatab-property-1" role="tab" data-toggle="tab" class="secondary-color metatab-property-1-tab-name">
+                            Trip
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-9 subtype-filters-names">
+                <div class="tab-content card col-sm-12 col-md-12 col-lg-12">
+                <!--  Property Info  -->
+                    <div id="metatab-info" class="active card-content">
+                        <propertyinfo-cmp #propertyInfo></propertyinfo-cmp>
+                    </div>
+
+                    <div id="metatab-images" class="card-content">
+                        <propertyimage-cmp #propertyImage></propertyimage-cmp>
+                    </div>
+
+                    <div id="metatab-marketing" class="card-content">
+                        <propertymarketing-cmp #propertyMargeting></propertymarketing-cmp>
+                    </div>
+
+                    <div class="card-content" id="metatab-property-4">
+                        <property-metafilter-cmp [metadata]="mainService.metadata[3]" #pointsOfInterest></property-metafilter-cmp>
+                    </div>
+
+                    <div class="card-content" id="metatab-property-3">
+                        <property-metafilter-cmp [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
+                    </div>
+
+                    <div class="card-content" id="metatab-property-6">
+                        <property-metafilter-cmp [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
+                    </div>
+
+                    <div class="card-content" id="metatab-property-2">
+                        <property-metafilter-cmp [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
+                    </div>
+
+                    <div class="card-content" id="metatab-property-1">
+                        <property-metafilter-cmp [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" (click)="activeChange($event)" checked="checked"> Active
+                        </label>
+                    </div>
+                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" (click)="saveInfo()">
+                        <span class="btn-label">
+                            <i class="material-icons">add</i>
+                        </span>
+                        Save
+                    </button>
+                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" (click)="continueInfo()">
+                        <span class="btn-label">
+                            <i class="material-icons">save</i>
+                        </span>
+                        Save & Continue
+                    </button>
+                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" (click)="discardInfo()">
+                        <span class="btn-label">
+                            <i class="material-icons">close</i>
+                        </span>
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

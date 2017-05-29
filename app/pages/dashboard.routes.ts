@@ -4,6 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { BookingComponent } from './booking/booking.component';
 import { PropertiesComponent } from './properties/properties.component';
 import { AddpropertyComponent } from './properties/addproperty/addproperty.component';
+import { EditpropertyComponent } from './properties/editproperty/editproperty.component';
 
 
 import { VillaComponent } from '../components/villa/villa.component';
@@ -25,7 +26,8 @@ export const MODULE_ROUTES: Route[] =[
     { path: 'home', component: HomeComponent },
     { path: 'booking', component: BookingComponent },
     { path: 'properties', component: PropertiesComponent },
-    { path: 'properties/addproperty', component: AddpropertyComponent }
+    { path: 'properties/addproperty', component: AddpropertyComponent },
+    { path: 'properties/editproperty/:id', component: EditpropertyComponent }
 ]
 //
 export const MODULE_COMPONENTS = [
@@ -35,6 +37,7 @@ export const MODULE_COMPONENTS = [
     MetafilterComponent,
     PropertiesComponent,
     AddpropertyComponent,
+    EditpropertyComponent,
     PropertyinfoComponent,
     PropertyimageoComponent,
     PropertymarketingComponent,
