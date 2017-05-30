@@ -16,6 +16,7 @@ var MetafilterComponent = (function () {
     }
     MetafilterComponent.prototype.ngOnInit = function () {
         this.collapsed = true;
+        console.log('metafilter');
         this.metafilters = [];
         for (var i = 0; i < 10000; i++) {
             this.metafilters.push(false);

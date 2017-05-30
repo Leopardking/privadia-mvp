@@ -1,40 +1,30 @@
 "use strict";
 // import { DashboardComponent } from './dashboard.component';
 var home_component_1 = require('./home/home.component');
-var booking_component_1 = require('./booking/booking.component');
-var properties_component_1 = require('./properties/properties.component');
-var addproperty_component_1 = require('./properties/addproperty/addproperty.component');
-var editproperty_component_1 = require('./properties/editproperty/editproperty.component');
+// import { BookingComponent } from './booking/booking.component';
+// import { PropertiesComponent } from './properties/properties.component';
+// import { AddpropertyComponent } from './properties/addproperty/addproperty.component';
+// import { EditpropertyComponent } from './properties/editproperty/editproperty.component';
 var villa_component_1 = require('../components/villa/villa.component');
 var metafilter_component_1 = require('../components/metafilter/metafilter.component');
 // property components
-var propertyinfo_component_1 = require('./properties/propertyinfo/propertyinfo.component');
-var propertyimage_component_1 = require('./properties/propertyimage/propertyimage.component');
-var propertymarketing_component_1 = require('./properties/marketing/propertymarketing.component');
-var metafilterheading_component_1 = require('./properties/metafilterheading/metafilterheading.component');
-var metafilter_component_2 = require('./properties/metafiltercomponents/metafilter.component');
+// import { PropertyinfoComponent } from './properties/propertyinfo/propertyinfo.component';
+// import { PropertyimageoComponent } from './properties/propertyimage/propertyimage.component';
+// import { PropertymarketingComponent } from './properties/marketing/propertymarketing.component';
+// import { MetafilterheadingComponent } from './properties/metafilterheading/metafilterheading.component';
+// import { PropertyMetafilterComponent } from './properties/metafiltercomponents/metafilter.component';
 //
 exports.MODULE_ROUTES = [
+    //{ path: '', pathMatch: 'full' },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: home_component_1.HomeComponent },
-    { path: 'booking', component: booking_component_1.BookingComponent },
-    { path: 'properties', component: properties_component_1.PropertiesComponent },
-    { path: 'properties/addproperty', component: addproperty_component_1.AddpropertyComponent },
-    { path: 'properties/editproperty/:id', component: editproperty_component_1.EditpropertyComponent }
+    { path: 'booking', loadChildren: 'app/pages/booking/booking.module#BookingModule' },
+    { path: 'properties', loadChildren: 'app/pages/properties/properties.module#PropertiesModule' },
 ];
 //
 exports.MODULE_COMPONENTS = [
     home_component_1.HomeComponent,
     villa_component_1.VillaComponent,
-    booking_component_1.BookingComponent,
     metafilter_component_1.MetafilterComponent,
-    properties_component_1.PropertiesComponent,
-    addproperty_component_1.AddpropertyComponent,
-    editproperty_component_1.EditpropertyComponent,
-    propertyinfo_component_1.PropertyinfoComponent,
-    propertyimage_component_1.PropertyimageoComponent,
-    propertymarketing_component_1.PropertymarketingComponent,
-    metafilterheading_component_1.MetafilterheadingComponent,
-    metafilter_component_2.PropertyMetafilterComponent,
 ];
 //# sourceMappingURL=dashboard.routes.js.map

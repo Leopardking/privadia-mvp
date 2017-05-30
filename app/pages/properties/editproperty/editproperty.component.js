@@ -9,12 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var homeservice_1 = require('../../../providers/homeservice');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(mainService, propertyService) {
+    function EditpropertyComponent(mainService, propertyService, route) {
         this.mainService = mainService;
         this.propertyService = propertyService;
+        this.route = route;
         this.reading = false;
         this.datatableInited = false;
         this.properties = [];
@@ -22,6 +24,16 @@ var EditpropertyComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     EditpropertyComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.sub = this.route.params.subscribe(function (params) {
+            _this.propertyService.getPropertyById(params['id']).subscribe(function (d) {
+                _this.properties = d;
+                console.log('This properties', _this.properties);
+            }, function (e) { console.log("error:", e); });
+            console.log('This id', params['id']);
+            // this.id = +params['id']; // (+) converts string 'id' to a number
+            // In a real app: dispatch action to load the details here.
+        });
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
@@ -205,7 +217,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, router_1.ActivatedRoute])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());

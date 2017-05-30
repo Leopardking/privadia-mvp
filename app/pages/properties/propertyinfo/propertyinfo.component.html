@@ -75,8 +75,10 @@
                 <div class="form-group label-floating listing-name col-lg-6 col-md-6 col-sm-12 box-url">
                     <label class="control-label">Box Url</label>
                     <input type="text" class="form-control" (blur)="boxUrlChanged($event)">
-                </div>  
-                <property-metafilter-cmp [metadata]="mainService.metadata[4]" #villadescription></property-metafilter-cmp>
+                </div>
+                <div *ngIf="mainService.metadata[4]">
+                    <property-metafilter-cmp [metadata]="mainService.metadata[4]" #villadescription></property-metafilter-cmp>
+                </div>
             </div>
         </div>
     </div>

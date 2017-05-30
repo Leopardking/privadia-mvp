@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-
-import { PropertyinfoComponent } from '../propertyinfo/propertyinfo.component';
+import { ActivatedRoute } from '@angular/router';
 
 import { MainService } from '../../../providers/homeservice';
 import { PropertiesService } from '../../../providers/properties/properties.service';
@@ -25,6 +24,8 @@ export class EditpropertyComponent implements OnInit{
     @ViewChild('services') services;
     @ViewChild('trip') trip;
 
+   // public metadata;
+
     private villadescription;
     private reading:boolean = false;
     private datatableInited:boolean = false;
@@ -37,12 +38,28 @@ export class EditpropertyComponent implements OnInit{
 
     private isActive = true;
 
-    constructor ( private mainService: MainService, private propertyService: PropertiesService ) {
+    // id: number;
+    private sub: any;
+
+    constructor ( private mainService: MainService, private propertyService: PropertiesService, private route: ActivatedRoute ) {
 
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
+        this.sub = this.route.params.subscribe(params => {
+            this.propertyService.getPropertyById(params['id']).subscribe(
+                d => {
+                    this.properties = d;
+                    console.log('This properties', this.properties);
+                },
+                e => { console.log("error:", e); }
+            );
+            console.log('This id', params['id']);
+            // this.id = +params['id']; // (+) converts string 'id' to a number
+
+            // In a real app: dispatch action to load the details here.
+        });
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
@@ -194,7 +211,6 @@ export class EditpropertyComponent implements OnInit{
             },
             e => { console.log("error:", e); }
         );
-
         console.log(data);
     }
 

@@ -9,30 +9,29 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-//import { RouterModule } from '@angular/router';
 var router_1 = require('@angular/router');
-var platform_browser_1 = require('@angular/platform-browser');
-var ng2_auto_complete_1 = require('ng2-auto-complete');
-var ng2_cloudinary_1 = require('ng2-cloudinary');
-var ng2_file_upload_1 = require('ng2-file-upload');
-var dashboard_routes_1 = require('./dashboard.routes');
-var DashboardModule = (function () {
-    function DashboardModule() {
+var editproperty_routes_1 = require('./editproperty.routes');
+var common_1 = require("@angular/common");
+var ng2_auto_complete_1 = require("ng2-auto-complete");
+var ng2_cloudinary_1 = require("ng2-cloudinary");
+var ng2_file_upload_1 = require("ng2-file-upload");
+var EditpropertyModule = (function () {
+    function EditpropertyModule() {
     }
-    DashboardModule = __decorate([
+    EditpropertyModule = __decorate([
         core_1.NgModule({
             imports: [
-                platform_browser_1.BrowserModule,
+                common_1.CommonModule,
                 ng2_auto_complete_1.Ng2AutoCompleteModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,
                 ng2_file_upload_1.FileUploadModule,
-                router_1.RouterModule.forRoot(dashboard_routes_1.MODULE_ROUTES)
+                router_1.RouterModule.forChild(editproperty_routes_1.MODULE_ROUTES)
             ],
-            declarations: [dashboard_routes_1.MODULE_COMPONENTS]
+            declarations: [editproperty_routes_1.MODULE_COMPONENTS]
         }), 
         __metadata('design:paramtypes', [])
-    ], DashboardModule);
-    return DashboardModule;
+    ], EditpropertyModule);
+    return EditpropertyModule;
 }());
-exports.DashboardModule = DashboardModule;
-//# sourceMappingURL=dashboard.module.js.map
+exports.EditpropertyModule = EditpropertyModule;
+//# sourceMappingURL=editproperty.module.js.map

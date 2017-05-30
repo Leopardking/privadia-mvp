@@ -29,16 +29,22 @@
                                     </tr>
                                 </tfoot>
                                 <tbody id="bookingTableBody">
-                                    <tr *ngFor="let item of mainService.properties; let i = index; let last = last ">
+                                    <div *ngFor="let item of mainService.properties; let i = index; let last = last ">
                                         <td>{{item.Id}}</td>
                                         <td>{{item.Name}}</td>
                                         <td class="text-right">
-                                            <button class="btn btn-simple btn-warning btn-icon shadow-grey" routerLink="/properties/editproperty/{{item.Id}}"><i class="material-icons">edit</i>Edit</button>
-                                            <button class="btn btn-simple btn-danger btn-icon shadow-grey"><i class="material-icons">close</i>Remove</button>
-                                            <button class="btn btn-simple btn-warning btn-icon shadow-grey"><i class="material-icons">euro_symbol</i>Set Rates</button>
+                                            <button class="btn btn-simple btn-warning btn-icon shadow-grey" [routerLink]="['/properties/editproperty', item.Id]">
+                                                <i class="material-icons">edit</i>Edit
+                                            </button>
+                                            <button class="btn btn-simple btn-danger btn-icon shadow-grey" routerLink="/properties/editproperty/{{item.Id}}">
+                                                <i class="material-icons">close</i>Remove
+                                            </button>
+                                            <button class="btn btn-simple btn-warning btn-icon shadow-grey">
+                                                <i class="material-icons">euro_symbol</i>Set Rates
+                                            </button>
                                         </td>
-										{{ !mainService.isReading && last && !datatableInited ? finishReading() : "" }}
-                                    </tr>
+										<!--{{ !mainService.isReading && last && !datatableInited ? finishReading() : "" }}-->
+                                    </div>
                                 </tbody>
                             </table>
                         </div>

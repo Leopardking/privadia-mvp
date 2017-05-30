@@ -24,7 +24,7 @@ export class PropertyMetafilterComponent implements OnInit{
             for (let j = 0; j < this.metadata[i].MetaData.length; j++) {
             	this.metafilters[this.metadata[i].MetaData[j]] = false;
             }
-        }		
+        }
 	}
 
 	private subfilterChange(e) {

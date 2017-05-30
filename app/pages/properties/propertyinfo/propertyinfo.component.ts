@@ -63,6 +63,7 @@ export class PropertyinfoComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
+        /*
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
@@ -81,9 +82,8 @@ export class PropertyinfoComponent implements OnInit{
             Id: '',
             Name: ''
         }
-
+        */
         // description
-
 
         this.propertyService.getOwners().subscribe(
             d => { 

@@ -39,23 +39,28 @@ var PropertyinfoComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
-        var _this = this;
+        /*
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
         this.ownerNames = [];
         this.regions = [];
+
         this.ownerName = "";
         this.regionName = "";
+
         this.owner = {
             Id: '',
             Name: ''
-        };
+        }
+
         this.region = {
             Id: '',
             Name: ''
-        };
+        }
+        */
         // description
+        var _this = this;
         this.propertyService.getOwners().subscribe(function (d) {
             _this.owners = d;
             _this.ownerNames = d.map(function (item, i) { return item.Name; });

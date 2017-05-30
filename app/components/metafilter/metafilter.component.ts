@@ -23,7 +23,7 @@ export class MetafilterComponent implements OnInit{
 
     ngOnInit() {
         this.collapsed = true;
-
+        console.log('metafilter');
         this.metafilters = [];
         for (let i = 0; i < 10000; i++) {
             this.metafilters.push(false);

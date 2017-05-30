@@ -16,7 +16,7 @@ import { SidebarModule } from './components/sidebar/sidebar.module';
 import { FooterModule } from './components/shared/footer/footer.module';
 import { NavbarModule} from './components/shared/navbar/navbar.module';
 
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { MainService } from './providers/homeservice';
 import { LoginService } from './providers/login/login.service';
@@ -36,7 +36,7 @@ import { BookingService } from './providers/booking/booking.service';
     ],
     declarations: [ AppComponent, DashboardComponent, UsersComponent ],
     providers: [
-        {provide: LocationStrategy, useClass: HashLocationStrategy },
+        {provide: LocationStrategy, useClass: PathLocationStrategy },
         MainService, LoginService, PropertiesService, BookingService
     ],
     bootstrap:    [ AppComponent ]

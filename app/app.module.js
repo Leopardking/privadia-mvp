@@ -43,7 +43,7 @@ var AppModule = (function () {
             ],
             declarations: [app_component_1.AppComponent, dashboard_component_1.DashboardComponent, users_component_1.UsersComponent],
             providers: [
-                { provide: common_1.LocationStrategy, useClass: common_1.HashLocationStrategy },
+                { provide: common_1.LocationStrategy, useClass: common_1.PathLocationStrategy },
                 homeservice_1.MainService, login_service_1.LoginService, properties_service_1.PropertiesService, booking_service_1.BookingService
             ],
             bootstrap: [app_component_1.AppComponent]

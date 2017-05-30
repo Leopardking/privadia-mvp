@@ -21,11 +21,11 @@ export class PropertyimageoComponent implements OnInit{
 	private uploader: CloudinaryUploader;
 
 	constructor( private mainService: MainService ) {
-		this.uploader = new CloudinaryUploader( 
+		this.uploader = new CloudinaryUploader(
 			new CloudinaryOptions({
-				cloudName: 'privadia', 
+				cloudName: 'privadia',
 				uploadPreset: 'blmelyur'
-			}) 
+			})
 		);
 
 	}
@@ -47,7 +47,7 @@ export class PropertyimageoComponent implements OnInit{
             });
 
 			let img = JSON.parse(response);
-			
+
 			this.images.push({
 				FileName: img.url,
 				ImageId: img.public_id
@@ -72,7 +72,7 @@ export class PropertyimageoComponent implements OnInit{
                 }
             });
 
-          	return {item, response, status, headers};  
+          	return {item, response, status, headers};
 		}
 	}
 
