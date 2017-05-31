@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { AutoComplete } from '../../../components/autocomplete/autocomplete.component';
 import { AutoCompleteConfig } from '../../../components/autocomplete/autocomplete.config';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import { MainService } from '../../../providers/homeservice';
+import {FormGroup} from "@angular/forms";
 
 @Component({
     moduleId: module.id,
@@ -14,6 +15,11 @@ import { MainService } from '../../../providers/homeservice';
 })
 
 export class PropertyinfoComponent implements OnInit{
+    @Input('property') property;
+    @Input('name') name;
+    @Input('group')
+    public propertyForm: FormGroup;
+
     @ViewChild('villadescription') villadescription;
 
     // name & address
@@ -29,7 +35,7 @@ export class PropertyinfoComponent implements OnInit{
     public ownerName; 
     public regionName;
     public region;
-    public listingName;
+    public InternalName;
     public officialName;
     public address;
 
@@ -63,7 +69,9 @@ export class PropertyinfoComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
-        /*
+        console.log('this.property mainService', this.mainService.metadata )
+        //this.property// = this.getInfo();
+        //console.log('Property ', this.property)
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
@@ -82,7 +90,6 @@ export class PropertyinfoComponent implements OnInit{
             Id: '',
             Name: ''
         }
-        */
         // description
 
         this.propertyService.getOwners().subscribe(
@@ -195,7 +202,7 @@ export class PropertyinfoComponent implements OnInit{
     }
 
     private listingNameChanged(e) {
-        this.listingName = e.target.value;
+        this.InternalName = e.target.value;
     }
 
     private officialNameChanged(e) {

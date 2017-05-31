@@ -25,7 +25,7 @@ var AddpropertyComponent = (function () {
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-        this.villadescription = this.propertyInfo.villadescription;
+        //this.villadescription = this.propertyInfo.villadescription;
     };
     AddpropertyComponent.prototype.saveInfo = function () {
         var _this = this;

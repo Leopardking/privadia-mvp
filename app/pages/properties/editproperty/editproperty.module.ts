@@ -5,9 +5,12 @@ import {CommonModule} from "@angular/common";
 import {Ng2AutoCompleteModule} from "ng2-auto-complete";
 import {Ng2CloudinaryModule} from "ng2-cloudinary";
 import {FileUploadModule} from "ng2-file-upload";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
+        FormsModule,
+        ReactiveFormsModule,
         CommonModule,
         Ng2AutoCompleteModule,
         Ng2CloudinaryModule,

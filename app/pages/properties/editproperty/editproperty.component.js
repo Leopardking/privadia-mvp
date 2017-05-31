@@ -9,26 +9,69 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var homeservice_1 = require('../../../providers/homeservice');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(mainService, propertyService, route) {
+    function EditpropertyComponent(mainService, propertyService, route, builder) {
         this.mainService = mainService;
         this.propertyService = propertyService;
         this.route = route;
+        this.builder = builder;
         this.reading = false;
         this.datatableInited = false;
-        this.properties = [];
+        this.property = [];
         this.isActive = true;
+        //propertyForm: any;
+        this.isLoad = false;
+        this.propertyForm = new forms_1.FormGroup({
+            InternalName: new forms_1.FormControl(),
+            Name: new forms_1.FormControl(),
+            Address: new forms_1.FormControl(),
+            RegionId: new forms_1.FormControl(),
+            RegionName: new forms_1.FormControl(),
+            Headline: new forms_1.FormControl(),
+            Summary: new forms_1.FormControl(),
+            Description: new forms_1.FormControl(),
+            OtherInfo: new forms_1.FormControl(),
+            CollaboratorInitials: new forms_1.FormControl(),
+            BoxUrl: new forms_1.FormControl(),
+        });
+        console.log('this.property mainService', this.mainService.metadata);
+        /*
+                this.propertyForm = builder.group({
+                    'InternalName': '1',
+                    'OwnerName': '1',
+                    'Address': '1 33',
+                    'Name': '1     1',
+                });
+        */
+        //console.log('Form ', this.propertyForm.controls)
     }
-    // steve@freelancemvc.net, agent1@freelancemvc.net 
+    // steve@freelancemvc.net, agent1@freelancemvc.net
     EditpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
+        console.log('this.property mainService', this.mainService.metadata);
         this.sub = this.route.params.subscribe(function (params) {
             _this.propertyService.getPropertyById(params['id']).subscribe(function (d) {
-                _this.properties = d;
-                console.log('This properties', _this.properties);
+                _this.property = d;
+                _this.propertyForm = _this.builder.group({
+                    'InternalName': d.InternalName,
+                    'Name': d.Name,
+                    'Address': d.Address,
+                    'RegionId': d.RegionId,
+                    'RegionName': d.RegionName,
+                    'Headline': d.Headline,
+                    'Summary': d.Summary,
+                    'Description': d.Description,
+                    'OtherInfo': d.OtherInfo,
+                    'CollaboratorInitials': d.CollaboratorInitials,
+                    'BoxUrl': d.BoxUrl,
+                });
+                _this.isLoad = true;
+                console.log('This properties', _this.property);
+                console.log('This properties Form', _this.propertyForm);
             }, function (e) { console.log("error:", e); });
             console.log('This id', params['id']);
             // this.id = +params['id']; // (+) converts string 'id' to a number
@@ -37,18 +80,20 @@ var EditpropertyComponent = (function () {
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-        this.villadescription = this.propertyInfo.villadescription;
+        //this.villadescription = this.propertyInfo.villadescription;
     };
     EditpropertyComponent.prototype.saveInfo = function () {
-        var _this = this;
+        /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
-        var validateErrors = $(".tab-content .has-error");
-        if (validateErrors.length) {
+
+        let validateErrors = $(".tab-content .has-error");
+        if ( validateErrors.length ) {
             $.notify({
                 icon: "notifications",
                 message: $(".tab-content .has-error").length + " Validation Errors Found"
-            }, {
+
+            },{
                 type: 'danger',
                 timer: 3000,
                 placement: {
@@ -56,34 +101,41 @@ var EditpropertyComponent = (function () {
                     align: 'right'
                 }
             });
-            for (var i = 0; i < validateErrors.length; i++) {
-                var ele = validateErrors[i];
+
+            for (let i = 0; i < validateErrors.length; i++) {
+                let ele = validateErrors[i];
+
                 while (!ele.className.includes('card-content')) {
                     if (ele.className.includes('panel-group')) {
                         $(ele).addClass('title-error');
                     }
                     ele = ele.parentElement;
                 }
-                var eleTabName = document.getElementsByClassName(ele.id + "-tab-name");
+
+                let eleTabName = document.getElementsByClassName(ele.id + "-tab-name");
                 $(eleTabName).addClass("has-error");
             }
+
             return;
         }
+
         $('.has-error').removeClass("has-error");
-        var metaData = [];
-        for (var i = 1; i < 125; i++) {
-            var available = this.pointsOfInterest.metafilters[i]
-                || this.features.metafilters[i]
-                || this.services.metafilters[i]
-                || this.villadescription.metafilters[i]
-                || this.localActivities.metafilters[i]
-                || this.trip.metafilters[i];
+
+        let metaData = [];
+        for (let i = 1; i < 125; i++) {
+            let available = this.pointsOfInterest.metafilters[i]
+                        ||  this.features.metafilters[i]
+                        ||  this.services.metafilters[i]
+                        ||  this.villadescription.metafilters[i]
+                        ||  this.localActivities.metafilters[i]
+                        ||  this.trip.metafilters[i] ;
             metaData.push({
                 Available: available ? 1 : 0,
                 MetaDataId: i
             });
         }
-        var contacts = this.propertyInfo.contacts.map(function (item, index) {
+
+        let contacts = this.propertyInfo.contacts.map( (item, index) => {
             return {
                 EmailAddress: item.email,
                 FirstName: item.firstName,
@@ -92,29 +144,32 @@ var EditpropertyComponent = (function () {
                 Telephone: parseInt(item.telephone)
             };
         });
-        var bathrooms = this.propertyInfo.bathrooms.map(function (item, index) {
+
+        let bathrooms = this.propertyInfo.bathrooms.map( (item, index) => {
             return {
                 Description: item.description,
                 Name: item.name,
                 PropertyRoomType: 2
-            };
+            }
         });
-        var bedrooms = this.propertyInfo.bedrooms.map(function (item, index) {
+
+        let bedrooms = this.propertyInfo.bedrooms.map( (item, index) => {
             return {
                 Description: item.description,
                 Name: item.name,
                 PropertyRoomType: 1
-            };
+            }
         });
-        var poi = this.pointsOfInterest.metafilterHeading.PoITypes.map(function (item, index) {
+        
+        let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
             return {
                 Available: item.checked ? 1 : 0,
                 Distance: item.distance,
                 Name: item.typeName,
                 PointOfInterestTypeId: item.Id
             };
-        });
-        var data = {
+        })
+        let data = {
             Active: this.isActive,
             Address: this.propertyInfo.address,
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
@@ -154,22 +209,28 @@ var EditpropertyComponent = (function () {
             WheelchairAccessible: this.propertyInfo.wheelchairAllowed,
             childrenAllowed: parseInt(this.propertyInfo.allowChildren),
             propertyName: this.propertyInfo.officialName
-        };
-        this.propertyService.addProperty(data).subscribe(function (d) {
-            $.notify({
-                icon: "notifications",
-                message: "Property Added Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-            _this.mainService.readData();
-        }, function (e) { console.log("error:", e); });
-        console.log(data);
+        }
+        this.propertyService.addProperty(data).subscribe(
+            d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                this.mainService.readData();
+            },
+            e => { console.log("error:", e); }
+        );
+        */
+        //console.log(data);
+        console.log('Save form ', this.propertyForm);
     };
     EditpropertyComponent.prototype.continueInfo = function () {
     };
@@ -217,7 +278,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, router_1.ActivatedRoute, forms_1.FormBuilder])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());

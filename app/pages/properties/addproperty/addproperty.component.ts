@@ -46,7 +46,7 @@ export class AddpropertyComponent implements OnInit{
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-        this.villadescription = this.propertyInfo.villadescription;
+        //this.villadescription = this.propertyInfo.villadescription;
     }
 
     private saveInfo() {

@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { MainService } from '../../../providers/homeservice';
@@ -24,13 +25,15 @@ export class EditpropertyComponent implements OnInit{
     @ViewChild('services') services;
     @ViewChild('trip') trip;
 
-   // public metadata;
+    // public propertyForm: any;
+
+    // public metadata;
 
     private villadescription;
     private reading:boolean = false;
     private datatableInited:boolean = false;
     
-    private properties = [];
+    private property = [];
 
     private contacts;
     private bedrooms;
@@ -40,18 +43,66 @@ export class EditpropertyComponent implements OnInit{
 
     // id: number;
     private sub: any;
+    //propertyForm: any;
+    private isLoad = false;
 
-    constructor ( private mainService: MainService, private propertyService: PropertiesService, private route: ActivatedRoute ) {
+    public propertyForm = new FormGroup ({
+        InternalName: new FormControl(),
+        Name: new FormControl(),
+        Address: new FormControl(),
+        RegionId: new FormControl(),
+        RegionName: new FormControl(),
+        Headline: new FormControl(),
+        Summary: new FormControl(),
+        Description: new FormControl(),
+        OtherInfo: new FormControl(),
+        CollaboratorInitials: new FormControl(),
+        BoxUrl: new FormControl(),
+    });
 
+    constructor ( private mainService: MainService,
+                  private propertyService: PropertiesService,
+                  private route: ActivatedRoute,
+                  private builder: FormBuilder) {
+
+        console.log('this.property mainService', this.mainService.metadata )
+/*
+        this.propertyForm = builder.group({
+            'InternalName': '1',
+            'OwnerName': '1',
+            'Address': '1 33',
+            'Name': '1     1',
+        });
+*/
+
+        //console.log('Form ', this.propertyForm.controls)
     }
 
-    // steve@freelancemvc.net, agent1@freelancemvc.net 
+    // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
+        console.log('this.property mainService', this.mainService.metadata )
+
         this.sub = this.route.params.subscribe(params => {
             this.propertyService.getPropertyById(params['id']).subscribe(
                 d => {
-                    this.properties = d;
-                    console.log('This properties', this.properties);
+                    this.property = d;
+
+                    this.propertyForm = this.builder.group({
+                        'InternalName': d.InternalName,
+                        'Name': d.Name,
+                        'Address': d.Address,
+                        'RegionId': d.RegionId,
+                        'RegionName': d.RegionName,
+                        'Headline': d.Headline,
+                        'Summary': d.Summary,
+                        'Description': d.Description,
+                        'OtherInfo': d.OtherInfo,
+                        'CollaboratorInitials': d.CollaboratorInitials,
+                        'BoxUrl': d.BoxUrl,
+                    });
+                    this.isLoad = true;
+                    console.log('This properties', this.property);
+                    console.log('This properties Form', this.propertyForm);
                 },
                 e => { console.log("error:", e); }
             );
@@ -63,10 +114,12 @@ export class EditpropertyComponent implements OnInit{
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
-        this.villadescription = this.propertyInfo.villadescription;
+        //this.villadescription = this.propertyInfo.villadescription;
     }
 
     private saveInfo() {
+
+        /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
 
@@ -211,7 +264,9 @@ export class EditpropertyComponent implements OnInit{
             },
             e => { console.log("error:", e); }
         );
-        console.log(data);
+        */
+        //console.log(data);
+        console.log('Save form ', this.propertyForm)
     }
 
     private continueInfo() {

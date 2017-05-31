@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var homeservice_1 = require('../../../providers/homeservice');
+var forms_1 = require("@angular/forms");
 var PropertyinfoComponent = (function () {
     function PropertyinfoComponent(propertyService, mainService) {
         this.propertyService = propertyService;
@@ -39,28 +40,26 @@ var PropertyinfoComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
-        /*
+        var _this = this;
+        console.log('this.property mainService', this.mainService.metadata);
+        //this.property// = this.getInfo();
+        //console.log('Property ', this.property)
         this.contacts = [];
         this.bedrooms = [];
         this.bathrooms = [];
         this.ownerNames = [];
         this.regions = [];
-
         this.ownerName = "";
         this.regionName = "";
-
         this.owner = {
             Id: '',
             Name: ''
-        }
-
+        };
         this.region = {
             Id: '',
             Name: ''
-        }
-        */
+        };
         // description
-        var _this = this;
         this.propertyService.getOwners().subscribe(function (d) {
             _this.owners = d;
             _this.ownerNames = d.map(function (item, i) { return item.Name; });
@@ -151,7 +150,7 @@ var PropertyinfoComponent = (function () {
         }
     };
     PropertyinfoComponent.prototype.listingNameChanged = function (e) {
-        this.listingName = e.target.value;
+        this.InternalName = e.target.value;
     };
     PropertyinfoComponent.prototype.officialNameChanged = function (e) {
         this.officialName = e.target.value;
@@ -240,6 +239,18 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.wheelchairAllowChange = function (e) {
         this.wheelchairAllowed = e.target.checked;
     };
+    __decorate([
+        core_1.Input('property'), 
+        __metadata('design:type', Object)
+    ], PropertyinfoComponent.prototype, "property", void 0);
+    __decorate([
+        core_1.Input('name'), 
+        __metadata('design:type', Object)
+    ], PropertyinfoComponent.prototype, "name", void 0);
+    __decorate([
+        core_1.Input('group'), 
+        __metadata('design:type', forms_1.FormGroup)
+    ], PropertyinfoComponent.prototype, "propertyForm", void 0);
     __decorate([
         core_1.ViewChild('villadescription'), 
         __metadata('design:type', Object)

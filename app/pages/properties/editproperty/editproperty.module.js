@@ -15,12 +15,15 @@ var common_1 = require("@angular/common");
 var ng2_auto_complete_1 = require("ng2-auto-complete");
 var ng2_cloudinary_1 = require("ng2-cloudinary");
 var ng2_file_upload_1 = require("ng2-file-upload");
+var forms_1 = require("@angular/forms");
 var EditpropertyModule = (function () {
     function EditpropertyModule() {
     }
     EditpropertyModule = __decorate([
         core_1.NgModule({
             imports: [
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 common_1.CommonModule,
                 ng2_auto_complete_1.Ng2AutoCompleteModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,

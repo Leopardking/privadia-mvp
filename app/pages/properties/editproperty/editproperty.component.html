@@ -50,13 +50,13 @@
                     </li>
                 </ul>
             </div>
-            <div class="col-md-9 subtype-filters-names">
+            <div [formGroup]="propertyForm" class="col-md-9 subtype-filters-names">
                 <div class="tab-content card col-sm-12 col-md-12 col-lg-12">
                 <!--  Property Info  -->
-                    <div id="metatab-info" class="active card-content">
-                        <propertyinfo-cmp #propertyInfo></propertyinfo-cmp>
+                    <div id="metatab-info" class="active card-content" *ngIf="isLoad">
+                        <propertyinfo-cmp [name]="property" [group]="propertyForm" [property]="property" #propertyInfo></propertyinfo-cmp>
                     </div>
-
+                    <!--
                     <div id="metatab-images" class="card-content">
                         <propertyimage-cmp #propertyImage></propertyimage-cmp>
                     </div>
@@ -83,6 +83,7 @@
                     <div class="card-content" id="metatab-property-1" *ngIf="mainService.metadata[0]">
                         <property-metafilter-cmp [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
                     </div>
+                    -->
                 </div>
                 <div class="text-center">
                     <div class="checkbox">
