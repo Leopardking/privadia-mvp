@@ -16,27 +16,6 @@ var PropertyinfoComponent = (function () {
     function PropertyinfoComponent(propertyService, mainService) {
         this.propertyService = propertyService;
         this.mainService = mainService;
-        //description
-        this.headline = "";
-        this.summary = "";
-        this.description = "";
-        this.otherInfo = "";
-        this.collaboratorInitial = "";
-        this.boxUrl = "";
-        //property size and rooms
-        this.bathroomCount = 0;
-        this.bedroomCount = 0;
-        this.sleepCount = 0;
-        this.maximumCapacity = 0;
-        this.livingSquare = 0;
-        this.diningCapacity = 0;
-        this.kitchenInfo = "";
-        //children
-        this.allowChildren = 0;
-        this.smokeAllowed = false;
-        this.petsAllowed = false;
-        this.eventsAllowed = false;
-        this.wheelchairAllowed = false;
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
@@ -158,24 +137,6 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.addressChanged = function (e) {
         this.address = e.target.value;
     };
-    PropertyinfoComponent.prototype.headlineChanged = function (e) {
-        this.headline = e.target.value;
-    };
-    PropertyinfoComponent.prototype.summaryChanged = function (e) {
-        this.summary = e.target.value;
-    };
-    PropertyinfoComponent.prototype.otherInfoChanged = function (e) {
-        this.otherInfo = e.target.value;
-    };
-    PropertyinfoComponent.prototype.descriptionChanged = function (e) {
-        this.description = e.target.value;
-    };
-    PropertyinfoComponent.prototype.collaboratorInitialChanged = function (e) {
-        this.collaboratorInitial = e.target.value;
-    };
-    PropertyinfoComponent.prototype.boxUrlChanged = function (e) {
-        this.boxUrl = e.target.value;
-    };
     PropertyinfoComponent.prototype.adminInfoChanged = function (id, key, e) {
         var i;
         for (i = 0; i < this.contacts.length; i++) {
@@ -184,27 +145,6 @@ var PropertyinfoComponent = (function () {
             }
         }
         this.contacts[i][key] = e.target.value;
-    };
-    PropertyinfoComponent.prototype.bathroomsCountChanged = function (e) {
-        this.bathroomCount = e.target.value;
-    };
-    PropertyinfoComponent.prototype.bedroomsCountChanged = function (e) {
-        this.bedroomCount = e.target.value;
-    };
-    PropertyinfoComponent.prototype.sleepsChanged = function (e) {
-        this.sleepCount = e.target.value;
-    };
-    PropertyinfoComponent.prototype.maximumCapacityChanged = function (e) {
-        this.maximumCapacity = e.target.value;
-    };
-    PropertyinfoComponent.prototype.livingareaSquareChanged = function (e) {
-        this.livingSquare = e.target.value;
-    };
-    PropertyinfoComponent.prototype.diningCapacityChanged = function (e) {
-        this.diningCapacity = e.target.value;
-    };
-    PropertyinfoComponent.prototype.kitchenInfoChanged = function (e) {
-        this.kitchenInfo = e.target.value;
     };
     PropertyinfoComponent.prototype.bedroomChanged = function (id, key, e) {
         var i;
@@ -223,21 +163,6 @@ var PropertyinfoComponent = (function () {
             }
         }
         this.bathrooms[i][key] = e.target.value;
-    };
-    PropertyinfoComponent.prototype.childrenAllowChanged = function (e) {
-        this.allowChildren = e.target.value;
-    };
-    PropertyinfoComponent.prototype.smokeAllowChange = function (e) {
-        this.smokeAllowed = e.target.checked;
-    };
-    PropertyinfoComponent.prototype.petsAllowChange = function (e) {
-        this.petsAllowed = e.target.checked;
-    };
-    PropertyinfoComponent.prototype.eventsAllowChange = function (e) {
-        this.eventsAllowed = e.target.checked;
-    };
-    PropertyinfoComponent.prototype.wheelchairAllowChange = function (e) {
-        this.wheelchairAllowed = e.target.checked;
     };
     __decorate([
         core_1.Input('property'), 

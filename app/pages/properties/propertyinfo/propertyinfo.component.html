@@ -10,14 +10,12 @@
         </div>
         <div id="name_address" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-name_address">
             <div class="panel-body" [formGroup]="propertyForm">
-                <!--
                 <div>
-                    <div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames" (valueChanged)="ownerChanged($event)" [ngModel]="ownerName" class="form-group label-floating">
+                    <div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames" class="form-group label-floating">
                         <label class="control-label">Select Owner</label>
-                        <input class="form-control" id="owner-name">
+                        <input class="form-control" id="owner-name" formControlName="OwnerName">
                     </div>
                 </div>
-                -->
                 <div class="form-group label-floating col-lg-6 col-md-6 col-sm-12 listing-name">
                     <label class="control-label">Listing Name</label>
                     <input type="text" class="form-control" formControlName="InternalName">
@@ -33,6 +31,7 @@
                 <div>
                     <div ng2-auto-complete id="regionName" [max-num-list]="10" [source]="regions" (valueChanged)="regionChanged($event)" class="form-group label-floating has-error">
                         <label class="control-label">Select Region *</label>
+                        <input class="form-control" formControlName="RegionId" required>
                         <input class="form-control" formControlName="RegionName" required>
                     </div>
                 </div>
@@ -144,36 +143,36 @@
             </a>
         </div>
         <div id="size_rooms" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-size_rooms">
-            <div class="panel-body">
+            <div class="panel-body" [formGroup]="propertyForm">
                 <div class="form-group label-floating listing-name has-error col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Number of Bathrooms</label>
-                    <input type="number" class="form-control" (blur)="bathroomsCountChanged($event)" required>
+                    <input type="number" class="form-control" formControlName="Bathrooms" required>
                 </div>
                 <div class="form-group label-floating listing-name has-error col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Number of bedrooms</label>
-                    <input type="number" class="form-control" (blur)="bedroomsCountChanged($event)" required>
+                    <input type="number" class="form-control" formControlName="Bedrooms" required>
                 </div>
                 <div class="form-group has-error label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Sleeps</label>
-                    <input type="number" class="form-control" (blur)="sleepsChanged($event)" required>
+                    <input type="number" class="form-control" formControlName="Sleeps" required>
                 </div>
                 <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Maximum Capacity</label>
-                    <input type="number" class="form-control" (blur)="maximumCapacityChanged($event)">
+                    <input type="number" class="form-control" formControlName="Capacity">
                 </div>
                 <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Living Area (m
                     <sup>2</sup>
                     )</label>
-                    <input type="number" class="form-control" (blur)="livingareaSquareChanged($event)">
+                    <input type="number" class="form-control" formControlName="LivingAreaSize">
                 </div>
                 <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Dining Capacity</label>
-                    <input type="number" class="form-control" (blur)="diningCapacityChanged($event)">
+                    <input type="number" class="form-control" formControlName="DiningCapacity">
                 </div>
                 <div class="form-group label-floating listing-name col-sm-12 col-md-12 col-lg-12">
                     <label class="control-label">Kitchen Information</label>
-                    <textarea type="text" class="form-control" (blur)="kitchenInfoChanged($event)"></textarea>
+                    <textarea type="text" class="form-control" formControlName="KitchenInfo"></textarea>
                 </div>
 
                 <div class="col-sm-12 col-md-12 col-lg-12 listing-name bedrooms">
@@ -232,44 +231,44 @@
             </a>
         </div>
         <div id="conditions" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-conditions">
-            <div class="panel-body">
+            <div class="panel-body" [formGroup]="propertyForm">
                 <div class="listing-name col-sm-12 col-md-12 col-lg-12">
                     <h5 class="listing-name col-sm-12 col-md-12 col-lg-12">Children Allowed</h5>
                     <div id="childrenAllow" class="listing-name radio col-sm-12 col-md-4 col-lg-4">
                         <label>
-                            <input type="radio" name="childrenAllow" checked="true" value="0" (blur)="childrenAllowChanged($event)"> Children Welcome
+                            <input type="radio" checked="true" value="0" formControlName="ChildrenAllowed"> Children Welcome
                         </label>
                     </div>
                     <div class="listing-name radio col-sm-12 col-md-4 col-lg-4">
                         <label>
-                            <input type="radio" name="childrenAllow" value="1" (blur)="childrenAllowChanged($event)"> Ask Owner
+                            <input type="radio" value="1" formControlName="ChildrenAllowed"> Ask Owner
                         </label>
                     </div>
                     <div class="listing-name radio col-sm-12 col-md-4 col-lg-4">
                         <label>
-                            <input type="radio" name="childrenAllow" value="2" (blur)="childrenAllowChanged($event)"> Not Suitable For Children
+                            <input type="radio" value="2" formControlName="ChildrenAllowed"> Not Suitable For Children
                         </label>
                     </div>
                 </div>
                 <div class="listing-name col-sm-12 col-md-12 col-lg-12">
                     <div class="listing-name checkbox col-sm-12 col-md-3 col-lg-3">
                         <label>
-                            <input type="checkbox" name="optionsCheckboxes" (blur)="smokeAllowChange($event)"> Smoking Allowed
+                            <input type="checkbox" formControlName="SmokingAllowed"> Smoking Allowed
                         </label>
                     </div>
                     <div class="listing-name checkbox col-sm-12 col-md-3 col-lg-3">
                         <label>
-                            <input type="checkbox" name="optionsCheckboxes" (blur)="wheelchairAllowChange($event)"> Wheelchairs Allowed
+                            <input type="checkbox" formControlName="WheelchairAccessible"> Wheelchairs Allowed
                         </label>
                     </div>
                     <div class="listing-name checkbox col-sm-12 col-md-3 col-lg-3">
                         <label>
-                            <input type="checkbox" name="optionsCheckboxes" (blur)="petsAllowChange($event)"> Pets Allowed
+                            <input type="checkbox"formControlName="PetsAllowed"> Pets Allowed
                         </label>
                     </div>
                     <div class="listing-name checkbox col-sm-12 col-md-3 col-lg-3">
                         <label>
-                            <input type="checkbox" name="optionsCheckboxes" (blur)="eventsAllowChange($event)"> Events Allowed
+                            <input type="checkbox" formControlName="EventsAllowed"> Events Allowed
                         </label>
                     </div>
                 </div>

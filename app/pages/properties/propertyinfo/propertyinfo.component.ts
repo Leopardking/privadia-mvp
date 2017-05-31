@@ -39,30 +39,6 @@ export class PropertyinfoComponent implements OnInit{
     public officialName;
     public address;
 
-    //description
-    public headline = "";
-    public summary = "";
-    public description = "";
-    public otherInfo = "";
-    public collaboratorInitial = "";
-    public boxUrl = "";
-
-    //property size and rooms
-    public bathroomCount = 0;
-    public bedroomCount = 0;
-    public sleepCount = 0;
-    public maximumCapacity = 0;
-    public livingSquare = 0;
-    public diningCapacity = 0;
-    public kitchenInfo = "";
-
-    //children
-    public allowChildren = 0;
-    public smokeAllowed = false;
-    public petsAllowed = false;
-    public eventsAllowed = false;
-    public wheelchairAllowed = false;
-
     constructor ( private propertyService: PropertiesService, private mainService: MainService ) {
 
     }
@@ -212,31 +188,6 @@ export class PropertyinfoComponent implements OnInit{
     private addressChanged(e) {
         this.address = e.target.value;
     }
-
-    private headlineChanged(e) {
-        this.headline = e.target.value;
-    }
-
-    private summaryChanged(e) {
-        this.summary = e.target.value;
-    }
-
-    private otherInfoChanged(e) {
-        this.otherInfo = e.target.value;
-    }
-
-    private descriptionChanged(e) {
-        this.description = e.target.value;
-    }
-
-    private collaboratorInitialChanged(e) {
-        this.collaboratorInitial = e.target.value;
-    }
-
-    private boxUrlChanged(e) {
-        this.boxUrl = e.target.value;
-    }
-
     private adminInfoChanged(id, key, e) {
         let i;
         for (i = 0; i < this.contacts.length; i++) {
@@ -246,35 +197,6 @@ export class PropertyinfoComponent implements OnInit{
         }
         this.contacts[i][key] = e.target.value;
     }
-
-    private bathroomsCountChanged(e) {
-        this.bathroomCount = e.target.value;
-    }
-
-    private bedroomsCountChanged(e) {
-        this.bedroomCount = e.target.value;
-    }
-
-    private sleepsChanged(e) {
-        this.sleepCount = e.target.value;
-    }
-
-    private maximumCapacityChanged(e) {
-        this.maximumCapacity = e.target.value;
-    }
-
-    private livingareaSquareChanged(e) {
-        this.livingSquare = e.target.value;
-    }
-
-    private diningCapacityChanged(e) {
-        this.diningCapacity = e.target.value;
-    }
-
-    private kitchenInfoChanged(e) {
-        this.kitchenInfo = e.target.value;
-    }
-
     private bedroomChanged(id, key, e) {
         let i;
         for (i = 0; i < this.bedrooms.length; i++) {
@@ -293,25 +215,5 @@ export class PropertyinfoComponent implements OnInit{
             }
         }
         this.bathrooms[i][key] = e.target.value;
-    }
-
-    private childrenAllowChanged(e) {
-        this.allowChildren = e.target.value;
-    }
-
-    private smokeAllowChange(e) {
-        this.smokeAllowed = e.target.checked;
-    }
-
-    private petsAllowChange(e) {
-        this.petsAllowed = e.target.checked;
-    }
-
-    private eventsAllowChange(e) {
-        this.eventsAllowed = e.target.checked;
-    }
-
-    private wheelchairAllowChange(e) {
-        this.wheelchairAllowed = e.target.checked;
     }
 }
