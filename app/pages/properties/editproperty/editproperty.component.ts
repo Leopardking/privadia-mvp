@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,7 +9,7 @@ declare var $:any;
 
 @Component({
     moduleId: module.id,
-    selector: ' addproperty-cmp ',
+    selector: ' editproperty-cmp ',
     templateUrl: 'editproperty.component.html',
     styleUrls: [ 'editproperty.component.css' ]
 })
@@ -47,6 +47,7 @@ export class EditpropertyComponent implements OnInit{
     private isLoad = false;
 
     public propertyForm = new FormGroup ({
+        OwnerName: new FormControl(),
         InternalName: new FormControl(),
         Name: new FormControl(),
         Address: new FormControl(),
@@ -58,8 +59,19 @@ export class EditpropertyComponent implements OnInit{
         OtherInfo: new FormControl(),
         CollaboratorInitials: new FormControl(),
         BoxUrl: new FormControl(),
+        Bathrooms: new FormControl(),
+        Bedrooms: new FormControl(),
+        Sleeps: new FormControl(),
+        Capacity: new FormControl(),
+        LivingAreaSize: new FormControl(),
+        DiningCapacity: new FormControl(),
+        KitchenInfo: new FormControl(),
+        ChildrenAllowed: new FormControl(),
+        SmokingAllowed: new FormControl(),
+        WheelchairAccessible: new FormControl(),
+        PetsAllowed: new FormControl(),
+        EventsAllowed: new FormControl(),
     });
-
     constructor ( private mainService: MainService,
                   private propertyService: PropertiesService,
                   private route: ActivatedRoute,
@@ -88,17 +100,31 @@ export class EditpropertyComponent implements OnInit{
                     this.property = d;
 
                     this.propertyForm = this.builder.group({
-                        'InternalName': d.InternalName,
-                        'Name': d.Name,
-                        'Address': d.Address,
-                        'RegionId': d.RegionId,
-                        'RegionName': d.RegionName,
-                        'Headline': d.Headline,
-                        'Summary': d.Summary,
-                        'Description': d.Description,
-                        'OtherInfo': d.OtherInfo,
-                        'CollaboratorInitials': d.CollaboratorInitials,
-                        'BoxUrl': d.BoxUrl,
+                        OwnerName: d.OwnerName,
+                        InternalName: d.InternalName,
+                        Name: d.Name,
+                        Address: d.Address,
+                        RegionId: d.RegionId,
+                        RegionName: d.RegionName,
+                        Headline: d.Headline,
+                        Summary: d.Summary,
+                        Description: d.Description,
+                        OtherInfo: d.OtherInfo,
+                        CollaboratorInitials: d.CollaboratorInitials,
+                        BoxUrl: d.BoxUrl,
+                        Bathrooms: d.Bathrooms,
+                        Bedrooms: d.Bedrooms,
+                        Sleeps: d.Sleeps,
+                        Capacity: d.Capacity,
+                        LivingAreaSize: d.LivingAreaSize,
+                        DiningCapacity: d.DiningCapacity,
+                        KitchenInfo: d.KitchenInfo,
+                        ChildrenAllowed: d.ChildrenAllowed,
+                        SmokingAllowed: d.SmokingAllowed,
+                        WheelchairAccessible: d.WheelchairAccessible,
+                        PetsAllowed: d.PetsAllowed,
+                        EventsAllowed: d.EventsAllowed,
+
                     });
                     this.isLoad = true;
                     console.log('This properties', this.property);

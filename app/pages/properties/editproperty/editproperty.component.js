@@ -26,6 +26,7 @@ var EditpropertyComponent = (function () {
         //propertyForm: any;
         this.isLoad = false;
         this.propertyForm = new forms_1.FormGroup({
+            OwnerName: new forms_1.FormControl(),
             InternalName: new forms_1.FormControl(),
             Name: new forms_1.FormControl(),
             Address: new forms_1.FormControl(),
@@ -37,6 +38,18 @@ var EditpropertyComponent = (function () {
             OtherInfo: new forms_1.FormControl(),
             CollaboratorInitials: new forms_1.FormControl(),
             BoxUrl: new forms_1.FormControl(),
+            Bathrooms: new forms_1.FormControl(),
+            Bedrooms: new forms_1.FormControl(),
+            Sleeps: new forms_1.FormControl(),
+            Capacity: new forms_1.FormControl(),
+            LivingAreaSize: new forms_1.FormControl(),
+            DiningCapacity: new forms_1.FormControl(),
+            KitchenInfo: new forms_1.FormControl(),
+            ChildrenAllowed: new forms_1.FormControl(),
+            SmokingAllowed: new forms_1.FormControl(),
+            WheelchairAccessible: new forms_1.FormControl(),
+            PetsAllowed: new forms_1.FormControl(),
+            EventsAllowed: new forms_1.FormControl(),
         });
         console.log('this.property mainService', this.mainService.metadata);
         /*
@@ -57,17 +70,30 @@ var EditpropertyComponent = (function () {
             _this.propertyService.getPropertyById(params['id']).subscribe(function (d) {
                 _this.property = d;
                 _this.propertyForm = _this.builder.group({
-                    'InternalName': d.InternalName,
-                    'Name': d.Name,
-                    'Address': d.Address,
-                    'RegionId': d.RegionId,
-                    'RegionName': d.RegionName,
-                    'Headline': d.Headline,
-                    'Summary': d.Summary,
-                    'Description': d.Description,
-                    'OtherInfo': d.OtherInfo,
-                    'CollaboratorInitials': d.CollaboratorInitials,
-                    'BoxUrl': d.BoxUrl,
+                    OwnerName: d.OwnerName,
+                    InternalName: d.InternalName,
+                    Name: d.Name,
+                    Address: d.Address,
+                    RegionId: d.RegionId,
+                    RegionName: d.RegionName,
+                    Headline: d.Headline,
+                    Summary: d.Summary,
+                    Description: d.Description,
+                    OtherInfo: d.OtherInfo,
+                    CollaboratorInitials: d.CollaboratorInitials,
+                    BoxUrl: d.BoxUrl,
+                    Bathrooms: d.Bathrooms,
+                    Bedrooms: d.Bedrooms,
+                    Sleeps: d.Sleeps,
+                    Capacity: d.Capacity,
+                    LivingAreaSize: d.LivingAreaSize,
+                    DiningCapacity: d.DiningCapacity,
+                    KitchenInfo: d.KitchenInfo,
+                    ChildrenAllowed: d.ChildrenAllowed,
+                    SmokingAllowed: d.SmokingAllowed,
+                    WheelchairAccessible: d.WheelchairAccessible,
+                    PetsAllowed: d.PetsAllowed,
+                    EventsAllowed: d.EventsAllowed,
                 });
                 _this.isLoad = true;
                 console.log('This properties', _this.property);
@@ -274,7 +300,7 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: ' addproperty-cmp ',
+            selector: ' editproperty-cmp ',
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
