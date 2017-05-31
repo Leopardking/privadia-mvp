@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-
-import { PropertyinfoComponent } from '../propertyinfo/propertyinfo.component';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { MainService } from '../../../providers/homeservice';
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
 declare var $:any;
+
 
 @Component({
     moduleId: module.id,
@@ -15,41 +16,72 @@ declare var $:any;
 })
 
 export class AddpropertyComponent implements OnInit{
-    @ViewChild('propertyInfo') propertyInfo;
-    @ViewChild('propertyMargeting') propertyMargeting;
-    @ViewChild('propertyImage') propertyImage;
+    //@ViewChild('propertyInfo') propertyInfo;
+    //@ViewChild('propertyMargeting') propertyMargeting;
+    //@ViewChild('propertyImage') propertyImage;
 
-    @ViewChild('pointsOfInterest') pointsOfInterest;
-    @ViewChild('localActivities') localActivities;
-    @ViewChild('features') features;
-    @ViewChild('services') services;
-    @ViewChild('trip') trip;
+    //@ViewChild('pointsOfInterest') pointsOfInterest;
+    //@ViewChild('localActivities') localActivities;
+    //@ViewChild('features') features;
+    //@ViewChild('services') services;
+    //@ViewChild('trip') trip;
 
-    private villadescription;
-    private reading:boolean = false;
-    private datatableInited:boolean = false;
+    // private villadescription;
+    // private reading:boolean = false;
+    // private datatableInited:boolean = false;
     
-    private properties = [];
+    // private properties = [];
 
-    private contacts;
-    private bedrooms;
-    private bathrooms;
+    // private contacts;
+    // private bedrooms;
+    // private bathrooms;
 
     private isActive = true;
+    private isLoad = true;
 
-    constructor ( private mainService: MainService, private propertyService: PropertiesService ) {
+    public propertyForm = new FormGroup ({
+        OwnerName: new FormControl('OwnerName'),
+        InternalName: new FormControl('InternalName'),
+        Name: new FormControl('Name'),
+        Address: new FormControl('Address'),
+        RegionId: new FormControl(1),
+        RegionName: new FormControl('RegionName'),
+        Headline: new FormControl('Headline'),
+        Summary: new FormControl('Summary'),
+        Description: new FormControl('Description'),
+        OtherInfo: new FormControl('OtherInfo'),
+        CollaboratorInitials: new FormControl(''),
+        BoxUrl: new FormControl('BoxUrl'),
+        Bathrooms: new FormControl(1),
+        Bedrooms: new FormControl(2),
+        Sleeps: new FormControl(6),
+        Capacity: new FormControl(3),
+        LivingAreaSize: new FormControl(4),
+        DiningCapacity: new FormControl(5),
+        KitchenInfo: new FormControl('KitchenInfo'),
+        ChildrenAllowed: new FormControl(2),
+        SmokingAllowed: new FormControl(false),
+        WheelchairAccessible: new FormControl(true),
+        PetsAllowed: new FormControl(false),
+        EventsAllowed: new FormControl(true),
+    });
+
+    constructor ( private mainService: MainService,
+                  private propertyService: PropertiesService ) {
 
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
-        this.contacts = [];
-        this.bedrooms = [];
-        this.bathrooms = [];
-        //this.villadescription = this.propertyInfo.villadescription;
+        // this.contacts = [];
+        // this.bedrooms = [];
+        // this.bathrooms = [];
+        // this.villadescription = this.propertyInfo.villadescription;
     }
 
     private saveInfo() {
+        console.log('Save FORM',);
+        /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
 
@@ -137,46 +169,23 @@ export class AddpropertyComponent implements OnInit{
         })
         let data = {
             Active: this.isActive,
-            Address: this.propertyInfo.address,
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
-            Bathrooms: parseInt(this.propertyInfo.bathroomCount),
-            Bedrooms: parseInt(this.propertyInfo.bedroomCount),
             Benefits: this.features.metafilterHeading.uniqueBenefits,
-            BoxUrl: this.propertyInfo.boxUrl,
-            Capacity: parseInt(this.propertyInfo.maximumCapacity),
-            CollaboratorInitials: this.propertyInfo.collaboratorInitial,
             Contacts: contacts,
-            Description: this.propertyInfo.description,
-            DiningCapacity: parseInt(this.propertyInfo.diningCapacity),
-            EventsAllowed: this.propertyInfo.eventsAllowed,
-            Headline: this.propertyInfo.headline,
             Housekeeping: this.services.metafilterHeading.housekeeperState,
             Images: this.propertyImage.images,
-            InternalName: this.propertyInfo.listingName,
-            KitchenInfo: this.propertyInfo.kitchenInfo,
             LiftAvailable: this.features.metafilterHeading.liftAvailable,
-            LivingAreaSize: parseInt(this.propertyInfo.livingSquare),
             MetaData: metaData,
-            Name: this.propertyInfo.officialName,
             OtherHousekeepingInfo: this.services.metafilterHeading.housekeepOtherInfo,
-            OtherInfo: this.propertyInfo.otherInfo,
             Owner: this.propertyInfo.owner,
             UserId: this.propertyInfo.owner.Id,
-            OwnerName: this.propertyInfo.ownerName,
-            PetsAllowed: this.propertyInfo.petsAllowed,
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
             RegionId: this.propertyInfo.region.Id,
             RegionName: this.propertyInfo.regionName,
             Rooms: bedrooms.concat(bathrooms),
-            Sleeps: parseInt(this.propertyInfo.sleepCount),
-            SmokingAllowed: this.propertyInfo.smokeAllowed,
-            Summary: this.propertyInfo.summary,
-            WheelchairAccessible: this.propertyInfo.wheelchairAllowed,
-            childrenAllowed: parseInt(this.propertyInfo.allowChildren),
-            propertyName: this.propertyInfo.officialName
-        }
-        this.propertyService.addProperty(data).subscribe(
+        }*/
+        this.propertyService.addProperty(this.propertyForm.value).subscribe(
             d => { 
                 $.notify({
                     icon: "notifications",
@@ -195,7 +204,7 @@ export class AddpropertyComponent implements OnInit{
             e => { console.log("error:", e); }
         );
 
-        console.log(data);
+        console.log(this.propertyForm.value);
     }
 
     private continueInfo() {
