@@ -172,7 +172,7 @@ export class AddpropertyComponent implements OnInit{
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
         }*/
-        /*
+
         this.propertyService.addProperty(this.propertyForm.value).subscribe(
             d => { 
                 $.notify({
@@ -191,7 +191,7 @@ export class AddpropertyComponent implements OnInit{
             },
             e => { console.log("error:", e); }
         );
-        */
+
         console.log(this.propertyForm.value);
     }
 

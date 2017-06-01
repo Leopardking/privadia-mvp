@@ -21,8 +21,8 @@ var NavbarComponent = (function () {
     };
     NavbarComponent.prototype.getTitle = function () {
         var titlee = this.location.prepareExternalUrl(this.location.path());
-        if (titlee.charAt(0) === '#') {
-            titlee = titlee.slice(2);
+        if (titlee.charAt(0) === '/') {
+            titlee = titlee.slice(1);
         }
         for (var item = 0; item < this.listTitles.length; item++) {
             if (this.listTitles[item].path === titlee) {
@@ -32,14 +32,14 @@ var NavbarComponent = (function () {
         return 'Dashboard';
     };
     NavbarComponent.prototype.getPath = function () {
-        // console.log(this.location);
         return this.location.prepareExternalUrl(this.location.path());
     };
     NavbarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: 'navbar-cmp',
-            templateUrl: 'navbar.component.html'
+            templateUrl: 'navbar.component.html',
+            styleUrls: ['navbar.component.css']
         }), 
         __metadata('design:paramtypes', [common_1.Location])
     ], NavbarComponent);

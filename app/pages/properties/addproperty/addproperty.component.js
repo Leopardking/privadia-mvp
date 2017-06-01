@@ -87,6 +87,7 @@ var AddpropertyComponent = (function () {
         // this.villadescription = this.propertyInfo.villadescription;
     };
     AddpropertyComponent.prototype.saveInfo = function () {
+        var _this = this;
         console.log('Save FORM', this.propertyForm);
         /*
         $(".title-error").removeClass("title-error");
@@ -162,26 +163,20 @@ var AddpropertyComponent = (function () {
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
         }*/
-        /*
-        this.propertyService.addProperty(this.propertyForm.value).subscribe(
-            d => {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
-
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                this.mainService.readData();
-            },
-            e => { console.log("error:", e); }
-        );
-        */
+        this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Property Added Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            _this.mainService.readData();
+        }, function (e) { console.log("error:", e); });
         console.log(this.propertyForm.value);
     };
     AddpropertyComponent.prototype.continueInfo = function () {
