@@ -40,7 +40,7 @@ var AddpropertyComponent = (function () {
             Name: new forms_1.FormControl('Name'),
             Address: new forms_1.FormControl('Address'),
             RegionId: new forms_1.FormControl(1),
-            RegionName: new forms_1.FormControl('RegionName'),
+            RegionName: new forms_1.FormControl('Ibiza'),
             Headline: new forms_1.FormControl('Headline'),
             Summary: new forms_1.FormControl('Summary'),
             Description: new forms_1.FormControl('Description'),
@@ -140,32 +140,6 @@ var AddpropertyComponent = (function () {
             });
         }
 
-        let contacts = this.propertyInfo.contacts.map( (item, index) => {
-            return {
-                EmailAddress: item.email,
-                FirstName: item.firstName,
-                JobTitle: item.jobTitle,
-                LastName: item.lastName,
-                Telephone: parseInt(item.telephone)
-            };
-        });
-
-        let bathrooms = this.propertyInfo.bathrooms.map( (item, index) => {
-            return {
-                Description: item.description,
-                Name: item.name,
-                PropertyRoomType: 2
-            }
-        });
-
-        let bedrooms = this.propertyInfo.bedrooms.map( (item, index) => {
-            return {
-                Description: item.description,
-                Name: item.name,
-                PropertyRoomType: 1
-            }
-        });
-        
         let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
             return {
                 Available: item.checked ? 1 : 0,
@@ -178,7 +152,6 @@ var AddpropertyComponent = (function () {
             Active: this.isActive,
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
             Benefits: this.features.metafilterHeading.uniqueBenefits,
-            Contacts: contacts,
             Housekeeping: this.services.metafilterHeading.housekeeperState,
             Images: this.propertyImage.images,
             LiftAvailable: this.features.metafilterHeading.liftAvailable,
@@ -188,9 +161,6 @@ var AddpropertyComponent = (function () {
             UserId: this.propertyInfo.owner.Id,
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
-            RegionId: this.propertyInfo.region.Id,
-            RegionName: this.propertyInfo.regionName,
-            Rooms: bedrooms.concat(bathrooms),
         }*/
         /*
         this.propertyService.addProperty(this.propertyForm.value).subscribe(

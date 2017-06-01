@@ -20,7 +20,7 @@ var PropertyinfoComponent = (function () {
         this.mainService = mainService;
         this._sanitizer = _sanitizer;
         this.autocompleListFormatter = function (data) {
-            var html = "<span>" + data.Name + "</span>";
+            var html = "" + data.Name;
             return _this._sanitizer.bypassSecurityTrustHtml(html);
         };
     }

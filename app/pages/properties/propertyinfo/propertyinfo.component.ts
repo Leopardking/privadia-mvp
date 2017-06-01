@@ -85,7 +85,7 @@ export class PropertyinfoComponent implements OnInit{
     }
 
     private autocompleListFormatter = (data: any) : SafeHtml => {
-        let html = `<span>${data.Name}</span>`;
+        let html = `${data.Name}`;
         return this._sanitizer.bypassSecurityTrustHtml(html);
     }
 

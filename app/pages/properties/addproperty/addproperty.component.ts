@@ -45,7 +45,7 @@ export class AddpropertyComponent implements OnInit{
         Name: new FormControl('Name'),
         Address: new FormControl('Address'),
         RegionId: new FormControl(1),
-        RegionName: new FormControl('RegionName'),
+        RegionName: new FormControl('Ibiza'),
         Headline: new FormControl('Headline'),
         Summary: new FormControl('Summary'),
         Description: new FormControl('Description'),
@@ -150,32 +150,6 @@ export class AddpropertyComponent implements OnInit{
             });
         }
 
-        let contacts = this.propertyInfo.contacts.map( (item, index) => { 
-            return {
-                EmailAddress: item.email,
-                FirstName: item.firstName,
-                JobTitle: item.jobTitle,
-                LastName: item.lastName,
-                Telephone: parseInt(item.telephone)
-            };
-        });
-
-        let bathrooms = this.propertyInfo.bathrooms.map( (item, index) => {
-            return {
-                Description: item.description,
-                Name: item.name,
-                PropertyRoomType: 2
-            }
-        });
-
-        let bedrooms = this.propertyInfo.bedrooms.map( (item, index) => {
-            return {
-                Description: item.description,
-                Name: item.name,
-                PropertyRoomType: 1
-            }
-        });
-        
         let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
             return {
                 Available: item.checked ? 1 : 0,
@@ -188,7 +162,6 @@ export class AddpropertyComponent implements OnInit{
             Active: this.isActive,
             AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
             Benefits: this.features.metafilterHeading.uniqueBenefits,
-            Contacts: contacts,
             Housekeeping: this.services.metafilterHeading.housekeeperState,
             Images: this.propertyImage.images,
             LiftAvailable: this.features.metafilterHeading.liftAvailable,
@@ -198,9 +171,6 @@ export class AddpropertyComponent implements OnInit{
             UserId: this.propertyInfo.owner.Id,
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
-            RegionId: this.propertyInfo.region.Id,
-            RegionName: this.propertyInfo.regionName,
-            Rooms: bedrooms.concat(bathrooms),
         }*/
         /*
         this.propertyService.addProperty(this.propertyForm.value).subscribe(
