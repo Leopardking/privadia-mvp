@@ -29,10 +29,21 @@
                     <input type="text" class="form-control" formControlName="Address">
                 </div>
                 <div>
+                    <!--
                     <div ng2-auto-complete id="regionName" [max-num-list]="10" [source]="regions" (valueChanged)="regionChanged($event)" class="form-group label-floating">
+                    -->
+                    <div id="regionName"
+                         class="form-group label-floating">
                         <label class="control-label">Select Region *</label>
-                        <input class="form-control" formControlName="RegionId" required>
-                        <input class="form-control" formControlName="RegionName" required>
+                        <input class="form-control"
+                               ng2-auto-complete
+                               [max-num-list]="10"
+                               [source]="regionArray"
+                               [list-formatter]="autocompleListFormatter"
+                               value-property-name="Id"
+                               display-property-name="Name"
+                               (valueChanged)="regionChanged($event)"
+                               required>
                     </div>
                 </div>
             </div>

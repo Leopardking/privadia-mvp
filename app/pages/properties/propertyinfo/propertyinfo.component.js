@@ -9,13 +9,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var platform_browser_1 = require("@angular/platform-browser");
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var homeservice_1 = require('../../../providers/homeservice');
 var forms_1 = require("@angular/forms");
 var PropertyinfoComponent = (function () {
-    function PropertyinfoComponent(propertyService, mainService) {
+    function PropertyinfoComponent(propertyService, mainService, _sanitizer) {
+        var _this = this;
         this.propertyService = propertyService;
         this.mainService = mainService;
+        this._sanitizer = _sanitizer;
+        this.autocompleListFormatter = function (data) {
+            var html = "<span>" + data.Name + "</span>";
+            return _this._sanitizer.bypassSecurityTrustHtml(html);
+        };
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
@@ -55,7 +62,7 @@ var PropertyinfoComponent = (function () {
             FirstName: new forms_1.FormControl('FirstName'),
             LastName: new forms_1.FormControl('LastName'),
             Email: new forms_1.FormControl('Email'),
-            Telephone: new forms_1.FormControl('Telephone'),
+            Telephone: new forms_1.FormControl('123456789'),
         }));
     };
     PropertyinfoComponent.prototype.removeContact = function (i) {
@@ -86,14 +93,15 @@ var PropertyinfoComponent = (function () {
         var control = this.propertyForm.controls['Rooms'];
         control.removeAt(i);
     };
-    __decorate([
-        core_1.Input('property'), 
-        __metadata('design:type', Object)
-    ], PropertyinfoComponent.prototype, "property", void 0);
-    __decorate([
-        core_1.Input('name'), 
-        __metadata('design:type', Object)
-    ], PropertyinfoComponent.prototype, "name", void 0);
+    PropertyinfoComponent.prototype.regionChanged = function (e) {
+        console.log('Change region ', e);
+        var controlId = this.propertyForm.controls['RegionId'];
+        controlId.setValue(e.Id);
+        var controlName = this.propertyForm.controls['RegionName'];
+        controlName.setValue(e.Name);
+        $("#regionName").removeClass('is-empty');
+        $("#regionName").removeClass('has-error');
+    };
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
@@ -109,7 +117,7 @@ var PropertyinfoComponent = (function () {
             templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, homeservice_1.MainService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, homeservice_1.MainService, platform_browser_1.DomSanitizer])
     ], PropertyinfoComponent);
     return PropertyinfoComponent;
 }());

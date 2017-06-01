@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
 import { AutoComplete } from '../../../components/autocomplete/autocomplete.component';
 import { AutoCompleteConfig } from '../../../components/autocomplete/autocomplete.config';
@@ -15,8 +16,6 @@ import {FormGroup, FormArray, FormControl} from "@angular/forms";
 })
 
 export class PropertyinfoComponent implements OnInit{
-    @Input('property') property;
-    @Input('name') name;
     @Input('group')
     public propertyForm: FormGroup;
 
@@ -39,7 +38,7 @@ export class PropertyinfoComponent implements OnInit{
     public officialName;
     public address;
 
-    constructor ( private propertyService: PropertiesService, private mainService: MainService ) {
+    constructor ( private propertyService: PropertiesService, private mainService: MainService, private _sanitizer: DomSanitizer ) {
 
     }
 
@@ -85,6 +84,11 @@ export class PropertyinfoComponent implements OnInit{
         )
     }
 
+    private autocompleListFormatter = (data: any) : SafeHtml => {
+        let html = `<span>${data.Name}</span>`;
+        return this._sanitizer.bypassSecurityTrustHtml(html);
+    }
+
     private showAddContact() {
         const control = <FormArray>this.propertyForm.controls['Contacts'];
         control.push(
@@ -93,7 +97,7 @@ export class PropertyinfoComponent implements OnInit{
                 FirstName: new FormControl('FirstName'),
                 LastName: new FormControl('LastName'),
                 Email: new FormControl('Email'),
-                Telephone: new FormControl('Telephone'),
+                Telephone: new FormControl('123456789'),
             }),
         );
     }
@@ -136,80 +140,91 @@ export class PropertyinfoComponent implements OnInit{
         control.removeAt(i);
     }
 
-    /*
-    private ownerChanged(e) {
-        this.ownerName = e;
-        let owernIndex = this.ownerNames.indexOf(this.ownerName);
-        this.owner = this.owners[owernIndex];
-
-        if (owernIndex == -1) {
-            this.owner = {
-                Id: "",
-                Name: e
-            }
-        }
-
-        if (e) {
-            $("#ownerName").removeClass('is-empty');
-        }
-    }
-
     private regionChanged(e) {
-        this.regionName = e;
-        let index = this.regions.indexOf(e);
-        this.region = this.regionArray[index];
+        console.log('Change region ', e)
+        const controlId = <FormControl>this.propertyForm.controls['RegionId']
+        controlId.setValue(e.Id)
 
-        if (index == -1) {
-            this.region = {
-                Id: "",
-                Name: e
-            }
-        }
+        const controlName = <FormControl>this.propertyForm.controls['RegionName']
+        controlName.setValue(e.Name)
 
-        if (e) {
-            $("#regionName").removeClass('is-empty');
-            $("#regionName").removeClass('has-error');
-        }
+        $("#regionName").removeClass('is-empty');
+        $("#regionName").removeClass('has-error');
     }
+    /*
+     private ownerChanged(e) {
+         this.ownerName = e;
+         let owernIndex = this.ownerNames.indexOf(this.ownerName);
+         this.owner = this.owners[owernIndex];
 
-    private listingNameChanged(e) {
-        this.InternalName = e.target.value;
-    }
+         if (owernIndex == -1) {
+             this.owner = {
+                 Id: "",
+                 Name: e
+             }
+         }
 
-    private officialNameChanged(e) {
-        this.officialName = e.target.value;
-    }
+         if (e) {
+             $("#ownerName").removeClass('is-empty');
+         }
+     }
 
-    private addressChanged(e) {
-        this.address = e.target.value;
-    }
-    private adminInfoChanged(id, key, e) {
-        let i;
-        for (i = 0; i < this.contacts.length; i++) {
-            if (this.contacts[i].id == id) {
-                break;
-            }
-        }
-        this.contacts[i][key] = e.target.value;
-    }
-    private bedroomChanged(id, key, e) {
-        let i;
-        for (i = 0; i < this.bedrooms.length; i++) {
-            if (this.bedrooms[i].id == id) {
-                break;
-            }
-        }
-        this.bedrooms[i][key] = e.target.value;
-    }
+     private regionChanged(e) {
+         this.regionName = e;
+         let index = this.regions.indexOf(e);
+         this.region = this.regionArray[index];
 
-    private bathroomChanged(id, key, e) {
-        let i;
-        for (i = 0; i < this.bathrooms.length; i++) {
-            if (this.bathrooms[i].id == id) {
-                break;
-            }
-        }
-        this.bathrooms[i][key] = e.target.value;
-    }
-*/
+         if (index == -1) {
+             this.region = {
+                 Id: "",
+                 Name: e
+             }
+         }
+
+         if (e) {
+             $("#regionName").removeClass('is-empty');
+             $("#regionName").removeClass('has-error');
+         }
+     }
+
+     private listingNameChanged(e) {
+         this.InternalName = e.target.value;
+     }
+
+     private officialNameChanged(e) {
+         this.officialName = e.target.value;
+     }
+
+     private addressChanged(e) {
+         this.address = e.target.value;
+     }
+     private adminInfoChanged(id, key, e) {
+         let i;
+         for (i = 0; i < this.contacts.length; i++) {
+             if (this.contacts[i].id == id) {
+                 break;
+             }
+         }
+         this.contacts[i][key] = e.target.value;
+     }
+     private bedroomChanged(id, key, e) {
+         let i;
+         for (i = 0; i < this.bedrooms.length; i++) {
+             if (this.bedrooms[i].id == id) {
+                 break;
+             }
+         }
+         this.bedrooms[i][key] = e.target.value;
+     }
+
+     private bathroomChanged(id, key, e) {
+         let i;
+         for (i = 0; i < this.bathrooms.length; i++) {
+             if (this.bathrooms[i].id == id) {
+                 break;
+             }
+         }
+         this.bathrooms[i][key] = e.target.value;
+     }
+ */
 }
