@@ -5,7 +5,7 @@ import { AutoCompleteConfig } from '../../../components/autocomplete/autocomplet
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import { MainService } from '../../../providers/homeservice';
-import {FormGroup} from "@angular/forms";
+import {FormGroup, FormArray, FormControl} from "@angular/forms";
 
 @Component({
     moduleId: module.id,
@@ -48,11 +48,11 @@ export class PropertyinfoComponent implements OnInit{
         console.log('this.property mainService', this.mainService.metadata )
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
-        this.contacts = [];
-        this.bedrooms = [];
-        this.bathrooms = [];
-        this.ownerNames = [];
-        this.regions = [];
+        //this.contacts = [];
+        //this.bedrooms = [];
+        //this.bathrooms = [];
+        //this.ownerNames = [];
+        //this.regions = [];
 
         this.ownerName = "";
         this.regionName = "";
@@ -65,7 +65,7 @@ export class PropertyinfoComponent implements OnInit{
         this.region = {
             Id: '',
             Name: ''
-        }
+        };
         // description
 
         this.propertyService.getOwners().subscribe(
@@ -86,62 +86,57 @@ export class PropertyinfoComponent implements OnInit{
     }
 
     private showAddContact() {
-        this.contacts.push({
-            id: this.contacts.length == 0 ? 0 : this.contacts[this.contacts.length-1].id + 1,
-            jobTitle: "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            telephone: ""
-        });
+        const control = <FormArray>this.propertyForm.controls['Contacts'];
+        control.push(
+            new FormGroup({
+                JobTitle: new FormControl('JobTitle'),
+                FirstName: new FormControl('FirstName'),
+                LastName: new FormControl('LastName'),
+                Email: new FormControl('Email'),
+                Telephone: new FormControl('Telephone'),
+            }),
+        );
     }
 
-    private removeContact(id) {
-        let i;
-        for (i = 0; i < this.contacts.length; i++) {
-            if (this.contacts[i].id == id) {
-                break;
-            }
-        }
-        this.contacts.splice(i, 1);
+    private removeContact(i: number) {
+        const control = <FormArray>this.propertyForm.controls['Contacts'];
+        control.removeAt(i);
     }
+
 
     private addBedroom() {
-        this.bedrooms.push({
-            id: this.bedrooms.length == 0 ? 0 : this.bedrooms[this.bedrooms.length-1].id + 1,
-            name: "",
-            description: ""
-        });
+        const control = <FormArray>this.propertyForm.controls['Rooms'];
+        control.push(
+            new FormGroup({
+                Description: new FormControl('Description'),
+                Name: new FormControl('Name'),
+                PropertyRoomType: new FormControl(1),
+            }),
+        );
     }
 
-    private removeBedroom(id) {
-        let i;
-        for (i = 0; i < this.bedrooms.length; i++) {
-            if (this.bedrooms[i].id == id) {
-                break;
-            }
-        }
-        this.bedrooms.splice(i, 1);
+    private removeBedroom(i: number) {
+        const control = <FormArray>this.propertyForm.controls['Rooms'];
+        control.removeAt(i);
     }
 
     private addBathroom() {
-        this.bathrooms.push({
-            id: this.bathrooms.length == 0 ? 0 : this.bathrooms[this.bathrooms.length-1].id + 1,
-            name: "",
-            description: ""
-        });
+        const control = <FormArray>this.propertyForm.controls['Rooms'];
+        control.push(
+            new FormGroup({
+                Description: new FormControl('Description'),
+                Name: new FormControl('Name'),
+                PropertyRoomType: new FormControl(2),
+            }),
+        );
     }
 
-    private removeBathroom(id) {
-        let i;
-        for (i = 0; i < this.bathrooms.length; i++) {
-            if (this.bathrooms[i].id == id) {
-                break;
-            }
-        }
-        this.bathrooms.splice(i, 1);
+    private removeBathroom(i: number) {
+        const control = <FormArray>this.propertyForm.controls['Rooms'];
+        control.removeAt(i);
     }
 
+    /*
     private ownerChanged(e) {
         this.ownerName = e;
         let owernIndex = this.ownerNames.indexOf(this.ownerName);
@@ -216,4 +211,5 @@ export class PropertyinfoComponent implements OnInit{
         }
         this.bathrooms[i][key] = e.target.value;
     }
+*/
 }

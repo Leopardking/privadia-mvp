@@ -23,11 +23,11 @@ var PropertyinfoComponent = (function () {
         console.log('this.property mainService', this.mainService.metadata);
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
-        this.contacts = [];
-        this.bedrooms = [];
-        this.bathrooms = [];
-        this.ownerNames = [];
-        this.regions = [];
+        //this.contacts = [];
+        //this.bedrooms = [];
+        //this.bathrooms = [];
+        //this.ownerNames = [];
+        //this.regions = [];
         this.ownerName = "";
         this.regionName = "";
         this.owner = {
@@ -49,120 +49,42 @@ var PropertyinfoComponent = (function () {
         }, function (e) { console.log("error: ", e); });
     };
     PropertyinfoComponent.prototype.showAddContact = function () {
-        this.contacts.push({
-            id: this.contacts.length == 0 ? 0 : this.contacts[this.contacts.length - 1].id + 1,
-            jobTitle: "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            telephone: ""
-        });
+        var control = this.propertyForm.controls['Contacts'];
+        control.push(new forms_1.FormGroup({
+            JobTitle: new forms_1.FormControl('JobTitle'),
+            FirstName: new forms_1.FormControl('FirstName'),
+            LastName: new forms_1.FormControl('LastName'),
+            Email: new forms_1.FormControl('Email'),
+            Telephone: new forms_1.FormControl('Telephone'),
+        }));
     };
-    PropertyinfoComponent.prototype.removeContact = function (id) {
-        var i;
-        for (i = 0; i < this.contacts.length; i++) {
-            if (this.contacts[i].id == id) {
-                break;
-            }
-        }
-        this.contacts.splice(i, 1);
+    PropertyinfoComponent.prototype.removeContact = function (i) {
+        var control = this.propertyForm.controls['Contacts'];
+        control.removeAt(i);
     };
     PropertyinfoComponent.prototype.addBedroom = function () {
-        this.bedrooms.push({
-            id: this.bedrooms.length == 0 ? 0 : this.bedrooms[this.bedrooms.length - 1].id + 1,
-            name: "",
-            description: ""
-        });
+        var control = this.propertyForm.controls['Rooms'];
+        control.push(new forms_1.FormGroup({
+            Description: new forms_1.FormControl('Description'),
+            Name: new forms_1.FormControl('Name'),
+            PropertyRoomType: new forms_1.FormControl(1),
+        }));
     };
-    PropertyinfoComponent.prototype.removeBedroom = function (id) {
-        var i;
-        for (i = 0; i < this.bedrooms.length; i++) {
-            if (this.bedrooms[i].id == id) {
-                break;
-            }
-        }
-        this.bedrooms.splice(i, 1);
+    PropertyinfoComponent.prototype.removeBedroom = function (i) {
+        var control = this.propertyForm.controls['Rooms'];
+        control.removeAt(i);
     };
     PropertyinfoComponent.prototype.addBathroom = function () {
-        this.bathrooms.push({
-            id: this.bathrooms.length == 0 ? 0 : this.bathrooms[this.bathrooms.length - 1].id + 1,
-            name: "",
-            description: ""
-        });
+        var control = this.propertyForm.controls['Rooms'];
+        control.push(new forms_1.FormGroup({
+            Description: new forms_1.FormControl('Description'),
+            Name: new forms_1.FormControl('Name'),
+            PropertyRoomType: new forms_1.FormControl(2),
+        }));
     };
-    PropertyinfoComponent.prototype.removeBathroom = function (id) {
-        var i;
-        for (i = 0; i < this.bathrooms.length; i++) {
-            if (this.bathrooms[i].id == id) {
-                break;
-            }
-        }
-        this.bathrooms.splice(i, 1);
-    };
-    PropertyinfoComponent.prototype.ownerChanged = function (e) {
-        this.ownerName = e;
-        var owernIndex = this.ownerNames.indexOf(this.ownerName);
-        this.owner = this.owners[owernIndex];
-        if (owernIndex == -1) {
-            this.owner = {
-                Id: "",
-                Name: e
-            };
-        }
-        if (e) {
-            $("#ownerName").removeClass('is-empty');
-        }
-    };
-    PropertyinfoComponent.prototype.regionChanged = function (e) {
-        this.regionName = e;
-        var index = this.regions.indexOf(e);
-        this.region = this.regionArray[index];
-        if (index == -1) {
-            this.region = {
-                Id: "",
-                Name: e
-            };
-        }
-        if (e) {
-            $("#regionName").removeClass('is-empty');
-            $("#regionName").removeClass('has-error');
-        }
-    };
-    PropertyinfoComponent.prototype.listingNameChanged = function (e) {
-        this.InternalName = e.target.value;
-    };
-    PropertyinfoComponent.prototype.officialNameChanged = function (e) {
-        this.officialName = e.target.value;
-    };
-    PropertyinfoComponent.prototype.addressChanged = function (e) {
-        this.address = e.target.value;
-    };
-    PropertyinfoComponent.prototype.adminInfoChanged = function (id, key, e) {
-        var i;
-        for (i = 0; i < this.contacts.length; i++) {
-            if (this.contacts[i].id == id) {
-                break;
-            }
-        }
-        this.contacts[i][key] = e.target.value;
-    };
-    PropertyinfoComponent.prototype.bedroomChanged = function (id, key, e) {
-        var i;
-        for (i = 0; i < this.bedrooms.length; i++) {
-            if (this.bedrooms[i].id == id) {
-                break;
-            }
-        }
-        this.bedrooms[i][key] = e.target.value;
-    };
-    PropertyinfoComponent.prototype.bathroomChanged = function (id, key, e) {
-        var i;
-        for (i = 0; i < this.bathrooms.length; i++) {
-            if (this.bathrooms[i].id == id) {
-                break;
-            }
-        }
-        this.bathrooms[i][key] = e.target.value;
+    PropertyinfoComponent.prototype.removeBathroom = function (i) {
+        var control = this.propertyForm.controls['Rooms'];
+        control.removeAt(i);
     };
     __decorate([
         core_1.Input('property'), 

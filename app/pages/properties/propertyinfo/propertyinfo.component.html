@@ -20,7 +20,7 @@
                     <label class="control-label">Listing Name</label>
                     <input type="text" class="form-control" formControlName="InternalName">
                 </div>
-                <div class="form-group has-error label-floating listing-name col-lg-6 col-md-6 col-sm-12 official-name">
+                <div class="form-group label-floating listing-name col-lg-6 col-md-6 col-sm-12 official-name">
                     <label class="control-label">Official Name *</label>
                     <input type="text" class="form-control" formControlName="Name">
                 </div>
@@ -29,7 +29,7 @@
                     <input type="text" class="form-control" formControlName="Address">
                 </div>
                 <div>
-                    <div ng2-auto-complete id="regionName" [max-num-list]="10" [source]="regions" (valueChanged)="regionChanged($event)" class="form-group label-floating has-error">
+                    <div ng2-auto-complete id="regionName" [max-num-list]="10" [source]="regions" (valueChanged)="regionChanged($event)" class="form-group label-floating">
                         <label class="control-label">Select Region *</label>
                         <input class="form-control" formControlName="RegionId" required>
                         <input class="form-control" formControlName="RegionName" required>
@@ -96,14 +96,15 @@
                 </h4>
             </a>
         </div>
-        <div id="admin_info" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-admin_info">
-            <div class="panel-body">
+        <div [formGroup]="propertyForm" id="admin_info" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-admin_info">
+            <div class="panel-body" formArrayName="Contacts">
+                <!--
                 <div class="contact" *ngFor="let item of contacts">
                     <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">Job Title</label>
                         <input type="text" class="form-control" (blur)="adminInfoChanged(item.id, 'jobTitle', $event)">
                     </div>          
-                    <div class="form-group label-floating listing-name has-error col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">First Name</label>
                         <input type="text" class="form-control" (blur)="adminInfoChanged(item.id, 'firstName', $event)" required>
                     </div>                                     
@@ -111,11 +112,11 @@
                         <label class="control-label">Last Name</label>
                         <input type="text" class="form-control" (blur)="adminInfoChanged(item.id, 'lastName', $event)">
                     </div>                                    
-                    <div class="form-group label-floating listing-name has-error col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">Email Address</label>
                         <input type="email" class="form-control" (blur)="adminInfoChanged(item.id, 'email', $event)" required>
                     </div>
-                    <div class="form-group label-floating listing-name has-error col-sm-12 col-md-6 col-lg-4">
+                    <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">Telephone</label>
                         <input type="number" min="0" class="form-control" (blur)="adminInfoChanged(item.id, 'telephone', $event)" required>
                     </div>
@@ -123,6 +124,33 @@
                         <a (click)="removeContact(item.id)"> Remove Contact </a>
                     </div>
                 </div>
+                -->
+                <div class="contact" *ngFor="let control of propertyForm.controls.Contacts.controls; let i = index">
+                    <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">Job Title</label>
+                        <input type="text" class="form-control" [formControl]="control.controls.JobTitle">
+                    </div>
+                    <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">First Name</label>
+                        <input type="text" class="form-control" [formControl]="control.controls.FirstName" required>
+                    </div>
+                    <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">Last Name</label>
+                        <input type="text" class="form-control" [formControl]="control.controls.LastName">
+                    </div>
+                    <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">Email Address</label>
+                        <input type="email" class="form-control" [formControl]="control.controls.Email" required>
+                    </div>
+                    <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
+                        <label class="control-label">Telephone</label>
+                        <input type="number" min="0" class="form-control" [formControl]="control.controls.Telephone" required>
+                    </div>
+                    <div class="listing-name col-sm-12 col-md-12 col-lg-12">
+                        <a (click)="removeContact(i)"> Remove Contact </a>
+                    </div>
+                </div>
+
                 <div class="listing-name add-contact col-sm-12 col-md-12 col-lg-12">
                     <a (click)="showAddContact()"> Add Contact </a>
                 </div>
@@ -142,17 +170,17 @@
                 </h4>
             </a>
         </div>
-        <div id="size_rooms" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-size_rooms">
-            <div class="panel-body" [formGroup]="propertyForm">
-                <div class="form-group label-floating listing-name has-error col-sm-12 col-md-6 col-lg-4">
+        <div [formGroup]="propertyForm" id="size_rooms" class="panel-collapse collapse panel-content" role="tabpanel" attr.aria-labelledby="heading-size_rooms">
+            <div class="panel-body">
+                <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Number of Bathrooms</label>
                     <input type="number" class="form-control" formControlName="Bathrooms" required>
                 </div>
-                <div class="form-group label-floating listing-name has-error col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Number of bedrooms</label>
                     <input type="number" class="form-control" formControlName="Bedrooms" required>
                 </div>
-                <div class="form-group has-error label-floating listing-name col-sm-12 col-md-6 col-lg-4">
+                <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Sleeps</label>
                     <input type="number" class="form-control" formControlName="Sleeps" required>
                 </div>
@@ -175,19 +203,21 @@
                     <textarea type="text" class="form-control" formControlName="KitchenInfo"></textarea>
                 </div>
 
-                <div class="col-sm-12 col-md-12 col-lg-12 listing-name bedrooms">
+                <div formArrayName="Rooms" class="col-sm-12 col-md-12 col-lg-12 listing-name bedrooms">
                     <label>Bedroom Information</label>
-                    <div class="" *ngFor="let item of bedrooms">
-                        <div class="form-group label-floating listing-name col-sm-12 col-md-3 col-lg-3">
-                            <label class="control-label">Bedroom Name</label>
-                            <input type="text" class="form-control" (blur)="bedroomChanged(item.id, 'name', $event)">
-                        </div>
-                        <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-6">
-                            <label class="control-label">Bedroom Description</label>
-                            <input type="text" class="form-control" (blur)="bedroomChanged(item.id, 'description', $event)">
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3 listing-name remove-button">
-                            <a (click)="removeBedroom(item.id)">REMOVE BEDROOM</a>
+                    <div class="" *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
+                        <div *ngIf="control.controls.PropertyRoomType.value == 1">
+                            <div class="form-group label-floating listing-name col-sm-12 col-md-3 col-lg-3">
+                                <label class="control-label">Bedroom Name</label>
+                                <input type="text" class="form-control" [formControl]="control.controls.Name">
+                            </div>
+                            <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-6">
+                                <label class="control-label">Bedroom Description</label>
+                                <input type="text" class="form-control" [formControl]="control.controls.Description">
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 listing-name remove-button">
+                                <a (click)="removeBedroom(i)">REMOVE BEDROOM</a>
+                            </div>
                         </div>
                     </div>
                     <div class="listing-name col-sm-12 col-md-12 col-lg-12">
@@ -195,19 +225,21 @@
                     </div>
                 </div>
 
-                <div class="listing-name col-sm-12 col-md-12 col-lg-12 bathrooms">
+                <div formArrayName="Rooms" class="listing-name col-sm-12 col-md-12 col-lg-12 bathrooms">
                     <label>Bathroom Information</label>
-                    <div class="" *ngFor="let item of bathrooms">
-                        <div class="form-group label-floating listing-name col-sm-12 col-md-3 col-lg-3">
-                            <label class="control-label">Bathroom Name</label>
-                            <input type="text" class="form-control" (blur)="bathroomChanged(item.id, 'name', $event)">
-                        </div>
-                        <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-6">
-                            <label class="control-label">Bathroom Description</label>
-                            <input type="text" class="form-control" (blur)="bathroomChanged(item.id, 'name', $event)">
-                        </div>
-                        <div class="col-sm-12 col-md-3 col-lg-3 listing-name remove-button">
-                            <a (click)="removeBathroom(item.id)">REMOVE BATHROOM</a>
+                    <div class="" *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
+                        <div *ngIf="control.controls.PropertyRoomType.value == 2">
+                            <div class="form-group label-floating listing-name col-sm-12 col-md-3 col-lg-3">
+                                <label class="control-label">Bathroom Name</label>
+                                <input type="text" class="form-control" [formControl]="control.controls.Name">
+                            </div>
+                            <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-6">
+                                <label class="control-label">Bathroom Description</label>
+                                <input type="text" class="form-control" [formControl]="control.controls.Description">
+                            </div>
+                            <div class="col-sm-12 col-md-3 col-lg-3 listing-name remove-button">
+                                <a (click)="removeBathroom(i)">REMOVE BATHROOM</a>
+                            </div>
                         </div>
                     </div>
                     <div class="listing-name col-sm-12 col-md-12 col-lg-12">
@@ -236,7 +268,7 @@
                     <h5 class="listing-name col-sm-12 col-md-12 col-lg-12">Children Allowed</h5>
                     <div id="childrenAllow" class="listing-name radio col-sm-12 col-md-4 col-lg-4">
                         <label>
-                            <input type="radio" checked="true" value="0" formControlName="ChildrenAllowed"> Children Welcome
+                            <input type="radio" value="0" formControlName="ChildrenAllowed"> Children Welcome
                         </label>
                     </div>
                     <div class="listing-name radio col-sm-12 col-md-4 col-lg-4">

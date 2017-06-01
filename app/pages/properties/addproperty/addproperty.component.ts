@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import { MainService } from '../../../providers/homeservice';
@@ -64,13 +64,30 @@ export class AddpropertyComponent implements OnInit{
         WheelchairAccessible: new FormControl(true),
         PetsAllowed: new FormControl(false),
         EventsAllowed: new FormControl(true),
+        Contacts: new FormArray([]),
+        Rooms: new FormArray([]),
     });
 
     constructor ( private mainService: MainService,
-                  private propertyService: PropertiesService ) {
-
+                  private propertyService: PropertiesService,
+                  private builder: FormBuilder) {
+/*
+        this.propertyForm = this.builder.group({
+            Contacts: this.builder.array([
+                this.initAddress(),
+            ])
+        });*/
+    console.log('Form init',this.propertyForm)
     }
-
+/*
+    initAddress() {
+        // initialize our address
+        return this.builder.group({
+            street: ['', Validators.required],
+            postcode: ['']
+        });
+    }
+*/
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
         // this.contacts = [];
@@ -80,7 +97,7 @@ export class AddpropertyComponent implements OnInit{
     }
 
     private saveInfo() {
-        console.log('Save FORM',);
+        console.log('Save FORM', this.propertyForm);
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
@@ -185,6 +202,7 @@ export class AddpropertyComponent implements OnInit{
             RegionName: this.propertyInfo.regionName,
             Rooms: bedrooms.concat(bathrooms),
         }*/
+        /*
         this.propertyService.addProperty(this.propertyForm.value).subscribe(
             d => { 
                 $.notify({
@@ -203,7 +221,7 @@ export class AddpropertyComponent implements OnInit{
             },
             e => { console.log("error:", e); }
         );
-
+        */
         console.log(this.propertyForm.value);
     }
 

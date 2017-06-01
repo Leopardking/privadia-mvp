@@ -13,9 +13,10 @@ var forms_1 = require('@angular/forms');
 var homeservice_1 = require('../../../providers/homeservice');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(mainService, propertyService) {
+    function AddpropertyComponent(mainService, propertyService, builder) {
         this.mainService = mainService;
         this.propertyService = propertyService;
+        this.builder = builder;
         //@ViewChild('propertyInfo') propertyInfo;
         //@ViewChild('propertyMargeting') propertyMargeting;
         //@ViewChild('propertyImage') propertyImage;
@@ -58,8 +59,26 @@ var AddpropertyComponent = (function () {
             WheelchairAccessible: new forms_1.FormControl(true),
             PetsAllowed: new forms_1.FormControl(false),
             EventsAllowed: new forms_1.FormControl(true),
+            Contacts: new forms_1.FormArray([]),
+            Rooms: new forms_1.FormArray([]),
         });
+        /*
+                this.propertyForm = this.builder.group({
+                    Contacts: this.builder.array([
+                        this.initAddress(),
+                    ])
+                });*/
+        console.log('Form init', this.propertyForm);
     }
+    /*
+        initAddress() {
+            // initialize our address
+            return this.builder.group({
+                street: ['', Validators.required],
+                postcode: ['']
+            });
+        }
+    */
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     AddpropertyComponent.prototype.ngOnInit = function () {
         // this.contacts = [];
@@ -68,8 +87,7 @@ var AddpropertyComponent = (function () {
         // this.villadescription = this.propertyInfo.villadescription;
     };
     AddpropertyComponent.prototype.saveInfo = function () {
-        var _this = this;
-        console.log('Save FORM');
+        console.log('Save FORM', this.propertyForm);
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
@@ -174,20 +192,26 @@ var AddpropertyComponent = (function () {
             RegionName: this.propertyInfo.regionName,
             Rooms: bedrooms.concat(bathrooms),
         }*/
-        this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
-            $.notify({
-                icon: "notifications",
-                message: "Property Added Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-            _this.mainService.readData();
-        }, function (e) { console.log("error:", e); });
+        /*
+        this.propertyService.addProperty(this.propertyForm.value).subscribe(
+            d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                this.mainService.readData();
+            },
+            e => { console.log("error:", e); }
+        );
+        */
         console.log(this.propertyForm.value);
     };
     AddpropertyComponent.prototype.continueInfo = function () {
@@ -204,7 +228,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());
