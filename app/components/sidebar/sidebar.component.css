@@ -1,9 +1,30 @@
-.logo a {
-	color: white !important;
+.logo {
 }
-
+.logo a {
+	padding-left: 12px !important;
+	color: white !important;
+	font-size: 18pt;
+	font-weight: 500;
+	text-align: left !important;
+}
+.no-divider:after {
+	display: none !important;
+}
+.info a, .info span {
+	font-size: 12pt !important;
+	font-weight: 300;
+}
+i {
+	color:white !important;
+}
+.nav li.active.visible > a:not([data-toggle="collapse"]) i {
+	color: rgba(60, 72, 88, 0.8) !important;
+}
 p, span, a {
 	color: white;
+	font-size: 14pt !important;
+	font-weight: 500;
+	text-align: left;
 }
 
 .active.visible p, .active.visible span {
