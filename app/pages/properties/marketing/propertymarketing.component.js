@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require("@angular/forms");
 var PropertymarketingComponent = (function () {
     function PropertymarketingComponent() {
         this.re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
@@ -52,6 +53,10 @@ var PropertymarketingComponent = (function () {
         return validate;
     };
     __decorate([
+        core_1.Input('group'), 
+        __metadata('design:type', forms_1.FormGroup)
+    ], PropertymarketingComponent.prototype, "propertyForm", void 0);
+    __decorate([
         core_1.ViewChild('pdfUrl'), 
         __metadata('design:type', Object)
     ], PropertymarketingComponent.prototype, "elePdfUrl", void 0);
@@ -62,7 +67,7 @@ var PropertymarketingComponent = (function () {
     PropertymarketingComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: ' propertymarketing-cmp ',
+            selector: ' propertymarketing-cmp',
             templateUrl: 'propertymarketing.component.html',
             styleUrls: ['propertymarketing.component.css']
         }), 

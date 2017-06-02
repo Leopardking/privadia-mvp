@@ -47,6 +47,7 @@ var AddpropertyComponent = (function () {
             OtherInfo: new forms_1.FormControl('OtherInfo'),
             CollaboratorInitials: new forms_1.FormControl(''),
             BoxUrl: new forms_1.FormControl('BoxUrl'),
+            AgencyPackUrl: new forms_1.FormControl('AgencyPackUrl'),
             Bathrooms: new forms_1.FormControl(1),
             Bedrooms: new forms_1.FormControl(2),
             Sleeps: new forms_1.FormControl(6),

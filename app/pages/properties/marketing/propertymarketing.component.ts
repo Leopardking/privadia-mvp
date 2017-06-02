@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, Input} from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 @Component({
     moduleId: module.id,
-    selector: ' propertymarketing-cmp ',
+    selector: ' propertymarketing-cmp',
     templateUrl: 'propertymarketing.component.html',
     styleUrls: [ 'propertymarketing.component.css' ]
 })  
@@ -10,7 +11,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 export class PropertymarketingComponent implements OnInit{
 	public pdfUrl;
 	public agencyPackUrl;
-
+	@Input('group')	propertyForm: FormGroup;
 	private re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
 
 	@ViewChild('pdfUrl') elePdfUrl;
@@ -20,7 +21,6 @@ export class PropertymarketingComponent implements OnInit{
 	}
 
 	ngOnInit() {
-
 	}
 
 	private pdfUrlChanged(e) {

@@ -52,6 +52,7 @@ export class AddpropertyComponent implements OnInit{
         OtherInfo: new FormControl('OtherInfo'),
         CollaboratorInitials: new FormControl(''),
         BoxUrl: new FormControl('BoxUrl'),
+        AgencyPackUrl: new FormControl('AgencyPackUrl'),
         Bathrooms: new FormControl(1),
         Bedrooms: new FormControl(2),
         Sleeps: new FormControl(6),
