@@ -1,33 +1,29 @@
-import { Component, OnInit } from '@angular/core';
-
+import {Component, OnInit, Input} from '@angular/core';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
-
-import { MainService } from '../../../providers/homeservice';
+import {FormGroup, FormArray, FormControl} from "@angular/forms";
 
 declare var $:any;
 declare var window: any;
 
 @Component({
     moduleId: module.id,
-    selector: ' propertyimage-cmp ',
+    selector: ' propertyimage-cmp',
     templateUrl: 'propertyimage.component.html',
     styleUrls: [ 'propertyimage.component.css' ]
-})  
-
+})
 
 export class PropertyimageoComponent implements OnInit{
 	private images = [];
-
 	private uploader: CloudinaryUploader;
+	@Input('group')	propertyForm: FormGroup;
 
-	constructor( private mainService: MainService ) {
+	constructor() {
 		this.uploader = new CloudinaryUploader(
 			new CloudinaryOptions({
 				cloudName: 'privadia',
 				uploadPreset: 'blmelyur'
 			})
 		);
-
 	}
 
 	ngOnInit() {
@@ -47,14 +43,16 @@ export class PropertyimageoComponent implements OnInit{
             });
 
 			let img = JSON.parse(response);
-
-			this.images.push({
+			let image = {
 				FileName: img.url,
 				ImageId: img.public_id
-			});
+			};
+			this.images.push(image);
+
 			$.getScript('../../../../assets/js/init/initImageGallery.js');
 
-			console.log(img);
+			//Add a new image to Main Form
+			this.addImage(image);
 
 			return {item, response, status, headers};
 		};
@@ -77,10 +75,24 @@ export class PropertyimageoComponent implements OnInit{
 	}
 
 	private uploadImage() {
-
 	}
 
 	private fileChange() {
 		this.uploader.uploadAll();
+	}
+
+	/**
+	 * Add the image to main Form
+	 *
+	 * @param image
+	 */
+	private addImage(image) {
+		const control = <FormArray>this.propertyForm.controls['Images'];
+		control.push(
+			new FormGroup({
+				FileName: new FormControl(image.FileName),
+				ImageId: new FormControl(image.ImageId),
+			})
+		);
 	}
 }

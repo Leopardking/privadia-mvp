@@ -1,4 +1,4 @@
-<div>
+<div [formGroup]="propertyForm">
 	<label class="form-control">Property Image</label>
 	<input type="file" class="btn btn-file" ng2FileSelect [uploader]="uploader" (change)="fileChange()" />
 </div>

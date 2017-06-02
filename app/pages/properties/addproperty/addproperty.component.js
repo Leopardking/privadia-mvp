@@ -61,6 +61,7 @@ var AddpropertyComponent = (function () {
             EventsAllowed: new forms_1.FormControl(true),
             Contacts: new forms_1.FormArray([]),
             Rooms: new forms_1.FormArray([]),
+            Images: new forms_1.FormArray([])
         });
         /*
                 this.propertyForm = this.builder.group({

@@ -52,15 +52,15 @@
             </div>
             <div [formGroup]="propertyForm" class="col-md-9 subtype-filters-names">
                 <div class="tab-content card col-sm-12 col-md-12 col-lg-12">
-                <!--  Property Info  -->
+                    <!--  Property Info  -->
                     <div id="metatab-info" class="active card-content" *ngIf="isLoad">
-                        <propertyinfo-cmp [group]="propertyForm" #propertyInfo></propertyinfo-cmp>
+                        <propertyinfo-cmp [group]="propertyForm"></propertyinfo-cmp>
+                    </div>
+                    <!--  Property Image  -->
+                    <div id="metatab-images" class="card-content">
+                        <propertyimage-cmp [group]="propertyForm"></propertyimage-cmp>
                     </div>
                     <!--
-                    <div id="metatab-images" class="card-content">
-                        <propertyimage-cmp #propertyImage></propertyimage-cmp>
-                    </div>
-
                     <div id="metatab-marketing" class="card-content">
                         <propertymarketing-cmp #propertyMargeting></propertymarketing-cmp>
                     </div>

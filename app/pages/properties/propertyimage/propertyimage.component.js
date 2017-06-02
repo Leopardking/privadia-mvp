@@ -10,10 +10,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var ng2_cloudinary_1 = require('ng2-cloudinary');
-var homeservice_1 = require('../../../providers/homeservice');
+var forms_1 = require("@angular/forms");
 var PropertyimageoComponent = (function () {
-    function PropertyimageoComponent(mainService) {
-        this.mainService = mainService;
+    function PropertyimageoComponent() {
         this.images = [];
         this.uploader = new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
             cloudName: 'privadia',
@@ -36,12 +35,14 @@ var PropertyimageoComponent = (function () {
                 }
             });
             var img = JSON.parse(response);
-            _this.images.push({
+            var image = {
                 FileName: img.url,
                 ImageId: img.public_id
-            });
+            };
+            _this.images.push(image);
             $.getScript('../../../../assets/js/init/initImageGallery.js');
-            console.log(img);
+            //Add a new image to Main Form
+            _this.addImage(image);
             return { item: item, response: response, status: status, headers: headers };
         };
         this.uploader.onErrorItem = function (item, response, status, headers) {
@@ -64,14 +65,30 @@ var PropertyimageoComponent = (function () {
     PropertyimageoComponent.prototype.fileChange = function () {
         this.uploader.uploadAll();
     };
+    /**
+     * Add the image to main Form
+     *
+     * @param image
+     */
+    PropertyimageoComponent.prototype.addImage = function (image) {
+        var control = this.propertyForm.controls['Images'];
+        control.push(new forms_1.FormGroup({
+            FileName: new forms_1.FormControl(image.FileName),
+            ImageId: new forms_1.FormControl(image.ImageId),
+        }));
+    };
+    __decorate([
+        core_1.Input('group'), 
+        __metadata('design:type', forms_1.FormGroup)
+    ], PropertyimageoComponent.prototype, "propertyForm", void 0);
     PropertyimageoComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: ' propertyimage-cmp ',
+            selector: ' propertyimage-cmp',
             templateUrl: 'propertyimage.component.html',
             styleUrls: ['propertyimage.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService])
+        __metadata('design:paramtypes', [])
     ], PropertyimageoComponent);
     return PropertyimageoComponent;
 }());

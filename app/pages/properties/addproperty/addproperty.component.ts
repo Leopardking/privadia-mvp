@@ -66,6 +66,7 @@ export class AddpropertyComponent implements OnInit{
         EventsAllowed: new FormControl(true),
         Contacts: new FormArray([]),
         Rooms: new FormArray([]),
+        Images: new FormArray([])
     });
 
     constructor ( private mainService: MainService,
@@ -174,7 +175,7 @@ export class AddpropertyComponent implements OnInit{
         }*/
 
         this.propertyService.addProperty(this.propertyForm.value).subscribe(
-            d => { 
+            d => {
                 $.notify({
                     icon: "notifications",
                     message: "Property Added Successfully"
