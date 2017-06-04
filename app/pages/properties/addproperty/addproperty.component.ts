@@ -67,7 +67,8 @@ export class AddpropertyComponent implements OnInit{
         EventsAllowed: new FormControl(true),
         Contacts: new FormArray([]),
         Rooms: new FormArray([]),
-        Images: new FormArray([])
+        Images: new FormArray([]),
+        PointsOfInterest: new FormArray([])
     });
 
     constructor ( private mainService: MainService,
