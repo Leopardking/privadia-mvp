@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
+import {FormGroup} from "@angular/forms";
 
 declare var $:any;
 
@@ -13,7 +14,7 @@ declare var $:any;
 
 export class MetafilterheadingComponent implements OnInit{
 	@Input() name;
-
+	@Input('group')	propertyForm: FormGroup;
 
 	public housekeeperState = 0;
 	public housekeepOtherInfo = "";

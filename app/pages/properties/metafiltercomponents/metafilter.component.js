@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require("@angular/forms");
 var PropertyMetafilterComponent = (function () {
     function PropertyMetafilterComponent() {
     }
@@ -29,13 +30,13 @@ var PropertyMetafilterComponent = (function () {
         __metadata('design:type', Object)
     ], PropertyMetafilterComponent.prototype, "metadata", void 0);
     __decorate([
-        core_1.ViewChild('metafilterHeading'), 
-        __metadata('design:type', Object)
-    ], PropertyMetafilterComponent.prototype, "metafilterHeading", void 0);
+        core_1.Input('group'), 
+        __metadata('design:type', forms_1.FormGroup)
+    ], PropertyMetafilterComponent.prototype, "propertyForm", void 0);
     PropertyMetafilterComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: ' property-metafilter-cmp ',
+            selector: ' property-metafilter-cmp',
             templateUrl: 'metafilter.component.html',
             styleUrls: ['metafilter.component.css']
         }), 

@@ -1,17 +1,19 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 declare var $:any;
 
 @Component({
     moduleId: module.id,
-    selector: ' property-metafilter-cmp ',
+    selector: ' property-metafilter-cmp',
     templateUrl: 'metafilter.component.html',
     styleUrls: [ 'metafilter.component.css' ]
 })  
 
 export class PropertyMetafilterComponent implements OnInit{
 	@Input('metadata') metadata;
-	@ViewChild('metafilterHeading') metafilterHeading;
+	@Input('group')	propertyForm: FormGroup;
+	//@ViewChild('metafilterHeading') metafilterHeading;
 
 	public metafilters;
 
@@ -31,5 +33,35 @@ export class PropertyMetafilterComponent implements OnInit{
 		let optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
         this.metafilters[optionId] = !this.metafilters[optionId];
 	}
+
+
+// 	let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
+// 	return {
+// 		Available: item.checked ? 1 : 0,
+// 		Distance: item.distance,
+// 		Name: item.typeName,
+// 		PointOfInterestTypeId: item.Id
+// 	};
+// })
+
+
+	// Available
+	// 	:
+	// 	true
+	// Distance
+	// 	:
+	// 	10
+	// Id
+	// 	:
+	// 	8
+	// Name
+	// 	:
+	// 	"test bar"
+	// PointOfInterestTypeId
+	// 	:
+	// 	4
+	// PointOfInterestTypeName
+	// 	:
+	// 	"Bar"
 
 }

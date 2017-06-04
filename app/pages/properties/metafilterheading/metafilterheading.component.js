@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var properties_service_1 = require('../../../providers/properties/properties.service');
+var forms_1 = require("@angular/forms");
 var MetafilterheadingComponent = (function () {
     function MetafilterheadingComponent(propertiesService) {
         this.propertiesService = propertiesService;
@@ -88,6 +89,10 @@ var MetafilterheadingComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], MetafilterheadingComponent.prototype, "name", void 0);
+    __decorate([
+        core_1.Input('group'), 
+        __metadata('design:type', forms_1.FormGroup)
+    ], MetafilterheadingComponent.prototype, "propertyForm", void 0);
     MetafilterheadingComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
