@@ -22,7 +22,7 @@ export class PropertyMetafilterComponent implements OnInit{
 	}
 
 	ngOnInit() {
-		console.log('metadata', this.metadata);
+		console.log('Metadata filter', this.metadata);
         this.metafilters = [];
 		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
         for (let i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {

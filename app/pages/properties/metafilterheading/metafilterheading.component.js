@@ -24,58 +24,39 @@ var MetafilterheadingComponent = (function () {
         var _this = this;
         switch (this.name) {
             case "Points of Interest":
+                var control_1 = this.propertyForm.controls['PointsOfInterest'];
                 this.propertiesService.getPoITypes().subscribe(function (d) {
                     _this.PoITypes = d;
-                    _this.PoITypes.map(function (item, index) {
-                        item.typeName = "";
-                        item.distance = 0;
-                        item.checked = false;
+                    d.forEach(function (item, index) {
+                        control_1.push(new forms_1.FormGroup({
+                            Name: new forms_1.FormControl(''),
+                            PointOfInterestTypeId: new forms_1.FormControl(item.Id),
+                            PointOfInterestTypeName: new forms_1.FormControl(item.Name),
+                            Available: new forms_1.FormControl(false),
+                            Distance: new forms_1.FormControl(0),
+                        }));
                     });
                 }, function (e) {
                     console.log("Get Points of Types error: ", e);
                 });
+                console.log('this.propertyForm', this.propertyForm);
+                /*
+                this.propertiesService.getPoITypes().subscribe(
+                    d => {
+                        this.PoITypes = d;
+                        this.PoITypes.map( (item, index) => {
+                            item.typeName = "";
+                            item.distance = 0;
+                            item.checked = false;
+                        } );
+                    },
+                    e => {
+                        console.log("Get Points of Types error: ", e);
+                    }
+                );
+                */
                 break;
-            case "Services":
-                this.housekeepOtherInfo = "";
-                this.housekeeperState = 0;
-                break;
         }
-    };
-    /*
-    private housekeeperStateChange(s) {
-        this.housekeeperState = s;
-    }
-
-    private housekeeperOtherInfoChange(e) {
-        this.housekeepOtherInfo = e.target.innerHTML;
-    }
-    */
-    ///////////////		Points of Interests	  //////////////////
-    MetafilterheadingComponent.prototype.checkboxClick = function (e) {
-        var index = e.target.getAttribute('type-id');
-        this.PoITypes[index].checked = !this.PoITypes[index].checked;
-        var ele = $("input.name")[index];
-        if (ele.value == "" && this.PoITypes[index].checked) {
-            $(ele).parent().addClass("has-error");
-        }
-        else {
-            $(ele).parent().removeClass("has-error");
-        }
-        ele = $("input.distance")[index];
-        if (ele.value == "" && this.PoITypes[index].checked) {
-            $(ele).parent().addClass("has-error");
-        }
-        else {
-            $(ele).parent().removeClass("has-error");
-        }
-    };
-    MetafilterheadingComponent.prototype.nameChanged = function (e) {
-        var index = e.target.getAttribute('type-id');
-        this.PoITypes[index].typeName = e.target.value;
-    };
-    MetafilterheadingComponent.prototype.distanceChanged = function (e) {
-        var index = e.target.getAttribute('type-id');
-        this.PoITypes[index].distance = e.target.value;
     };
     __decorate([
         core_1.Input(), 

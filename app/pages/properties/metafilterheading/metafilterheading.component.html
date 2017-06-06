@@ -23,7 +23,7 @@
 </div>
 
 <div [formGroup]="propertyForm" *ngIf="name == 'Points of Interest'" class="points-of-interest">
-    <table>
+    <table formArrayName="PointsOfInterest">
         <thead>
             <tr>
                 <th class="col-lg-1 text-center"> Available </th>
@@ -33,18 +33,34 @@
             </tr>
         </thead>
         <tbody>
+            <!--
             <tr *ngFor="let item of PoITypes; let index = index" class="">
+            -->
+            <tr *ngFor="let control of propertyForm.controls.PointsOfInterest.controls; let i = index" class="">
                 <td class="text-center checkbox">
                     <label>
-                        <input type="checkbox" checked="{{ item.checked ? 'checked': '' }}" [attr.type-id]="index" class="checkbox" (click)="checkboxClick($event)"/>
+                        <input type="checkbox"
+                               [formControl]="control.controls.Available"
+                               [attr.type-id]="index"
+                               class="checkbox"/>
                     </label>
                 </td>
-                <td class="form-group text-center"> {{item.Name}} </td>
+                <td class="form-group text-center"> {{control.controls.PointOfInterestTypeName.value}} </td>
                 <td class="form-group text-left">
-                    <input type="text" [attr.type-id]="index" class="name form-control" disabled="{{ item.checked ? '' : 'disabled' }}" (change)="nameChanged($event)" required />
+                    <input type="text"
+                           [attr.type-id]="index"
+                           class="name form-control"
+                           [formControl]="control.controls.Name"
+                           required />
                 </td>
                 <td class="form-group text-left">
-                    <input type="number" min="0" [attr.type-id]="index" class="distance form-control" value="0" disabled="{{ item.checked ? '' : 'disabled' }}" (change)="distanceChanged($event)" required />
+                    <input type="number"
+                           min="0"
+                           [attr.type-id]="index"
+                           class="distance form-control"
+                           value="0"
+                           [formControl]="control.controls.Distance"
+                           required />
                 </td>
             </tr>
         </tbody>

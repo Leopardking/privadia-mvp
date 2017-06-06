@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
-import {FormGroup} from "@angular/forms";
+import {FormGroup, FormArray, FormControl} from "@angular/forms";
 
 declare var $:any;
 
@@ -30,6 +30,28 @@ export class MetafilterheadingComponent implements OnInit{
 	ngOnInit() {
 		switch (this.name) {
 			case "Points of Interest":
+				const control = <FormArray>this.propertyForm.controls['PointsOfInterest'];
+				this.propertiesService.getPoITypes().subscribe(
+					d => {
+						this.PoITypes = d;
+						d.forEach( (item, index) => {
+							control.push(
+								new FormGroup({
+									Name: new FormControl(''),
+									PointOfInterestTypeId: new FormControl(item.Id),
+									PointOfInterestTypeName: new FormControl(item.Name),
+									Available: new FormControl(false),
+									Distance: new FormControl(0),
+								}),
+							);
+						} );
+					},
+					e => {
+						console.log("Get Points of Types error: ", e);
+					}
+				);
+				console.log('this.propertyForm',this.propertyForm)
+				/*
 				this.propertiesService.getPoITypes().subscribe( 
 					d => {
 						this.PoITypes = d;
@@ -43,17 +65,18 @@ export class MetafilterheadingComponent implements OnInit{
 						console.log("Get Points of Types error: ", e);
 					}
 				);
+				*/
 				break;
+			/*
 			case "Services":
 				this.housekeepOtherInfo = "";
 				this.housekeeperState = 0;
 				break;
-			/*
 			case "Features":
 				this.liftAvailable = false;
 				this.uniqueBenefits = "";
 				break;
-			*/
+			 */
 		}
 	}
 
@@ -69,6 +92,7 @@ export class MetafilterheadingComponent implements OnInit{
 
 
 ///////////////		Points of Interests	  //////////////////
+	/*
 	private checkboxClick(e) {
 		let index = e.target.getAttribute('type-id');
 		this.PoITypes[index].checked = !this.PoITypes[index].checked;
@@ -98,7 +122,7 @@ export class MetafilterheadingComponent implements OnInit{
 		let index = e.target.getAttribute('type-id');
 		this.PoITypes[index].distance = e.target.value;
 	}
-
+	*/
 
 ///////////////		Features		///////////
 	/*

@@ -14,7 +14,7 @@ var PropertyMetafilterComponent = (function () {
     function PropertyMetafilterComponent() {
     }
     PropertyMetafilterComponent.prototype.ngOnInit = function () {
-        console.log('metadata', this.metadata);
+        console.log('Metadata filter', this.metadata);
         this.metafilters = [];
         var control = this.propertyForm.controls['MetaDataTmp'];
         for (var i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
