@@ -14,16 +14,35 @@ var PropertyMetafilterComponent = (function () {
     function PropertyMetafilterComponent() {
     }
     PropertyMetafilterComponent.prototype.ngOnInit = function () {
+        console.log('metadata', this.metadata);
         this.metafilters = [];
-        for (var i = 0; i < this.metadata.length; i++) {
-            for (var j = 0; j < this.metadata[i].MetaData.length; j++) {
-                this.metafilters[this.metadata[i].MetaData[j]] = false;
+        var control = this.propertyForm.controls['MetaDataTmp'];
+        for (var i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
+            control.addControl('type_' + this.metadata.MetaDataSubTypes[i].Id, new forms_1.FormArray([]));
+            var controlSubtype = control.controls['type_' + this.metadata.MetaDataSubTypes[i].Id];
+            for (var j = 0; j < this.metadata.MetaDataSubTypes[i].MetaData.length; j++) {
+                controlSubtype.push(new forms_1.FormGroup({
+                    MetaDataId: new forms_1.FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Id),
+                    MetaDataName: new forms_1.FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Name),
+                    Available: new forms_1.FormControl(false),
+                }));
             }
         }
     };
     PropertyMetafilterComponent.prototype.subfilterChange = function (e) {
         var optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
+        var optionName = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-name') : e.target.parentElement.parentElement.getAttribute('option-name');
+        var optionSubtype = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-subtype') : e.target.parentElement.parentElement.getAttribute('option-subtype');
+        var optionIndex = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-index') : e.target.parentElement.parentElement.getAttribute('option-index');
         this.metafilters[optionId] = !this.metafilters[optionId];
+        var control = this.propertyForm.controls['MetaDataTmp'];
+        var controlSubtype = control.controls['type_' + optionSubtype];
+        controlSubtype.controls[optionIndex].setValue({
+            MetaDataId: optionId,
+            MetaDataName: optionName,
+            Available: !controlSubtype.controls[optionIndex].value.Available,
+        });
+        console.log('Control metadata after', controlSubtype.controls[optionIndex].value.Available);
     };
     __decorate([
         core_1.Input('metadata'), 
