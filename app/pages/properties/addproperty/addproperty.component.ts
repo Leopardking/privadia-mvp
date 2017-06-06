@@ -68,7 +68,13 @@ export class AddpropertyComponent implements OnInit{
         Contacts: new FormArray([]),
         Rooms: new FormArray([]),
         Images: new FormArray([]),
-        PointsOfInterest: new FormArray([])
+        PointsOfInterest: new FormArray([]),
+        MetaData: new FormArray([]),
+        MetaDataTmp: new FormGroup({}),
+        OtherHousekeepingInfo: new FormControl('OtherHousekeepingInfo'),
+        Housekeeping: new FormControl('Housekeeping'),
+        LiftAvailable: new FormControl(true),
+        Benefits: new FormControl('Benefits'),
     });
 
     constructor ( private mainService: MainService,
@@ -163,19 +169,14 @@ export class AddpropertyComponent implements OnInit{
         })
         let data = {
             Active: this.isActive,
-            AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
-            Benefits: this.features.metafilterHeading.uniqueBenefits,
-            Housekeeping: this.services.metafilterHeading.housekeeperState,
             Images: this.propertyImage.images,
-            LiftAvailable: this.features.metafilterHeading.liftAvailable,
             MetaData: metaData,
-            OtherHousekeepingInfo: this.services.metafilterHeading.housekeepOtherInfo,
             Owner: this.propertyInfo.owner,
             UserId: this.propertyInfo.owner.Id,
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
         }*/
-
+/*
         this.propertyService.addProperty(this.propertyForm.value).subscribe(
             d => {
                 $.notify({
@@ -194,7 +195,7 @@ export class AddpropertyComponent implements OnInit{
             },
             e => { console.log("error:", e); }
         );
-
+*/
         console.log(this.propertyForm.value);
     }
 

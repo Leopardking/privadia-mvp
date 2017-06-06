@@ -63,7 +63,13 @@ var AddpropertyComponent = (function () {
             Contacts: new forms_1.FormArray([]),
             Rooms: new forms_1.FormArray([]),
             Images: new forms_1.FormArray([]),
-            PointsOfInterest: new forms_1.FormArray([])
+            PointsOfInterest: new forms_1.FormArray([]),
+            MetaData: new forms_1.FormArray([]),
+            MetaDataTmp: new forms_1.FormGroup({}),
+            OtherHousekeepingInfo: new forms_1.FormControl('OtherHousekeepingInfo'),
+            Housekeeping: new forms_1.FormControl('Housekeeping'),
+            LiftAvailable: new forms_1.FormControl(true),
+            Benefits: new forms_1.FormControl('Benefits'),
         });
         /*
                 this.propertyForm = this.builder.group({
@@ -90,7 +96,6 @@ var AddpropertyComponent = (function () {
         // this.villadescription = this.propertyInfo.villadescription;
     };
     AddpropertyComponent.prototype.saveInfo = function () {
-        var _this = this;
         console.log('Save FORM', this.propertyForm);
         /*
         $(".title-error").removeClass("title-error");
@@ -154,32 +159,33 @@ var AddpropertyComponent = (function () {
         })
         let data = {
             Active: this.isActive,
-            AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
-            Benefits: this.features.metafilterHeading.uniqueBenefits,
-            Housekeeping: this.services.metafilterHeading.housekeeperState,
             Images: this.propertyImage.images,
-            LiftAvailable: this.features.metafilterHeading.liftAvailable,
             MetaData: metaData,
-            OtherHousekeepingInfo: this.services.metafilterHeading.housekeepOtherInfo,
             Owner: this.propertyInfo.owner,
             UserId: this.propertyInfo.owner.Id,
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
         }*/
-        this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
-            $.notify({
-                icon: "notifications",
-                message: "Property Added Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-            _this.mainService.readData();
-        }, function (e) { console.log("error:", e); });
+        /*
+                this.propertyService.addProperty(this.propertyForm.value).subscribe(
+                    d => {
+                        $.notify({
+                            icon: "notifications",
+                            message: "Property Added Successfully"
+        
+                        },{
+                            type: 'success',
+                            timer: 3000,
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            }
+                        });
+                        this.mainService.readData();
+                    },
+                    e => { console.log("error:", e); }
+                );
+        */
         console.log(this.propertyForm.value);
     };
     AddpropertyComponent.prototype.continueInfo = function () {
