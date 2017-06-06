@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import * as _ from "lodash";
 
 import { MainService } from '../../../providers/homeservice';
 import { PropertiesService } from '../../../providers/properties/properties.service';
@@ -107,7 +108,15 @@ export class AddpropertyComponent implements OnInit{
     }
 
     private saveInfo() {
-        console.log('Save FORM', this.propertyForm);
+        console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
+        let newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
+
+            console.log('elem', el)
+            return newArr = _.concat(newArr, el)
+        })
+        this.propertyForm.value.MetaData = newArr;
+        console.log('this.propertyForm.value.MetaDataTmp', this.propertyForm.value)
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
@@ -177,7 +186,6 @@ export class AddpropertyComponent implements OnInit{
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
         }*/
-/*
         this.propertyService.addProperty(this.propertyForm.value).subscribe(
             d => {
                 $.notify({
@@ -196,7 +204,6 @@ export class AddpropertyComponent implements OnInit{
             },
             e => { console.log("error:", e); }
         );
-*/
         console.log(this.propertyForm.value);
     }
 

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+var _ = require("lodash");
 var homeservice_1 = require('../../../providers/homeservice');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var AddpropertyComponent = (function () {
@@ -97,7 +98,15 @@ var AddpropertyComponent = (function () {
         // this.villadescription = this.propertyInfo.villadescription;
     };
     AddpropertyComponent.prototype.saveInfo = function () {
-        console.log('Save FORM', this.propertyForm);
+        var _this = this;
+        console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
+        var newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
+            console.log('elem', el);
+            return newArr = _.concat(newArr, el);
+        });
+        this.propertyForm.value.MetaData = newArr;
+        console.log('this.propertyForm.value.MetaDataTmp', this.propertyForm.value);
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
@@ -167,26 +176,20 @@ var AddpropertyComponent = (function () {
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
         }*/
-        /*
-                this.propertyService.addProperty(this.propertyForm.value).subscribe(
-                    d => {
-                        $.notify({
-                            icon: "notifications",
-                            message: "Property Added Successfully"
-        
-                        },{
-                            type: 'success',
-                            timer: 3000,
-                            placement: {
-                                from: 'top',
-                                align: 'right'
-                            }
-                        });
-                        this.mainService.readData();
-                    },
-                    e => { console.log("error:", e); }
-                );
-        */
+        this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Property Added Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            _this.mainService.readData();
+        }, function (e) { console.log("error:", e); });
         console.log(this.propertyForm.value);
     };
     AddpropertyComponent.prototype.continueInfo = function () {

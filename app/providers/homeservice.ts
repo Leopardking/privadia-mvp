@@ -41,7 +41,7 @@ export class MainService {
             			this.bookingService.setApiURL(this.apiUrl);
 
 						this.readData();
-        		    }, 
+        		    },
                     e => { console.log("error:", e)} 
                 );
 	}
