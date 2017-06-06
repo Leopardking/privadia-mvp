@@ -35,6 +35,7 @@ var AddpropertyComponent = (function () {
         this.isActive = true;
         this.isLoad = true;
         this.propertyForm = new forms_1.FormGroup({
+            Active: new forms_1.FormControl(true),
             OwnerName: new forms_1.FormControl('OwnerName'),
             InternalName: new forms_1.FormControl('InternalName'),
             Name: new forms_1.FormControl('Name'),

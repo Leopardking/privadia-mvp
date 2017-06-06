@@ -40,6 +40,7 @@ export class AddpropertyComponent implements OnInit{
     private isLoad = true;
 
     public propertyForm = new FormGroup ({
+        Active: new FormControl(true),
         OwnerName: new FormControl('OwnerName'),
         InternalName: new FormControl('InternalName'),
         Name: new FormControl('Name'),
