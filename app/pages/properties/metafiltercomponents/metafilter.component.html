@@ -12,21 +12,17 @@
             </div>
             <div id="{{subtype.Id}}" class="panel-collapse collapse in" role="tabpanel" [attr.aria-labelledby]="'heading-'+subtype.Id">
                 <div class="panel-body">
-                    <!--
-                    <div *ngFor="let option of subtype.MetaData; let i = index">
-                    -->
-                    <div *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index">
-                        <button class="subtype-filter btn btn-sm {{ metafilters[option.controls.MetaDataId.value] ? 'btn-success' : 'btn-default'}}"
-                                [attr.option-id]="option.controls.MetaDataId.value"
-                                [attr.option-name]="option.controls.MetaDataName.value"
-                                [attr.option-subtype]="subtype.Id"
-                                [attr.option-index]="i" (click)="subfilterChange($event)">
-                            <span class="btn-label">
-                                <i class="material-icons">{{ metafilters[option.controls.MetaDataId.value] ? 'check' : 'close' }}</i>
-                            </span>
-                            {{option.controls.MetaDataName.value}}
-                        </button>
-                    </div>
+                    <button class="subtype-filter btn btn-sm {{ metafilters[option.controls.MetaDataId.value] ? 'btn-success' : 'btn-default'}}"
+                            *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index"
+                            [attr.option-id]="option.controls.MetaDataId.value"
+                            [attr.option-name]="option.controls.MetaDataName.value"
+                            [attr.option-subtype]="subtype.Id"
+                            [attr.option-index]="i" (click)="subfilterChange($event)">
+                        <span class="btn-label">
+                            <i class="material-icons">{{ metafilters[option.controls.MetaDataId.value] ? 'check' : 'close' }}</i>
+                        </span>
+                        {{option.controls.MetaDataName.value}}
+                    </button>
                 </div>
             </div>
         </div>
