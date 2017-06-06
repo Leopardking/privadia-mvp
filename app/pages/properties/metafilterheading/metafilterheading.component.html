@@ -1,28 +1,28 @@
-<div *ngIf="name == 'Services'" class="housekeeperstate">
+<div [formGroup]="propertyForm" *ngIf="name == 'Services'" class="housekeeperstate">
 	<h5>Housekeeping</h5>
     <div id="childrenAllow" class="radio">
         <label>
-            <input type="radio" name="childrenAllow" checked="true" value="0" (click)="housekeeperStateChange(0)"> Not Available
+            <input type="radio" checked="true" value="0" formControlName="Housekeeping"> Not Available
         </label>
     </div>
     <div class="radio">
         <label>
-            <input type="radio" name="childrenAllow" value="1" (click)="housekeeperStateChange(1)"> Housekeeper Included
+            <input type="radio" value="1" formControlName="Housekeeping"> Housekeeper Included
         </label>
     </div>
     <div class="radio">
         <label>
-            <input type="radio" name="childrenAllow" value="2" (click)="housekeeperStateChange(2)"> Housekeeper Optional
+            <input type="radio" value="2" formControlName="Housekeeping"> Housekeeper Optional
         </label>
     </div>
 
     <div class="form-group label-floating">
         <label class="control-label">Other Housekeeping Information</label>
-        <textarea class="form-control" (change)="housekeeperOtherInfoChange($event)"></textarea>
+        <textarea class="form-control" formControlName="OtherHousekeepingInfo"></textarea>
     </div>
 </div>
 
-<div *ngIf="name == 'Points of Interest'" [formGroup]="propertyForm" class="points-of-interest">
+<div [formGroup]="propertyForm" *ngIf="name == 'Points of Interest'" class="points-of-interest">
     <table>
         <thead>
             <tr>
@@ -54,14 +54,14 @@
     </div>
 </div>
 
-<div *ngIf="name == 'Features'" class="features">
+<div [formGroup]="propertyForm" *ngIf="name == 'Features'" class="features">
     <div class="checkbox">
         <label>
-            <input type="checkbox" (click)="liftAvailabilityChanged($event)"> Lift Available
+            <input type="checkbox" formControlName="LiftAvailable" (click)="liftAvailabilityChanged($event)"> Lift Available
         </label>
     </div>
     <div class="form-group label-floating">
         <label class="control-label">Unique Benefits</label>
-        <textarea class="form-control" (change)="uniqueBenefitsChange($event)"></textarea>
+        <textarea class="form-control" formControlName="Benefits" (change)="uniqueBenefitsChange($event)"></textarea>
     </div>
 </div>

@@ -43,6 +43,7 @@ export class PropertyMetafilterComponent implements OnInit{
 				//this.metafilters[this.metadata[i].MetaData[j]] = false;
             }
         }
+		console.log('metadata', this.metadata);
 	}
 
 	private subfilterChange(e) {

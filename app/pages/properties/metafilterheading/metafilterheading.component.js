@@ -39,18 +39,17 @@ var MetafilterheadingComponent = (function () {
                 this.housekeepOtherInfo = "";
                 this.housekeeperState = 0;
                 break;
-            case "Features":
-                this.liftAvailable = false;
-                this.uniqueBenefits = "";
-                break;
         }
     };
-    MetafilterheadingComponent.prototype.housekeeperStateChange = function (s) {
+    /*
+    private housekeeperStateChange(s) {
         this.housekeeperState = s;
-    };
-    MetafilterheadingComponent.prototype.housekeeperOtherInfoChange = function (e) {
+    }
+
+    private housekeeperOtherInfoChange(e) {
         this.housekeepOtherInfo = e.target.innerHTML;
-    };
+    }
+    */
     ///////////////		Points of Interests	  //////////////////
     MetafilterheadingComponent.prototype.checkboxClick = function (e) {
         var index = e.target.getAttribute('type-id');
@@ -77,13 +76,6 @@ var MetafilterheadingComponent = (function () {
     MetafilterheadingComponent.prototype.distanceChanged = function (e) {
         var index = e.target.getAttribute('type-id');
         this.PoITypes[index].distance = e.target.value;
-    };
-    ///////////////		Features		///////////
-    MetafilterheadingComponent.prototype.uniqueBenefitsChange = function (e) {
-        this.uniqueBenefits = e.target.value;
-    };
-    MetafilterheadingComponent.prototype.liftAvailabilityChanged = function (e) {
-        this.liftAvailable = !this.liftAvailable;
     };
     __decorate([
         core_1.Input(), 

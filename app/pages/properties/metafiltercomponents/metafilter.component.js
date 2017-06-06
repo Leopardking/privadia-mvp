@@ -28,6 +28,7 @@ var PropertyMetafilterComponent = (function () {
                 }));
             }
         }
+        console.log('metadata', this.metadata);
     };
     PropertyMetafilterComponent.prototype.subfilterChange = function (e) {
         var optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');

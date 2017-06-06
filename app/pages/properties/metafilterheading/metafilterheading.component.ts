@@ -14,7 +14,8 @@ declare var $:any;
 
 export class MetafilterheadingComponent implements OnInit{
 	@Input() name;
-	@Input('group')	propertyForm: FormGroup;
+	@Input('group')
+	private propertyForm: FormGroup;
 
 	public housekeeperState = 0;
 	public housekeepOtherInfo = "";
@@ -47,13 +48,16 @@ export class MetafilterheadingComponent implements OnInit{
 				this.housekeepOtherInfo = "";
 				this.housekeeperState = 0;
 				break;
+			/*
 			case "Features":
 				this.liftAvailable = false;
 				this.uniqueBenefits = "";
 				break;
+			*/
 		}
 	}
 
+	/*
 	private housekeeperStateChange(s) {
 		this.housekeeperState = s;
 	}
@@ -61,6 +65,7 @@ export class MetafilterheadingComponent implements OnInit{
 	private housekeeperOtherInfoChange(e) {
 		this.housekeepOtherInfo = e.target.innerHTML;
 	}
+	*/
 
 
 ///////////////		Points of Interests	  //////////////////
@@ -96,6 +101,7 @@ export class MetafilterheadingComponent implements OnInit{
 
 
 ///////////////		Features		///////////
+	/*
 	private uniqueBenefitsChange(e) {
 		this.uniqueBenefits = e.target.value;
 	}
@@ -103,4 +109,5 @@ export class MetafilterheadingComponent implements OnInit{
 	private liftAvailabilityChanged(e) {
 		this.liftAvailable = !this.liftAvailable;
 	}
+	*/
 }
