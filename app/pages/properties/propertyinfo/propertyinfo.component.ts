@@ -22,9 +22,9 @@ export class PropertyinfoComponent implements OnInit{
     @ViewChild('villadescription') villadescription;
 
     // name & address
-    public contacts;
+    // public contacts;
     public bedrooms;
-    public bathrooms;
+    // public bathrooms;
     private ownerNames;
     private regions;
     private regionArray;
@@ -35,7 +35,7 @@ export class PropertyinfoComponent implements OnInit{
     public regionName;
     public region;
     public InternalName;
-    public officialName;
+    // public officialName;
     public address;
 
     constructor ( private propertyService: PropertiesService, private mainService: MainService, private _sanitizer: DomSanitizer ) {
