@@ -11,59 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var PropertymarketingComponent = (function () {
+    // @ViewChild('pdfUrl') elePdfUrl;
+    // @ViewChild('agencyUrl') eleAgencyUrl;
     function PropertymarketingComponent() {
         this.re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
     }
     PropertymarketingComponent.prototype.ngOnInit = function () {
     };
-    PropertymarketingComponent.prototype.pdfUrlChanged = function (e) {
-        this.pdfUrl = e.target.value;
-        if (this.pdfUrl != "" && !this.re.test(this.pdfUrl)) {
-            $(this.elePdfUrl.nativeElement).parent().addClass('has-error');
-        }
-        else {
-            $(this.elePdfUrl.nativeElement).parent().removeClass('has-error');
-        }
-    };
-    PropertymarketingComponent.prototype.agnecyPackUrl = function (e) {
-        this.agencyPackUrl = e.target.value;
-        if (this.agencyPackUrl != "" && !this.re.test(this.pdfUrl)) {
-            $(this.eleAgencyUrl.nativeElement).parent().addClass('has-error');
-        }
-        else {
-            $(this.eleAgencyUrl.nativeElement).parent().removeClass('has-error');
-        }
-    };
-    PropertymarketingComponent.prototype.getValidation = function () {
-        var validate = true;
-        if (this.agencyPackUrl != "" && !this.re.test(this.agencyPackUrl)) {
-            $(this.eleAgencyUrl.nativeElement).parent().addClass('has-error');
-            validate = false;
-        }
-        else {
-            $(this.eleAgencyUrl.nativeElement).parent().removeClass('has-error');
-        }
-        if (this.pdfUrl != "" && !this.re.test(this.pdfUrl)) {
-            $(this.elePdfUrl.nativeElement).parent().addClass('has-error');
-            validate = false;
-        }
-        else {
-            $(this.elePdfUrl.nativeElement).parent().removeClass('has-error');
-        }
-        return validate;
-    };
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
     ], PropertymarketingComponent.prototype, "propertyForm", void 0);
-    __decorate([
-        core_1.ViewChild('pdfUrl'), 
-        __metadata('design:type', Object)
-    ], PropertymarketingComponent.prototype, "elePdfUrl", void 0);
-    __decorate([
-        core_1.ViewChild('agencyUrl'), 
-        __metadata('design:type', Object)
-    ], PropertymarketingComponent.prototype, "eleAgencyUrl", void 0);
     PropertymarketingComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

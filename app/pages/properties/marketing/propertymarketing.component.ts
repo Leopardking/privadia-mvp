@@ -9,13 +9,13 @@ import {FormGroup} from "@angular/forms";
 })  
 
 export class PropertymarketingComponent implements OnInit{
-	public pdfUrl;
-	public agencyPackUrl;
+	// public pdfUrl;
+	// public agencyPackUrl;
 	@Input('group')	propertyForm: FormGroup;
 	private re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
 
-	@ViewChild('pdfUrl') elePdfUrl;
-	@ViewChild('agencyUrl') eleAgencyUrl;
+	// @ViewChild('pdfUrl') elePdfUrl;
+	// @ViewChild('agencyUrl') eleAgencyUrl;
 
 	constructor(  ) {
 	}
@@ -23,6 +23,7 @@ export class PropertymarketingComponent implements OnInit{
 	ngOnInit() {
 	}
 
+	/*
 	private pdfUrlChanged(e) {
 		this.pdfUrl = e.target.value;
 
@@ -42,7 +43,6 @@ export class PropertymarketingComponent implements OnInit{
 			$(this.eleAgencyUrl.nativeElement).parent().removeClass('has-error');
 		}
 	}
-
 	public getValidation() {
 		let validate = true;
 
@@ -62,4 +62,5 @@ export class PropertymarketingComponent implements OnInit{
 
 		return validate;
 	}
+	*/
 }
