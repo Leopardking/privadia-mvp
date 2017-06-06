@@ -28,6 +28,7 @@
       'ng2-cloudinary': 'npm:ng2-cloudinary/dist/umd/ng2-cloudinary.js',
       'ng2-file-upload': 'npm:ng2-file-upload/bundles/ng2-file-upload.umd.js',
       // other libraries
+      'lodash': 'npm:lodash',
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
     },
@@ -38,6 +39,10 @@
         defaultExtension: 'js'
       },
       rxjs: {
+        defaultExtension: 'js'
+      },
+      lodash: {
+        main: 'index.js',
         defaultExtension: 'js'
       }
     }
