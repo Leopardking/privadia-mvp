@@ -72,22 +72,25 @@
                         <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[3]" #pointsOfInterest></property-metafilter-cmp>
                     </div>
 
-                    <!--
-                    <div class="card-content" id="metatab-property-3" *ngIf="mainService.metadata[2]">
+                    <!--  Property Local Activities -->
+                    <div class="card-content" id="metatab-property-3" *ngIf="mainService.metadata[2] && isLoad">
                         <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
                     </div>
-                    <div class="card-content" id="metatab-property-6" *ngIf="mainService.metadata[5]">
+
+                    <!--  Property Features -->
+                    <div class="card-content" id="metatab-property-6" *ngIf="mainService.metadata[5] && isLoad">
                         <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
                     </div>
 
-                    <div class="card-content" id="metatab-property-2" *ngIf="mainService.metadata[1]">
+                    <!--  Property Services -->
+                    <div class="card-content" id="metatab-property-2" *ngIf="mainService.metadata[1] && isLoad">
                         <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
                     </div>
 
-                    <div class="card-content" id="metatab-property-1" *ngIf="mainService.metadata[0]">
+                    <!--  Property Trip -->
+                    <div class="card-content" id="metatab-property-1" *ngIf="mainService.metadata[0] && isLoad">
                         <property-metafilter-cmp [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
                     </div>
-                    -->
                 </div>
                 <div class="text-center">
                     <div class="checkbox">

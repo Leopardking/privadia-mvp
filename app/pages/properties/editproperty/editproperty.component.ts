@@ -93,6 +93,10 @@ export class EditpropertyComponent implements OnInit{
                         WheelchairAccessible: d.WheelchairAccessible,
                         PetsAllowed: d.PetsAllowed,
                         EventsAllowed: d.EventsAllowed,
+                        LiftAvailable: d.LiftAvailable,
+                        Benefits: d.Benefits,
+                        Housekeeping: d.Housekeeping,
+                        OtherHousekeepingInfo: d.OtherHousekeepingInfo,
                     });
 
                     this.setContacts(d.Contacts);

@@ -73,6 +73,10 @@ var EditpropertyComponent = (function () {
                     WheelchairAccessible: d.WheelchairAccessible,
                     PetsAllowed: d.PetsAllowed,
                     EventsAllowed: d.EventsAllowed,
+                    LiftAvailable: d.LiftAvailable,
+                    Benefits: d.Benefits,
+                    Housekeeping: d.Housekeeping,
+                    OtherHousekeepingInfo: d.OtherHousekeepingInfo,
                 });
                 _this.setContacts(d.Contacts);
                 _this.setRooms(d.Rooms);
