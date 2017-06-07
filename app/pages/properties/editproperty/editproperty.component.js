@@ -77,6 +77,7 @@ var EditpropertyComponent = (function () {
                 _this.setContacts(d.Contacts);
                 _this.setRooms(d.Rooms);
                 _this.setImages(d.Images);
+                _this.setPointsOfInterest(d.PointsOfInterest);
                 // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
                 _this.isLoad = true;
                 console.log('This properties', _this.property);
@@ -117,35 +118,37 @@ var EditpropertyComponent = (function () {
         var imageFormArray = this.builder.array(imageFGs);
         this.propertyForm.setControl('Images', imageFormArray);
     };
-    EditpropertyComponent.prototype.setPointsOfInterest = function (rooms) {
+    EditpropertyComponent.prototype.setPointsOfInterest = function (points) {
         var _this = this;
-        var roomFGs = rooms.map(function (room) { return _this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+        var pointFGs = points.map(function (point) { return _this.builder.group({
+            Name: point.Name,
+            PointOfInterestTypeId: point.PointOfInterestTypeId,
+            PointOfInterestTypeName: point.PointOfInterestTypeName,
+            Available: point.Available,
+            Distance: point.Distance,
         }); });
-        var roomFormArray = this.builder.array(roomFGs);
-        this.propertyForm.setControl('Rooms', roomFormArray);
+        var pointFormArray = this.builder.array(pointFGs);
+        this.propertyForm.setControl('PointsOfInterest', pointFormArray);
     };
-    EditpropertyComponent.prototype.setMetaData = function (rooms) {
+    EditpropertyComponent.prototype.setMetaData = function (metaDates) {
         var _this = this;
-        var roomFGs = rooms.map(function (room) { return _this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+        var metaDateFGs = metaDates.map(function (metaDate) { return _this.builder.group({
+            MetaDataId: metaDate.MetaDataId,
+            MetaDataName: metaDate.MetaDataName,
+            Available: metaDate.Available,
         }); });
-        var roomFormArray = this.builder.array(roomFGs);
-        this.propertyForm.setControl('Rooms', roomFormArray);
+        var metaDateFormArray = this.builder.array(metaDateFGs);
+        this.propertyForm.setControl('MetaData', metaDateFormArray);
     };
-    EditpropertyComponent.prototype.setMetaDataTmp = function (rooms) {
+    EditpropertyComponent.prototype.setMetaDataTmp = function (metaDates) {
         var _this = this;
-        var roomFGs = rooms.map(function (room) { return _this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+        var metaDateFGs = metaDates.map(function (metaDate) { return _this.builder.group({
+            MetaDataId: metaDate.MetaDataId,
+            MetaDataName: metaDate.MetaDataName,
+            Available: metaDate.Available,
         }); });
-        var roomFormArray = this.builder.array(roomFGs);
-        this.propertyForm.setControl('Rooms', roomFormArray);
+        var metaDateFormArray = this.builder.array(metaDateFGs);
+        this.propertyForm.setControl('MetaDataTmp', metaDateFormArray);
     };
     EditpropertyComponent.prototype.saveInfo = function () {
         /*

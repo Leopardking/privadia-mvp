@@ -98,6 +98,7 @@ export class EditpropertyComponent implements OnInit{
                     this.setContacts(d.Contacts);
                     this.setRooms(d.Rooms);
                     this.setImages(d.Images);
+                    this.setPointsOfInterest(d.PointsOfInterest);
                     // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
 
                     this.isLoad = true;
@@ -142,34 +143,36 @@ export class EditpropertyComponent implements OnInit{
         this.propertyForm.setControl('Images', imageFormArray);
     }
 
-    setPointsOfInterest(rooms) {
-        const roomFGs = rooms.map(room => this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+    setPointsOfInterest(points) {
+        const pointFGs = points.map(point => this.builder.group({
+            Name: point.Name,
+            PointOfInterestTypeId: point.PointOfInterestTypeId,
+            PointOfInterestTypeName: point.PointOfInterestTypeName,
+            Available: point.Available,
+            Distance: point.Distance,
         }));
-        const roomFormArray = this.builder.array(roomFGs);
-        this.propertyForm.setControl('Rooms', roomFormArray);
+        const pointFormArray = this.builder.array(pointFGs);
+        this.propertyForm.setControl('PointsOfInterest', pointFormArray);
     }
 
-    setMetaData(rooms) {
-        const roomFGs = rooms.map(room => this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+    setMetaData(metaDates) {
+        const metaDateFGs = metaDates.map(metaDate => this.builder.group({
+            MetaDataId: metaDate.MetaDataId,
+            MetaDataName: metaDate.MetaDataName,
+            Available: metaDate.Available,
         }));
-        const roomFormArray = this.builder.array(roomFGs);
-        this.propertyForm.setControl('Rooms', roomFormArray);
+        const metaDateFormArray = this.builder.array(metaDateFGs);
+        this.propertyForm.setControl('MetaData', metaDateFormArray);
     }
 
-    setMetaDataTmp(rooms) {
-        const roomFGs = rooms.map(room => this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+    setMetaDataTmp(metaDates) {
+        const metaDateFGs = metaDates.map(metaDate => this.builder.group({
+            MetaDataId: metaDate.MetaDataId,
+            MetaDataName: metaDate.MetaDataName,
+            Available: metaDate.Available,
         }));
-        const roomFormArray = this.builder.array(roomFGs);
-        this.propertyForm.setControl('Rooms', roomFormArray);
+        const metaDateFormArray = this.builder.array(metaDateFGs);
+        this.propertyForm.setControl('MetaDataTmp', metaDateFormArray);
     }
 
     private saveInfo() {
