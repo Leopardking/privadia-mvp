@@ -14,9 +14,10 @@ var _ = require("lodash");
 var homeservice_1 = require('../../../providers/homeservice');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(mainService, propertyService) {
+    function AddpropertyComponent(mainService, propertyService, builder) {
         this.mainService = mainService;
         this.propertyService = propertyService;
+        this.builder = builder;
         // private isActive = true;
         this.isLoad = true;
         this.propertyForm = new forms_1.FormGroup({
@@ -27,6 +28,10 @@ var AddpropertyComponent = (function () {
             Address: new forms_1.FormControl('Address'),
             RegionId: new forms_1.FormControl(1),
             RegionName: new forms_1.FormControl('Ibiza'),
+            Region: new forms_1.FormControl({
+                Id: 1,
+                Name: 'Ibiza',
+            }),
             Headline: new forms_1.FormControl('Headline'),
             Summary: new forms_1.FormControl('Summary'),
             Description: new forms_1.FormControl('Description'),
@@ -61,6 +66,14 @@ var AddpropertyComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net
     AddpropertyComponent.prototype.ngOnInit = function () { };
+    AddpropertyComponent.prototype.setRegion = function (region) {
+        var regionFGs = this.builder.group({
+            Id: [region.RegionId],
+            Name: [region.RegionName]
+        });
+        // const regionFormArray = this.builder.array(regionFGs);
+        this.propertyForm.setControl('Region', regionFGs);
+    };
     AddpropertyComponent.prototype.saveInfo = function () {
         var _this = this;
         console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
@@ -167,7 +180,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());

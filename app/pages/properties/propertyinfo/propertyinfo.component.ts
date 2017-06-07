@@ -140,8 +140,7 @@ export class PropertyinfoComponent implements OnInit{
         control.removeAt(i);
     }
 
-    private regionChanged(e) {
-        console.log('Change region ', e)
+    private regionChanged(e, region) {
         const controlId = <FormControl>this.propertyForm.controls['RegionId'];
         controlId.setValue(e.Id);
 
@@ -151,6 +150,7 @@ export class PropertyinfoComponent implements OnInit{
         $("#regionName").removeClass('is-empty');
         $("#regionName").removeClass('has-error');
     }
+
     /*
      private ownerChanged(e) {
          this.ownerName = e;

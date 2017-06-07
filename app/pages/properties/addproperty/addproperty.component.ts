@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from "lodash";
 
@@ -28,6 +28,10 @@ export class AddpropertyComponent implements OnInit{
         Address: new FormControl('Address'),
         RegionId: new FormControl(1),
         RegionName: new FormControl('Ibiza'),
+        Region: new FormControl({
+            Id: 1,
+            Name: 'Ibiza',
+        }),
         Headline: new FormControl('Headline'),
         Summary: new FormControl('Summary'),
         Description: new FormControl('Description'),
@@ -60,12 +64,22 @@ export class AddpropertyComponent implements OnInit{
     });
 
     constructor ( private mainService: MainService,
-                  private propertyService: PropertiesService ) {
+                  private propertyService: PropertiesService,
+                  private builder: FormBuilder ) {
         console.log('Form init',this.propertyForm)
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){}
+
+    setRegion(region) {
+        const regionFGs = this.builder.group({
+            Id: [region.RegionId],
+            Name: [region.RegionName]
+        });
+        // const regionFormArray = this.builder.array(regionFGs);
+        this.propertyForm.setControl('Region', regionFGs);
+    }
 
     private saveInfo() {
         console.log('Save FORM', this.propertyForm.value.MetaDataTmp);

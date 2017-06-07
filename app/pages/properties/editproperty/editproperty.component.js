@@ -53,6 +53,7 @@ var EditpropertyComponent = (function () {
                     Address: d.Address,
                     RegionId: d.RegionId,
                     RegionName: d.RegionName,
+                    Region: { Id: d.RegionId, Name: d.RegionName },
                     Headline: d.Headline,
                     Summary: d.Summary,
                     Description: d.Description,
@@ -75,6 +76,7 @@ var EditpropertyComponent = (function () {
                 });
                 _this.setContacts(d.Contacts);
                 _this.setRooms(d.Rooms);
+                // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
                 _this.isLoad = true;
                 console.log('This properties', _this.property);
                 console.log('This properties Form', _this.propertyForm);

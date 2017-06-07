@@ -73,6 +73,7 @@ export class EditpropertyComponent implements OnInit{
                         Address: d.Address,
                         RegionId: d.RegionId,
                         RegionName: d.RegionName,
+                        Region: { Id: d.RegionId, Name: d.RegionName},
                         Headline: d.Headline,
                         Summary: d.Summary,
                         Description: d.Description,
@@ -96,6 +97,7 @@ export class EditpropertyComponent implements OnInit{
 
                     this.setContacts(d.Contacts);
                     this.setRooms(d.Rooms);
+                    // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
 
                     this.isLoad = true;
                     console.log('This properties', this.property);
