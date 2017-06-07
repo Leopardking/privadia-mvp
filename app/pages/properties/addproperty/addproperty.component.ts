@@ -17,7 +17,7 @@ declare var $:any;
 })
 
 export class AddpropertyComponent implements OnInit{
-    private isActive = true;
+    // private isActive = true;
     private isLoad = true;
 
     public propertyForm = new FormGroup ({

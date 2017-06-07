@@ -17,7 +17,7 @@ var AddpropertyComponent = (function () {
     function AddpropertyComponent(mainService, propertyService) {
         this.mainService = mainService;
         this.propertyService = propertyService;
-        this.isActive = true;
+        // private isActive = true;
         this.isLoad = true;
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
