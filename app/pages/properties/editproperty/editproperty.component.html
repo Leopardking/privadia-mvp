@@ -62,11 +62,12 @@
                         <propertyimage-cmp [group]="propertyForm" #propertyImage></propertyimage-cmp>
                     </div>
 
-                    <!--
-                    <div id="metatab-marketing" class="card-content">
+                    <!--  Property Marketing  -->
+                    <div id="metatab-marketing" class="card-content" *ngIf="isLoad">
                         <propertymarketing-cmp [group]="propertyForm" #propertyMargeting></propertymarketing-cmp>
                     </div>
 
+                    <!--
                     <div class="card-content" id="metatab-property-4" *ngIf="mainService.metadata[3]">
                         <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[3]" #pointsOfInterest></property-metafilter-cmp>
                     </div>
