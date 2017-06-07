@@ -61,7 +61,7 @@ var PropertyinfoComponent = (function () {
             JobTitle: new forms_1.FormControl('JobTitle'),
             FirstName: new forms_1.FormControl('FirstName'),
             LastName: new forms_1.FormControl('LastName'),
-            Email: new forms_1.FormControl('Email'),
+            EmailAddress: new forms_1.FormControl('EmailAddress'),
             Telephone: new forms_1.FormControl('123456789'),
         }));
     };

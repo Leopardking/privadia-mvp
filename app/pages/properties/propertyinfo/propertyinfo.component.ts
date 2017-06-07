@@ -96,7 +96,7 @@ export class PropertyinfoComponent implements OnInit{
                 JobTitle: new FormControl('JobTitle'),
                 FirstName: new FormControl('FirstName'),
                 LastName: new FormControl('LastName'),
-                Email: new FormControl('Email'),
+                EmailAddress: new FormControl('EmailAddress'),
                 Telephone: new FormControl('123456789'),
             }),
         );

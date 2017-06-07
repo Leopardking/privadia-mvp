@@ -88,9 +88,11 @@
                     <label class="control-label">Box Url</label>
                     <input type="text" class="form-control" formControlName="BoxUrl">
                 </div>
+                <!--
                 <div *ngIf="mainService.metadata[4]">
                     <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[4]" #villadescription></property-metafilter-cmp>
                 </div>
+                -->
             </div>
         </div>
     </div>
@@ -151,7 +153,7 @@
                     </div>
                     <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">Email Address</label>
-                        <input type="email" class="form-control" [formControl]="control.controls.Email" required>
+                        <input type="email" class="form-control" [formControl]="control.controls.EmailAddress" required>
                     </div>
                     <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">Telephone</label>
