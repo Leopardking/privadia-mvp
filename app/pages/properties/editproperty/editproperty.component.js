@@ -19,48 +19,24 @@ var EditpropertyComponent = (function () {
         this.propertyService = propertyService;
         this.route = route;
         this.builder = builder;
-        this.reading = false;
-        this.datatableInited = false;
+        // @ViewChild('propertyInfo') propertyInfo;
+        // @ViewChild('propertyMargeting') propertyMargeting;
+        // @ViewChild('propertyImage') propertyImage;
+        // @ViewChild('pointsOfInterest') pointsOfInterest;
+        // @ViewChild('localActivities') localActivities;
+        // @ViewChild('features') features;
+        // @ViewChild('services') services;
+        // @ViewChild('trip') trip;
+        // public propertyForm: any;
+        // public metadata;
+        // private villadescription;
+        // private reading:boolean = false;
+        // private datatableInited:boolean = false;
         this.property = [];
-        this.isActive = true;
         //propertyForm: any;
         this.isLoad = false;
-        this.propertyForm = new forms_1.FormGroup({
-            OwnerName: new forms_1.FormControl(),
-            InternalName: new forms_1.FormControl(),
-            Name: new forms_1.FormControl(),
-            Address: new forms_1.FormControl(),
-            RegionId: new forms_1.FormControl(),
-            RegionName: new forms_1.FormControl(),
-            Headline: new forms_1.FormControl(),
-            Summary: new forms_1.FormControl(),
-            Description: new forms_1.FormControl(),
-            OtherInfo: new forms_1.FormControl(),
-            CollaboratorInitials: new forms_1.FormControl(),
-            BoxUrl: new forms_1.FormControl(),
-            Bathrooms: new forms_1.FormControl(),
-            Bedrooms: new forms_1.FormControl(),
-            Sleeps: new forms_1.FormControl(),
-            Capacity: new forms_1.FormControl(),
-            LivingAreaSize: new forms_1.FormControl(),
-            DiningCapacity: new forms_1.FormControl(),
-            KitchenInfo: new forms_1.FormControl(),
-            ChildrenAllowed: new forms_1.FormControl(),
-            SmokingAllowed: new forms_1.FormControl(),
-            WheelchairAccessible: new forms_1.FormControl(),
-            PetsAllowed: new forms_1.FormControl(),
-            EventsAllowed: new forms_1.FormControl(),
-        });
+        this.propertyForm = new forms_1.FormGroup({});
         console.log('this.property mainService', this.mainService.metadata);
-        /*
-                this.propertyForm = builder.group({
-                    'InternalName': '1',
-                    'OwnerName': '1',
-                    'Address': '1 33',
-                    'Name': '1     1',
-                });
-        */
-        //console.log('Form ', this.propertyForm.controls)
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net
     EditpropertyComponent.prototype.ngOnInit = function () {
@@ -70,6 +46,7 @@ var EditpropertyComponent = (function () {
             _this.propertyService.getPropertyById(params['id']).subscribe(function (d) {
                 _this.property = d;
                 _this.propertyForm = _this.builder.group({
+                    Active: d.Active,
                     OwnerName: d.OwnerName,
                     InternalName: d.InternalName,
                     Name: d.Name,
@@ -82,6 +59,7 @@ var EditpropertyComponent = (function () {
                     OtherInfo: d.OtherInfo,
                     CollaboratorInitials: d.CollaboratorInitials,
                     BoxUrl: d.BoxUrl,
+                    AgencyPackUrl: d.AgencyPackUrl,
                     Bathrooms: d.Bathrooms,
                     Bedrooms: d.Bedrooms,
                     Sleeps: d.Sleeps,
@@ -95,18 +73,75 @@ var EditpropertyComponent = (function () {
                     PetsAllowed: d.PetsAllowed,
                     EventsAllowed: d.EventsAllowed,
                 });
+                _this.setContacts(d.Contacts);
+                _this.setRooms(d.Rooms);
                 _this.isLoad = true;
                 console.log('This properties', _this.property);
                 console.log('This properties Form', _this.propertyForm);
             }, function (e) { console.log("error:", e); });
-            console.log('This id', params['id']);
-            // this.id = +params['id']; // (+) converts string 'id' to a number
-            // In a real app: dispatch action to load the details here.
         });
-        this.contacts = [];
-        this.bedrooms = [];
-        this.bathrooms = [];
-        //this.villadescription = this.propertyInfo.villadescription;
+    };
+    EditpropertyComponent.prototype.setContacts = function (contacts) {
+        var _this = this;
+        var contactFGs = contacts.map(function (contact) { return _this.builder.group({
+            JobTitle: contact.JobTitle,
+            FirstName: contact.FirstName,
+            LastName: contact.LastName,
+            EmailAddress: contact.EmailAddress,
+            Telephone: contact.Telephone,
+        }); });
+        var contactFormArray = this.builder.array(contactFGs);
+        this.propertyForm.setControl('Contacts', contactFormArray);
+    };
+    EditpropertyComponent.prototype.setRooms = function (rooms) {
+        var _this = this;
+        var roomFGs = rooms.map(function (room) { return _this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }); });
+        var roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
+    };
+    EditpropertyComponent.prototype.setImages = function (rooms) {
+        var _this = this;
+        var roomFGs = rooms.map(function (room) { return _this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }); });
+        var roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
+    };
+    EditpropertyComponent.prototype.setPointsOfInterest = function (rooms) {
+        var _this = this;
+        var roomFGs = rooms.map(function (room) { return _this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }); });
+        var roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
+    };
+    EditpropertyComponent.prototype.setMetaData = function (rooms) {
+        var _this = this;
+        var roomFGs = rooms.map(function (room) { return _this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }); });
+        var roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
+    };
+    EditpropertyComponent.prototype.setMetaDataTmp = function (rooms) {
+        var _this = this;
+        var roomFGs = rooms.map(function (room) { return _this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }); });
+        var roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
     };
     EditpropertyComponent.prototype.saveInfo = function () {
         /*
@@ -257,46 +292,15 @@ var EditpropertyComponent = (function () {
         */
         //console.log(data);
         console.log('Save form ', this.propertyForm);
+        console.log('Save form ', this.propertyForm.value);
     };
     EditpropertyComponent.prototype.continueInfo = function () {
     };
     EditpropertyComponent.prototype.discardInfo = function () {
     };
     EditpropertyComponent.prototype.activeChange = function (e) {
-        this.isActive = e.target.checked;
+        // this.isActive = e.target.checked;
     };
-    __decorate([
-        core_1.ViewChild('propertyInfo'), 
-        __metadata('design:type', Object)
-    ], EditpropertyComponent.prototype, "propertyInfo", void 0);
-    __decorate([
-        core_1.ViewChild('propertyMargeting'), 
-        __metadata('design:type', Object)
-    ], EditpropertyComponent.prototype, "propertyMargeting", void 0);
-    __decorate([
-        core_1.ViewChild('propertyImage'), 
-        __metadata('design:type', Object)
-    ], EditpropertyComponent.prototype, "propertyImage", void 0);
-    __decorate([
-        core_1.ViewChild('pointsOfInterest'), 
-        __metadata('design:type', Object)
-    ], EditpropertyComponent.prototype, "pointsOfInterest", void 0);
-    __decorate([
-        core_1.ViewChild('localActivities'), 
-        __metadata('design:type', Object)
-    ], EditpropertyComponent.prototype, "localActivities", void 0);
-    __decorate([
-        core_1.ViewChild('features'), 
-        __metadata('design:type', Object)
-    ], EditpropertyComponent.prototype, "features", void 0);
-    __decorate([
-        core_1.ViewChild('services'), 
-        __metadata('design:type', Object)
-    ], EditpropertyComponent.prototype, "services", void 0);
-    __decorate([
-        core_1.ViewChild('trip'), 
-        __metadata('design:type', Object)
-    ], EditpropertyComponent.prototype, "trip", void 0);
     EditpropertyComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

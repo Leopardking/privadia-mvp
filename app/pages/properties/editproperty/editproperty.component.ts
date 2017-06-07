@@ -15,79 +15,45 @@ declare var $:any;
 })
 
 export class EditpropertyComponent implements OnInit{
-    @ViewChild('propertyInfo') propertyInfo;
-    @ViewChild('propertyMargeting') propertyMargeting;
-    @ViewChild('propertyImage') propertyImage;
+    // @ViewChild('propertyInfo') propertyInfo;
+    // @ViewChild('propertyMargeting') propertyMargeting;
+    // @ViewChild('propertyImage') propertyImage;
 
-    @ViewChild('pointsOfInterest') pointsOfInterest;
-    @ViewChild('localActivities') localActivities;
-    @ViewChild('features') features;
-    @ViewChild('services') services;
-    @ViewChild('trip') trip;
+    // @ViewChild('pointsOfInterest') pointsOfInterest;
+    // @ViewChild('localActivities') localActivities;
+    // @ViewChild('features') features;
+    // @ViewChild('services') services;
+    // @ViewChild('trip') trip;
 
     // public propertyForm: any;
 
     // public metadata;
 
-    private villadescription;
-    private reading:boolean = false;
-    private datatableInited:boolean = false;
+    // private villadescription;
+    // private reading:boolean = false;
+    // private datatableInited:boolean = false;
     
     private property = [];
 
-    private contacts;
-    private bedrooms;
-    private bathrooms;
+    // private contacts;
+    // private bedrooms;
+    // private bathrooms;
 
-    private isActive = true;
+    // private isActive = true;
 
     // id: number;
     private sub: any;
     //propertyForm: any;
     private isLoad = false;
 
-    public propertyForm = new FormGroup ({
-        OwnerName: new FormControl(),
-        InternalName: new FormControl(),
-        Name: new FormControl(),
-        Address: new FormControl(),
-        RegionId: new FormControl(),
-        RegionName: new FormControl(),
-        Headline: new FormControl(),
-        Summary: new FormControl(),
-        Description: new FormControl(),
-        OtherInfo: new FormControl(),
-        CollaboratorInitials: new FormControl(),
-        BoxUrl: new FormControl(),
-        Bathrooms: new FormControl(),
-        Bedrooms: new FormControl(),
-        Sleeps: new FormControl(),
-        Capacity: new FormControl(),
-        LivingAreaSize: new FormControl(),
-        DiningCapacity: new FormControl(),
-        KitchenInfo: new FormControl(),
-        ChildrenAllowed: new FormControl(),
-        SmokingAllowed: new FormControl(),
-        WheelchairAccessible: new FormControl(),
-        PetsAllowed: new FormControl(),
-        EventsAllowed: new FormControl(),
-    });
+    public propertyForm = new FormGroup ({});
+
     constructor ( private mainService: MainService,
                   private propertyService: PropertiesService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
 
         console.log('this.property mainService', this.mainService.metadata )
-/*
-        this.propertyForm = builder.group({
-            'InternalName': '1',
-            'OwnerName': '1',
-            'Address': '1 33',
-            'Name': '1     1',
-        });
-*/
-
-        //console.log('Form ', this.propertyForm.controls)
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net
@@ -100,6 +66,7 @@ export class EditpropertyComponent implements OnInit{
                     this.property = d;
 
                     this.propertyForm = this.builder.group({
+                        Active: d.Active,
                         OwnerName: d.OwnerName,
                         InternalName: d.InternalName,
                         Name: d.Name,
@@ -112,6 +79,7 @@ export class EditpropertyComponent implements OnInit{
                         OtherInfo: d.OtherInfo,
                         CollaboratorInitials: d.CollaboratorInitials,
                         BoxUrl: d.BoxUrl,
+                        AgencyPackUrl: d.AgencyPackUrl,
                         Bathrooms: d.Bathrooms,
                         Bedrooms: d.Bedrooms,
                         Sleeps: d.Sleeps,
@@ -124,23 +92,80 @@ export class EditpropertyComponent implements OnInit{
                         WheelchairAccessible: d.WheelchairAccessible,
                         PetsAllowed: d.PetsAllowed,
                         EventsAllowed: d.EventsAllowed,
-
                     });
+
+                    this.setContacts(d.Contacts);
+                    this.setRooms(d.Rooms);
+
                     this.isLoad = true;
                     console.log('This properties', this.property);
                     console.log('This properties Form', this.propertyForm);
                 },
                 e => { console.log("error:", e); }
             );
-            console.log('This id', params['id']);
-            // this.id = +params['id']; // (+) converts string 'id' to a number
-
-            // In a real app: dispatch action to load the details here.
         });
-        this.contacts = [];
-        this.bedrooms = [];
-        this.bathrooms = [];
-        //this.villadescription = this.propertyInfo.villadescription;
+    }
+
+    setContacts(contacts) {
+        const contactFGs = contacts.map(contact => this.builder.group({
+            JobTitle: contact.JobTitle,
+            FirstName: contact.FirstName,
+            LastName: contact.LastName,
+            EmailAddress: contact.EmailAddress,
+            Telephone: contact.Telephone,
+        }));
+        const contactFormArray = this.builder.array(contactFGs);
+        this.propertyForm.setControl('Contacts', contactFormArray);
+    }
+
+    setRooms(rooms) {
+        const roomFGs = rooms.map(room => this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }));
+        const roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
+    }
+
+    setImages(rooms) {
+        const roomFGs = rooms.map(room => this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }));
+        const roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
+    }
+
+    setPointsOfInterest(rooms) {
+        const roomFGs = rooms.map(room => this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }));
+        const roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
+    }
+
+    setMetaData(rooms) {
+        const roomFGs = rooms.map(room => this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }));
+        const roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
+    }
+
+    setMetaDataTmp(rooms) {
+        const roomFGs = rooms.map(room => this.builder.group({
+            Name: room.Name,
+            Description: room.Description,
+            PropertyRoomType: room.PropertyRoomType,
+        }));
+        const roomFormArray = this.builder.array(roomFGs);
+        this.propertyForm.setControl('Rooms', roomFormArray);
     }
 
     private saveInfo() {
@@ -293,6 +318,7 @@ export class EditpropertyComponent implements OnInit{
         */
         //console.log(data);
         console.log('Save form ', this.propertyForm)
+        console.log('Save form ', this.propertyForm.value)
     }
 
     private continueInfo() {
@@ -304,6 +330,6 @@ export class EditpropertyComponent implements OnInit{
     }
 
     private activeChange(e) {
-        this.isActive = e.target.checked;
+        // this.isActive = e.target.checked;
     }
 }
