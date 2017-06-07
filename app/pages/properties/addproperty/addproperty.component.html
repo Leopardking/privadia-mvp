@@ -57,7 +57,7 @@
                         <propertyinfo-cmp [group]="propertyForm"></propertyinfo-cmp>
                     </div>
                     <!--  Property Image  -->
-                    <div id="metatab-images" class="card-content">
+                    <div id="metatab-images" class="card-content" *ngIf="isLoad">
                         <propertyimage-cmp [group]="propertyForm"></propertyimage-cmp>
                     </div>
                     <!--  Property Marketing  -->

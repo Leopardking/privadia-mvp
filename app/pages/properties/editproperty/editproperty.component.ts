@@ -97,6 +97,7 @@ export class EditpropertyComponent implements OnInit{
 
                     this.setContacts(d.Contacts);
                     this.setRooms(d.Rooms);
+                    this.setImages(d.Images);
                     // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
 
                     this.isLoad = true;
@@ -130,14 +131,15 @@ export class EditpropertyComponent implements OnInit{
         this.propertyForm.setControl('Rooms', roomFormArray);
     }
 
-    setImages(rooms) {
-        const roomFGs = rooms.map(room => this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+    setImages(images) {
+        const imageFGs = images.map(image => this.builder.group({
+            Id: image.Id,
+            FileName: image.FileName,
+            ImageId: image.ImageId,
+            OrderIdx: image.OrderIdx,
         }));
-        const roomFormArray = this.builder.array(roomFGs);
-        this.propertyForm.setControl('Rooms', roomFormArray);
+        const imageFormArray = this.builder.array(imageFGs);
+        this.propertyForm.setControl('Images', imageFormArray);
     }
 
     setPointsOfInterest(rooms) {

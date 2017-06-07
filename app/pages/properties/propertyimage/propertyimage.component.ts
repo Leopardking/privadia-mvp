@@ -47,7 +47,7 @@ export class PropertyimageoComponent implements OnInit{
 				FileName: img.url,
 				ImageId: img.public_id
 			};
-			this.images.push(image);
+			// this.images.push(image);
 
 			$.getScript('../../../../assets/js/init/initImageGallery.js');
 
@@ -71,7 +71,8 @@ export class PropertyimageoComponent implements OnInit{
             });
 
           	return {item, response, status, headers};
-		}
+		};
+		$.getScript('../../../../assets/js/init/initImageGallery.js');
 	}
 
 	private uploadImage() {

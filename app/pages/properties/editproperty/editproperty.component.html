@@ -56,28 +56,30 @@
                     <div id="metatab-info" class="active card-content" *ngIf="isLoad">
                         <propertyinfo-cmp [group]="propertyForm" #propertyInfo></propertyinfo-cmp>
                     </div>
-                    <!--
-                    <div id="metatab-images" class="card-content">
-                        <propertyimage-cmp #propertyImage></propertyimage-cmp>
+
+                    <!--  Property Image  -->
+                    <div id="metatab-images" class="card-content" *ngIf="isLoad">
+                        <propertyimage-cmp [group]="propertyForm" #propertyImage></propertyimage-cmp>
                     </div>
 
+                    <!--
                     <div id="metatab-marketing" class="card-content">
-                        <propertymarketing-cmp #propertyMargeting></propertymarketing-cmp>
+                        <propertymarketing-cmp [group]="propertyForm" #propertyMargeting></propertymarketing-cmp>
                     </div>
 
                     <div class="card-content" id="metatab-property-4" *ngIf="mainService.metadata[3]">
-                        <property-metafilter-cmp [metadata]="mainService.metadata[3]" #pointsOfInterest></property-metafilter-cmp>
+                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[3]" #pointsOfInterest></property-metafilter-cmp>
                     </div>
 
                     <div class="card-content" id="metatab-property-3" *ngIf="mainService.metadata[2]">
-                        <property-metafilter-cmp [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
+                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
                     </div>
                     <div class="card-content" id="metatab-property-6" *ngIf="mainService.metadata[5]">
-                        <property-metafilter-cmp [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
+                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
                     </div>
 
                     <div class="card-content" id="metatab-property-2" *ngIf="mainService.metadata[1]">
-                        <property-metafilter-cmp [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
+                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
                     </div>
 
                     <div class="card-content" id="metatab-property-1" *ngIf="mainService.metadata[0]">

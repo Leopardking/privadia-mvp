@@ -76,6 +76,7 @@ var EditpropertyComponent = (function () {
                 });
                 _this.setContacts(d.Contacts);
                 _this.setRooms(d.Rooms);
+                _this.setImages(d.Images);
                 // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
                 _this.isLoad = true;
                 console.log('This properties', _this.property);
@@ -105,15 +106,16 @@ var EditpropertyComponent = (function () {
         var roomFormArray = this.builder.array(roomFGs);
         this.propertyForm.setControl('Rooms', roomFormArray);
     };
-    EditpropertyComponent.prototype.setImages = function (rooms) {
+    EditpropertyComponent.prototype.setImages = function (images) {
         var _this = this;
-        var roomFGs = rooms.map(function (room) { return _this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+        var imageFGs = images.map(function (image) { return _this.builder.group({
+            Id: image.Id,
+            FileName: image.FileName,
+            ImageId: image.ImageId,
+            OrderIdx: image.OrderIdx,
         }); });
-        var roomFormArray = this.builder.array(roomFGs);
-        this.propertyForm.setControl('Rooms', roomFormArray);
+        var imageFormArray = this.builder.array(imageFGs);
+        this.propertyForm.setControl('Images', imageFormArray);
     };
     EditpropertyComponent.prototype.setPointsOfInterest = function (rooms) {
         var _this = this;

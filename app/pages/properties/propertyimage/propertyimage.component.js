@@ -39,7 +39,7 @@ var PropertyimageoComponent = (function () {
                 FileName: img.url,
                 ImageId: img.public_id
             };
-            _this.images.push(image);
+            // this.images.push(image);
             $.getScript('../../../../assets/js/init/initImageGallery.js');
             //Add a new image to Main Form
             _this.addImage(image);
@@ -59,6 +59,7 @@ var PropertyimageoComponent = (function () {
             });
             return { item: item, response: response, status: status, headers: headers };
         };
+        $.getScript('../../../../assets/js/init/initImageGallery.js');
     };
     PropertyimageoComponent.prototype.uploadImage = function () {
     };
