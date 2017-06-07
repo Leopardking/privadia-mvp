@@ -58,7 +58,7 @@ export class AddpropertyComponent implements OnInit{
         MetaData: new FormArray([]),
         MetaDataTmp: new FormGroup({}),
         OtherHousekeepingInfo: new FormControl('OtherHousekeepingInfo'),
-        Housekeeping: new FormControl('Housekeeping'),
+        Housekeeping: new FormControl(1),
         LiftAvailable: new FormControl(true),
         Benefits: new FormControl('Benefits'),
     });

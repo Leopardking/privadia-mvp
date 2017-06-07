@@ -171,7 +171,6 @@ export class EditpropertyComponent implements OnInit{
     }
 
     private saveInfo() {
-
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");

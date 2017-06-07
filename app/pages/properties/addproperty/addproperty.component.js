@@ -58,7 +58,7 @@ var AddpropertyComponent = (function () {
             MetaData: new forms_1.FormArray([]),
             MetaDataTmp: new forms_1.FormGroup({}),
             OtherHousekeepingInfo: new forms_1.FormControl('OtherHousekeepingInfo'),
-            Housekeeping: new forms_1.FormControl('Housekeeping'),
+            Housekeeping: new forms_1.FormControl(1),
             LiftAvailable: new forms_1.FormControl(true),
             Benefits: new forms_1.FormControl('Benefits'),
         });
