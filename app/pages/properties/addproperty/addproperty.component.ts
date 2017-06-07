@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from "lodash";
 
@@ -17,26 +17,6 @@ declare var $:any;
 })
 
 export class AddpropertyComponent implements OnInit{
-    //@ViewChild('propertyInfo') propertyInfo;
-    //@ViewChild('propertyMargeting') propertyMargeting;
-    //@ViewChild('propertyImage') propertyImage;
-
-    //@ViewChild('pointsOfInterest') pointsOfInterest;
-    //@ViewChild('localActivities') localActivities;
-    //@ViewChild('features') features;
-    //@ViewChild('services') services;
-    //@ViewChild('trip') trip;
-
-    // private villadescription;
-    // private reading:boolean = false;
-    // private datatableInited:boolean = false;
-    
-    // private properties = [];
-
-    // private contacts;
-    // private bedrooms;
-    // private bathrooms;
-
     private isActive = true;
     private isLoad = true;
 
@@ -52,7 +32,7 @@ export class AddpropertyComponent implements OnInit{
         Summary: new FormControl('Summary'),
         Description: new FormControl('Description'),
         OtherInfo: new FormControl('OtherInfo'),
-        CollaboratorInitials: new FormControl(''),
+        CollaboratorInitials: new FormControl('CollaboratorInitials'),
         BoxUrl: new FormControl('BoxUrl'),
         AgencyPackUrl: new FormControl('AgencyPackUrl'),
         Bathrooms: new FormControl(1),
@@ -80,32 +60,12 @@ export class AddpropertyComponent implements OnInit{
     });
 
     constructor ( private mainService: MainService,
-                  private propertyService: PropertiesService,
-                  private builder: FormBuilder) {
-/*
-        this.propertyForm = this.builder.group({
-            Contacts: this.builder.array([
-                this.initAddress(),
-            ])
-        });*/
-    console.log('Form init',this.propertyForm)
+                  private propertyService: PropertiesService ) {
+        console.log('Form init',this.propertyForm)
     }
-/*
-    initAddress() {
-        // initialize our address
-        return this.builder.group({
-            street: ['', Validators.required],
-            postcode: ['']
-        });
-    }
-*/
-    // steve@freelancemvc.net, agent1@freelancemvc.net 
-    ngOnInit(){
-        // this.contacts = [];
-        // this.bedrooms = [];
-        // this.bathrooms = [];
-        // this.villadescription = this.propertyInfo.villadescription;
-    }
+
+    // steve@freelancemvc.net, agent1@freelancemvc.net
+    ngOnInit(){}
 
     private saveInfo() {
         console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
@@ -213,9 +173,5 @@ export class AddpropertyComponent implements OnInit{
 
     private discardInfo() {
 
-    }
-
-    private activeChange(e) {
-        this.isActive = e.target.checked;
     }
 }

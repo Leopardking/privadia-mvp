@@ -14,25 +14,9 @@ var _ = require("lodash");
 var homeservice_1 = require('../../../providers/homeservice');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(mainService, propertyService, builder) {
+    function AddpropertyComponent(mainService, propertyService) {
         this.mainService = mainService;
         this.propertyService = propertyService;
-        this.builder = builder;
-        //@ViewChild('propertyInfo') propertyInfo;
-        //@ViewChild('propertyMargeting') propertyMargeting;
-        //@ViewChild('propertyImage') propertyImage;
-        //@ViewChild('pointsOfInterest') pointsOfInterest;
-        //@ViewChild('localActivities') localActivities;
-        //@ViewChild('features') features;
-        //@ViewChild('services') services;
-        //@ViewChild('trip') trip;
-        // private villadescription;
-        // private reading:boolean = false;
-        // private datatableInited:boolean = false;
-        // private properties = [];
-        // private contacts;
-        // private bedrooms;
-        // private bathrooms;
         this.isActive = true;
         this.isLoad = true;
         this.propertyForm = new forms_1.FormGroup({
@@ -47,7 +31,7 @@ var AddpropertyComponent = (function () {
             Summary: new forms_1.FormControl('Summary'),
             Description: new forms_1.FormControl('Description'),
             OtherInfo: new forms_1.FormControl('OtherInfo'),
-            CollaboratorInitials: new forms_1.FormControl(''),
+            CollaboratorInitials: new forms_1.FormControl('CollaboratorInitials'),
             BoxUrl: new forms_1.FormControl('BoxUrl'),
             AgencyPackUrl: new forms_1.FormControl('AgencyPackUrl'),
             Bathrooms: new forms_1.FormControl(1),
@@ -73,30 +57,10 @@ var AddpropertyComponent = (function () {
             LiftAvailable: new forms_1.FormControl(true),
             Benefits: new forms_1.FormControl('Benefits'),
         });
-        /*
-                this.propertyForm = this.builder.group({
-                    Contacts: this.builder.array([
-                        this.initAddress(),
-                    ])
-                });*/
         console.log('Form init', this.propertyForm);
     }
-    /*
-        initAddress() {
-            // initialize our address
-            return this.builder.group({
-                street: ['', Validators.required],
-                postcode: ['']
-            });
-        }
-    */
-    // steve@freelancemvc.net, agent1@freelancemvc.net 
-    AddpropertyComponent.prototype.ngOnInit = function () {
-        // this.contacts = [];
-        // this.bedrooms = [];
-        // this.bathrooms = [];
-        // this.villadescription = this.propertyInfo.villadescription;
-    };
+    // steve@freelancemvc.net, agent1@freelancemvc.net
+    AddpropertyComponent.prototype.ngOnInit = function () { };
     AddpropertyComponent.prototype.saveInfo = function () {
         var _this = this;
         console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
@@ -196,9 +160,6 @@ var AddpropertyComponent = (function () {
     };
     AddpropertyComponent.prototype.discardInfo = function () {
     };
-    AddpropertyComponent.prototype.activeChange = function (e) {
-        this.isActive = e.target.checked;
-    };
     AddpropertyComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -206,7 +167,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());
