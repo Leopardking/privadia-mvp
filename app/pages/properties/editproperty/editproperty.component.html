@@ -89,7 +89,7 @@
 
                     <!--  Property Trip -->
                     <div class="card-content" id="metatab-property-1" *ngIf="mainService.metadata[0] && isLoad">
-                        <property-metafilter-cmp [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
+                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
                     </div>
                 </div>
                 <div class="text-center">

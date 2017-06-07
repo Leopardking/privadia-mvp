@@ -1,4 +1,5 @@
 <metafilter-heading-cmp [name]="metadata.Name" [group]="propertyForm"></metafilter-heading-cmp>
+
 <div [formGroup]="propertyForm">
     <div formArrayName="MetaDataTmp" class="panel-group" role="tablist" aria-multiselectable="true">
         <div class="panel panel-default" *ngFor="let subtype of metadata.MetaDataSubTypes">

@@ -10,25 +10,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
+var _ = require('lodash');
 var PropertyMetafilterComponent = (function () {
     function PropertyMetafilterComponent() {
     }
     PropertyMetafilterComponent.prototype.ngOnInit = function () {
-        console.log('Metadata filter', this.metadata);
+        var _this = this;
         this.metafilters = [];
+        var values = this.propertyForm.controls['MetaData'].value;
+        // console.log('MetaDataTmp ', );
         var control = this.propertyForm.controls['MetaDataTmp'];
-        for (var i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
-            control.addControl('type_' + this.metadata.MetaDataSubTypes[i].Id, new forms_1.FormArray([]));
-            var controlSubtype = control.controls['type_' + this.metadata.MetaDataSubTypes[i].Id];
-            for (var j = 0; j < this.metadata.MetaDataSubTypes[i].MetaData.length; j++) {
+        var _loop_1 = function(i) {
+            control.addControl('type_' + this_1.metadata.MetaDataSubTypes[i].Id, new forms_1.FormArray([]));
+            var controlSubtype = control.controls['type_' + this_1.metadata.MetaDataSubTypes[i].Id];
+            var _loop_2 = function(j) {
+                var obj = _.find(values, function (el) {
+                    return el['MetaDataId'] == _this.metadata.MetaDataSubTypes[i].MetaData[j].Id;
+                });
                 controlSubtype.push(new forms_1.FormGroup({
-                    MetaDataId: new forms_1.FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Id),
-                    MetaDataName: new forms_1.FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Name),
-                    Available: new forms_1.FormControl(false),
+                    MetaDataId: new forms_1.FormControl(this_1.metadata.MetaDataSubTypes[i].MetaData[j].Id),
+                    MetaDataName: new forms_1.FormControl(this_1.metadata.MetaDataSubTypes[i].MetaData[j].Name),
+                    Available: new forms_1.FormControl(obj['Available'] || false),
                 }));
+                this_1.metafilters[this_1.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj['Available'] || false;
+            };
+            for (var j = 0; j < this_1.metadata.MetaDataSubTypes[i].MetaData.length; j++) {
+                _loop_2(j);
             }
+        };
+        var this_1 = this;
+        for (var i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
+            _loop_1(i);
         }
-        console.log('metadata', this.metadata);
     };
     PropertyMetafilterComponent.prototype.subfilterChange = function (e) {
         var optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
@@ -43,7 +56,7 @@ var PropertyMetafilterComponent = (function () {
             MetaDataName: optionName,
             Available: !controlSubtype.controls[optionIndex].value.Available,
         });
-        console.log('Control metadata after', controlSubtype.controls[optionIndex].value.Available);
+        //console.log('Control metadata after', controlSubtype.controls[optionIndex].value)
     };
     __decorate([
         core_1.Input('metadata'), 

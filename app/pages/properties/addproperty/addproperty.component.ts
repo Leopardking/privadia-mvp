@@ -23,11 +23,11 @@ export class AddpropertyComponent implements OnInit{
     public propertyForm = new FormGroup ({
         Active: new FormControl(true),
         OwnerName: new FormControl('OwnerName'),
-        InternalName: new FormControl('InternalName'),
-        Name: new FormControl('Name'),
+        InternalName: new FormControl(),
+        Name: new FormControl(),
         Address: new FormControl('Address'),
-        RegionId: new FormControl(1),
-        RegionName: new FormControl('Ibiza'),
+        RegionId: new FormControl(),
+        RegionName: new FormControl(),
         Region: new FormControl({
             Id: 1,
             Name: 'Ibiza',
@@ -82,15 +82,13 @@ export class AddpropertyComponent implements OnInit{
     }
 
     private saveInfo() {
-        console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
+        //console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
         let newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
-
-            console.log('elem', el)
             return newArr = _.concat(newArr, el)
         })
         this.propertyForm.value.MetaData = newArr;
-        console.log('this.propertyForm.value.MetaDataTmp', this.propertyForm.value)
+        //console.log('this.propertyForm.value.MetaDataTmp', this.propertyForm.value)
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");

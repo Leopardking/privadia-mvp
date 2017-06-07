@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import * as _ from "lodash";
 
 import { MainService } from '../../../providers/homeservice';
 import { PropertiesService } from '../../../providers/properties/properties.service';
@@ -66,6 +67,7 @@ export class EditpropertyComponent implements OnInit{
                     this.property = d;
 
                     this.propertyForm = this.builder.group({
+                        Id: params['id'],
                         Active: d.Active,
                         OwnerName: d.OwnerName,
                         InternalName: d.InternalName,
@@ -97,12 +99,15 @@ export class EditpropertyComponent implements OnInit{
                         Benefits: d.Benefits,
                         Housekeeping: d.Housekeeping,
                         OtherHousekeepingInfo: d.OtherHousekeepingInfo,
+                        MetaDataTmp: {},
                     });
 
                     this.setContacts(d.Contacts);
                     this.setRooms(d.Rooms);
                     this.setImages(d.Images);
                     this.setPointsOfInterest(d.PointsOfInterest);
+                    this.setMetaData(d.MetaData);
+                    this.setMetaDataTmp(d.MetaData);
                     // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
 
                     this.isLoad = true;
@@ -170,16 +175,24 @@ export class EditpropertyComponent implements OnInit{
     }
 
     setMetaDataTmp(metaDates) {
+        /*
         const metaDateFGs = metaDates.map(metaDate => this.builder.group({
             MetaDataId: metaDate.MetaDataId,
             MetaDataName: metaDate.MetaDataName,
             Available: metaDate.Available,
         }));
-        const metaDateFormArray = this.builder.array(metaDateFGs);
+        */
+        // const metaDateFormArray = this.builder.array(metaDateFGs);
+        const metaDateFormArray = this.builder.group({});
         this.propertyForm.setControl('MetaDataTmp', metaDateFormArray);
     }
 
     private saveInfo() {
+        let newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
+            return newArr = _.concat(newArr, el)
+        });
+        this.propertyForm.value.MetaData = newArr;
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
@@ -307,11 +320,12 @@ export class EditpropertyComponent implements OnInit{
             childrenAllowed: parseInt(this.propertyInfo.allowChildren),
             propertyName: this.propertyInfo.officialName
         }
-        this.propertyService.addProperty(data).subscribe(
+        */
+        this.propertyService.addProperty(this.propertyForm.value).subscribe(
             d => { 
                 $.notify({
                     icon: "notifications",
-                    message: "Property Added Successfully"
+                    message: "Property Edited Successfully"
 
                 },{
                     type: 'success',
@@ -325,7 +339,7 @@ export class EditpropertyComponent implements OnInit{
             },
             e => { console.log("error:", e); }
         );
-        */
+
         //console.log(data);
         console.log('Save form ', this.propertyForm)
         console.log('Save form ', this.propertyForm.value)

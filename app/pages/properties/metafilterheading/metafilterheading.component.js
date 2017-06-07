@@ -39,7 +39,7 @@ var MetafilterheadingComponent = (function () {
                 }, function (e) {
                     console.log("Get Points of Types error: ", e);
                 });
-                console.log('this.propertyForm', this.propertyForm);
+                //console.log('this.propertyForm 1',this.propertyForm)
                 /*
                 this.propertiesService.getPoITypes().subscribe(
                     d => {

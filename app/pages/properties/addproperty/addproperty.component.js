@@ -23,11 +23,11 @@ var AddpropertyComponent = (function () {
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
             OwnerName: new forms_1.FormControl('OwnerName'),
-            InternalName: new forms_1.FormControl('InternalName'),
-            Name: new forms_1.FormControl('Name'),
+            InternalName: new forms_1.FormControl(),
+            Name: new forms_1.FormControl(),
             Address: new forms_1.FormControl('Address'),
-            RegionId: new forms_1.FormControl(1),
-            RegionName: new forms_1.FormControl('Ibiza'),
+            RegionId: new forms_1.FormControl(),
+            RegionName: new forms_1.FormControl(),
             Region: new forms_1.FormControl({
                 Id: 1,
                 Name: 'Ibiza',
@@ -76,14 +76,13 @@ var AddpropertyComponent = (function () {
     };
     AddpropertyComponent.prototype.saveInfo = function () {
         var _this = this;
-        console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
+        //console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
         var newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
-            console.log('elem', el);
             return newArr = _.concat(newArr, el);
         });
         this.propertyForm.value.MetaData = newArr;
-        console.log('this.propertyForm.value.MetaDataTmp', this.propertyForm.value);
+        //console.log('this.propertyForm.value.MetaDataTmp', this.propertyForm.value)
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import {FormGroup,FormArray,FormControl} from "@angular/forms";
-
+import * as _ from 'lodash';
 declare var $:any;
 
 @Component({
@@ -22,9 +22,11 @@ export class PropertyMetafilterComponent implements OnInit{
 	}
 
 	ngOnInit() {
-		console.log('Metadata filter', this.metadata);
         this.metafilters = [];
+        const values = this.propertyForm.controls['MetaData'].value;
+		// console.log('MetaDataTmp ', );
 		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
+
         for (let i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
 			control.addControl(
 				'type_' + this.metadata.MetaDataSubTypes[i].Id,
@@ -33,17 +35,19 @@ export class PropertyMetafilterComponent implements OnInit{
 
 			const controlSubtype = <FormArray>control.controls['type_' + this.metadata.MetaDataSubTypes[i].Id];
             for (let j = 0; j < this.metadata.MetaDataSubTypes[i].MetaData.length; j++) {
+				const obj = _.find(values, (el) => {
+					return el['MetaDataId'] == this.metadata.MetaDataSubTypes[i].MetaData[j].Id;
+				});
 				controlSubtype.push(
 					new FormGroup({
 						MetaDataId: new FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Id),
 						MetaDataName: new FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Name),
-						Available: new FormControl(false),
+						Available: new FormControl(obj['Available'] || false),
 					}),
-				)
-				//this.metafilters[this.metadata[i].MetaData[j]] = false;
+				);
+				this.metafilters[this.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj['Available'] || false;
             }
         }
-		console.log('metadata', this.metadata);
 	}
 
 	private subfilterChange(e) {
@@ -61,7 +65,7 @@ export class PropertyMetafilterComponent implements OnInit{
 			MetaDataName: optionName,
 			Available: !controlSubtype.controls[optionIndex].value.Available,
 		});
-		console.log('Control metadata after', controlSubtype.controls[optionIndex].value.Available)
+		//console.log('Control metadata after', controlSubtype.controls[optionIndex].value)
 	}
 
 // 	let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {

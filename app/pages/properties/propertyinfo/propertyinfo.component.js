@@ -93,7 +93,7 @@ var PropertyinfoComponent = (function () {
         var control = this.propertyForm.controls['Rooms'];
         control.removeAt(i);
     };
-    PropertyinfoComponent.prototype.regionChanged = function (e, region) {
+    PropertyinfoComponent.prototype.regionChanged = function (e) {
         var controlId = this.propertyForm.controls['RegionId'];
         controlId.setValue(e.Id);
         var controlName = this.propertyForm.controls['RegionName'];

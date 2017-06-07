@@ -42,6 +42,7 @@
                                [max-num-list]="10"
                                [source]="regionArray"
                                [list-formatter]="autocompleListFormatter"
+                               (valueChanged)="regionChanged($event)"
                                value-property-name="Id"
                                display-property-name="Name"
                                required>
@@ -89,11 +90,9 @@
                     <label class="control-label">Box Url</label>
                     <input type="text" class="form-control" formControlName="BoxUrl">
                 </div>
-                <!--
                 <div *ngIf="mainService.metadata[4]">
                     <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[4]" #villadescription></property-metafilter-cmp>
                 </div>
-                -->
             </div>
         </div>
     </div>

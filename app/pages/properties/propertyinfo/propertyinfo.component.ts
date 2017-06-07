@@ -140,7 +140,7 @@ export class PropertyinfoComponent implements OnInit{
         control.removeAt(i);
     }
 
-    private regionChanged(e, region) {
+    private regionChanged(e) {
         const controlId = <FormControl>this.propertyForm.controls['RegionId'];
         controlId.setValue(e.Id);
 

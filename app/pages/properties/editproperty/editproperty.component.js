@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
+var _ = require("lodash");
 var homeservice_1 = require('../../../providers/homeservice');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var EditpropertyComponent = (function () {
@@ -46,6 +47,7 @@ var EditpropertyComponent = (function () {
             _this.propertyService.getPropertyById(params['id']).subscribe(function (d) {
                 _this.property = d;
                 _this.propertyForm = _this.builder.group({
+                    Id: params['id'],
                     Active: d.Active,
                     OwnerName: d.OwnerName,
                     InternalName: d.InternalName,
@@ -77,11 +79,14 @@ var EditpropertyComponent = (function () {
                     Benefits: d.Benefits,
                     Housekeeping: d.Housekeeping,
                     OtherHousekeepingInfo: d.OtherHousekeepingInfo,
+                    MetaDataTmp: {},
                 });
                 _this.setContacts(d.Contacts);
                 _this.setRooms(d.Rooms);
                 _this.setImages(d.Images);
                 _this.setPointsOfInterest(d.PointsOfInterest);
+                _this.setMetaData(d.MetaData);
+                _this.setMetaDataTmp(d.MetaData);
                 // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
                 _this.isLoad = true;
                 console.log('This properties', _this.property);
@@ -145,16 +150,24 @@ var EditpropertyComponent = (function () {
         this.propertyForm.setControl('MetaData', metaDateFormArray);
     };
     EditpropertyComponent.prototype.setMetaDataTmp = function (metaDates) {
-        var _this = this;
-        var metaDateFGs = metaDates.map(function (metaDate) { return _this.builder.group({
+        /*
+        const metaDateFGs = metaDates.map(metaDate => this.builder.group({
             MetaDataId: metaDate.MetaDataId,
             MetaDataName: metaDate.MetaDataName,
             Available: metaDate.Available,
-        }); });
-        var metaDateFormArray = this.builder.array(metaDateFGs);
+        }));
+        */
+        // const metaDateFormArray = this.builder.array(metaDateFGs);
+        var metaDateFormArray = this.builder.group({});
         this.propertyForm.setControl('MetaDataTmp', metaDateFormArray);
     };
     EditpropertyComponent.prototype.saveInfo = function () {
+        var _this = this;
+        var newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
+            return newArr = _.concat(newArr, el);
+        });
+        this.propertyForm.value.MetaData = newArr;
         /*
         $(".title-error").removeClass("title-error");
         $(".metafilter-names li a.has-error").removeClass("has-error");
@@ -282,25 +295,21 @@ var EditpropertyComponent = (function () {
             childrenAllowed: parseInt(this.propertyInfo.allowChildren),
             propertyName: this.propertyInfo.officialName
         }
-        this.propertyService.addProperty(data).subscribe(
-            d => {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
-
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                this.mainService.readData();
-            },
-            e => { console.log("error:", e); }
-        );
         */
+        this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Property Edited Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            _this.mainService.readData();
+        }, function (e) { console.log("error:", e); });
         //console.log(data);
         console.log('Save form ', this.propertyForm);
         console.log('Save form ', this.propertyForm.value);
