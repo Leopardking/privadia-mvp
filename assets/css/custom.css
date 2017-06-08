@@ -50,3 +50,21 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	background-color: #0b5a7c !important;
 	color: white !important;
 }
+
+.main-panel .main-content {
+	padding: 10px 15px 30px;
+}
+.card [data-background-color="blue"] {
+	background: #5399bc;
+	box-shadow: 0px 2px 4px 0 rgba(75, 75, 75, 0.4);
+	border-radius: 5px;
+}
+.card-title {
+	font-size: 16pt;
+	text-transform: uppercase;
+}
+
+
+
+
+
