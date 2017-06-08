@@ -22,50 +22,54 @@ var AddpropertyComponent = (function () {
         this.isLoad = true;
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
-            OwnerName: new forms_1.FormControl('OwnerName'),
+            OwnerName: new forms_1.FormControl(),
             InternalName: new forms_1.FormControl(),
-            Name: new forms_1.FormControl(),
-            Address: new forms_1.FormControl('Address'),
+            Name: new forms_1.FormControl(null, forms_1.Validators.required),
+            Address: new forms_1.FormControl(),
             RegionId: new forms_1.FormControl(),
             RegionName: new forms_1.FormControl(),
             Region: new forms_1.FormControl({
                 Id: 1,
                 Name: 'Ibiza',
             }),
-            Headline: new forms_1.FormControl('Headline'),
-            Summary: new forms_1.FormControl('Summary'),
-            Description: new forms_1.FormControl('Description'),
-            OtherInfo: new forms_1.FormControl('OtherInfo'),
-            CollaboratorInitials: new forms_1.FormControl('CollaboratorInitials'),
-            BoxUrl: new forms_1.FormControl('BoxUrl'),
-            AgencyPackUrl: new forms_1.FormControl('AgencyPackUrl'),
-            Bathrooms: new forms_1.FormControl(1),
-            Bedrooms: new forms_1.FormControl(2),
-            Sleeps: new forms_1.FormControl(6),
-            Capacity: new forms_1.FormControl(3),
-            LivingAreaSize: new forms_1.FormControl(4),
-            DiningCapacity: new forms_1.FormControl(5),
-            KitchenInfo: new forms_1.FormControl('KitchenInfo'),
-            ChildrenAllowed: new forms_1.FormControl(2),
+            Headline: new forms_1.FormControl(),
+            Summary: new forms_1.FormControl(),
+            Description: new forms_1.FormControl(),
+            OtherInfo: new forms_1.FormControl(),
+            CollaboratorInitials: new forms_1.FormControl(),
+            BoxUrl: new forms_1.FormControl(),
+            AgencyPackUrl: new forms_1.FormControl(),
+            Bathrooms: new forms_1.FormControl(null, forms_1.Validators.required),
+            Bedrooms: new forms_1.FormControl(null, forms_1.Validators.required),
+            Sleeps: new forms_1.FormControl(null, forms_1.Validators.required),
+            Capacity: new forms_1.FormControl(null, forms_1.Validators.required),
+            LivingAreaSize: new forms_1.FormControl(null, forms_1.Validators.required),
+            DiningCapacity: new forms_1.FormControl(null, forms_1.Validators.required),
+            KitchenInfo: new forms_1.FormControl(),
+            ChildrenAllowed: new forms_1.FormControl(0),
             SmokingAllowed: new forms_1.FormControl(false),
-            WheelchairAccessible: new forms_1.FormControl(true),
+            WheelchairAccessible: new forms_1.FormControl(false),
             PetsAllowed: new forms_1.FormControl(false),
-            EventsAllowed: new forms_1.FormControl(true),
+            EventsAllowed: new forms_1.FormControl(false),
             Contacts: new forms_1.FormArray([]),
             Rooms: new forms_1.FormArray([]),
             Images: new forms_1.FormArray([]),
             PointsOfInterest: new forms_1.FormArray([]),
             MetaData: new forms_1.FormArray([]),
             MetaDataTmp: new forms_1.FormGroup({}),
-            OtherHousekeepingInfo: new forms_1.FormControl('OtherHousekeepingInfo'),
-            Housekeeping: new forms_1.FormControl(1),
-            LiftAvailable: new forms_1.FormControl(true),
-            Benefits: new forms_1.FormControl('Benefits'),
+            OtherHousekeepingInfo: new forms_1.FormControl(),
+            Housekeeping: new forms_1.FormControl(0),
+            LiftAvailable: new forms_1.FormControl(false),
+            Benefits: new forms_1.FormControl(),
         });
         console.log('Form init', this.propertyForm);
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net
-    AddpropertyComponent.prototype.ngOnInit = function () { };
+    AddpropertyComponent.prototype.ngOnInit = function () {
+        $.getScript('../../../../assets/js/core/jquery.validate.min.js');
+        //$.getScript('../../../../assets/js/init/initImageGallery.js');
+        //$('#registerFormValidation').validate();
+    };
     AddpropertyComponent.prototype.setRegion = function (region) {
         var regionFGs = this.builder.group({
             Id: [region.RegionId],
@@ -152,25 +156,57 @@ var AddpropertyComponent = (function () {
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
         }*/
-        this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
-            $.notify({
-                icon: "notifications",
-                message: "Property Added Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-            _this.mainService.readData();
-        }, function (e) { console.log("error:", e); });
-        console.log(this.propertyForm.value);
+        if (this.propertyForm.valid) {
+            this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+                }, {
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                _this.mainService.readData();
+            }, function (e) { console.log("error:", e); });
+        }
+        console.log('Property Form ', this.propertyForm);
+        console.log('Property Form Value ', this.propertyForm.value);
     };
     AddpropertyComponent.prototype.continueInfo = function () {
+        console.log('Continue Info form');
     };
     AddpropertyComponent.prototype.discardInfo = function () {
+        console.log('Discard Info form');
+    };
+    AddpropertyComponent.prototype.onSubmit = function () {
+        var _this = this;
+        console.log('Submit form');
+        var newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
+            return newArr = _.concat(newArr, el);
+        });
+        this.propertyForm.value.MetaData = newArr;
+        if (this.propertyForm.valid) {
+            this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+                }, {
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                _this.mainService.readData();
+            }, function (e) { console.log("error:", e); });
+        }
+        console.log('Property Form ', this.propertyForm);
+        console.log('Property Form Value ', this.propertyForm.value);
     };
     AddpropertyComponent = __decorate([
         core_1.Component({

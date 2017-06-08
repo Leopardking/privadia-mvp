@@ -38,14 +38,15 @@ export class PropertyMetafilterComponent implements OnInit{
 				const obj = _.find(values, (el) => {
 					return el['MetaDataId'] == this.metadata.MetaDataSubTypes[i].MetaData[j].Id;
 				});
+				// console.log('Available', obj)
 				controlSubtype.push(
 					new FormGroup({
 						MetaDataId: new FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Id),
 						MetaDataName: new FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Name),
-						Available: new FormControl(obj['Available'] || false),
+						Available: new FormControl(obj && obj['Available'] || false),
 					}),
 				);
-				this.metafilters[this.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj['Available'] || false;
+				this.metafilters[this.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj && obj['Available'] || false;
             }
         }
 	}

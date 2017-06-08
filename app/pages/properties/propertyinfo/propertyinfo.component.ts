@@ -93,11 +93,11 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Contacts'];
         control.push(
             new FormGroup({
-                JobTitle: new FormControl('JobTitle'),
-                FirstName: new FormControl('FirstName'),
-                LastName: new FormControl('LastName'),
-                EmailAddress: new FormControl('EmailAddress'),
-                Telephone: new FormControl('123456789'),
+                JobTitle: new FormControl(),
+                FirstName: new FormControl(),
+                LastName: new FormControl(),
+                EmailAddress: new FormControl(),
+                Telephone: new FormControl(),
             }),
         );
     }
@@ -112,8 +112,8 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Rooms'];
         control.push(
             new FormGroup({
-                Description: new FormControl('Description'),
-                Name: new FormControl('Name'),
+                Description: new FormControl(),
+                Name: new FormControl(),
                 PropertyRoomType: new FormControl(1),
             }),
         );
@@ -128,8 +128,8 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Rooms'];
         control.push(
             new FormGroup({
-                Description: new FormControl('Description'),
-                Name: new FormControl('Name'),
+                Description: new FormControl(),
+                Name: new FormControl(),
                 PropertyRoomType: new FormControl(2),
             }),
         );

@@ -27,12 +27,13 @@ var PropertyMetafilterComponent = (function () {
                 var obj = _.find(values, function (el) {
                     return el['MetaDataId'] == _this.metadata.MetaDataSubTypes[i].MetaData[j].Id;
                 });
+                // console.log('Available', obj)
                 controlSubtype.push(new forms_1.FormGroup({
                     MetaDataId: new forms_1.FormControl(this_1.metadata.MetaDataSubTypes[i].MetaData[j].Id),
                     MetaDataName: new forms_1.FormControl(this_1.metadata.MetaDataSubTypes[i].MetaData[j].Name),
-                    Available: new forms_1.FormControl(obj['Available'] || false),
+                    Available: new forms_1.FormControl(obj && obj['Available'] || false),
                 }));
-                this_1.metafilters[this_1.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj['Available'] || false;
+                this_1.metafilters[this_1.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj && obj['Available'] || false;
             };
             for (var j = 0; j < this_1.metadata.MetaDataSubTypes[i].MetaData.length; j++) {
                 _loop_2(j);

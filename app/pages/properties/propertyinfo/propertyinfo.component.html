@@ -44,8 +44,7 @@
                                [list-formatter]="autocompleListFormatter"
                                (valueChanged)="regionChanged($event)"
                                value-property-name="Id"
-                               display-property-name="Name"
-                               required>
+                               display-property-name="Name">
                     </div>
                 </div>
             </div>
@@ -145,7 +144,7 @@
                     </div>
                     <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">First Name</label>
-                        <input type="text" class="form-control" [formControl]="control.controls.FirstName" required>
+                        <input type="text" class="form-control" [formControl]="control.controls.FirstName">
                     </div>
                     <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">Last Name</label>
@@ -153,11 +152,11 @@
                     </div>
                     <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">Email Address</label>
-                        <input type="email" class="form-control" [formControl]="control.controls.EmailAddress" required>
+                        <input type="email" class="form-control" [formControl]="control.controls.EmailAddress">
                     </div>
                     <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                         <label class="control-label">Telephone</label>
-                        <input type="number" min="0" class="form-control" [formControl]="control.controls.Telephone" required>
+                        <input type="number" min="0" class="form-control" [formControl]="control.controls.Telephone">
                     </div>
                     <div class="listing-name col-sm-12 col-md-12 col-lg-12">
                         <a (click)="removeContact(i)"> Remove Contact </a>
@@ -187,15 +186,15 @@
             <div class="panel-body">
                 <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Number of Bathrooms</label>
-                    <input type="number" class="form-control" formControlName="Bathrooms" required>
+                    <input type="number" class="form-control" formControlName="Bathrooms">
                 </div>
                 <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Number of bedrooms</label>
-                    <input type="number" class="form-control" formControlName="Bedrooms" required>
+                    <input type="number" class="form-control" formControlName="Bedrooms">
                 </div>
                 <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Sleeps</label>
-                    <input type="number" class="form-control" formControlName="Sleeps" required>
+                    <input type="number" class="form-control" formControlName="Sleeps">
                 </div>
                 <div class="form-group label-floating listing-name col-sm-12 col-md-6 col-lg-4">
                     <label class="control-label">Maximum Capacity</label>

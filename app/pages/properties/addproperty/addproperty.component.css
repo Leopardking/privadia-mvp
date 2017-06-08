@@ -27,3 +27,6 @@ li > a.has-error {
 .checkbox label {
 	color: black;
 }
+.ng-touched.ng-invalid input.ng-invalid {
+	background-color: #000;
+}

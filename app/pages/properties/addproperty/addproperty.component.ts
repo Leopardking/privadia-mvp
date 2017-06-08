@@ -22,45 +22,45 @@ export class AddpropertyComponent implements OnInit{
 
     public propertyForm = new FormGroup ({
         Active: new FormControl(true),
-        OwnerName: new FormControl('OwnerName'),
+        OwnerName: new FormControl(),
         InternalName: new FormControl(),
-        Name: new FormControl(),
-        Address: new FormControl('Address'),
+        Name: new FormControl(null, Validators.required),
+        Address: new FormControl(),
         RegionId: new FormControl(),
         RegionName: new FormControl(),
         Region: new FormControl({
             Id: 1,
             Name: 'Ibiza',
         }),
-        Headline: new FormControl('Headline'),
-        Summary: new FormControl('Summary'),
-        Description: new FormControl('Description'),
-        OtherInfo: new FormControl('OtherInfo'),
-        CollaboratorInitials: new FormControl('CollaboratorInitials'),
-        BoxUrl: new FormControl('BoxUrl'),
-        AgencyPackUrl: new FormControl('AgencyPackUrl'),
-        Bathrooms: new FormControl(1),
-        Bedrooms: new FormControl(2),
-        Sleeps: new FormControl(6),
-        Capacity: new FormControl(3),
-        LivingAreaSize: new FormControl(4),
-        DiningCapacity: new FormControl(5),
-        KitchenInfo: new FormControl('KitchenInfo'),
-        ChildrenAllowed: new FormControl(2),
+        Headline: new FormControl(),
+        Summary: new FormControl(),
+        Description: new FormControl(),
+        OtherInfo: new FormControl(),
+        CollaboratorInitials: new FormControl(),
+        BoxUrl: new FormControl(),
+        AgencyPackUrl: new FormControl(),
+        Bathrooms: new FormControl(null, Validators.required),
+        Bedrooms: new FormControl(null, Validators.required),
+        Sleeps: new FormControl(null, Validators.required),
+        Capacity: new FormControl(null, Validators.required),
+        LivingAreaSize: new FormControl(null, Validators.required),
+        DiningCapacity: new FormControl(null, Validators.required),
+        KitchenInfo: new FormControl(),
+        ChildrenAllowed: new FormControl(0),
         SmokingAllowed: new FormControl(false),
-        WheelchairAccessible: new FormControl(true),
+        WheelchairAccessible: new FormControl(false),
         PetsAllowed: new FormControl(false),
-        EventsAllowed: new FormControl(true),
+        EventsAllowed: new FormControl(false),
         Contacts: new FormArray([]),
         Rooms: new FormArray([]),
         Images: new FormArray([]),
         PointsOfInterest: new FormArray([]),
         MetaData: new FormArray([]),
         MetaDataTmp: new FormGroup({}),
-        OtherHousekeepingInfo: new FormControl('OtherHousekeepingInfo'),
-        Housekeeping: new FormControl(1),
-        LiftAvailable: new FormControl(true),
-        Benefits: new FormControl('Benefits'),
+        OtherHousekeepingInfo: new FormControl(),
+        Housekeeping: new FormControl(0),
+        LiftAvailable: new FormControl(false),
+        Benefits: new FormControl(),
     });
 
     constructor ( private mainService: MainService,
@@ -70,7 +70,11 @@ export class AddpropertyComponent implements OnInit{
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net
-    ngOnInit(){}
+    ngOnInit(){
+        $.getScript('../../../../assets/js/core/jquery.validate.min.js');
+        //$.getScript('../../../../assets/js/init/initImageGallery.js');
+        //$('#registerFormValidation').validate();
+    }
 
     setRegion(region) {
         const regionFGs = this.builder.group({
@@ -158,32 +162,67 @@ export class AddpropertyComponent implements OnInit{
             PointsOfInterest: poi,
             Region: this.propertyInfo.region,
         }*/
-        this.propertyService.addProperty(this.propertyForm.value).subscribe(
-            d => {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
+        if(this.propertyForm.valid) {
+            this.propertyService.addProperty(this.propertyForm.value).subscribe(
+                d => {
+                    $.notify({
+                        icon: "notifications",
+                        message: "Property Added Successfully"
 
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                this.mainService.readData();
-            },
-            e => { console.log("error:", e); }
-        );
-        console.log(this.propertyForm.value);
+                    },{
+                        type: 'success',
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                    this.mainService.readData();
+                },
+                e => { console.log("error:", e); }
+            );
+        }
+        console.log('Property Form ', this.propertyForm);
+        console.log('Property Form Value ', this.propertyForm.value);
     }
 
     private continueInfo() {
-
+        console.log('Continue Info form')
     }
 
     private discardInfo() {
+        console.log('Discard Info form')
+    }
 
+    private onSubmit() {
+        console.log('Submit form')
+        let newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
+            return newArr = _.concat(newArr, el)
+        })
+        this.propertyForm.value.MetaData = newArr;
+
+        if(this.propertyForm.valid) {
+            this.propertyService.addProperty(this.propertyForm.value).subscribe(
+                d => {
+                    $.notify({
+                        icon: "notifications",
+                        message: "Property Added Successfully"
+
+                    },{
+                        type: 'success',
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                    this.mainService.readData();
+                },
+                e => { console.log("error:", e); }
+            );
+        }
+        console.log('Property Form ', this.propertyForm);
+        console.log('Property Form Value ', this.propertyForm.value);
     }
 }

@@ -58,11 +58,11 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.showAddContact = function () {
         var control = this.propertyForm.controls['Contacts'];
         control.push(new forms_1.FormGroup({
-            JobTitle: new forms_1.FormControl('JobTitle'),
-            FirstName: new forms_1.FormControl('FirstName'),
-            LastName: new forms_1.FormControl('LastName'),
-            EmailAddress: new forms_1.FormControl('EmailAddress'),
-            Telephone: new forms_1.FormControl('123456789'),
+            JobTitle: new forms_1.FormControl(),
+            FirstName: new forms_1.FormControl(),
+            LastName: new forms_1.FormControl(),
+            EmailAddress: new forms_1.FormControl(),
+            Telephone: new forms_1.FormControl(),
         }));
     };
     PropertyinfoComponent.prototype.removeContact = function (i) {
@@ -72,8 +72,8 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.addBedroom = function () {
         var control = this.propertyForm.controls['Rooms'];
         control.push(new forms_1.FormGroup({
-            Description: new forms_1.FormControl('Description'),
-            Name: new forms_1.FormControl('Name'),
+            Description: new forms_1.FormControl(),
+            Name: new forms_1.FormControl(),
             PropertyRoomType: new forms_1.FormControl(1),
         }));
     };
@@ -84,8 +84,8 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.addBathroom = function () {
         var control = this.propertyForm.controls['Rooms'];
         control.push(new forms_1.FormGroup({
-            Description: new forms_1.FormControl('Description'),
-            Name: new forms_1.FormControl('Name'),
+            Description: new forms_1.FormControl(),
+            Name: new forms_1.FormControl(),
             PropertyRoomType: new forms_1.FormControl(2),
         }));
     };

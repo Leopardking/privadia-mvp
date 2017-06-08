@@ -50,7 +50,7 @@
                     </li>
                 </ul>
             </div>
-            <div [formGroup]="propertyForm" class="col-md-9 subtype-filters-names">
+            <form [formGroup]="propertyForm" class="col-md-9 subtype-filters-names" (ngSubmit)="onSubmit()">
                 <div class="tab-content card col-sm-12 col-md-12 col-lg-12">
                     <!--  Property Info  -->
                     <div id="metatab-info" class="active card-content" *ngIf="isLoad">
@@ -101,26 +101,26 @@
                             <input type="checkbox" formControlName="Active" checked="checked"> Active
                         </label>
                     </div>
-                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" (click)="saveInfo()">
+                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" type="submit">
                         <span class="btn-label">
                             <i class="material-icons">add</i>
                         </span>
                         Save
                     </button>
-                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" (click)="continueInfo()">
+                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" type="button" (click)="continueInfo()">
                         <span class="btn-label">
                             <i class="material-icons">save</i>
                         </span>
                         Save & Continue
                     </button>
-                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" (click)="discardInfo()">
+                    <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" type="button" (click)="discardInfo()">
                         <span class="btn-label">
                             <i class="material-icons">close</i>
                         </span>
                         Cancel
                     </button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>
