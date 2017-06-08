@@ -22,13 +22,15 @@ export class NavbarComponent implements OnInit{
         this.listTitles = ROUTES.filter(listTitle => listTitle.menuType !== MenuType.BRAND);
     }
     getTitle(){
-        let titlee = this.location.prepareExternalUrl(this.location.path());
-        if(titlee.charAt(0) === '/'){
-            titlee = titlee.slice( 1 );
+        console.log('Get title');
+
+        let title = this.location.prepareExternalUrl(this.location.path());
+        if(title.charAt(0) === '/'){
+            title = title.slice( 1 );
         }
 
         for(let item = 0; item < this.listTitles.length; item++){
-            if(this.listTitles[item].path === titlee){
+            if(this.listTitles[item].path === title){
                 return this.listTitles[item].title;
             }
         }
