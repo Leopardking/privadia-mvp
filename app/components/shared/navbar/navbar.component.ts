@@ -22,8 +22,6 @@ export class NavbarComponent implements OnInit{
         this.listTitles = ROUTES.filter(listTitle => listTitle.menuType !== MenuType.BRAND);
     }
     getTitle(){
-        console.log('Get title');
-
         let title = this.location.prepareExternalUrl(this.location.path());
         if(title.charAt(0) === '/'){
             title = title.slice( 1 );

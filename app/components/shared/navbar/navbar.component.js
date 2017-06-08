@@ -20,12 +20,12 @@ var NavbarComponent = (function () {
         this.listTitles = sidebar_routes_config_1.ROUTES.filter(function (listTitle) { return listTitle.menuType !== sidebar_metadata_1.MenuType.BRAND; });
     };
     NavbarComponent.prototype.getTitle = function () {
-        var titlee = this.location.prepareExternalUrl(this.location.path());
-        if (titlee.charAt(0) === '/') {
-            titlee = titlee.slice(1);
+        var title = this.location.prepareExternalUrl(this.location.path());
+        if (title.charAt(0) === '/') {
+            title = title.slice(1);
         }
         for (var item = 0; item < this.listTitles.length; item++) {
-            if (this.listTitles[item].path === titlee) {
+            if (this.listTitles[item].path === title) {
                 return this.listTitles[item].title;
             }
         }
