@@ -122,6 +122,7 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.setPointsOfInterest = function (points) {
         var _this = this;
         var pointFGs = points.map(function (point) { return _this.builder.group({
+            Id: point.Id,
             Name: point.Name,
             PointOfInterestTypeId: point.PointOfInterestTypeId,
             PointOfInterestTypeName: point.PointOfInterestTypeName,
@@ -307,11 +308,37 @@ var EditpropertyComponent = (function () {
         console.log('Save form ', this.propertyForm.value);
     };
     EditpropertyComponent.prototype.continueInfo = function () {
+        console.log('Continue Info form');
     };
     EditpropertyComponent.prototype.discardInfo = function () {
+        console.log('Discard Info form');
     };
-    EditpropertyComponent.prototype.activeChange = function (e) {
-        // this.isActive = e.target.checked;
+    EditpropertyComponent.prototype.onSubmit = function () {
+        var _this = this;
+        console.log('Submit form');
+        var newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
+            return newArr = _.concat(newArr, el);
+        });
+        this.propertyForm.value.MetaData = newArr;
+        if (this.propertyForm.valid) {
+            this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+                }, {
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                _this.mainService.readData();
+            }, function (e) { console.log("error:", e); });
+        }
+        console.log('Property Form ', this.propertyForm);
+        console.log('Property Form Value ', this.propertyForm.value);
     };
     EditpropertyComponent = __decorate([
         core_1.Component({

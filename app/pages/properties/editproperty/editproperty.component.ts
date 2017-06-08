@@ -144,6 +144,7 @@ export class EditpropertyComponent implements OnInit{
 
     setPointsOfInterest(points) {
         const pointFGs = points.map(point => this.builder.group({
+            Id: point.Id,
             Name: point.Name,
             PointOfInterestTypeId: point.PointOfInterestTypeId,
             PointOfInterestTypeName: point.PointOfInterestTypeName,
@@ -336,14 +337,42 @@ export class EditpropertyComponent implements OnInit{
     }
 
     private continueInfo() {
-
+        console.log('Continue Info form')
     }
 
     private discardInfo() {
-
+        console.log('Discard Info form')
     }
 
-    private activeChange(e) {
-        // this.isActive = e.target.checked;
+    private onSubmit() {
+        console.log('Submit form')
+        let newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
+            return newArr = _.concat(newArr, el)
+        })
+        this.propertyForm.value.MetaData = newArr;
+
+        if(this.propertyForm.valid) {
+            this.propertyService.addProperty(this.propertyForm.value).subscribe(
+                d => {
+                    $.notify({
+                        icon: "notifications",
+                        message: "Property Added Successfully"
+
+                    },{
+                        type: 'success',
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                    this.mainService.readData();
+                },
+                e => { console.log("error:", e); }
+            );
+        }
+        console.log('Property Form ', this.propertyForm);
+        console.log('Property Form Value ', this.propertyForm.value);
     }
 }
