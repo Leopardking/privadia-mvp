@@ -17,12 +17,12 @@ export class MetafilterheadingComponent implements OnInit{
 	@Input('group')
 	private propertyForm: FormGroup;
 
-	public housekeeperState = 0;
-	public housekeepOtherInfo = "";
+	// public housekeeperState = 0;
+	// public housekeepOtherInfo = "";
 
-	public liftAvailable: boolean = false;
-	public uniqueBenefits: string = "";
-	public PoITypes = [];
+	// public liftAvailable: boolean = false;
+	// public uniqueBenefits: string = "";
+	// public PoITypes = [];
 
 	constructor( private propertiesService: PropertiesService ) {
 	}
@@ -33,18 +33,21 @@ export class MetafilterheadingComponent implements OnInit{
 				const control = <FormArray>this.propertyForm.controls['PointsOfInterest'];
 				this.propertiesService.getPoITypes().subscribe(
 					d => {
-						this.PoITypes = d;
-						d.forEach( (item, index) => {
-							control.push(
-								new FormGroup({
-									Name: new FormControl(''),
-									PointOfInterestTypeId: new FormControl(item.Id),
-									PointOfInterestTypeName: new FormControl(item.Name),
-									Available: new FormControl(false),
-									Distance: new FormControl(0),
-								}),
-							);
-						} );
+						// this.PoITypes = d;
+						if(!control.value.length) {
+							d.forEach( (item, index) => {
+								control.push(
+									new FormGroup({
+										Name: new FormControl(''),
+										PointOfInterestTypeId: new FormControl(item.Id),
+										PointOfInterestTypeName: new FormControl(item.Name),
+										Available: new FormControl(false),
+										Distance: new FormControl(0),
+									}),
+								);
+							} );
+						}
+						console.log('PointsOfInterest init', control.value.length )
 					},
 					e => {
 						console.log("Get Points of Types error: ", e);

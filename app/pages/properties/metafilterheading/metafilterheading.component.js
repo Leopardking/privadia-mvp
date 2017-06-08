@@ -12,30 +12,32 @@ var core_1 = require('@angular/core');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
 var MetafilterheadingComponent = (function () {
+    // public housekeeperState = 0;
+    // public housekeepOtherInfo = "";
+    // public liftAvailable: boolean = false;
+    // public uniqueBenefits: string = "";
+    // public PoITypes = [];
     function MetafilterheadingComponent(propertiesService) {
         this.propertiesService = propertiesService;
-        this.housekeeperState = 0;
-        this.housekeepOtherInfo = "";
-        this.liftAvailable = false;
-        this.uniqueBenefits = "";
-        this.PoITypes = [];
     }
     MetafilterheadingComponent.prototype.ngOnInit = function () {
-        var _this = this;
         switch (this.name) {
             case "Points of Interest":
                 var control_1 = this.propertyForm.controls['PointsOfInterest'];
                 this.propertiesService.getPoITypes().subscribe(function (d) {
-                    _this.PoITypes = d;
-                    d.forEach(function (item, index) {
-                        control_1.push(new forms_1.FormGroup({
-                            Name: new forms_1.FormControl(''),
-                            PointOfInterestTypeId: new forms_1.FormControl(item.Id),
-                            PointOfInterestTypeName: new forms_1.FormControl(item.Name),
-                            Available: new forms_1.FormControl(false),
-                            Distance: new forms_1.FormControl(0),
-                        }));
-                    });
+                    // this.PoITypes = d;
+                    if (!control_1.value.length) {
+                        d.forEach(function (item, index) {
+                            control_1.push(new forms_1.FormGroup({
+                                Name: new forms_1.FormControl(''),
+                                PointOfInterestTypeId: new forms_1.FormControl(item.Id),
+                                PointOfInterestTypeName: new forms_1.FormControl(item.Name),
+                                Available: new forms_1.FormControl(false),
+                                Distance: new forms_1.FormControl(0),
+                            }));
+                        });
+                    }
+                    console.log('PointsOfInterest init', control_1.value.length);
                 }, function (e) {
                     console.log("Get Points of Types error: ", e);
                 });

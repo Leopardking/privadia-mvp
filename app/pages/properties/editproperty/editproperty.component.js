@@ -130,6 +130,7 @@ var EditpropertyComponent = (function () {
             Distance: point.Distance,
         }); });
         var pointFormArray = this.builder.array(pointFGs);
+        console.log('Point Form Array ', points);
         this.propertyForm.setControl('PointsOfInterest', pointFormArray);
     };
     EditpropertyComponent.prototype.setMetaData = function (metaDates) {
@@ -314,29 +315,34 @@ var EditpropertyComponent = (function () {
         console.log('Discard Info form');
     };
     EditpropertyComponent.prototype.onSubmit = function () {
-        var _this = this;
         console.log('Submit form');
         var newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
         });
         this.propertyForm.value.MetaData = newArr;
-        if (this.propertyForm.valid) {
-            this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
-                }, {
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                _this.mainService.readData();
-            }, function (e) { console.log("error:", e); });
-        }
+        /*
+                if(this.propertyForm.valid) {
+                    this.propertyService.addProperty(this.propertyForm.value).subscribe(
+                        d => {
+                            $.notify({
+                                icon: "notifications",
+                                message: "Property Added Successfully"
+        
+                            },{
+                                type: 'success',
+                                timer: 3000,
+                                placement: {
+                                    from: 'top',
+                                    align: 'right'
+                                }
+                            });
+                            this.mainService.readData();
+                        },
+                        e => { console.log("error:", e); }
+                    );
+                }
+        */
         console.log('Property Form ', this.propertyForm);
         console.log('Property Form Value ', this.propertyForm.value);
     };

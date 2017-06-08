@@ -152,6 +152,7 @@ export class EditpropertyComponent implements OnInit{
             Distance: point.Distance,
         }));
         const pointFormArray = this.builder.array(pointFGs);
+        console.log('Point Form Array ',points)
         this.propertyForm.setControl('PointsOfInterest', pointFormArray);
     }
 
@@ -351,7 +352,7 @@ export class EditpropertyComponent implements OnInit{
             return newArr = _.concat(newArr, el)
         })
         this.propertyForm.value.MetaData = newArr;
-
+/*
         if(this.propertyForm.valid) {
             this.propertyService.addProperty(this.propertyForm.value).subscribe(
                 d => {
@@ -372,6 +373,7 @@ export class EditpropertyComponent implements OnInit{
                 e => { console.log("error:", e); }
             );
         }
+*/
         console.log('Property Form ', this.propertyForm);
         console.log('Property Form Value ', this.propertyForm.value);
     }
