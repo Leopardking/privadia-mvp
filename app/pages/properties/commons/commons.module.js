@@ -10,32 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var editproperty_routes_1 = require('./editproperty.routes');
-var commons_routes_1 = require('../commons/commons.routes');
+var commons_routes_1 = require('./commons.routes');
 var common_1 = require("@angular/common");
-var ng2_auto_complete_1 = require("ng2-auto-complete");
 var ng2_cloudinary_1 = require("ng2-cloudinary");
 var ng2_file_upload_1 = require("ng2-file-upload");
 var forms_1 = require("@angular/forms");
-var EditpropertyModule = (function () {
-    function EditpropertyModule() {
+var ng2_auto_complete_1 = require("ng2-auto-complete");
+var CommonsModule = (function () {
+    function CommonsModule() {
     }
-    EditpropertyModule = __decorate([
+    CommonsModule = __decorate([
         core_1.NgModule({
             imports: [
+                common_1.CommonModule,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
-                common_1.CommonModule,
                 ng2_auto_complete_1.Ng2AutoCompleteModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,
                 ng2_file_upload_1.FileUploadModule,
-                router_1.RouterModule.forChild(editproperty_routes_1.MODULE_ROUTES)
+                ng2_cloudinary_1.Ng2CloudinaryModule,
+                ng2_file_upload_1.FileUploadModule,
+                router_1.RouterModule.forChild(commons_routes_1.MODULE_ROUTES)
             ],
-            declarations: [editproperty_routes_1.MODULE_COMPONENTS, commons_routes_1.MODULE_COMPONENTS]
+            declarations: [commons_routes_1.MODULE_COMPONENTS]
         }), 
         __metadata('design:paramtypes', [])
-    ], EditpropertyModule);
-    return EditpropertyModule;
+    ], CommonsModule);
+    return CommonsModule;
 }());
-exports.EditpropertyModule = EditpropertyModule;
-//# sourceMappingURL=editproperty.module.js.map
+exports.CommonsModule = CommonsModule;
+//# sourceMappingURL=commons.module.js.map

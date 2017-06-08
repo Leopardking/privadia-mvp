@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var addproperty_routes_1 = require('./addproperty.routes');
+var commons_routes_1 = require('../commons/commons.routes');
 var common_1 = require("@angular/common");
 var ng2_auto_complete_1 = require("ng2-auto-complete");
 var ng2_cloudinary_1 = require("ng2-cloudinary");
@@ -28,9 +29,9 @@ var AddpropertyModule = (function () {
                 ng2_auto_complete_1.Ng2AutoCompleteModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,
                 ng2_file_upload_1.FileUploadModule,
-                router_1.RouterModule.forChild(addproperty_routes_1.MODULE_ROUTES)
+                router_1.RouterModule.forChild(addproperty_routes_1.MODULE_ROUTES),
             ],
-            declarations: [addproperty_routes_1.MODULE_COMPONENTS]
+            declarations: [addproperty_routes_1.MODULE_COMPONENTS, commons_routes_1.MODULE_COMPONENTS]
         }), 
         __metadata('design:paramtypes', [])
     ], AddpropertyModule);

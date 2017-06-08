@@ -13,10 +13,5 @@ export const MODULE_ROUTES: Route[] =[
 ];
 
 export const MODULE_COMPONENTS = [
-    PropertyMetafilterComponent,
     AddpropertyComponent,
-    MetafilterheadingComponent,
-    PropertyinfoComponent,
-    PropertyimageoComponent,
-    PropertymarketingComponent,
 ];

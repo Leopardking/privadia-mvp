@@ -3,8 +3,8 @@ var properties_component_1 = require('./properties.component');
 exports.MODULE_ROUTES = [
     { path: '', children: [
             { path: '', component: properties_component_1.PropertiesComponent },
-            { path: 'addproperty', loadChildren: 'app/pages/properties/addproperty/addproperty.module#AddpropertyModule' },
-            { path: 'editproperty/:id', loadChildren: 'app/pages/properties/editproperty/editproperty.module#EditpropertyModule' },
+            { path: 'addproperty', loadChildren: 'app/pages/properties/commons/commons.module#CommonsModule' },
+            { path: 'editproperty', loadChildren: 'app/pages/properties/commons/commons.module#CommonsModule' },
         ] },
 ];
 exports.MODULE_COMPONENTS = [
