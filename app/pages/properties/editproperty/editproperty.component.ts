@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as _ from "lodash";
@@ -16,16 +16,6 @@ declare var $:any;
 })
 
 export class EditpropertyComponent implements OnInit{
-    // @ViewChild('propertyInfo') propertyInfo;
-    // @ViewChild('propertyMargeting') propertyMargeting;
-    // @ViewChild('propertyImage') propertyImage;
-
-    // @ViewChild('pointsOfInterest') pointsOfInterest;
-    // @ViewChild('localActivities') localActivities;
-    // @ViewChild('features') features;
-    // @ViewChild('services') services;
-    // @ViewChild('trip') trip;
-
     // public propertyForm: any;
 
     // public metadata;
@@ -71,7 +61,7 @@ export class EditpropertyComponent implements OnInit{
                         Active: d.Active,
                         OwnerName: d.OwnerName,
                         InternalName: d.InternalName,
-                        Name: d.Name,
+                        Name: [d.Name, Validators.required],
                         Address: d.Address,
                         RegionId: d.RegionId,
                         RegionName: d.RegionName,
@@ -83,12 +73,12 @@ export class EditpropertyComponent implements OnInit{
                         CollaboratorInitials: d.CollaboratorInitials,
                         BoxUrl: d.BoxUrl,
                         AgencyPackUrl: d.AgencyPackUrl,
-                        Bathrooms: d.Bathrooms,
-                        Bedrooms: d.Bedrooms,
-                        Sleeps: d.Sleeps,
-                        Capacity: d.Capacity,
-                        LivingAreaSize: d.LivingAreaSize,
-                        DiningCapacity: d.DiningCapacity,
+                        Bathrooms: [d.Bathrooms, Validators.required],
+                        Bedrooms: [d.Bedrooms, Validators.required],
+                        Sleeps: [d.Sleeps, Validators.required],
+                        Capacity: [d.Capacity, Validators.required],
+                        LivingAreaSize: [d.LivingAreaSize, Validators.required],
+                        DiningCapacity: [d.DiningCapacity, Validators.required],
                         KitchenInfo: d.KitchenInfo,
                         ChildrenAllowed: d.ChildrenAllowed,
                         SmokingAllowed: d.SmokingAllowed,

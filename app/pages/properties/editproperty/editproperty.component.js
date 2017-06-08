@@ -20,14 +20,6 @@ var EditpropertyComponent = (function () {
         this.propertyService = propertyService;
         this.route = route;
         this.builder = builder;
-        // @ViewChild('propertyInfo') propertyInfo;
-        // @ViewChild('propertyMargeting') propertyMargeting;
-        // @ViewChild('propertyImage') propertyImage;
-        // @ViewChild('pointsOfInterest') pointsOfInterest;
-        // @ViewChild('localActivities') localActivities;
-        // @ViewChild('features') features;
-        // @ViewChild('services') services;
-        // @ViewChild('trip') trip;
         // public propertyForm: any;
         // public metadata;
         // private villadescription;
@@ -51,7 +43,7 @@ var EditpropertyComponent = (function () {
                     Active: d.Active,
                     OwnerName: d.OwnerName,
                     InternalName: d.InternalName,
-                    Name: d.Name,
+                    Name: [d.Name, forms_1.Validators.required],
                     Address: d.Address,
                     RegionId: d.RegionId,
                     RegionName: d.RegionName,
@@ -63,12 +55,12 @@ var EditpropertyComponent = (function () {
                     CollaboratorInitials: d.CollaboratorInitials,
                     BoxUrl: d.BoxUrl,
                     AgencyPackUrl: d.AgencyPackUrl,
-                    Bathrooms: d.Bathrooms,
-                    Bedrooms: d.Bedrooms,
-                    Sleeps: d.Sleeps,
-                    Capacity: d.Capacity,
-                    LivingAreaSize: d.LivingAreaSize,
-                    DiningCapacity: d.DiningCapacity,
+                    Bathrooms: [d.Bathrooms, forms_1.Validators.required],
+                    Bedrooms: [d.Bedrooms, forms_1.Validators.required],
+                    Sleeps: [d.Sleeps, forms_1.Validators.required],
+                    Capacity: [d.Capacity, forms_1.Validators.required],
+                    LivingAreaSize: [d.LivingAreaSize, forms_1.Validators.required],
+                    DiningCapacity: [d.DiningCapacity, forms_1.Validators.required],
                     KitchenInfo: d.KitchenInfo,
                     ChildrenAllowed: d.ChildrenAllowed,
                     SmokingAllowed: d.SmokingAllowed,
