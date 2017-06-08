@@ -16,22 +16,28 @@ export class PropertiesComponent implements OnInit{
     private addproperty = false;
 
     private datatableInited = false;
-    
-    private properties = [];
+    private tableWidget: any;
+
+    //private properties = [];
     private addPropertyLink = "addproperty";
 
 
-    constructor ( private mainService: MainService) {
-
-    }
+    constructor ( private mainService: MainService) {}
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
-
     }
     
     private finishReading() {
-        initDataTable();
+        let DataTable: any = $('#datatables');
+        this.tableWidget = DataTable.DataTable({
+            //select: true,
+            //paging: false,
+            bLengthChange: false,
+            ordering: false,
+            searching: false,
+            info: false,
+        });
         this.datatableInited = true;
     }
 

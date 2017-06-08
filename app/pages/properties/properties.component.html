@@ -16,20 +16,20 @@
                             <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th class="disabled-sorting text-right">Options</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th class="disabled-sorting text-right"></th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th class="disabled-sorting text-right">Options</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th class="disabled-sorting text-right"></th>
                                     </tr>
                                 </tfoot>
-                                <tbody id="bookingTableBody">
-                                    <div *ngFor="let item of mainService.properties; let i = index; let last = last ">
+                                <tbody id="bookingTableBody" *ngIf="mainService.properties">
+                                    <tr *ngFor="let item of mainService.properties; let i = index; let last = last ">
                                         <td>{{item.Id}}</td>
                                         <td>{{item.Name}}</td>
                                         <td class="text-right">
@@ -43,8 +43,8 @@
                                                 <i class="material-icons">euro_symbol</i>Set Rates
                                             </button>
                                         </td>
-										<!--{{ !mainService.isReading && last && !datatableInited ? finishReading() : "" }}-->
-                                    </div>
+										{{ !mainService.isReading && last && !datatableInited ? finishReading() : "" }}
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

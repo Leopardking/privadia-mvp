@@ -10,20 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var homeservice_1 = require('../../providers/homeservice');
-var initDataTable = require('../../../assets/js/init/initDataTable.js');
 var PropertiesComponent = (function () {
     function PropertiesComponent(mainService) {
         this.mainService = mainService;
         this.addproperty = false;
         this.datatableInited = false;
-        this.properties = [];
+        //private properties = [];
         this.addPropertyLink = "addproperty";
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertiesComponent.prototype.ngOnInit = function () {
     };
     PropertiesComponent.prototype.finishReading = function () {
-        initDataTable();
+        var DataTable = $('#datatables');
+        this.tableWidget = DataTable.DataTable({
+            //select: true,
+            //paging: false,
+            bLengthChange: false,
+            ordering: false,
+            searching: false,
+            info: false,
+        });
         this.datatableInited = true;
     };
     PropertiesComponent.prototype.addBooking = function () {
