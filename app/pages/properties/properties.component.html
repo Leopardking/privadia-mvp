@@ -18,11 +18,13 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                         <th class="disabled-sorting text-right"></th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                         <th class="disabled-sorting text-right"></th>
@@ -31,6 +33,12 @@
                                 <tbody id="bookingTableBody" *ngIf="!mainService.isReading">
                                     <tr *ngFor="let item of mainService.properties; let i = index; let last = last ">
                                         <td>{{item.Id}}</td>
+                                        <td>
+                                            <img class="img" src="{{ item.ImageId ? 'http://res.cloudinary.com/privadia/image/upload/c_fill,h_280,w_430/c_fill,q_80/' + item.ImageId + '.jpg' : '../assets/img/image_placeholder.jpg' }}">
+                                            <!--
+                                              <cl-image public-id="{{item.ImageId}}" cloud-name="privadia" crop="fill" quality="80" height="280" width="430" format="jpg" ></cl-image>
+                                            -->
+                                        </td>
                                         <td>{{item.Name}}</td>
                                         <td class="text-right">
                                             <button class="btn btn-simple btn-warning btn-icon shadow-grey" [routerLink]="['/properties/editproperty', item.Id]">
