@@ -106,6 +106,22 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="btn-back">
+                            <i class="material-icons">arrow_back</i> <span>Back to properties</span>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <button class="btn btn-success pull-right m-r-20 p-l-r-20" type="submit">Save</button>
+                        <div class="togglebutton pull-right">
+                            <label>
+                                <input type="checkbox" formControlName="Active" *ngIf="isLoad"> Active status
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!--
                 <div class="text-center">
                     <div class="checkbox">
                         <label>
@@ -131,6 +147,7 @@
                         Cancel
                     </button>
                 </div>
+                -->
             </form>
         </div>
     </div>
