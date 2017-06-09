@@ -2,7 +2,9 @@
     <div class="container-fluid">
         <div class="toolbar">
             <!-- Here you can write extra buttons/actions for the toolbar              -->
-            <button class="btn btn-simple btn-success btn-icon pull-right secondary-color shadow-grey" [routerLink]="addPropertyLink"><i class="material-icons">add</i> Add Property</button>
+            <button class="btn btn-simple btn-success btn-icon pull-right secondary-color shadow-grey"
+                    [routerLink]="addPropertyLink"><i class="material-icons">add</i> Add Property
+            </button>
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -13,46 +15,53 @@
                     <div class="card-content">
                         <h4 class="card-title">All Properties</h4>
                         <div class="material-datatables">
-                            <table id="datatables" class="table table-striped table-no-bordered table-hover" cellspacing="0" width="100%" style="width:100%">
+                            <table id="datatables"
+                                   class="table table-striped table-no-bordered table-hover table-properties"
+                                   cellspacing="0" width="100%" style="width:100%">
                                 <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th class="disabled-sorting text-right"></th>
-                                    </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="disabled-sorting text-right"></th>
+                                </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th class="disabled-sorting text-right"></th>
-                                    </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="disabled-sorting text-right"></th>
+                                </tr>
                                 </tfoot>
                                 <tbody id="bookingTableBody" *ngIf="!mainService.isReading">
-                                    <tr *ngFor="let item of mainService.properties; let i = index; let last = last ">
-                                        <td>{{item.Id}}</td>
-                                        <td>
-                                            <img class="img" src="{{ item.ImageId ? 'http://res.cloudinary.com/privadia/image/upload/c_fill,h_280,w_430/c_fill,q_80/' + item.ImageId + '.jpg' : '../assets/img/image_placeholder.jpg' }}">
-                                            <!--
-                                              <cl-image public-id="{{item.ImageId}}" cloud-name="privadia" crop="fill" quality="80" height="280" width="430" format="jpg" ></cl-image>
-                                            -->
-                                        </td>
-                                        <td>{{item.Name}}</td>
-                                        <td class="text-right">
-                                            <button class="btn btn-simple btn-warning btn-icon shadow-grey" [routerLink]="['/properties/editproperty', item.Id]">
-                                                <i class="material-icons">edit</i>Edit
-                                            </button>
-                                            <button class="btn btn-simple btn-danger btn-icon shadow-grey" routerLink="/properties/editproperty/{{item.Id}}">
-                                                <i class="material-icons">close</i>Remove
-                                            </button>
-                                            <button class="btn btn-simple btn-warning btn-icon shadow-grey">
-                                                <i class="material-icons">euro_symbol</i>Set Rates
-                                            </button>
-                                        </td>
-										{{ !mainService.isReading && last && !datatableInited ? finishReading() : "" }}
-                                    </tr>
+                                <tr *ngFor="let item of mainService.properties; let i = index; let last = last ">
+                                    <td class="thumb">
+                                        <img class="img"
+                                             src="{{ item.ImageId ? 'http://res.cloudinary.com/privadia/image/upload/c_fill,h_280,w_430/c_fill,q_80/' + item.ImageId + '.jpg' : '../assets/img/image_placeholder.jpg' }}">
+                                        <!--
+                                          <cl-image public-id="{{item.ImageId}}" cloud-name="privadia" crop="fill" quality="80" height="280" width="430" format="jpg" ></cl-image>
+                                        -->
+                                    </td>
+                                    <td>
+                                        <div class="property-name">{{item.Name}}</div>
+                                        <div class="property-id">ID {{item.Id}}</div>
+                                        <div class="property-status">Inactive</div>
+                                        <div class="property-status active">Active</div>
+                                    </td>
+                                    <td class="text-right">
+                                        <button class="btn btn-simple btn-set-rates btn-icon">
+                                            <i class="material-icons">attach_money</i>Set Rates
+                                        </button>
+                                        <button class="btn btn-simple btn-edit btn-icon"
+                                                [routerLink]="['/properties/editproperty', item.Id]">
+                                            <i class="material-icons">edit</i>Edit
+                                        </button>
+                                        <button class="btn btn-simple btn-delete btn-icon"
+                                                routerLink="/properties/editproperty/{{item.Id}}">
+                                            <i class="material-icons">delete</i>Remove
+                                        </button>
+                                    </td>
+                                    {{ !mainService.isReading && last && !datatableInited ? finishReading() : "" }}
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -64,9 +73,15 @@
             <!-- end col-md-12 -->
         </div>
         <!-- end row -->
+        <div class="toolbar">
+            <!-- Here you can write extra buttons/actions for the toolbar              -->
+            <button class="btn btn-simple btn-success btn-icon pull-right secondary-color shadow-grey"
+                    [routerLink]="addPropertyLink"><i class="material-icons">add</i> Add Property
+            </button>
+        </div>
     </div>
 </div>
 
 <div class="loading-gif" [hidden]="!mainService.isReading">
-	<img src="../assets/img/loading.gif"/>
+    <img src="../assets/img/loading.gif"/>
 </div>

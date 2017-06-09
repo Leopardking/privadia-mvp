@@ -64,7 +64,30 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	text-transform: uppercase;
 }
 
+.card .card-header {
+	margin: -20px 25px 0;
+}
 
+.card .card-content {
+	padding: 15px 25px;
+}
+
+.pagination .paginate_button a {
+	color: #262626;
+}
+
+/**
+ *  Pagination style table
+ */
+.pagination .paginate_button.active a {
+	color: #ffffff;
+	background-color: #5399bc;
+	box-shadow: 0px 4px 12px 0 rgba(21, 101, 192, 0.4);
+}
+
+.pagination .paginate_button.disabled a {
+	color: #c6c6c6;
+}
 
 /**
  *  Margin and padding
@@ -107,6 +130,3 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .tab-content >div.active {
 	display: inherit;
 }
-
-
-
