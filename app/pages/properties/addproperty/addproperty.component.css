@@ -24,13 +24,6 @@
 	padding: 6px 0;
 }
 
-.tab-content >div {
-	display: none;
-}
-
-.tab-content >div.active {
-	display: inherit;
-}
 
 
 

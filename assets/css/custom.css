@@ -73,12 +73,40 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	margin-left: 0px;
 	margin-right: 0px;
 }
+.m-t-5 {
+	margin-top: 5px;
+}
+.m-t-25 {
+	margin-top: 25px !important;
+}
+.m-l-r-20-negative {
+	margin-left: -20px;
+	margin-right: -20px;
+}
 .p-l-r-none {
 	padding-left: 0px !important;
 	padding-right: 0px !important;
 }
+.p-t-none {
+	padding-top: 0px !important;
+}
+.p-l-r-20 {
+	padding-left: 20px;
+	padding-right: 20px;
+}
 
 
+
+/**
+ *  Tabs style
+ */
+.tab-content >div {
+	display: none;
+}
+
+.tab-content >div.active {
+	display: inherit;
+}
 
 
 

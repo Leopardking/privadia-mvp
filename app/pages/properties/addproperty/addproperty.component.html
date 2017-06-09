@@ -60,45 +60,45 @@
                                 </a>
                             </li>
                         </ul>
-                        <div class="tab-content">
+                        <div class="tab-content m-l-r-20-negative m-t-25">
                             <!--  Property Info  -->
-                            <div id="metatab-info" class="active card-content p-l-r-none" *ngIf="isLoad">
+                            <div id="metatab-info" class="active card-content p-l-r-none p-t-none" *ngIf="isLoad">
                                 <propertyinfo-cmp [group]="propertyForm"></propertyinfo-cmp>
                             </div>
                             <!--  Property Image  -->
-                            <div id="metatab-images" class="card-content p-l-r-none" *ngIf="isLoad">
+                            <div id="metatab-images" class="card-content p-l-r-none p-t-none" *ngIf="isLoad">
                                 <propertyimage-cmp [group]="propertyForm"></propertyimage-cmp>
                             </div>
                             <!--  Property Marketing  -->
-                            <div id="metatab-marketing" class="card-content p-l-r-none">
+                            <div id="metatab-marketing" class="card-content p-l-r-none p-t-none">
                                 <propertymarketing-cmp [group]="propertyForm"></propertymarketing-cmp>
                             </div>
 
-                            <div class="card-content" id="metatab-property-4 p-l-r-none">
+                            <div id="metatab-property-4" class="card-content p-l-r-none p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[3]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[3]"></property-metafilter-cmp>
                             </div>
 
-                            <div class="card-content" id="metatab-property-3 p-l-r-none">
+                            <div id="metatab-property-3" class="card-content p-l-r-none p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[2]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
                             </div>
 
-                            <div class="card-content" id="metatab-property-6 p-l-r-none">
+                            <div id="metatab-property-6" class="card-content p-l-r-none p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[5]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
                             </div>
 
-                            <div class="card-content" id="metatab-property-2 p-l-r-none">
+                            <div id="metatab-property-2" class="card-content p-l-r-none p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[1]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
                             </div>
 
-                            <div class="card-content" id="metatab-property-1 p-l-r-none">
+                            <div id="metatab-property-1" class="card-content p-l-r-none p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[0]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
