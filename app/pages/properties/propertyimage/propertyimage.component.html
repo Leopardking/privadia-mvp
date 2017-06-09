@@ -1,43 +1,49 @@
-<div [formGroup]="propertyForm">
-    {{propertyForm.controls.Images.controls.value | json}}
-	<label class="form-control">Property Image</label>
-	<input type="file" class="btn btn-file" ng2FileSelect [uploader]="uploader" (change)="fileChange()" />
-</div>
+<div class="card-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div [formGroup]="propertyForm">
+                {{propertyForm.controls.Images.controls.value | json}}
+                <label class="form-control">Property Image</label>
+                <input type="file" class="btn btn-file" ng2FileSelect [uploader]="uploader" (change)="fileChange()" />
+            </div>
 
-<div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:800px;height:456px;overflow:hidden;visibility:hidden;background-color:#24262e;">
-</div>
+            <div id="jssor_1" style="position:relative;margin:0 auto;top:0px;left:0px;width:800px;height:456px;overflow:hidden;visibility:hidden;background-color:#24262e;">
+            </div>
 
-<div id="jssor_2" class="hidden" style="position:relative;margin:0 auto;top:0px;left:0px;width:800px;height:456px;overflow:hidden;visibility:hidden;background-color:#24262e;">
-    <!-- Loading Screen -->
-    <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
-    <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:800px;height:356px;overflow:hidden;">
-        <div *ngFor="let item of propertyForm.controls.Images.value">
-            <cl-image data-u="image" public-id="{{item.ImageId}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="560" width="860" format="jpg">
-            </cl-image>
-            <cl-image data-u="thumb" public-id="{{item.ImageId}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="72" width="72" format="jpg">
-            </cl-image>
-        </div>
-        <a data-u="any" href="https://www.jssor.com" style="display:none">javascript slider</a>
-    </div>
-    <!-- Thumbnail Navigator -->
-    <div data-u="thumbnavigator" class="jssort01" style="position:absolute;left:0px;bottom:0px;width:800px;height:100px;" data-autocenter="1">
-        <!-- Thumbnail Item Skin Begin -->
-        <div data-u="slides" style="cursor: default;">
-            <div data-u="prototype" class="p">
-                <div class="w">
-                    <div data-u="thumbnailtemplate" class="t"></div>
+            <div id="jssor_2" class="hidden" style="position:relative;margin:0 auto;top:0px;left:0px;width:800px;height:456px;overflow:hidden;visibility:hidden;background-color:#24262e;">
+                <!-- Loading Screen -->
+                <div data-u="loading" style="position:absolute;top:0px;left:0px;background:url('') no-repeat 50% 50%;background-color:rgba(0, 0, 0, 0.7);"></div>
+                <div data-u="slides" style="cursor:default;position:relative;top:0px;left:0px;width:800px;height:356px;overflow:hidden;">
+                    <div *ngFor="let item of propertyForm.controls.Images.value">
+                        <cl-image data-u="image" public-id="{{item.ImageId}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="560" width="860" format="jpg">
+                        </cl-image>
+                        <cl-image data-u="thumb" public-id="{{item.ImageId}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="72" width="72" format="jpg">
+                        </cl-image>
+                    </div>
+                    <a data-u="any" href="https://www.jssor.com" style="display:none">javascript slider</a>
                 </div>
-                <div class="c"></div>
+                <!-- Thumbnail Navigator -->
+                <div data-u="thumbnavigator" class="jssort01" style="position:absolute;left:0px;bottom:0px;width:800px;height:100px;" data-autocenter="1">
+                    <!-- Thumbnail Item Skin Begin -->
+                    <div data-u="slides" style="cursor: default;">
+                        <div data-u="prototype" class="p">
+                            <div class="w">
+                                <div data-u="thumbnailtemplate" class="t"></div>
+                            </div>
+                            <div class="c"></div>
+                        </div>
+                    </div>
+                    <!-- Thumbnail Item Skin End -->
+                </div>
+                <!-- Arrow Navigator -->
+                <span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
+                <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
+            </div>
+
+
+            <div class="loading-gif" [hidden]="!uploader.isUploading">
+                <img src="../assets/img/loading.gif"/>
             </div>
         </div>
-        <!-- Thumbnail Item Skin End -->
     </div>
-    <!-- Arrow Navigator -->
-    <span data-u="arrowleft" class="jssora05l" style="top:158px;left:8px;width:40px;height:40px;"></span>
-    <span data-u="arrowright" class="jssora05r" style="top:158px;right:8px;width:40px;height:40px;"></span>
-</div>
-
-
-<div class="loading-gif" [hidden]="!uploader.isUploading">
-    <img src="../assets/img/loading.gif"/>
 </div>
