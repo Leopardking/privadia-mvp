@@ -28,7 +28,7 @@
                                         <th class="disabled-sorting text-right"></th>
                                     </tr>
                                 </tfoot>
-                                <tbody id="bookingTableBody" *ngIf="mainService.properties">
+                                <tbody id="bookingTableBody" *ngIf="!mainService.isReading">
                                     <tr *ngFor="let item of mainService.properties; let i = index; let last = last ">
                                         <td>{{item.Id}}</td>
                                         <td>{{item.Name}}</td>

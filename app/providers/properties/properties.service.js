@@ -47,7 +47,7 @@ var PropertiesService = (function () {
     PropertiesService.prototype.addProperty = function (data) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
-        var addApiUrl = 'http://privadia-api-dev.azurewebsites.net';
+        // let addApiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
         return this.http.post(this.apiUrl + '/api/properties/', data, options)
             .map(this.extractData)
             .catch(this.handleError);

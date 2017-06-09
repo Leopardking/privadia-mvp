@@ -12,7 +12,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class MainService {
 	private token:string = "";
-	private apiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
+	private apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	//private apiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
 	public filter: Filter;
 
 	public regions = [];

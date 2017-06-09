@@ -52,7 +52,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		let addApiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
+		// let addApiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
 
 		return this.http.post( this.apiUrl + '/api/properties/', data, options )
 				.map(this.extractData)
