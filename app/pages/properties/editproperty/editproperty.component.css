@@ -1,3 +1,30 @@
+.card .nav-pills {
+	margin-top: 5px;
+}
+.nav-pills .nav-pill {
+	width: 96px;
+	height: 96px;
+}
+.nav-pills .nav-pill a {
+	color: #455a64;
+	font-size: 12px;
+	border-radius: 3px;
+	padding-left: 10px;
+	padding-right: 10px;
+	line-height: normal;
+	min-width: 96px;
+	height: 96px;
+}
+.nav-pills .nav-pill.active a{
+	background: #eceff1;
+	box-shadow: none;
+}
+.nav-pills .nav-pill .material-icons {
+	font-size: 36px;
+	padding: 6px 0;
+}
+
+/*
 .tab-content >div {
 	display: none;
 }
@@ -27,3 +54,4 @@ li > a.has-error {
 .checkbox label {
 	color: black;
 }
+*/

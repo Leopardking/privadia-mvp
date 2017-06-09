@@ -1,119 +1,123 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3 p-b-15 metafilter-names">
-                <ul class="nav nav-pills nav-pills-icons nav-pills-grey nav-stacked" role="tablist">
-                    <li class="active">
-                        <a href="#metatab-info" role="tab" data-toggle="tab" class="secondary-color metatab-info-tab-name">
-                            Property Info Edit
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#metatab-images" role="tab" data-toggle="tab" class="secondary-color metatab-images-tab-name">
-                            Images Edit
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#metatab-availability" role="tab" data-toggle="tab" class="secondary-color metatab-availability-tab-name">
-                            Availability Edit
-                        </a>
-                    </li>
-                    <li class="">
-                        <a href="#metatab-marketing" role="tab" data-toggle="tab" class="secondary-color metatab-marketing-tab-name">
-                            Marketing Edit
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#metatab-property-4" role="tab" data-toggle="tab" class="secondary-color metatab-property-4-tab-name">
-                            Points of Interests Edit
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#metatab-property-3" role="tab" data-toggle="tab" class="secondary-color metatab-property-3-tab-name">
-                            Local Activities Edit
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#metatab-property-6" role="tab" data-toggle="tab" class="secondary-color metatab-property-6-tab-name">
-                            Features Edit
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#metatab-property-2" role="tab" data-toggle="tab" class="secondary-color metatab-property-2-tab-name">
-                            Services
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#metatab-property-1" role="tab" data-toggle="tab" class="secondary-color metatab-property-1-tab-name">
-                            Trip
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <form [formGroup]="propertyForm" novalidate class="col-md-9 subtype-filters-names" (ngSubmit)="onSubmit()">
-                <div class="tab-content card col-sm-12 col-md-12 col-lg-12">
-                    <!--  Property Info  -->
-                    <div id="metatab-info" class="active card-content" *ngIf="isLoad">
-                        <propertyinfo-cmp [group]="propertyForm" #propertyInfo></propertyinfo-cmp>
-                    </div>
+            <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="col-xs-12">
+                <div class="card">
+                    <div class="card-content p-b-15">
+                        <ul class="nav nav-pills">
+                            <li class="nav-pill active">
+                                <a href="#metatab-info" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">store</i>
+                                    Property Info
+                                </a>
+                            </li>
+                            <li class="nav-pill">
+                                <a href="#metatab-images" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">camera_alt</i>
+                                    Images
+                                </a>
+                            </li>
+                            <li class="nav-pill">
+                                <a href="#metatab-availability" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">check_circle</i>
+                                    Availability
+                                </a>
+                            </li>
+                            <li class="nav-pill">
+                                <a href="#metatab-marketing" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">assessment</i>
+                                    Marketing
+                                </a>
+                            </li>
+                            <li class="nav-pill">
+                                <a href="#metatab-property-4" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">golf_course</i>
+                                    Points of Interests
+                                </a>
+                            </li>
+                            <li class="nav-pill">
+                                <a href="#metatab-property-3" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">pin_drop</i>
+                                    Local Activities
+                                </a>
+                            </li>
+                            <li class="nav-pill">
+                                <a href="#metatab-property-6" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">stars</i>
+                                    Features
+                                </a>
+                            </li>
+                            <li class="nav-pill">
+                                <a href="#metatab-property-2" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">hotel</i>
+                                    Services
+                                </a>
+                            </li>
+                            <li class="nav-pill">
+                                <a href="#metatab-property-1" role="tab" data-toggle="tab" class="">
+                                    <i class="material-icons">flight_takeoff</i>
+                                    Trip
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content m-l-r-20-negative m-t-25">
+                            <!--  Property Info  -->
+                            <div id="metatab-info" class="active card-content p-l-r-none p-t-none" *ngIf="isLoad">
+                                <propertyinfo-cmp [group]="propertyForm"></propertyinfo-cmp>
+                            </div>
+                            <!--  Property Image  -->
+                            <div id="metatab-images" class="card-content p-l-r-none p-t-none" *ngIf="isLoad">
+                                <propertyimage-cmp [group]="propertyForm"></propertyimage-cmp>
+                            </div>
+                            <!--  Property Marketing  -->
+                            <div id="metatab-marketing" class="card-content p-l-r-none p-t-none" *ngIf="isLoad">
+                                <propertymarketing-cmp [group]="propertyForm"></propertymarketing-cmp>
+                            </div>
 
-                    <!--  Property Image  -->
-                    <div id="metatab-images" class="card-content" *ngIf="isLoad">
-                        <propertyimage-cmp [group]="propertyForm" #propertyImage></propertyimage-cmp>
-                    </div>
+                            <div id="metatab-property-4" class="card-content p-l-r-none p-t-none" *ngIf="mainService.metadata[3] && isLoad">
+                                <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[3]"></property-metafilter-cmp>
+                            </div>
 
-                    <!--  Property Marketing  -->
-                    <div id="metatab-marketing" class="card-content" *ngIf="isLoad">
-                        <propertymarketing-cmp [group]="propertyForm" #propertyMargeting></propertymarketing-cmp>
-                    </div>
+                            <div id="metatab-property-3" class="card-content p-l-r-none p-t-none" *ngIf="mainService.metadata[2] && isLoad">
+                                <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
+                            </div>
 
-                    <!--  Property PointsOfInterests  -->
-                    <div class="card-content" id="metatab-property-4" *ngIf="mainService.metadata[3] && isLoad">
-                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[3]" #pointsOfInterest></property-metafilter-cmp>
-                    </div>
+                            <div id="metatab-property-6" class="card-content p-l-r-none p-t-none" *ngIf="mainService.metadata[5] && isLoad">
+                                <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
+                            </div>
 
-                    <!--  Property Local Activities -->
-                    <div class="card-content" id="metatab-property-3" *ngIf="mainService.metadata[2] && isLoad">
-                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
-                    </div>
+                            <div id="metatab-property-2" class="card-content p-l-r-none p-t-none" *ngIf="mainService.metadata[1] && isLoad">
+                                <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
+                            </div>
 
-                    <!--  Property Features -->
-                    <div class="card-content" id="metatab-property-6" *ngIf="mainService.metadata[5] && isLoad">
-                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
-                    </div>
-
-                    <!--  Property Services -->
-                    <div class="card-content" id="metatab-property-2" *ngIf="mainService.metadata[1] && isLoad">
-                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
-                    </div>
-
-                    <!--  Property Trip -->
-                    <div class="card-content" id="metatab-property-1" *ngIf="mainService.metadata[0] && isLoad">
-                        <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
+                            <div id="metatab-property-1" class="card-content p-l-r-none p-t-none" *ngIf="mainService.metadata[0] && isLoad">
+                                <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="text-center">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" (click)="activeChange($event)" checked="checked"> Active
+                            <input type="checkbox" formControlName="Active" *ngIf="isLoad"> Active
                         </label>
                     </div>
                     <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" type="submit">
-                        <span class="btn-label">
-                            <i class="material-icons">add</i>
-                        </span>
+                            <span class="btn-label">
+                                <i class="material-icons">add</i>
+                            </span>
                         Save
                     </button>
                     <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" type="button" (click)="continueInfo()">
-                        <span class="btn-label">
-                            <i class="material-icons">save</i>
-                        </span>
+                            <span class="btn-label">
+                                <i class="material-icons">save</i>
+                            </span>
                         Save & Continue
                     </button>
                     <button class="subtype-filter btn btn-primary secondary-color hover-primary-color shadow-grey" type="button" (click)="discardInfo()">
-                        <span class="btn-label">
-                            <i class="material-icons">close</i>
-                        </span>
+                            <span class="btn-label">
+                                <i class="material-icons">close</i>
+                            </span>
                         Cancel
                     </button>
                 </div>
