@@ -1,29 +1,35 @@
 <metafilter-heading-cmp [name]="metadata.Name" [group]="propertyForm"></metafilter-heading-cmp>
 
-<div [formGroup]="propertyForm">
-    <div formArrayName="MetaDataTmp" class="panel-group" role="tablist" aria-multiselectable="true">
-        <div class="panel panel-default" *ngFor="let subtype of metadata.MetaDataSubTypes">
-            <div class="panel-heading" role="tab" id="heading-{{subtype.Id}}">
-                <a role="button" data-toggle="collapse" [attr.data-parent]="'#metadata-'+metadata.Id" href="#{{subtype.Id}}" aria-expanded="true" [attr.aria-controls]="subtype.Id">
-                    <h4 class="panel-title">
-                        {{subtype.Name}}
-                        <i class="material-icons">keyboard_arrow_down</i>
-                    </h4>
-                </a>
-            </div>
-            <div id="{{subtype.Id}}" class="panel-collapse collapse in" role="tabpanel" [attr.aria-labelledby]="'heading-'+subtype.Id">
-                <div class="panel-body">
-                    <button class="subtype-filter btn btn-sm {{ metafilters[option.controls.MetaDataId.value] ? 'btn-success' : 'btn-default'}}"
-                            *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index"
-                            [attr.option-id]="option.controls.MetaDataId.value"
-                            [attr.option-name]="option.controls.MetaDataName.value"
-                            [attr.option-subtype]="subtype.Id"
-                            [attr.option-index]="i" (click)="subfilterChange($event)">
+<div class="card-content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div [formGroup]="propertyForm">
+                <div formArrayName="MetaDataTmp" class="panel-group" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default" *ngFor="let subtype of metadata.MetaDataSubTypes">
+                        <div class="panel-heading" role="tab" id="heading-{{subtype.Id}}">
+                            <a role="button" data-toggle="collapse" [attr.data-parent]="'#metadata-'+metadata.Id" href="#{{subtype.Id}}" aria-expanded="true" [attr.aria-controls]="subtype.Id">
+                                <h4 class="panel-title">
+                                    {{subtype.Name}}
+                                    <i class="material-icons">keyboard_arrow_down</i>
+                                </h4>
+                            </a>
+                        </div>
+                        <div id="{{subtype.Id}}" class="panel-collapse collapse in" role="tabpanel" [attr.aria-labelledby]="'heading-'+subtype.Id">
+                            <div class="panel-body">
+                                <button class="subtype-filter btn btn-sm {{ metafilters[option.controls.MetaDataId.value] ? 'btn-success' : 'btn-default'}}"
+                                        *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index"
+                                        [attr.option-id]="option.controls.MetaDataId.value"
+                                        [attr.option-name]="option.controls.MetaDataName.value"
+                                        [attr.option-subtype]="subtype.Id"
+                                        [attr.option-index]="i" (click)="subfilterChange($event)">
                         <span class="btn-label">
                             <i class="material-icons">{{ metafilters[option.controls.MetaDataId.value] ? 'check' : 'close' }}</i>
                         </span>
-                        {{option.controls.MetaDataName.value}}
-                    </button>
+                                    {{option.controls.MetaDataName.value}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
