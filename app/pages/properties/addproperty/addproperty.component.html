@@ -74,31 +74,31 @@
                                 <propertymarketing-cmp [group]="propertyForm"></propertymarketing-cmp>
                             </div>
 
-                            <div id="metatab-property-4" class="card-content p-l-r-none p-t-none">
+                            <div id="metatab-property-4" class="card-content p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[3]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[3]"></property-metafilter-cmp>
                             </div>
 
-                            <div id="metatab-property-3" class="card-content p-l-r-none p-t-none">
+                            <div id="metatab-property-3" class="card-content p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[2]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
                             </div>
 
-                            <div id="metatab-property-6" class="card-content p-l-r-none p-t-none">
+                            <div id="metatab-property-6" class="card-content p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[5]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
                             </div>
 
-                            <div id="metatab-property-2" class="card-content p-l-r-none p-t-none">
+                            <div id="metatab-property-2" class="card-content p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[1]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
                             </div>
 
-                            <div id="metatab-property-1" class="card-content p-l-r-none p-t-none">
+                            <div id="metatab-property-1" class="card-content p-t-none">
                                 <property-metafilter-cmp *ngIf="mainService.metadata[0]"
                                                          [group]="propertyForm"
                                                          [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
@@ -108,12 +108,12 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        <div class="btn-back">
+                        <div class="btn btn-simple btn-back">
                             <i class="material-icons">arrow_back</i> <span>Back to properties</span>
                         </div>
                     </div>
                     <div class="col-xs-4">
-                        <button class="btn btn-success pull-right m-r-20 p-l-r-20" type="submit">Save</button>
+                        <button class="btn btn-success pull-right font-16 m-r-20 p-l-r-20" type="submit">Save</button>
                         <div class="togglebutton pull-right">
                             <label>
                                 <input type="checkbox" formControlName="Active" *ngIf="isLoad"> Active status

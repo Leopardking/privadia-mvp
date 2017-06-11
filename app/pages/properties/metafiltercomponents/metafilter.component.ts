@@ -17,7 +17,7 @@ export class PropertyMetafilterComponent implements OnInit{
 	//@ViewChild('metafilterHeading') metafilterHeading;
 
 	public metafilters;
-
+	public metafilterDecorator = [];
 	constructor(  ) {
 	}
 
@@ -50,8 +50,15 @@ export class PropertyMetafilterComponent implements OnInit{
             }
         }
 		$.getScript('../../../../assets/js/plugins/jquery.tagsinput.js');
+
+        $('.tagsinput').tagsinput({
+			itemText: 'MetaDataName'
+		});
+
 		if($(".selectpicker").length != 0){
-			$(".selectpicker").selectpicker();
+			setTimeout(() => {
+				$(".selectpicker").selectpicker();
+			},500);
 		}
 	}
 
@@ -72,6 +79,13 @@ export class PropertyMetafilterComponent implements OnInit{
 			Available: !controlSubtype.controls[optionIndex].value.Available,
 		});
 		*/
+	}
+
+	private metafilterDecorators(tagsList) {
+		tagsList.value.map((element) => {
+			return element.Available && this.metafilterDecorator.push(element.MetaDataName)
+		});
+		return this.metafilterDecorator;
 	}
 
 // 	let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {

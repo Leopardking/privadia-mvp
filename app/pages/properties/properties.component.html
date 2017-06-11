@@ -44,8 +44,8 @@
                                     <td>
                                         <div class="property-name">{{item.Name}}</div>
                                         <div class="property-id">ID {{item.Id}}</div>
-                                        <div class="property-status">Inactive</div>
-                                        <div class="property-status active">Active</div>
+                                        <div class="property-status" *ngIf="!item.Active">Inactive</div>
+                                        <div class="property-status active" *ngIf="item.Active">Active</div>
                                     </td>
                                     <td class="text-right">
                                         <button class="btn btn-simple btn-set-rates btn-icon">
