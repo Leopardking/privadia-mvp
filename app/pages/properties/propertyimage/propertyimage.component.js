@@ -20,8 +20,8 @@ var PropertyimageoComponent = (function () {
         }));
     }
     PropertyimageoComponent.prototype.ngOnInit = function () {
+        //$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
         var _this = this;
-        $.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
         this.uploader.onSuccessItem = function (item, response, status, headers) {
             $.notify({
                 icon: "notifications",
@@ -40,7 +40,7 @@ var PropertyimageoComponent = (function () {
                 ImageId: img.public_id
             };
             // this.images.push(image);
-            $.getScript('../../../../assets/js/init/initImageGallery.js');
+            //$.getScript('../../../../assets/js/init/initImageGallery.js');
             //Add a new image to Main Form
             _this.addImage(image);
             return { item: item, response: response, status: status, headers: headers };
@@ -59,7 +59,7 @@ var PropertyimageoComponent = (function () {
             });
             return { item: item, response: response, status: status, headers: headers };
         };
-        $.getScript('../../../../assets/js/init/initImageGallery.js');
+        //$.getScript('../../../../assets/js/init/initImageGallery.js');
     };
     PropertyimageoComponent.prototype.uploadImage = function () {
     };

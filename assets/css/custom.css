@@ -107,6 +107,9 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .m-t-25 {
 	margin-top: 25px !important;
 }
+.m-b-15 {
+	margin-bottom: 15px !important;
+}
 .m-r-20 {
 	margin-right: 20px;
 }
@@ -235,6 +238,29 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	padding-right: 10px !important;
 	top:0px;
 }
+.upload-image {
+	text-align: center;
+}
+.upload-image .material-icons {
+	font-size: 150px;
+}
+.upload-image .title {
+	color: #3a3a3a;
+	font-size: 18px;
+	font-weight: 300;
+	font-style: normal;
+}
+.upload-image .btn {
+	width: 200px;
+	height: 48px;
+	line-height: 24px;
+	font-size: 14px;
+	font-weight: 300;
+	font-style: normal;
+}
+
+
+
 /**
  * Custom button
  */
@@ -268,3 +294,8 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	color: #b0bec5 !important;
 	text-transform: none;
 }
+
+
+
+
+

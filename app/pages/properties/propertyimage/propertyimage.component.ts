@@ -27,7 +27,7 @@ export class PropertyimageoComponent implements OnInit{
 	}
 
 	ngOnInit() {
-		$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
+		//$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
 
 		this.uploader.onSuccessItem = ( item, response, status, headers) => {
 			$.notify({
@@ -49,7 +49,7 @@ export class PropertyimageoComponent implements OnInit{
 			};
 			// this.images.push(image);
 
-			$.getScript('../../../../assets/js/init/initImageGallery.js');
+			//$.getScript('../../../../assets/js/init/initImageGallery.js');
 
 			//Add a new image to Main Form
 			this.addImage(image);
@@ -72,7 +72,7 @@ export class PropertyimageoComponent implements OnInit{
 
           	return {item, response, status, headers};
 		};
-		$.getScript('../../../../assets/js/init/initImageGallery.js');
+		//$.getScript('../../../../assets/js/init/initImageGallery.js');
 	}
 
 	private uploadImage() {
