@@ -13,7 +13,6 @@ var forms_1 = require("@angular/forms");
 var _ = require('lodash');
 var PropertyMetafilterComponent = (function () {
     function PropertyMetafilterComponent() {
-        this.metafilterDecorator = [];
     }
     PropertyMetafilterComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -44,10 +43,6 @@ var PropertyMetafilterComponent = (function () {
         for (var i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
             _loop_1(i);
         }
-        $.getScript('../../../../assets/js/plugins/jquery.tagsinput.js');
-        $('.tagsinput').tagsinput({
-            itemText: 'MetaDataName'
-        });
         if ($(".selectpicker").length != 0) {
             setTimeout(function () {
                 $(".selectpicker").selectpicker();
@@ -70,13 +65,6 @@ var PropertyMetafilterComponent = (function () {
             Available: !controlSubtype.controls[optionIndex].value.Available,
         });
         */
-    };
-    PropertyMetafilterComponent.prototype.metafilterDecorators = function (tagsList) {
-        var _this = this;
-        tagsList.value.map(function (element) {
-            return element.Available && _this.metafilterDecorator.push(element.MetaDataName);
-        });
-        return this.metafilterDecorator;
     };
     __decorate([
         core_1.Input('metadata'), 

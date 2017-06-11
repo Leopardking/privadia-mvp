@@ -3,6 +3,7 @@ import {FormGroup,FormArray,FormControl} from "@angular/forms";
 import * as _ from 'lodash';
 declare var $:any;
 
+
 @Component({
     moduleId: module.id,
     selector: ' property-metafilter-cmp',
@@ -14,12 +15,12 @@ export class PropertyMetafilterComponent implements OnInit{
 	@Input('metadata') metadata;
 	@Input('group')
 	public propertyForm: FormGroup;
+
+
 	//@ViewChild('metafilterHeading') metafilterHeading;
 
 	public metafilters;
-	public metafilterDecorator = [];
-	constructor(  ) {
-	}
+	constructor(  ) {}
 
 	ngOnInit() {
         this.metafilters = [];
@@ -49,11 +50,6 @@ export class PropertyMetafilterComponent implements OnInit{
 				this.metafilters[this.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj && obj['Available'] || false;
             }
         }
-		$.getScript('../../../../assets/js/plugins/jquery.tagsinput.js');
-
-        $('.tagsinput').tagsinput({
-			itemText: 'MetaDataName'
-		});
 
 		if($(".selectpicker").length != 0){
 			setTimeout(() => {
@@ -81,12 +77,6 @@ export class PropertyMetafilterComponent implements OnInit{
 		*/
 	}
 
-	private metafilterDecorators(tagsList) {
-		tagsList.value.map((element) => {
-			return element.Available && this.metafilterDecorator.push(element.MetaDataName)
-		});
-		return this.metafilterDecorator;
-	}
 
 // 	let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
 // 	return {

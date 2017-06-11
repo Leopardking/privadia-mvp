@@ -18,9 +18,15 @@
                     </select>
                 </div>
                 <div class="col-xs-9">
-                    {{propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].value | json}}
-                    <input type="text" [value]="propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].value" class="tagsinput" data-role="tagsinput" data-color="success" />
-                    <!-- You can change data-color="rose" with one of our colors primary | warning | info | danger | success -->
+                    <div class="bootstrap-tagsinput">
+                        <span *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index">
+                            <span class="tag label label-info"
+                                  *ngIf="option.controls.Available.value"
+                            >{{option.controls.MetaDataName.value}}
+                                <span data-role="remove"></span>
+                            </span>
+                        </span>
+                    </div>
                 </div>
             </div>
 
