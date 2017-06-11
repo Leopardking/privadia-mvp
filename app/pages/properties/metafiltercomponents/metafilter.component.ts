@@ -49,6 +49,10 @@ export class PropertyMetafilterComponent implements OnInit{
 				this.metafilters[this.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj && obj['Available'] || false;
             }
         }
+		$.getScript('../../../../assets/js/plugins/jquery.tagsinput.js');
+		if($(".selectpicker").length != 0){
+			$(".selectpicker").selectpicker();
+		}
 	}
 
 	private subfilterChange(e) {
@@ -60,13 +64,14 @@ export class PropertyMetafilterComponent implements OnInit{
 
    		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
 		const controlSubtype = <FormArray>control.controls['type_' + optionSubtype];
-
+		console.log('Control metadata after', e.target.value, optionId, optionName, optionSubtype, optionIndex)
+		/*
 		controlSubtype.controls[optionIndex].setValue({
 			MetaDataId: optionId,
 			MetaDataName: optionName,
 			Available: !controlSubtype.controls[optionIndex].value.Available,
 		});
-		//console.log('Control metadata after', controlSubtype.controls[optionIndex].value)
+		*/
 	}
 
 // 	let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {

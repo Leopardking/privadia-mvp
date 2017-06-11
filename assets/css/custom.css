@@ -154,8 +154,8 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .control-label {
 	color: #b0bec5 !important;
 }
-.form-group.is-focused .form-control {
-	background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc);
+.form-group.is-focused .form-control, .btn-group.bootstrap-select.show-tick.open .select-with-transition {
+	background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc) !important;
 }
 .radio {
 }
@@ -186,8 +186,29 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	text-transform: uppercase;
 	font-size: 14px;
 }
-
-
+.select-with-transition {
+	background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc) !important;
+}
+.bootstrap-tagsinput {
+	line-height: 44px;
+}
+.bootstrap-tagsinput input{
+	display: none;
+}
+.label.label-info, .label.label-info:hover {
+	background-color: #0b5a7c;
+	line-height: 26px;
+	font-size: 14px;
+	font-weight: 400;
+	text-transform: none;
+	border-radius: 13px;
+	padding: 0 30px 0 15px;
+}
+.bootstrap-tagsinput .tag [data-role="remove"] {
+	opacity: 1;
+	padding-right: 10px !important;
+	top:0px;
+}
 /**
  * Custom button
  */
@@ -210,5 +231,14 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 }
 
 
-
-
+/**
+ *  Dropdown menu
+ */
+.dropdown-menu li a:hover, .dropdown-menu li a:focus, .dropdown-menu li a:active {
+	background-color: #0b5a7c;
+	box-shadow: 0px 7px 12px 0 rgba(83, 153, 188, 0.4) !important;
+}
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+	color: #b0bec5 !important;
+	text-transform: none;
+}

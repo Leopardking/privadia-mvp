@@ -43,6 +43,10 @@ var PropertyMetafilterComponent = (function () {
         for (var i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
             _loop_1(i);
         }
+        $.getScript('../../../../assets/js/plugins/jquery.tagsinput.js');
+        if ($(".selectpicker").length != 0) {
+            $(".selectpicker").selectpicker();
+        }
     };
     PropertyMetafilterComponent.prototype.subfilterChange = function (e) {
         var optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
@@ -52,12 +56,14 @@ var PropertyMetafilterComponent = (function () {
         this.metafilters[optionId] = !this.metafilters[optionId];
         var control = this.propertyForm.controls['MetaDataTmp'];
         var controlSubtype = control.controls['type_' + optionSubtype];
+        console.log('Control metadata after', e.target.value, optionId, optionName, optionSubtype, optionIndex);
+        /*
         controlSubtype.controls[optionIndex].setValue({
             MetaDataId: optionId,
             MetaDataName: optionName,
             Available: !controlSubtype.controls[optionIndex].value.Available,
         });
-        //console.log('Control metadata after', controlSubtype.controls[optionIndex].value)
+        */
     };
     __decorate([
         core_1.Input('metadata'), 
