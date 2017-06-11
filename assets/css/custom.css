@@ -216,7 +216,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc) !important;
 }
 .bootstrap-tagsinput {
-	line-height: 44px;
+	padding: 12px 6px 5px;
 }
 .bootstrap-tagsinput input{
 	display: none;
