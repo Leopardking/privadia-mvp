@@ -2,3 +2,16 @@
 	width: 0;
 	height: 0;
 }
+.navbar {
+	padding: 0;
+	position: absolute;
+	z-index: 1111;
+	top:13px;
+	right:-21px;
+}
+.navbar .navbar-minimize{
+	padding: 0;
+}
+.navbar .navbar-minimize i{
+	color: #7b7b7b !important;
+}
