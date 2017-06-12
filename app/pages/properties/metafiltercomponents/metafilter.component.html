@@ -5,13 +5,14 @@
         <div class="" *ngFor="let subtype of metadata.MetaDataSubTypes">
             <div class="row">
                 <div class="col-xs-3">
-                    <select class="selectpicker" data-style="select-with-transition" multiple title="{{subtype.Name}}" data-size="7"
+                    <select class="selectpicker" data-style="select-with-transition" title="{{subtype.Name}}" data-size="7"
+                            [attr.option-subtype]="'type_' + subtype.Id"
                             (change)="subfilterChange($event)">
                         <option *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index"
-                                [value]="option.controls.MetaDataName.value"
+                                value="{{i}}"
+                                title="{{subtype.Name}}"
                                 [attr.option-id]="option.controls.MetaDataId.value"
                                 [attr.option-name]="option.controls.MetaDataName.value"
-                                [attr.option-subtype]="subtype.Id"
                                 [attr.option-index]="i">
                             {{option.controls.MetaDataName.value}}
                         </option>
@@ -21,9 +22,9 @@
                     <div class="bootstrap-tagsinput">
                         <span *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index">
                             <span class="tag label label-info"
-                                  *ngIf="option.controls.Available.value"
-                            >{{option.controls.MetaDataName.value}}
-                                <span data-role="remove"></span>
+                                  *ngIf="option.controls.Available.value">
+                                {{option.controls.MetaDataName.value}}
+                                <span data-role="remove" (click)="removeMetafilter({index: i, type: 'type_' + subtype.Id})"></span>
                             </span>
                         </span>
                     </div>

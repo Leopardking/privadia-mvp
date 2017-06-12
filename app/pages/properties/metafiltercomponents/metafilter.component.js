@@ -50,21 +50,28 @@ var PropertyMetafilterComponent = (function () {
         }
     };
     PropertyMetafilterComponent.prototype.subfilterChange = function (e) {
-        var optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
-        var optionName = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-name') : e.target.parentElement.parentElement.getAttribute('option-name');
-        var optionSubtype = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-subtype') : e.target.parentElement.parentElement.getAttribute('option-subtype');
-        var optionIndex = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-index') : e.target.parentElement.parentElement.getAttribute('option-index');
-        this.metafilters[optionId] = !this.metafilters[optionId];
+        // let optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
+        // let optionName = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-name') : e.target.parentElement.parentElement.getAttribute('option-name');
+        // let optionSubtype = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-subtype') : e.target.parentElement.parentElement.getAttribute('option-subtype');
+        // let optionIndex = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-index') : e.target.parentElement.parentElement.getAttribute('option-index');
+        /// this.metafilters[optionId] = !this.metafilters[optionId];
         var control = this.propertyForm.controls['MetaDataTmp'];
-        var controlSubtype = control.controls['type_' + optionSubtype];
-        console.log('Control metadata after', e.target.value, optionId, optionName, optionSubtype, optionIndex);
-        /*
-        controlSubtype.controls[optionIndex].setValue({
-            MetaDataId: optionId,
-            MetaDataName: optionName,
-            Available: !controlSubtype.controls[optionIndex].value.Available,
+        var controlSubtype = control.controls[e.target.getAttribute('option-subtype')];
+        controlSubtype.controls[e.target.value].setValue({
+            MetaDataId: controlSubtype.controls[e.target.value].value.MetaDataId,
+            MetaDataName: controlSubtype.controls[e.target.value].value.MetaDataName,
+            Available: !controlSubtype.controls[e.target.value].value.Available,
         });
-        */
+        //console.log('Control metadata after', e.target.value, controlSubtype)
+    };
+    PropertyMetafilterComponent.prototype.removeMetafilter = function (el) {
+        var control = this.propertyForm.controls['MetaDataTmp'];
+        var controlSubtype = control.controls[el.type];
+        controlSubtype.controls[el.index].setValue({
+            MetaDataId: controlSubtype.controls[el.index].value.MetaDataId,
+            MetaDataName: controlSubtype.controls[el.index].value.MetaDataName,
+            Available: !controlSubtype.controls[el.index].value.Available,
+        });
     };
     __decorate([
         core_1.Input('metadata'), 

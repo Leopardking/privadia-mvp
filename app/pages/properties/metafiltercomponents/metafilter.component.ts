@@ -16,7 +16,6 @@ export class PropertyMetafilterComponent implements OnInit{
 	@Input('group')
 	public propertyForm: FormGroup;
 
-
 	//@ViewChild('metafilterHeading') metafilterHeading;
 
 	public metafilters;
@@ -59,24 +58,31 @@ export class PropertyMetafilterComponent implements OnInit{
 	}
 
 	private subfilterChange(e) {
-		let optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
-		let optionName = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-name') : e.target.parentElement.parentElement.getAttribute('option-name');
-		let optionSubtype = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-subtype') : e.target.parentElement.parentElement.getAttribute('option-subtype');
-		let optionIndex = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-index') : e.target.parentElement.parentElement.getAttribute('option-index');
-        this.metafilters[optionId] = !this.metafilters[optionId];
+		// let optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
+		// let optionName = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-name') : e.target.parentElement.parentElement.getAttribute('option-name');
+		// let optionSubtype = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-subtype') : e.target.parentElement.parentElement.getAttribute('option-subtype');
+		// let optionIndex = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-index') : e.target.parentElement.parentElement.getAttribute('option-index');
+        /// this.metafilters[optionId] = !this.metafilters[optionId];
 
    		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
-		const controlSubtype = <FormArray>control.controls['type_' + optionSubtype];
-		console.log('Control metadata after', e.target.value, optionId, optionName, optionSubtype, optionIndex)
-		/*
-		controlSubtype.controls[optionIndex].setValue({
-			MetaDataId: optionId,
-			MetaDataName: optionName,
-			Available: !controlSubtype.controls[optionIndex].value.Available,
+		const controlSubtype = <FormArray>control.controls[e.target.getAttribute('option-subtype')];
+		controlSubtype.controls[e.target.value].setValue({
+			MetaDataId: controlSubtype.controls[e.target.value].value.MetaDataId,
+			MetaDataName: controlSubtype.controls[e.target.value].value.MetaDataName,
+			Available: !controlSubtype.controls[e.target.value].value.Available,
 		});
-		*/
+		//console.log('Control metadata after', e.target.value, controlSubtype)
 	}
 
+	private removeMetafilter(el) {
+		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
+		const controlSubtype = <FormArray>control.controls[el.type];
+		controlSubtype.controls[el.index].setValue({
+			MetaDataId: controlSubtype.controls[el.index].value.MetaDataId,
+			MetaDataName: controlSubtype.controls[el.index].value.MetaDataName,
+			Available: !controlSubtype.controls[el.index].value.Available,
+		});
+	}
 
 // 	let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
 // 	return {
@@ -86,25 +92,4 @@ export class PropertyMetafilterComponent implements OnInit{
 // 		PointOfInterestTypeId: item.Id
 // 	};
 // })
-
-
-	// Available
-	// 	:
-	// 	true
-	// Distance
-	// 	:
-	// 	10
-	// Id
-	// 	:
-	// 	8
-	// Name
-	// 	:
-	// 	"test bar"
-	// PointOfInterestTypeId
-	// 	:
-	// 	4
-	// PointOfInterestTypeName
-	// 	:
-	// 	"Bar"
-
 }
