@@ -19,6 +19,7 @@ declare var $:any;
 export class AddpropertyComponent implements OnInit{
     // private isActive = true;
     private isLoad = true;
+    private errorForm = false;
 
     public propertyForm = new FormGroup ({
         Active: new FormControl(true),
@@ -221,6 +222,8 @@ export class AddpropertyComponent implements OnInit{
                 },
                 e => { console.log("error:", e); }
             );
+        } else {
+            this.errorForm = true;
         }
         console.log('Property Form ', this.propertyForm);
         console.log('Property Form Value ', this.propertyForm.value);

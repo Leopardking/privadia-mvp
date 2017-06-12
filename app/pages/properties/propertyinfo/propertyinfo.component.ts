@@ -19,6 +19,9 @@ export class PropertyinfoComponent implements OnInit{
     @Input('group')
     public propertyForm: FormGroup;
 
+    @Input('errorForm')
+    public errorForm: any;
+
     @ViewChild('villadescription') villadescription;
 
     // name & address

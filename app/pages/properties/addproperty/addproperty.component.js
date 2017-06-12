@@ -20,6 +20,7 @@ var AddpropertyComponent = (function () {
         this.builder = builder;
         // private isActive = true;
         this.isLoad = true;
+        this.errorForm = false;
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
             OwnerName: new forms_1.FormControl(),
@@ -204,6 +205,9 @@ var AddpropertyComponent = (function () {
                 });
                 _this.mainService.readData();
             }, function (e) { console.log("error:", e); });
+        }
+        else {
+            this.errorForm = true;
         }
         console.log('Property Form ', this.propertyForm);
         console.log('Property Form Value ', this.propertyForm.value);

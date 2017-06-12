@@ -106,6 +106,10 @@ var PropertyinfoComponent = (function () {
         __metadata('design:type', forms_1.FormGroup)
     ], PropertyinfoComponent.prototype, "propertyForm", void 0);
     __decorate([
+        core_1.Input('errorForm'), 
+        __metadata('design:type', Object)
+    ], PropertyinfoComponent.prototype, "errorForm", void 0);
+    __decorate([
         core_1.ViewChild('villadescription'), 
         __metadata('design:type', Object)
     ], PropertyinfoComponent.prototype, "villadescription", void 0);

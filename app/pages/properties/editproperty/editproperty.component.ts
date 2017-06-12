@@ -37,6 +37,7 @@ export class EditpropertyComponent implements OnInit{
     //propertyForm: any;
     private isLoad = false;
 
+    private errorForm = false;
     public propertyForm = new FormGroup ({});
 
     constructor ( private mainService: MainService,
@@ -372,6 +373,8 @@ export class EditpropertyComponent implements OnInit{
                 },
                 e => { console.log("error:", e); }
             );
+        } else {
+            this.errorForm = true;
         }
 
         console.log('Property Form ', this.propertyForm);

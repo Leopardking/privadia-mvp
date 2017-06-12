@@ -45,7 +45,7 @@
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <div class="form-group label-floating">
+                    <div class="form-group label-floating" [ngClass]="{'has-error': !propertyForm.controls['Name'].valid && errorForm}">
                         <label class="control-label">Official Name *</label>
                         <input type="text" class="form-control" formControlName="Name">
                     </div>
@@ -62,7 +62,8 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div id="regionName"
-                         class="form-group label-floating">
+                         class="form-group label-floating"
+                         [ngClass]="{'has-error':!propertyForm.controls['Region'].valid && errorForm}">
                         <label class="control-label">Select Region *</label>
                         <input class="form-control"
                                ng2-auto-complete
@@ -191,37 +192,37 @@
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="form-group label-floating">
+                    <div class="form-group label-floating"[ngClass]="{'has-error':!propertyForm.controls['Bathrooms'].valid && errorForm}">
                         <label class="control-label">Number of Bathrooms</label>
                         <input type="number" class="form-control" formControlName="Bathrooms">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="form-group label-floating">
+                    <div class="form-group label-floating" [ngClass]="{'has-error':!propertyForm.controls['Bedrooms'].valid && errorForm}">
                         <label class="control-label">Number of bedrooms</label>
                         <input type="number" class="form-control" formControlName="Bedrooms">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="form-group label-floating">
+                    <div class="form-group label-floating" [ngClass]="{'has-error':!propertyForm.controls['Sleeps'].valid && errorForm}">
                         <label class="control-label">Sleeps</label>
                         <input type="number" class="form-control" formControlName="Sleeps">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="form-group label-floating">
+                    <div class="form-group label-floating" [ngClass]="{'has-error':!propertyForm.controls['Capacity'].valid && errorForm}">
                         <label class="control-label">Maximum Capacity</label>
                         <input type="number" class="form-control" formControlName="Capacity">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="form-group label-floating">
+                    <div class="form-group label-floating" [ngClass]="{'has-error':!propertyForm.controls['LivingAreaSize'].valid && errorForm}">
                         <label class="control-label">Living Area (m<sup>2</sup>)</label>
                         <input type="number" class="form-control" formControlName="LivingAreaSize">
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div class="form-group label-floating">
+                    <div class="form-group label-floating" [ngClass]="{'has-error':!propertyForm.controls['DiningCapacity'].valid && errorForm}">
                         <label class="control-label">Dining Capacity</label>
                         <input type="number" class="form-control" formControlName="DiningCapacity">
                     </div>

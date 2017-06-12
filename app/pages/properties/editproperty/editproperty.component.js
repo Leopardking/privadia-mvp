@@ -28,6 +28,7 @@ var EditpropertyComponent = (function () {
         this.property = [];
         //propertyForm: any;
         this.isLoad = false;
+        this.errorForm = false;
         this.propertyForm = new forms_1.FormGroup({});
         console.log('this.property mainService', this.mainService.metadata);
     }
@@ -337,6 +338,9 @@ var EditpropertyComponent = (function () {
                 });
                 _this.mainService.readData();
             }, function (e) { console.log("error:", e); });
+        }
+        else {
+            this.errorForm = true;
         }
         console.log('Property Form ', this.propertyForm);
         console.log('Property Form Value ', this.propertyForm.value);
