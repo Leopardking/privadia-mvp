@@ -62,7 +62,7 @@
                         </ul>
                         <div class="tab-content m-l-r-20-negative m-t-25">
                             <!--  Property Info  -->
-                            <div id="metatab-info" class="active card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
+                            <div id="metatab-info" class="fade active in card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
                                 <propertyinfo-cmp [group]="propertyForm"></propertyinfo-cmp>
                                 <div class="card-content p-b-none">
                                     <div class="row">
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <!--  Property Image  -->
-                            <div id="metatab-images" class="card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
+                            <div id="metatab-images" class="fade card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
                                 <propertyimage-cmp [group]="propertyForm"></propertyimage-cmp>
                                 <div class="card-content p-b-none">
                                     <div class="row">
@@ -87,7 +87,7 @@
                                 </div>
                             </div>
                             <!--  Property Availability -->
-                            <div id="metatab-availability" class="card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
+                            <div id="metatab-availability" class="fade card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
                                 <div class="card-content p-b-none">
                                     <div class="row">
                                         <div class="col-xs-6">
@@ -100,7 +100,7 @@
                                 </div>
                             </div>
                             <!--  Property Marketing  -->
-                            <div id="metatab-marketing" class="card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
+                            <div id="metatab-marketing" class="fade card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
                                 <propertymarketing-cmp [group]="propertyForm"></propertymarketing-cmp>
                                 <div class="card-content p-b-none">
                                     <div class="row">
@@ -114,7 +114,7 @@
                                 </div>
                             </div>
 
-                            <div id="metatab-property-4" class="card-content p-b-none p-t-none" *ngIf="mainService.metadata[3] && isLoad">
+                            <div id="metatab-property-4" class="fade card-content p-b-none p-t-none" *ngIf="mainService.metadata[3] && isLoad">
                                 <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[3]"></property-metafilter-cmp>
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -126,7 +126,7 @@
                                 </div>
                             </div>
 
-                            <div id="metatab-property-3" class="card-content p-b-none p-t-none" *ngIf="mainService.metadata[2] && isLoad">
+                            <div id="metatab-property-3" class="fade card-content p-b-none p-t-none" *ngIf="mainService.metadata[2] && isLoad">
                                 <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[2]" #localActivities></property-metafilter-cmp>
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -138,7 +138,7 @@
                                 </div>
                             </div>
 
-                            <div id="metatab-property-6" class="card-content p-b-none p-t-none" *ngIf="mainService.metadata[5] && isLoad">
+                            <div id="metatab-property-6" class="fade card-content p-b-none p-t-none" *ngIf="mainService.metadata[5] && isLoad">
                                 <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[5]" #features></property-metafilter-cmp>
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -150,7 +150,7 @@
                                 </div>
                             </div>
 
-                            <div id="metatab-property-2" class="card-content p-b-none p-t-none" *ngIf="mainService.metadata[1] && isLoad">
+                            <div id="metatab-property-2" class="fade card-content p-b-none p-t-none" *ngIf="mainService.metadata[1] && isLoad">
                                 <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[1]" #services></property-metafilter-cmp>
                                 <div class="row">
                                     <div class="col-xs-6">
@@ -162,7 +162,7 @@
                                 </div>
                             </div>
 
-                            <div id="metatab-property-1" class="card-content p-b-none p-t-none" *ngIf="mainService.metadata[0] && isLoad">
+                            <div id="metatab-property-1" class="fade card-content p-b-none p-t-none" *ngIf="mainService.metadata[0] && isLoad">
                                 <property-metafilter-cmp [group]="propertyForm" [metadata]="mainService.metadata[0]" #trip></property-metafilter-cmp>
                                 <div class="row">
                                     <div class="col-xs-6">

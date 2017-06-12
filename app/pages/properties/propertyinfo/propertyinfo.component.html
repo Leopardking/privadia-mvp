@@ -27,7 +27,7 @@
 </ul>
 <div class="tab-content">
     <!--  Property Info  -->
-    <div id="heading-name_address" class="active card-content">
+    <div id="heading-name_address" class="fade active in card-content">
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-xs-12">
@@ -80,7 +80,7 @@
         </div>
     </div>
     <!--  Property Image  -->
-    <div id="heading-description" class="card-content">
+    <div id="heading-description" class="fade card-content">
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-xs-12">
@@ -138,7 +138,7 @@
         </div>
     </div>
     <!--  Property Marketing  -->
-    <div id="heading-admin_info" class="card-content">
+    <div id="heading-admin_info" class="fade card-content">
         <div [formGroup]="propertyForm" >
             <div formArrayName="Contacts" class="row">
                 <div class="contact col-xs-12 col-sm-6 col-md-4" *ngFor="let control of propertyForm.controls.Contacts.controls; let i = index">
@@ -187,7 +187,7 @@
         </div>
     </div>
 
-    <div id="heading-size_rooms" class="card-content">
+    <div id="heading-size_rooms" class="fade card-content">
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-4">
@@ -308,7 +308,7 @@
         </div>
     </div>
 
-    <div id="heading-conditions" class="card-content">
+    <div id="heading-conditions" class="fade card-content">
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-xs-12">
