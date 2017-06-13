@@ -61,6 +61,8 @@ var PropertyimageoComponent = (function () {
         };
         //$.getScript('../../../../assets/js/init/initImageGallery.js');
     };
+    PropertyimageoComponent.prototype.deleteImage = function (item) {
+    };
     PropertyimageoComponent.prototype.uploadImage = function () {
     };
     PropertyimageoComponent.prototype.fileChange = function () {

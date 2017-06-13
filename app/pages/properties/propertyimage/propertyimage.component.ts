@@ -75,6 +75,10 @@ export class PropertyimageoComponent implements OnInit{
 		//$.getScript('../../../../assets/js/init/initImageGallery.js');
 	}
 
+	private deleteImage(item) {
+
+	}
+
 	private uploadImage() {
 	}
 

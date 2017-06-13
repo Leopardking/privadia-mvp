@@ -1,3 +1,33 @@
+.image-hover .delete-image {
+    display: none;
+}
+.image-hover:hover .delete-image {
+    display: block;
+    position: absolute;
+    top:0px;
+    left:15px;
+    right:15px;
+    bottom: 0px;
+    background-color: rgba(255,255,255,.36);
+    cursor: pointer;
+}
+.image-hover .delete-image .material-icons {
+    font-size: 48px;
+    color: #bfbfbf;
+    width: 88px;
+    height: 88px;
+    background-color: #fff;
+    text-align: center;
+    line-height: 88px;
+    border-radius: 50%;
+    position: absolute;
+    left:50%;
+    margin-left: -44px;
+    top:50%;
+    margin-top: -44px;
+}
+
+
 /* jssor slider arrow navigator skin 05 css */
         /*
         .jssora05l                  (normal)

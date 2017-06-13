@@ -1,8 +1,19 @@
 <div class="card-content">
     <div class="row">
-        <div *ngFor="let item of propertyForm.controls.Images.value" class="col-xs-3 m-b-15">
-            <cl-image data-u="image" public-id="{{item.ImageId}}" cloud-name="privadia" class="md-card-image" crop="fill" quality="80" height="560" width="860" format="jpg">
+        <div *ngFor="let item of propertyForm.controls.Images.value" class="col-xs-3 m-b-15 image-hover">
+            <cl-image data-u="image"
+                      public-id="{{item.ImageId}}"
+                      cloud-name="privadia"
+                      class="md-card-image"
+                      crop="fill"
+                      quality="80"
+                      height="560"
+                      width="860"
+                      format="jpg">
             </cl-image>
+            <a class="delete-image hidden" (click)="deleteImage(item)" >
+                <i class="material-icons">delete</i>
+            </a>
         </div>
     </div>
     <div class="row">
