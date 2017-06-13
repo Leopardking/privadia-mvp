@@ -17,10 +17,10 @@ export class CalendarComponent implements OnInit{
 	@Input('group')
 	private propertyForm: FormGroup;
 	private selected;
-	private month;
+	//private month;
 	private months;
 	private weeks;
-	private date;
+	//private date;
 	private bookingDays;
 
 	private startCalendar;

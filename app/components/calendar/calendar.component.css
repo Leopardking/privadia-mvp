@@ -40,4 +40,11 @@
 .month-container {
 
 }
-
+.form-text .control-label {
+	font-size: 16px;
+	color: #3a3a3a;
+}
+.form-text span {
+	font-size: 16px;
+	color: #5399bc;
+}

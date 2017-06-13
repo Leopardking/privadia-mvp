@@ -1,4 +1,22 @@
-<div class="calendar-container">
+<div [formGroup]="propertyForm" class="calendar-container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group form-text">
+                <label class="control-label">iCal url:</label>
+                <span>http://privadia-api-dev.azurewebsites.net/Bookings/ICal/1</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="form-group label-floating">
+                <label class="control-label">Minimum Days Stay</label>
+                <input type="number" class="form-control">
+            </div>
+        </div>
+    </div>
+
     <div class="c-button-group">
         <a (click)="changeYear(-1)"
            class="btn btn-round btn-fab btn-fab-mini btn-white">
