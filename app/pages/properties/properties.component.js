@@ -9,14 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var homeservice_1 = require('../../providers/homeservice');
+var homeservice_1 = require('./../../providers/homeservice');
+var properties_service_1 = require('./../../providers/properties/properties.service');
+//import initDataTable = require('../../../assets/js/init/initDataTable.js');
 var PropertiesComponent = (function () {
-    function PropertiesComponent(mainService) {
+    //private properties = [];
+    //private addPropertyLink = "addproperty";
+    function PropertiesComponent(mainService, propertyService) {
         this.mainService = mainService;
-        this.addproperty = false;
+        this.propertyService = propertyService;
+        // private addproperty = false;
         this.datatableInited = false;
-        //private properties = [];
-        this.addPropertyLink = "addproperty";
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertiesComponent.prototype.ngOnInit = function () {
@@ -33,6 +36,13 @@ var PropertiesComponent = (function () {
         });
         this.datatableInited = true;
     };
+    PropertiesComponent.prototype.removeProperty = function (el) {
+        var _this = this;
+        this.propertyService.deleteProperty(el.propertyId).subscribe(function (d) {
+            _this.mainService.properties.splice(el.index, 1);
+            console.log('Delete property ', d);
+        }, function (e) { console.log("error:", e); });
+    };
     PropertiesComponent.prototype.addBooking = function () {
         console.log('add');
     };
@@ -46,7 +56,7 @@ var PropertiesComponent = (function () {
             templateUrl: 'properties.component.html',
             styleUrls: ['properties.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService])
+        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService])
     ], PropertiesComponent);
     return PropertiesComponent;
 }());

@@ -3,7 +3,7 @@
         <div class="toolbar">
             <!-- Here you can write extra buttons/actions for the toolbar              -->
             <button class="btn btn-simple btn-success btn-icon pull-right secondary-color shadow-grey"
-                    [routerLink]="addPropertyLink"><i class="material-icons">add</i> Add Property
+                    [routerLink]="['addproperty']"><i class="material-icons">add</i> Add Property
             </button>
         </div>
         <div class="row">
@@ -56,7 +56,8 @@
                                             <i class="material-icons">edit</i>Edit
                                         </button>
                                         <button class="btn btn-simple btn-delete btn-icon"
-                                                routerLink="/properties/editproperty/{{item.Id}}">
+                                                type="button"
+                                                (click)="removeProperty({index: i, propertyId: item.Id})">
                                             <i class="material-icons">delete</i>Remove
                                         </button>
                                     </td>

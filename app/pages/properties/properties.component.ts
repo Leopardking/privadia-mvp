@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MainService } from '../../providers/homeservice';
+import { MainService } from './../../providers/homeservice';
+import { PropertiesService } from './../../providers/properties/properties.service';
 
 
-import initDataTable = require('../../../assets/js/init/initDataTable.js');
+//import initDataTable = require('../../../assets/js/init/initDataTable.js');
 
 @Component({
     moduleId: module.id,
@@ -13,16 +14,17 @@ import initDataTable = require('../../../assets/js/init/initDataTable.js');
 })
 
 export class PropertiesComponent implements OnInit{
-    private addproperty = false;
+    // private addproperty = false;
 
     private datatableInited = false;
     private tableWidget: any;
 
     //private properties = [];
-    private addPropertyLink = "addproperty";
+    //private addPropertyLink = "addproperty";
 
 
-    constructor ( private mainService: MainService) {}
+    constructor ( private mainService: MainService,
+                  private propertyService: PropertiesService ) {}
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
@@ -39,6 +41,16 @@ export class PropertiesComponent implements OnInit{
             info: false,
         });
         this.datatableInited = true;
+    }
+
+    private removeProperty(el) {
+        this.propertyService.deleteProperty(el.propertyId).subscribe(
+            d => {
+                this.mainService.properties.splice(el.index,1);
+                console.log('Delete property ', d);
+            },
+            e => { console.log("error:", e); }
+        );
     }
 
     private addBooking() {
