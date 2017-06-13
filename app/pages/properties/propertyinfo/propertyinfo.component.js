@@ -54,6 +54,7 @@ var PropertyinfoComponent = (function () {
             _this.regionArray = d;
             _this.regions = d.map(function (item, i) { return item.Name; });
         }, function (e) { console.log("error: ", e); });
+        $.getScript('../../../../assets/js/core/bootstrap.min.js');
     };
     PropertyinfoComponent.prototype.showAddContact = function () {
         var control = this.propertyForm.controls['Contacts'];
@@ -100,6 +101,16 @@ var PropertyinfoComponent = (function () {
         controlName.setValue(e.Name);
         $("#regionName").removeClass('is-empty');
         $("#regionName").removeClass('has-error');
+    };
+    PropertyinfoComponent.prototype.changeTab = function (e) {
+        //$(e.target.getAttribute('href')).tab('show')
+        /*
+        $('a[data-toggle="tab2"]').on('shown.bs.tab', function (e) {
+            e.target // newly activated tab
+            e.relatedTarget // previous active tab
+        })
+        */
+        console.log('Change tab', e.target.getAttribute('href'));
     };
     __decorate([
         core_1.Input('group'), 

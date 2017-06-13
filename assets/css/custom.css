@@ -35,12 +35,12 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	background-color: #5399bc !important;
 	color: white !important;
 }
-
+/*
 .nav-pills.nav-pills-grey > li.active > a, .nav-pills.nav-pills-grey > li.active > a:focus, .nav-pills.nav-pills-grey > li.active > a:hover {
   	background-color: #00bcd4;
   	box-shadow: 0 3px 10px 0px rgba(100, 100, 100, 1), 0 7px 10px -5px rgba(0, 188, 212, 0.4);
 }
-
+*/
 .shadow-grey {
 	box-shadow: none !important;
 }

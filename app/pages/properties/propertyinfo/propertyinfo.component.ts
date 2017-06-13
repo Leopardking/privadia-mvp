@@ -24,6 +24,7 @@ export class PropertyinfoComponent implements OnInit{
 
     @ViewChild('villadescription') villadescription;
 
+    //public changeTab
     // name & address
     // public contacts;
     public bedrooms;
@@ -85,6 +86,7 @@ export class PropertyinfoComponent implements OnInit{
             },
             e => { console.log("error: ", e); }
         )
+        $.getScript('../../../../assets/js/core/bootstrap.min.js');
     }
 
     private autocompleListFormatter = (data: any) : SafeHtml => {
@@ -154,6 +156,16 @@ export class PropertyinfoComponent implements OnInit{
         $("#regionName").removeClass('has-error');
     }
 
+    public changeTab(e) {
+        //$(e.target.getAttribute('href')).tab('show')
+        /*
+        $('a[data-toggle="tab2"]').on('shown.bs.tab', function (e) {
+            e.target // newly activated tab
+            e.relatedTarget // previous active tab
+        })
+        */
+        console.log('Change tab',e.target.getAttribute('href'))
+    }
     /*
      private ownerChanged(e) {
          this.ownerName = e;

@@ -27,7 +27,7 @@
 </ul>
 <div class="tab-content">
     <!--  Property Info  -->
-    <div id="heading-name_address" class="fade active in card-content">
+    <div id="heading-name_address" class="tab-pane fade active in card-content p-b-none">
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-xs-12">
@@ -79,9 +79,14 @@
                 </div>
             </div>
         </div>
+        <div class="row p-b-none">
+            <div class="col-xs-offset-6 col-xs-6">
+                <a href="#heading-description" role="tab" data-toggle="tab" class="btn btn-success pull-right" (click)="changeTab($event)">Next</a>
+            </div>
+        </div>
     </div>
     <!--  Property Image  -->
-    <div id="heading-description" class="fade card-content">
+    <div id="heading-description" class="fade card-content p-b-none">
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-xs-12">
@@ -137,9 +142,17 @@
                 </div>
             </div>
         </div>
+        <div class="row p-b-none">
+            <div class="col-xs-6">
+                <a href="#heading-name_address" role="tab" data-toggle="tab" class="btn btn-success">Back</a>
+            </div>
+            <div class="col-xs-6">
+                <a href="#heading-admin_info" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</a>
+            </div>
+        </div>
     </div>
     <!--  Property Marketing  -->
-    <div id="heading-admin_info" class="fade card-content">
+    <div id="heading-admin_info" class="fade card-content p-b-none">
         <div [formGroup]="propertyForm" >
             <div formArrayName="Contacts" class="row">
                 <div class="contact col-xs-12 col-sm-6 col-md-4" *ngFor="let control of propertyForm.controls.Contacts.controls; let i = index">
@@ -186,9 +199,17 @@
                 </div>
             </div>
         </div>
+        <div class="row p-b-none">
+            <div class="col-xs-6">
+                <a href="#heading-description" role="tab" data-toggle="tab" class="btn btn-success">Back</a>
+            </div>
+            <div class="col-xs-6">
+                <a href="#heading-size_rooms" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</a>
+            </div>
+        </div>
     </div>
 
-    <div id="heading-size_rooms" class="fade card-content">
+    <div id="heading-size_rooms" class="fade card-content p-b-none">
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-sm-12 col-md-6 col-lg-4">
@@ -307,9 +328,17 @@
                 </div>
             </div>
         </div>
+        <div class="row p-b-none">
+            <div class="col-xs-6">
+                <a href="#heading-size_rooms" role="tab" data-toggle="tab" class="btn btn-success">Back</a>
+            </div>
+            <div class="col-xs-6">
+                <a href="#heading-conditions" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</a>
+            </div>
+        </div>
     </div>
 
-    <div id="heading-conditions" class="fade card-content">
+    <div id="heading-conditions" class="fade card-content p-b-none">
         <div [formGroup]="propertyForm">
             <div class="row">
                 <div class="col-xs-12">
@@ -355,6 +384,14 @@
                         <input type="checkbox" formControlName="EventsAllowed"> Events Allowed
                     </label>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <a href="#heading-conditions" role="tab" data-toggle="tab" class="btn btn-success">Back</a>
+            </div>
+            <div class="col-xs-offset-6 col-xs-6">
+                <a href="#metatab-images" role="tab" data-toggle="tab" class="btn btn-success pull-right">Finish</a>
             </div>
         </div>
     </div>
