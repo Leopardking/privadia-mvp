@@ -1,5 +1,40 @@
-<div>
-    <div class="card-calendar">
-        <div id="fullCalendar"></div>
+<div class="calendar-container">
+    <div class="c-button-group">
+        <a (click)="changeYear(-1)"
+           class="btn btn-round btn-fab btn-fab-mini btn-white">
+            <i class="material-icons">keyboard_arrow_left</i>
+        </a>
+        <span class="yearNumber">{{selected.format("YYYY")}}</span>
+        <a (click)="changeYear(1)"
+           class="btn btn-round btn-fab btn-fab-mini btn-white">
+            <i class="material-icons">keyboard_arrow_right</i>
+        </a>
+    </div>
+    <div class="row">
+        <div class="month-container col-xs-4" *ngFor="let month of months">
+            <div class="month">
+                <span class="month-label">{{month.monthName}}</span><br/><br/>
+                <table>
+                    <thead>
+                    <tr class="week names">
+                        <th class="day">S</th>
+                        <th class="day">M</th>
+                        <th class="day">T</th>
+                        <th class="day">W</th>
+                        <th class="day">T</th>
+                        <th class="day">F</th>
+                        <th class="day">S</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="week" *ngFor="let week of month.weeks">
+                        <td *ngFor="let day of week.days"
+                            class="day {{isIn(day.number,day.isCurrentMonth)}}"
+                            [ngClass]="{'different-month': !day.isCurrentMonth }">{{day.number}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

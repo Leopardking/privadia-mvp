@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-content p-b-15">
                         <ul class="nav nav-pills">
-                            <li class="nav-pill active">
+                            <li class="nav-pill">
                                 <a href="#metatab-info" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">store</i>
                                     Property Info
@@ -17,7 +17,7 @@
                                     Images
                                 </a>
                             </li>
-                            <li class="nav-pill">
+                            <li class="nav-pill active">
                                 <a href="#metatab-availability" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">check_circle</i>
                                     Availability
@@ -62,7 +62,7 @@
                         </ul>
                         <div class="tab-content m-l-r-20-negative m-t-25">
                             <!--  Property Info  -->
-                            <div id="metatab-info" class="fade active in card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
+                            <div id="metatab-info" class="fade card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
                                 <propertyinfo-cmp [group]="propertyForm" [errorForm]="errorForm"></propertyinfo-cmp>
                             </div>
                             <!--  Property Image  -->
@@ -70,10 +70,8 @@
                                 <propertyimage-cmp [group]="propertyForm"></propertyimage-cmp>
                             </div>
                             <!--  Property Availability -->
-                            <div id="metatab-availability" class="fade card-content p-b-none p-t-none">
-                                <!--
-                                    <calendar-cmp [group]="propertyForm"></calendar-cmp>
-                                -->
+                            <div id="metatab-availability" class="fade active in card-content p-b-none p-t-none">
+                                <calendar-cmp [group]="propertyForm"></calendar-cmp>
                             </div>
                             <!--  Property Marketing  -->
                             <div id="metatab-marketing" class="fade card-content p-b-none p-l-r-none p-t-none">
