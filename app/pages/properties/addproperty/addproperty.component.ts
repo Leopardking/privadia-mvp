@@ -223,7 +223,7 @@ export class AddpropertyComponent implements OnInit{
                 e => { console.log("error:", e); }
             );
         } else {
-            this.errorForm = true;
+            this.errorForm = true
         }
         console.log('Property Form ', this.propertyForm);
         console.log('Property Form Value ', this.propertyForm.value);

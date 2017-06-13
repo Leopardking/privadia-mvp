@@ -7,6 +7,7 @@ import {PropertyimageoComponent} from "../propertyimage/propertyimage.component"
 import {PropertymarketingComponent} from "../marketing/propertymarketing.component";
 import {MetafilterheadingComponent} from "../metafilterheading/metafilterheading.component";
 import {PropertyMetafilterComponent} from "../metafiltercomponents/metafilter.component";
+import {CalendarComponent} from "./../../../components/calendar/calendar.component";
 
 export const MODULE_ROUTES: Route[] =[
     { path: '', component: AddpropertyComponent },
@@ -29,4 +30,5 @@ export const MODULE_COMPONENTS = [
     PropertyinfoComponent,
     PropertyimageoComponent,
     PropertymarketingComponent,
+    CalendarComponent,
 ];
