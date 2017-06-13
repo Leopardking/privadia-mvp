@@ -300,6 +300,32 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	text-transform: none;
 }
 
+/**
+ *  Calendar
+ */
+.fc-toolbar h2 {
+	font-size: 24px;
+	font-weight: 100;
+	color: #0b5a7c;
+}
+.card-calendar .fc .fc-body td:first-child {
+	border-left: 1px solid #ddd;
+}
+.card-calendar .fc .fc-body td:last-child {
+	border-right: 1px solid #ddd;
+}
+.card-calendar .fc {
+	margin-bottom: 5px;
+	border-bottom: 1px solid #ddd;
+}
+.card-calendar .fc span.fc-day-number {
+	color: #000;
+	font-size: 14px;
+	font-weight: 100;
+}
+.card-calendar .fc .fc-other-month span.fc-day-number {
+	color: #b3b3b3;
+}
 
 
 

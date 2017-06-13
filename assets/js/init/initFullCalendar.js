@@ -17,8 +17,8 @@ if ('undefined' !== typeof module) {
             },
             header: {
 				left: 'title',
-				center: 'month,agendaWeek,agendaDay',
-				right: 'prev,next,today'
+				//center: 'month,agendaWeek,agendaDay',
+				right: 'prev,next'
 			},
 			defaultDate: today,
 			selectable: true,
@@ -70,12 +70,12 @@ if ('undefined' !== typeof module) {
 			eventLimit: true, // allow "more" link when too many events
 
 
-            // color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
-            events: [
+			// color classes: [ event-blue | event-azure | event-green | event-orange | event-red ]
+			events: [
 				{
 					title: 'All Day Event',
 					start: new Date(y, m, 1),
-                    className: 'event-default'
+					className: 'event-default'
 				},
 				{
 					id: 999,
