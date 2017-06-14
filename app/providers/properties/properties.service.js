@@ -13,6 +13,7 @@ var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
+require('rxjs/add/observable/throw');
 var PropertiesService = (function () {
     function PropertiesService(http) {
         this.http = http;
@@ -56,6 +57,14 @@ var PropertiesService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.delete(this.apiUrl + '/api/properties/' + id, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    PropertiesService.prototype.getRates = function (id) {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        this.isReading = true;
+        return this.http.delete(this.apiUrl + '/api/rates/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -117,6 +126,7 @@ var PropertiesService = (function () {
         if (error instanceof http_1.Response) {
             var body = error.json() || '';
             var err = body.error || JSON.stringify(body);
+            console.log('body', err);
             errMsg = error.status + " - " + (error.statusText || '') + " " + err;
         }
         else {

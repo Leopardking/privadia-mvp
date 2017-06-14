@@ -19,9 +19,11 @@ h5 {
 	font-size: 18px;
 	color: #3a3a3a;
 }
+/*
 .bootstrap-datetimepicker-widget {
 	left: -33px !important;
 }
+*/
 body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	display: none;
 }
@@ -74,6 +76,17 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .pagination .paginate_button a {
 	color: #262626;
 }
+
+/**
+ *  Text color
+*/
+.text-primary {
+	color: #0b5a7c;
+}
+.text-danger {
+	color: #b71c1c;
+}
+
 
 /**
  *  Pagination style table
@@ -327,6 +340,14 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	color: #b3b3b3;
 }
 
-
-
-
+/**
+ * DateTimePicker
+ */
+.bootstrap-datetimepicker-widget {
+	box-shadow: 0 0 10px 0 rgba(170, 168, 168, 0.4);
+	border-radius: 0px;
+}
+.bootstrap-datetimepicker-widget table td.active > div, .bootstrap-datetimepicker-widget table td.active:hover > div {
+	background-color: #5399bc;
+	box-shadow: none;
+}
