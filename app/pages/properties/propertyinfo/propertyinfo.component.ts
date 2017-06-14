@@ -85,8 +85,7 @@ export class PropertyinfoComponent implements OnInit{
                 this.regions = d.map( (item, i) => { return item.Name; } );
             },
             e => { console.log("error: ", e); }
-        )
-        $.getScript('../../../../assets/js/core/bootstrap.min.js');
+        );
     }
 
     private autocompleListFormatter = (data: any) : SafeHtml => {
