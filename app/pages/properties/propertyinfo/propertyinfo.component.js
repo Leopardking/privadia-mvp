@@ -54,7 +54,6 @@ var PropertyinfoComponent = (function () {
             _this.regionArray = d;
             _this.regions = d.map(function (item, i) { return item.Name; });
         }, function (e) { console.log("error: ", e); });
-        $.getScript('../../../../assets/js/core/bootstrap.min.js');
     };
     PropertyinfoComponent.prototype.showAddContact = function () {
         var control = this.propertyForm.controls['Contacts'];
