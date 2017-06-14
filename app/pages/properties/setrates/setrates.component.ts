@@ -139,8 +139,10 @@ export class SetratesComponent implements OnInit{
         }, 100);
     }
 
-    private removeRates() {
+    private removeRates(object) {
         console.log('removeRates')
+        const control = <FormArray>this.ratesForm.controls['Rates'];
+        control.removeAt(object.index);
     }
 
     private addRow() {

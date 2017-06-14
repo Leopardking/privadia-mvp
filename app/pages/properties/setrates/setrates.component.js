@@ -127,8 +127,10 @@ var SetratesComponent = (function () {
             initDatetimepickers();
         }, 100);
     };
-    SetratesComponent.prototype.removeRates = function () {
+    SetratesComponent.prototype.removeRates = function (object) {
         console.log('removeRates');
+        var control = this.ratesForm.controls['Rates'];
+        control.removeAt(object.index);
     };
     SetratesComponent.prototype.addRow = function () {
         var control = this.ratesForm.controls['Rates'];

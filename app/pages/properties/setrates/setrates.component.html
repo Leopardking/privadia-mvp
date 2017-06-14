@@ -75,7 +75,7 @@
                                             <button class="btn btn-simple btn-edit btn-icon"
                                                     type="button"
                                                     *ngIf="!isEdit[i]"
-                                                    (click)="editRates({index: i, propertyId: 1, isEdit: true})">
+                                                    (click)="editRates({index: i, propertyId: 1})">
                                                 <i class="material-icons text-primary">edit</i>
                                             </button>
                                             <button class="btn btn-simple btn-delete btn-icon"
@@ -87,7 +87,7 @@
                                             <button class="btn btn-simple btn-edit btn-icon"
                                                     type="button"
                                                     *ngIf="isEdit[i]"
-                                                    (click)="editRates({index: i, propertyId: 1, isEdit: false})">
+                                                    (click)="editRates({index: i, propertyId: 1})">
                                                 <i class="material-icons text-primary">done</i>
                                             </button>
                                             <button class="btn btn-simple btn-delete btn-icon"
