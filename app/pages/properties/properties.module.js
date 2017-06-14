@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var properties_routes_1 = require('./properties.routes');
 var common_1 = require("@angular/common");
+var forms_1 = require("@angular/forms");
 var PropertiesModule = (function () {
     function PropertiesModule() {
     }
@@ -19,6 +20,8 @@ var PropertiesModule = (function () {
         core_1.NgModule({
             imports: [
                 common_1.CommonModule,
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 // Ng2CloudinaryModule,
                 // FileUploadModule,
                 router_1.RouterModule.forChild(properties_routes_1.MODULE_ROUTES)

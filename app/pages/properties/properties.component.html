@@ -48,7 +48,8 @@
                                         <div class="property-status active" *ngIf="item.Active">Active</div>
                                     </td>
                                     <td class="text-right">
-                                        <button class="btn btn-simple btn-set-rates btn-icon">
+                                        <button class="btn btn-simple btn-set-rates btn-icon"
+                                                [routerLink]="['/properties/setrates', item.Id]">
                                             <i class="material-icons">attach_money</i>Set Rates
                                         </button>
                                         <button class="btn btn-simple btn-edit btn-icon"
