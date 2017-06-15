@@ -299,6 +299,10 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .btn.btn-danger:hover, .btn.btn-danger:active, .btn.btn-danger:focus, .btn.btn-danger:focus:active, .btn.btn-danger:active:hover {
 	box-shadow: 0px 7px 12px 0 rgba(183, 28, 28, 0.4);
 }
+.btn-back {
+	font-size: 14px;
+	line-height: 22px;
+}
 
 
 /**

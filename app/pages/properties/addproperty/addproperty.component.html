@@ -112,9 +112,11 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-8">
-                        <div class="btn btn-simple btn-back">
+                        <button class="btn btn-default btn-simple btn-back"
+                                type="button"
+                                [routerLink]="['/properties']">
                             <i class="material-icons">arrow_back</i> <span>Back to properties</span>
-                        </div>
+                        </button>
                     </div>
                     <div class="col-xs-4">
                         <button class="btn btn-success pull-right font-16 m-r-20 p-l-r-20" type="submit">Save</button>
