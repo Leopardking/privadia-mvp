@@ -151,10 +151,10 @@ var EditpropertyComponent = (function () {
         this.propertyForm.setControl('MetaDataTmp', metaDateFormArray);
     };
     EditpropertyComponent.prototype.saveInfo = function () {
-        var _this = this;
-        var newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
-            return newArr = _.concat(newArr, el);
+        /*
+        let newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
+            return newArr = _.concat(newArr, el)
         });
         this.propertyForm.value.MetaData = newArr;
         /*
@@ -284,24 +284,29 @@ var EditpropertyComponent = (function () {
             childrenAllowed: parseInt(this.propertyInfo.allowChildren),
             propertyName: this.propertyInfo.officialName
         }
-        */
-        this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
-            $.notify({
-                icon: "notifications",
-                message: "Property Edited Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-            _this.mainService.readData();
-        }, function (e) { console.log("error:", e); });
+        */ /*
+        this.propertyService.addProperty(this.propertyForm.value).subscribe(
+            d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Updated Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                this.mainService.readData();
+            },
+            e => { console.log("error:", e); }
+        );
+
         //console.log(data);
-        console.log('Save form ', this.propertyForm);
-        console.log('Save form ', this.propertyForm.value);
+        console.log('Save form ', this.propertyForm)
+        console.log('Save form ', this.propertyForm.value)*/
     };
     EditpropertyComponent.prototype.continueInfo = function () {
         console.log('Continue Info form');
@@ -321,7 +326,7 @@ var EditpropertyComponent = (function () {
             this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
                 $.notify({
                     icon: "notifications",
-                    message: "Property Added Successfully"
+                    message: "Property Updated Successfully"
                 }, {
                     type: 'success',
                     timer: 3000,
@@ -336,8 +341,6 @@ var EditpropertyComponent = (function () {
         else {
             this.errorForm = true;
         }
-        console.log('Property Form ', this.propertyForm);
-        console.log('Property Form Value ', this.propertyForm.value);
     };
     EditpropertyComponent = __decorate([
         core_1.Component({

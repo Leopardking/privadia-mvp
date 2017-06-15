@@ -181,6 +181,7 @@ export class EditpropertyComponent implements OnInit{
     }
 
     private saveInfo() {
+        /*
         let newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
@@ -313,12 +314,12 @@ export class EditpropertyComponent implements OnInit{
             childrenAllowed: parseInt(this.propertyInfo.allowChildren),
             propertyName: this.propertyInfo.officialName
         }
-        */
+        *//*
         this.propertyService.addProperty(this.propertyForm.value).subscribe(
             d => { 
                 $.notify({
                     icon: "notifications",
-                    message: "Property Edited Successfully"
+                    message: "Property Updated Successfully"
 
                 },{
                     type: 'success',
@@ -335,7 +336,7 @@ export class EditpropertyComponent implements OnInit{
 
         //console.log(data);
         console.log('Save form ', this.propertyForm)
-        console.log('Save form ', this.propertyForm.value)
+        console.log('Save form ', this.propertyForm.value)*/
     }
 
     private continueInfo() {
@@ -359,7 +360,7 @@ export class EditpropertyComponent implements OnInit{
                 d => {
                     $.notify({
                         icon: "notifications",
-                        message: "Property Added Successfully"
+                        message: "Property Updated Successfully"
 
                     },{
                         type: 'success',
@@ -376,8 +377,5 @@ export class EditpropertyComponent implements OnInit{
         } else {
             this.errorForm = true;
         }
-
-        console.log('Property Form ', this.propertyForm);
-        console.log('Property Form Value ', this.propertyForm.value);
     }
 }
