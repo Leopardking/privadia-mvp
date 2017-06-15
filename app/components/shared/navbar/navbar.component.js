@@ -9,30 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var sidebar_routes_config_1 = require('../.././sidebar/sidebar-routes.config');
-var sidebar_metadata_1 = require('../.././sidebar/sidebar.metadata');
+var navbar_routes_config_1 = require('./navbar-routes.config');
+var navbar_metadata_1 = require('./navbar.metadata');
 var common_1 = require('@angular/common');
 var NavbarComponent = (function () {
     function NavbarComponent(location) {
         this.location = location;
     }
     NavbarComponent.prototype.ngOnInit = function () {
-        this.listTitles = sidebar_routes_config_1.ROUTES.filter(function (listTitle) { return listTitle.menuType !== sidebar_metadata_1.MenuType.BRAND; });
     };
-    NavbarComponent.prototype.getTitle = function () {
+    NavbarComponent.prototype.ngDoCheck = function () {
+        this.menuItems = navbar_routes_config_1.ROUTES.filter(function (menuItem) { return menuItem.menuType !== navbar_metadata_1.MenuType.BRAND; });
         var title = this.location.prepareExternalUrl(this.location.path());
-        if (title.charAt(0) === '/') {
-            title = title.slice(1);
-        }
-        for (var item = 0; item < this.listTitles.length; item++) {
-            if (this.listTitles[item].path === title) {
-                return this.listTitles[item].title;
-            }
-        }
-        return 'Dashboard';
-    };
-    NavbarComponent.prototype.getPath = function () {
-        return this.location.prepareExternalUrl(this.location.path());
+        this.activePage = this.menuItems.find(function (item) {
+            return item.path == title;
+        });
+        this.activePage = this.activePage || { path: '/properties/editproperty', title: 'Edit Property', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'store' };
     };
     NavbarComponent = __decorate([
         core_1.Component({

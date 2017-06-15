@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTES } from '../.././sidebar/sidebar-routes.config';
-import { MenuType } from '../.././sidebar/sidebar.metadata';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ROUTES } from './navbar-routes.config';
+import { MenuType } from './navbar.metadata';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
 @Component({
@@ -12,15 +12,28 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 })
 
 export class NavbarComponent implements OnInit{
-    private listTitles: any[];
+    public menuItems: any[];
+    public activePage;
+
     location: Location;
-    constructor(location:Location) {
+    constructor( location:Location ) {
         this.location = location;
     }
 
     ngOnInit(){
-        this.listTitles = ROUTES.filter(listTitle => listTitle.menuType !== MenuType.BRAND);
     }
+
+    ngDoCheck() {
+        this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
+
+        let title = this.location.prepareExternalUrl(this.location.path());
+        this.activePage = this.menuItems.find((item) => {
+            return item.path == title
+        })
+
+        this.activePage = this.activePage || { path: '/properties/editproperty', title: 'Edit Property', menuType: MenuType.LEFT, icon: 'store'}
+    }
+    /*
     getTitle(){
         let title = this.location.prepareExternalUrl(this.location.path());
         if(title.charAt(0) === '/'){
@@ -37,4 +50,5 @@ export class NavbarComponent implements OnInit{
     getPath(){
         return this.location.prepareExternalUrl(this.location.path());
     }
+    */
 }

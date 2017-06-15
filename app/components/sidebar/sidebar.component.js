@@ -18,13 +18,13 @@ var SidebarComponent = (function () {
     }
     SidebarComponent.prototype.ngOnInit = function () {
         $.getScript('../../assets/js/sidebar-moving-tab.js');
-        $.getScript('../../assets/js/plugins/bootstrap-datetimepicker.js');
+        //$.getScript('../../assets/js/plugins/bootstrap-datetimepicker.js');
         this.menuItems = sidebar_routes_config_1.ROUTES.filter(function (menuItem) { return menuItem.menuType !== sidebar_metadata_1.MenuType.BRAND; });
     };
     SidebarComponent.prototype.menuClick = function () {
-        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        $("dashboard-cmp .main-content").scrollTop(0);
-        return true;
+        //$('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        //$("dashboard-cmp .main-content").scrollTop(0);
+        //return true;
     };
     SidebarComponent = __decorate([
         core_1.Component({

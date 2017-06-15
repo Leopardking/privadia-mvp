@@ -4,8 +4,10 @@
     text-transform: uppercase;
     color: #3a3a3a;
 }
-.material-icons {
+.title-page .material-icons {
     color: #3a3a3a;
+    margin-top: -5px;
+    margin-right: 5px;
 }
 .btn-non-color {
     background-color: transparent;

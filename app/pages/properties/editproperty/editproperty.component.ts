@@ -24,7 +24,7 @@ export class EditpropertyComponent implements OnInit{
     // private reading:boolean = false;
     // private datatableInited:boolean = false;
     
-    private property = [];
+    private property;
 
     // private contacts;
     // private bedrooms;

@@ -46,7 +46,7 @@
         <ul class="nav">
             <li routerLinkActive="active" *ngFor="let item of menuItems">
                 <a [routerLink]="[item.path]" (click)="menuClick()">
-                    <i class="{{item.icon}}">{{item.iconName}}</i>
+                    <i class="material-icons">{{item.icon}}</i>
                     <p>{{item.title}}</p>
                 </a>
                 <mainfilter-cmp *ngIf="item.iconName == 'dashboard1'"></mainfilter-cmp>

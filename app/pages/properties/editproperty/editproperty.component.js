@@ -20,12 +20,6 @@ var EditpropertyComponent = (function () {
         this.propertyService = propertyService;
         this.route = route;
         this.builder = builder;
-        // public propertyForm: any;
-        // public metadata;
-        // private villadescription;
-        // private reading:boolean = false;
-        // private datatableInited:boolean = false;
-        this.property = [];
         //propertyForm: any;
         this.isLoad = false;
         this.errorForm = false;
