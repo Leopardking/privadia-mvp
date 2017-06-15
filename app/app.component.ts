@@ -16,10 +16,9 @@ export class AppComponent implements OnInit{
     }
     ngOnInit(){
         $.getScript('../assets/js/init/initMenu.js');
-        $.getScript('../assets/js/demo.js');
-
-
+        //$.getScript('../assets/js/demo.js');
     }
+    /*
     public isMap(){
         // console.log(this.location);
         if(this.location.prepareExternalUrl(this.location.path()) == '#/maps/fullscreen'){
@@ -29,4 +28,5 @@ export class AppComponent implements OnInit{
             return false;
         }
     }
+    */
 }

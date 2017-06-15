@@ -16,16 +16,7 @@ var AppComponent = (function () {
     }
     AppComponent.prototype.ngOnInit = function () {
         $.getScript('../assets/js/init/initMenu.js');
-        $.getScript('../assets/js/demo.js');
-    };
-    AppComponent.prototype.isMap = function () {
-        // console.log(this.location);
-        if (this.location.prepareExternalUrl(this.location.path()) == '#/maps/fullscreen') {
-            return true;
-        }
-        else {
-            return false;
-        }
+        //$.getScript('../assets/js/demo.js');
     };
     AppComponent = __decorate([
         core_1.Component({

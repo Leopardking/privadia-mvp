@@ -1,7 +1,5 @@
-
-<div class="wrapper">
+<div class="wrapper" *ngIf="location.path() != '/login'">
     <div class="sidebar" data-active-color="white" data-background-color="#0b5a7c">
-    <!-- <div class="sidebar" data-color="red" data-image=""> -->
         <sidebar-cmp></sidebar-cmp>
         <div class="sidebar-background primary-color"></div>
         <div class="navbar navbar-transparent">
@@ -16,10 +14,6 @@
     <div class="main-panel">
         <navbar-cmp></navbar-cmp>
         <dashboard-cmp></dashboard-cmp>
-        <!--
-        <div *ngIf="!isMap()">
-            <footer-cmp></footer-cmp>
-        </div>
-        -->
     </div>
 </div>
+<users-cmp *ngIf="location.path() == '/login'"></users-cmp>

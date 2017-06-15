@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit{
     }
 
     ngOnInit(){
-        
+        setTimeout(function() {
+            $('.card').removeClass('card-hidden');
+        }, 700)
     }
 }

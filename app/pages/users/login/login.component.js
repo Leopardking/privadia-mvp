@@ -13,6 +13,9 @@ var LoginComponent = (function () {
     function LoginComponent() {
     }
     LoginComponent.prototype.ngOnInit = function () {
+        setTimeout(function () {
+            $('.card').removeClass('card-hidden');
+        }, 700);
     };
     LoginComponent = __decorate([
         core_1.Component({
