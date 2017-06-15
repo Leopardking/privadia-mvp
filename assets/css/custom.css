@@ -274,7 +274,9 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	font-weight: 300;
 	font-style: normal;
 }
-
+.metafilter-select span.material-icons.check-mark {
+	display: none !important;
+}
 
 
 /**

@@ -45,7 +45,9 @@ var PropertyMetafilterComponent = (function () {
         }
         if ($(".selectpicker").length != 0) {
             setTimeout(function () {
-                $(".selectpicker").selectpicker();
+                $(".selectpicker").selectpicker({
+                    selectedTextFormat: 'static'
+                });
             }, 500);
         }
     };

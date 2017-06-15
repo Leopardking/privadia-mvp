@@ -52,7 +52,9 @@ export class PropertyMetafilterComponent implements OnInit{
 
 		if($(".selectpicker").length != 0){
 			setTimeout(() => {
-				$(".selectpicker").selectpicker();
+				$(".selectpicker").selectpicker({
+					selectedTextFormat: 'static'
+				});
 			},500);
 		}
 	}
