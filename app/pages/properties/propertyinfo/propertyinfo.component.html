@@ -1,25 +1,29 @@
 <ul class="nav nav-pills p-l-r-20 m-t-25" role="tablist">
-    <li class="nav-pill active class1">
+    <li class="nav-pill active"
+        [ngClass]="{'has-error': !propertyForm.controls['Name'].valid && errorForm}">
         <a href="#heading-name_address" role="tab" data-toggle="tab" class="">
             Name & Address
         </a>
     </li>
-    <li class="nav-pill class2">
+    <li class="nav-pill">
         <a href="#heading-description" role="tab" data-toggle="tab" class="">
             Description
         </a>
     </li>
-    <li class="nav-pill class3">
+    <li class="nav-pill">
         <a href="#heading-admin_info" role="tab" data-toggle="tab" class="">
             Admin Info
         </a>
     </li>
-    <li class="nav-pill class4">
+    <li class="nav-pill"
+        [ngClass]="{'has-error': (!propertyForm.controls['Bathrooms'].valid ||
+                                  !propertyForm.controls['Bedrooms'].valid ||
+                                  !propertyForm.controls['Sleeps'].valid) && errorForm}">
         <a href="#heading-size_rooms" role="tab" data-toggle="tab" class="">
             Size and Rooms
         </a>
     </li>
-    <li class="nav-pill class5">
+    <li class="nav-pill">
         <a href="#heading-conditions" role="tab" data-toggle="tab" class="">
             Conditions
         </a>

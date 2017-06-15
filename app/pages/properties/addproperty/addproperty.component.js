@@ -67,7 +67,21 @@ var AddpropertyComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net
     AddpropertyComponent.prototype.ngOnInit = function () {
-        $.getScript('../../../../assets/js/core/jquery.validate.min.js');
+        var _this = this;
+        setTimeout(function () {
+            $('button[data-toggle="tab"]').click(function (e) {
+                if (_this.propertyForm.valid) {
+                    var target = $(e.target).attr("href");
+                    $('a[href="' + target + '"]').tab('show');
+                    e.preventDefault();
+                }
+                else {
+                    _this.errorForm = true;
+                    e.stopPropagation();
+                }
+            });
+        });
+        //$.getScript('../../../../assets/js/core/jquery.validate.min.js');
         //$.getScript('../../../../assets/js/init/initImageGallery.js');
         //$('#registerFormValidation').validate();
     };

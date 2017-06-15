@@ -27,11 +27,6 @@ var PropertyinfoComponent = (function () {
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
         var _this = this;
-        $('button[data-toggle="tab"]').click(function (e) {
-            var target = $(e.target).attr("href"); // activated tab
-            $('a[href="' + target + '"]').tab('show');
-            e.preventDefault();
-        });
         /*
         $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab

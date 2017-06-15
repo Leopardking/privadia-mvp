@@ -72,7 +72,20 @@ export class AddpropertyComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
-        $.getScript('../../../../assets/js/core/jquery.validate.min.js');
+        setTimeout(() => {
+            $('button[data-toggle="tab"]').click((e)=>{
+                if(this.propertyForm.valid) {
+                    const target = $(e.target).attr("href");
+                    $('a[href="' + target+ '"]').tab('show');
+                    e.preventDefault()
+                }
+                else {
+                    this.errorForm = true;
+                    e.stopPropagation()
+                }
+            });
+        });
+        //$.getScript('../../../../assets/js/core/jquery.validate.min.js');
         //$.getScript('../../../../assets/js/init/initImageGallery.js');
         //$('#registerFormValidation').validate();
     }

@@ -50,11 +50,6 @@ export class PropertyinfoComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
-        $('button[data-toggle="tab"]').click((e)=>{
-            const target = $(e.target).attr("href") // activated tab
-            $('a[href="' + target+ '"]').tab('show');
-            e.preventDefault()
-        });
         /*
         $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab
