@@ -7,7 +7,7 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 
 import initDatetimepickers = require('../../../../assets/js/init/initDatetimepickers.js');
 declare var moment: any
-//declare var datepicker: any
+declare var $: any
 
 
 @Component({
@@ -25,6 +25,7 @@ export class SetratesComponent implements OnInit{
     public ratesForm = new FormGroup ({
         Rates: new FormArray([]),
     });
+    public date;
 
     constructor ( private mainService: MainService,
                   private propertyService: PropertiesService,
@@ -122,13 +123,17 @@ export class SetratesComponent implements OnInit{
         let DataTable: any = $('#datatables');
         DataTable.DataTable({
             //select: true,
-            //paging: false,
+            paging: false,
             bLengthChange: false,
             ordering: false,
             searching: false,
             info: false,
         });
         this.datatableInited = true;
+    }
+
+    private changeDate(e) {
+        console.log('Change Rate',e.target.value)
     }
 
     private editRates(object) {
@@ -145,7 +150,23 @@ export class SetratesComponent implements OnInit{
         control.removeAt(object.index);
     }
 
+    private clearRates(rate) {
+        this.isEdit[rate.index] = !this.isEdit[rate.index];
+
+        rate.rate.setValue({
+            Currency: 'EUR',
+            Id: rate.rate.controls.Id.value,
+            IsNew: rate.rate.controls.IsNew.value,
+            LengthOfStay: rate.rate.controls.LengthOfStay.value,
+            PropertyId: rate.rate.controls.PropertyId.value,
+            EndDate: moment().format('MM/DD/YYYY'),
+            StartDate: moment().format('MM/DD/YYYY'),
+            Value: null,
+        });
+    }
+
     private addRow() {
+        console.log('Data', this.date)
         const control = <FormArray>this.ratesForm.controls['Rates'];
         control.push(
             new FormGroup({
@@ -161,11 +182,26 @@ export class SetratesComponent implements OnInit{
         );
     }
 
-    private discardInfo() {
-        console.log('Discard Info form')
-    }
-
     private onSubmit() {
-        console.log('On submit')
+        console.log('On submit ', this.ratesForm.controls['Rates'].value)
+        this.propertyService.saveRates(this.ratesForm.controls['Rates'].value).subscribe(
+            d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+            },
+            e => {
+                console.log('Error ', e)
+            }
+        )
     }
 }

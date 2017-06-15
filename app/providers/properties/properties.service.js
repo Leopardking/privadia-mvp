@@ -48,7 +48,6 @@ var PropertiesService = (function () {
     PropertiesService.prototype.addProperty = function (data) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
-        // let addApiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
         return this.http.post(this.apiUrl + '/api/properties/', data, options)
             .map(this.extractData)
             .catch(this.handleError);
@@ -64,7 +63,14 @@ var PropertiesService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         this.isReading = true;
-        return this.http.delete(this.apiUrl + '/api/rates/' + id, options)
+        return this.http.get(this.apiUrl + '/api/rates/' + id, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    PropertiesService.prototype.saveRates = function (data) {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/rates/', data, options)
             .map(this.extractData)
             .catch(this.handleError);
     };

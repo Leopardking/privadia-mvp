@@ -54,8 +54,6 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		// let addApiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
-
 		return this.http.post( this.apiUrl + '/api/properties/', data, options )
 				.map(this.extractData)
 				.catch(this.handleError);
@@ -75,7 +73,16 @@ export class PropertiesService {
 		let options = new RequestOptions( {headers: header} );
 		this.isReading = true;
 
-		return this.http.delete( this.apiUrl + '/api/rates/' + id, options )
+		return this.http.get( this.apiUrl + '/api/rates/' + id, options )
+				.map(this.extractData)
+				.catch(this.handleError);
+	}
+
+	public saveRates(data) {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.post( this.apiUrl + '/api/rates/', data, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}

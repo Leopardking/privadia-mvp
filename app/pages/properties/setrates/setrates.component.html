@@ -37,6 +37,9 @@
                                                 <i class="material-icons">insert_invitation</i>
                                                 <input type="text"
                                                        class="form-control datepicker"
+                                                       #datePicker
+                                                       [ngModel]="rate.controls.StartDate.value"
+                                                       (blur)="rate.controls.StartDate.setValue(datePicker.value)"
                                                        [formControl]="rate.controls.StartDate"/>
                                             </div>
                                             <div class="form-group date-group" *ngIf="!isEdit[i]">
@@ -49,6 +52,9 @@
                                                 <i class="material-icons">insert_invitation</i>
                                                 <input type="text"
                                                        class="form-control datepicker"
+                                                       #datePicker
+                                                       [ngModel]="rate.controls.EndDate.value"
+                                                       (blur)="rate.controls.EndDate.setValue(datePicker.value)"
                                                        [formControl]="rate.controls.EndDate"/>
                                             </div>
                                             <div class="form-group date-group" *ngIf="!isEdit[i]">
@@ -93,7 +99,7 @@
                                             <button class="btn btn-simple btn-delete btn-icon"
                                                     type="button"
                                                     *ngIf="isEdit[i]"
-                                                    (click)="clearRates({index: i, propertyId: 1})">
+                                                    (click)="clearRates({rate: rate, index: i})">
                                                 <i class="material-icons text-danger">clear</i>
                                             </button>
                                         </td>
@@ -102,17 +108,21 @@
                                 </tbody>
                             </table>
                             <div class="row">
-                                <div class="col-xs-12">
-                                    <button class="btn btn-simple btn-edit btn-icon"
+                                <div class="col-xs-12 text-right">
+                                    <button class="btn btn-success btn-edit btn-icon"
                                             type="button"
                                             (click)="addRow()">
-                                        <i class="material-icons text-primary">add</i>Add Rate
+                                        <i class="material-icons">add</i>Add Rate
                                     </button>
-                                    <button class="btn btn-simple btn-delete btn-icon"
+                                    <button class="btn btn-success btn-edit btn-icon"
                                             type="button"
-                                            *ngIf="!isEdit"
+                                            (click)="onSubmit()">
+                                        Save
+                                    </button>
+                                    <button class="btn btn-default btn-delete btn-icon"
+                                            type="button"
                                             (click)="removeRates({index: 1, propertyId: 1})">
-                                        <i class="material-icons text-danger">delete</i>
+                                        Cancel
                                     </button>
                                 </div>
                             </div>

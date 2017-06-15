@@ -13,7 +13,6 @@ var forms_1 = require('@angular/forms');
 var homeservice_1 = require('../../../providers/homeservice');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var initDatetimepickers = require('../../../../assets/js/init/initDatetimepickers.js');
-//declare var datepicker: any
 var SetratesComponent = (function () {
     function SetratesComponent(mainService, propertyService, builder) {
         this.mainService = mainService;
@@ -113,13 +112,16 @@ var SetratesComponent = (function () {
         var DataTable = $('#datatables');
         DataTable.DataTable({
             //select: true,
-            //paging: false,
+            paging: false,
             bLengthChange: false,
             ordering: false,
             searching: false,
             info: false,
         });
         this.datatableInited = true;
+    };
+    SetratesComponent.prototype.changeDate = function (e) {
+        console.log('Change Rate', e.target.value);
     };
     SetratesComponent.prototype.editRates = function (object) {
         this.isEdit[object.index] = !this.isEdit[object.index];
@@ -132,7 +134,21 @@ var SetratesComponent = (function () {
         var control = this.ratesForm.controls['Rates'];
         control.removeAt(object.index);
     };
+    SetratesComponent.prototype.clearRates = function (rate) {
+        this.isEdit[rate.index] = !this.isEdit[rate.index];
+        rate.rate.setValue({
+            Currency: 'EUR',
+            Id: rate.rate.controls.Id.value,
+            IsNew: rate.rate.controls.IsNew.value,
+            LengthOfStay: rate.rate.controls.LengthOfStay.value,
+            PropertyId: rate.rate.controls.PropertyId.value,
+            EndDate: moment().format('MM/DD/YYYY'),
+            StartDate: moment().format('MM/DD/YYYY'),
+            Value: null,
+        });
+    };
     SetratesComponent.prototype.addRow = function () {
+        console.log('Data', this.date);
         var control = this.ratesForm.controls['Rates'];
         control.push(new forms_1.FormGroup({
             Currency: new forms_1.FormControl('EUR'),
@@ -145,11 +161,23 @@ var SetratesComponent = (function () {
             Value: new forms_1.FormControl(),
         }));
     };
-    SetratesComponent.prototype.discardInfo = function () {
-        console.log('Discard Info form');
-    };
     SetratesComponent.prototype.onSubmit = function () {
-        console.log('On submit');
+        console.log('On submit ', this.ratesForm.controls['Rates'].value);
+        this.propertyService.saveRates(this.ratesForm.controls['Rates'].value).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Property Added Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+        }, function (e) {
+            console.log('Error ', e);
+        });
     };
     SetratesComponent = __decorate([
         core_1.Component({
