@@ -8,6 +8,8 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 import { MainService } from '../../../providers/homeservice';
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 
+declare var $: any;
+
 @Component({
     moduleId: module.id,
     selector: ' propertyinfo-cmp ',
@@ -48,6 +50,19 @@ export class PropertyinfoComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
+        $('button[data-toggle="tab"]').click((e)=>{
+            const target = $(e.target).attr("href") // activated tab
+            $('a[href="' + target+ '"]').tab('show');
+            e.preventDefault()
+        });
+        /*
+        $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+            console.log('Target 1',target);
+            $(target).tab('show')
+            e.preventDefault()
+        });
+        */
         console.log('this.property mainService', this.mainService.metadata )
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
@@ -155,15 +170,13 @@ export class PropertyinfoComponent implements OnInit{
         $("#regionName").removeClass('has-error');
     }
 
-    public changeTab(e) {
-        //$(e.target.getAttribute('href')).tab('show')
-        /*
-        $('a[data-toggle="tab2"]').on('shown.bs.tab', function (e) {
-            e.target // newly activated tab
-            e.relatedTarget // previous active tab
-        })
-        */
-        console.log('Change tab',e.target.getAttribute('href'))
+    public changeTab(test: any, test1: any) {
+        //const liNavID = "ID" + test.toString().split(/#(.+)?/)[1];
+
+        //document.getElementById(test1).classList.remove('active');
+        //document.getElementById(liNavID).classList.add('active');
+
+        //console.log(liNavID);
     }
     /*
      private ownerChanged(e) {

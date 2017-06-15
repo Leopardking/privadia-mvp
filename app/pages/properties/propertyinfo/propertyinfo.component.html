@@ -1,25 +1,25 @@
-<ul class="nav nav-pills p-l-r-20 m-t-25">
-    <li class="nav-pill active">
+<ul class="nav nav-pills p-l-r-20 m-t-25" role="tablist">
+    <li class="nav-pill active class1">
         <a href="#heading-name_address" role="tab" data-toggle="tab" class="">
             Name & Address
         </a>
     </li>
-    <li class="nav-pill">
+    <li class="nav-pill class2">
         <a href="#heading-description" role="tab" data-toggle="tab" class="">
             Description
         </a>
     </li>
-    <li class="nav-pill">
+    <li class="nav-pill class3">
         <a href="#heading-admin_info" role="tab" data-toggle="tab" class="">
             Admin Info
         </a>
     </li>
-    <li class="nav-pill">
+    <li class="nav-pill class4">
         <a href="#heading-size_rooms" role="tab" data-toggle="tab" class="">
             Size and Rooms
         </a>
     </li>
-    <li class="nav-pill">
+    <li class="nav-pill class5">
         <a href="#heading-conditions" role="tab" data-toggle="tab" class="">
             Conditions
         </a>
@@ -81,7 +81,10 @@
         </div>
         <div class="row p-b-none">
             <div class="col-xs-offset-6 col-xs-6">
-                <a href="#heading-description" role="tab" data-toggle="tab" class="btn btn-success pull-right" (click)="changeTab($event)">Next</a>
+                <button type="button"
+                        data-toggle="tab"
+                        class="btn btn-success pull-right"
+                        href="#heading-description">Next</button>
             </div>
         </div>
     </div>
@@ -144,10 +147,10 @@
         </div>
         <div class="row p-b-none">
             <div class="col-xs-6">
-                <a href="#heading-name_address" role="tab" data-toggle="tab" class="btn btn-success">Back</a>
+                <button href="#heading-name_address" role="tab" data-toggle="tab" class="btn btn-success">Back</button>
             </div>
             <div class="col-xs-6">
-                <a href="#heading-admin_info" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</a>
+                <button href="#heading-admin_info" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</button>
             </div>
         </div>
     </div>
@@ -201,10 +204,10 @@
         </div>
         <div class="row p-b-none">
             <div class="col-xs-6">
-                <a href="#heading-description" role="tab" data-toggle="tab" class="btn btn-success">Back</a>
+                <button href="#heading-description" role="tab" data-toggle="tab" class="btn btn-success">Back</button>
             </div>
             <div class="col-xs-6">
-                <a href="#heading-size_rooms" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</a>
+                <button href="#heading-size_rooms" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</button>
             </div>
         </div>
     </div>
@@ -330,10 +333,10 @@
         </div>
         <div class="row p-b-none">
             <div class="col-xs-6">
-                <a href="#heading-size_rooms" role="tab" data-toggle="tab" class="btn btn-success">Back</a>
+                <button href="#heading-admin_info" role="tab" data-toggle="tab" class="btn btn-success">Back</button>
             </div>
             <div class="col-xs-6">
-                <a href="#heading-conditions" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</a>
+                <button href="#heading-conditions" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</button>
             </div>
         </div>
     </div>
@@ -388,10 +391,10 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
-                <a href="#heading-conditions" role="tab" data-toggle="tab" class="btn btn-success">Back</a>
+                <button href="#heading-size_rooms" role="tab" data-toggle="tab" class="btn btn-success">Back</button>
             </div>
-            <div class="col-xs-offset-6 col-xs-6">
-                <a href="#metatab-images" role="tab" data-toggle="tab" class="btn btn-success pull-right">Finish</a>
+            <div class="col-xs-6">
+                <button href="#metatab-images" role="tab" data-toggle="tab" class="btn btn-success pull-right">Finish</button>
             </div>
         </div>
     </div>

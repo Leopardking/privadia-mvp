@@ -27,6 +27,19 @@ var PropertyinfoComponent = (function () {
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $('button[data-toggle="tab"]').click(function (e) {
+            var target = $(e.target).attr("href"); // activated tab
+            $('a[href="' + target + '"]').tab('show');
+            e.preventDefault();
+        });
+        /*
+        $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target).attr("href") // activated tab
+            console.log('Target 1',target);
+            $(target).tab('show')
+            e.preventDefault()
+        });
+        */
         console.log('this.property mainService', this.mainService.metadata);
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
@@ -101,15 +114,11 @@ var PropertyinfoComponent = (function () {
         $("#regionName").removeClass('is-empty');
         $("#regionName").removeClass('has-error');
     };
-    PropertyinfoComponent.prototype.changeTab = function (e) {
-        //$(e.target.getAttribute('href')).tab('show')
-        /*
-        $('a[data-toggle="tab2"]').on('shown.bs.tab', function (e) {
-            e.target // newly activated tab
-            e.relatedTarget // previous active tab
-        })
-        */
-        console.log('Change tab', e.target.getAttribute('href'));
+    PropertyinfoComponent.prototype.changeTab = function (test, test1) {
+        //const liNavID = "ID" + test.toString().split(/#(.+)?/)[1];
+        //document.getElementById(test1).classList.remove('active');
+        //document.getElementById(liNavID).classList.add('active');
+        //console.log(liNavID);
     };
     __decorate([
         core_1.Input('group'), 
