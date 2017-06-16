@@ -277,6 +277,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 }
 .upload-image {
 	text-align: center;
+	cursor: pointer;
 }
 .upload-image .material-icons {
 	font-size: 150px;
