@@ -69,7 +69,7 @@ var PropertyinfoComponent = (function () {
             JobTitle: new forms_1.FormControl(),
             FirstName: new forms_1.FormControl(),
             LastName: new forms_1.FormControl(),
-            EmailAddress: new forms_1.FormControl(),
+            EmailAddress: new forms_1.FormControl(''),
             Telephone: new forms_1.FormControl(),
         }));
     };

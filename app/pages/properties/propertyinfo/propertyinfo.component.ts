@@ -6,7 +6,7 @@ import { AutoCompleteConfig } from '../../../components/autocomplete/autocomplet
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import { MainService } from '../../../providers/homeservice';
-import {FormGroup, FormArray, FormControl} from "@angular/forms";
+import {FormGroup, FormArray, FormControl, Validators} from "@angular/forms";
 
 declare var $: any;
 
@@ -110,7 +110,7 @@ export class PropertyinfoComponent implements OnInit{
                 JobTitle: new FormControl(),
                 FirstName: new FormControl(),
                 LastName: new FormControl(),
-                EmailAddress: new FormControl(),
+                EmailAddress: new FormControl(''),
                 Telephone: new FormControl(),
             }),
         );
