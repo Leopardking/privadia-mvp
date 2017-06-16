@@ -55,6 +55,7 @@ export class AddpropertyComponent implements OnInit{
         Contacts: new FormArray([]),
         Rooms: new FormArray([]),
         Images: new FormArray([]),
+        MinimumStay: new FormControl(),
         PointsOfInterest: new FormArray([]),
         MetaData: new FormArray([]),
         MetaDataTmp: new FormGroup({}),

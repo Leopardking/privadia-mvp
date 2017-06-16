@@ -50,6 +50,7 @@ var EditpropertyComponent = (function () {
                     CollaboratorInitials: d.CollaboratorInitials,
                     BoxUrl: d.BoxUrl,
                     AgencyPackUrl: d.AgencyPackUrl,
+                    MinimumStay: d.MinimumStay,
                     Bathrooms: [d.Bathrooms, forms_1.Validators.required],
                     Bedrooms: [d.Bedrooms, forms_1.Validators.required],
                     Sleeps: [d.Sleeps, forms_1.Validators.required],

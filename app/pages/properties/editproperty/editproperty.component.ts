@@ -74,6 +74,7 @@ export class EditpropertyComponent implements OnInit{
                         CollaboratorInitials: d.CollaboratorInitials,
                         BoxUrl: d.BoxUrl,
                         AgencyPackUrl: d.AgencyPackUrl,
+                        MinimumStay: d.MinimumStay,
                         Bathrooms: [d.Bathrooms, Validators.required],
                         Bedrooms: [d.Bedrooms, Validators.required],
                         Sleeps: [d.Sleeps, Validators.required],

@@ -55,6 +55,7 @@ var AddpropertyComponent = (function () {
             Contacts: new forms_1.FormArray([]),
             Rooms: new forms_1.FormArray([]),
             Images: new forms_1.FormArray([]),
+            MinimumStay: new forms_1.FormControl(),
             PointsOfInterest: new forms_1.FormArray([]),
             MetaData: new forms_1.FormArray([]),
             MetaDataTmp: new forms_1.FormGroup({}),

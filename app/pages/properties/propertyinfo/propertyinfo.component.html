@@ -185,12 +185,12 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-md-6 col-lg-6">
-                            <button class="btn btn-danger btn-icon" (click)="removeContact()">
+                            <button class="btn btn-danger btn-icon" type="button" (click)="removeContact()">
                                 <i class="material-icons">delete</i> Remove Contact
                             </button>
                         </div>
                         <div class="col-sm-6 col-md-6 col-lg-6" *ngIf="propertyForm.controls.Contacts.controls.length == (i + 1)">
-                            <button class="btn btn-success btn-icon pull-right" (click)="showAddContact()">
+                            <button class="btn btn-success btn-icon pull-right" type="button" (click)="showAddContact()">
                                 <i class="material-icons">add</i> Add Contact
                             </button>
                         </div>
@@ -200,7 +200,7 @@
             </div>
             <div class="row" *ngIf="propertyForm.controls.Contacts.controls.length == 0">
                 <div class="col-xs-12">
-                    <button class="btn btn-success btn-icon" (click)="showAddContact()">
+                    <button class="btn btn-success btn-icon" type="button" (click)="showAddContact()">
                         <i class="material-icons">add</i> Add Contact
                     </button>
                 </div>
@@ -281,10 +281,10 @@
                                 </div>
                             </div>
                             <div class="col-sm-12 col-md-4 col-lg-4">
-                                <button class="btn btn-success btn-icon pull-right" (click)="addBedroom()" *ngIf="false">
+                                <button class="btn btn-success btn-icon pull-right" type="button" (click)="addBedroom()" *ngIf="false">
                                     <i class="material-icons">add</i> Add BEDROOM
                                 </button>
-                                <button class="btn btn-danger btn-icon pull-right" (click)="removeBedroom()">
+                                <button class="btn btn-danger btn-icon pull-right" type="button" (click)="removeBedroom()">
                                     <i class="material-icons">delete</i> REMOVE BEDROOM
                                 </button>
                             </div>
@@ -293,7 +293,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
-                        <button class="btn btn-success btn-icon" (click)="addBedroom()">
+                        <button class="btn btn-success btn-icon" type="button" (click)="addBedroom()">
                             <i class="material-icons">add</i> Add BEDROOM
                         </button>
                     </div>
@@ -317,10 +317,10 @@
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-4 col-lg-4">
-                            <button class="btn btn-success btn-icon pull-right" (click)="addBathroom()" *ngIf="false">
+                            <button class="btn btn-success btn-icon pull-right" type="button" (click)="addBathroom()" *ngIf="false">
                                 <i class="material-icons">add</i> Add BATHROOM
                             </button>
-                            <button class="btn btn-danger btn-icon pull-right" (click)="removeBathroom()">
+                            <button class="btn btn-danger btn-icon pull-right" type="button" (click)="removeBathroom()">
                                 <i class="material-icons">delete</i> REMOVE BATHROOM
                             </button>
                         </div>
@@ -328,7 +328,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">
-                        <button class="btn btn-success btn-icon" (click)="addBathroom()">
+                        <button class="btn btn-success btn-icon" type="button" (click)="addBathroom()">
                             <i class="material-icons">add</i> Add Bathroom
                         </button>
                     </div>
