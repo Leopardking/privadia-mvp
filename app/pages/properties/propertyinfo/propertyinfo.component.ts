@@ -110,7 +110,7 @@ export class PropertyinfoComponent implements OnInit{
                 JobTitle: new FormControl(),
                 FirstName: new FormControl(),
                 LastName: new FormControl(),
-                EmailAddress: new FormControl(''),
+                EmailAddress: new FormControl('', Validators.pattern('/^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/')),
                 Telephone: new FormControl(),
             }),
         );
