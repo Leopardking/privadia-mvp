@@ -99,7 +99,7 @@ export class EditpropertyComponent implements OnInit{
                     this.setImages(d.Images);
                     this.setPointsOfInterest(d.PointsOfInterest);
                     this.setMetaData(d.MetaData);
-                    this.setMetaDataTmp(d.MetaData);
+                    this.setMetaDataTmp();
                     // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
 
                     this.isLoad = true;
@@ -158,27 +158,19 @@ export class EditpropertyComponent implements OnInit{
         this.propertyForm.setControl('PointsOfInterest', pointFormArray);
     }
 
-    setMetaData(metaDates) {
-        const metaDateFGs = metaDates.map(metaDate => this.builder.group({
+    setMetaData(metaDatas) {
+        const metaDataFGs = metaDatas.map(metaDate => this.builder.group({
             MetaDataId: metaDate.MetaDataId,
             MetaDataName: metaDate.MetaDataName,
             Available: metaDate.Available,
         }));
-        const metaDateFormArray = this.builder.array(metaDateFGs);
-        this.propertyForm.setControl('MetaData', metaDateFormArray);
+        const metaDataFormArray = this.builder.array(metaDataFGs);
+        this.propertyForm.setControl('MetaData', metaDataFormArray);
     }
 
-    setMetaDataTmp(metaDates) {
-        /*
-        const metaDateFGs = metaDates.map(metaDate => this.builder.group({
-            MetaDataId: metaDate.MetaDataId,
-            MetaDataName: metaDate.MetaDataName,
-            Available: metaDate.Available,
-        }));
-        */
-        // const metaDateFormArray = this.builder.array(metaDateFGs);
-        const metaDateFormArray = this.builder.group({});
-        this.propertyForm.setControl('MetaDataTmp', metaDateFormArray);
+    setMetaDataTmp() {
+        const metaDataFormArray = this.builder.group({});
+        this.propertyForm.setControl('MetaDataTmp', metaDataFormArray);
     }
 
     private saveInfo() {
@@ -355,6 +347,7 @@ export class EditpropertyComponent implements OnInit{
             return newArr = _.concat(newArr, el)
         })
         this.propertyForm.value.MetaData = newArr;
+        console.log('Form ', this.propertyForm.value)
 
         if(this.propertyForm.valid) {
             this.propertyService.addProperty(this.propertyForm.value).subscribe(
@@ -371,7 +364,6 @@ export class EditpropertyComponent implements OnInit{
                             align: 'right'
                         }
                     });
-                    this.mainService.readData();
                 },
                 e => { console.log("error:", e); }
             );

@@ -74,7 +74,7 @@ var EditpropertyComponent = (function () {
                 _this.setImages(d.Images);
                 _this.setPointsOfInterest(d.PointsOfInterest);
                 _this.setMetaData(d.MetaData);
-                _this.setMetaDataTmp(d.MetaData);
+                _this.setMetaDataTmp();
                 // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
                 _this.isLoad = true;
                 console.log('This properties', _this.property);
@@ -129,27 +129,19 @@ var EditpropertyComponent = (function () {
         console.log('Point Form Array ', points);
         this.propertyForm.setControl('PointsOfInterest', pointFormArray);
     };
-    EditpropertyComponent.prototype.setMetaData = function (metaDates) {
+    EditpropertyComponent.prototype.setMetaData = function (metaDatas) {
         var _this = this;
-        var metaDateFGs = metaDates.map(function (metaDate) { return _this.builder.group({
+        var metaDataFGs = metaDatas.map(function (metaDate) { return _this.builder.group({
             MetaDataId: metaDate.MetaDataId,
             MetaDataName: metaDate.MetaDataName,
             Available: metaDate.Available,
         }); });
-        var metaDateFormArray = this.builder.array(metaDateFGs);
-        this.propertyForm.setControl('MetaData', metaDateFormArray);
+        var metaDataFormArray = this.builder.array(metaDataFGs);
+        this.propertyForm.setControl('MetaData', metaDataFormArray);
     };
-    EditpropertyComponent.prototype.setMetaDataTmp = function (metaDates) {
-        /*
-        const metaDateFGs = metaDates.map(metaDate => this.builder.group({
-            MetaDataId: metaDate.MetaDataId,
-            MetaDataName: metaDate.MetaDataName,
-            Available: metaDate.Available,
-        }));
-        */
-        // const metaDateFormArray = this.builder.array(metaDateFGs);
-        var metaDateFormArray = this.builder.group({});
-        this.propertyForm.setControl('MetaDataTmp', metaDateFormArray);
+    EditpropertyComponent.prototype.setMetaDataTmp = function () {
+        var metaDataFormArray = this.builder.group({});
+        this.propertyForm.setControl('MetaDataTmp', metaDataFormArray);
     };
     EditpropertyComponent.prototype.saveInfo = function () {
         /*
@@ -316,13 +308,13 @@ var EditpropertyComponent = (function () {
         console.log('Discard Info form');
     };
     EditpropertyComponent.prototype.onSubmit = function () {
-        var _this = this;
         console.log('Submit form');
         var newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
         });
         this.propertyForm.value.MetaData = newArr;
+        console.log('Form ', this.propertyForm.value);
         if (this.propertyForm.valid) {
             this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
                 $.notify({
@@ -336,7 +328,6 @@ var EditpropertyComponent = (function () {
                         align: 'right'
                     }
                 });
-                _this.mainService.readData();
             }, function (e) { console.log("error:", e); });
         }
         else {
