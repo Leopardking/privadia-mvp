@@ -89,8 +89,18 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 
 
 /**
- *  Pagination style table
+ *  Data Table Style
  */
+.dataTables_filter .form-group.form-group-sm {
+	margin-top: 0px;
+	padding-bottom: 3px;
+}
+.dataTables_filter .form-group.form-group-sm .form-control {
+	height: 36px;
+	padding: 7px 0;
+	font-size: 14px;
+	line-height: 1.42857;
+}
 .pagination .paginate_button.active a {
 	color: #ffffff;
 	background-color: #5399bc;

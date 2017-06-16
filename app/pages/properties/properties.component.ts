@@ -14,32 +14,24 @@ import { PropertiesService } from './../../providers/properties/properties.servi
 })
 
 export class PropertiesComponent implements OnInit{
-    // private addproperty = false;
-
     private datatableInited = false;
-    private tableWidget: any;
-
-    //private properties = [];
-    //private addPropertyLink = "addproperty";
-
 
     constructor ( private mainService: MainService,
                   private propertyService: PropertiesService ) {}
 
-    // steve@freelancemvc.net, agent1@freelancemvc.net 
-    ngOnInit(){
-    }
+    ngOnInit(){}
     
     private finishReading() {
-        let DataTable: any = $('#datatables');
-        this.tableWidget = DataTable.DataTable({
-            //select: true,
-            //paging: false,
+        let dataTableQuery: any = $('#datatables');
+        let tableWidget = dataTableQuery.DataTable({
             bLengthChange: false,
             ordering: false,
             searching: false,
             info: false,
         });
+        $('#datatableSearch').on( 'keyup', function () {
+            tableWidget.search( this.value ).draw();
+        } );
         this.datatableInited = true;
     }
 

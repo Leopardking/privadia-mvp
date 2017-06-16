@@ -13,26 +13,22 @@ var homeservice_1 = require('./../../providers/homeservice');
 var properties_service_1 = require('./../../providers/properties/properties.service');
 //import initDataTable = require('../../../assets/js/init/initDataTable.js');
 var PropertiesComponent = (function () {
-    //private properties = [];
-    //private addPropertyLink = "addproperty";
     function PropertiesComponent(mainService, propertyService) {
         this.mainService = mainService;
         this.propertyService = propertyService;
-        // private addproperty = false;
         this.datatableInited = false;
     }
-    // steve@freelancemvc.net, agent1@freelancemvc.net 
-    PropertiesComponent.prototype.ngOnInit = function () {
-    };
+    PropertiesComponent.prototype.ngOnInit = function () { };
     PropertiesComponent.prototype.finishReading = function () {
-        var DataTable = $('#datatables');
-        this.tableWidget = DataTable.DataTable({
-            //select: true,
-            //paging: false,
+        var dataTableQuery = $('#datatables');
+        var tableWidget = dataTableQuery.DataTable({
             bLengthChange: false,
             ordering: false,
             searching: false,
             info: false,
+        });
+        $('#datatableSearch').on('keyup', function () {
+            tableWidget.search(this.value).draw();
         });
         this.datatableInited = true;
     };
