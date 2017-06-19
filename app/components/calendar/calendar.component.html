@@ -10,9 +10,9 @@
 
     <div class="row">
         <div class="col-xs-3">
-            <div class="form-group label-floating">
-                <label class="control-label">Minimum Days Stay</label>
-                <input type="number" class="form-control" formControlName="MinimumStay">
+            <div class="form-group label-floating" [ngClass]="{'form-error': !propertyForm.controls['MinimumStay'].valid && errorForm}">
+                <label class="control-label">Minimum Days Stay {{propertyForm.controls['MinimumStay'].valid}}</label>
+                <input type="text" class="form-control" formControlName="MinimumStay">
             </div>
         </div>
     </div>

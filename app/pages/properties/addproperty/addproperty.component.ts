@@ -38,8 +38,8 @@ export class AddpropertyComponent implements OnInit{
         Description: new FormControl(),
         OtherInfo: new FormControl(),
         CollaboratorInitials: new FormControl(),
-        BoxUrl: new FormControl(),
-        AgencyPackUrl: new FormControl(),
+        BoxUrl: new FormControl(null, Validators.pattern('^((https?|ftp)://)?([a-z]+[.])?[a-z0-9-]+([.][a-z]{1,4}){1,2}(/.*[?].*)?$')),
+        AgencyPackUrl: new FormControl(null, Validators.pattern('^((https?|ftp)://)?([a-z]+[.])?[a-z0-9-]+([.][a-z]{1,4}){1,2}(/.*[?].*)?$')),
         Bathrooms: new FormControl(null, Validators.required),
         Bedrooms: new FormControl(null, Validators.required),
         Sleeps: new FormControl(null, Validators.required),
@@ -55,7 +55,7 @@ export class AddpropertyComponent implements OnInit{
         Contacts: new FormArray([]),
         Rooms: new FormArray([]),
         Images: new FormArray([]),
-        MinimumStay: new FormControl(),
+        MinimumStay: new FormControl(null, Validators.required),
         PointsOfInterest: new FormArray([]),
         MetaData: new FormArray([]),
         MetaDataTmp: new FormGroup({}),
@@ -73,6 +73,7 @@ export class AddpropertyComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
+        console.log('Init form ');
         setTimeout(() => {
             $('button[data-toggle="tab"]').click((e)=>{
                 if(this.propertyForm.valid) {

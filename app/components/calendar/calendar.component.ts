@@ -16,6 +16,10 @@ declare var _: any;
 export class CalendarComponent implements OnInit{
 	@Input('group')
 	private propertyForm: FormGroup;
+
+	@Input('errorForm')
+	public errorForm: any;
+
 	private selected;
 	//private month;
 	private months;

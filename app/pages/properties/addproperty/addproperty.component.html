@@ -4,8 +4,12 @@
             <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="col-xs-12">
                 <div class="card">
                     <div class="card-content p-b-15">
-                        <ul class="nav nav-pills">
-                            <li class="nav-pill active">
+                        <ul class="nav nav-pills main-nav-pills">
+                            <li class="nav-pill active"
+                                [ngClass]="{'form-error': (!propertyForm.controls['Bathrooms'].valid ||
+                                !propertyForm.controls['Name'].valid ||
+                                !propertyForm.controls['Bedrooms'].valid ||
+                                !propertyForm.controls['Sleeps'].valid) && errorForm}">
                                 <a href="#metatab-info" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">store</i>
                                     Property Info
@@ -17,7 +21,7 @@
                                     Images
                                 </a>
                             </li>
-                            <li class="nav-pill">
+                            <li class="nav-pill" [ngClass]="{'form-error': !propertyForm.controls['MinimumStay'].valid && errorForm}">
                                 <a href="#metatab-availability" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">check_circle</i>
                                     Availability
@@ -71,7 +75,7 @@
                             </div>
                             <!--  Property Availability -->
                             <div id="metatab-availability" class="card-content p-b-none p-t-none">
-                                <calendar-cmp [group]="propertyForm"></calendar-cmp>
+                                <calendar-cmp [group]="propertyForm" [errorForm]="errorForm"></calendar-cmp>
                             </div>
                             <!--  Property Marketing  -->
                             <div id="metatab-marketing" class="card-content p-b-none p-l-r-none p-t-none">

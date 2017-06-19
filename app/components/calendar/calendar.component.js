@@ -103,6 +103,10 @@ var CalendarComponent = (function () {
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
     ], CalendarComponent.prototype, "propertyForm", void 0);
+    __decorate([
+        core_1.Input('errorForm'), 
+        __metadata('design:type', Object)
+    ], CalendarComponent.prototype, "errorForm", void 0);
     CalendarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

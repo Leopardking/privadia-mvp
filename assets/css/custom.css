@@ -171,12 +171,15 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .tab-content >div.active {
 	display: inherit;
 }
-.nav-pills .nav-pill.has-error.active a {
+.main-nav-pills > .nav-pill.form-error a {
+	color: #b71c1c !important;
+}
+.nav-pills.sub-pills .nav-pill.form-error.active a {
 	background-color: #b71c1c !important;
 	color: #fff;
 }
 
-.nav-pill.has-error a {
+.nav-pill.form-error a {
 	color: #b71c1c;
 }
 
@@ -299,8 +302,13 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	display: none !important;
 }
 
-.form-group.has-error .form-control, .form-group.has-error.is-focused .form-control {
+.form-group.form-error .form-control,
+.form-group.form-error.is-focused .form-control,
+.form-group.has-error .form-control,
+.form-group.has-error.is-focused .form-control {
 	background-image: linear-gradient(#b71c1c, #b71c1c), linear-gradient(#5399bc, #5399bc);
+	background-size: 100% 2px, 100% 1px;
+	transition-duration: 0.3s;
 }
 
 /**

@@ -38,8 +38,8 @@ var AddpropertyComponent = (function () {
             Description: new forms_1.FormControl(),
             OtherInfo: new forms_1.FormControl(),
             CollaboratorInitials: new forms_1.FormControl(),
-            BoxUrl: new forms_1.FormControl(),
-            AgencyPackUrl: new forms_1.FormControl(),
+            BoxUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('^((https?|ftp)://)?([a-z]+[.])?[a-z0-9-]+([.][a-z]{1,4}){1,2}(/.*[?].*)?$')),
+            AgencyPackUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('^((https?|ftp)://)?([a-z]+[.])?[a-z0-9-]+([.][a-z]{1,4}){1,2}(/.*[?].*)?$')),
             Bathrooms: new forms_1.FormControl(null, forms_1.Validators.required),
             Bedrooms: new forms_1.FormControl(null, forms_1.Validators.required),
             Sleeps: new forms_1.FormControl(null, forms_1.Validators.required),
@@ -55,7 +55,7 @@ var AddpropertyComponent = (function () {
             Contacts: new forms_1.FormArray([]),
             Rooms: new forms_1.FormArray([]),
             Images: new forms_1.FormArray([]),
-            MinimumStay: new forms_1.FormControl(),
+            MinimumStay: new forms_1.FormControl(null, forms_1.Validators.required),
             PointsOfInterest: new forms_1.FormArray([]),
             MetaData: new forms_1.FormArray([]),
             MetaDataTmp: new forms_1.FormGroup({}),
@@ -69,6 +69,7 @@ var AddpropertyComponent = (function () {
     // steve@freelancemvc.net, agent1@freelancemvc.net
     AddpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
+        console.log('Init form ');
         setTimeout(function () {
             $('button[data-toggle="tab"]').click(function (e) {
                 if (_this.propertyForm.valid) {
