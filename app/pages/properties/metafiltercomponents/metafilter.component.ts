@@ -27,7 +27,7 @@ export class PropertyMetafilterComponent implements OnInit{
 	ngOnInit() {
         this.metafilters = [];
         const values = this.propertyForm.controls['MetaData'].value;
-		// console.log('MetaDataTmp ', );
+
 		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
 
         for (let i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
@@ -58,12 +58,11 @@ export class PropertyMetafilterComponent implements OnInit{
 				this.metafilters[this.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj && obj['Available'] || false;
             }
         }
-		console.log('control',this.metafilters)
+
 		$(".selectpicker").selectpicker({
 			selectedTextFormat: 'static'
 		});
-		console.log('Metafilters Model', this.metafiltersModel)
-		console.log('Property Form', this.propertyForm.value)
+		$('.dropdown-menu.inner').perfectScrollbar();
 	}
 
 	private subfilterModelChange(e, type) {

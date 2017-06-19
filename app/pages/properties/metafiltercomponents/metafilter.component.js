@@ -18,7 +18,6 @@ var PropertyMetafilterComponent = (function () {
         var _this = this;
         this.metafilters = [];
         var values = this.propertyForm.controls['MetaData'].value;
-        // console.log('MetaDataTmp ', );
         var control = this.propertyForm.controls['MetaDataTmp'];
         var _loop_1 = function(i) {
             control.addControl('type_' + this_1.metadata.MetaDataSubTypes[i].Id, new forms_1.FormArray([]));
@@ -50,12 +49,10 @@ var PropertyMetafilterComponent = (function () {
         for (var i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
             _loop_1(i);
         }
-        console.log('control', this.metafilters);
         $(".selectpicker").selectpicker({
             selectedTextFormat: 'static'
         });
-        console.log('Metafilters Model', this.metafiltersModel);
-        console.log('Property Form', this.propertyForm.value);
+        $('.dropdown-menu.inner').perfectScrollbar();
     };
     PropertyMetafilterComponent.prototype.subfilterModelChange = function (e, type) {
         var control = this.propertyForm.controls['MetaDataTmp'];
