@@ -24,13 +24,13 @@
                     <i class="material-icons">image</i><br /><br />
                     <i class="title">Upload a photo of your property</i><br /><br />
                     <i class="btn btn-success">Upload an Image</i><br />
-                    <input type="file" id="upload" style="display:none" ng2FileSelect [uploader]="uploader" (change)="fileChange()">
+                    <input type="file" id="upload" accept="image/jpeg" style="display:none" ng2FileSelect [uploader]="uploader" (change)="fileChange()">
                 </label>
             </div>
             <div [formGroup]="propertyForm" class="" *ngIf="propertyForm.controls.Images.value.length">
                 <label for="upload_2" class="upload-image">
                     <i class="btn btn-success">Upload more</i><br />
-                    <input type="file" id="upload_2" style="display:none" ng2FileSelect [uploader]="uploader" (change)="fileChange()">
+                    <input type="file" id="upload_2" accept="image/jpeg" style="display:none" ng2FileSelect [uploader]="uploader" (change)="fileChange()">
                 </label>
             </div>
 <!--

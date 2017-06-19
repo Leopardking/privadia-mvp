@@ -16,7 +16,8 @@ var PropertyimageoComponent = (function () {
         this.images = [];
         this.uploader = new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
             cloudName: 'privadia',
-            uploadPreset: 'blmelyur'
+            uploadPreset: 'blmelyur',
+            resourceType: 'image'
         }));
     }
     PropertyimageoComponent.prototype.ngOnInit = function () {

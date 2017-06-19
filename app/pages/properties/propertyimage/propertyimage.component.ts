@@ -21,7 +21,8 @@ export class PropertyimageoComponent implements OnInit{
 		this.uploader = new CloudinaryUploader(
 			new CloudinaryOptions({
 				cloudName: 'privadia',
-				uploadPreset: 'blmelyur'
+				uploadPreset: 'blmelyur',
+				resourceType: 'image'
 			})
 		);
 	}
