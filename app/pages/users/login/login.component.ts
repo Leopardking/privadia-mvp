@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl} from "@angular/forms";
+import {FormGroup, FormControl, Validators} from "@angular/forms";
 
 @Component({
     moduleId: module.id,
@@ -10,8 +10,11 @@ import {FormGroup, FormControl} from "@angular/forms";
 
 export class LoginComponent implements OnInit{
     public loginForm = new FormGroup({
-        email: new FormControl('Test'),
-        password: new FormControl('Password'),
+        Email: new FormControl(null, Validators.compose([
+            Validators.required,
+            Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm)
+        ])),
+        Password: new FormControl('Password', Validators.required),
     });
 
     constructor (  ) {
@@ -26,6 +29,6 @@ export class LoginComponent implements OnInit{
     }
     
     private onSubmit() {
-        console.log('On Submit',)
+        console.log('On Submit', this.loginForm)
     }
 }

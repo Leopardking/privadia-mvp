@@ -69,7 +69,7 @@ var PropertyinfoComponent = (function () {
             JobTitle: new forms_1.FormControl(),
             FirstName: new forms_1.FormControl(),
             LastName: new forms_1.FormControl(),
-            EmailAddress: new forms_1.FormControl('', forms_1.Validators.pattern('/^(([^<>()[]\.,;:s@"]+(.[^<>()[]\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/')),
+            EmailAddress: new forms_1.FormControl('', forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm)),
             Telephone: new forms_1.FormControl(),
         }));
     };

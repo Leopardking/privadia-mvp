@@ -13,8 +13,11 @@ var forms_1 = require("@angular/forms");
 var LoginComponent = (function () {
     function LoginComponent() {
         this.loginForm = new forms_1.FormGroup({
-            email: new forms_1.FormControl('Test'),
-            password: new forms_1.FormControl('Password'),
+            Email: new forms_1.FormControl(null, forms_1.Validators.compose([
+                forms_1.Validators.required,
+                forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm)
+            ])),
+            Password: new forms_1.FormControl('Password', forms_1.Validators.required),
         });
     }
     LoginComponent.prototype.ngOnInit = function () {
@@ -23,7 +26,7 @@ var LoginComponent = (function () {
         }, 700);
     };
     LoginComponent.prototype.onSubmit = function () {
-        console.log('On Submit');
+        console.log('On Submit', this.loginForm);
     };
     LoginComponent = __decorate([
         core_1.Component({

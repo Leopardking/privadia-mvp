@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-primary navbar-transparent navbar-absolute">
     <div class="container">
         <div class="navbar-header">
@@ -34,22 +33,22 @@
                                     <h4 class="card-title">Login</h4>
                                 </div>
                                 <div class="card-content">
-                                    <div class="input-group">
+                                    <div class="input-group" [ngClass]="{'form-error': !loginForm.controls.Email.valid && loginForm.controls.Email.touched}">
                                         <span class="input-group-addon">
                                             <i class="material-icons">email</i>
                                         </span>
                                         <div class="form-group label-floating">
                                             <label class="control-label">Email address</label>
-                                            <input type="email" class="form-control" formControlName="email">
+                                            <input type="email" class="form-control" formControlName="Email">
                                         </div>
                                     </div>
-                                    <div class="input-group">
+                                    <div class="input-group" [ngClass]="{'form-error': !loginForm.controls.Password.valid}">
                                         <span class="input-group-addon">
                                             <i class="material-icons">lock_outline</i>
                                         </span>
                                         <div class="form-group label-floating">
                                             <label class="control-label">Password</label>
-                                            <input type="password" class="form-control" formControlName="password">
+                                            <input type="password" class="form-control" formControlName="Password">
                                         </div>
                                     </div>
                                 </div>
