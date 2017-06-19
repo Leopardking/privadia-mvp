@@ -176,7 +176,7 @@
                         <label class="control-label">Last Name</label>
                         <input type="text" class="form-control" [formControl]="control.controls.LastName">
                     </div>
-                    <div class="form-group label-floating">
+                    <div class="form-group label-floating" [ngClass]="{'form-error': !control.controls.EmailAddress.valid}">
                         <label class="control-label">Email Address</label>
                         <input type="email" class="form-control" [formControl]="control.controls.EmailAddress">
                     </div>
