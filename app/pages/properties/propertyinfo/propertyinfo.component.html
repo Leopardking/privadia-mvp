@@ -5,7 +5,8 @@
             Name & Address
         </a>
     </li>
-    <li class="nav-pill">
+    <li class="nav-pill"
+        [ngClass]="{'form-error': !propertyForm.controls['BoxUrl'].valid && errorForm}">
         <a href="#heading-description" role="tab" data-toggle="tab" class="">
             Description
         </a>
