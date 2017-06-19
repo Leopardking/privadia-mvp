@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import { LoginComponent } from './login/login.component';
 
@@ -8,6 +9,8 @@ import { MODULE_ROUTES,MODULE_COMPONENTS } from './users.routes';
 
 @NgModule({
     imports: [
+        FormsModule,
+        ReactiveFormsModule,
         BrowserModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],

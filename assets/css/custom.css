@@ -333,6 +333,20 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	background-color: #0b5a7c;
 	box-shadow: 0px 7px 12px 0 rgba(83, 153, 188, 0.4);
 }
+.btn.btn-success.btn-simple,
+.navbar .navbar-nav > li > a.btn.btn-success.btn-simple {
+	color: #5399bc;
+}
+.btn.btn-success.btn-simple:hover,
+.btn.btn-success.btn-simple:focus,
+.btn.btn-success.btn-simple:active, 
+.navbar .navbar-nav > li > a.btn.btn-success.btn-simple:hover,
+.navbar .navbar-nav > li > a.btn.btn-success.btn-simple:focus,
+.navbar .navbar-nav > li > a.btn.btn-success.btn-simple:active {
+	color: #5399bc;
+	box-shadow: none;
+	background-color: transparent;
+}
 .btn.btn-danger {
 	min-width: 120px;
 	padding: 12px 15px;

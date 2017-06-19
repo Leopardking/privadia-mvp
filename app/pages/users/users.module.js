@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var platform_browser_1 = require('@angular/platform-browser');
+var forms_1 = require("@angular/forms");
 var users_routes_1 = require('./users.routes');
 var UsersModule = (function () {
     function UsersModule() {
@@ -18,6 +19,8 @@ var UsersModule = (function () {
     UsersModule = __decorate([
         core_1.NgModule({
             imports: [
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 platform_browser_1.BrowserModule,
                 router_1.RouterModule.forChild(users_routes_1.MODULE_ROUTES)
             ],

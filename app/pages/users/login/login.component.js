@@ -9,19 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require("@angular/forms");
 var LoginComponent = (function () {
     function LoginComponent() {
+        this.loginForm = new forms_1.FormGroup({
+            email: new forms_1.FormControl('Test'),
+            password: new forms_1.FormControl('Password'),
+        });
     }
     LoginComponent.prototype.ngOnInit = function () {
         setTimeout(function () {
             $('.card').removeClass('card-hidden');
         }, 700);
     };
+    LoginComponent.prototype.onSubmit = function () {
+        console.log('On Submit');
+    };
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: ' login-cmp ',
-            templateUrl: 'login.component.html'
+            templateUrl: 'login.component.html',
+            styleUrls: ['login.component.css'],
         }), 
         __metadata('design:paramtypes', [])
     ], LoginComponent);
