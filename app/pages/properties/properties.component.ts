@@ -20,16 +20,17 @@ export class PropertiesComponent implements OnInit{
                   private propertyService: PropertiesService ) {}
 
     ngOnInit(){}
-    
+
     private finishReading() {
         let dataTableQuery: any = $('#datatables');
-        let tableWidget = dataTableQuery.DataTable({
+        const tableWidget = dataTableQuery.DataTable({
             bLengthChange: false,
             ordering: false,
-            searching: false,
+            //searching: false,
             info: false,
         });
         $('#datatableSearch').on( 'keyup', function () {
+            console.log('Search ', $(this).text())
             tableWidget.search( this.value ).draw();
         } );
         this.datatableInited = true;

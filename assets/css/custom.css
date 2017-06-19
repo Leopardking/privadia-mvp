@@ -389,3 +389,10 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	background-color: #5399bc;
 	box-shadow: none;
 }
+
+/**
+ * DataTables style
+ */
+.dataTables_filter {
+	display: none;
+}
