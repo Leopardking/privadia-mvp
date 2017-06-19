@@ -12,21 +12,24 @@ var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var LoginComponent = (function () {
     function LoginComponent() {
+        this.errorForm = false;
         this.loginForm = new forms_1.FormGroup({
             Email: new forms_1.FormControl(null, forms_1.Validators.compose([
                 forms_1.Validators.required,
                 forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm)
             ])),
-            Password: new forms_1.FormControl('Password', forms_1.Validators.required),
+            Password: new forms_1.FormControl(null, forms_1.Validators.required),
         });
     }
     LoginComponent.prototype.ngOnInit = function () {
+        console.log('Init Form', this.loginForm);
         setTimeout(function () {
             $('.card').removeClass('card-hidden');
         }, 700);
     };
     LoginComponent.prototype.onSubmit = function () {
         console.log('On Submit', this.loginForm);
+        this.errorForm = true;
     };
     LoginComponent = __decorate([
         core_1.Component({
