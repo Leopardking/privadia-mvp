@@ -171,6 +171,15 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .tab-content >div.active {
 	display: inherit;
 }
+.nav-pills {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.nav-pills:before, .nav-pills:after {
+	display: none;
+}
 .main-nav-pills > .nav-pill.form-error a {
 	color: #b71c1c !important;
 }
