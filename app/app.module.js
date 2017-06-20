@@ -12,9 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
-// import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 var app_component_1 = require('./app.component');
-//import {AuthGuard} from "./providers/common/auth.guard";
 var auth_guard_1 = require("./shared/guard/auth.guard");
 var app_routing_module_1 = require("./app-routing.module");
 var AppModule = (function () {
@@ -26,20 +24,10 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 app_routing_module_1.AppRoutingModule,
-                // DashboardModule,
-                // UsersModule,
-                // SidebarModule,
-                // NavbarModule,
-                // FooterModule,
                 http_1.HttpModule,
                 router_1.RouterModule.forRoot([])
             ],
             providers: [
-                // {provide: LocationStrategy, useClass: PathLocationStrategy },
-                // MainService,
-                // LoginService,
-                // PropertiesService,
-                // BookingService,
                 auth_guard_1.AuthGuard,
             ],
             bootstrap: [app_component_1.AppComponent]

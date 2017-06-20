@@ -32,10 +32,6 @@ export class LoginComponent implements OnInit {
         }, 700)
     }
 
-    onLoggedin() {
-        localStorage.setItem('isLoggedin', 'true');
-    }
-
     private onSubmit() {
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(
             d => {
@@ -47,7 +43,7 @@ export class LoginComponent implements OnInit {
                 console.log('On Submit error', e)
             }
         );
-        console.log('On Submit', this.loginForm)
+
         this.errorForm = true;
     }
 }

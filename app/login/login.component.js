@@ -31,9 +31,6 @@ var LoginComponent = (function () {
             $('.card').removeClass('card-hidden');
         }, 700);
     };
-    LoginComponent.prototype.onLoggedin = function () {
-        localStorage.setItem('isLoggedin', 'true');
-    };
     LoginComponent.prototype.onSubmit = function () {
         var _this = this;
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(function (d) {
@@ -43,7 +40,6 @@ var LoginComponent = (function () {
         }, function (e) {
             console.log('On Submit error', e);
         });
-        console.log('On Submit', this.loginForm);
         this.errorForm = true;
     };
     LoginComponent = __decorate([

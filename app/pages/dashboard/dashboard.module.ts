@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { VillaComponent } from '../../components/villa/villa.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import {MetafilterComponent} from "../../components/metafilter/metafilter.component";
+import { MetafilterComponent } from "../../components/metafilter/metafilter.component";
 
 @NgModule({
     imports: [

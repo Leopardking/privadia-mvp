@@ -14,20 +14,6 @@ export class AppComponent implements OnInit{
     constructor(location:Location, public router: Router) {
         this.location = location;
     }
-    ngOnInit(){
-        console.log('Init app',)
-        //$.getScript('../assets/js/init/initMenu.js');
-        //$.getScript('../assets/js/demo.js');
-    }
-    /*
-    public isMap(){
-        // console.log(this.location);
-        if(this.location.prepareExternalUrl(this.location.path()) == '#/maps/fullscreen'){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-    */
+
+    ngOnInit(){}
 }

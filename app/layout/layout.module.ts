@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
-//import { TranslateModule } from '@ngx-translate/core';
 import { MainService } from '../providers/homeservice';
 import {LoginService} from "../providers/login/login.service";
 import {PropertiesService} from "../providers/properties/properties.service";
@@ -15,9 +13,7 @@ import { SidebarComponent } from '../shared/components/sidebar/sidebar.component
 @NgModule({
     imports: [
         CommonModule,
-        //NgbDropdownModule.forRoot(),
         LayoutRoutingModule,
-        //TranslateModule
     ],
     declarations: [
         LayoutComponent,

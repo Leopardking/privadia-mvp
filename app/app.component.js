@@ -16,11 +16,7 @@ var AppComponent = (function () {
         this.router = router;
         this.location = location;
     }
-    AppComponent.prototype.ngOnInit = function () {
-        console.log('Init app');
-        //$.getScript('../assets/js/init/initMenu.js');
-        //$.getScript('../assets/js/demo.js');
-    };
+    AppComponent.prototype.ngOnInit = function () { };
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',

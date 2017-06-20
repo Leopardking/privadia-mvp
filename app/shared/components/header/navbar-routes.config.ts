@@ -2,7 +2,7 @@ import { MenuType, RouteInfo } from './navbar.metadata';
 
 export const ROUTES: RouteInfo[] = [
     { path: '/', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'dashboard' },
-    { path: '/home', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'dashboard' },
+    { path: '/dashboard', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'dashboard' },
     { path: '/booking', title: 'Bookings', menuType: MenuType.LEFT, icon: 'confirmation_number' },
 
     { path: '/properties', title: 'Properties', menuType: MenuType.LEFT, icon: 'store' },
