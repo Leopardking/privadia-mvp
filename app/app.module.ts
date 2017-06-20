@@ -22,25 +22,58 @@ import { MainService } from './providers/homeservice';
 import { LoginService } from './providers/login/login.service';
 import { PropertiesService } from './providers/properties/properties.service';
 import { BookingService } from './providers/booking/booking.service';
-import {AuthGuard} from "./providers/common/auth.guard";
+//import {AuthGuard} from "./providers/common/auth.guard";
+import {AuthGuard} from "./shared/guard/auth.guard";
 import {AUTH_PROVIDERS} from "angular2-jwt";
+import {AppRoutingModule} from "./app-routing.module";
 
+@NgModule({
+    declarations: [ AppComponent ],
+    imports:      [
+        BrowserModule,
+        AppRoutingModule,
+        // DashboardModule,
+        // UsersModule,
+        // SidebarModule,
+        // NavbarModule,
+        // FooterModule,
+        HttpModule,
+        RouterModule.forRoot([])
+    ],
+    providers: [
+        // {provide: LocationStrategy, useClass: PathLocationStrategy },
+        // MainService,
+        // LoginService,
+        // PropertiesService,
+        // BookingService,
+        AuthGuard,
+        //...AUTH_PROVIDERS
+    ],
+    bootstrap:    [ AppComponent ]
+})
+/*
 @NgModule({
     imports:      [
         BrowserModule,
         DashboardModule,
         UsersModule,
-        SidebarModule,
-        NavbarModule,
-        FooterModule,
+        // SidebarModule,
+        // NavbarModule,
+        // FooterModule,
         HttpModule,
         RouterModule.forRoot([])
     ],
     declarations: [ AppComponent, DashboardComponent, UsersComponent ],
     providers: [
         {provide: LocationStrategy, useClass: PathLocationStrategy },
-        MainService, LoginService, PropertiesService, BookingService, AuthGuard, ...AUTH_PROVIDERS
+        // MainService,
+        LoginService,
+        // PropertiesService,
+        // BookingService,
+        AuthGuard,
+        ...AUTH_PROVIDERS
     ],
     bootstrap:    [ AppComponent ]
 })
+*/
 export class AppModule { }

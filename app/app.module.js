@@ -14,44 +14,34 @@ var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
 // import { ROUTER_PROVIDERS } from '@angular/router-deprecated';
 var app_component_1 = require('./app.component');
-var dashboard_component_1 = require('./pages/dashboard.component');
-var users_component_1 = require('./pages/users/users.component');
-var dashboard_module_1 = require('./pages/dashboard.module');
-var users_module_1 = require('./pages/users/users.module');
-var sidebar_module_1 = require('./components/sidebar/sidebar.module');
-var footer_module_1 = require('./components/shared/footer/footer.module');
-var navbar_module_1 = require('./components/shared/navbar/navbar.module');
-var common_1 = require('@angular/common');
-var homeservice_1 = require('./providers/homeservice');
-var login_service_1 = require('./providers/login/login.service');
-var properties_service_1 = require('./providers/properties/properties.service');
-var booking_service_1 = require('./providers/booking/booking.service');
-var auth_guard_1 = require("./providers/common/auth.guard");
-var angular2_jwt_1 = require("angular2-jwt");
+//import {AuthGuard} from "./providers/common/auth.guard";
+var auth_guard_1 = require("./shared/guard/auth.guard");
+var app_routing_module_1 = require("./app-routing.module");
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
+            declarations: [app_component_1.AppComponent],
             imports: [
                 platform_browser_1.BrowserModule,
-                dashboard_module_1.DashboardModule,
-                users_module_1.UsersModule,
-                sidebar_module_1.SidebarModule,
-                navbar_module_1.NavbarModule,
-                footer_module_1.FooterModule,
+                app_routing_module_1.AppRoutingModule,
+                // DashboardModule,
+                // UsersModule,
+                // SidebarModule,
+                // NavbarModule,
+                // FooterModule,
                 http_1.HttpModule,
                 router_1.RouterModule.forRoot([])
             ],
-            declarations: [app_component_1.AppComponent, dashboard_component_1.DashboardComponent, users_component_1.UsersComponent],
             providers: [
-                { provide: common_1.LocationStrategy, useClass: common_1.PathLocationStrategy },
-                homeservice_1.MainService,
-                login_service_1.LoginService,
-                properties_service_1.PropertiesService,
-                booking_service_1.BookingService,
-                auth_guard_1.AuthGuard
-            ].concat(angular2_jwt_1.AUTH_PROVIDERS),
+                // {provide: LocationStrategy, useClass: PathLocationStrategy },
+                // MainService,
+                // LoginService,
+                // PropertiesService,
+                // BookingService,
+                auth_guard_1.AuthGuard,
+            ],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
