@@ -14,6 +14,7 @@ var router_1 = require('@angular/router');
 var dashboard_component_1 = require('./dashboard.component');
 var villa_component_1 = require('../../components/villa/villa.component');
 var dashboard_routing_module_1 = require('./dashboard-routing.module');
+var metafilter_component_1 = require("../../components/metafilter/metafilter.component");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -22,9 +23,9 @@ var DashboardModule = (function () {
             imports: [
                 common_1.CommonModule,
                 dashboard_routing_module_1.DashboardRoutingModule,
-                router_1.RouterModule
+                router_1.RouterModule,
             ],
-            declarations: [dashboard_component_1.DashboardComponent, villa_component_1.VillaComponent],
+            declarations: [dashboard_component_1.DashboardComponent, villa_component_1.VillaComponent, metafilter_component_1.MetafilterComponent],
         }), 
         __metadata('design:paramtypes', [])
     ], DashboardModule);
