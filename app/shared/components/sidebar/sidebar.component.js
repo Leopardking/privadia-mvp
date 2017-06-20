@@ -17,7 +17,8 @@ var SidebarComponent = (function () {
         this.mainService = mainService;
     }
     SidebarComponent.prototype.ngOnInit = function () {
-        $.getScript('../../assets/js/sidebar-moving-tab.js');
+        $.getScript('../../../assets/js/init/initMenu.js');
+        $.getScript('../../../assets/js/sidebar-moving-tab.js');
         //$.getScript('../../assets/js/plugins/bootstrap-datetimepicker.js');
         this.menuItems = sidebar_routes_config_1.ROUTES.filter(function (menuItem) { return menuItem.menuType !== sidebar_metadata_1.MenuType.BRAND; });
     };
@@ -29,7 +30,7 @@ var SidebarComponent = (function () {
     SidebarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'app-sidebar',
+            selector: 'sidebar-cmp',
             templateUrl: 'sidebar.component.html',
             styleUrls: ['sidebar.component.css']
         }), 

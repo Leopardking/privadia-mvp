@@ -23,8 +23,8 @@ import { LoginService } from './providers/login/login.service';
 import { PropertiesService } from './providers/properties/properties.service';
 import { BookingService } from './providers/booking/booking.service';
 //import {AuthGuard} from "./providers/common/auth.guard";
+
 import {AuthGuard} from "./shared/guard/auth.guard";
-import {AUTH_PROVIDERS} from "angular2-jwt";
 import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({

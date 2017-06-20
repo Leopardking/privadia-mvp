@@ -17,7 +17,8 @@ var AppComponent = (function () {
         this.location = location;
     }
     AppComponent.prototype.ngOnInit = function () {
-        $.getScript('../assets/js/init/initMenu.js');
+        console.log('Init app');
+        //$.getScript('../assets/js/init/initMenu.js');
         //$.getScript('../assets/js/demo.js');
     };
     AppComponent = __decorate([

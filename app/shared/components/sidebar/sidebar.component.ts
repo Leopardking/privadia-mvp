@@ -6,7 +6,7 @@ import { MenuType } from './sidebar.metadata';
 
 @Component({
     moduleId: module.id,
-    selector: 'app-sidebar',
+    selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
     styleUrls: ['sidebar.component.css']
 })
@@ -18,7 +18,8 @@ export class SidebarComponent implements OnInit{
     }
 
     ngOnInit() {
-        $.getScript('../../assets/js/sidebar-moving-tab.js');
+        $.getScript('../../../assets/js/init/initMenu.js');
+        $.getScript('../../../assets/js/sidebar-moving-tab.js');
         //$.getScript('../../assets/js/plugins/bootstrap-datetimepicker.js');
 
         this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);

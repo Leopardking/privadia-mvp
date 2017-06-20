@@ -15,7 +15,8 @@ export class AppComponent implements OnInit{
         this.location = location;
     }
     ngOnInit(){
-        $.getScript('../assets/js/init/initMenu.js');
+        console.log('Init app',)
+        //$.getScript('../assets/js/init/initMenu.js');
         //$.getScript('../assets/js/demo.js');
     }
     /*
