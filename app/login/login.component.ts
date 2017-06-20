@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(
             d => {
                 localStorage.setItem('id_token', d.access_token);
-                this.router.navigate(['home']);
+                this.router.navigate(['dashboard']);
                 console.log('On Submit Success', d)
             },
             e => {

@@ -38,7 +38,7 @@ var LoginComponent = (function () {
         var _this = this;
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(function (d) {
             localStorage.setItem('id_token', d.access_token);
-            _this.router.navigate(['home']);
+            _this.router.navigate(['dashboard']);
             console.log('On Submit Success', d);
         }, function (e) {
             console.log('On Submit error', e);
