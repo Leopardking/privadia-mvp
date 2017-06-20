@@ -1,0 +1,58 @@
+<div class="logo no-divider">
+    <div class="logo-normal">
+        <a href="" class="simple-text">
+            Privadia Exchange
+        </a>
+    </div>
+</div>
+<div class="sidebar-wrapper">
+    <div class="user">
+        <div class="photo">
+            <img src="../assets/img/faces/avatar.jpg"/>
+        </div>
+        <div class="info">
+            <a data-toggle="collapse" href="#collapseUser" class="collapsed">
+                <span>
+                    Tania Andrew
+                    <b class="caret"></b>
+                </span>
+            </a>
+            <div class="collapse" id="collapseUser">
+                <ul class="nav">
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span class="sidebar-mini visible-on-sidebar-mini">MP</span>
+                            <span class="sidebar-normal">My Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span class="sidebar-mini visible-on-sidebar-mini">EP</span>
+                            <span class="sidebar-normal">Edit Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            <span class="sidebar-mini visible-on-sidebar-mini">S</span>
+                            <span class="sidebar-normal">Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="nav-container">
+        <ul class="nav">
+            <li routerLinkActive="active" *ngFor="let item of menuItems">
+                <a [routerLink]="[item.path]" (click)="menuClick()">
+                    <i class="material-icons">{{item.icon}}</i>
+                    <p>{{item.title}}</p>
+                </a>
+                <!--
+                <mainfilter-cmp *ngIf="item.iconName == 'dashboard1'"></mainfilter-cmp>
+                -->
+            </li>
+        </ul>
+    </div>
+
+</div>
