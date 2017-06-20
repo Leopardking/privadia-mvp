@@ -18,7 +18,6 @@ require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var MainService = (function () {
     function MainService(http, loginService, propertiesService, bookingService) {
-        var _this = this;
         this.http = http;
         this.loginService = loginService;
         this.propertiesService = propertiesService;
@@ -30,15 +29,22 @@ var MainService = (function () {
         this.properties = [];
         this.filter = new Filter(1, [1, 2, 3, 4, 5, 6, 7, 8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow()), 0, 0, [], 0);
         this.metadata = [];
+        /*
         this.loginService.login(this.apiUrl, "steve@freelancemvc.net", "password")
-            .subscribe(function (d) {
-            _this.setToken(d.token_type + ' ' + d.access_token);
-            _this.propertiesService.setToken(_this.token);
-            _this.bookingService.setToken(_this.token);
-            _this.propertiesService.setApiURL(_this.apiUrl);
-            _this.bookingService.setApiURL(_this.apiUrl);
-            _this.readData();
-        }, function (e) { console.log("error:", e); });
+                .subscribe(
+                    d => {
+                        this.setToken(d.token_type + ' ' + d.access_token);
+                        this.propertiesService.setToken(this.token);
+                        this.bookingService.setToken(this.token);
+
+                        this.propertiesService.setApiURL(this.apiUrl);
+                        this.bookingService.setApiURL(this.apiUrl);
+
+                        this.readData();
+                    },
+                    e => { console.log("error:", e)}
+                );
+        */
     }
     MainService.prototype.readData = function () {
         var _this = this;

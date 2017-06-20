@@ -27,7 +27,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" method="get" action="">
                             <div class="card card-login card-hidden">
                                 <div class="card-header text-center" data-background-color="blue">
                                     <h4 class="card-title">Login</h4>
@@ -41,7 +41,7 @@
                                         </span>
                                         <div class="form-group label-floating">
                                             <label class="control-label">Email address</label>
-                                            <input type="email" class="form-control" formControlName="Email">
+                                            <input type="text" class="form-control" formControlName="Email">
                                         </div>
                                     </div>
                                     <div class="input-group" [ngClass]="{'form-error': !loginForm.controls.Password.valid && loginForm.controls.Password.touched

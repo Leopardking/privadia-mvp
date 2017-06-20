@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class MainService {
 	private token:string = "";
-	private apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
 	//private apiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
 	public filter: Filter;
 
@@ -30,7 +30,7 @@ export class MainService {
 				, 0, 0, [], 0);
 
 		this.metadata = [];
-
+		/*
 		this.loginService.login(this.apiUrl, "steve@freelancemvc.net", "password")
         		.subscribe( 
                     d => { 
@@ -45,6 +45,7 @@ export class MainService {
         		    },
                     e => { console.log("error:", e)} 
                 );
+		*/
 	}
 
 	public readData() {

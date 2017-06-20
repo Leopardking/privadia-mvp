@@ -12,7 +12,7 @@ export class LoginService {
 	}
 
 	public login(apiUrl, email, password) {
-		var grant_type = "password";
+		const grant_type = "password";
 
 		if (email && password && grant_type) {
 			let username = encodeURIComponent(email);
