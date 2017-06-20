@@ -30,7 +30,6 @@ export class MainService {
 				, 0, 0, [], 0);
 
 		this.metadata = [];
-		/*
 		this.loginService.login(this.apiUrl, "steve@freelancemvc.net", "password")
         		.subscribe( 
                     d => { 
@@ -45,7 +44,6 @@ export class MainService {
         		    },
                     e => { console.log("error:", e)} 
                 );
-		*/
 	}
 
 	public readData() {

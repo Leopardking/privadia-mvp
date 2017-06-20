@@ -10,25 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var common_1 = require('@angular/common');
-var AppComponent = (function () {
-    function AppComponent(location, router) {
+var angular2_jwt_1 = require('angular2-jwt');
+var AuthGuard = (function () {
+    function AuthGuard(router) {
         this.router = router;
-        this.location = location;
     }
-    AppComponent.prototype.ngOnInit = function () {
-        $.getScript('../assets/js/init/initMenu.js');
-        //$.getScript('../assets/js/demo.js');
+    AuthGuard.prototype.canActivate = function (route, state) {
+        console.log('tokenNotExpired', angular2_jwt_1.tokenNotExpired());
+        //if (tokenNotExpired()) {
+        if (localStorage.getItem('id_token')) {
+            return true;
+        }
+        this.router.navigate(['/login']);
+        return false;
     };
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            templateUrl: 'app/app.component.html',
-            styleUrls: ['app/app.component.css']
-        }), 
-        __metadata('design:paramtypes', [common_1.Location, router_1.Router])
-    ], AppComponent);
-    return AppComponent;
+    AuthGuard = __decorate([
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [router_1.Router])
+    ], AuthGuard);
+    return AuthGuard;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.AuthGuard = AuthGuard;
+//# sourceMappingURL=auth.guard.js.map

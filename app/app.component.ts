@@ -11,7 +11,7 @@ declare var $:any;
 
 export class AppComponent implements OnInit{
     location: Location;
-    constructor(location:Location) {
+    constructor(location:Location, public router: Router) {
         this.location = location;
     }
     ngOnInit(){

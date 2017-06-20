@@ -14,9 +14,11 @@ var login_service_1 = require('../../../providers/login/login.service');
 var homeservice_1 = require("../../../providers/homeservice");
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var booking_service_1 = require('../../../providers/booking/booking.service');
+var router_1 = require("@angular/router");
 var LoginComponent = (function () {
-    function LoginComponent(loginService, MainProvider, PropertiesProvider, BookingProvider) {
+    function LoginComponent(loginService, router, MainProvider, PropertiesProvider, BookingProvider) {
         this.loginService = loginService;
+        this.router = router;
         this.MainProvider = MainProvider;
         this.PropertiesProvider = PropertiesProvider;
         this.BookingProvider = BookingProvider;
@@ -48,11 +50,18 @@ var LoginComponent = (function () {
             );
         */
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(function (d) {
-            _this.setToken(d.token_type + ' ' + d.access_token);
-            _this.PropertiesProvider.setToken(_this.token);
-            _this.BookingProvider.setToken(_this.token);
-            _this.PropertiesProvider.setApiURL(_this.MainProvider.apiUrl);
-            _this.BookingProvider.setApiURL(_this.MainProvider.apiUrl);
+            console.log('Login  ', d.access_token);
+            localStorage.setItem('id_token', d.access_token);
+            console.log('Local Storage', localStorage.getItem('id_token'));
+            _this.router.navigate(['home']);
+            /*
+            this.setToken(d.token_type + ' ' + d.access_token);
+            this.PropertiesProvider.setToken(this.token);
+            this.BookingProvider.setToken(this.token);
+
+            this.PropertiesProvider.setApiURL(this.MainProvider.apiUrl);
+            this.BookingProvider.setApiURL(this.MainProvider.apiUrl);
+            */
             console.log('On Submit Success', d);
         }, function (e) {
             console.log('On Submit error', e);
@@ -70,7 +79,7 @@ var LoginComponent = (function () {
             templateUrl: 'login.component.html',
             styleUrls: ['login.component.css'],
         }), 
-        __metadata('design:paramtypes', [login_service_1.LoginService, homeservice_1.MainService, properties_service_1.PropertiesService, booking_service_1.BookingService])
+        __metadata('design:paramtypes', [login_service_1.LoginService, router_1.Router, homeservice_1.MainService, properties_service_1.PropertiesService, booking_service_1.BookingService])
     ], LoginComponent);
     return LoginComponent;
 }());

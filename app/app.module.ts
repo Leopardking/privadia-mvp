@@ -22,6 +22,8 @@ import { MainService } from './providers/homeservice';
 import { LoginService } from './providers/login/login.service';
 import { PropertiesService } from './providers/properties/properties.service';
 import { BookingService } from './providers/booking/booking.service';
+import {AuthGuard} from "./providers/common/auth.guard";
+import {AUTH_PROVIDERS} from "angular2-jwt";
 
 @NgModule({
     imports:      [
@@ -37,7 +39,7 @@ import { BookingService } from './providers/booking/booking.service';
     declarations: [ AppComponent, DashboardComponent, UsersComponent ],
     providers: [
         {provide: LocationStrategy, useClass: PathLocationStrategy },
-        MainService, LoginService, PropertiesService, BookingService
+        MainService, LoginService, PropertiesService, BookingService, AuthGuard, ...AUTH_PROVIDERS
     ],
     bootstrap:    [ AppComponent ]
 })

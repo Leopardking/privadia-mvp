@@ -26,6 +26,8 @@ var homeservice_1 = require('./providers/homeservice');
 var login_service_1 = require('./providers/login/login.service');
 var properties_service_1 = require('./providers/properties/properties.service');
 var booking_service_1 = require('./providers/booking/booking.service');
+var auth_guard_1 = require("./providers/common/auth.guard");
+var angular2_jwt_1 = require("angular2-jwt");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -44,8 +46,12 @@ var AppModule = (function () {
             declarations: [app_component_1.AppComponent, dashboard_component_1.DashboardComponent, users_component_1.UsersComponent],
             providers: [
                 { provide: common_1.LocationStrategy, useClass: common_1.PathLocationStrategy },
-                homeservice_1.MainService, login_service_1.LoginService, properties_service_1.PropertiesService, booking_service_1.BookingService
-            ],
+                homeservice_1.MainService,
+                login_service_1.LoginService,
+                properties_service_1.PropertiesService,
+                booking_service_1.BookingService,
+                auth_guard_1.AuthGuard
+            ].concat(angular2_jwt_1.AUTH_PROVIDERS),
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

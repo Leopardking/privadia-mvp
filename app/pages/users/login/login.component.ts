@@ -5,6 +5,7 @@ import {MainService} from "../../../providers/homeservice";
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import { BookingService } from '../../../providers/booking/booking.service';
+import {Router} from "@angular/router";
 
 declare const $:any;
 
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit{
     });
 
     constructor ( private loginService: LoginService,
+                  private router: Router,
                   private MainProvider: MainService,
                   private PropertiesProvider: PropertiesService,
                   private BookingProvider: BookingService ) {
@@ -54,12 +56,18 @@ export class LoginComponent implements OnInit{
         */
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(
             d => {
+                console.log('Login  ',d.access_token);
+                localStorage.setItem('id_token', d.access_token);
+                console.log('Local Storage',localStorage.getItem('id_token'))
+                this.router.navigate(['home']);
+                /*
                 this.setToken(d.token_type + ' ' + d.access_token);
                 this.PropertiesProvider.setToken(this.token);
                 this.BookingProvider.setToken(this.token);
 
                 this.PropertiesProvider.setApiURL(this.MainProvider.apiUrl);
                 this.BookingProvider.setApiURL(this.MainProvider.apiUrl);
+                */
                 console.log('On Submit Success', d)
             },
             e => {
