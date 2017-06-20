@@ -6,7 +6,7 @@ import { MenuType } from './sidebar.metadata';
 
 @Component({
     moduleId: module.id,
-    selector: 'sidebar-cmp',
+    selector: 'app-sidebar',
     templateUrl: 'sidebar.component.html',
     styleUrls: ['sidebar.component.css']
 })
