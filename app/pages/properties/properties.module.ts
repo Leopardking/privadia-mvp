@@ -5,6 +5,8 @@ import {CommonModule} from "@angular/common";
 import {Ng2CloudinaryModule} from "ng2-cloudinary";
 import {FileUploadModule} from "ng2-file-upload";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DashboardService} from "../../providers/dashboard/dashboard.service";
+import {PropertiesService} from "../../providers/properties/properties.service";
 
 @NgModule({
     imports: [
@@ -15,7 +17,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         // FileUploadModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],
-    declarations: [ MODULE_COMPONENTS ]
+    declarations: [ MODULE_COMPONENTS ],
+    providers: [ DashboardService, PropertiesService ]
 })
 
 export class PropertiesModule{}

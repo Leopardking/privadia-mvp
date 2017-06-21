@@ -9,12 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var homeservice_1 = require('./../../providers/homeservice');
+//import { MainService } from './../../providers/homeservice';
+var dashboard_service_1 = require('./../../providers/dashboard/dashboard.service');
 var properties_service_1 = require('./../../providers/properties/properties.service');
 //import initDataTable = require('../../../assets/js/init/initDataTable.js');
 var PropertiesComponent = (function () {
-    function PropertiesComponent(mainService, propertyService) {
-        this.mainService = mainService;
+    function PropertiesComponent(dashboardService, propertyService) {
+        this.dashboardService = dashboardService;
         this.propertyService = propertyService;
         this.datatableInited = false;
     }
@@ -36,7 +37,7 @@ var PropertiesComponent = (function () {
     PropertiesComponent.prototype.removeProperty = function (el) {
         var _this = this;
         this.propertyService.deleteProperty(el.propertyId).subscribe(function (d) {
-            _this.mainService.properties.splice(el.index, 1);
+            _this.dashboardService.properties.splice(el.index, 1);
             console.log('Delete property ', d);
         }, function (e) { console.log("error:", e); });
     };
@@ -53,7 +54,7 @@ var PropertiesComponent = (function () {
             templateUrl: 'properties.component.html',
             styleUrls: ['properties.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService])
     ], PropertiesComponent);
     return PropertiesComponent;
 }());

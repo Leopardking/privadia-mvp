@@ -13,6 +13,8 @@ var router_1 = require('@angular/router');
 var properties_routes_1 = require('./properties.routes');
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
+var dashboard_service_1 = require("../../providers/dashboard/dashboard.service");
+var properties_service_1 = require("../../providers/properties/properties.service");
 var PropertiesModule = (function () {
     function PropertiesModule() {
     }
@@ -26,7 +28,8 @@ var PropertiesModule = (function () {
                 // FileUploadModule,
                 router_1.RouterModule.forChild(properties_routes_1.MODULE_ROUTES)
             ],
-            declarations: [properties_routes_1.MODULE_COMPONENTS]
+            declarations: [properties_routes_1.MODULE_COMPONENTS],
+            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService]
         }), 
         __metadata('design:paramtypes', [])
     ], PropertiesModule);

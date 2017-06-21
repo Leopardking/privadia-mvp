@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { MainService } from './../../providers/homeservice';
+//import { MainService } from './../../providers/homeservice';
+import { DashboardService } from './../../providers/dashboard/dashboard.service';
 import { PropertiesService } from './../../providers/properties/properties.service';
 
 
@@ -16,7 +17,7 @@ import { PropertiesService } from './../../providers/properties/properties.servi
 export class PropertiesComponent implements OnInit{
     private datatableInited = false;
 
-    constructor ( private mainService: MainService,
+    constructor ( private dashboardService: DashboardService,
                   private propertyService: PropertiesService ) {}
 
     ngOnInit(){}
@@ -39,7 +40,7 @@ export class PropertiesComponent implements OnInit{
     private removeProperty(el) {
         this.propertyService.deleteProperty(el.propertyId).subscribe(
             d => {
-                this.mainService.properties.splice(el.index,1);
+                this.dashboardService.properties.splice(el.index,1);
                 console.log('Delete property ', d);
             },
             e => { console.log("error:", e); }
