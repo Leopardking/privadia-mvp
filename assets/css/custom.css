@@ -265,8 +265,28 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	top: -6px;
 	left: -1px;
 }
+.select-component .bootstrap-select {
+	margin-top: 0px;
+}
+.select-component .bootstrap-select .btn.dropdown-toggle {
+	height: 36px;
+	padding: 7px 0;
+	color: #3a3a3a !important;
+	font-size: 14px;
+}
+.select-component .bootstrap-select .btn.dropdown-toggle span {
+	color: #3a3a3a !important;
+	font-size: 14px;
+}
+.select-component .select-with-transition .caret, .select-component .select-with-transition .ripple-container {
+	display: inline-block;
+}
 .select-with-transition {
 	background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc) !important;
+}
+.always-visible .ps-container > .ps-scrollbar-x-rail,
+.always-visible .ps-container > .ps-scrollbar-y-rail {
+	opacity: 0.6;
 }
 .bootstrap-tagsinput {
 	padding: 12px 6px 5px;

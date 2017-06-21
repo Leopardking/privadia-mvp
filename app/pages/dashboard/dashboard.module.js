@@ -27,6 +27,7 @@ var dashboard_routing_module_1 = require('./dashboard-routing.module');
 var dashboard_filter_component_1 = require("../../components/dashboard-filter/dashboard-filter.component");
 var input_field_component_1 = require("../../components/form-fields/input-field/input-field.component");
 var datetimepicker_field_component_1 = require("../../components/form-fields/datetimepicker-field/datetimepicker-field.component");
+var select_component_1 = require("../../components/form-fields/select-field/select.component");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -42,7 +43,8 @@ var DashboardModule = (function () {
                 villa_component_1.VillaComponent,
                 dashboard_filter_component_1.DashboardfilterComponent,
                 input_field_component_1.InputfieldComponent,
-                datetimepicker_field_component_1.DatetimefieldComponent
+                datetimepicker_field_component_1.DatetimefieldComponent,
+                select_component_1.SelectfieldComponent
             ],
             providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, booking_service_1.BookingService]
         }), 

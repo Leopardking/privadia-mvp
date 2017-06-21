@@ -19,6 +19,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import {DashboardfilterComponent} from "../../components/dashboard-filter/dashboard-filter.component";
 import {InputfieldComponent} from "../../components/form-fields/input-field/input-field.component";
 import {DatetimefieldComponent} from "../../components/form-fields/datetimepicker-field/datetimepicker-field.component";
+import {SelectfieldComponent} from "../../components/form-fields/select-field/select.component";
 
 @NgModule({
     imports: [
@@ -31,7 +32,8 @@ import {DatetimefieldComponent} from "../../components/form-fields/datetimepicke
         VillaComponent,
         DashboardfilterComponent,
         InputfieldComponent,
-        DatetimefieldComponent
+        DatetimefieldComponent,
+        SelectfieldComponent
     ],
     providers: [ DashboardService, PropertiesService, BookingService ]
 })

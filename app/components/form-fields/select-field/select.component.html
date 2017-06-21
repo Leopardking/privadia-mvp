@@ -1,0 +1,38 @@
+<div class="form-group label-floating select-component always-visible">
+    <label class="control-label">{{data.title}}</label>
+    <select class="selectpicker"
+            multiple
+            data-style="select-with-transition"
+            title="Select"
+            data-size="7">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+    </select>
+</div>
+
+<!--
+<div class="form-group label-floating">
+    <label class="control-label">{{data.title}}</label>
+    <input [type]="data.type" [value]="data.value" [name]="data.name" class="form-control" formControlName="Sleeps">
+    <select class="metafilter-select selectpicker "
+            data-style="select-with-transition"
+            title="{{subtype.Name}}"
+            data-size="7"
+            multiple
+            [(ngModel)]="metafiltersModel"
+            [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="subfilterModelChange($event, 'type_' + subtype.Id)">
+        <option *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index"
+                [formGroupName]="i"
+                [ngValue]="option.value">
+            {{option.controls.MetaDataName.value}}
+        </option>
+    </select>
+</div>
+-->
