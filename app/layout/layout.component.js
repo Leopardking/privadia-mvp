@@ -10,26 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var AuthGuard = (function () {
-    function AuthGuard(router) {
+var LayoutComponent = (function () {
+    function LayoutComponent(router) {
         this.router = router;
     }
-    AuthGuard.prototype.canActivate = function (route, state) {
-        /*
-        console.log('tokenNotExpired',tokenNotExpired())
-        //if (tokenNotExpired()) {
-        if (localStorage.getItem('id_token')) {
-          return true;
+    LayoutComponent.prototype.ngOnInit = function () {
+        if (this.router.url === '/') {
+            this.router.navigate(['/dashboard']);
         }
-        */
-        this.router.navigate(['/login']);
-        return false;
     };
-    AuthGuard = __decorate([
-        core_1.Injectable(), 
+    LayoutComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'app-layout',
+            templateUrl: 'layout.component.html',
+            styleUrls: ['layout.component.css']
+        }), 
         __metadata('design:paramtypes', [router_1.Router])
-    ], AuthGuard);
-    return AuthGuard;
+    ], LayoutComponent);
+    return LayoutComponent;
 }());
-exports.AuthGuard = AuthGuard;
-//# sourceMappingURL=auth.guard.js.map
+exports.LayoutComponent = LayoutComponent;
+//# sourceMappingURL=layout.component.js.map
