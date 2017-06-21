@@ -46,7 +46,7 @@ var MainService = (function () {
         this.propertiesService.setToken(localStorage.getItem('id_token'));
         this.bookingService.setToken(localStorage.getItem('id_token'));
         this.propertiesService.setApiURL(this.apiUrl);
-        this.bookingService.setApiURL(this.apiUrl);
+        //this.bookingService.setApiURL(this.apiUrl);
         this.readData();
     }
     MainService.prototype.readData = function () {

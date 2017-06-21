@@ -50,7 +50,7 @@ export class MainService {
 		this.bookingService.setToken(localStorage.getItem('id_token'));
 
 		this.propertiesService.setApiURL(this.apiUrl);
-		this.bookingService.setApiURL(this.apiUrl);
+		//this.bookingService.setApiURL(this.apiUrl);
 
 		this.readData();
 	}

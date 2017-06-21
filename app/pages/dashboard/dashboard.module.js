@@ -23,7 +23,9 @@ var booking_service_1 = require("../../providers/booking/booking.service");
 var dashboard_component_1 = require('./dashboard.component');
 var villa_component_1 = require('../../components/villa/villa.component');
 var dashboard_routing_module_1 = require('./dashboard-routing.module');
-var metafilter_component_1 = require("../../components/metafilter/metafilter.component");
+// import { MetafilterComponent } from "../../components/metafilter/metafilter.component";
+var dashboard_filter_component_1 = require("../../components/dashboard-filter/dashboard-filter.component");
+var input_field_component_1 = require("../../components/form-fields/input-field/input-field.component");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -34,7 +36,7 @@ var DashboardModule = (function () {
                 dashboard_routing_module_1.DashboardRoutingModule,
                 router_1.RouterModule,
             ],
-            declarations: [dashboard_component_1.DashboardComponent, villa_component_1.VillaComponent, metafilter_component_1.MetafilterComponent],
+            declarations: [dashboard_component_1.DashboardComponent, villa_component_1.VillaComponent, dashboard_filter_component_1.DashboardfilterComponent, input_field_component_1.InputfieldComponent],
             providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, booking_service_1.BookingService]
         }), 
         __metadata('design:paramtypes', [])

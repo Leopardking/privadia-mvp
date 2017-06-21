@@ -14,4 +14,4 @@ exports.MODULE_COMPONENTS = [
     villa_component_1.VillaComponent,
     metafilter_component_1.MetafilterComponent,
 ];
-//# sourceMappingURL=dashboard.routes.js.map
+//# sourceMappingURL=_dashboard.routes.js.map

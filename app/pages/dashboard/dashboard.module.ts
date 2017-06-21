@@ -15,7 +15,9 @@ import { BookingService } from "../../providers/booking/booking.service";
 import { DashboardComponent } from './dashboard.component';
 import { VillaComponent } from '../../components/villa/villa.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { MetafilterComponent } from "../../components/metafilter/metafilter.component";
+// import { MetafilterComponent } from "../../components/metafilter/metafilter.component";
+import {DashboardfilterComponent} from "../../components/dashboard-filter/dashboard-filter.component";
+import {InputfieldComponent} from "../../components/form-fields/input-field/input-field.component";
 
 @NgModule({
     imports: [
@@ -23,7 +25,7 @@ import { MetafilterComponent } from "../../components/metafilter/metafilter.comp
         DashboardRoutingModule,
         RouterModule,
     ],
-    declarations: [ DashboardComponent, VillaComponent, MetafilterComponent ],
+    declarations: [ DashboardComponent, VillaComponent, DashboardfilterComponent, InputfieldComponent ],
     providers: [ DashboardService, PropertiesService, BookingService ]
 })
 export class DashboardModule {}
