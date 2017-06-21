@@ -29,7 +29,281 @@
                     </div>
                     <div class="col-xs-2">
                         <select-field-cmp
-                                [data]="{title: 'From $', name: 'from', value: '0', type: 'number'}"></select-field-cmp>
+                                [data]="{title: 'Locations', name: 'from', value: '0', type: 'number'}"></select-field-cmp>
+                    </div>
+                    <button class="btn btn-white btn-round btn-fab btn-just-icon" type="button" data-toggle="collapse" data-target="#extend-filter">
+                        <i class="material-icons">more_vert</i>
+                    </button>
+                </div>
+                <div class="row">
+                    <div id="extend-filter" class="extend-filter-container collapse">
+                        <div class="card">
+                            <ul class="row m-l-r-none nav nav-pills">
+                                <li class="nav-pill col-xs-2 col-width-20">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Local Activities</label>
+                                        <p class="form-control-static" data-toggle="tab" href="#activities">
+                                            Select
+                                            <span class="caret"></span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="nav-pill col-xs-2 col-width-20">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Points of Interest</label>
+                                        <p class="form-control-static" data-toggle="tab" href="#poi">
+                                            Select
+                                            <span class="caret"></span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="nav-pill col-xs-2 col-width-20">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Features</label>
+                                        <p class="form-control-static" data-toggle="tab" href="#features">
+                                            Select
+                                            <span class="caret"></span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="nav-pill col-xs-2 col-width-20">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Setting and Vies</label>
+                                        <p class="form-control-static" data-toggle="tab" href="#setting">
+                                            Select
+                                            <span class="caret"></span>
+                                        </p>
+                                    </div>
+                                </li>
+                                <li class="nav-pill col-xs-2 col-width-20">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Trip Type</label>
+                                        <p class="form-control-static" data-toggle="tab" href="#trip">
+                                            Select
+                                            <span class="caret"></span>
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="tab-content">
+                                        <div id="activities" class="tab-pane">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <h5 class="m-b-none">Amenities</h5>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Internet
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Fireplace
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Fireplace
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Wood Stove
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Heating
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Towels Provided
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Washing Machine
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Tumble Dryer
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Parking
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <h5 class="m-b-none">Amenities</h5>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Internet
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Fireplace
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Fireplace
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Wood Stove
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Heating
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Towels Provided
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Washing Machine
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Tumble Dryer
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Parking
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <h5 class="m-b-none">Amenities</h5>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Internet
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Fireplace
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Fireplace
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Wood Stove
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Heating
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Towels Provided
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Washing Machine
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Tumble Dryer
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Parking
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xs-3">
+                                                    <h5 class="m-b-none">Amenities</h5>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Internet
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Fireplace
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Fireplace
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Wood Stove
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Heating
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Towels Provided
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Washing Machine
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Tumble Dryer
+                                                        </label>
+                                                    </div>
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" formControlName="SmokingAllowed"> Parking
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="poi" class="tab-pane">
+                                            poi
+                                        </div>
+                                        <div id="features" class="tab-pane">
+                                            features
+                                        </div>
+                                        <div id="setting" class="tab-pane">
+                                            setting
+                                        </div>
+                                        <div id="trip" class="tab-pane">
+                                            trip
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </form>

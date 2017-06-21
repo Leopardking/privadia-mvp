@@ -2,6 +2,7 @@
     padding: 5px 20px;
 }
 .filter-card {
+    margin-bottom: 50px;
     padding: 0 30px 0 15px;
     border-radius:0px;
     box-shadow: 0px 5px 10px 0 rgba(170, 168, 168, 0.4);
@@ -13,6 +14,76 @@
 .filter-card .input-group .material-icons.non-icon {
     font-family: Roboto, Helvetica, Arial, sans-serif;
 }
+.btn-fab {
+    position: absolute;
+    top:9px;
+    right: -25px;
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    line-height: 48px;
+    color: #5399bc !important;
+    box-shadow: none;
+}
+.btn.btn-fab:focus, .btn.btn-fab:active, .btn.btn-fab:hover {
+    box-shadow: 0 14px 26px -12px rgba(153, 153, 153, 0.42), 0 4px 23px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(153, 153, 153, 0.2);
+}
+
+.extend-filter-container {
+    position: absolute;
+    top: 75px;
+    right: -25px;
+    width: 70%;
+    z-index: 4;
+}
+.extend-filter-container .card {
+    padding: 0 30px;
+    margin: 0px;
+    border-radius: 0px;
+}
+.extend-filter-container .nav {
+    margin-top: 0px;
+}
+.extend-filter-container .nav-pill {
+    margin-left: 0px;
+}
+.extend-filter-container .nav-pill .form-control-static {
+    line-height: 20px;
+    background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc);
+    background-position: center bottom, center calc(100% - 0px);
+    background-size: 0 2px, 100% 1px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    transition: background 0s ease-out;
+    cursor: pointer;
+}
+.extend-filter-container .nav-pill.active .form-control-static {
+    background-size: 100% 2px, 100% 1px;
+    transition-duration: 0.3s;
+}
+.extend-filter-container .nav-pill .caret {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    margin-top: -5px;
+    vertical-align: middle;
+}
+.extend-filter-container .nav-pill.active .caret {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.extend-filter-container .tab-content {
+    margin: 0px 15px 20px;
+}
+.extend-filter-container .tab-content h5 {
+    font-size: 14px;
+    color: #b0bec5;
+}
+
+
+
 
 /*
 .card {

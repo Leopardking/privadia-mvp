@@ -49,9 +49,11 @@ var PropertyMetafilterComponent = (function () {
         for (var i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
             _loop_1(i);
         }
-        $(".selectpicker").selectpicker({
-            selectedTextFormat: 'static'
-        });
+        setTimeout(function () {
+            $(".selectpicker").selectpicker({
+                selectedTextFormat: 'static'
+            });
+        }, 1000);
         $('.dropdown-menu.inner').perfectScrollbar();
     };
     PropertyMetafilterComponent.prototype.subfilterModelChange = function (e, type) {

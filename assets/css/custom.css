@@ -36,6 +36,9 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	background-color: #5399bc !important;
 	color: white !important;
 }
+.col-width-20 {
+	width: 20%;
+}
 /*
 .nav-pills.nav-pills-grey > li.active > a, .nav-pills.nav-pills-grey > li.active > a:focus, .nav-pills.nav-pills-grey > li.active > a:hover {
   	background-color: #00bcd4;
@@ -57,6 +60,9 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 
 .main-panel .main-content {
 	padding: 10px 15px 30px;
+}
+.card {
+	box-shadow: 0px 5px 10px 0 rgba(170, 168, 168, 0.4);
 }
 .card [data-background-color="blue"] {
 	background: #5399bc;
@@ -206,8 +212,13 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
  *  Form style
 */
 .form-control, .form-group .form-control {
+	padding: 7px 5px;
 	background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc);
 	background-position: center bottom, center calc(100% - 0px);
+}
+.form-control-static {
+	padding-left: 5px;
+	padding-right: 5px;
 }
 .control-label {
 	color: #b0bec5 !important;
@@ -271,6 +282,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .select-component .bootstrap-select .btn.dropdown-toggle {
 	height: 36px;
 	padding: 7px 0;
+	padding-left: 5px !important;
 	color: #3a3a3a !important;
 	font-size: 14px;
 }

@@ -59,9 +59,11 @@ export class PropertyMetafilterComponent implements OnInit{
             }
         }
 
-		$(".selectpicker").selectpicker({
-			selectedTextFormat: 'static'
-		});
+        setTimeout(() => {
+			$(".selectpicker").selectpicker({
+				selectedTextFormat: 'static'
+			});
+		}, 1000);
 		$('.dropdown-menu.inner').perfectScrollbar();
 	}
 
