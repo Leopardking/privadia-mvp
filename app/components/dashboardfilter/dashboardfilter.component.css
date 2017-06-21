@@ -1,0 +1,141 @@
+.card {
+	margin-top: 0px;
+}
+
+.card-header {
+	cursor: pointer;
+}
+
+.order-type {
+	position: absolute;
+    right: 200px;
+    top: -5px;
+}
+
+.order-type button {
+    padding-bottom: 0;
+}
+
+.card-header .card-title .metafilter-expand {
+	margin-right: 20px;
+}
+
+.metafilter-names ul {
+    margin-top: 0;
+}
+
+.subtype-filters-names {
+    padding-top: 5px;
+}
+
+.card-header .card-title .metafilter-expand:after {
+	content: "";
+    width: 0;
+    height: 0;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-top: 5px solid;
+    position: absolute;
+    right: 13px;
+    top: 23px;
+}
+
+.card-header .card-title .metafilter-expand.collapsed:after {
+ 	content: "";
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+}
+
+
+.card.collapsed .card-header {
+	padding: 10px 30px;
+}
+
+.card.collapsed .card-header .card-title {
+	padding-top: 5px;
+}
+
+.meta-filter {
+	margin-top: 0px;
+	margin-bottom: 7px;
+}
+
+.meta-filter .subtype-name {
+	display: block;
+}
+
+.meta-filter .subtype-filter label {
+	margin: 0 5px 0 5px;
+}
+
+.meta-filter .card-header.card-header-text {
+	height: 27px;
+    padding: 5px 10px;
+}
+
+.meta-filter .card-content {
+	padding: 5px 10px;
+}
+
+.meta-filter .card-content button {
+	margin: 2px 2px;
+    padding: 2px 15px;
+}
+
+.metafilter-container-header {
+    
+}
+
+.metafilter-container-header .card-header {
+	margin-top: 8px;
+	padding: 7px 20px;
+}
+
+.card .tab-content {
+	margin-top: 0;
+}
+
+.metafilter-container .nav-pills > li > a, .metafilter-container .nav-pills > li > a:focus, .metafilter-container .nav-pills.nav-pills-rose > li > a:hover
+{
+	padding: 3px;
+	height: 30px;
+}
+
+.metafilter-container .nav-pills > li.active > a, .metafilter-container .nav-pills > li > a:hover {
+    background-color: #0b5a7c !important;
+}
+
+.metafilter-container .nav-pills > li.active > a:after {
+	content: "";
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.metafilter-container .nav-pills > li {
+	height: 30px;
+	margin: 5px;
+}
+
+.metafilter-container .nav-pills > li.li-applybutton {
+	height: 40px;
+}
+
+.meta-filter .card-title {
+	margin: 2px 10px;
+}
+
+.p-b-15 {
+    padding-bottom: 15px;
+}
