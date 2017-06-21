@@ -10,12 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
-var homeservice_1 = require('../../../providers/homeservice');
+// import { MainService } from '../../../providers/homeservice';
+var dashboard_service_1 = require('../../../providers/dashboard/dashboard.service');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var initDatetimepickers = require('../../../../assets/js/init/initDatetimepickers.js');
 var SetratesComponent = (function () {
-    function SetratesComponent(mainService, propertyService, builder) {
-        this.mainService = mainService;
+    function SetratesComponent(dashboardService, propertyService, builder) {
+        this.dashboardService = dashboardService;
         this.propertyService = propertyService;
         this.builder = builder;
         this.datatableInited = false;
@@ -186,7 +187,7 @@ var SetratesComponent = (function () {
             templateUrl: 'setrates.component.html',
             styleUrls: ['setrates.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], SetratesComponent);
     return SetratesComponent;
 }());

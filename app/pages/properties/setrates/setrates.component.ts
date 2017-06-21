@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { MainService } from '../../../providers/homeservice';
+// import { MainService } from '../../../providers/homeservice';
+import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
 import initDatetimepickers = require('../../../../assets/js/init/initDatetimepickers.js');
@@ -27,7 +28,7 @@ export class SetratesComponent implements OnInit{
     });
     public date;
 
-    constructor ( private mainService: MainService,
+    constructor ( private dashboardService: DashboardService,
                   private propertyService: PropertiesService,
                   private builder: FormBuilder ) {
         console.log('Form init')

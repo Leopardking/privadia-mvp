@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 import * as _ from "lodash";
 
-import { MainService } from '../../../providers/homeservice';
+//import { MainService } from '../../../providers/homeservice';
+import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
 declare var $:any;
@@ -40,17 +41,17 @@ export class EditpropertyComponent implements OnInit{
     private errorForm = false;
     public propertyForm = new FormGroup ({});
 
-    constructor ( private mainService: MainService,
+    constructor ( private dashboardService: DashboardService,
                   private propertyService: PropertiesService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
 
-        console.log('this.property mainService', this.mainService.metadata )
+        console.log('this.property mainService', this.dashboardService.metadata )
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
-        console.log('this.property mainService', this.mainService.metadata )
+        console.log('this.property mainService', this.dashboardService.metadata )
 
         this.sub = this.route.params.subscribe(params => {
             this.propertyService.getPropertyById(params['id']).subscribe(

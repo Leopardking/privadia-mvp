@@ -11,13 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require("@angular/platform-browser");
 var properties_service_1 = require('../../../providers/properties/properties.service');
-var homeservice_1 = require('../../../providers/homeservice');
+//import { MainService } from '../../../providers/homeservice';
+var dashboard_service_1 = require('../../../providers/dashboard/dashboard.service');
 var forms_1 = require("@angular/forms");
 var PropertyinfoComponent = (function () {
-    function PropertyinfoComponent(propertyService, mainService, _sanitizer) {
+    function PropertyinfoComponent(propertyService, dashboardService, _sanitizer) {
         var _this = this;
         this.propertyService = propertyService;
-        this.mainService = mainService;
+        this.dashboardService = dashboardService;
         this._sanitizer = _sanitizer;
         this.autocompleListFormatter = function (data) {
             var html = "" + data.Name;
@@ -35,7 +36,7 @@ var PropertyinfoComponent = (function () {
             e.preventDefault()
         });
         */
-        console.log('this.property mainService', this.mainService.metadata);
+        console.log('this.property mainService', this.dashboardService.metadata);
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
         //this.contacts = [];
@@ -134,7 +135,7 @@ var PropertyinfoComponent = (function () {
             templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, homeservice_1.MainService, platform_browser_1.DomSanitizer])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, dashboard_service_1.DashboardService, platform_browser_1.DomSanitizer])
     ], PropertyinfoComponent);
     return PropertyinfoComponent;
 }());

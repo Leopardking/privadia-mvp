@@ -12,11 +12,12 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var _ = require("lodash");
-var homeservice_1 = require('../../../providers/homeservice');
+//import { MainService } from '../../../providers/homeservice';
+var dashboard_service_1 = require('../../../providers/dashboard/dashboard.service');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(mainService, propertyService, route, builder) {
-        this.mainService = mainService;
+    function EditpropertyComponent(dashboardService, propertyService, route, builder) {
+        this.dashboardService = dashboardService;
         this.propertyService = propertyService;
         this.route = route;
         this.builder = builder;
@@ -24,12 +25,12 @@ var EditpropertyComponent = (function () {
         this.isLoad = false;
         this.errorForm = false;
         this.propertyForm = new forms_1.FormGroup({});
-        console.log('this.property mainService', this.mainService.metadata);
+        console.log('this.property mainService', this.dashboardService.metadata);
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net
     EditpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log('this.property mainService', this.mainService.metadata);
+        console.log('this.property mainService', this.dashboardService.metadata);
         this.sub = this.route.params.subscribe(function (params) {
             _this.propertyService.getPropertyById(params['id']).subscribe(function (d) {
                 _this.property = d;
@@ -341,7 +342,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, router_1.ActivatedRoute, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, router_1.ActivatedRoute, forms_1.FormBuilder])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());

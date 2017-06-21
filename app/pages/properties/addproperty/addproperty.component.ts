@@ -3,7 +3,8 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@ang
 import { ActivatedRoute } from '@angular/router';
 import * as _ from "lodash";
 
-import { MainService } from '../../../providers/homeservice';
+//import { MainService } from '../../../providers/homeservice';
+import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
 declare var $:any;
@@ -65,7 +66,7 @@ export class AddpropertyComponent implements OnInit{
         Benefits: new FormControl(),
     });
 
-    constructor ( private mainService: MainService,
+    constructor ( private dashboardService: DashboardService,
                   private propertyService: PropertiesService,
                   private builder: FormBuilder ) {
         console.log('Form init',this.propertyForm)
@@ -193,7 +194,7 @@ export class AddpropertyComponent implements OnInit{
                             align: 'right'
                         }
                     });
-                    this.mainService.readData();
+                    this.dashboardService.readData();
                 },
                 e => { console.log("error:", e); }
             );
@@ -233,7 +234,7 @@ export class AddpropertyComponent implements OnInit{
                             align: 'right'
                         }
                     });
-                    this.mainService.readData();
+                    this.dashboardService.readData();
                 },
                 e => { console.log("error:", e); }
             );

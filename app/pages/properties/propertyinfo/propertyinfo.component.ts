@@ -5,7 +5,8 @@ import { AutoComplete } from '../../../components/autocomplete/autocomplete.comp
 import { AutoCompleteConfig } from '../../../components/autocomplete/autocomplete.config';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
-import { MainService } from '../../../providers/homeservice';
+//import { MainService } from '../../../providers/homeservice';
+import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import {FormGroup, FormArray, FormControl, Validators} from "@angular/forms";
 
 declare var $: any;
@@ -44,7 +45,9 @@ export class PropertyinfoComponent implements OnInit{
     // public officialName;
     public address;
 
-    constructor ( private propertyService: PropertiesService, private mainService: MainService, private _sanitizer: DomSanitizer ) {
+    constructor ( private propertyService: PropertiesService,
+                  private dashboardService: DashboardService,
+                  private _sanitizer: DomSanitizer ) {
 
     }
 
@@ -58,7 +61,7 @@ export class PropertyinfoComponent implements OnInit{
             e.preventDefault()
         });
         */
-        console.log('this.property mainService', this.mainService.metadata )
+        console.log('this.property mainService', this.dashboardService.metadata )
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
         //this.contacts = [];

@@ -7,6 +7,7 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
 import {Ng2CloudinaryModule} from "ng2-cloudinary";
 import {FileUploadModule} from "ng2-file-upload";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {DashboardService} from "../../../providers/dashboard/dashboard.service";
 
 @NgModule({
     imports: [

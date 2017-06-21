@@ -11,11 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var _ = require("lodash");
-var homeservice_1 = require('../../../providers/homeservice');
+//import { MainService } from '../../../providers/homeservice';
+var dashboard_service_1 = require('../../../providers/dashboard/dashboard.service');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(mainService, propertyService, builder) {
-        this.mainService = mainService;
+    function AddpropertyComponent(dashboardService, propertyService, builder) {
+        this.dashboardService = dashboardService;
         this.propertyService = propertyService;
         this.builder = builder;
         // private isActive = true;
@@ -186,7 +187,7 @@ var AddpropertyComponent = (function () {
                         align: 'right'
                     }
                 });
-                _this.mainService.readData();
+                _this.dashboardService.readData();
             }, function (e) { console.log("error:", e); });
         }
         console.log('Property Form ', this.propertyForm);
@@ -219,7 +220,7 @@ var AddpropertyComponent = (function () {
                         align: 'right'
                     }
                 });
-                _this.mainService.readData();
+                _this.dashboardService.readData();
             }, function (e) { console.log("error:", e); });
         }
         else {
@@ -235,7 +236,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());
