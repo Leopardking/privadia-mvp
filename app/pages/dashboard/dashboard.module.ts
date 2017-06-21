@@ -18,6 +18,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 // import { MetafilterComponent } from "../../components/metafilter/metafilter.component";
 import {DashboardfilterComponent} from "../../components/dashboard-filter/dashboard-filter.component";
 import {InputfieldComponent} from "../../components/form-fields/input-field/input-field.component";
+import {DatetimefieldComponent} from "../../components/form-fields/datetimepicker-field/datetimepicker-field.component";
 
 @NgModule({
     imports: [
@@ -25,7 +26,13 @@ import {InputfieldComponent} from "../../components/form-fields/input-field/inpu
         DashboardRoutingModule,
         RouterModule,
     ],
-    declarations: [ DashboardComponent, VillaComponent, DashboardfilterComponent, InputfieldComponent ],
+    declarations: [
+        DashboardComponent,
+        VillaComponent,
+        DashboardfilterComponent,
+        InputfieldComponent,
+        DatetimefieldComponent
+    ],
     providers: [ DashboardService, PropertiesService, BookingService ]
 })
 export class DashboardModule {}
