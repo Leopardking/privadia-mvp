@@ -48,6 +48,8 @@
     margin-left: 0px;
 }
 .extend-filter-container .nav-pill .form-control-static {
+    display: block;
+    color: #3a3a3a;
     line-height: 20px;
     background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc);
     background-position: center bottom, center calc(100% - 0px);

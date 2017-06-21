@@ -1,7 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DashboardService, Filter } from '../../providers/dashboard/dashboard.service';
 
-import initSemanticSelect = require('../../../assets/js/init/initSemanticSelect.js');
+//import initSemanticSelect = require('../../../assets/js/init/initSemanticSelect.js');
+
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
     moduleId: module.id,
@@ -11,25 +14,32 @@ import initSemanticSelect = require('../../../assets/js/init/initSemanticSelect.
 })
 
 export class DashboardfilterComponent implements OnInit{
-
+    @Input('metafilters') private metafilters: any;
+/*
     private collapsed:boolean;
     private subfilters;
     private metafilters;
     private order;
-
+*/
     constructor ( private dashboardService: DashboardService ) {
-
+        //console.log('Matedata ',this.dashboardService.metadata)
     }
 
     ngOnInit() {
+        /*
+        setTimeout(() => {
+            console.log('Matedata ',this.dashboardService.metadata)
+        },9000)
+        /*
         this.collapsed = true;
         console.log('metafilter');
         this.metafilters = [];
         for (let i = 0; i < 10000; i++) {
             this.metafilters.push(false);
         }
+        */
     }
-
+/*
     private filterDisplayChange() {
         this.collapsed = !this.collapsed;
     }
@@ -84,4 +94,5 @@ export class DashboardfilterComponent implements OnInit{
         //$(".selectpicker").selectpicker();
         return "";
     }
+    */
 }

@@ -11,68 +11,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
 var DashboardfilterComponent = (function () {
+    /*
+        private collapsed:boolean;
+        private subfilters;
+        private metafilters;
+        private order;
+    */
     function DashboardfilterComponent(dashboardService) {
         this.dashboardService = dashboardService;
+        //console.log('Matedata ',this.dashboardService.metadata)
     }
     DashboardfilterComponent.prototype.ngOnInit = function () {
+        /*
+        setTimeout(() => {
+            console.log('Matedata ',this.dashboardService.metadata)
+        },9000)
+        /*
         this.collapsed = true;
         console.log('metafilter');
         this.metafilters = [];
-        for (var i = 0; i < 10000; i++) {
+        for (let i = 0; i < 10000; i++) {
             this.metafilters.push(false);
         }
+        */
     };
-    DashboardfilterComponent.prototype.filterDisplayChange = function () {
-        this.collapsed = !this.collapsed;
-    };
-    DashboardfilterComponent.prototype.subfilterChange = function (e) {
-        var optionId = e.target.tagName == "BUTTON" ? e.target.id : e.target.parentElement.parentElement.id;
-        this.metafilters[optionId] = !this.metafilters[optionId];
-    };
-    DashboardfilterComponent.prototype.applyMetafilter = function () {
-        var metadataFilter = [];
-        for (var i = 0; i < 10000; i++) {
-            if (this.metafilters[i]) {
-                metadataFilter.push(i);
-            }
-        }
-        var filter = new dashboard_service_1.Filter(0, 0, 0, 0, 0, 0, metadataFilter, this.order);
-        this.dashboardService.setFilter(filter, 2);
-        this.collapsed = true;
-    };
-    DashboardfilterComponent.prototype.orderChange = function (evt) {
-        var t = evt.target;
-        this.order = t.value;
-        this.sortVillas(t.value);
-    };
-    DashboardfilterComponent.prototype.sortVillas = function (orderType) {
-        var comparefunc = function (a, b) {
-            if (a.TotalRate > b.TotalRate)
-                return 1;
-            else if (a.TotalRate == b.TotalRate)
-                return 0;
-            else
-                return -1;
-        };
-        var comparefunc1 = function (a, b) {
-            if (a.TotalRate > b.TotalRate)
-                return -1;
-            else if (a.TotalRate == b.TotalRate)
-                return 0;
-            else
-                return 1;
-        };
-        if (orderType == 0) {
-            this.dashboardService.villas.sort(comparefunc1);
-        }
-        else {
-            this.dashboardService.villas.sort(comparefunc);
-        }
-    };
-    DashboardfilterComponent.prototype.finished = function () {
-        //$(".selectpicker").selectpicker();
-        return "";
-    };
+    __decorate([
+        core_1.Input('metafilters'), 
+        __metadata('design:type', Object)
+    ], DashboardfilterComponent.prototype, "metafilters", void 0);
     DashboardfilterComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
