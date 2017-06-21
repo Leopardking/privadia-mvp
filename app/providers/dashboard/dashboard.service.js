@@ -12,15 +12,13 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 //import { LoginService } from '../login/login.service';
 var properties_service_1 = require('../properties/properties.service');
-var booking_service_1 = require('../booking/booking.service');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var DashboardService = (function () {
-    function DashboardService(http, /*private loginService: LoginService,*/ propertiesService, bookingService) {
+    function DashboardService(http, /*private loginService: LoginService,*/ propertiesService /*, private bookingService: BookingService*/) {
         this.http = http;
         this.propertiesService = propertiesService;
-        this.bookingService = bookingService;
         this.token = "";
         this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
         this.regions = [];
@@ -45,9 +43,9 @@ var DashboardService = (function () {
          );
          */
         this.propertiesService.setToken(localStorage.getItem('id_token'));
-        this.bookingService.setToken(localStorage.getItem('id_token'));
+        // this.bookingService.setToken(localStorage.getItem('id_token'));
         this.propertiesService.setApiURL(this.apiUrl);
-        this.bookingService.setApiURL(this.apiUrl);
+        // this.bookingService.setApiURL(this.apiUrl);
         this.readData();
     }
     DashboardService.prototype.readData = function () {
@@ -145,7 +143,7 @@ var DashboardService = (function () {
     };
     DashboardService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, properties_service_1.PropertiesService, booking_service_1.BookingService])
+        __metadata('design:paramtypes', [http_1.Http, properties_service_1.PropertiesService])
     ], DashboardService);
     return DashboardService;
 }());

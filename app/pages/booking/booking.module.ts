@@ -4,16 +4,17 @@ import { MODULE_ROUTES, MODULE_COMPONENTS } from './booking.routes';
 import {CommonModule} from "@angular/common";
 import {Ng2CloudinaryModule} from "ng2-cloudinary";
 import {FileUploadModule} from "ng2-file-upload";
+import {BookingService} from "../../providers/booking/booking.service";
 
 @NgModule({
     imports: [
         CommonModule,
-        Ng2CloudinaryModule,
-        FileUploadModule,
+        // Ng2CloudinaryModule,
+        // FileUploadModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],
-    declarations: [ MODULE_COMPONENTS ]
+    declarations: [ MODULE_COMPONENTS ],
+    providers: [ BookingService ]
 })
 
-export class BookingModule{
-}
+export class BookingModule {}

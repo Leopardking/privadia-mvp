@@ -14,16 +14,20 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var BookingService = (function () {
+    /*
+    public setApiURL(url) {
+        this.apiUrl = url;
+    }
+    */
     function BookingService(http) {
         this.http = http;
+        this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
+        this.setToken(localStorage.getItem('id_token'));
     }
     BookingService.prototype.setToken = function (str) {
         this.token = str;
         this.header = new http_1.Headers({ 'Authorization': this.token });
         this.options = new http_1.RequestOptions({ headers: this.header });
-    };
-    BookingService.prototype.setApiURL = function (url) {
-        this.apiUrl = url;
     };
     BookingService.prototype.allBookings = function () {
         return this.http.get(this.apiUrl + '/api/bookings/', this.options)

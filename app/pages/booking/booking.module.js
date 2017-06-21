@@ -12,8 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var booking_routes_1 = require('./booking.routes');
 var common_1 = require("@angular/common");
-var ng2_cloudinary_1 = require("ng2-cloudinary");
-var ng2_file_upload_1 = require("ng2-file-upload");
+var booking_service_1 = require("../../providers/booking/booking.service");
 var BookingModule = (function () {
     function BookingModule() {
     }
@@ -21,11 +20,12 @@ var BookingModule = (function () {
         core_1.NgModule({
             imports: [
                 common_1.CommonModule,
-                ng2_cloudinary_1.Ng2CloudinaryModule,
-                ng2_file_upload_1.FileUploadModule,
+                // Ng2CloudinaryModule,
+                // FileUploadModule,
                 router_1.RouterModule.forChild(booking_routes_1.MODULE_ROUTES)
             ],
-            declarations: [booking_routes_1.MODULE_COMPONENTS]
+            declarations: [booking_routes_1.MODULE_COMPONENTS],
+            providers: [booking_service_1.BookingService]
         }), 
         __metadata('design:paramtypes', [])
     ], BookingModule);

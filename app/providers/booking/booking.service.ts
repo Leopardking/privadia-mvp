@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BookingService {
-	private apiUrl: string;
+	private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
 	private token: string;
 
 	private header;
@@ -19,11 +19,14 @@ export class BookingService {
 		this.options = new RequestOptions( {headers: this.header} );
 	}
 
+	/*
 	public setApiURL(url) {
 		this.apiUrl = url;
 	}
+	*/
 
 	constructor ( private http: Http ) {
+		this.setToken(localStorage.getItem('id_token'));
 	}
 
 	public allBookings() {
