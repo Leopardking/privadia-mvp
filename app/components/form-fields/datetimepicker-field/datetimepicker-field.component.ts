@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 
 @Component({
     moduleId: module.id,
@@ -15,6 +16,6 @@ export class DatetimefieldComponent implements OnInit{
     }
 
     ngOnInit() {
-
+        initDatetimepickers();
     }
 }

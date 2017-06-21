@@ -9,10 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 var DatetimefieldComponent = (function () {
     function DatetimefieldComponent() {
     }
     DatetimefieldComponent.prototype.ngOnInit = function () {
+        initDatetimepickers();
     };
     __decorate([
         core_1.Input('data'), 

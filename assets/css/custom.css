@@ -117,6 +117,9 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	margin-left: 0px;
 	margin-right: 0px;
 }
+.m-t-none {
+	margin-top: 0px;
+}
 .m-b-none {
 	margin-bottom: 0px;
 }

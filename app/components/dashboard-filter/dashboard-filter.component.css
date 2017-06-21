@@ -1,11 +1,13 @@
 .filter-card {
-    padding: 0 15px;
+    padding: 0 30px 0 15px;
     border-radius:0px;
     box-shadow: 0px 5px 10px 0 rgba(170, 168, 168, 0.4);
 }
 .filter-card .input-group .material-icons {
     color: #5399bc;
     font-size: 18px;
+}
+.filter-card .input-group .material-icons.non-icon {
     font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
