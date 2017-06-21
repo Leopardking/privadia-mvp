@@ -25,11 +25,12 @@ export class MainService {
 
 	public isReading;
 
-	constructor (private http: Http, private loginService: LoginService, private propertiesService: PropertiesService, private bookingService: BookingService) {
+	constructor (private http: Http, /*private loginService: LoginService,*/ private propertiesService: PropertiesService, private bookingService: BookingService) {
 		this.filter = new Filter(1, [1,2,3,4,5,6,7,8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow())
 				, 0, 0, [], 0);
 
 		this.metadata = [];
+		/*
 		this.loginService.login(this.apiUrl, "steve@freelancemvc.net", "password")
         		.subscribe( 
                     d => { 
@@ -44,6 +45,14 @@ export class MainService {
         		    },
                     e => { console.log("error:", e)} 
                 );
+		*/
+		this.propertiesService.setToken(localStorage.getItem('id_token'));
+		this.bookingService.setToken(localStorage.getItem('id_token'));
+
+		this.propertiesService.setApiURL(this.apiUrl);
+		this.bookingService.setApiURL(this.apiUrl);
+
+		this.readData();
 	}
 
 	public readData() {
@@ -118,7 +127,7 @@ export class MainService {
 		this.isReading = true;
 
 		let header = new Headers();
-		header.append('Authorization', this.token );
+		header.append('Authorization', localStorage.getItem('id_token') );
 
 		let options = new RequestOptions({ headers: header });
 

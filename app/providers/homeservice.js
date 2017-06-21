@@ -10,17 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
-var login_service_1 = require('./login/login.service');
 var properties_service_1 = require('./properties/properties.service');
 var booking_service_1 = require('./booking/booking.service');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var MainService = (function () {
-    function MainService(http, loginService, propertiesService, bookingService) {
-        var _this = this;
+    function MainService(http, /*private loginService: LoginService,*/ propertiesService, bookingService) {
         this.http = http;
-        this.loginService = loginService;
         this.propertiesService = propertiesService;
         this.bookingService = bookingService;
         this.token = "";
@@ -30,15 +27,27 @@ var MainService = (function () {
         this.properties = [];
         this.filter = new Filter(1, [1, 2, 3, 4, 5, 6, 7, 8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow()), 0, 0, [], 0);
         this.metadata = [];
+        /*
         this.loginService.login(this.apiUrl, "steve@freelancemvc.net", "password")
-            .subscribe(function (d) {
-            _this.setToken(d.token_type + ' ' + d.access_token);
-            _this.propertiesService.setToken(_this.token);
-            _this.bookingService.setToken(_this.token);
-            _this.propertiesService.setApiURL(_this.apiUrl);
-            _this.bookingService.setApiURL(_this.apiUrl);
-            _this.readData();
-        }, function (e) { console.log("error:", e); });
+                .subscribe(
+                    d => {
+                        this.setToken(d.token_type + ' ' + d.access_token);
+                        this.propertiesService.setToken(this.token);
+                        this.bookingService.setToken(this.token);
+
+                        this.propertiesService.setApiURL(this.apiUrl);
+                        this.bookingService.setApiURL(this.apiUrl);
+
+                        this.readData();
+                    },
+                    e => { console.log("error:", e)}
+                );
+        */
+        this.propertiesService.setToken(localStorage.getItem('id_token'));
+        this.bookingService.setToken(localStorage.getItem('id_token'));
+        this.propertiesService.setApiURL(this.apiUrl);
+        this.bookingService.setApiURL(this.apiUrl);
+        this.readData();
     }
     MainService.prototype.readData = function () {
         var _this = this;
@@ -87,7 +96,7 @@ var MainService = (function () {
     MainService.prototype.getVillas = function () {
         this.isReading = true;
         var header = new http_1.Headers();
-        header.append('Authorization', this.token);
+        header.append('Authorization', localStorage.getItem('id_token'));
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.post(this.apiUrl + '/api/properties/searchavailable', this.filter.getCompat(), options)
             .map(this.extractVillaData)
@@ -135,7 +144,7 @@ var MainService = (function () {
     };
     MainService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService, properties_service_1.PropertiesService, booking_service_1.BookingService])
+        __metadata('design:paramtypes', [http_1.Http, properties_service_1.PropertiesService, booking_service_1.BookingService])
     ], MainService);
     return MainService;
 }());
