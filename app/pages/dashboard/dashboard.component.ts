@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MainService } from '../../providers/homeservice';
-
-import { VillaComponent } from '../../components/villa/villa.component';
+import { DashboardService } from '../../providers/dashboard/dashboard.service';
 
 @Component({
     moduleId: module.id,
@@ -12,14 +10,7 @@ import { VillaComponent } from '../../components/villa/villa.component';
 
 export class DashboardComponent implements OnInit{
 
-	private villas;
-    private regions: any;
+    constructor ( private dashboardService: DashboardService) { }
 
-    constructor ( private mainService: MainService) {
-
-    }
-
-    ngOnInit(){
-
-    }
+    ngOnInit(){}
 }

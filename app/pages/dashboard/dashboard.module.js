@@ -11,6 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require("@angular/common");
 var router_1 = require('@angular/router');
+/**
+ *  Providers
+ */
+var dashboard_service_1 = require("../../providers/dashboard/dashboard.service");
+var properties_service_1 = require("../../providers/properties/properties.service");
+var booking_service_1 = require("../../providers/booking/booking.service");
+/**
+ *  Components
+ */
 var dashboard_component_1 = require('./dashboard.component');
 var villa_component_1 = require('../../components/villa/villa.component');
 var dashboard_routing_module_1 = require('./dashboard-routing.module');
@@ -26,6 +35,7 @@ var DashboardModule = (function () {
                 router_1.RouterModule,
             ],
             declarations: [dashboard_component_1.DashboardComponent, villa_component_1.VillaComponent, metafilter_component_1.MetafilterComponent],
+            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, booking_service_1.BookingService]
         }), 
         __metadata('design:paramtypes', [])
     ], DashboardModule);

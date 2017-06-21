@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {MainService} from "../../../providers/homeservice";
 
 import { ROUTES } from './sidebar-routes.config';
 import { MenuType } from './sidebar.metadata';
@@ -13,9 +12,7 @@ import { MenuType } from './sidebar.metadata';
 export class SidebarComponent implements OnInit{
     public menuItems: any[];
 
-    constructor ( private mainService: MainService ) {
-
-    }
+    constructor () {}
 
     ngOnInit() {
         $.getScript('../../../assets/js/init/initMenu.js');

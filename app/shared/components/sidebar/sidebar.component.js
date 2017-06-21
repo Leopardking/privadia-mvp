@@ -9,12 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var homeservice_1 = require("../../../providers/homeservice");
 var sidebar_routes_config_1 = require('./sidebar-routes.config');
 var sidebar_metadata_1 = require('./sidebar.metadata');
 var SidebarComponent = (function () {
-    function SidebarComponent(mainService) {
-        this.mainService = mainService;
+    function SidebarComponent() {
     }
     SidebarComponent.prototype.ngOnInit = function () {
         $.getScript('../../../assets/js/init/initMenu.js');
@@ -34,7 +32,7 @@ var SidebarComponent = (function () {
             templateUrl: 'sidebar.component.html',
             styleUrls: ['sidebar.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService])
+        __metadata('design:paramtypes', [])
     ], SidebarComponent);
     return SidebarComponent;
 }());

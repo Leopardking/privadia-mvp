@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class MainService {
+export class DashboardService {
 	private token:string = "";
 	public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
 	//private apiUrl:string = 'http://privadia-api-dev.azurewebsites.net';

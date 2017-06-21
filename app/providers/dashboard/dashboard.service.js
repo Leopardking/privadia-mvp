@@ -16,8 +16,8 @@ var booking_service_1 = require('../booking/booking.service');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
-var MainService = (function () {
-    function MainService(http, /*private loginService: LoginService,*/ propertiesService, bookingService) {
+var DashboardService = (function () {
+    function DashboardService(http, /*private loginService: LoginService,*/ propertiesService, bookingService) {
         this.http = http;
         this.propertiesService = propertiesService;
         this.bookingService = bookingService;
@@ -50,7 +50,7 @@ var MainService = (function () {
         this.bookingService.setApiURL(this.apiUrl);
         this.readData();
     }
-    MainService.prototype.readData = function () {
+    DashboardService.prototype.readData = function () {
         var _this = this;
         this.isReading = true;
         //--------------		Reading data of villas		-----------///////////
@@ -72,20 +72,20 @@ var MainService = (function () {
             console.log("error: ", e);
         });
     };
-    MainService.prototype.getTomorrow = function () {
+    DashboardService.prototype.getTomorrow = function () {
         var today = new Date();
         var tomorrow = new Date();
         tomorrow.setTime(today.getTime() + (24 * 60 * 60 * 1000));
         return tomorrow;
     };
-    MainService.prototype.setToken = function (token) {
+    DashboardService.prototype.setToken = function (token) {
         this.token = token;
     };
-    MainService.prototype.getToken = function () {
+    DashboardService.prototype.getToken = function () {
         return this.token;
     };
     // Fixes Local Time to UTC offsets.
-    MainService.prototype.dateToDateTime = function (pDate) {
+    DashboardService.prototype.dateToDateTime = function (pDate) {
         var mDate = new Date(pDate);
         var mHoursOffset = (mDate.getTimezoneOffset() / 60) * -1;
         var mMinutesOffset = (mDate.getTimezoneOffset() % 60) * -1;
@@ -94,7 +94,7 @@ var MainService = (function () {
         return mDate;
     };
     ;
-    MainService.prototype.getVillas = function () {
+    DashboardService.prototype.getVillas = function () {
         this.isReading = true;
         var header = new http_1.Headers();
         header.append('Authorization', localStorage.getItem('id_token'));
@@ -103,14 +103,14 @@ var MainService = (function () {
             .map(this.extractVillaData)
             .catch(this.handleError);
     };
-    MainService.prototype.logFunc = function (str) {
+    DashboardService.prototype.logFunc = function (str) {
         console.log(str);
     };
-    MainService.prototype.extractVillaData = function (res) {
+    DashboardService.prototype.extractVillaData = function (res) {
         var body = res.json();
         return body || {};
     };
-    MainService.prototype.handleError = function (error) {
+    DashboardService.prototype.handleError = function (error) {
         var errMsg;
         if (error instanceof http_1.Response) {
             var body = error.json() || '';
@@ -123,7 +123,7 @@ var MainService = (function () {
         this.isReading = false;
         return Observable_1.Observable.throw(errMsg);
     };
-    MainService.prototype.setFilter = function (filter, type) {
+    DashboardService.prototype.setFilter = function (filter, type) {
         var _this = this;
         if (type == 1) {
             this.filter.bedrooms = filter.bedrooms;
@@ -143,13 +143,13 @@ var MainService = (function () {
             _this.isReading = false;
         }, function (e) { console.log("error:", e); });
     };
-    MainService = __decorate([
+    DashboardService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http, properties_service_1.PropertiesService, booking_service_1.BookingService])
-    ], MainService);
-    return MainService;
+    ], DashboardService);
+    return DashboardService;
 }());
-exports.MainService = MainService;
+exports.DashboardService = DashboardService;
 var Filter = (function () {
     function Filter(pBedrooms, pLocations, pCheckIn, pCheckOut, pMinRate, pMaxRate, pMetaDataFilters, pOrderBy) {
         this.bedrooms = pBedrooms;

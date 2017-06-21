@@ -10,10 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var common_1 = require('@angular/common');
-var homeservice_1 = require('../providers/homeservice');
-var login_service_1 = require("../providers/login/login.service");
-var properties_service_1 = require("../providers/properties/properties.service");
-var booking_service_1 = require("../providers/booking/booking.service");
 var layout_routing_module_1 = require('./layout-routing.module');
 var layout_component_1 = require('./layout.component');
 var header_component_1 = require('../shared/components/header/header.component');
@@ -32,7 +28,6 @@ var LayoutModule = (function () {
                 header_component_1.HeaderComponent,
                 sidebar_component_1.SidebarComponent,
             ],
-            providers: [homeservice_1.MainService, login_service_1.LoginService, properties_service_1.PropertiesService, booking_service_1.BookingService]
         }), 
         __metadata('design:paramtypes', [])
     ], LayoutModule);

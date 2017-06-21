@@ -9,13 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var homeservice_1 = require('../../providers/homeservice');
+var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
 var DashboardComponent = (function () {
-    function DashboardComponent(mainService) {
-        this.mainService = mainService;
+    function DashboardComponent(dashboardService) {
+        this.dashboardService = dashboardService;
     }
-    DashboardComponent.prototype.ngOnInit = function () {
-    };
+    DashboardComponent.prototype.ngOnInit = function () { };
     DashboardComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -23,7 +22,7 @@ var DashboardComponent = (function () {
             templateUrl: 'dashboard.component.html',
             styleUrls: ['dashboard.component.css']
         }), 
-        __metadata('design:paramtypes', [homeservice_1.MainService])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
     ], DashboardComponent);
     return DashboardComponent;
 }());
