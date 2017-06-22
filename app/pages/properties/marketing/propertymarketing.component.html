@@ -1,7 +1,8 @@
 <div [formGroup]="propertyForm" class="card-content">
     <div class="row">
         <div class="col-xs-12">
-            <div class="form-group label-floating">
+            <div class="form-group label-floating"
+                 [ngClass]="{'form-error': !propertyForm.controls['BoxUrl'].valid}">
                 <label class="control-label">Unbranded PDF Url</label>
                 <input type="text" class="form-control" formControlName="BoxUrl" #pdfUrl>
             </div>
@@ -9,7 +10,8 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div class="form-group label-floating">
+            <div class="form-group label-floating"
+                 [ngClass]="{'form-error': !propertyForm.controls['AgencyPackUrl'].valid}">
                 <label class="control-label">Agency Pack Download Url</label>
                 <input type="text" class="form-control" formControlName="AgencyPackUrl" #agencyUrl>
             </div>

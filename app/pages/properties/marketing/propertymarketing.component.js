@@ -11,13 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var PropertymarketingComponent = (function () {
-    // @ViewChild('pdfUrl') elePdfUrl;
-    // @ViewChild('agencyUrl') eleAgencyUrl;
     function PropertymarketingComponent() {
         this.re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
     }
-    PropertymarketingComponent.prototype.ngOnInit = function () {
-    };
+    PropertymarketingComponent.prototype.ngOnInit = function () { };
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
