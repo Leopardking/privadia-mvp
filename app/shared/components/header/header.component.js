@@ -28,6 +28,9 @@ var HeaderComponent = (function () {
         });
         this.activePage = this.activePage || { path: '/properties/editproperty', title: 'Edit Property', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'store' };
     };
+    HeaderComponent.prototype.onLoggedout = function () {
+        localStorage.removeItem('id_token');
+    };
     HeaderComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

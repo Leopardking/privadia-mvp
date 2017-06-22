@@ -34,6 +34,10 @@ export class HeaderComponent implements OnInit {
 
         this.activePage = this.activePage || { path: '/properties/editproperty', title: 'Edit Property', menuType: MenuType.LEFT, icon: 'store'}
     }
+
+    onLoggedout() {
+        localStorage.removeItem('id_token');
+    }
 /*
     constructor(private translate: TranslateService, public router: Router) {
         this.router.events.subscribe((val) => {
@@ -54,9 +58,6 @@ export class HeaderComponent implements OnInit {
         dom.classList.toggle('rtl');
     }
 
-    onLoggedout() {
-        localStorage.removeItem('isLoggedin');
-    }
 
     changeLang(language: string) {
         //this.translate.use(language);

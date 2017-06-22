@@ -404,7 +404,12 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 /**
  *  Dropdown menu
  */
-.dropdown-menu li a:hover, .dropdown-menu li a:focus, .dropdown-menu li a:active {
+.navbar .dropdown-menu li a:hover,
+.navbar .dropdown-menu li a:focus,
+.navbar .dropdown-menu li a:active,
+.dropdown-menu li a:hover,
+.dropdown-menu li a:focus,
+.dropdown-menu li a:active {
 	background-color: #0b5a7c;
 	box-shadow: 0px 7px 12px 0 rgba(83, 153, 188, 0.4) !important;
 }
