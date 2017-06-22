@@ -10,45 +10,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
-//import initSemanticSelect = require('../../../assets/js/init/initSemanticSelect.js');
 var forms_1 = require('@angular/forms');
 var _ = require("lodash");
 var DashboardfilterComponent = (function () {
-    /*
-        private collapsed:boolean;
-        private subfilters;
-        private metafilters;
-        private order;
-    */
     function DashboardfilterComponent(dashboardService, builder) {
         this.dashboardService = dashboardService;
         this.builder = builder;
         this.filterForm = new forms_1.FormGroup({});
-        //console.log('Matedata ',this.dashboardService.metadata)
     }
     DashboardfilterComponent.prototype.ngOnInit = function () {
-        var _this = this;
         this.filterForm = this.builder.group({
-            Bedrooms: new forms_1.FormControl(1),
+            Bedrooms: new forms_1.FormControl(),
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            MaxRate: new forms_1.FormControl(3000),
-            MinRate: new forms_1.FormControl(100),
+            MaxRate: new forms_1.FormControl(),
+            MinRate: new forms_1.FormControl(),
             OrderBy: new forms_1.FormControl(),
             Regions: new forms_1.FormArray([]),
             MetaDataFilters: new forms_1.FormArray([]),
         });
-        setTimeout(function () {
-            console.log('Matedata ', _this.dashboardService);
-        }, 9000);
-        /*
-        this.collapsed = true;
-        console.log('metafilter');
-        this.metafilters = [];
-        for (let i = 0; i < 10000; i++) {
-            this.metafilters.push(false);
-        }
-        */
     };
     DashboardfilterComponent.prototype.onSubmit = function (form) {
         var _this = this;
@@ -59,7 +39,6 @@ var DashboardfilterComponent = (function () {
         }, function (e) {
             console.log('Get Villas Error', e);
         });
-        console.log('Submit form ', form);
     };
     DashboardfilterComponent.prototype.metadataChange = function (e) {
         var control = this.filterForm.controls['MetaDataFilters'];

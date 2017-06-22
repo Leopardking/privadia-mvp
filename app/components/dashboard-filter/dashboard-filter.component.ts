@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DashboardService, Filter } from '../../providers/dashboard/dashboard.service';
-
-//import initSemanticSelect = require('../../../assets/js/init/initSemanticSelect.js');
+import { DashboardService } from '../../providers/dashboard/dashboard.service';
 
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 
@@ -18,43 +16,26 @@ import * as _ from "lodash";
 export class DashboardfilterComponent implements OnInit{
     @Input('metafilters') private metafilters: any;
     public filterForm = new FormGroup ({});
-/*
-    private collapsed:boolean;
-    private subfilters;
-    private metafilters;
-    private order;
-*/
+
     constructor ( private dashboardService: DashboardService,
                   private builder: FormBuilder) {
-        //console.log('Matedata ',this.dashboardService.metadata)
     }
 
     ngOnInit() {
         this.filterForm = this.builder.group({
-            Bedrooms: new FormControl(1),
+            Bedrooms: new FormControl(),
             CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            MaxRate: new FormControl(3000),
-            MinRate: new FormControl(100),
+            MaxRate: new FormControl(),
+            MinRate: new FormControl(),
             OrderBy: new FormControl(),
             Regions: new FormArray([]),
             MetaDataFilters: new FormArray([]),
         })
-        setTimeout(() => {
-            console.log('Matedata ',this.dashboardService)
-        },9000)
-        /*
-        this.collapsed = true;
-        console.log('metafilter');
-        this.metafilters = [];
-        for (let i = 0; i < 10000; i++) {
-            this.metafilters.push(false);
-        }
-        */
     }
 
     private onSubmit(form) {
-        form.Regions = _.uniq(form.Regions)
+        form.Regions = _.uniq(form.Regions);
         this.dashboardService.getVillas(form).subscribe(
             d => {
                 this.dashboardService.villas = d;
@@ -64,7 +45,6 @@ export class DashboardfilterComponent implements OnInit{
                 console.log('Get Villas Error', e)
             }
         );
-        console.log('Submit form ', form);
     }
 
     private metadataChange(e) {
