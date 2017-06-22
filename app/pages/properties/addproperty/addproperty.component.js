@@ -10,12 +10,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+var router_1 = require('@angular/router');
 var _ = require("lodash");
 //import { MainService } from '../../../providers/homeservice';
 var dashboard_service_1 = require('../../../providers/dashboard/dashboard.service');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(dashboardService, propertyService, builder) {
+    function AddpropertyComponent(router, dashboardService, propertyService, builder) {
+        this.router = router;
         this.dashboardService = dashboardService;
         this.propertyService = propertyService;
         this.builder = builder;
@@ -216,7 +218,8 @@ var AddpropertyComponent = (function () {
                         align: 'right'
                     }
                 });
-                _this.dashboardService.readData();
+                _this.router.navigate(['properties']);
+                //this.dashboardService.readData();
             }, function (e) { console.log("error:", e); });
         }
         else {
@@ -230,7 +233,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.Router, dashboard_service_1.DashboardService, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());

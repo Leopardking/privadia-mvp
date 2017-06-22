@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import * as _ from "lodash";
 
 //import { MainService } from '../../../providers/homeservice';
@@ -65,7 +65,8 @@ export class AddpropertyComponent implements OnInit{
         Benefits: new FormControl(),
     });
 
-    constructor ( private dashboardService: DashboardService,
+    constructor ( private router:Router,
+                  private dashboardService: DashboardService,
                   private propertyService: PropertiesService,
                   private builder: FormBuilder ) {
         console.log('Form init',this.propertyForm)
@@ -232,7 +233,9 @@ export class AddpropertyComponent implements OnInit{
                             align: 'right'
                         }
                     });
-                    this.dashboardService.readData();
+
+                    this.router.navigate(['properties']);
+                    //this.dashboardService.readData();
                 },
                 e => { console.log("error:", e); }
             );
