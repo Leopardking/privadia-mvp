@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {FormGroup} from "@angular/forms";
 
 declare const $: any;
 
@@ -11,6 +12,7 @@ declare const $: any;
 
 export class SelectfieldComponent implements OnInit{
     @Input('data') private data: any;
+    @Input('group') private filterForm: FormGroup;
 
     constructor ( ) {
 

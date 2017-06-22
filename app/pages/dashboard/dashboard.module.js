@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require("@angular/common");
 var router_1 = require('@angular/router');
+var forms_1 = require("@angular/forms");
 /**
  *  Providers
  */
@@ -37,6 +38,8 @@ var DashboardModule = (function () {
                 common_1.CommonModule,
                 dashboard_routing_module_1.DashboardRoutingModule,
                 router_1.RouterModule,
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule
             ],
             declarations: [
                 dashboard_component_1.DashboardComponent,

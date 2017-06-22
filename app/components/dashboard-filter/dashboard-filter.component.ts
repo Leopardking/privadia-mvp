@@ -5,6 +5,7 @@ import { DashboardService, Filter } from '../../providers/dashboard/dashboard.se
 
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 
+declare const moment: any;
 
 @Component({
     moduleId: module.id,
@@ -15,17 +16,29 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@ang
 
 export class DashboardfilterComponent implements OnInit{
     @Input('metafilters') private metafilters: any;
+    public filterFrom = new FormGroup ({});
 /*
     private collapsed:boolean;
     private subfilters;
     private metafilters;
     private order;
 */
-    constructor ( private dashboardService: DashboardService ) {
+    constructor ( private dashboardService: DashboardService,
+                  private builder: FormBuilder) {
         //console.log('Matedata ',this.dashboardService.metadata)
     }
 
     ngOnInit() {
+        this.filterFrom = this.builder.group({
+            Bedrooms: new FormControl(1),
+            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            MaxRate: new FormControl(3000),
+            MinRate: new FormControl(100),
+            OrderBy: new FormControl(),
+            Regions: new FormControl(),
+            MetaDataFilters: new FormControl(),
+        })
         /*
         setTimeout(() => {
             console.log('Matedata ',this.dashboardService.metadata)

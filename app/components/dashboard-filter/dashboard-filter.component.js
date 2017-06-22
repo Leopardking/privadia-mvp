@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
+//import initSemanticSelect = require('../../../assets/js/init/initSemanticSelect.js');
+var forms_1 = require('@angular/forms');
 var DashboardfilterComponent = (function () {
     /*
         private collapsed:boolean;
@@ -17,11 +19,23 @@ var DashboardfilterComponent = (function () {
         private metafilters;
         private order;
     */
-    function DashboardfilterComponent(dashboardService) {
+    function DashboardfilterComponent(dashboardService, builder) {
         this.dashboardService = dashboardService;
+        this.builder = builder;
+        this.filterFrom = new forms_1.FormGroup({});
         //console.log('Matedata ',this.dashboardService.metadata)
     }
     DashboardfilterComponent.prototype.ngOnInit = function () {
+        this.filterFrom = this.builder.group({
+            Bedrooms: new forms_1.FormControl(1),
+            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            MaxRate: new forms_1.FormControl(3000),
+            MinRate: new forms_1.FormControl(100),
+            OrderBy: new forms_1.FormControl(),
+            Regions: new forms_1.FormControl(),
+            MetaDataFilters: new forms_1.FormControl(),
+        });
         /*
         setTimeout(() => {
             console.log('Matedata ',this.dashboardService.metadata)
@@ -46,7 +60,7 @@ var DashboardfilterComponent = (function () {
             templateUrl: 'dashboard-filter.component.html',
             styleUrls: ['dashboard-filter.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, forms_1.FormBuilder])
     ], DashboardfilterComponent);
     return DashboardfilterComponent;
 }());

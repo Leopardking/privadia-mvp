@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require("@angular/forms");
 var InputfieldComponent = (function () {
     function InputfieldComponent() {
     }
@@ -18,6 +19,10 @@ var InputfieldComponent = (function () {
         core_1.Input('data'), 
         __metadata('design:type', Object)
     ], InputfieldComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input('group'), 
+        __metadata('design:type', forms_1.FormGroup)
+    ], InputfieldComponent.prototype, "filterForm", void 0);
     InputfieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

@@ -1,35 +1,41 @@
 <div class="row">
     <div class="card filter-card">
         <div class="card-content">
-            <form>
+            <form [formGroup]="filterFrom">
                 <div class="row">
                     <div class="col-xs-2">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons non-icon">$</i></span>
                             <input-field-cmp
-                                    [data]="{title: 'From ($)', name: 'from', value: '40', type: 'number'}"></input-field-cmp>
+                                    [data]="{title: 'From ($)', name: 'MinRate', value: '40', type: 'number'}"
+                                    [group]="filterFrom"></input-field-cmp>
                         </div>
                     </div>
                     <div class="col-xs-2">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons">$</i></span>
                             <input-field-cmp
-                                    [data]="{title: 'To $', name: 'to', value: '4000', type: 'number'}"></input-field-cmp>
+                                    [data]="{title: 'To $', name: 'MaxRate', value: '4000', type: 'number'}"
+                                    [group]="filterFrom"></input-field-cmp>
                         </div>
                     </div>
                     <div class="col-xs-2">
-                        <datetimepicker-field-cmp [data]="{title: 'Check In', name: 'check_in', value: '06/21/2017'}"></datetimepicker-field-cmp>
+                        <datetimepicker-field-cmp [data]="{title: 'Check In', name: 'CheckIn', value: '06/21/2017'}"
+                                                  [group]="filterFrom"></datetimepicker-field-cmp>
                     </div>
                     <div class="col-xs-2">
-                        <datetimepicker-field-cmp [data]="{title: 'Check Out', name: 'check_in', value: '06/21/2017'}"></datetimepicker-field-cmp>
+                        <datetimepicker-field-cmp [data]="{title: 'Check Out', name: 'CheckOut', value: '06/21/2017'}"
+                                                  [group]="filterFrom"></datetimepicker-field-cmp>
                     </div>
                     <div class="col-xs-2">
                         <input-field-cmp
-                                [data]="{title: 'Bedrooms', name: 'bedrooms', value: '0', type: 'number'}"></input-field-cmp>
+                                [data]="{title: 'Bedrooms', name: 'Bedrooms', value: '0', type: 'number'}"
+                                [group]="filterFrom"></input-field-cmp>
                     </div>
                     <div class="col-xs-2">
                         <select-field-cmp
-                                [data]="{title: 'Locations', name: 'from', value: '0', type: 'number'}"></select-field-cmp>
+                                [data]="{title: 'Locations', name: 'Regions', value: '0', type: 'number'}"
+                                [group]="filterFrom"></select-field-cmp>
                     </div>
                     <button class="btn btn-white btn-round btn-fab btn-just-icon" type="button" data-toggle="collapse" data-target="#extend-filter">
                         <i class="material-icons">more_vert</i>

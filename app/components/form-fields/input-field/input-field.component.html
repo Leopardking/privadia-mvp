@@ -1,5 +1,5 @@
-<div class="form-group label-floating">
+<div [formGroup]="filterForm" class="form-group label-floating">
     <label class="control-label">{{data.title}}</label>
-    <input [type]="data.type" [value]="data.value" [name]="data.name" class="form-control" formControlName="Sleeps">
+    <input [type]="data.type" [name]="data.name" class="form-control" [formControlName]="data.name">
 </div>
 
