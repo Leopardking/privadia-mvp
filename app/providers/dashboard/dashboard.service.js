@@ -16,7 +16,7 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var DashboardService = (function () {
-    function DashboardService(http, /*private loginService: LoginService,*/ propertiesService /*, private bookingService: BookingService*/) {
+    function DashboardService(http, propertiesService) {
         this.http = http;
         this.propertiesService = propertiesService;
         this.token = "";
@@ -26,26 +26,8 @@ var DashboardService = (function () {
         this.properties = [];
         this.filter = new Filter(1, [1, 2, 3, 4, 5, 6, 7, 8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow()), 0, 0, [], 0);
         this.metadata = [];
-        /*
-         this.loginService.login(this.apiUrl, "steve@freelancemvc.net", "password")
-         .subscribe(
-         d => {
-         this.setToken(d.token_type + ' ' + d.access_token);
-         this.propertiesService.setToken(this.token);
-         this.bookingService.setToken(this.token);
-
-         this.propertiesService.setApiURL(this.apiUrl);
-         this.bookingService.setApiURL(this.apiUrl);
-
-         this.readData();
-         },
-         e => { console.log("error:", e)}
-         );
-         */
         this.propertiesService.setToken(localStorage.getItem('id_token'));
-        // this.bookingService.setToken(localStorage.getItem('id_token'));
         this.propertiesService.setApiURL(this.apiUrl);
-        // this.bookingService.setApiURL(this.apiUrl);
         this.readData();
     }
     DashboardService.prototype.readData = function () {
@@ -54,7 +36,7 @@ var DashboardService = (function () {
         //--------------		Reading data of villas		-----------///////////
         this.propertiesService.getregions().subscribe(function (d) {
             _this.regions = d;
-            _this.getVillas().subscribe(function (d) {
+            _this.getVillas(_this.filter.getCompat()).subscribe(function (d) {
                 _this.villas = d;
                 _this.propertiesService.getMetaData().subscribe(function (d) {
                     _this.metadata = d;
@@ -92,12 +74,12 @@ var DashboardService = (function () {
         return mDate;
     };
     ;
-    DashboardService.prototype.getVillas = function () {
+    DashboardService.prototype.getVillas = function (filter) {
         this.isReading = true;
         var header = new http_1.Headers();
         header.append('Authorization', localStorage.getItem('id_token'));
         var options = new http_1.RequestOptions({ headers: header });
-        return this.http.post(this.apiUrl + '/api/properties/searchavailable', this.filter.getCompat(), options)
+        return this.http.post(this.apiUrl + '/api/properties/searchavailable', filter, options)
             .map(this.extractVillaData)
             .catch(this.handleError);
     };
@@ -120,26 +102,6 @@ var DashboardService = (function () {
         }
         this.isReading = false;
         return Observable_1.Observable.throw(errMsg);
-    };
-    DashboardService.prototype.setFilter = function (filter, type) {
-        var _this = this;
-        if (type == 1) {
-            this.filter.bedrooms = filter.bedrooms;
-            this.filter.locations = filter.locations;
-            this.filter.checkIn = filter.checkIn;
-            this.filter.checkOut = filter.checkOut;
-            this.filter.minRate = filter.minRate;
-            this.filter.maxRate = filter.maxRate;
-        }
-        else if (type == 2) {
-            this.filter.MetaDataFilters = filter.MetaDataFilters;
-            this.filter.orderBy = filter.orderBy;
-        }
-        this.isReading = true;
-        this.getVillas().subscribe(function (d) {
-            _this.villas = d;
-            _this.isReading = false;
-        }, function (e) { console.log("error:", e); });
     };
     DashboardService = __decorate([
         core_1.Injectable(), 

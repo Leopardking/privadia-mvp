@@ -25,32 +25,14 @@ export class DashboardService {
 
 	public isReading;
 
-	constructor (private http: Http, /*private loginService: LoginService,*/ private propertiesService: PropertiesService/*, private bookingService: BookingService*/) {
+	constructor (private http: Http, private propertiesService: PropertiesService) {
 		this.filter = new Filter(1, [1,2,3,4,5,6,7,8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow())
 			, 0, 0, [], 0);
 
 		this.metadata = [];
-		/*
-		 this.loginService.login(this.apiUrl, "steve@freelancemvc.net", "password")
-		 .subscribe(
-		 d => {
-		 this.setToken(d.token_type + ' ' + d.access_token);
-		 this.propertiesService.setToken(this.token);
-		 this.bookingService.setToken(this.token);
-
-		 this.propertiesService.setApiURL(this.apiUrl);
-		 this.bookingService.setApiURL(this.apiUrl);
-
-		 this.readData();
-		 },
-		 e => { console.log("error:", e)}
-		 );
-		 */
 		this.propertiesService.setToken(localStorage.getItem('id_token'));
-		// this.bookingService.setToken(localStorage.getItem('id_token'));
 
 		this.propertiesService.setApiURL(this.apiUrl);
-		// this.bookingService.setApiURL(this.apiUrl);
 
 		this.readData();
 	}
@@ -63,7 +45,7 @@ export class DashboardService {
 			d => {
 				this.regions = d;
 
-				this.getVillas().subscribe(
+				this.getVillas(this.filter.getCompat()).subscribe(
 					d => {
 						this.villas = d;
 
@@ -86,6 +68,7 @@ export class DashboardService {
 		);
 
 		//------------	Reading all properties -------------//
+
 		this.propertiesService.getAllProperties().subscribe(
 			d => {
 				this.properties = d;
@@ -123,7 +106,7 @@ export class DashboardService {
 		return mDate;
 	};
 
-	public getVillas() {
+	public getVillas(filter) {
 		this.isReading = true;
 
 		let header = new Headers();
@@ -131,7 +114,7 @@ export class DashboardService {
 
 		let options = new RequestOptions({ headers: header });
 
-		return this.http.post(this.apiUrl + '/api/properties/searchavailable', this.filter.getCompat(), options)
+		return this.http.post(this.apiUrl + '/api/properties/searchavailable', filter, options)
             .map(this.extractVillaData)
             .catch(this.handleError);
 	}
@@ -161,7 +144,9 @@ export class DashboardService {
 		return Observable.throw(errMsg);
 	}
 
+	/*
 	public setFilter(filter, type) {
+
 		if (type == 1) {
 			this.filter.bedrooms = filter.bedrooms;
 			this.filter.locations = filter.locations;
@@ -174,6 +159,7 @@ export class DashboardService {
 			this.filter.orderBy = filter.orderBy;
 		}
 
+		this.filter = filter;
 		this.isReading = true;
 		this.getVillas().subscribe(
 			d => {
@@ -183,6 +169,7 @@ export class DashboardService {
 			e => { console.log("error:", e); }
 		);
 	}
+	*/
 }
 
 export class Filter {

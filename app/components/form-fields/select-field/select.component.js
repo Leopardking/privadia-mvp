@@ -10,19 +10,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
+var _ = require("lodash");
 var SelectfieldComponent = (function () {
+    //private selectQuery = $(".selectpicker");
     function SelectfieldComponent() {
     }
     SelectfieldComponent.prototype.ngOnInit = function () {
-        $(".selectpicker").selectpicker();
-        $('.selectpicker').on('show.bs.select', function (e) {
-            $('.dropdown-menu.inner').perfectScrollbar();
+        var selectQuery = $(".selectpicker");
+        setTimeout(function () {
+            selectQuery.selectpicker({
+                selectedTextFormat: 'static'
+            });
+            selectQuery.on('show.bs.select', function (e) {
+                $('.dropdown-menu.inner').perfectScrollbar();
+            });
+        }, 10);
+    };
+    SelectfieldComponent.prototype.regionChange = function (e) {
+        var control = this.filterForm.controls['Regions'];
+        var arr = $(e.target).val();
+        arr.forEach(function (value) {
+            var index = _.findIndex(control.value, function (val) { return val == value; });
+            return control.push(new forms_1.FormControl(value));
         });
     };
     __decorate([
         core_1.Input('data'), 
         __metadata('design:type', Object)
     ], SelectfieldComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input('regions'), 
+        __metadata('design:type', Object)
+    ], SelectfieldComponent.prototype, "regions", void 0);
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)

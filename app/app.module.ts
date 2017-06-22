@@ -21,29 +21,5 @@ import {AppRoutingModule} from "./app-routing.module";
     ],
     bootstrap:    [ AppComponent ]
 })
-/*
-@NgModule({
-    imports:      [
-        BrowserModule,
-        DashboardModule,
-        UsersModule,
-        // SidebarModule,
-        // NavbarModule,
-        // FooterModule,
-        HttpModule,
-        RouterModule.forRoot([])
-    ],
-    declarations: [ AppComponent, DashboardComponent, UsersComponent ],
-    providers: [
-        {provide: LocationStrategy, useClass: PathLocationStrategy },
-        // MainService,
-        LoginService,
-        // PropertiesService,
-        // BookingService,
-        AuthGuard,
-        ...AUTH_PROVIDERS
-    ],
-    bootstrap:    [ AppComponent ]
-})
-*/
+
 export class AppModule { }

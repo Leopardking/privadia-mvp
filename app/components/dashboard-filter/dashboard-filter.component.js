@@ -23,24 +23,24 @@ var DashboardfilterComponent = (function () {
     function DashboardfilterComponent(dashboardService, builder) {
         this.dashboardService = dashboardService;
         this.builder = builder;
-        this.filterFrom = new forms_1.FormGroup({});
+        this.filterForm = new forms_1.FormGroup({});
         //console.log('Matedata ',this.dashboardService.metadata)
     }
     DashboardfilterComponent.prototype.ngOnInit = function () {
-        this.filterFrom = this.builder.group({
+        var _this = this;
+        this.filterForm = this.builder.group({
             Bedrooms: new forms_1.FormControl(1),
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             MaxRate: new forms_1.FormControl(3000),
             MinRate: new forms_1.FormControl(100),
             OrderBy: new forms_1.FormControl(),
-            Regions: new forms_1.FormControl(),
+            Regions: new forms_1.FormArray([]),
             MetaDataFilters: new forms_1.FormArray([]),
         });
-        /*
-        setTimeout(() => {
-            console.log('Matedata ',this.dashboardService.metadata)
-        },9000)
+        setTimeout(function () {
+            console.log('Matedata ', _this.dashboardService);
+        }, 9000);
         /*
         this.collapsed = true;
         console.log('metafilter');
@@ -51,10 +51,18 @@ var DashboardfilterComponent = (function () {
         */
     };
     DashboardfilterComponent.prototype.onSubmit = function (form) {
+        var _this = this;
+        form.Regions = _.uniq(form.Regions);
+        this.dashboardService.getVillas(form).subscribe(function (d) {
+            _this.dashboardService.villas = d;
+            _this.dashboardService.isReading = false;
+        }, function (e) {
+            console.log('Get Villas Error', e);
+        });
         console.log('Submit form ', form);
     };
     DashboardfilterComponent.prototype.metadataChange = function (e) {
-        var control = this.filterFrom.controls['MetaDataFilters'];
+        var control = this.filterForm.controls['MetaDataFilters'];
         var index = _.findIndex(control.value, function (val) { return val == e.target.value; });
         if (index == -1)
             return control.push(new forms_1.FormControl(e.target.value));

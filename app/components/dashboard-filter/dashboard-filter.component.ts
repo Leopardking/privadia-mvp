@@ -17,7 +17,7 @@ import * as _ from "lodash";
 
 export class DashboardfilterComponent implements OnInit{
     @Input('metafilters') private metafilters: any;
-    public filterFrom = new FormGroup ({});
+    public filterForm = new FormGroup ({});
 /*
     private collapsed:boolean;
     private subfilters;
@@ -30,19 +30,18 @@ export class DashboardfilterComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.filterFrom = this.builder.group({
+        this.filterForm = this.builder.group({
             Bedrooms: new FormControl(1),
             CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             MaxRate: new FormControl(3000),
             MinRate: new FormControl(100),
             OrderBy: new FormControl(),
-            Regions: new FormControl(),
+            Regions: new FormArray([]),
             MetaDataFilters: new FormArray([]),
         })
-        /*
         setTimeout(() => {
-            console.log('Matedata ',this.dashboardService.metadata)
+            console.log('Matedata ',this.dashboardService)
         },9000)
         /*
         this.collapsed = true;
@@ -55,11 +54,21 @@ export class DashboardfilterComponent implements OnInit{
     }
 
     private onSubmit(form) {
+        form.Regions = _.uniq(form.Regions)
+        this.dashboardService.getVillas(form).subscribe(
+            d => {
+                this.dashboardService.villas = d;
+                this.dashboardService.isReading = false;
+            },
+            e => {
+                console.log('Get Villas Error', e)
+            }
+        );
         console.log('Submit form ', form);
     }
 
     private metadataChange(e) {
-        const control = <FormArray>this.filterFrom.controls['MetaDataFilters'];
+        const control = <FormArray>this.filterForm.controls['MetaDataFilters'];
         const index = _.findIndex(control.value, (val) => { return val == e.target.value});
 
         if(index == -1)

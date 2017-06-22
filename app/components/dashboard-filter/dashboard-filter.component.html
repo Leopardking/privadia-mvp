@@ -1,14 +1,14 @@
 <div class="row">
     <div class="card filter-card">
         <div class="card-content">
-            <form [formGroup]="filterFrom" (ngSubmit)="onSubmit(filterFrom.value)">
+            <form [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)">
                 <div class="row">
                     <div class="col-xs-2">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons non-icon">$</i></span>
                             <input-field-cmp
                                     [data]="{title: 'From ($)', name: 'MinRate', value: '40', type: 'number'}"
-                                    [group]="filterFrom"></input-field-cmp>
+                                    [group]="filterForm"></input-field-cmp>
                         </div>
                     </div>
                     <div class="col-xs-2">
@@ -16,26 +16,27 @@
                             <span class="input-group-addon"><i class="material-icons">$</i></span>
                             <input-field-cmp
                                     [data]="{title: 'To $', name: 'MaxRate', value: '4000', type: 'number'}"
-                                    [group]="filterFrom"></input-field-cmp>
+                                    [group]="filterForm"></input-field-cmp>
                         </div>
                     </div>
                     <div class="col-xs-2">
                         <datetimepicker-field-cmp [data]="{title: 'Check In', name: 'CheckIn', value: '06/21/2017'}"
-                                                  [group]="filterFrom"></datetimepicker-field-cmp>
+                                                  [group]="filterForm"></datetimepicker-field-cmp>
                     </div>
                     <div class="col-xs-2">
                         <datetimepicker-field-cmp [data]="{title: 'Check Out', name: 'CheckOut', value: '06/21/2017'}"
-                                                  [group]="filterFrom"></datetimepicker-field-cmp>
+                                                  [group]="filterForm"></datetimepicker-field-cmp>
                     </div>
                     <div class="col-xs-2">
                         <input-field-cmp
                                 [data]="{title: 'Bedrooms', name: 'Bedrooms', value: '0', type: 'number'}"
-                                [group]="filterFrom"></input-field-cmp>
+                                [group]="filterForm"></input-field-cmp>
                     </div>
                     <div class="col-xs-2">
-                        <select-field-cmp
+                        <select-field-cmp *ngIf="dashboardService.regions.length"
                                 [data]="{title: 'Locations', name: 'Regions', value: '0', type: 'number'}"
-                                [group]="filterFrom"></select-field-cmp>
+                                [regions]="dashboardService.regions"
+                                [group]="filterForm"></select-field-cmp>
                     </div>
                     <button class="btn btn-white btn-round btn-fab btn-just-icon" type="button" data-toggle="collapse" data-target="#extend-filter">
                         <i class="material-icons">more_vert</i>
