@@ -1,7 +1,7 @@
 <div class="row">
     <div class="card filter-card">
         <div class="card-content">
-            <form [formGroup]="filterFrom">
+            <form [formGroup]="filterFrom" (ngSubmit)="onSubmit(filterFrom.value)">
                 <div class="row">
                     <div class="col-xs-2">
                         <div class="input-group">
@@ -42,7 +42,7 @@
                     </button>
                 </div>
                 <div class="row">
-                    <div id="extend-filter" class="extend-filter-container collapse" *ngIf="dashboardService.metadata.length">
+                    <div id="extend-filter" class="extend-filter-container collapse in" *ngIf="dashboardService.metadata.length">
                         <div class="card">
                             <ul class="row m-l-r-none nav nav-pills">
                                 <li class="nav-pill col-xs-2 col-width-21" *ngFor="let metafilter of metafilters">
@@ -57,15 +57,15 @@
                             </ul>
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="tab-content">
+                                    <div formArrayName="MetaDataFilters" class="tab-content">
 
                                         <div *ngFor="let metafilter of metafilters" [id]="'metafilter-' + metafilter.Id" class="tab-pane">
                                             <div class="row">
                                                 <div *ngFor="let metadata of metafilter.MetaDataSubTypes" class="col-xs-3">
                                                     <h5 class="m-b-none">{{metadata.Name}}</h5>
-                                                    <div class="checkbox" *ngFor="let meta of metadata.MetaData">
+                                                    <div class="checkbox" *ngFor="let meta of metadata.MetaData; let i = index">
                                                         <label>
-                                                            <input type="checkbox" formControlName="SmokingAllowed"> {{meta.Name}}
+                                                            <input type="checkbox" value="{{meta.Id}}" name="MetaDataFilters" (click)="metadataChange($event)"> {{meta.Name}}
                                                         </label>
                                                     </div>
                                                 </div>
@@ -75,6 +75,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary">submit</button>
                     </div>
                 </div>
             </form>

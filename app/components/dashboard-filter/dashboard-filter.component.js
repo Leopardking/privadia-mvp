@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
 //import initSemanticSelect = require('../../../assets/js/init/initSemanticSelect.js');
 var forms_1 = require('@angular/forms');
+var _ = require("lodash");
 var DashboardfilterComponent = (function () {
     /*
         private collapsed:boolean;
@@ -34,7 +35,7 @@ var DashboardfilterComponent = (function () {
             MinRate: new forms_1.FormControl(100),
             OrderBy: new forms_1.FormControl(),
             Regions: new forms_1.FormControl(),
-            MetaDataFilters: new forms_1.FormControl(),
+            MetaDataFilters: new forms_1.FormArray([]),
         });
         /*
         setTimeout(() => {
@@ -48,6 +49,16 @@ var DashboardfilterComponent = (function () {
             this.metafilters.push(false);
         }
         */
+    };
+    DashboardfilterComponent.prototype.onSubmit = function (form) {
+        console.log('Submit form ', form);
+    };
+    DashboardfilterComponent.prototype.metadataChange = function (e) {
+        var control = this.filterFrom.controls['MetaDataFilters'];
+        var index = _.findIndex(control.value, function (val) { return val == e.target.value; });
+        if (index == -1)
+            return control.push(new forms_1.FormControl(e.target.value));
+        return control.removeAt(index);
     };
     __decorate([
         core_1.Input('metafilters'), 

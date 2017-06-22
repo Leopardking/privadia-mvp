@@ -6,6 +6,7 @@ import { DashboardService, Filter } from '../../providers/dashboard/dashboard.se
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 declare const moment: any;
+import * as _ from "lodash";
 
 @Component({
     moduleId: module.id,
@@ -37,7 +38,7 @@ export class DashboardfilterComponent implements OnInit{
             MinRate: new FormControl(100),
             OrderBy: new FormControl(),
             Regions: new FormControl(),
-            MetaDataFilters: new FormControl(),
+            MetaDataFilters: new FormArray([]),
         })
         /*
         setTimeout(() => {
@@ -52,6 +53,21 @@ export class DashboardfilterComponent implements OnInit{
         }
         */
     }
+
+    private onSubmit(form) {
+        console.log('Submit form ', form);
+    }
+
+    private metadataChange(e) {
+        const control = <FormArray>this.filterFrom.controls['MetaDataFilters'];
+        const index = _.findIndex(control.value, (val) => { return val == e.target.value});
+
+        if(index == -1)
+            return control.push(new FormControl(e.target.value));
+
+        return control.removeAt(index);
+    }
+
 /*
     private filterDisplayChange() {
         this.collapsed = !this.collapsed;
