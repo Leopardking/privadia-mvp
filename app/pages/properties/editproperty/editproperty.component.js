@@ -79,6 +79,7 @@ var EditpropertyComponent = (function () {
                 _this.setMetaDataTmp();
                 // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
                 _this.isLoad = true;
+                $('.property-tabs a:first').tab('show');
                 console.log('This properties', _this.property);
                 console.log('This properties Form', _this.propertyForm);
             }, function (e) { console.log("error:", e); });

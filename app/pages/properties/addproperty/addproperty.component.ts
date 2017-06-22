@@ -76,6 +76,8 @@ export class AddpropertyComponent implements OnInit{
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
         setTimeout(() => {
+            $('.property-tabs a:first').tab('show')
+
             $('button[data-toggle="tab"]').click((e)=>{
                 if(this.propertyForm.valid) {
                     const target = $(e.target).attr("href");
@@ -88,9 +90,6 @@ export class AddpropertyComponent implements OnInit{
                 }
             });
         });
-        //$.getScript('../../../../assets/js/core/jquery.validate.min.js');
-        //$.getScript('../../../../assets/js/init/initImageGallery.js');
-        //$('#registerFormValidation').validate();
     }
 
     setRegion(region) {
@@ -98,7 +97,7 @@ export class AddpropertyComponent implements OnInit{
             Id: [region.RegionId],
             Name: [region.RegionName]
         });
-        // const regionFormArray = this.builder.array(regionFGs);
+
         this.propertyForm.setControl('Region', regionFGs);
     }
 
@@ -212,7 +211,6 @@ export class AddpropertyComponent implements OnInit{
     }
 
     private onSubmit() {
-        console.log('Submit form')
         let newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
@@ -241,7 +239,5 @@ export class AddpropertyComponent implements OnInit{
         } else {
             this.errorForm = true
         }
-        console.log('Property Form ', this.propertyForm);
-        console.log('Property Form Value ', this.propertyForm.value);
     }
 }

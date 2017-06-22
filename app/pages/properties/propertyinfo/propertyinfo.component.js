@@ -63,6 +63,7 @@ var PropertyinfoComponent = (function () {
             _this.regionArray = d;
             _this.regions = d.map(function (item, i) { return item.Name; });
         }, function (e) { console.log("error: ", e); });
+        $('.property-tab a:first').tab('show');
     };
     PropertyinfoComponent.prototype.showAddContact = function () {
         var control = this.propertyForm.controls['Contacts'];

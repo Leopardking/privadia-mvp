@@ -105,6 +105,8 @@ export class EditpropertyComponent implements OnInit{
                     // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
 
                     this.isLoad = true;
+
+                    $('.property-tabs a:first').tab('show')
                     console.log('This properties', this.property);
                     console.log('This properties Form', this.propertyForm);
                 },

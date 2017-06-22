@@ -72,6 +72,7 @@ var AddpropertyComponent = (function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         setTimeout(function () {
+            $('.property-tabs a:first').tab('show');
             $('button[data-toggle="tab"]').click(function (e) {
                 if (_this.propertyForm.valid) {
                     var target = $(e.target).attr("href");
@@ -84,16 +85,12 @@ var AddpropertyComponent = (function () {
                 }
             });
         });
-        //$.getScript('../../../../assets/js/core/jquery.validate.min.js');
-        //$.getScript('../../../../assets/js/init/initImageGallery.js');
-        //$('#registerFormValidation').validate();
     };
     AddpropertyComponent.prototype.setRegion = function (region) {
         var regionFGs = this.builder.group({
             Id: [region.RegionId],
             Name: [region.RegionName]
         });
-        // const regionFormArray = this.builder.array(regionFGs);
         this.propertyForm.setControl('Region', regionFGs);
     };
     AddpropertyComponent.prototype.saveInfo = function () {
@@ -201,7 +198,6 @@ var AddpropertyComponent = (function () {
     };
     AddpropertyComponent.prototype.onSubmit = function () {
         var _this = this;
-        console.log('Submit form');
         var newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
@@ -226,8 +222,6 @@ var AddpropertyComponent = (function () {
         else {
             this.errorForm = true;
         }
-        console.log('Property Form ', this.propertyForm);
-        console.log('Property Form Value ', this.propertyForm.value);
     };
     AddpropertyComponent = __decorate([
         core_1.Component({

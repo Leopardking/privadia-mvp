@@ -1,11 +1,11 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="col-xs-12">
+            <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="col-xs-12" novalidate>
                 <div class="card">
-                    <div class="card-content p-b-15">
+                    <div class="property-tabs card-content p-b-15">
                         <ul class="nav nav-pills main-nav-pills">
-                            <li class="nav-pill active"
+                            <li class="nav-pill"
                                 [ngClass]="{'form-error': (!propertyForm.controls['Bathrooms'].valid ||
                                 !propertyForm.controls['Name'].valid ||
                                 !propertyForm.controls['Bedrooms'].valid ||
@@ -66,7 +66,7 @@
                         </ul>
                         <div class="tab-content m-l-r-20-negative m-t-25">
                             <!--  Property Info  -->
-                            <div id="metatab-info" class="active card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
+                            <div id="metatab-info" class="card-content p-b-none p-l-r-none p-t-none" *ngIf="isLoad">
                                 <propertyinfo-cmp [group]="propertyForm" [errorForm]="errorForm"></propertyinfo-cmp>
                             </div>
                             <!--  Property Image  -->

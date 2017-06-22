@@ -9,7 +9,7 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import {FormGroup, FormArray, FormControl, Validators} from "@angular/forms";
 
-declare var $: any;
+declare const $: any;
 
 @Component({
     moduleId: module.id,
@@ -99,6 +99,7 @@ export class PropertyinfoComponent implements OnInit{
             },
             e => { console.log("error: ", e); }
         );
+        $('.property-tab a:first').tab('show')
     }
 
     private autocompleListFormatter = (data: any) : SafeHtml => {
