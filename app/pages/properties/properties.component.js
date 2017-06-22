@@ -19,7 +19,9 @@ var PropertiesComponent = (function () {
         this.propertyService = propertyService;
         this.datatableInited = false;
     }
-    PropertiesComponent.prototype.ngOnInit = function () { };
+    PropertiesComponent.prototype.ngOnInit = function () {
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+    };
     PropertiesComponent.prototype.finishReading = function () {
         var dataTableQuery = $('#datatables');
         var tableWidget = dataTableQuery.DataTable({

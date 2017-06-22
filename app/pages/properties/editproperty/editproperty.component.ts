@@ -7,7 +7,7 @@ import * as _ from "lodash";
 import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
-declare var $:any;
+declare const $:any;
 
 @Component({
     moduleId: module.id,
@@ -51,6 +51,7 @@ export class EditpropertyComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         console.log('this.property mainService', this.dashboardService.metadata )
 
         this.sub = this.route.params.subscribe(params => {

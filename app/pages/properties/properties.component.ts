@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './../../providers/dashboard/dashboard.service';
 import { PropertiesService } from './../../providers/properties/properties.service';
 
+declare const $:any;
 
 //import initDataTable = require('../../../assets/js/init/initDataTable.js');
 
@@ -20,7 +21,9 @@ export class PropertiesComponent implements OnInit{
     constructor ( private dashboardService: DashboardService,
                   private propertyService: PropertiesService ) {}
 
-    ngOnInit(){}
+    ngOnInit(){
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+    }
 
     private finishReading() {
         let dataTableQuery: any = $('#datatables');

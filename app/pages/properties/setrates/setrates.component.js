@@ -29,6 +29,7 @@ var SetratesComponent = (function () {
     }
     SetratesComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         console.log('moment', moment().format());
         this.propertyService.getRates(14489).subscribe(function (d) {
             _this.listRates = d;

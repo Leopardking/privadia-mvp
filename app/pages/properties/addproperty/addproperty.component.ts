@@ -7,8 +7,7 @@ import * as _ from "lodash";
 import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
-declare var $:any;
-
+declare const $:any;
 
 @Component({
     moduleId: module.id,
@@ -74,7 +73,8 @@ export class AddpropertyComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
-        console.log('Init form ');
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+
         setTimeout(() => {
             $('button[data-toggle="tab"]').click((e)=>{
                 if(this.propertyForm.valid) {

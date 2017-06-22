@@ -30,6 +30,7 @@ var EditpropertyComponent = (function () {
     // steve@freelancemvc.net, agent1@freelancemvc.net
     EditpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         console.log('this.property mainService', this.dashboardService.metadata);
         this.sub = this.route.params.subscribe(function (params) {
             _this.propertyService.getPropertyById(params['id']).subscribe(function (d) {

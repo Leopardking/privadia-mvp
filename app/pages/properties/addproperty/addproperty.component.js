@@ -70,7 +70,7 @@ var AddpropertyComponent = (function () {
     // steve@freelancemvc.net, agent1@freelancemvc.net
     AddpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log('Init form ');
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         setTimeout(function () {
             $('button[data-toggle="tab"]').click(function (e) {
                 if (_this.propertyForm.valid) {

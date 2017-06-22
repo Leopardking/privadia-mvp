@@ -7,8 +7,8 @@ import { DashboardService } from '../../../providers/dashboard/dashboard.service
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
 import initDatetimepickers = require('../../../../assets/js/init/initDatetimepickers.js');
-declare var moment: any
-declare var $: any
+declare const moment: any
+declare const $: any
 
 
 @Component({
@@ -35,6 +35,8 @@ export class SetratesComponent implements OnInit{
     }
 
     ngOnInit(){
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+
         console.log('moment',moment().format())
         this.propertyService.getRates(14489).subscribe(
             d => {

@@ -14,7 +14,9 @@ var DashboardComponent = (function () {
     function DashboardComponent(dashboardService) {
         this.dashboardService = dashboardService;
     }
-    DashboardComponent.prototype.ngOnInit = function () { };
+    DashboardComponent.prototype.ngOnInit = function () {
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+    };
     DashboardComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
