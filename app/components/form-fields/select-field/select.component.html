@@ -6,7 +6,9 @@
             title="Select"
             data-size="7"
             (change)="regionChange($event)">
-        <option *ngFor="let region of regions; let i = index" [value]="region.Id">{{region.Name}}</option>
+        <optgroup label="Spain" style="font-size: 16px">
+            <option *ngFor="let region of regions; let i = index" [value]="region.Id">{{region.Name}}</option>
+        </optgroup>
     </select>
 </div>
 
