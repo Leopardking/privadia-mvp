@@ -102,6 +102,10 @@ export class PropertyinfoComponent implements OnInit{
         $('.property-tab a:first').tab('show')
     }
 
+    private autosize(e){
+        e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';
+    }
+
     private autocompleListFormatter = (data: any) : SafeHtml => {
         let html = `${data.Name}`;
         return this._sanitizer.bypassSecurityTrustHtml(html);

@@ -60,6 +60,9 @@ var MetafilterheadingComponent = (function () {
                 break;
         }
     };
+    MetafilterheadingComponent.prototype.autosize = function (e) {
+        e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

@@ -65,6 +65,9 @@ var PropertyinfoComponent = (function () {
         }, function (e) { console.log("error: ", e); });
         $('.property-tab a:first').tab('show');
     };
+    PropertyinfoComponent.prototype.autosize = function (e) {
+        e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';
+    };
     PropertyinfoComponent.prototype.showAddContact = function () {
         var control = this.propertyForm.controls['Contacts'];
         control.push(new forms_1.FormGroup({

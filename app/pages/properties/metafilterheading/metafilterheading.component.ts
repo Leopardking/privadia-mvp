@@ -83,6 +83,10 @@ export class MetafilterheadingComponent implements OnInit{
 		}
 	}
 
+	private autosize(e){
+		e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';
+	}
+
 	/*
 	private housekeeperStateChange(s) {
 		this.housekeeperState = s;

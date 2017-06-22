@@ -217,7 +217,8 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	background-position: center bottom, center calc(100% - 0px);
 }
 .form-group textarea.form-control {
-	height: 49px;
+	min-height: 49px;
+	max-height: 133px;
 }
 .form-control-static {
 	padding-left: 5px;
