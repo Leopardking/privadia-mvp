@@ -21,7 +21,7 @@ var LoginComponent = (function () {
         this.loginForm = new forms_1.FormGroup({
             Email: new forms_1.FormControl('steve@freelancemvc.net', forms_1.Validators.compose([
                 forms_1.Validators.required,
-                forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm)
+                forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
             ])),
             Password: new forms_1.FormControl('password', forms_1.Validators.required),
         });
