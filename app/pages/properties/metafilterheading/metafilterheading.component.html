@@ -81,11 +81,11 @@
 <div [formGroup]="propertyForm" *ngIf="name == 'Features'" class="features">
     <div class="checkbox">
         <label>
-            <input type="checkbox" formControlName="LiftAvailable" (click)="liftAvailabilityChanged($event)"> Lift Available
+            <input type="checkbox" formControlName="LiftAvailable"> Lift Available
         </label>
     </div>
     <div class="form-group label-floating">
         <label class="control-label">Unique Benefits</label>
-        <textarea class="form-control" formControlName="Benefits" (change)="uniqueBenefitsChange($event)"></textarea>
+        <textarea class="form-control" formControlName="Benefits"></textarea>
     </div>
 </div>
