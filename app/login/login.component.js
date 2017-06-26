@@ -26,7 +26,17 @@ var LoginComponent = (function () {
             Password: new forms_1.FormControl('password', forms_1.Validators.required),
         });
     }
+    LoginComponent.prototype.checkFullPageBackgroundImage = function () {
+        var $page = $('.full-page');
+        var image_src = $page.data('image');
+        if (image_src !== undefined) {
+            var image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>';
+            $page.append(image_container);
+        }
+    };
+    ;
     LoginComponent.prototype.ngOnInit = function () {
+        this.checkFullPageBackgroundImage();
         setTimeout(function () {
             $('.card').removeClass('card-hidden');
         }, 700);

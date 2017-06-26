@@ -493,6 +493,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .modal-dialog .modal-footer{
 	text-align: center;
 }
-.modal-backdrop {
+.modal-backdrop.in {
+	opacity: 1;
 	background: rgba(0, 0, 5, 0.6);
 }

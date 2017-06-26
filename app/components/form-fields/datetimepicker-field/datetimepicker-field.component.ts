@@ -14,9 +14,7 @@ export class DatetimefieldComponent implements OnInit{
     @Input('classes') private classes: any;
     @Input('group') private filterForm: FormGroup;
 
-    constructor ( ) {
-
-    }
+    constructor ( ) { }
 
     ngOnInit() {
         initDatetimepickers();
