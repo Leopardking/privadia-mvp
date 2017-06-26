@@ -468,3 +468,31 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .dataTables_filter {
 	display: none;
 }
+
+/**
+ * Modal Dialog
+ */
+.modal-dialog {
+	border-radius: 10px;
+	overflow: hidden;
+}
+.modal-dialog .modal-content .modal-header{
+	padding: 0px;
+}
+.modal-dialog .modal-body .material-icons{
+	font-size: 16px;
+	color: #359bc0;
+}
+.modal-dialog .modal-body .input-group .form-group-static {
+	margin-top: 14px;
+	font-size: 16px;
+}
+.modal-dialog .modal-body h5 {
+	font-size: 16px;
+}
+.modal-dialog .modal-footer{
+	text-align: center;
+}
+.modal-backdrop {
+	background: rgba(0, 0, 5, 0.6);
+}

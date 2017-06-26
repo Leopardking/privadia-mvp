@@ -1,0 +1,51 @@
+.modal-header {
+    position: relative;
+}
+.modal-header .villa-container {
+    position: absolute;
+    width: 100%;
+    left:0px;
+    bottom: 10px;
+    padding-left: 24px;
+    padding-right: 24px;
+}
+.modal-header .villa-container .modal-title{
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 300;
+    color: #fff;
+}
+.modal-header .villa-container .location {
+    font-size: 16px;
+    font-weight: 300;
+    color: #FFFFFF;
+}
+.modal-header .villa-container .location .material-icons {
+    font-size: 16px;
+    font-weight: 300;
+    color: #FFFFFF;
+}
+.modal-body {
+    margin-top: 20px;
+}
+.modal-body .estimated-cost {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+}
+.modal-body .estimated-cost span {
+    line-height: 21px;
+    font-weight: 300;
+}
+.modal-body .estimated-cost i {
+    line-height: 21px;
+    margin-right: 5px;
+}
+.modal-body .estimated-cost .control-label {
+    font-size: 12px;
+    margin-right: 20px;
+}
+

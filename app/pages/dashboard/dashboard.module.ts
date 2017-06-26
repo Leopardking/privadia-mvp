@@ -21,6 +21,7 @@ import { DashboardfilterComponent } from "../../components/dashboard-filter/dash
 import { InputfieldComponent } from "../../components/form-fields/input-field/input-field.component";
 import { DatetimefieldComponent } from "../../components/form-fields/datetimepicker-field/datetimepicker-field.component";
 import { SelectfieldComponent } from "../../components/form-fields/select-field/select.component";
+import {Ng2CloudinaryModule} from "ng2-cloudinary";
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { SelectfieldComponent } from "../../components/form-fields/select-field/
         DashboardRoutingModule,
         RouterModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        Ng2CloudinaryModule
     ],
     declarations: [
         DashboardComponent,

@@ -29,6 +29,7 @@ var dashboard_filter_component_1 = require("../../components/dashboard-filter/da
 var input_field_component_1 = require("../../components/form-fields/input-field/input-field.component");
 var datetimepicker_field_component_1 = require("../../components/form-fields/datetimepicker-field/datetimepicker-field.component");
 var select_component_1 = require("../../components/form-fields/select-field/select.component");
+var ng2_cloudinary_1 = require("ng2-cloudinary");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -39,7 +40,8 @@ var DashboardModule = (function () {
                 dashboard_routing_module_1.DashboardRoutingModule,
                 router_1.RouterModule,
                 forms_1.FormsModule,
-                forms_1.ReactiveFormsModule
+                forms_1.ReactiveFormsModule,
+                ng2_cloudinary_1.Ng2CloudinaryModule
             ],
             declarations: [
                 dashboard_component_1.DashboardComponent,

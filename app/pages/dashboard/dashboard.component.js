@@ -10,12 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
+var forms_1 = require('@angular/forms');
 var DashboardComponent = (function () {
-    function DashboardComponent(dashboardService) {
+    function DashboardComponent(dashboardService, builder) {
         this.dashboardService = dashboardService;
+        this.builder = builder;
+        this.enquiryForm = new forms_1.FormGroup({});
     }
     DashboardComponent.prototype.ngOnInit = function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        $('.modal').appendTo("body");
+        setTimeout(function () {
+            $('.modal-content').perfectScrollbar();
+        }, 5000);
+        this.enquiryForm = this.builder.group({
+            FirstName: new forms_1.FormControl(),
+            LastName: new forms_1.FormControl(),
+            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            Message: new forms_1.FormControl(),
+        });
     };
     DashboardComponent = __decorate([
         core_1.Component({
@@ -24,7 +38,7 @@ var DashboardComponent = (function () {
             templateUrl: 'dashboard.component.html',
             styleUrls: ['dashboard.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, forms_1.FormBuilder])
     ], DashboardComponent);
     return DashboardComponent;
 }());
