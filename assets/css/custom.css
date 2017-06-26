@@ -212,12 +212,13 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
  *  Form style
 */
 .form-control, .form-group .form-control {
-	padding: 7px 5px;
+	padding: 5px;
 	background-image: linear-gradient(#5399bc, #5399bc), linear-gradient(#5399bc, #5399bc);
 	background-position: center bottom, center calc(100% - 0px);
 }
 .form-group textarea.form-control {
-	min-height: 49px;
+	height: 46px;
+	min-height: 46px;
 	max-height: 124px;
 }
 .form-control-static {

@@ -103,7 +103,7 @@ export class PropertyinfoComponent implements OnInit{
     }
 
     private autosize(e){
-        e.target.style.cssText = 'height:' + e.target.scrollHeight + 'px';
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     }
 
     private autocompleListFormatter = (data: any) : SafeHtml => {
