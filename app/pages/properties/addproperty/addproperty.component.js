@@ -24,6 +24,7 @@ var AddpropertyComponent = (function () {
         // private isActive = true;
         this.isLoad = true;
         this.errorForm = false;
+        this.sending = false;
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
             OwnerName: new forms_1.FormControl(),
@@ -206,6 +207,7 @@ var AddpropertyComponent = (function () {
         });
         this.propertyForm.value.MetaData = newArr;
         if (this.propertyForm.valid) {
+            this.sending = true;
             this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
                 $.notify({
                     icon: "notifications",
@@ -219,6 +221,7 @@ var AddpropertyComponent = (function () {
                     }
                 });
                 _this.router.navigate(['properties']);
+                _this.sending = false;
                 //this.dashboardService.readData();
             }, function (e) { console.log("error:", e); });
         }

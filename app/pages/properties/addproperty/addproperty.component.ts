@@ -20,6 +20,7 @@ export class AddpropertyComponent implements OnInit{
     // private isActive = true;
     private isLoad = true;
     private errorForm = false;
+    private sending = false;
 
     public propertyForm = new FormGroup ({
         Active: new FormControl(true),
@@ -219,6 +220,8 @@ export class AddpropertyComponent implements OnInit{
         this.propertyForm.value.MetaData = newArr;
 
         if(this.propertyForm.valid) {
+            this.sending = true;
+
             this.propertyService.addProperty(this.propertyForm.value).subscribe(
                 d => {
                     $.notify({
@@ -235,6 +238,8 @@ export class AddpropertyComponent implements OnInit{
                     });
 
                     this.router.navigate(['properties']);
+                    this.sending = false;
+
                     //this.dashboardService.readData();
                 },
                 e => { console.log("error:", e); }
