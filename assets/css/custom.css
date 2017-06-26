@@ -405,6 +405,9 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 /**
  *  Dropdown menu
  */
+.dropdown-menu li span {
+	font-size: 14px;
+}
 .navbar .dropdown-menu li a:hover,
 .navbar .dropdown-menu li a:focus,
 .navbar .dropdown-menu li a:active,
