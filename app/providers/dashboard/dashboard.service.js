@@ -15,10 +15,12 @@ var properties_service_1 = require('../properties/properties.service');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
+var router_1 = require("@angular/router");
 var DashboardService = (function () {
-    function DashboardService(http, propertiesService) {
+    function DashboardService(http, propertiesService, router) {
         this.http = http;
         this.propertiesService = propertiesService;
+        this.router = router;
         this.token = "";
         this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
         this.regions = [];
@@ -42,14 +44,20 @@ var DashboardService = (function () {
                     _this.metadata = d;
                     console.log(d);
                     _this.isReading = false;
-                }, function (e) { console.log("error: ", e); });
-            }, function (e) { console.log("error:", e); });
-        }, function (e) { console.log(e); });
+                }, function (e) { console.log("error metadata: ", e); });
+            }, function (e) {
+                console.log("error villas:", e);
+            });
+        }, function (e) {
+            console.log('error regions', e);
+            localStorage.removeItem('id_token');
+            _this.router.navigate(['/login']);
+        });
         //------------	Reading all properties -------------//
         this.propertiesService.getAllProperties().subscribe(function (d) {
             _this.properties = d;
         }, function (e) {
-            console.log("error: ", e);
+            console.log("error properties: ", e);
         });
     };
     DashboardService.prototype.getTomorrow = function () {
@@ -105,7 +113,7 @@ var DashboardService = (function () {
     };
     DashboardService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [http_1.Http, properties_service_1.PropertiesService, router_1.Router])
     ], DashboardService);
     return DashboardService;
 }());

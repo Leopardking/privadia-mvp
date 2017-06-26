@@ -8,6 +8,7 @@ import { BookingService } from '../booking/booking.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class DashboardService {
@@ -25,7 +26,9 @@ export class DashboardService {
 
 	public isReading;
 
-	constructor (private http: Http, private propertiesService: PropertiesService) {
+	constructor (private http: Http,
+				 private propertiesService: PropertiesService,
+				 private router: Router) {
 		this.filter = new Filter(1, [1,2,3,4,5,6,7,8], this.dateToDateTime(new Date()), this.dateToDateTime(this.getTomorrow())
 			, 0, 0, [], 0);
 
@@ -44,7 +47,6 @@ export class DashboardService {
 		this.propertiesService.getregions().subscribe(
 			d => {
 				this.regions = d;
-
 				this.getVillas(this.filter.getCompat()).subscribe(
 					d => {
 						this.villas = d;
@@ -57,14 +59,19 @@ export class DashboardService {
 
 								this.isReading = false;
 							},
-							e => { console.log("error: ", e); }
+							e => { console.log("error metadata: ", e); }
 						);
 					},
-					e => { console.log("error:", e); }
+					e => {
+						console.log("error villas:", e);
+					}
 				);
-
 			},
-			e => { console.log(e); }
+			e => {
+				console.log('error regions', e);
+				localStorage.removeItem('id_token');
+				this.router.navigate(['/login']);
+			}
 		);
 
 		//------------	Reading all properties -------------//
@@ -74,7 +81,7 @@ export class DashboardService {
 				this.properties = d;
 			},
 			e => {
-				console.log("error: ", e);
+				console.log("error properties: ", e);
 			}
 		);
 	}
