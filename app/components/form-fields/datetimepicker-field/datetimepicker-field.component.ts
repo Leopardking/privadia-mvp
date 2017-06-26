@@ -11,6 +11,7 @@ import {FormGroup} from "@angular/forms";
 
 export class DatetimefieldComponent implements OnInit{
     @Input('data') private data: any;
+    @Input('classes') private classes: any;
     @Input('group') private filterForm: FormGroup;
 
     constructor ( ) {

@@ -22,6 +22,10 @@ var DatetimefieldComponent = (function () {
         __metadata('design:type', Object)
     ], DatetimefieldComponent.prototype, "data", void 0);
     __decorate([
+        core_1.Input('classes'), 
+        __metadata('design:type', Object)
+    ], DatetimefieldComponent.prototype, "classes", void 0);
+    __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
     ], DatetimefieldComponent.prototype, "filterForm", void 0);
