@@ -1,5 +1,10 @@
 <div [formGroup]="filterForm" class="form-group label-floating">
     <label class="control-label">{{data.title}}</label>
-    <input [type]="data.type" [name]="data.name" class="form-control" [formControlName]="data.name">
+    <span *ngIf="static" class="form-control-static">{{filterForm.controls[data.name].value}}</span>
+    <input *ngIf="!static"
+           [type]="data.type"
+           [name]="data.name"
+           class="form-control"
+           [formControlName]="data.name">
 </div>
 

@@ -10,6 +10,7 @@ import {FormGroup} from "@angular/forms";
 
 export class InputfieldComponent implements OnInit{
     @Input('data') private data: any;
+    @Input('static') private static: boolean = false;
     @Input('group') private filterForm: FormGroup;
 
     constructor ( ) {

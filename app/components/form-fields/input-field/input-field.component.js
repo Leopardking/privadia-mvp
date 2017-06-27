@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var InputfieldComponent = (function () {
     function InputfieldComponent() {
+        this.static = false;
     }
     InputfieldComponent.prototype.ngOnInit = function () {
     };
@@ -19,6 +20,10 @@ var InputfieldComponent = (function () {
         core_1.Input('data'), 
         __metadata('design:type', Object)
     ], InputfieldComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input('static'), 
+        __metadata('design:type', Boolean)
+    ], InputfieldComponent.prototype, "static", void 0);
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
