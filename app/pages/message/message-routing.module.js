@@ -10,29 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var layout_component_1 = require('./layout.component');
+var message_component_1 = require('./message.component');
 var routes = [
-    {
-        path: '', component: layout_component_1.LayoutComponent,
-        children: [
-            { path: 'dashboard', loadChildren: '/app/pages/dashboard/dashboard.module#DashboardModule' },
-            { path: 'booking', loadChildren: 'app/pages/booking/booking.module#BookingModule' },
-            { path: 'properties', loadChildren: 'app/pages/properties/properties.module#PropertiesModule' },
-            { path: 'message', loadChildren: 'app/pages/message/message.module#MessageModule' },
-        ]
-    }
+    { path: '', component: message_component_1.MessageComponent }
 ];
-var LayoutRoutingModule = (function () {
-    function LayoutRoutingModule() {
+var MessageRoutingModule = (function () {
+    function MessageRoutingModule() {
     }
-    LayoutRoutingModule = __decorate([
+    MessageRoutingModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild(routes)],
             exports: [router_1.RouterModule]
         }), 
         __metadata('design:paramtypes', [])
-    ], LayoutRoutingModule);
-    return LayoutRoutingModule;
+    ], MessageRoutingModule);
+    return MessageRoutingModule;
 }());
-exports.LayoutRoutingModule = LayoutRoutingModule;
-//# sourceMappingURL=layout-routing.module.js.map
+exports.MessageRoutingModule = MessageRoutingModule;
+//# sourceMappingURL=message-routing.module.js.map
