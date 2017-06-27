@@ -10,5 +10,6 @@ export const ROUTES: RouteInfo[] = [
     { path: '/properties/editproperty', title: 'Edit Property', menuType: MenuType.LEFT, icon: 'store' },
 
     { path: '/notifications', title: 'Notifications', menuType: MenuType.LEFT, icon: 'notifications' },
+    { path: '/message', title: 'Messages', menuType: MenuType.LEFT, icon: 'mail' },
     { path: '/users', title: 'Users', menuType: MenuType.LEFT, icon: 'group' },
 ];

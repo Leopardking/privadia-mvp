@@ -8,6 +8,7 @@ exports.ROUTES = [
     { path: '/properties/addproperty', title: 'Add Property', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'store' },
     { path: '/properties/editproperty', title: 'Edit Property', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'store' },
     { path: '/notifications', title: 'Notifications', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'notifications' },
+    { path: '/message', title: 'Messages', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'mail' },
     { path: '/users', title: 'Users', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'group' },
 ];
 //# sourceMappingURL=navbar-routes.config.js.map
