@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var properties_service_1 = require('../../../providers/properties/properties.service');
+var properties_service_1 = require('../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
 var MetafilterheadingComponent = (function () {
     // public housekeeperState = 0;
@@ -75,12 +75,12 @@ var MetafilterheadingComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: ' metafilter-heading-cmp ',
-            templateUrl: 'metafilterheading.component.html',
-            styleUrls: ['metafilterheading.component.css']
+            templateUrl: 'meta-filter-heading.component.html',
+            styleUrls: ['meta-filter-heading.component.css']
         }), 
         __metadata('design:paramtypes', [properties_service_1.PropertiesService])
     ], MetafilterheadingComponent);
     return MetafilterheadingComponent;
 }());
 exports.MetafilterheadingComponent = MetafilterheadingComponent;
-//# sourceMappingURL=metafilterheading.component.js.map
+//# sourceMappingURL=meta-filter-heading.component.js.map

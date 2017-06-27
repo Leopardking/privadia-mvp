@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 
-import { PropertiesService } from '../../../providers/properties/properties.service';
+import { PropertiesService } from '../../providers/properties/properties.service';
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 
 declare var $:any;
@@ -8,8 +8,8 @@ declare var $:any;
 @Component({
     moduleId: module.id,
     selector: ' metafilter-heading-cmp ',
-    templateUrl: 'metafilterheading.component.html',
-    styleUrls: [ 'metafilterheading.component.css' ]
+    templateUrl: 'meta-filter-heading.component.html',
+    styleUrls: [ 'meta-filter-heading.component.css' ]
 })  
 
 export class MetafilterheadingComponent implements OnInit{
