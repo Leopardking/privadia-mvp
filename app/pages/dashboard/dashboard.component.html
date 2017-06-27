@@ -14,8 +14,10 @@
         </div>
     </div>
 </div>
-<div class="loading-gif" [hidden]="!dashboardService.isReading">
-	<img src="../assets/img/loading.gif"/>
+<div class="loader" [hidden]="!dashboardService.isReading">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
 </div>
 <div class="modal fade" id="proposal" tabindex="-1" role="dialog" aria-labelledby="proposalLabel" aria-hidden="false">
     <div class="modal-dialog">

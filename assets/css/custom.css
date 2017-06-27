@@ -1,3 +1,6 @@
+.loader[hidden] {
+	display: none;
+}
 .loading-gif {
 	position: fixed;
 	top: 75px;
