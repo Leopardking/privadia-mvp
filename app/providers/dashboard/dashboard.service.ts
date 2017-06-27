@@ -13,8 +13,8 @@ import {Router} from "@angular/router";
 @Injectable()
 export class DashboardService {
 	private token:string = "";
-	public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
-	// public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net/api';
+	// public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 
 	//private apiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
 	public filter: Filter;
@@ -123,7 +123,7 @@ export class DashboardService {
 
 		let options = new RequestOptions({ headers: header });
 
-		return this.http.post(this.apiUrl + '/api/properties/searchavailable', filter, options)
+		return this.http.post(this.apiUrl + '/api/Properties/SearchAvailable', filter, options)
             .map(this.extractVillaData)
             .catch(this.handleError);
 	}

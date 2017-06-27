@@ -10,12 +10,12 @@ import { LoginService } from "../providers/login/login.service";
     styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
-    public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
-    // public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net/api';
+    //public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+    public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
     private errorForm = false;
 
     public loginForm = new FormGroup({
-        Email: new FormControl('steve@freelancemvc.net', Validators.compose([
+        Email: new FormControl('manager@freelancemvc.net', Validators.compose([
             Validators.required,
             Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
         ])),

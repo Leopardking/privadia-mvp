@@ -21,7 +21,8 @@ var BookingService = (function () {
     */
     function BookingService(http) {
         this.http = http;
-        this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
+        // private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+        this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.setToken(localStorage.getItem('id_token'));
     }
     BookingService.prototype.setToken = function (str) {

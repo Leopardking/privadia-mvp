@@ -22,7 +22,8 @@ var DashboardService = (function () {
         this.propertiesService = propertiesService;
         this.router = router;
         this.token = "";
-        this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
+        // public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+        this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.regions = [];
         this.villas = [];
         this.properties = [];
@@ -87,7 +88,7 @@ var DashboardService = (function () {
         var header = new http_1.Headers();
         header.append('Authorization', localStorage.getItem('id_token'));
         var options = new http_1.RequestOptions({ headers: header });
-        return this.http.post(this.apiUrl + '/api/properties/searchavailable', filter, options)
+        return this.http.post(this.apiUrl + '/api/Properties/SearchAvailable', filter, options)
             .map(this.extractVillaData)
             .catch(this.handleError);
     };
