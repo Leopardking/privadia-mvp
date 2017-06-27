@@ -20,6 +20,10 @@ var SidebarComponent = (function () {
         //$.getScript('../../assets/js/plugins/bootstrap-datetimepicker.js');
         this.menuItems = sidebar_routes_config_1.ROUTES.filter(function (menuItem) { return menuItem.menuType !== sidebar_metadata_1.MenuType.BRAND; });
     };
+    SidebarComponent.prototype.onLoggedout = function () {
+        $('body').removeClass('nav-open');
+        localStorage.removeItem('id_token');
+    };
     SidebarComponent.prototype.menuClick = function () {
         //$('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         //$("dashboard-cmp .main-content").scrollTop(0);

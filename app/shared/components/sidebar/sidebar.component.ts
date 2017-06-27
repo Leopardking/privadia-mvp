@@ -3,6 +3,8 @@ import {Component, OnInit} from '@angular/core';
 import { ROUTES } from './sidebar-routes.config';
 import { MenuType } from './sidebar.metadata';
 
+declare const $: any;
+
 @Component({
     moduleId: module.id,
     selector: 'app-sidebar',
@@ -20,6 +22,11 @@ export class SidebarComponent implements OnInit{
         //$.getScript('../../assets/js/plugins/bootstrap-datetimepicker.js');
 
         this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
+    }
+
+    onLoggedout() {
+        $('body').removeClass('nav-open');
+        localStorage.removeItem('id_token');
     }
 
     private menuClick() {

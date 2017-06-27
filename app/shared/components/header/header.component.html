@@ -62,7 +62,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="/" (click)="onLoggedout()">Logout</a>
+                            <a [routerLink]="['/login']" (click)="onLoggedout()">Logout</a>
                         </li>
                     </ul>
                 </li>

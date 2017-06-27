@@ -73,6 +73,8 @@ mdp = {
         $sidebar_wrapper = $('.sidebar-wrapper');
 
         if(!mobile_menu_initialized){
+            $('.sidebar-mobile').addClass('mobile-visible');
+            /*
             $navbar = $('nav').find('.navbar-collapse').first().clone(true);
 
             nav_content = '';
@@ -100,14 +102,15 @@ mdp = {
             });
 
             // simulate resize so all the charts/maps will be redrawn
+             */
             window.dispatchEvent(new Event('resize'));
-
             mobile_menu_initialized = true;
         } else {
             if($(window).width() > 991){
+                $('.sidebar-mobile').removeClass('mobile-visible');
                 // reset all the additions that we made for the sidebar wrapper only if the screen is bigger than 991px
-                $sidebar_wrapper.find('.navbar-form').remove();
-                $sidebar_wrapper.find('.nav-mobile-menu').remove();
+                // $sidebar_wrapper.find('.navbar-form').remove();
+                // $sidebar_wrapper.find('.nav-mobile-menu').remove();
 
                 mobile_menu_initialized = false;
             }

@@ -29,10 +29,13 @@ p, span, a {
     color: black;
 }
 
-mainfilter-cmp {
+.sidebar-mobile {
     display: none;
 }
-
-.active.visible mainfilter-cmp {
-    display: inherit;
+.sidebar-mobile.mobile-visible {
+    display: block;
 }
+.nav-mobile-menu .dropdown.open>a, .nav-mobile-menu li:first-child > a {
+    background: none;
+}
+

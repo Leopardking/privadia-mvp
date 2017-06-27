@@ -37,6 +37,12 @@
                             <span class="sidebar-normal">Settings</span>
                         </a>
                     </li>
+                    <li class="sidebar-mobile">
+                        <a [routerLink]="['/login']" (click)="onLoggedout()">
+                            <span class="sidebar-mini visible-on-sidebar-mini">S</span>
+                            <span class="sidebar-normal">Logout</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
