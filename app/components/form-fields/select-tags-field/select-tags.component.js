@@ -19,8 +19,9 @@ var SelectTagsFieldComponent = (function () {
             selectQuery.selectpicker({
                 selectedTextFormat: 'static'
             });
+            $('.dropdown-menu.open .inner').perfectScrollbar();
             selectQuery.on('show.bs.select', function (e) {
-                $('.dropdown-menu.inner').perfectScrollbar();
+                $('.dropdown-menu.open .inner').perfectScrollbar('update');
             });
         }, 1);
     };
