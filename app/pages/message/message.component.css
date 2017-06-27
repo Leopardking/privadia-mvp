@@ -1,51 +1,69 @@
-.modal-header {
-    position: relative;
+.card-content {
+    padding: 15px 25px 15px 0px;
 }
-.modal-header .villa-container {
-    position: absolute;
-    width: 100%;
-    left:0px;
-    bottom: 10px;
-    padding-left: 24px;
-    padding-right: 24px;
-}
-.modal-header .villa-container .modal-title{
-    margin-bottom: 10px;
-    font-size: 24px;
+.nav-tabs a, .nav-tabs i {
+    font-size: 14px;
+    text-transform: none;
     font-weight: 300;
-    color: #fff;
 }
-.modal-header .villa-container .location {
+.table-enquiries {
+}
+.table-enquiries > tbody > tr {
     font-size: 16px;
-    font-weight: 300;
-    color: #FFFFFF;
 }
-.modal-header .villa-container .location .material-icons {
-    font-size: 16px;
-    font-weight: 300;
-    color: #FFFFFF;
+.table-enquiries > tbody > tr > td:nth-child(1) {
+    border-top: 0;
+    background-color: #fff;
+    padding: 0;
+    text-align: center;
 }
-.modal-body {
-    margin-top: 20px;
+.table-enquiries > tbody > tr.unread {
+    font-weight: 500;
+    background-color: #e7ebed;
 }
-.modal-body .estimated-cost {
-    margin-top: 20px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction:row;
-    justify-content:center;
-    align-items:center;
+.table-enquiries > tbody > tr > td {
+    padding: 0 8px;
+    height: 60px;
+    border-top: solid 1px #a6a6a6;
 }
-.modal-body .estimated-cost span {
-    line-height: 21px;
-    font-weight: 300;
-}
-.modal-body .estimated-cost i {
-    line-height: 21px;
-    margin-right: 5px;
-}
-.modal-body .estimated-cost .control-label {
+.table-enquiries .enquiry-status {
     font-size: 12px;
-    margin-right: 20px;
+    font-weight: 300;
+    width: 74px;
+    height: 18px;
+    border-radius: 9px;
+    text-align: center;
+    color: #fff;
+    line-height: 18px;
+    display: none;
 }
-
+.table-enquiries .enquiry-status.accepted {
+    background-color: #00bfa5;
+    display: inline-block;
+}
+.table-enquiries .enquiry-status.declined {
+    background-color: #ff1744;
+    display: inline-block;
+}
+.table-enquiries .icons .material-icons {
+    font-size: 16px;
+    font-weight: 300;
+    padding: 16px;
+}
+.table-enquiries .photo {
+    width: 32px;
+    height: 32px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.table-enquiries .photo > img {
+    width: 100%;
+}
+.badge {
+    width: 20px;
+    height: 20px;
+    background-color: #00bfa5;
+    font-size: 11px;
+    line-height: 2;
+    padding: 0;
+}
