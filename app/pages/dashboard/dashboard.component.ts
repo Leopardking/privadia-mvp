@@ -15,6 +15,7 @@ declare const moment:any;
 
 export class DashboardComponent implements OnInit{
     public enquiryForm = new FormGroup ({});
+    public proposalForm = new FormGroup ({});
 
     constructor ( private dashboardService: DashboardService, private builder: FormBuilder) { }
 
@@ -23,7 +24,7 @@ export class DashboardComponent implements OnInit{
         $('.modal').appendTo("body");
         setTimeout(()=> {
             $('.modal-content').perfectScrollbar();
-        },5000)
+        },100)
 
         this.enquiryForm = this.builder.group({
             FirstName: new FormControl(),
@@ -31,6 +32,14 @@ export class DashboardComponent implements OnInit{
             CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             Message: new FormControl(),
+        });
+
+        this.proposalForm = this.builder.group({
+            ClientName: new FormControl('Johnathan Robinson'),
+            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            RentalPrice: new FormControl(1200),
+            BookingPrice: new FormControl(1495),
         })
     }
 }

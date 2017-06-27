@@ -16,19 +16,27 @@ var DashboardComponent = (function () {
         this.dashboardService = dashboardService;
         this.builder = builder;
         this.enquiryForm = new forms_1.FormGroup({});
+        this.proposalForm = new forms_1.FormGroup({});
     }
     DashboardComponent.prototype.ngOnInit = function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         $('.modal').appendTo("body");
         setTimeout(function () {
             $('.modal-content').perfectScrollbar();
-        }, 5000);
+        }, 100);
         this.enquiryForm = this.builder.group({
             FirstName: new forms_1.FormControl(),
             LastName: new forms_1.FormControl(),
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             Message: new forms_1.FormControl(),
+        });
+        this.proposalForm = this.builder.group({
+            ClientName: new forms_1.FormControl('Johnathan Robinson'),
+            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            RentalPrice: new forms_1.FormControl(1200),
+            BookingPrice: new forms_1.FormControl(1495),
         });
     };
     DashboardComponent = __decorate([
