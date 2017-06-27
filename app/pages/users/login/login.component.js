@@ -23,10 +23,11 @@ var LoginComponent = (function () {
         this.PropertiesProvider = PropertiesProvider;
         this.BookingProvider = BookingProvider;
         this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
+        // public apiUrl:string = 'http://privadia-mvp-api-2-dev/api';
         this.token = "";
         this.errorForm = false;
         this.loginForm = new forms_1.FormGroup({
-            Email: new forms_1.FormControl('steve@freelancemvc.net', forms_1.Validators.compose([
+            Email: new forms_1.FormControl('admin@freelancemvc.net', forms_1.Validators.compose([
                 forms_1.Validators.required,
             ])),
             Password: new forms_1.FormControl('password', forms_1.Validators.required),

@@ -14,6 +14,8 @@ import {Router} from "@angular/router";
 export class DashboardService {
 	private token:string = "";
 	public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	// public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net/api';
+
 	//private apiUrl:string = 'http://privadia-api-dev.azurewebsites.net';
 	public filter: Filter;
 

@@ -11,6 +11,7 @@ import { LoginService } from "../providers/login/login.service";
 })
 export class LoginComponent implements OnInit {
     public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+    // public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net/api';
     private errorForm = false;
 
     public loginForm = new FormGroup({

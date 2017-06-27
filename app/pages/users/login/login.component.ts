@@ -18,11 +18,12 @@ declare const $:any;
 
 export class LoginComponent implements OnInit{
     public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+    // public apiUrl:string = 'http://privadia-mvp-api-2-dev/api';
     private token:string = "";
     private errorForm = false;
 
     public loginForm = new FormGroup({
-        Email: new FormControl('steve@freelancemvc.net', Validators.compose([
+        Email: new FormControl('admin@freelancemvc.net', Validators.compose([
             Validators.required,
             //Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/igm)
         ])),

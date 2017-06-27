@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class BookingService {
 	private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	// public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net/api';
 	private token: string;
 
 	private header;
