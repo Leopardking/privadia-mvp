@@ -1,75 +1,11 @@
-<!--
 <metafilter-heading-cmp [name]="metadata.Name" [group]="propertyForm"></metafilter-heading-cmp>
--->
+
 <div [formGroup]="propertyForm">
     <div formGroupName="MetaDataTmp">
         <div *ngFor="let subtype of metadata.MetaDataSubTypes">
-            <div class="row" formArrayName="{{'type_' + subtype.Id}}">
-                <div class="col-xs-3">
-                    <select class="metafilter-select selectpicker "
-                            data-style="select-with-transition"
-                            title="{{subtype.Name}}"
-                            data-size="7"
-                            multiple
-                            [(ngModel)]="metafiltersModel"
-                            [ngModelOptions]="{standalone: true}"
-                            (ngModelChange)="subfilterModelChange($event, 'type_' + subtype.Id)">
-                        <option *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index"
-                                [formGroupName]="i"
-                                [ngValue]="option.value">
-                            {{option.controls.MetaDataName.value}}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-xs-9">
-                    <div class="bootstrap-tagsinput">
-                        <span *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index">
-                            <span class="tag label label-info"
-                                  *ngIf="option.controls.Available.value">
-                                {{option.controls.MetaDataName.value}}
-                                <span data-role="remove" (click)="removeMetafilter({index: i, type: 'type_' + subtype.Id})"></span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <select-tags-field-cmp [data]="propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].value"
+                                   [subtype]="subtype"
+                                   [group]="propertyForm.controls.MetaDataTmp"></select-tags-field-cmp>
         </div>
     </div>
 </div>
-<!--
-<div [formGroup]="propertyForm">
-    <div formGroupName="MetaDataTmp">
-        <div *ngFor="let subtype of metadata.MetaDataSubTypes">
-            <div class="row" formArrayName="{{'type_' + subtype.Id}}">
-                <div class="col-xs-3">
-                    <select class="metafilter-select selectpicker "
-                            data-style="select-with-transition"
-                            title="{{subtype.Name}}"
-                            data-size="7"
-                            multiple
-                            [(ngModel)]="metafiltersModel"
-                            [ngModelOptions]="{standalone: true}"
-                            (ngModelChange)="subfilterModelChange($event, 'type_' + subtype.Id)">
-                        <option *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index"
-                                [formGroupName]="i"
-                                [ngValue]="option.value">
-                            {{option.controls.MetaDataName.value}}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-xs-9">
-                    <div class="bootstrap-tagsinput">
-                        <span *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index">
-                            <span class="tag label label-info"
-                                  *ngIf="option.controls.Available.value">
-                                {{option.controls.MetaDataName.value}}
-                                <span data-role="remove" (click)="removeMetafilter({index: i, type: 'type_' + subtype.Id})"></span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->

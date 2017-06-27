@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {FormGroup, FormArray, FormControl} from "@angular/forms";
+import { FormGroup, FormArray } from "@angular/forms";
 
 declare const $: any;
-import * as _ from "lodash";
 
 @Component({
     moduleId: module.id,
@@ -11,15 +10,12 @@ import * as _ from "lodash";
     styleUrls: [ 'select-tags.component.css' ]
 })
 
-export class SelectfieldComponent implements OnInit {
+export class SelectTagsFieldComponent implements OnInit {
     @Input('data') private data: any;
-    @Input('regions') private regions: any;
-    @Input('group') private filterForm: FormGroup;
+    @Input('subtype') private subtype: any;
+    @Input('group') private field: FormGroup;
 
-    //private selectQuery = $(".selectpicker");
-    constructor () {
-
-    }
+    constructor () { }
 
     ngOnInit() {
         const selectQuery = $(".selectpicker");
@@ -31,16 +27,30 @@ export class SelectfieldComponent implements OnInit {
             selectQuery.on('show.bs.select', function (e) {
                 $('.dropdown-menu.inner').perfectScrollbar();
             });
-        }, 10)
+        }, 1)
     }
 
-    private regionChange(e) {
-        const control = <FormArray>this.filterForm.controls['Regions'];
+    private subfilterModelChange(e, type) {
+        const controlSubtype = <FormArray>this.field.controls[type];
+        controlSubtype.controls.forEach((key, value) => {
+            e.find((el) => {
+                if(el.MetaDataId == key.value.MetaDataId) {
+                    key.setValue({
+                        MetaDataId: el.MetaDataId,
+                        MetaDataName: el.MetaDataName,
+                        Available: !el.Available,
+                    });
+                }
+            })
+        })
+    }
 
-        const arr = $(e.target).val();
-        arr.forEach((value) => {
-            const index = _.findIndex(control.value, (val) => { return val == value});
-            return control.push(new FormControl(value));
+    private removeMetafilter(e) {
+        const controlSubtype = <FormArray>this.field.controls[e.type];
+        controlSubtype.controls[e.index].setValue({
+            MetaDataId: controlSubtype.controls[e.index].value.MetaDataId,
+            MetaDataName: controlSubtype.controls[e.index].value.MetaDataName,
+            Available: !controlSubtype.controls[e.index].value.Available,
         });
     }
 }

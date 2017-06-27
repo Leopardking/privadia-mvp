@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import {FormGroup,FormArray,FormControl} from "@angular/forms";
-//import * as _ from 'lodash';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormGroup, FormArray, FormControl } from "@angular/forms";
 
-declare var $:any;
-declare var _:any;
+declare const $:any;
+declare const _:any;
 
 
 @Component({
@@ -18,10 +17,7 @@ export class PropertyMetafilterComponent implements OnInit{
 	@Input('group')
 	public propertyForm: FormGroup;
 
-	//@ViewChild('metafilterHeading') metafilterHeading;
-
 	public metafilters;
-	public metafiltersModel = [];
 	constructor(  ) {}
 
 	ngOnInit() {
@@ -40,7 +36,7 @@ export class PropertyMetafilterComponent implements OnInit{
 				const obj = _.find(values, (el) => {
 					return el['MetaDataId'] == this.metadata.MetaDataSubTypes[i].MetaData[j].Id;
 				});
-				// console.log('Available', obj)
+
 				controlSubtype.push(
 					new FormGroup({
 						MetaDataId: new FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Id),
@@ -48,13 +44,6 @@ export class PropertyMetafilterComponent implements OnInit{
 						Available: new FormControl(obj && obj['Available'] || false),
 					}),
 				);
-				/*
-				this.metafiltersModel.push({
-					MetaDataId: this.metadata.MetaDataSubTypes[i].MetaData[j].Id,
-					MetaDataName: this.metadata.MetaDataSubTypes[i].MetaData[j].Name,
-					Available: obj && obj['Available'] || false,
-				})
-				*/
 				this.metafilters[this.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj && obj['Available'] || false;
             }
         }
@@ -67,6 +56,7 @@ export class PropertyMetafilterComponent implements OnInit{
 		$('.dropdown-menu.inner').perfectScrollbar();
 	}
 
+	/*
 	private subfilterModelChange(e, type) {
 		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
 		const controlSubtype = <FormArray>control.controls[type];
@@ -83,39 +73,6 @@ export class PropertyMetafilterComponent implements OnInit{
 		})
 	}
 
-	private subfilterChange(e) {
-		console.log('event ',e.target.value)
-		// let optionId = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-id') : e.target.parentElement.parentElement.getAttribute('option-id');
-		// let optionName = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-name') : e.target.parentElement.parentElement.getAttribute('option-name');
-		// let optionSubtype = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-subtype') : e.target.parentElement.parentElement.getAttribute('option-subtype');
-		// let optionIndex = e.target.tagName == "BUTTON" ? e.target.getAttribute('option-index') : e.target.parentElement.parentElement.getAttribute('option-index');
-        /// this.metafilters[optionId] = !this.metafilters[optionId];
-		/*
-		$(e.target).change(function() {
-			var latest_value = $("option:selected:first",this).val();
-			//alert(latest_value);
-
-		});
-		$(e.target).on('change',function() {
-			//alert($(this).val());
-			console.log($('option:selected:first',this).val());
-		});
-		let selectedValue = $("option:selected",$(e.target)).val();
-		console.log('Selected Value', selectedValue);
-
-   		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
-		const controlSubtype = <FormArray>control.controls[e.target.getAttribute('option-subtype')];
-		controlSubtype.controls[selectedValue].setValue({
-			MetaDataId: controlSubtype.controls[selectedValue].value.MetaDataId,
-			MetaDataName: controlSubtype.controls[selectedValue].value.MetaDataName,
-			Available: !controlSubtype.controls[selectedValue].value.Available,
-		});
-		*/
-		//console.log('Control Form after', this.propertyForm.value)
-		//console.log('Control metadata after', this.metafilters)
-		//console.log('Control metafiltersModel after', this.metafiltersModel)
-	}
-
 	private removeMetafilter(e) {
 		console.log('remove', e.index)
 		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
@@ -126,13 +83,5 @@ export class PropertyMetafilterComponent implements OnInit{
 			Available: !controlSubtype.controls[e.index].value.Available,
 		});
 	}
-
-// 	let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
-// 	return {
-// 		Available: item.checked ? 1 : 0,
-// 		Distance: item.distance,
-// 		Name: item.typeName,
-// 		PointOfInterestTypeId: item.Id
-// 	};
-// })
+	*/
 }
