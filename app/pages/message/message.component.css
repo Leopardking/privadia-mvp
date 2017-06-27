@@ -25,6 +25,7 @@
     padding: 0 8px;
     height: 60px;
     border-top: solid 1px #a6a6a6;
+    color: #3a3a3a;
 }
 .table-enquiries .enquiry-status {
     font-size: 12px;
@@ -45,10 +46,16 @@
     background-color: #ff1744;
     display: inline-block;
 }
-.table-enquiries .icons .material-icons {
+.table-enquiries button {
     font-size: 16px;
     font-weight: 300;
-    padding: 16px;
+    padding: 19px;
+    margin: 0;
+    min-width: 60px;
+    color: #3a3a3a;
+}
+.table-enquiries button:hover {
+    background-color: rgba(200, 200, 200, 0.2);
 }
 .table-enquiries .photo {
     width: 32px;
