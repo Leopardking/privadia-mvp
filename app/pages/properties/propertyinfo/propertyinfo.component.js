@@ -59,7 +59,7 @@ var PropertyinfoComponent = (function () {
             _this.owners = d;
             _this.ownerNames = d.map(function (item, i) { return item.Name; });
         }, function (e) { console.log("error: ", e); });
-        this.propertyService.getregions().subscribe(function (d) {
+        this.propertyService.getRegions().subscribe(function (d) {
             _this.regionArray = d;
             _this.regions = d.map(function (item, i) { return item.Name; });
         }, function (e) { console.log("error: ", e); });

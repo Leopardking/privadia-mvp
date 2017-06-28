@@ -53,7 +53,7 @@ var MainService = (function () {
         var _this = this;
         this.isReading = true;
         //--------------		Reading data of villas		-----------///////////
-        this.propertiesService.getregions().subscribe(function (d) {
+        this.propertiesService.getRegions().subscribe(function (d) {
             _this.regions = d;
             _this.getVillas().subscribe(function (d) {
                 _this.villas = d;

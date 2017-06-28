@@ -37,7 +37,7 @@ var DashboardService = (function () {
         var _this = this;
         this.isReading = true;
         //--------------		Reading data of villas		-----------///////////
-        this.propertiesService.getregions().subscribe(function (d) {
+        this.propertiesService.getRegions().subscribe(function (d) {
             _this.regions = d;
             _this.getVillas(_this.filter.getCompat()).subscribe(function (d) {
                 _this.villas = d;
@@ -55,11 +55,16 @@ var DashboardService = (function () {
             _this.router.navigate(['/login']);
         });
         //------------	Reading all properties -------------//
-        this.propertiesService.getAllProperties().subscribe(function (d) {
-            _this.properties = d;
-        }, function (e) {
-            console.log("error properties: ", e);
-        });
+        /*
+        this.propertiesService.getAllProperties().subscribe(
+            d => {
+                this.properties = d;
+            },
+            e => {
+                console.log("error properties: ", e);
+            }
+        );
+        */
     };
     DashboardService.prototype.getTomorrow = function () {
         var today = new Date();

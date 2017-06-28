@@ -92,7 +92,7 @@ export class PropertyinfoComponent implements OnInit{
             e => { console.log("error: ", e); }
         );
 
-        this.propertyService.getregions().subscribe(
+        this.propertyService.getRegions().subscribe(
             d => {
                 this.regionArray = d;
                 this.regions = d.map( (item, i) => { return item.Name; } );

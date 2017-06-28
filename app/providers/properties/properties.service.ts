@@ -27,7 +27,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.get( this.apiUrl + '/api/properties/', options )
+		return this.http.get( this.apiUrl + '/api/Properties/', options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -36,7 +36,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.get( this.apiUrl + '/api/properties/' + id, options )
+		return this.http.get( this.apiUrl + '/api/Properties/' + id, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -45,7 +45,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.post( this.apiUrl + '/api/properties/', data, options)
+		return this.http.post( this.apiUrl + '/api/Properties/', data, options)
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -54,7 +54,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.post( this.apiUrl + '/api/properties/', data, options )
+		return this.http.post( this.apiUrl + '/api/Properties/', data, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -63,7 +63,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.delete( this.apiUrl + '/api/properties/' + id, options )
+		return this.http.delete( this.apiUrl + '/api/Properties/' + id, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -73,7 +73,7 @@ export class PropertiesService {
 		let options = new RequestOptions( {headers: header} );
 		this.isReading = true;
 
-		return this.http.get( this.apiUrl + '/api/rates/' + id, options )
+		return this.http.get( this.apiUrl + '/api/Rates/' + id, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -82,16 +82,16 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.post( this.apiUrl + '/api/rates/', data, options )
+		return this.http.post( this.apiUrl + '/api/Rates/', data, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
 
-	public getregions() {
+	public getRegions() {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.get( this.apiUrl + '/api/lookups/getregions', options )
+		return this.http.get( this.apiUrl + '/api/Lookups/GetRegions', options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -100,7 +100,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.get( this.apiUrl + '/api/lookups/getowners', options )
+		return this.http.get( this.apiUrl + '/api/Lookups/GetOwners', options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -109,7 +109,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.get( this.apiUrl + '/api/lookups/getPointOfInterestTypes', options )
+		return this.http.get( this.apiUrl + '/api/Lookups/GetPointOfInterestTypes', options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -118,7 +118,7 @@ export class PropertiesService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.get( this.apiUrl + '/api/lookups/getMetaData', options )
+		return this.http.get( this.apiUrl + '/api/Lookups/GetMetaData', options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}

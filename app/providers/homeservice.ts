@@ -61,7 +61,7 @@ export class MainService {
 		this.isReading = true;
 
 		//--------------		Reading data of villas		-----------///////////
-        this.propertiesService.getregions().subscribe( 
+        this.propertiesService.getRegions().subscribe(
             d => {
                 this.regions = d;
                 

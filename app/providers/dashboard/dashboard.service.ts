@@ -46,7 +46,7 @@ export class DashboardService {
 		this.isReading = true;
 
 		//--------------		Reading data of villas		-----------///////////
-		this.propertiesService.getregions().subscribe(
+		this.propertiesService.getRegions().subscribe(
 			d => {
 				this.regions = d;
 				this.getVillas(this.filter.getCompat()).subscribe(
@@ -77,7 +77,7 @@ export class DashboardService {
 		);
 
 		//------------	Reading all properties -------------//
-
+		/*
 		this.propertiesService.getAllProperties().subscribe(
 			d => {
 				this.properties = d;
@@ -86,6 +86,7 @@ export class DashboardService {
 				console.log("error properties: ", e);
 			}
 		);
+		*/
 	}
 
 	private getTomorrow() {
