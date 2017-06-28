@@ -9,8 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var MessageComponent = (function () {
-    function MessageComponent() {
+    function MessageComponent(router) {
+        this.router = router;
+        router.events.subscribe(function (val) {
+            var hash = window.location.hash;
+            hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+        });
     }
     MessageComponent.prototype.ngOnInit = function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
@@ -30,7 +36,7 @@ var MessageComponent = (function () {
             templateUrl: 'message.component.html',
             styleUrls: ['message.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_1.Router])
     ], MessageComponent);
     return MessageComponent;
 }());

@@ -12,6 +12,7 @@ export interface RouteInfo {
     icon: string;
     children?: Array<{
         path: string;
+        hash: string;
         title: string;
         menuType: MenuType;
         icon: string;

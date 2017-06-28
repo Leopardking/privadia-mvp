@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 declare const $:any;
 
@@ -10,7 +11,11 @@ declare const $:any;
 })
 
 export class MessageComponent implements OnInit{
-    constructor ( ) { }
+    constructor (private router: Router) {
+        router.events.subscribe((val) => {
+            const hash = window.location.hash;
+            hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+    }); }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
