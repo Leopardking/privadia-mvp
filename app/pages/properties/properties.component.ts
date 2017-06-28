@@ -18,8 +18,9 @@ declare const $:any;
 export class PropertiesComponent implements OnInit{
     private datatableInited = false;
 
-    constructor ( private dashboardService: DashboardService,
-                  private propertyService: PropertiesService ) {}
+    constructor ( private propertiesService: PropertiesService ) {
+        propertiesService.getDataProperties()
+    }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
@@ -41,9 +42,9 @@ export class PropertiesComponent implements OnInit{
     }
 
     private removeProperty(el) {
-        this.propertyService.deleteProperty(el.propertyId).subscribe(
+        this.propertiesService.deleteProperty(el.propertyId).subscribe(
             d => {
-                this.dashboardService.properties.splice(el.index,1);
+                this.propertiesService.properties.splice(el.index,1);
                 console.log('Delete property ', d);
             },
             e => { console.log("error:", e); }

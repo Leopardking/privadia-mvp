@@ -11,17 +11,78 @@ export class PropertiesService {
 	// public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
 	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 	private token: string = localStorage.getItem('id_token');
+
+	public properties = [];
+	public property;
 	public isReading;
 
-	public setToken(str) {
-		this.token = str;
+	public owners;
+	public regionArray;
+	public regions;
+	public metadata;
+	// private ownerNames;
+
+	// public owner;
+	// public ownerName;
+
+	// public ownerName = "";
+	// public regionName = "";
+	/*
+	public owner = {
+		Id: '',
+		Name: ''
+	};
+	*/
+	public region = {
+		Id: '',
+		Name: ''
+	};
+
+	constructor ( private http: Http ) {}
+
+	public getDataProperties() {
+		this.getAllProperties().subscribe(
+			d => {
+				this.properties = d;
+			},
+			e => {
+				console.log("error properties: ", e);
+			}
+		);
+
 	}
 
-	public setApiURL(url) {
-		this.apiUrl = url;
-	}
+	public getDataProperty(id) {
+		this.isReading = true
+		this.getPropertyById(id).subscribe(
+			d => {
+				this.property = d;
 
-	constructor ( private http: Http ) {
+				this.getOwners().subscribe(
+					d => {
+						this.owners = d;
+						// this.ownerNames = d.map( (item, i) => { return item.Name; } );
+
+						this.getRegions().subscribe(
+							d => {
+								this.regionArray = d;
+								this.regions = d.map( (item, i) => { return item.Name; } );
+
+								this.getMetaData().subscribe(
+									d => {
+										this.metadata = d;
+										this.isReading = false;
+									},
+									e => { console.log("Error MetaData: ", e); }
+								);	},
+							e => { console.log("Error Regions: ", e); }
+						);
+					},
+					e => { console.log("Error Owner: ", e); }
+				);
+			},
+			e => { console.log("Error Properties: ", e); }
+		);
 	}
 
 	public getAllProperties() {

@@ -48,8 +48,8 @@
                                         <th></th>
                                     </tr>
                                 </tfoot>
-                                <tbody id="bookingTableBody" *ngIf="!dashboardService.isReading">
-                                    <tr *ngFor="let item of dashboardService.properties; let i = index; let last = last ">
+                                <tbody id="bookingTableBody" *ngIf="!propertiesService.isReading">
+                                    <tr *ngFor="let item of propertiesService.properties; let i = index; let last = last ">
                                         <td></td>
                                         <td class="thumb">
                                             <cl-image *ngIf="item.ImageId"
@@ -88,7 +88,7 @@
                                             </button>
                                         </td>
                                         <td></td>
-                                        {{ !dashboardService.isReading && last && !datatableInited ? finishReading() : "" }}
+                                        {{ !propertiesService.isReading && last && !datatableInited ? finishReading() : "" }}
                                     </tr>
                                 </tbody>
                             </table>
@@ -111,7 +111,7 @@
     </div>
 </div>
 
-<div class="loader" [hidden]="!dashboardService.isReading">
+<div class="loader" [hidden]="!propertiesService.isReading">
     <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
     </svg>

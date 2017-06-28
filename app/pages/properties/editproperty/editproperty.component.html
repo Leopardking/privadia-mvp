@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" *ngIf="propertyForm">
             <form [formGroup]="propertyForm"
                   (ngSubmit)="onSubmit()"
                   class="col-xs-12"
@@ -76,54 +76,54 @@
                         <div class="tab-content m-l-r-20-negative m-t-25">
                             <!--  Property Info  -->
                             <div id="metatab-info" class="fade active in card-content p-b-none p-l-r-none p-t-none">
-                                <propertyinfo-cmp *ngIf="isLoad"
+                                <propertyinfo-cmp *ngIf="!propertiesService.isReading"
                                                   [group]="propertyForm" [errorForm]="errorForm"></propertyinfo-cmp>
                             </div>
                             <!--  Property Image  -->
                             <div id="metatab-images" class="fade card-content p-b-none p-l-r-none p-t-none">
-                                <propertyimage-cmp *ngIf="isLoad"
+                                <propertyimage-cmp *ngIf="!propertiesService.isReading"
                                                    [group]="propertyForm"></propertyimage-cmp>
                             </div>
                             <!--  Property Availability -->
                             <div id="metatab-availability" class="fade card-content p-b-none p-t-none">
-                                <calendar-cmp *ngIf="isLoad"
+                                <calendar-cmp *ngIf="!propertiesService.isReading"
                                               [group]="propertyForm"
                                               [errorForm]="errorForm"></calendar-cmp>
                             </div>
                             <!--  Property Marketing  -->
                             <div id="metatab-marketing" class="fade card-content p-b-none p-l-r-none p-t-none">
-                                <propertymarketing-cmp *ngIf="isLoad"
+                                <propertymarketing-cmp *ngIf="!propertiesService.isReading"
                                                        [group]="propertyForm"></propertymarketing-cmp>
                             </div>
 
                             <div id="metatab-property-4" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="dashboardService.metadata[3] && isLoad"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata[3] && !propertiesService.isReading"
                                                          [group]="propertyForm"
-                                                         [metadata]="dashboardService.metadata[3]"></property-metafilter-cmp>
+                                                         [metadata]="propertiesService.metadata[3]"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-3" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="dashboardService.metadata[2] && isLoad"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata[2] && !propertiesService.isReading"
                                                          [group]="propertyForm"
-                                                         [metadata]="dashboardService.metadata[2]"></property-metafilter-cmp>
+                                                         [metadata]="propertiesService.metadata[2]"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-6" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="dashboardService.metadata[5] && isLoad"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata[5] && !propertiesService.isReading"
                                                          [group]="propertyForm"
-                                                         [metadata]="dashboardService.metadata[5]"></property-metafilter-cmp>
+                                                         [metadata]="propertiesService.metadata[5]"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-2" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="dashboardService.metadata[1] && isLoad"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata[1] && !propertiesService.isReading"
                                                          [group]="propertyForm"
-                                                         [metadata]="dashboardService.metadata[1]"></property-metafilter-cmp>
+                                                         [metadata]="propertiesService.metadata[1]"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-1" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="dashboardService.metadata[0] && isLoad"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata[0] && !propertiesService.isReading"
                                                          [group]="propertyForm"
-                                                         [metadata]="dashboardService.metadata[0]"></property-metafilter-cmp>
+                                                         [metadata]="propertiesService.metadata[0]"></property-metafilter-cmp>
                             </div>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                         <button class="btn btn-success pull-right m-r-20 p-l-r-20 font-16" type="submit">Save</button>
                         <div class="togglebutton pull-right">
                             <label>
-                                <input type="checkbox" formControlName="Active" *ngIf="isLoad"> Active status
+                                <input type="checkbox" formControlName="Active" *ngIf="!propertiesService.isReading"> Active status
                             </label>
                         </div>
                     </div>
@@ -148,4 +148,9 @@
             </form>
         </div>
     </div>
+</div>
+<div class="loader" [hidden]="!propertiesService.isReading">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
 </div>

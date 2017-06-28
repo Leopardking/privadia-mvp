@@ -76,7 +76,7 @@
                                    formControlName="Region"
                                    [(ngModel)]="propertyForm.controls.Region.value"
                                    [max-num-list]="10"
-                                   [source]="regionArray"
+                                   [source]="propertiesService.regionArray"
                                    [list-formatter]="autocompleListFormatter"
                                    (valueChanged)="regionChanged($event)"
                                    value-property-name="Id"
@@ -145,8 +145,8 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <div *ngIf="dashboardService.metadata[4]">
-                            <property-metafilter-cmp [group]="propertyForm" [metadata]="dashboardService.metadata[4]" #villadescription></property-metafilter-cmp>
+                        <div *ngIf="!propertiesService.isReading && propertiesService.metadata[4]">
+                            <property-metafilter-cmp [group]="propertyForm" [metadata]="propertiesService.metadata[4]" #villadescription></property-metafilter-cmp>
                         </div>
                     </div>
                 </div>

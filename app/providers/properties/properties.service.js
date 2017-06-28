@@ -20,12 +20,49 @@ var PropertiesService = (function () {
         // public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
+        this.properties = [];
+        // private ownerNames;
+        // public owner;
+        // public ownerName;
+        // public ownerName = "";
+        // public regionName = "";
+        /*
+        public owner = {
+            Id: '',
+            Name: ''
+        };
+        */
+        this.region = {
+            Id: '',
+            Name: ''
+        };
     }
-    PropertiesService.prototype.setToken = function (str) {
-        this.token = str;
+    PropertiesService.prototype.getDataProperties = function () {
+        var _this = this;
+        this.getAllProperties().subscribe(function (d) {
+            _this.properties = d;
+        }, function (e) {
+            console.log("error properties: ", e);
+        });
     };
-    PropertiesService.prototype.setApiURL = function (url) {
-        this.apiUrl = url;
+    PropertiesService.prototype.getDataProperty = function (id) {
+        var _this = this;
+        this.isReading = true;
+        this.getPropertyById(id).subscribe(function (d) {
+            _this.property = d;
+            _this.getOwners().subscribe(function (d) {
+                _this.owners = d;
+                // this.ownerNames = d.map( (item, i) => { return item.Name; } );
+                _this.getRegions().subscribe(function (d) {
+                    _this.regionArray = d;
+                    _this.regions = d.map(function (item, i) { return item.Name; });
+                    _this.getMetaData().subscribe(function (d) {
+                        _this.metadata = d;
+                        _this.isReading = false;
+                    }, function (e) { console.log("Error MetaData: ", e); });
+                }, function (e) { console.log("Error Regions: ", e); });
+            }, function (e) { console.log("Error Owner: ", e); });
+        }, function (e) { console.log("Error Properties: ", e); });
     };
     PropertiesService.prototype.getAllProperties = function () {
         var header = new http_1.Headers({ 'Authorization': this.token });

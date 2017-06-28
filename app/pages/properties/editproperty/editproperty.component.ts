@@ -17,102 +17,73 @@ declare const $:any;
 })
 
 export class EditpropertyComponent implements OnInit{
-    // public propertyForm: any;
-
-    // public metadata;
-
-    // private villadescription;
-    // private reading:boolean = false;
-    // private datatableInited:boolean = false;
-    
     private property;
-
-    // private contacts;
-    // private bedrooms;
-    // private bathrooms;
-
-    // private isActive = true;
-
-    // id: number;
     private sub: any;
-    //propertyForm: any;
-    private isLoad = false;
+    private propertyId;
 
     private errorForm = false;
-    public propertyForm = new FormGroup ({});
+    public propertyForm: FormGroup;
 
-    constructor ( private dashboardService: DashboardService,
-                  private propertyService: PropertiesService,
+    constructor ( private propertiesService: PropertiesService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
-
-        console.log('this.property mainService', this.dashboardService.metadata )
+        this.sub = this.route.params.subscribe(params => {
+            propertiesService.getDataProperty(this.propertyId = params['id']);
+        });
     }
 
-    // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        console.log('this.property mainService', this.dashboardService.metadata )
 
-        this.sub = this.route.params.subscribe(params => {
-            this.propertyService.getPropertyById(params['id']).subscribe(
-                d => {
-                    this.property = d;
+        setTimeout(() => {
 
-                    this.propertyForm = this.builder.group({
-                        Id: params['id'],
-                        Active: d.Active,
-                        OwnerName: d.OwnerName,
-                        InternalName: d.InternalName,
-                        Name: [d.Name, Validators.required],
-                        Address: d.Address,
-                        RegionId: d.RegionId,
-                        RegionName: d.RegionName,
-                        Region: { Id: d.RegionId, Name: d.RegionName},
-                        Headline: d.Headline,
-                        Summary: d.Summary,
-                        Description: d.Description,
-                        OtherInfo: d.OtherInfo,
-                        CollaboratorInitials: d.CollaboratorInitials,
-                        BoxUrl: [d.BoxUrl, Validators.pattern('https?://.+')],
-                        AgencyPackUrl: [d.AgencyPackUrl, Validators.pattern('https?://.+')],
-                        MinimumStay: [d.MinimumStay, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
-                        Bathrooms: [d.Bathrooms, Validators.required],
-                        Bedrooms: [d.Bedrooms, Validators.required],
-                        Sleeps: [d.Sleeps, Validators.required],
-                        Capacity: d.Capacity,
-                        LivingAreaSize: d.LivingAreaSize,
-                        DiningCapacity: d.DiningCapacity,
-                        KitchenInfo: d.KitchenInfo,
-                        ChildrenAllowed: d.ChildrenAllowed,
-                        SmokingAllowed: d.SmokingAllowed,
-                        WheelchairAccessible: d.WheelchairAccessible,
-                        PetsAllowed: d.PetsAllowed,
-                        EventsAllowed: d.EventsAllowed,
-                        LiftAvailable: d.LiftAvailable,
-                        Benefits: d.Benefits,
-                        Housekeeping: d.Housekeeping,
-                        OtherHousekeepingInfo: d.OtherHousekeepingInfo,
-                        MetaDataTmp: {},
-                    });
+            this.propertyForm = this.builder.group({
+                Id: this.propertyId,
+                Active: this.propertiesService.property.Active,
+                OwnerName: this.propertiesService.property.OwnerName,
+                InternalName: this.propertiesService.property.InternalName,
+                Name: [this.propertiesService.property.Name, Validators.required],
+                Address: this.propertiesService.property.Address,
+                RegionId: this.propertiesService.property.RegionId,
+                RegionName: this.propertiesService.property.RegionName,
+                Region: { Id: this.propertiesService.property.RegionId, Name: this.propertiesService.property.RegionName},
+                Headline: this.propertiesService.property.Headline,
+                Summary: this.propertiesService.property.Summary,
+                Description: this.propertiesService.property.Description,
+                OtherInfo: this.propertiesService.property.OtherInfo,
+                CollaboratorInitials: this.propertiesService.property.CollaboratorInitials,
+                BoxUrl: [this.propertiesService.property.BoxUrl, Validators.pattern('https?://.+')],
+                AgencyPackUrl: [this.propertiesService.property.AgencyPackUrl, Validators.pattern('https?://.+')],
+                MinimumStay: [this.propertiesService.property.MinimumStay, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
+                Bathrooms: [this.propertiesService.property.Bathrooms, Validators.required],
+                Bedrooms: [this.propertiesService.property.Bedrooms, Validators.required],
+                Sleeps: [this.propertiesService.property.Sleeps, Validators.required],
+                Capacity: this.propertiesService.property.Capacity,
+                LivingAreaSize: this.propertiesService.property.LivingAreaSize,
+                DiningCapacity: this.propertiesService.property.DiningCapacity,
+                KitchenInfo: this.propertiesService.property.KitchenInfo,
+                ChildrenAllowed: this.propertiesService.property.ChildrenAllowed,
+                SmokingAllowed: this.propertiesService.property.SmokingAllowed,
+                WheelchairAccessible: this.propertiesService.property.WheelchairAccessible,
+                PetsAllowed: this.propertiesService.property.PetsAllowed,
+                EventsAllowed: this.propertiesService.property.EventsAllowed,
+                LiftAvailable: this.propertiesService.property.LiftAvailable,
+                Benefits: this.propertiesService.property.Benefits,
+                Housekeeping: this.propertiesService.property.Housekeeping,
+                OtherHousekeepingInfo: this.propertiesService.property.OtherHousekeepingInfo,
+                MetaDataTmp: {},
+            });
+            this.setContacts(this.propertiesService.property.Contacts);
+            this.setRooms(this.propertiesService.property.Rooms);
+            this.setImages(this.propertiesService.property.Images);
+            this.setPointsOfInterest(this.propertiesService.property.PointsOfInterest);
+            this.setMetaData(this.propertiesService.property.MetaData);
+            this.setMetaDataTmp();
 
-                    this.setContacts(d.Contacts);
-                    this.setRooms(d.Rooms);
-                    this.setImages(d.Images);
-                    this.setPointsOfInterest(d.PointsOfInterest);
-                    this.setMetaData(d.MetaData);
-                    this.setMetaDataTmp();
-                    // this.setRegion({RegionId: d.RegionId, RegionName: d.RegionName});
+            $('.property-tabs a:first').tab('show')
+            console.log('Form ', this.propertyForm)
 
-                    this.isLoad = true;
-
-                    $('.property-tabs a:first').tab('show')
-                    console.log('This properties', this.property);
-                    console.log('This properties Form', this.propertyForm);
-                },
-                e => { console.log("error:", e); }
-            );
-        });
+        }, 1000);
     }
 
     setContacts(contacts) {
@@ -177,165 +148,6 @@ export class EditpropertyComponent implements OnInit{
         this.propertyForm.setControl('MetaDataTmp', metaDataFormArray);
     }
 
-    private saveInfo() {
-        /*
-        let newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
-            return newArr = _.concat(newArr, el)
-        });
-        this.propertyForm.value.MetaData = newArr;
-        /*
-        $(".title-error").removeClass("title-error");
-        $(".metafilter-names li a.has-error").removeClass("has-error");
-
-        let validateErrors = $(".tab-content .has-error");
-        if ( validateErrors.length ) {
-            $.notify({
-                icon: "notifications",
-                message: $(".tab-content .has-error").length + " Validation Errors Found"
-
-            },{
-                type: 'danger',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-
-            for (let i = 0; i < validateErrors.length; i++) {
-                let ele = validateErrors[i];
-
-                while (!ele.className.includes('card-content')) {
-                    if (ele.className.includes('panel-group')) {
-                        $(ele).addClass('title-error');
-                    }
-                    ele = ele.parentElement;
-                }
-
-                let eleTabName = document.getElementsByClassName(ele.id + "-tab-name");
-                $(eleTabName).addClass("has-error");
-            }
-
-            return;
-        }
-
-        $('.has-error').removeClass("has-error");
-
-        let metaData = [];
-        for (let i = 1; i < 125; i++) {
-            let available = this.pointsOfInterest.metafilters[i] 
-                        ||  this.features.metafilters[i] 
-                        ||  this.services.metafilters[i] 
-                        ||  this.villadescription.metafilters[i] 
-                        ||  this.localActivities.metafilters[i] 
-                        ||  this.trip.metafilters[i] ;
-            metaData.push({ 
-                Available: available ? 1 : 0,
-                MetaDataId: i
-            });
-        }
-
-        let contacts = this.propertyInfo.contacts.map( (item, index) => { 
-            return {
-                EmailAddress: item.email,
-                FirstName: item.firstName,
-                JobTitle: item.jobTitle,
-                LastName: item.lastName,
-                Telephone: parseInt(item.telephone)
-            };
-        });
-
-        let bathrooms = this.propertyInfo.bathrooms.map( (item, index) => {
-            return {
-                Description: item.description,
-                Name: item.name,
-                PropertyRoomType: 2
-            }
-        });
-
-        let bedrooms = this.propertyInfo.bedrooms.map( (item, index) => {
-            return {
-                Description: item.description,
-                Name: item.name,
-                PropertyRoomType: 1
-            }
-        });
-        
-        let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
-            return {
-                Available: item.checked ? 1 : 0,
-                Distance: item.distance,
-                Name: item.typeName,
-                PointOfInterestTypeId: item.Id
-            };
-        })
-        let data = {
-            Active: this.isActive,
-            Address: this.propertyInfo.address,
-            AgencyPackUrl: this.propertyMargeting.agencyPackUrl,
-            Bathrooms: parseInt(this.propertyInfo.bathroomCount),
-            Bedrooms: parseInt(this.propertyInfo.bedroomCount),
-            Benefits: this.features.metafilterHeading.uniqueBenefits,
-            BoxUrl: this.propertyInfo.boxUrl,
-            Capacity: parseInt(this.propertyInfo.maximumCapacity),
-            CollaboratorInitials: this.propertyInfo.collaboratorInitial,
-            Contacts: contacts,
-            Description: this.propertyInfo.description,
-            DiningCapacity: parseInt(this.propertyInfo.diningCapacity),
-            EventsAllowed: this.propertyInfo.eventsAllowed,
-            Headline: this.propertyInfo.headline,
-            Housekeeping: this.services.metafilterHeading.housekeeperState,
-            Images: this.propertyImage.images,
-            InternalName: this.propertyInfo.listingName,
-            KitchenInfo: this.propertyInfo.kitchenInfo,
-            LiftAvailable: this.features.metafilterHeading.liftAvailable,
-            LivingAreaSize: parseInt(this.propertyInfo.livingSquare),
-            MetaData: metaData,
-            Name: this.propertyInfo.officialName,
-            OtherHousekeepingInfo: this.services.metafilterHeading.housekeepOtherInfo,
-            OtherInfo: this.propertyInfo.otherInfo,
-            Owner: this.propertyInfo.owner,
-            UserId: this.propertyInfo.owner.Id,
-            OwnerName: this.propertyInfo.ownerName,
-            PetsAllowed: this.propertyInfo.petsAllowed,
-            PointsOfInterest: poi,
-            Region: this.propertyInfo.region,
-            RegionId: this.propertyInfo.region.Id,
-            RegionName: this.propertyInfo.regionName,
-            Rooms: bedrooms.concat(bathrooms),
-            Sleeps: parseInt(this.propertyInfo.sleepCount),
-            SmokingAllowed: this.propertyInfo.smokeAllowed,
-            Summary: this.propertyInfo.summary,
-            WheelchairAccessible: this.propertyInfo.wheelchairAllowed,
-            childrenAllowed: parseInt(this.propertyInfo.allowChildren),
-            propertyName: this.propertyInfo.officialName
-        }
-        *//*
-        this.propertyService.addProperty(this.propertyForm.value).subscribe(
-            d => { 
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Updated Successfully"
-
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                this.mainService.readData();
-            },
-            e => { console.log("error:", e); }
-        );
-
-        //console.log(data);
-        console.log('Save form ', this.propertyForm)
-        console.log('Save form ', this.propertyForm.value)*/
-    }
-
     private continueInfo() {
         console.log('Continue Info form')
     }
@@ -345,16 +157,15 @@ export class EditpropertyComponent implements OnInit{
     }
 
     private onSubmit() {
-        console.log('Submit form')
         let newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
-        })
+        });
         this.propertyForm.value.MetaData = newArr;
-        console.log('Form ', this.propertyForm.value)
 
+        console.log('save ',this.propertyForm)
         if(this.propertyForm.valid) {
-            this.propertyService.addProperty(this.propertyForm.value).subscribe(
+            this.propertiesService.addProperty(this.propertyForm.value).subscribe(
                 d => {
                     $.notify({
                         icon: "notifications",

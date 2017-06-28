@@ -11,14 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require("@angular/platform-browser");
 var properties_service_1 = require('../../../providers/properties/properties.service');
-//import { MainService } from '../../../providers/homeservice';
-var dashboard_service_1 = require('../../../providers/dashboard/dashboard.service');
 var forms_1 = require("@angular/forms");
 var PropertyinfoComponent = (function () {
-    function PropertyinfoComponent(propertyService, dashboardService, _sanitizer) {
+    function PropertyinfoComponent(propertiesService, 
+        //private dashboardService: DashboardService,
+        _sanitizer) {
         var _this = this;
-        this.propertyService = propertyService;
-        this.dashboardService = dashboardService;
+        this.propertiesService = propertiesService;
         this._sanitizer = _sanitizer;
         this.autocompleListFormatter = function (data) {
             var html = "" + data.Name;
@@ -27,7 +26,6 @@ var PropertyinfoComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
-        var _this = this;
         /*
         $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab
@@ -36,7 +34,7 @@ var PropertyinfoComponent = (function () {
             e.preventDefault()
         });
         */
-        console.log('this.property mainService', this.dashboardService.metadata);
+        //console.log('this.property mainService', this.dashboardService.metadata )
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
         //this.contacts = [];
@@ -55,14 +53,23 @@ var PropertyinfoComponent = (function () {
             Name: ''
         };
         // description
-        this.propertyService.getOwners().subscribe(function (d) {
-            _this.owners = d;
-            _this.ownerNames = d.map(function (item, i) { return item.Name; });
-        }, function (e) { console.log("error: ", e); });
-        this.propertyService.getRegions().subscribe(function (d) {
-            _this.regionArray = d;
-            _this.regions = d.map(function (item, i) { return item.Name; });
-        }, function (e) { console.log("error: ", e); });
+        /*
+            this.propertiesService.getOwners().subscribe(
+                d => {
+                    this.owners = d;
+                    this.ownerNames = d.map( (item, i) => { return item.Name; } );
+                },
+                e => { console.log("error: ", e); }
+            );
+    
+            this.propertiesService.getRegions().subscribe(
+                d => {
+                    this.regionArray = d;
+                    this.regions = d.map( (item, i) => { return item.Name; } );
+                },
+                e => { console.log("error: ", e); }
+            );
+            */
         $('.property-tab a:first').tab('show');
     };
     PropertyinfoComponent.prototype.autosize = function (e) {
@@ -139,7 +146,7 @@ var PropertyinfoComponent = (function () {
             templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, dashboard_service_1.DashboardService, platform_browser_1.DomSanitizer])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, platform_browser_1.DomSanitizer])
     ], PropertyinfoComponent);
     return PropertyinfoComponent;
 }());

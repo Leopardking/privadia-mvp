@@ -45,8 +45,8 @@ export class PropertyinfoComponent implements OnInit{
     // public officialName;
     public address;
 
-    constructor ( private propertyService: PropertiesService,
-                  private dashboardService: DashboardService,
+    constructor ( private propertiesService: PropertiesService,
+                  //private dashboardService: DashboardService,
                   private _sanitizer: DomSanitizer ) {
 
     }
@@ -61,7 +61,7 @@ export class PropertyinfoComponent implements OnInit{
             e.preventDefault()
         });
         */
-        console.log('this.property mainService', this.dashboardService.metadata )
+        //console.log('this.property mainService', this.dashboardService.metadata )
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
         //this.contacts = [];
@@ -83,8 +83,8 @@ export class PropertyinfoComponent implements OnInit{
             Name: ''
         };
         // description
-
-        this.propertyService.getOwners().subscribe(
+    /*
+        this.propertiesService.getOwners().subscribe(
             d => { 
                 this.owners = d;
                 this.ownerNames = d.map( (item, i) => { return item.Name; } );
@@ -92,13 +92,14 @@ export class PropertyinfoComponent implements OnInit{
             e => { console.log("error: ", e); }
         );
 
-        this.propertyService.getRegions().subscribe(
+        this.propertiesService.getRegions().subscribe(
             d => {
                 this.regionArray = d;
                 this.regions = d.map( (item, i) => { return item.Name; } );
             },
             e => { console.log("error: ", e); }
         );
+        */
         $('.property-tab a:first').tab('show')
     }
 
