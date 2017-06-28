@@ -51,8 +51,8 @@ var DashboardService = (function () {
             });
         }, function (e) {
             console.log('error regions', e);
-            localStorage.removeItem('id_token');
-            _this.router.navigate(['/login']);
+            // localStorage.removeItem('id_token');
+            // this.router.navigate(['/login']);
         });
         //------------	Reading all properties -------------//
         this.propertiesService.getAllProperties().subscribe(function (d) {

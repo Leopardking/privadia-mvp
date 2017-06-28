@@ -1,5 +1,15 @@
 .card .card-content {
-    padding: 5px 20px;
+    padding: 5px 20px 5px 80px;
+}
+.btn-filter-search {
+    position: absolute;
+    top:0px;
+    left:16px;
+    width: 41px;
+    min-width: 41px;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    padding: 12px 13px;
 }
 .filter-card {
     margin-bottom: 50px;
@@ -32,8 +42,8 @@
 
 .extend-filter-container {
     position: absolute;
-    top: 130px;
-    right: -25px;
+    top: 77px;
+    right: -29px;
     width: 70%;
     z-index: 4;
 }
