@@ -43,14 +43,27 @@
     </div>
     <div class="nav-container">
         <ul class="nav">
-            <li routerLinkActive="active" *ngFor="let item of menuItems">
-                <a [routerLink]="['/' + item.path]" (click)="menuClick()">
+            <li routerlinkactive="active" *ngFor="let item of menuItems">
+                <a *ngIf="!item.children" [routerLink]="['/' + item.path]" (click)="menuClick()">
                     <i class="material-icons">{{item.icon}}</i>
                     <p>{{item.title}}</p>
                 </a>
-                <!--
-                <mainfilter-cmp *ngIf="item.iconName == 'dashboard1'"></mainfilter-cmp>
-                -->
+                <a *ngIf="item.children" data-toggle="collapse" href="#messageCollapse">
+                    <i class="material-icons">place</i>
+                    <p>{{item.title}}
+                        <b class="caret"></b>
+                    </p>
+                </a>
+                <div *ngIf="item.children" class="collapse" id="messageCollapse">
+                    <ul class="nav">
+                        <li routerlinkactive="active" *ngFor="let child of item.children">
+                            <a href="#">
+                                <span class="sidebar-mini"><i class="material-icons">{{child.icon}}</i></span>
+                                <span class="sidebar-normal">{{child.title}}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
