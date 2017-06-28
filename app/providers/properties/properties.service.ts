@@ -8,8 +8,9 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class PropertiesService {
-	private apiUrl: string;
-	private token: string;
+	// public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+	private token: string = localStorage.getItem('id_token');
 	public isReading;
 
 	public setToken(str) {
@@ -66,6 +67,16 @@ export class PropertiesService {
 		return this.http.delete( this.apiUrl + '/api/Properties/' + id, options )
 				.map(this.extractData)
 				.catch(this.handleError);
+	}
+
+	public getVillas(filter) {
+		let header = new Headers({ 'Authorization': this.token });
+
+		let options = new RequestOptions({ headers: header });
+
+		return this.http.post(this.apiUrl + '/api/Properties/SearchAvailable', filter, options)
+            .map(this.extractData)
+            .catch(this.handleError);
 	}
 
 	public getRates(id) {

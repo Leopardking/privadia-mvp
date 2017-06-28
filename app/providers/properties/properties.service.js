@@ -17,6 +17,9 @@ require('rxjs/add/observable/throw');
 var PropertiesService = (function () {
     function PropertiesService(http) {
         this.http = http;
+        // public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+        this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+        this.token = localStorage.getItem('id_token');
     }
     PropertiesService.prototype.setToken = function (str) {
         this.token = str;
@@ -56,6 +59,13 @@ var PropertiesService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.delete(this.apiUrl + '/api/Properties/' + id, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    PropertiesService.prototype.getVillas = function (filter) {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/Properties/SearchAvailable', filter, options)
             .map(this.extractData)
             .catch(this.handleError);
     };

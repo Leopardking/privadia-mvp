@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from '../../providers/dashboard/dashboard.service';
 
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
+import {PropertiesService} from "../../providers/properties/properties.service";
 
 declare const $:any;
 declare const moment:any;

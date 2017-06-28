@@ -5,6 +5,7 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@ang
 
 declare const moment: any;
 import * as _ from "lodash";
+import {PropertiesService} from "../../providers/properties/properties.service";
 
 @Component({
     moduleId: module.id,
@@ -18,6 +19,7 @@ export class DashboardfilterComponent implements OnInit{
     public filterForm = new FormGroup ({});
 
     constructor ( private dashboardService: DashboardService,
+                  private propertiesService: PropertiesService,
                   private builder: FormBuilder) {
     }
 
@@ -35,9 +37,7 @@ export class DashboardfilterComponent implements OnInit{
     }
 
     private onSubmit(form) {
-        //form.Regions = _.uniq(form.Regions);
-        console.log('On submit',form);
-        this.dashboardService.getVillas(form).subscribe(
+        this.propertiesService.getVillas(form).subscribe(
             d => {
                 this.dashboardService.villas = d;
                 this.dashboardService.isReading = false;
