@@ -71,8 +71,8 @@ export class DashboardService {
 			},
 			e => {
 				console.log('error regions', e);
-				// localStorage.removeItem('id_token');
-				// this.router.navigate(['/login']);
+				localStorage.removeItem('id_token');
+				this.router.navigate(['/login']);
 			}
 		);
 
