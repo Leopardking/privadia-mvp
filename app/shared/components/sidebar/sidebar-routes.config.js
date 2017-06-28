@@ -4,7 +4,6 @@ exports.ROUTES = [
     { path: 'dashboard', title: 'Dashboard', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'dashboard' },
     { path: 'booking', title: 'Bookings', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'confirmation_number' },
     { path: 'properties', title: 'Properties', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'store' },
-    { path: 'notifications', title: 'Notifications', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'notifications' },
     { path: 'message', title: 'Messages', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'mail' },
     { path: 'users', title: 'Users', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'group' },
 ];
