@@ -2,7 +2,7 @@
 <div class="card card-product">
     <div class="card-image" data-header-animation="true">
         <a href="#pablo">
-            <img class="img" src="{{ villa.ImageId ? 'http://res.cloudinary.com/privadia/image/upload/c_fill,h_280,w_430/c_fill,q_80/' + villa.ImageId + '.jpg' : '../assets/img/image_placeholder.jpg' }}">
+            <cl-image public-id="{{villa.ImageId}}" cloud-name="privadia" crop="fill" quality="80" height="280" width="430" format="jpg">
         </a>
     </div>
     <div class="card-content">
@@ -20,16 +20,13 @@
                 <i class="material-icons">close</i>
             </button>
         </div>
-        <h4 class="card-title col-lg-12 col-md-12 col-sm-12">
+        <h4 class="card-title">
             <a href="#pablo">{{villa.Name}}</a>
         </h4>
-        <div class="card-description col-lg-6 col-md-6 col-sm-12">
-            <span>{{villa.CollaboratorInitials}}</span>
-        </div>
-        <div class="card-description col-lg-6 col-md-6 col-sm-12">
-            <span class="text-right p-r-10">{{villa.Bedrooms}} Bedrooms</span>
-            <span class="text-right p-r-10">{{villa.Bathrooms}} Bathrooms</span>
-            <span class="text-right p-r-10">{{villa.Sleeps}} Sleeps</span>
+        <div class="card-description">
+            <span>{{villa.Bedrooms}}</span> Bedrooms
+            <span>{{villa.Bathrooms}}</span> Bathrooms
+            <span>{{villa.Sleeps}}</span> Sleeps
         </div>
     </div>
     <div class="card-footer">

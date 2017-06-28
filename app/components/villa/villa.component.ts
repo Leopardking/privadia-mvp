@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 @Component({
     moduleId: module.id,
     selector: ' villa-cmp ',
-    templateUrl: 'villa1.component.html',
+    templateUrl: 'villa.component.html',
     styleUrls: ['villa.component.css']
 })
 
@@ -24,7 +24,7 @@ export class VillaComponent implements OnInit{
     }
 
     public roundRate(rate) {
-        return this.numberWithCommas(parseFloat(rate).toFixed(2));
+        return this.numberWithCommas(rate && parseFloat(rate).toFixed(2) || 0);
     }
 
     private getRichInfo() {

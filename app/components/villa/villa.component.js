@@ -16,7 +16,7 @@ var VillaComponent = (function () {
         this.villaInfo = this.getInfo();
     };
     VillaComponent.prototype.roundRate = function (rate) {
-        return this.numberWithCommas(parseFloat(rate).toFixed(2));
+        return this.numberWithCommas(rate && parseFloat(rate).toFixed(2) || 0);
     };
     VillaComponent.prototype.getRichInfo = function () {
         return "<b>" + this.villa.Name + "</b>" +
@@ -57,7 +57,7 @@ var VillaComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: ' villa-cmp ',
-            templateUrl: 'villa1.component.html',
+            templateUrl: 'villa.component.html',
             styleUrls: ['villa.component.css']
         }), 
         __metadata('design:paramtypes', [])
