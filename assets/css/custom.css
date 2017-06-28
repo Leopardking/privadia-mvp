@@ -141,7 +141,10 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	margin-top: 5px;
 }
 .m-t-15 {
-	margin-top: 15px;
+	margin-top: 15px !important;
+}
+.m-t-20 {
+	margin-top: 20px !important;
 }
 .m-t-25 {
 	margin-top: 25px !important;
@@ -151,6 +154,9 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 }
 .m-r-20 {
 	margin-right: 20px;
+}
+.m-r-25 {
+	margin-right: 25px;
 }
 .m-l-r-20-negative {
 	margin-left: -20px;
@@ -536,6 +542,10 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .table.dataTable > tfoot > tr > th {
 	border-color: #a6a6a6;
 }
+.table.dataTable button:hover {
+    background-color: rgba(200, 200, 200, 0.2);
+}
+
 div.dataTables_wrapper {
 
 }
