@@ -22,9 +22,11 @@ export class DashboardComponent implements OnInit{
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         $('.modal').appendTo("body");
+        /*
         setTimeout(()=> {
             $('.modal-content').perfectScrollbar();
         },100)
+        */
 
         this.enquiryForm = this.builder.group({
             FirstName: new FormControl(),

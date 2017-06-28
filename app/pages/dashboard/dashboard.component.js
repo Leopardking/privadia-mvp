@@ -21,9 +21,11 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         $('.modal').appendTo("body");
-        setTimeout(function () {
+        /*
+        setTimeout(()=> {
             $('.modal-content').perfectScrollbar();
-        }, 100);
+        },100)
+        */
         this.enquiryForm = this.builder.group({
             FirstName: new forms_1.FormControl(),
             LastName: new forms_1.FormControl(),
