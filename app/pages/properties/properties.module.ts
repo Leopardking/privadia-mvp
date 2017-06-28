@@ -13,8 +13,7 @@ import {PropertiesService} from "../../providers/properties/properties.service";
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        // Ng2CloudinaryModule,
-        // FileUploadModule,
+        Ng2CloudinaryModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS ],

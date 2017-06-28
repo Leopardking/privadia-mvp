@@ -9,35 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
-var forms_1 = require('@angular/forms');
 var MessageComponent = (function () {
-    function MessageComponent(dashboardService, builder) {
-        this.dashboardService = dashboardService;
-        this.builder = builder;
-        this.enquiryForm = new forms_1.FormGroup({});
-        this.proposalForm = new forms_1.FormGroup({});
+    function MessageComponent() {
     }
     MessageComponent.prototype.ngOnInit = function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        $('.modal').appendTo("body");
         setTimeout(function () {
-            $('.modal-content').perfectScrollbar();
-        }, 100);
-        this.enquiryForm = this.builder.group({
-            FirstName: new forms_1.FormControl(),
-            LastName: new forms_1.FormControl(),
-            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            Message: new forms_1.FormControl(),
-        });
-        this.proposalForm = this.builder.group({
-            ClientName: new forms_1.FormControl('Johnathan Robinson'),
-            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            RentalPrice: new forms_1.FormControl(1200),
-            BookingPrice: new forms_1.FormControl(1495),
-        });
+            var dataTableQuery = $('#datatables');
+            var tableWidget = dataTableQuery.DataTable({
+                bLengthChange: false,
+                ordering: false,
+                info: false,
+            });
+        }, 10);
     };
     MessageComponent = __decorate([
         core_1.Component({
@@ -46,7 +30,7 @@ var MessageComponent = (function () {
             templateUrl: 'message.component.html',
             styleUrls: ['message.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [])
     ], MessageComponent);
     return MessageComponent;
 }());

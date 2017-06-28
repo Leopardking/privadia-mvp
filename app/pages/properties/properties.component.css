@@ -1,35 +1,27 @@
-.table-properties {
-    color: #3a3a3a;
+.table-properties > tbody > tr > td:first-child,
+.table-properties > tbody > tr > td:last-child,
+.table-properties > tfoot > tr > th:first-child,
+.table-properties > tfoot > tr > th:last-child {
+    border-top: 0;
+    padding: 0;
+    text-align: center;
+    width: 36px;
 }
-
-.table-properties tr.odd, .table-properties tr:hover {
-    background-color: #ffffff;
-}
-
-.table-properties td {
-    border-top: 1px solid #c6c6c6;
-}
-
 .table-properties .thumb {
     width: 84px;
     min-width: 84px;
     height: auto;
-    padding: 4px 4px 4px 0 !important;
+    padding: 13px 15px 13px 0 !important;
 }
-
 .table-properties .property-name {
-    font-size: 16px;
-    padding: 8px;
-    font-weight: 300;
+    padding: 8px 0;
 }
-
 .table-properties .property-id {
     font-size: 12px;
-    padding: 7px;
+    padding: 7px 0;
     display: inline-block;
     width: 100px;
 }
-
 .table-properties .property-status {
     font-size: 12px;
     width: 70px;
@@ -41,11 +33,9 @@
     line-height: 18px;
     display: inline-block;
 }
-
 .table-properties .property-status.active {
     background-color: #5399bc;
 }
-
 .table-properties .text-right {
     min-width: 240px;
     padding: 0 !important;
@@ -60,11 +50,6 @@
     text-transform: none;
     border-radius: 0;
 }
-
-.table-properties .text-right button:hover {
-    background-color: rgba(200, 200, 200, 0.2);
-}
-
 .table-properties .text-right .btn-set-rates {
     color: #0b5a7c;
 }
@@ -76,9 +61,32 @@
 .table-properties .text-right .btn-delete {
     color: #b71c1c;
 }
-
 .table-properties .text-right i {
     font-size: 24px;
     padding: 4px 0;
     display: block;
 }
+
+/*
+.table-properties {
+    color: #3a3a3a;
+}
+
+.table-properties tr.odd, .table-properties tr:hover {
+    background-color: #ffffff;
+}
+
+.table-properties td {
+    border-top: 1px solid #c6c6c6;
+}
+
+
+
+
+
+
+
+
+
+*/
+

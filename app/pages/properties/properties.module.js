@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var properties_routes_1 = require('./properties.routes');
 var common_1 = require("@angular/common");
+var ng2_cloudinary_1 = require("ng2-cloudinary");
 var forms_1 = require("@angular/forms");
 var dashboard_service_1 = require("../../providers/dashboard/dashboard.service");
 var properties_service_1 = require("../../providers/properties/properties.service");
@@ -24,8 +25,7 @@ var PropertiesModule = (function () {
                 common_1.CommonModule,
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
-                // Ng2CloudinaryModule,
-                // FileUploadModule,
+                ng2_cloudinary_1.Ng2CloudinaryModule,
                 router_1.RouterModule.forChild(properties_routes_1.MODULE_ROUTES)
             ],
             declarations: [properties_routes_1.MODULE_COMPONENTS],
