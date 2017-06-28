@@ -512,3 +512,35 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	opacity: 1;
 	background: rgba(0, 0, 5, 0.6);
 }
+
+/**
+ * Table styles
+ */
+.table.dataTable {
+    margin-top: 0px !important;
+}
+.table > tbody > tr {
+	font-size: 16px;
+	font-weight: 300;
+	color: #3a3a3a;
+}
+.table.dataTable > tbody > tr > td {
+    height: 60px;
+}
+.table.dataTable > tbody > tr > td,
+.table.dataTable > thead > tr > th {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+}
+.table.dataTable > tbody > tr > td,
+.table.dataTable > tfoot > tr > th {
+	border-color: #a6a6a6;
+}
+div.dataTables_wrapper {
+
+}
+div.dataTables_wrapper div.dataTables_paginate {
+    margin-right: 36px;
+}
+
+
