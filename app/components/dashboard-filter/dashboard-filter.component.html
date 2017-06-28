@@ -7,7 +7,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons non-icon">$</i></span>
                             <input-field-cmp
-                                    [data]="{title: 'From ($)', name: 'MinRate', value: '40', type: 'number'}"
+                                    [data]="{title: 'From ($)', name: 'MinRate', type: 'number'}"
                                     [group]="filterForm"></input-field-cmp>
                         </div>
                     </div>
@@ -15,30 +15,30 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons">$</i></span>
                             <input-field-cmp
-                                    [data]="{title: 'To $', name: 'MaxRate', value: '4000', type: 'number'}"
+                                    [data]="{title: 'To $', name: 'MaxRate', type: 'number'}"
                                     [group]="filterForm"></input-field-cmp>
                         </div>
                     </div>
                     <div class="col-xs-2">
-                        <datetimepicker-field-cmp [data]="{title: 'Check In', name: 'CheckIn', value: '06/21/2017'}"
+                        <datetimepicker-field-cmp [data]="{title: 'Check In', name: 'CheckIn'}"
                                                   [classes]="{withIcon: true}"
                                                   [group]="filterForm"></datetimepicker-field-cmp>
                     </div>
                     <div class="col-xs-2">
-                        <datetimepicker-field-cmp [data]="{title: 'Check Out', name: 'CheckOut', value: '06/21/2017'}"
+                        <datetimepicker-field-cmp [data]="{title: 'Check Out', name: 'CheckOut'}"
                                                   [classes]="{withIcon: true}"
                                                   [group]="filterForm"></datetimepicker-field-cmp>
                     </div>
                     <div class="col-xs-2">
                         <input-field-cmp
-                                [data]="{title: 'Bedrooms', name: 'Bedrooms', value: '0', type: 'number'}"
+                                [data]="{title: 'Bedrooms', name: 'Bedrooms', type: 'number'}"
                                 [group]="filterForm"></input-field-cmp>
                     </div>
                     <div class="col-xs-2">
                         <select-field-cmp *ngIf="dashboardService.regions.length"
-                                [data]="{title: 'Locations', name: 'Regions', value: '0', type: 'number'}"
+                                [data]="{title: 'Locations', name: 'Regions', type: 'number'}"
                                 [regions]="dashboardService.regions"
-                                [group]="filterForm"></select-field-cmp>
+                                [group]="filterForm.controls.Regions"></select-field-cmp>
                     </div>
                     <button class="btn btn-white btn-round btn-fab btn-just-icon" type="button" data-toggle="collapse" data-target="#extend-filter">
                         <i class="material-icons">more_vert</i>

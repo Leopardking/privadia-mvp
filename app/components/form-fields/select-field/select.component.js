@@ -10,12 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
-var _ = require("lodash");
 var SelectfieldComponent = (function () {
-    //private selectQuery = $(".selectpicker");
-    function SelectfieldComponent() {
+    function SelectfieldComponent(builder) {
+        this.builder = builder;
     }
     SelectfieldComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var selectQuery = $(".selectpicker");
         setTimeout(function () {
             selectQuery.selectpicker({
@@ -25,14 +25,13 @@ var SelectfieldComponent = (function () {
                 $('.dropdown-menu.inner').perfectScrollbar();
             });
         }, 10);
+        this.regions.forEach(function () {
+            _this.field.push(new forms_1.FormControl());
+        });
     };
     SelectfieldComponent.prototype.regionChange = function (e) {
-        var control = this.filterForm.controls['Regions'];
-        var arr = $(e.target).val();
-        arr.forEach(function (value) {
-            var index = _.findIndex(control.value, function (val) { return val == value; });
-            return control.push(new forms_1.FormControl(value));
-        });
+        this.field.reset();
+        this.field.patchValue(this.metafiltersModel);
     };
     __decorate([
         core_1.Input('data'), 
@@ -44,8 +43,8 @@ var SelectfieldComponent = (function () {
     ], SelectfieldComponent.prototype, "regions", void 0);
     __decorate([
         core_1.Input('group'), 
-        __metadata('design:type', forms_1.FormGroup)
-    ], SelectfieldComponent.prototype, "filterForm", void 0);
+        __metadata('design:type', forms_1.FormArray)
+    ], SelectfieldComponent.prototype, "field", void 0);
     SelectfieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -53,7 +52,7 @@ var SelectfieldComponent = (function () {
             templateUrl: 'select.component.html',
             styleUrls: ['select.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [forms_1.FormBuilder])
     ], SelectfieldComponent);
     return SelectfieldComponent;
 }());

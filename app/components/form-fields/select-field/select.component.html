@@ -5,6 +5,8 @@
             data-style="select-with-transition"
             title="Select"
             data-size="7"
+            [(ngModel)]="metafiltersModel"
+            [ngModelOptions]="{standalone: true}"
             (change)="regionChange($event)">
         <optgroup label="Spain" style="font-size: 16px">
             <option *ngFor="let region of regions; let i = index" [value]="region.Id">{{region.Name}}</option>

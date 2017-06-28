@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {FormGroup, FormArray, FormControl} from "@angular/forms";
+import {FormGroup, FormArray, FormControl, FormBuilder} from "@angular/forms";
 
 declare const $: any;
 import * as _ from "lodash";
@@ -14,10 +14,11 @@ import * as _ from "lodash";
 export class SelectfieldComponent implements OnInit {
     @Input('data') private data: any;
     @Input('regions') private regions: any;
-    @Input('group') private filterForm: FormGroup;
+    @Input('group') private field: FormArray;
 
     //private selectQuery = $(".selectpicker");
-    constructor () {
+    private metafiltersModel;
+    constructor ( private builder: FormBuilder) {
 
     }
 
@@ -32,15 +33,14 @@ export class SelectfieldComponent implements OnInit {
                 $('.dropdown-menu.inner').perfectScrollbar();
             });
         }, 10)
+
+        this.regions.forEach(() => {
+            this.field.push(new FormControl());
+        })
     }
 
     private regionChange(e) {
-        const control = <FormArray>this.filterForm.controls['Regions'];
-
-        const arr = $(e.target).val();
-        arr.forEach((value) => {
-            const index = _.findIndex(control.value, (val) => { return val == value});
-            return control.push(new FormControl(value));
-        });
+        this.field.reset();
+        this.field.patchValue(this.metafiltersModel)
     }
 }

@@ -35,7 +35,8 @@ export class DashboardfilterComponent implements OnInit{
     }
 
     private onSubmit(form) {
-        form.Regions = _.uniq(form.Regions);
+        //form.Regions = _.uniq(form.Regions);
+        console.log('On submit',form);
         this.dashboardService.getVillas(form).subscribe(
             d => {
                 this.dashboardService.villas = d;

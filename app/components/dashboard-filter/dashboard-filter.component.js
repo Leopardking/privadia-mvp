@@ -32,7 +32,8 @@ var DashboardfilterComponent = (function () {
     };
     DashboardfilterComponent.prototype.onSubmit = function (form) {
         var _this = this;
-        form.Regions = _.uniq(form.Regions);
+        //form.Regions = _.uniq(form.Regions);
+        console.log('On submit', form);
         this.dashboardService.getVillas(form).subscribe(function (d) {
             _this.dashboardService.villas = d;
             _this.dashboardService.isReading = false;
