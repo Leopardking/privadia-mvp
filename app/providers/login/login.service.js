@@ -36,6 +36,10 @@ var LoginService = (function () {
                 .catch(this.handleError);
         }
     };
+    LoginService.prototype.getPermission = function (permition) {
+        if (this.userInfo)
+            return this.userInfo.Permissions.filter(function (element) { return element.Name === permition; })[0];
+    };
     LoginService.prototype.getCurrentUser = function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });

@@ -38,6 +38,11 @@ export class LoginService {
 
 	}
 
+	public getPermission(permition) {
+		if(this.userInfo)
+			return this.userInfo.Permissions.filter( element => element.Name === permition)[0];
+	}
+
 	private getCurrentUser() {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );

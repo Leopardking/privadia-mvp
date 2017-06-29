@@ -4,6 +4,7 @@ import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import {LoginService} from "../login/login.service";
 
 @Injectable()
 export class LookupsService {
@@ -14,11 +15,13 @@ export class LookupsService {
 	public companies = [];
 	public managers = [];
 
-	constructor ( private http: Http ) {}
+	constructor ( private http: Http,
+				  private loginService: LoginService) {}
 
 	public getDataCompanies() {
 		this.getManagementCompanies().subscribe(
 			d => {
+				console.log('error',)
 				this.companies = d;
 			},
 			e => { console.log('Error ManagementCompanies', e) }
@@ -26,15 +29,20 @@ export class LookupsService {
 	}
 
 	public getDataManagers() {
+		/*
 		this.getManagersByCompany().subscribe(
 			d => {
 				this.managers = d;
 			},
 			e => { console.log('Error ManagersByCompany', e) }
 		)
+		*/
 	}
 
 	private getManagementCompanies() {
+		if(!this.loginService.getPermission('Lookups/GetManagementCompanies'))
+			return Observable.throw({error: 'Permission denied'});
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
@@ -44,6 +52,9 @@ export class LookupsService {
 	}
 
 	private getManagersByCompany() {
+		if(!this.loginService.getPermission('Lookups/GetManagersByCompany'))
+			return Observable.throw({error: 'Permission denied'});
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 

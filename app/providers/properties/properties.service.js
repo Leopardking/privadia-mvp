@@ -14,9 +14,11 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
+var login_service_1 = require("../login/login.service");
 var PropertiesService = (function () {
-    function PropertiesService(http) {
+    function PropertiesService(http, loginService) {
         this.http = http;
+        this.loginService = loginService;
         // public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
@@ -50,18 +52,18 @@ var PropertiesService = (function () {
         this.isReading = true;
         this.getPropertyById(id).subscribe(function (d) {
             _this.property = d;
+            _this.getMetaData().subscribe(function (d) {
+                _this.metadata = d;
+            }, function (e) { console.log("Error MetaData: ", e); });
+            _this.getRegions().subscribe(function (d) {
+                _this.regionArray = d;
+                _this.regions = d.map(function (item, i) { return item.Name; });
+            }, function (e) { console.log("Error Regions: ", e); });
             _this.getOwners().subscribe(function (d) {
                 _this.owners = d;
                 // this.ownerNames = d.map( (item, i) => { return item.Name; } );
-                _this.getRegions().subscribe(function (d) {
-                    _this.regionArray = d;
-                    _this.regions = d.map(function (item, i) { return item.Name; });
-                    _this.getMetaData().subscribe(function (d) {
-                        _this.metadata = d;
-                        _this.isReading = false;
-                    }, function (e) { console.log("Error MetaData: ", e); });
-                }, function (e) { console.log("Error Regions: ", e); });
             }, function (e) { console.log("Error Owner: ", e); });
+            _this.isReading = false;
         }, function (e) { console.log("Error Properties: ", e); });
     };
     PropertiesService.prototype.getDataEmptyProperty = function () {
@@ -138,6 +140,8 @@ var PropertiesService = (function () {
             .catch(this.handleError);
     };
     PropertiesService.prototype.getRegions = function () {
+        if (!this.loginService.getPermission('Lookups/GetRegions'))
+            return Observable_1.Observable.throw({ error: 'Permission denied' });
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetRegions', options)
@@ -145,6 +149,8 @@ var PropertiesService = (function () {
             .catch(this.handleError);
     };
     PropertiesService.prototype.getOwners = function () {
+        if (!this.loginService.getPermission('Lookups/GetOwners'))
+            return Observable_1.Observable.throw({ error: 'Permission denied' });
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetOwners', options)
@@ -159,6 +165,8 @@ var PropertiesService = (function () {
             .catch(this.handleError);
     };
     PropertiesService.prototype.getMetaData = function () {
+        if (!this.loginService.getPermission('Lookups/GetMetaData'))
+            return Observable_1.Observable.throw({ error: 'Permission denied' });
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetMetaData', options)
@@ -205,7 +213,7 @@ var PropertiesService = (function () {
     };
     PropertiesService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService])
     ], PropertiesService);
     return PropertiesService;
 }());

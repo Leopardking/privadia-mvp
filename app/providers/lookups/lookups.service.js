@@ -13,9 +13,11 @@ var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
+var login_service_1 = require("../login/login.service");
 var LookupsService = (function () {
-    function LookupsService(http) {
+    function LookupsService(http, loginService) {
         this.http = http;
+        this.loginService = loginService;
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
         this.companies = [];
@@ -24,16 +26,23 @@ var LookupsService = (function () {
     LookupsService.prototype.getDataCompanies = function () {
         var _this = this;
         this.getManagementCompanies().subscribe(function (d) {
+            console.log('error');
             _this.companies = d;
         }, function (e) { console.log('Error ManagementCompanies', e); });
     };
     LookupsService.prototype.getDataManagers = function () {
-        var _this = this;
-        this.getManagersByCompany().subscribe(function (d) {
-            _this.managers = d;
-        }, function (e) { console.log('Error ManagersByCompany', e); });
+        /*
+        this.getManagersByCompany().subscribe(
+            d => {
+                this.managers = d;
+            },
+            e => { console.log('Error ManagersByCompany', e) }
+        )
+        */
     };
     LookupsService.prototype.getManagementCompanies = function () {
+        if (!this.loginService.getPermission('Lookups/GetManagementCompanies'))
+            return Observable_1.Observable.throw({ error: 'Permission denied' });
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetManagementCompanies', options)
@@ -41,6 +50,8 @@ var LookupsService = (function () {
             .catch(this.handleError);
     };
     LookupsService.prototype.getManagersByCompany = function () {
+        if (!this.loginService.getPermission('Lookups/GetManagersByCompany'))
+            return Observable_1.Observable.throw({ error: 'Permission denied' });
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetManagersByCompany/6e78b138-4d18-4691-b988-c5057f599bf0', options)
@@ -65,7 +76,7 @@ var LookupsService = (function () {
     };
     LookupsService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService])
     ], LookupsService);
     return LookupsService;
 }());

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
+import {LoginService} from "../login/login.service";
 
 @Injectable()
 export class PropertiesService {
@@ -38,7 +39,8 @@ export class PropertiesService {
 		Name: ''
 	};
 
-	constructor ( private http: Http ) {}
+	constructor ( private http: Http,
+				  private loginService: LoginService ) {}
 
 	public getDataProperties() {
 		this.getAllProperties().subscribe(
@@ -58,28 +60,31 @@ export class PropertiesService {
 			d => {
 				this.property = d;
 
-				this.getOwners().subscribe(
-					d => {
-						this.owners = d;
-						// this.ownerNames = d.map( (item, i) => { return item.Name; } );
+					this.getMetaData().subscribe(
+						d => {
+							this.metadata = d;
+						},
+						e => { console.log("Error MetaData: ", e); }
+					);
 
-						this.getRegions().subscribe(
-							d => {
-								this.regionArray = d;
-								this.regions = d.map( (item, i) => { return item.Name; } );
+					this.getRegions().subscribe(
+						d => {
+							this.regionArray = d;
+							this.regions = d.map( (item, i) => { return item.Name; } );
 
-								this.getMetaData().subscribe(
-									d => {
-										this.metadata = d;
-										this.isReading = false;
-									},
-									e => { console.log("Error MetaData: ", e); }
-								);	},
-							e => { console.log("Error Regions: ", e); }
-						);
-					},
-					e => { console.log("Error Owner: ", e); }
-				);
+						},
+						e => { console.log("Error Regions: ", e); }
+					);
+
+					this.getOwners().subscribe(
+						d => {
+							this.owners = d;
+							// this.ownerNames = d.map( (item, i) => { return item.Name; } );
+						},
+						e => { console.log("Error Owner: ", e); }
+					);
+
+				this.isReading = false;
 			},
 			e => { console.log("Error Properties: ", e); }
 		);
@@ -186,6 +191,9 @@ export class PropertiesService {
 	}
 
 	public getRegions() {
+		if(!this.loginService.getPermission('Lookups/GetRegions'))
+			return Observable.throw({error: 'Permission denied'});
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
@@ -195,6 +203,9 @@ export class PropertiesService {
 	}
 
 	public getOwners() {
+		if(!this.loginService.getPermission('Lookups/GetOwners'))
+			return Observable.throw({error: 'Permission denied'});
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
@@ -213,6 +224,9 @@ export class PropertiesService {
 	}
 
 	public getMetaData() {
+		if(!this.loginService.getPermission('Lookups/GetMetaData'))
+			return Observable.throw({error: 'Permission denied'});
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
