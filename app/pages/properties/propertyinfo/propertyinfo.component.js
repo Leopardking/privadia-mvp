@@ -12,30 +12,15 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require("@angular/platform-browser");
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
+var lookups_service_1 = require("../../../providers/lookups/lookups.service");
+var login_service_1 = require("../../../providers/login/login.service");
 var PropertyinfoComponent = (function () {
-    function PropertyinfoComponent(propertiesService, 
-        //private dashboardService: DashboardService,
-        _sanitizer) {
+    function PropertyinfoComponent(propertiesService, lookupsService, loginService, _sanitizer) {
         var _this = this;
         this.propertiesService = propertiesService;
+        this.lookupsService = lookupsService;
+        this.loginService = loginService;
         this._sanitizer = _sanitizer;
-        // @ViewChild('villadescription') villadescription;
-        this.companyList = [{
-                Id: "6e78b138-4d18-4691-b988-c5057f599bf02",
-                Name: "Test Management Company2"
-            }, {
-                Id: "6e78b138-4d18-4691-b988-c5057f599bf03",
-                Name: "Test Management Company3"
-            }, {
-                Id: "6e78b138-4d18-4691-b988-c5057f599bf04",
-                Name: "Test Management Company4"
-            }, {
-                Id: "6e78b138-4d18-4691-b988-c5057f599bf0",
-                Name: "Test Management Company"
-            }, {
-                Id: "6e78b138-4d18-4691-b988-c5057f599bf06",
-                Name: "Test Management Company6"
-            },];
         this.autocompleListFormatter = function (data) {
             var html = "" + data.Name;
             return _this._sanitizer.bypassSecurityTrustHtml(html);
@@ -43,6 +28,9 @@ var PropertyinfoComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
+        var role = this.loginService.userInfo.Roles.filter(function (role) { return role.Name === 'Manager'; })[0];
+        if (role)
+            this.propertyForm.controls['ManagementCompany'].setValue(this.lookupsService.companies[0]);
         /*
         $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab
@@ -159,7 +147,7 @@ var PropertyinfoComponent = (function () {
             templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, platform_browser_1.DomSanitizer])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService, login_service_1.LoginService, platform_browser_1.DomSanitizer])
     ], PropertyinfoComponent);
     return PropertyinfoComponent;
 }());

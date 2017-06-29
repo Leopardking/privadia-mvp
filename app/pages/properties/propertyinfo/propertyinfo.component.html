@@ -37,10 +37,16 @@
             <div [formGroup]="propertyForm">
                 <div class="row">
                     <div class="col-xs-4">
-                        <singleselect-field-cmp *ngIf="companyList.length"
-                                                [dataList]="companyList"
-                                                [options]="{title: 'Management Company', default: 'Select Company', name: 'ManagementCompany'}"
+                        <singleselect-field-cmp *ngIf="lookupsService.companies.length"
+                                                [dataList]="lookupsService.companies"
+                                                [options]="{title: 'Management Company', default: 'Select Company'}"
                                                 [field]="propertyForm.controls.ManagementCompany"></singleselect-field-cmp>
+                    </div>
+                    <div class="col-xs-4">
+                        <singleselect-field-cmp *ngIf="lookupsService.managers.length"
+                                                [dataList]="lookupsService.managers"
+                                                [options]="{title: 'Managers List', default: 'Select Managers'}"
+                                                [field]="propertyForm.controls.ManagerUser"></singleselect-field-cmp>
                     </div>
                 </div>
                 <div class="row">

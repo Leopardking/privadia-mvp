@@ -11,28 +11,26 @@ export class LookupsService {
 	private token: string = localStorage.getItem('id_token');
 
 	public userInfo: any;
+	public companies = [];
+	public managers = [];
 
 	constructor ( private http: Http ) {}
 
 	public getDataCompanies() {
 		this.getManagementCompanies().subscribe(
 			d => {
-				console.log('getManagersByCompany',d)
+				this.companies = d;
 			},
-			e => {
-
-			}
+			e => { console.log('Error ManagementCompanies', e) }
 		)
 	}
 
 	public getDataManagers() {
 		this.getManagersByCompany().subscribe(
 			d => {
-				console.log('getManagersByCompany',d)
+				this.managers = d;
 			},
-			e => {
-
-			}
+			e => { console.log('Error ManagersByCompany', e) }
 		)
 	}
 

@@ -8,6 +8,8 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 //import { MainService } from '../../../providers/homeservice';
 import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import {FormGroup, FormArray, FormControl, Validators} from "@angular/forms";
+import {LookupsService} from "../../../providers/lookups/lookups.service";
+import {LoginService} from "../../../providers/login/login.service";
 
 declare const $: any;
 
@@ -23,25 +25,7 @@ export class PropertyinfoComponent implements OnInit{
     @Input('errorForm') public errorForm: any;
 
     // @ViewChild('villadescription') villadescription;
-
-    public companyList = [{
-        Id: "6e78b138-4d18-4691-b988-c5057f599bf02",
-        Name: "Test Management Company2"
-    },{
-        Id: "6e78b138-4d18-4691-b988-c5057f599bf03",
-        Name: "Test Management Company3"
-    },{
-        Id: "6e78b138-4d18-4691-b988-c5057f599bf04",
-        Name: "Test Management Company4"
-    },{
-        Id: "6e78b138-4d18-4691-b988-c5057f599bf0",
-        Name: "Test Management Company"
-    },{
-        Id: "6e78b138-4d18-4691-b988-c5057f599bf06",
-        Name: "Test Management Company6"
-    },];
-
-    //public changeTab
+    // public changeTab
     // name & address
     // public contacts;
     public bedrooms;
@@ -60,13 +44,19 @@ export class PropertyinfoComponent implements OnInit{
     public address;
 
     constructor ( private propertiesService: PropertiesService,
-                  //private dashboardService: DashboardService,
+                  private lookupsService: LookupsService,
+                  private loginService: LoginService,
                   private _sanitizer: DomSanitizer ) {
 
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
+        const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Manager')[0];
+
+        if(role)
+            this.propertyForm.controls['ManagementCompany'].setValue(this.lookupsService.companies[0]);
+
         /*
         $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab

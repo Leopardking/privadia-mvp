@@ -18,18 +18,20 @@ var LookupsService = (function () {
         this.http = http;
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
+        this.companies = [];
+        this.managers = [];
     }
     LookupsService.prototype.getDataCompanies = function () {
+        var _this = this;
         this.getManagementCompanies().subscribe(function (d) {
-            console.log('getManagersByCompany', d);
-        }, function (e) {
-        });
+            _this.companies = d;
+        }, function (e) { console.log('Error ManagementCompanies', e); });
     };
     LookupsService.prototype.getDataManagers = function () {
+        var _this = this;
         this.getManagersByCompany().subscribe(function (d) {
-            console.log('getManagersByCompany', d);
-        }, function (e) {
-        });
+            _this.managers = d;
+        }, function (e) { console.log('Error ManagersByCompany', e); });
     };
     LookupsService.prototype.getManagementCompanies = function () {
         var header = new http_1.Headers({ 'Authorization': this.token });

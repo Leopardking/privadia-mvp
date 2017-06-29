@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import * as _ from 'lodash'
 import {LookupsService} from "../../../providers/lookups/lookups.service";
+import {LoginService} from "../../../providers/login/login.service";
 declare const $:any;
 //declare const _:any;
 
@@ -15,7 +16,7 @@ declare const $:any;
     styleUrls: [ 'addproperty.component.css' ]
 })
 
-export class AddpropertyComponent implements OnInit{
+export class AddpropertyComponent implements OnInit, AfterViewInit{
     // private isActive = true;
     private isLoad = true;
     private errorForm = false;
@@ -37,14 +38,14 @@ export class AddpropertyComponent implements OnInit{
         ManagementCompanyId: new FormControl(),
         ManagementCompanyName: new FormControl(),
         ManagementCompany: new FormControl({
-            Id: "6e78b138-4d18-4691-b988-c5057f599bf03",
-            Name: "Test Management Company3"
+            Id: null,
+            Name: null,
         }),
         ManagerUserId: new FormControl(),
         ManagerUserName: new FormControl(),
         ManagerUser: new FormControl({
-            Id: 1,
-            Name: 'Ibiza',
+            Id: null,
+            Name: null,
         }),
         Headline: new FormControl(),
         Summary: new FormControl(),
@@ -109,6 +110,9 @@ export class AddpropertyComponent implements OnInit{
         });
     }
 
+    ngAfterViewInit () {
+    }
+
     setRegion(region) {
         const regionFGs = this.builder.group({
             Id: [region.RegionId],
@@ -127,7 +131,7 @@ export class AddpropertyComponent implements OnInit{
     }
 
     private onSubmit() {
-        console.log('Submit ', this.propertyForm.value)
+        console.log('Sub',this.propertyForm.value)
         /*
         let newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {

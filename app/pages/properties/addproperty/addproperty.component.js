@@ -39,14 +39,14 @@ var AddpropertyComponent = (function () {
             ManagementCompanyId: new forms_1.FormControl(),
             ManagementCompanyName: new forms_1.FormControl(),
             ManagementCompany: new forms_1.FormControl({
-                Id: "6e78b138-4d18-4691-b988-c5057f599bf03",
-                Name: "Test Management Company3"
+                Id: null,
+                Name: null,
             }),
             ManagerUserId: new forms_1.FormControl(),
             ManagerUserName: new forms_1.FormControl(),
             ManagerUser: new forms_1.FormControl({
-                Id: 1,
-                Name: 'Ibiza',
+                Id: null,
+                Name: null,
             }),
             Headline: new forms_1.FormControl(),
             Summary: new forms_1.FormControl(),
@@ -102,6 +102,8 @@ var AddpropertyComponent = (function () {
             });
         });
     };
+    AddpropertyComponent.prototype.ngAfterViewInit = function () {
+    };
     AddpropertyComponent.prototype.setRegion = function (region) {
         var regionFGs = this.builder.group({
             Id: [region.RegionId],
@@ -116,7 +118,7 @@ var AddpropertyComponent = (function () {
         console.log('Discard Info form');
     };
     AddpropertyComponent.prototype.onSubmit = function () {
-        console.log('Submit ', this.propertyForm.value);
+        console.log('Sub', this.propertyForm.value);
         /*
         let newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
