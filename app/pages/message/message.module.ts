@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 /**
  *  Providers
@@ -13,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MessageComponent } from './message.component';
 import { MessageRoutingModule } from './message-routing.module';
 import {Ng2CloudinaryModule} from "ng2-cloudinary";
+import {EnquiryComponent} from "./enquiry/enquiry.component";
 
 @NgModule({
     imports: [
@@ -23,6 +23,7 @@ import {Ng2CloudinaryModule} from "ng2-cloudinary";
     ],
     declarations: [
         MessageComponent,
+        EnquiryComponent
     ],
 })
 export class MessageModule {}

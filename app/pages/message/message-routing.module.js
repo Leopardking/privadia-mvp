@@ -11,8 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var message_component_1 = require('./message.component');
+var enquiry_component_1 = require('./enquiry/enquiry.component');
 var routes = [
-    { path: '', component: message_component_1.MessageComponent }
+    { path: '', component: message_component_1.MessageComponent },
+    { path: 'dialogs', component: enquiry_component_1.EnquiryComponent }
 ];
 var MessageRoutingModule = (function () {
     function MessageRoutingModule() {

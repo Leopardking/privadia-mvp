@@ -5,7 +5,7 @@ declare const $:any;
 
 @Component({
     moduleId: module.id,
-    selector: 'message-cmp ',
+    selector: 'message-cmp',
     templateUrl: 'message.component.html',
     styleUrls: [ 'message.component.css' ]
 })

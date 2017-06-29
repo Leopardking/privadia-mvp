@@ -32,7 +32,7 @@ var MessageComponent = (function () {
     MessageComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'message-cmp ',
+            selector: 'message-cmp',
             templateUrl: 'message.component.html',
             styleUrls: ['message.component.css']
         }), 

@@ -1,0 +1,299 @@
+.messages-wrp {
+    padding-top: 52px;
+    padding-left: 24px;
+}
+.messages-wrp .messages .date-line {
+    font-size: 14px;
+    text-align: center;
+    color: #747879;
+    background-color: #f3f5f6;
+    height: 24px;
+    padding-bottom: 12px;
+}
+
+.messages-wrp .messages .message {
+    width: 80%;
+    margin: 20px 0;
+    position: relative;
+    border-radius: 10px;
+    display: block;
+}
+
+.messages-wrp .messages .message:before {
+    position: absolute;
+    display: inline-block;
+    border-style: solid;
+    content: " ";
+}
+
+.messages-wrp .messages .message:after {
+    position: absolute;
+    display: inline-block;
+    border-style: solid;
+    content: " ";
+}
+
+.messages-wrp .messages .message.from {
+    float: left;
+    background-color: #f3f5f6;
+}
+
+.messages-wrp .messages .message.from:before {
+    bottom: -18px;
+    left: 40px;
+    border-width: 0 0 18px 34px;
+    border-color: transparent #f3f5f6;
+}
+
+.messages-wrp .messages .message.from:after {
+    bottom: -18px;
+    left: 40px;
+    border-width: 0 0 18px 6px;
+    border-color: transparent #ffffff;
+}
+
+.messages-wrp .messages .message.to {
+    float: right;
+    background-color: #d0effe;
+}
+
+.messages-wrp .messages .message.to:before {
+    bottom: -18px;
+    right: 40px;
+    border-width: 0 34px 18px 0;
+    border-color: transparent #d0effe;
+}
+
+.messages-wrp .messages .message.to:after {
+    bottom: -18px;
+    right: 40px;
+    border-width: 0 6px 18px 0;
+    border-color: transparent #ffffff;
+}
+
+.messages-wrp .messages .message.info {
+    margin-left: 10%;
+    float: left;
+    border-width: 0;
+    background-color: #f3f5f6;
+}
+
+.messages-wrp .messages .message.info:before {
+    border-width: 0;
+}
+
+.messages-wrp .messages .message.info:after {
+    border-width: 0;
+}
+
+.messages-wrp .messages .message .message-text {
+    padding: 16px;
+    font-size: 14px;
+}
+
+.messages-wrp .messages .message .message-date {
+    padding: 0 12px 12px;
+    font-size: 14px;
+    float: right;
+    color: #747879;
+    display: inline-block;
+}
+
+.enquiry-header {
+    position: relative;
+}
+
+.enquiry-header .image-wrp {
+    overflow: hidden;
+    border-top-right-radius: 6px;
+}
+
+.enquiry-header .image-wrp .image-villa:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top-right-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.enquiry-header .villa-container {
+    position: absolute;
+    width: 50%;
+    bottom: 10px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.enquiry-header .villa-container.left {
+    left: 0px;
+    padding-left: 45px;
+}
+
+.enquiry-header .villa-container.right {
+    right: 0px;
+    padding-right: 45px;
+    text-align: right;
+}
+
+.enquiry-header .villa-container .enquiry-status {
+    font-size: 12px;
+    font-weight: 300;
+    width: 74px;
+    height: 18px;
+    border-radius: 9px;
+    text-align: center;
+    color: #fff;
+    line-height: 18px;
+    display: none;
+}
+
+.enquiry-header .villa-container .enquiry-status.accepted {
+    background-color: #00bfa5;
+    display: inline-block;
+}
+
+.enquiry-header .villa-container .enquiry-status.declined {
+    background-color: #ff1744;
+    display: inline-block;
+}
+
+.enquiry-header .villa-container .enquiry-status.accepted {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.enquiry-header .enquiry-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.enquiry-header .villa-container .location {
+    font-size: 16px;
+}
+
+.enquiry-header .villa-container .price {
+    font-size: 18px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.enquiry-header .villa-container .material-icons {
+    font-size: 18px;
+    vertical-align: top;
+}
+
+.enquiry-body {
+    padding-left: 11px;
+    padding-right: 18px;
+    margin-top: 20px;
+}
+
+.enquiry-body .terms h5 {
+    font-size: 16px;
+}
+
+.enquiry-body .terms ol {
+    counter-reset: item;
+    padding-left: 15px;
+}
+
+.enquiry-body .terms ol > li {
+    display: block;
+    padding-bottom: 20px;
+}
+
+.enquiry-body .terms ol > li:before {
+    content: counter(item) ". ";
+    counter-increment: item;
+    font-weight: 600;
+}
+
+.enquiry-body .terms ul {
+    list-style: none;
+    padding-left: 8px;
+}
+
+.enquiry-body .terms ul > li {
+    padding-bottom: 20px;
+}
+
+.enquiry-body a {
+    text-decoration: underline;
+    color: #5399bc;
+}
+
+.enquiry-body a:hover {
+    color: #0b5a7c;
+}
+
+.enquiry-body .material-icons {
+    font-size: 18px;
+    color: #5399bc;
+}
+
+.enquiry-body .no-proposal {
+    text-align: center;
+    padding: 106px 62px 106px 66px;
+}
+
+.enquiry-body .stats {
+    padding-bottom: 15px;
+}
+
+.enquiry-body .i-group {
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+}
+
+.enquiry-body .i-group i {
+    padding: 0 15px;
+}
+
+.enquiry-body .form-group .control-label {
+    font-size: 12px;
+}
+
+.enquiry-body .input-group-addon {
+    padding: 14px 20px 0;
+}
+
+.enquiry-body .input-group-addon.static {
+    padding: 34px 20px 0;
+}
+
+.enquiry-body .proposal-line {
+    font-size: 14px;
+    text-align: center;
+    color: #747879;
+    background-color: #f3f5f6;
+    height: 24px;
+    margin-top: 20px;
+}
+
+.enquiry-body .estimated-cost {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.enquiry-body .estimated-cost span {
+    line-height: 21px;
+    font-weight: 300;
+}
+
+.enquiry-body .estimated-cost i {
+    line-height: 21px;
+    margin-right: 5px;
+}
+
+.enquiry-body .estimated-cost .control-label {
+    font-size: 12px;
+    margin-right: 20px;
+}
