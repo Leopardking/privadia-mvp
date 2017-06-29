@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import {LoginService} from "../../../providers/login/login.service";
+import {LookupsService} from "../../../providers/lookups/lookups.service";
 
 declare const $:any;
 declare const _:any;
@@ -24,10 +25,13 @@ export class EditpropertyComponent implements OnInit{
 
     constructor ( private propertiesService: PropertiesService,
                   private loginService: LoginService,
+                  private lookupsService: LookupsService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
         this.route.params.subscribe(params => {
             propertiesService.getDataProperty(this.propertyId = params['id']);
+            lookupsService.getDataCompanies();
+            lookupsService.getDataManagers();
         });
     }
 
@@ -46,6 +50,18 @@ export class EditpropertyComponent implements OnInit{
                 RegionId: this.propertiesService.property.RegionId,
                 RegionName: this.propertiesService.property.RegionName,
                 Region: { Id: this.propertiesService.property.RegionId, Name: this.propertiesService.property.RegionName},
+                ManagementCompanyId: this.propertiesService.property.ManagementCompanyId,
+                ManagementCompanyName: this.propertiesService.property.ManagementCompanyName,
+                ManagerUserId: this.propertiesService.property.ManagerUserId,
+                ManagerUserName: this.propertiesService.property.ManagerUserName,
+                ManagementCompany: {
+                    Id: this.propertiesService.property.ManagementCompanyId,
+                    Name: this.propertiesService.property.ManagementCompanyName,
+                },
+                ManagerUser: {
+                    Id: this.propertiesService.property.ManagerUserId,
+                    Name: this.propertiesService.property.ManagerUserName,
+                },
                 Headline: this.propertiesService.property.Headline,
                 Summary: this.propertiesService.property.Summary,
                 Description: this.propertiesService.property.Description,

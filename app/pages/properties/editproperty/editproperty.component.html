@@ -76,7 +76,7 @@
                         <div class="tab-content m-l-r-20-negative m-t-25">
                             <!--  Property Info  -->
                             <div id="metatab-info" class="fade active in card-content p-b-none p-l-r-none p-t-none">
-                                <propertyinfo-cmp *ngIf="!propertiesService.isReading"
+                                <propertyinfo-cmp *ngIf="!propertiesService.isReading && !lookupsService.isReading"
                                                   [group]="propertyForm" [errorForm]="errorForm"></propertyinfo-cmp>
                             </div>
                             <!--  Property Image  -->

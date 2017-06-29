@@ -13,16 +13,20 @@ var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var login_service_1 = require("../../../providers/login/login.service");
+var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(propertiesService, loginService, route, builder) {
+    function EditpropertyComponent(propertiesService, loginService, lookupsService, route, builder) {
         var _this = this;
         this.propertiesService = propertiesService;
         this.loginService = loginService;
+        this.lookupsService = lookupsService;
         this.route = route;
         this.builder = builder;
         this.errorForm = false;
         this.route.params.subscribe(function (params) {
             propertiesService.getDataProperty(_this.propertyId = params['id']);
+            lookupsService.getDataCompanies();
+            lookupsService.getDataManagers();
         });
     }
     EditpropertyComponent.prototype.ngOnInit = function () {
@@ -40,6 +44,18 @@ var EditpropertyComponent = (function () {
                 RegionId: _this.propertiesService.property.RegionId,
                 RegionName: _this.propertiesService.property.RegionName,
                 Region: { Id: _this.propertiesService.property.RegionId, Name: _this.propertiesService.property.RegionName },
+                ManagementCompanyId: _this.propertiesService.property.ManagementCompanyId,
+                ManagementCompanyName: _this.propertiesService.property.ManagementCompanyName,
+                ManagerUserId: _this.propertiesService.property.ManagerUserId,
+                ManagerUserName: _this.propertiesService.property.ManagerUserName,
+                ManagementCompany: {
+                    Id: _this.propertiesService.property.ManagementCompanyId,
+                    Name: _this.propertiesService.property.ManagementCompanyName,
+                },
+                ManagerUser: {
+                    Id: _this.propertiesService.property.ManagerUserId,
+                    Name: _this.propertiesService.property.ManagerUserName,
+                },
                 Headline: _this.propertiesService.property.Headline,
                 Summary: _this.propertiesService.property.Summary,
                 Description: _this.propertiesService.property.Description,
@@ -175,7 +191,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, router_1.ActivatedRoute, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, lookups_service_1.LookupsService, router_1.ActivatedRoute, forms_1.FormBuilder])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());
