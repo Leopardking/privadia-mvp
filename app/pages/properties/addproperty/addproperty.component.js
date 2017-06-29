@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
+var _ = require('lodash');
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 //declare const _:any;
 var AddpropertyComponent = (function () {
@@ -118,43 +119,34 @@ var AddpropertyComponent = (function () {
         console.log('Discard Info form');
     };
     AddpropertyComponent.prototype.onSubmit = function () {
-        console.log('Sub', this.propertyForm.value);
-        /*
-        let newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
-            return newArr = _.concat(newArr, el)
-        })
+        var _this = this;
+        var newArr = [];
+        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
+            return newArr = _.concat(newArr, el);
+        });
         this.propertyForm.value.MetaData = newArr;
-
-        if(this.propertyForm.valid) {
+        if (this.propertyForm.valid) {
             this.sending = true;
-
-            this.propertiesService.addProperty(this.propertyForm.value).subscribe(
-                d => {
-                    $.notify({
-                        icon: "notifications",
-                        message: "Property Added Successfully"
-
-                    },{
-                        type: 'success',
-                        timer: 3000,
-                        placement: {
-                            from: 'top',
-                            align: 'right'
-                        }
-                    });
-
-                    this.router.navigate(['properties']);
-                    this.sending = false;
-
-                    //this.dashboardService.readData();
-                },
-                e => { console.log("error:", e); }
-            );
-        } else {
-            this.errorForm = true
+            this.propertiesService.addProperty(this.propertyForm.value).subscribe(function (d) {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+                }, {
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                _this.router.navigate(['properties']);
+                _this.sending = false;
+                //this.dashboardService.readData();
+            }, function (e) { console.log("error:", e); });
         }
-        */
+        else {
+            this.errorForm = true;
+        }
     };
     AddpropertyComponent = __decorate([
         core_1.Component({

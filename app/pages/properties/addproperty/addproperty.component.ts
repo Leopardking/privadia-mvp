@@ -131,8 +131,6 @@ export class AddpropertyComponent implements OnInit, AfterViewInit{
     }
 
     private onSubmit() {
-        console.log('Sub',this.propertyForm.value)
-        /*
         let newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
@@ -167,6 +165,5 @@ export class AddpropertyComponent implements OnInit, AfterViewInit{
         } else {
             this.errorForm = true
         }
-        */
     }
 }

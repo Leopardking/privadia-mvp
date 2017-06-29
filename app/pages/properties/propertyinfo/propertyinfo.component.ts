@@ -52,10 +52,13 @@ export class PropertyinfoComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
-        const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Manager')[0];
+        const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Admin')[0];
 
         if(role)
-            this.propertyForm.controls['ManagementCompany'].setValue(this.lookupsService.companies[0]);
+            this.propertyForm.controls['ManagementCompany'].reset({
+                value: this.lookupsService.companies[0],
+                disabled: true
+            });
 
         /*
         $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
