@@ -56,7 +56,7 @@
                 </a>
                 <div *ngIf="item.children" class="collapse" id="messageCollapse">
                     <ul class="nav">
-                        <li routerlinkactive="active" *ngFor="let child of item.children">
+                        <li *ngFor="let child of item.children" [routerLinkActive]="['active']">
                             <a [routerLink]="['/' + item.path]" fragment="{{child.hash}}">
                                 <span class="sidebar-mini"><i class="material-icons">{{child.icon}}</i></span>
                                 <span class="sidebar-normal">{{child.title}}</span>
