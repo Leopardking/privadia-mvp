@@ -53,7 +53,7 @@ export class PropertiesService {
 	}
 
 	public getDataProperty(id) {
-		this.isReading = true
+		this.isReading = true;
 		this.getPropertyById(id).subscribe(
 			d => {
 				this.property = d;
@@ -82,6 +82,32 @@ export class PropertiesService {
 				);
 			},
 			e => { console.log("Error Properties: ", e); }
+		);
+	}
+
+	public getDataEmptyProperty() {
+		this.isReading = true;
+		this.getOwners().subscribe(
+			d => {
+				this.owners = d;
+				// this.ownerNames = d.map( (item, i) => { return item.Name; } );
+
+				this.getRegions().subscribe(
+					d => {
+						this.regionArray = d;
+						this.regions = d.map( (item, i) => { return item.Name; } );
+
+						this.getMetaData().subscribe(
+							d => {
+								this.metadata = d;
+								this.isReading = false;
+							},
+							e => { console.log("Error MetaData: ", e); }
+						);	},
+					e => { console.log("Error Regions: ", e); }
+				);
+			},
+			e => { console.log("Error Owner: ", e); }
 		);
 	}
 

@@ -64,6 +64,22 @@ var PropertiesService = (function () {
             }, function (e) { console.log("Error Owner: ", e); });
         }, function (e) { console.log("Error Properties: ", e); });
     };
+    PropertiesService.prototype.getDataEmptyProperty = function () {
+        var _this = this;
+        this.isReading = true;
+        this.getOwners().subscribe(function (d) {
+            _this.owners = d;
+            // this.ownerNames = d.map( (item, i) => { return item.Name; } );
+            _this.getRegions().subscribe(function (d) {
+                _this.regionArray = d;
+                _this.regions = d.map(function (item, i) { return item.Name; });
+                _this.getMetaData().subscribe(function (d) {
+                    _this.metadata = d;
+                    _this.isReading = false;
+                }, function (e) { console.log("Error MetaData: ", e); });
+            }, function (e) { console.log("Error Regions: ", e); });
+        }, function (e) { console.log("Error Owner: ", e); });
+    };
     PropertiesService.prototype.getAllProperties = function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
