@@ -6,8 +6,8 @@ import {Ng2CloudinaryModule} from "ng2-cloudinary";
 import {FileUploadModule} from "ng2-file-upload";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Ng2AutoCompleteModule} from "ng2-auto-complete";
-import {DashboardService} from "../../../providers/dashboard/dashboard.service";
 import {PropertiesService} from "../../../providers/properties/properties.service";
+import {LookupsService} from "../../../providers/lookups/lookups.service";
 
 @NgModule({
     imports: [
@@ -22,7 +22,7 @@ import {PropertiesService} from "../../../providers/properties/properties.servic
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS ],
-    providers: [ DashboardService, PropertiesService ]
+    providers: [ PropertiesService, LookupsService ]
 })
 
 export class CommonsModule{}

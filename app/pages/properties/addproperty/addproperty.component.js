@@ -13,11 +13,13 @@ var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var _ = require('lodash');
+var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 //declare const _:any;
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(router, propertiesService, builder) {
+    function AddpropertyComponent(router, propertiesService, lookupsService, builder) {
         this.router = router;
         this.propertiesService = propertiesService;
+        this.lookupsService = lookupsService;
         this.builder = builder;
         // private isActive = true;
         this.isLoad = true;
@@ -32,6 +34,18 @@ var AddpropertyComponent = (function () {
             RegionId: new forms_1.FormControl(),
             RegionName: new forms_1.FormControl(),
             Region: new forms_1.FormControl({
+                Id: 1,
+                Name: 'Ibiza',
+            }),
+            ManagementCompanyId: new forms_1.FormControl(),
+            ManagementCompanyName: new forms_1.FormControl(),
+            ManagementCompany: new forms_1.FormControl({
+                Id: 1,
+                Name: 'Ibiza',
+            }),
+            ManagerUserId: new forms_1.FormControl(),
+            ManagerUserName: new forms_1.FormControl(),
+            ManagerUser: new forms_1.FormControl({
                 Id: 1,
                 Name: 'Ibiza',
             }),
@@ -67,9 +81,10 @@ var AddpropertyComponent = (function () {
             Benefits: new forms_1.FormControl(),
         });
         propertiesService.getDataEmptyProperty();
+        lookupsService.getDataCompanies();
+        lookupsService.getDataManagers();
         console.log('Form init', this.propertiesService);
     }
-    // steve@freelancemvc.net, agent1@freelancemvc.net
     AddpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
@@ -138,7 +153,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService, lookups_service_1.LookupsService, forms_1.FormBuilder])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());

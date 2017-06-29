@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import * as _ from 'lodash'
+import {LookupsService} from "../../../providers/lookups/lookups.service";
 declare const $:any;
 //declare const _:any;
 
@@ -26,9 +27,22 @@ export class AddpropertyComponent implements OnInit{
         InternalName: new FormControl(),
         Name: new FormControl(null, Validators.required),
         Address: new FormControl(),
+
         RegionId: new FormControl(),
         RegionName: new FormControl(),
         Region: new FormControl({
+            Id: 1,
+            Name: 'Ibiza',
+        }),
+        ManagementCompanyId: new FormControl(),
+        ManagementCompanyName: new FormControl(),
+        ManagementCompany: new FormControl({
+            Id: 1,
+            Name: 'Ibiza',
+        }),
+        ManagerUserId: new FormControl(),
+        ManagerUserName: new FormControl(),
+        ManagerUser: new FormControl({
             Id: 1,
             Name: 'Ibiza',
         }),
@@ -66,13 +80,15 @@ export class AddpropertyComponent implements OnInit{
 
     constructor ( private router:Router,
                   private propertiesService: PropertiesService,
+                  private lookupsService: LookupsService,
                   private builder: FormBuilder ) {
 
         propertiesService.getDataEmptyProperty();
+        lookupsService.getDataCompanies();
+        lookupsService.getDataManagers();
         console.log('Form init',this.propertiesService)
     }
 
-    // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
