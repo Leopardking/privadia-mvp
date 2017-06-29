@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
-var _ = require("lodash");
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var EditpropertyComponent = (function () {
     function EditpropertyComponent(propertiesService, route, builder) {
@@ -20,7 +19,7 @@ var EditpropertyComponent = (function () {
         this.route = route;
         this.builder = builder;
         this.errorForm = false;
-        this.sub = this.route.params.subscribe(function (params) {
+        this.route.params.subscribe(function (params) {
             propertiesService.getDataProperty(_this.propertyId = params['id']);
         });
     }
@@ -71,7 +70,6 @@ var EditpropertyComponent = (function () {
             _this.setMetaData(_this.propertiesService.property.MetaData);
             _this.setMetaDataTmp();
             $('.property-tabs a:first').tab('show');
-            console.log('Form ', _this.propertyForm);
         }, 1000);
     };
     EditpropertyComponent.prototype.setContacts = function (contacts) {

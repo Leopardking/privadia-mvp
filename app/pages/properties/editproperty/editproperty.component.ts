@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import * as _ from "lodash";
 
-//import { MainService } from '../../../providers/homeservice';
-import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
 declare const $:any;
+declare const _:any;
 
 @Component({
     moduleId: module.id,
@@ -18,7 +16,6 @@ declare const $:any;
 
 export class EditpropertyComponent implements OnInit{
     private property;
-    private sub: any;
     private propertyId;
 
     private errorForm = false;
@@ -27,7 +24,7 @@ export class EditpropertyComponent implements OnInit{
     constructor ( private propertiesService: PropertiesService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
-        this.sub = this.route.params.subscribe(params => {
+        this.route.params.subscribe(params => {
             propertiesService.getDataProperty(this.propertyId = params['id']);
         });
     }
@@ -36,7 +33,6 @@ export class EditpropertyComponent implements OnInit{
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
         setTimeout(() => {
-
             this.propertyForm = this.builder.group({
                 Id: this.propertyId,
                 Active: this.propertiesService.property.Active,
@@ -81,8 +77,6 @@ export class EditpropertyComponent implements OnInit{
             this.setMetaDataTmp();
 
             $('.property-tabs a:first').tab('show')
-            console.log('Form ', this.propertyForm)
-
         }, 1000);
     }
 
