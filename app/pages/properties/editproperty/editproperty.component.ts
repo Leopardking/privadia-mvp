@@ -16,7 +16,7 @@ declare const _:any;
     styleUrls: [ 'editproperty.component.css' ]
 })
 
-export class EditpropertyComponent implements OnInit{
+export class EditpropertyComponent implements OnInit {
     private property;
     private propertyId;
 
@@ -30,14 +30,13 @@ export class EditpropertyComponent implements OnInit{
                   private builder: FormBuilder) {
         this.route.params.subscribe(params => {
             propertiesService.getDataProperty(this.propertyId = params['id']);
-            lookupsService.getDataCompanies();
-            lookupsService.getDataManagers();
+            //lookupsService.getDataCompanies();
+            //lookupsService.getDataManagers();
         });
     }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        console.log('User Info Edit ', this.loginService.userInfo);
 
         setTimeout(() => {
             this.propertyForm = this.builder.group({

@@ -11,17 +11,15 @@ export class LookupsService {
 	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 	private token: string = localStorage.getItem('id_token');
 
-	public userInfo: any;
 	public companies = [];
 	public managers = [];
 
 	constructor ( private http: Http,
-				  private loginService: LoginService) {}
+				  private loginService: LoginService ) {}
 
 	public getDataCompanies() {
 		this.getManagementCompanies().subscribe(
 			d => {
-				console.log('error',)
 				this.companies = d;
 			},
 			e => { console.log('Error ManagementCompanies', e) }
@@ -29,19 +27,17 @@ export class LookupsService {
 	}
 
 	public getDataManagers() {
-		/*
 		this.getManagersByCompany().subscribe(
 			d => {
 				this.managers = d;
 			},
 			e => { console.log('Error ManagersByCompany', e) }
 		)
-		*/
 	}
 
-	private getManagementCompanies() {
+	public getManagementCompanies() {
 		if(!this.loginService.getPermission('Lookups/GetManagementCompanies'))
-			return Observable.throw({error: 'Permission denied'});
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -51,9 +47,9 @@ export class LookupsService {
             .catch(this.handleError);
 	}
 
-	private getManagersByCompany() {
+	public getManagersByCompany() {
 		if(!this.loginService.getPermission('Lookups/GetManagersByCompany'))
-			return Observable.throw({error: 'Permission denied'});
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );

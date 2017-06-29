@@ -12,11 +12,9 @@ var core_1 = require('@angular/core');
 var properties_service_1 = require('../properties/properties.service');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
-var router_1 = require("@angular/router");
 var DashboardService = (function () {
-    function DashboardService(propertiesService, router) {
+    function DashboardService(propertiesService) {
         this.propertiesService = propertiesService;
-        this.router = router;
         this.filter = {};
         this.regions = [];
         this.villas = [];
@@ -28,24 +26,24 @@ var DashboardService = (function () {
         var _this = this;
         this.isReading = true;
         //--------------		Reading data       -----------///////////
-        this.propertiesService.getRegions().subscribe(function (d) {
-            _this.regions = d;
-            _this.propertiesService.getVillas(_this.filter).subscribe(function (d) {
-                _this.villas = d;
-                _this.propertiesService.getMetaData().subscribe(function (d) {
-                    _this.metadata = d;
-                    _this.isReading = false;
-                }, function (e) { console.log("error metadata: ", e); });
-            }, function (e) { console.log("error villas:", e); });
+        this.propertiesService.getVillas(this.filter).subscribe(function (d) {
+            _this.villas = d;
+            _this.propertiesService.getMetaData().subscribe(function (d) {
+                _this.metadata = d;
+            }, function (e) { console.log("error metadata: ", e); });
+            _this.propertiesService.getRegions().subscribe(function (d) {
+                _this.regions = d;
+            }, function (e) { console.log('error regions', e); });
+            _this.isReading = false;
         }, function (e) {
-            console.log('error regions', e);
-            localStorage.removeItem('id_token');
-            _this.router.navigate(['/login']);
+            console.log("error villas:", e);
+            // localStorage.removeItem('id_token');
+            // this.router.navigate(['/login']);
         });
     };
     DashboardService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, router_1.Router])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService])
     ], DashboardService);
     return DashboardService;
 }());

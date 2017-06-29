@@ -40,7 +40,7 @@ export class PropertiesService {
 	};
 
 	constructor ( private http: Http,
-				  private loginService: LoginService ) {}
+				  private loginService: LoginService ) { }
 
 	public getDataProperties() {
 		this.getAllProperties().subscribe(
@@ -162,8 +162,10 @@ export class PropertiesService {
 	}
 
 	public getVillas(filter) {
-		let header = new Headers({ 'Authorization': this.token });
+		if(!this.loginService.getPermission('Properties/SearchAvailable'))
+			return Observable.throw(null);
 
+		let header = new Headers({ 'Authorization': this.token });
 		let options = new RequestOptions({ headers: header });
 
 		return this.http.post(this.apiUrl + '/api/Properties/SearchAvailable', filter, options)
@@ -192,7 +194,7 @@ export class PropertiesService {
 
 	public getRegions() {
 		if(!this.loginService.getPermission('Lookups/GetRegions'))
-			return Observable.throw({error: 'Permission denied'});
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -204,7 +206,7 @@ export class PropertiesService {
 
 	public getOwners() {
 		if(!this.loginService.getPermission('Lookups/GetOwners'))
-			return Observable.throw({error: 'Permission denied'});
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -225,7 +227,7 @@ export class PropertiesService {
 
 	public getMetaData() {
 		if(!this.loginService.getPermission('Lookups/GetMetaData'))
-			return Observable.throw({error: 'Permission denied'});
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );

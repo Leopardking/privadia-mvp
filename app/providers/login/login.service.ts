@@ -11,6 +11,7 @@ export class LoginService {
 	private token: string = localStorage.getItem('id_token');
 
 	public userInfo: any;
+	public isReading = true;
 
 	constructor ( private http: Http ) {}
 
@@ -18,6 +19,7 @@ export class LoginService {
 		this.getCurrentUser().subscribe(
 			d => {
 				this.userInfo = d;
+				this.isReading = false
 			},
 			e => { console.log('Error get user ', e) }
 		)

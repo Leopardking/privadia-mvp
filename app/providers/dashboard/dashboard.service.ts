@@ -19,8 +19,7 @@ export class DashboardService {
 
 	public isReading;
 
-	constructor ( private propertiesService: PropertiesService,
-				  private router: Router ) {
+	constructor ( private propertiesService: PropertiesService ) {
 		this.readData();
 	}
 
@@ -28,28 +27,30 @@ export class DashboardService {
 		this.isReading = true;
 
 		//--------------		Reading data       -----------///////////
-		this.propertiesService.getRegions().subscribe(
+		this.propertiesService.getVillas(this.filter).subscribe(
 			d => {
-				this.regions = d;
-				this.propertiesService.getVillas(this.filter).subscribe(
-					d => {
-						this.villas = d;
+				this.villas = d;
 
-						this.propertiesService.getMetaData().subscribe(
-							d => {
-								this.metadata = d;
-								this.isReading = false;
-							},
-							e => { console.log("error metadata: ", e); }
-						);
+				this.propertiesService.getMetaData().subscribe(
+					d => {
+						this.metadata = d;
 					},
-					e => { console.log("error villas:", e); }
+					e => { console.log("error metadata: ", e); }
 				);
+
+				this.propertiesService.getRegions().subscribe(
+					d => {
+						this.regions = d;
+					},
+					e => { console.log('error regions', e) }
+				);
+
+				this.isReading = false;
 			},
 			e => {
-				console.log('error regions', e);
-				localStorage.removeItem('id_token');
-				this.router.navigate(['/login']);
+				console.log("error villas:", e);
+				// localStorage.removeItem('id_token');
+				// this.router.navigate(['/login']);
 			}
 		);
 	}

@@ -10,10 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var properties_service_1 = require('./../../providers/properties/properties.service');
+var login_service_1 = require("../../providers/login/login.service");
 //import initDataTable = require('../../../assets/js/init/initDataTable.js');
 var PropertiesComponent = (function () {
-    function PropertiesComponent(propertiesService) {
+    function PropertiesComponent(propertiesService, loginService) {
         this.propertiesService = propertiesService;
+        this.loginService = loginService;
         this.datatableInited = false;
         propertiesService.getDataProperties();
     }
@@ -29,7 +31,6 @@ var PropertiesComponent = (function () {
             info: false,
         });
         $('#datatableSearch').on('keyup', function () {
-            console.log('Search ', $(this).text());
             tableWidget.search(this.value).draw();
         });
         this.datatableInited = true;
@@ -47,6 +48,8 @@ var PropertiesComponent = (function () {
     PropertiesComponent.prototype.editBooking = function () {
         console.log('edit');
     };
+    PropertiesComponent.prototype.permitoins = function (Permissions) {
+    };
     PropertiesComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -54,7 +57,7 @@ var PropertiesComponent = (function () {
             templateUrl: 'properties.component.html',
             styleUrls: ['properties.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService])
     ], PropertiesComponent);
     return PropertiesComponent;
 }());

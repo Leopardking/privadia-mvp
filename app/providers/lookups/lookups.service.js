@@ -26,23 +26,18 @@ var LookupsService = (function () {
     LookupsService.prototype.getDataCompanies = function () {
         var _this = this;
         this.getManagementCompanies().subscribe(function (d) {
-            console.log('error');
             _this.companies = d;
         }, function (e) { console.log('Error ManagementCompanies', e); });
     };
     LookupsService.prototype.getDataManagers = function () {
-        /*
-        this.getManagersByCompany().subscribe(
-            d => {
-                this.managers = d;
-            },
-            e => { console.log('Error ManagersByCompany', e) }
-        )
-        */
+        var _this = this;
+        this.getManagersByCompany().subscribe(function (d) {
+            _this.managers = d;
+        }, function (e) { console.log('Error ManagersByCompany', e); });
     };
     LookupsService.prototype.getManagementCompanies = function () {
         if (!this.loginService.getPermission('Lookups/GetManagementCompanies'))
-            return Observable_1.Observable.throw({ error: 'Permission denied' });
+            return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetManagementCompanies', options)
@@ -51,7 +46,7 @@ var LookupsService = (function () {
     };
     LookupsService.prototype.getManagersByCompany = function () {
         if (!this.loginService.getPermission('Lookups/GetManagersByCompany'))
-            return Observable_1.Observable.throw({ error: 'Permission denied' });
+            return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetManagersByCompany/6e78b138-4d18-4691-b988-c5057f599bf0', options)

@@ -118,6 +118,8 @@ var PropertiesService = (function () {
             .catch(this.handleError);
     };
     PropertiesService.prototype.getVillas = function (filter) {
+        if (!this.loginService.getPermission('Properties/SearchAvailable'))
+            return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.post(this.apiUrl + '/api/Properties/SearchAvailable', filter, options)
@@ -141,7 +143,7 @@ var PropertiesService = (function () {
     };
     PropertiesService.prototype.getRegions = function () {
         if (!this.loginService.getPermission('Lookups/GetRegions'))
-            return Observable_1.Observable.throw({ error: 'Permission denied' });
+            return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetRegions', options)
@@ -150,7 +152,7 @@ var PropertiesService = (function () {
     };
     PropertiesService.prototype.getOwners = function () {
         if (!this.loginService.getPermission('Lookups/GetOwners'))
-            return Observable_1.Observable.throw({ error: 'Permission denied' });
+            return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetOwners', options)
@@ -166,7 +168,7 @@ var PropertiesService = (function () {
     };
     PropertiesService.prototype.getMetaData = function () {
         if (!this.loginService.getPermission('Lookups/GetMetaData'))
-            return Observable_1.Observable.throw({ error: 'Permission denied' });
+            return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetMetaData', options)

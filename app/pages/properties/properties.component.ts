@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 //import { MainService } from './../../providers/homeservice';
 import { DashboardService } from './../../providers/dashboard/dashboard.service';
 import { PropertiesService } from './../../providers/properties/properties.service';
+import {LoginService} from "../../providers/login/login.service";
 
 declare const $:any;
 
@@ -18,7 +19,7 @@ declare const $:any;
 export class PropertiesComponent implements OnInit{
     private datatableInited = false;
 
-    constructor ( private propertiesService: PropertiesService ) {
+    constructor ( private propertiesService: PropertiesService, private loginService: LoginService ) {
         propertiesService.getDataProperties()
     }
 
@@ -35,7 +36,6 @@ export class PropertiesComponent implements OnInit{
             info: false,
         });
         $('#datatableSearch').on( 'keyup', function () {
-            console.log('Search ', $(this).text())
             tableWidget.search( this.value ).draw();
         } );
         this.datatableInited = true;
@@ -57,5 +57,9 @@ export class PropertiesComponent implements OnInit{
 
     private editBooking() {
         console.log('edit');
+    }
+
+    public permitoins(Permissions) {
+
     }
 }
