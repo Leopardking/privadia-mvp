@@ -36,6 +36,14 @@
         <div id="heading-name_address" class="tab-pane fade card-content p-b-none">
             <div [formGroup]="propertyForm">
                 <div class="row">
+                    <div class="col-xs-4">
+                        <singleselect-field-cmp *ngIf="companyList.length"
+                                                [dataList]="companyList"
+                                                [options]="{title: 'Management Company', default: 'Select Company', name: 'ManagementCompany'}"
+                                                [field]="propertyForm.controls.ManagementCompany"></singleselect-field-cmp>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-xs-12">
                         <div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames" class="form-group label-floating">
                             <label class="control-label">Select Owner</label>

@@ -19,13 +19,27 @@ declare const $: any;
 })
 
 export class PropertyinfoComponent implements OnInit{
-    @Input('group')
-    public propertyForm: FormGroup;
+    @Input('group') public propertyForm: FormGroup;
+    @Input('errorForm') public errorForm: any;
 
-    @Input('errorForm')
-    public errorForm: any;
+    // @ViewChild('villadescription') villadescription;
 
-    @ViewChild('villadescription') villadescription;
+    public companyList = [{
+        Id: "6e78b138-4d18-4691-b988-c5057f599bf02",
+        Name: "Test Management Company2"
+    },{
+        Id: "6e78b138-4d18-4691-b988-c5057f599bf03",
+        Name: "Test Management Company3"
+    },{
+        Id: "6e78b138-4d18-4691-b988-c5057f599bf04",
+        Name: "Test Management Company4"
+    },{
+        Id: "6e78b138-4d18-4691-b988-c5057f599bf0",
+        Name: "Test Management Company"
+    },{
+        Id: "6e78b138-4d18-4691-b988-c5057f599bf06",
+        Name: "Test Management Company6"
+    },];
 
     //public changeTab
     // name & address

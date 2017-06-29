@@ -18,6 +18,7 @@ var forms_1 = require("@angular/forms");
 var ng2_auto_complete_1 = require("ng2-auto-complete");
 var properties_service_1 = require("../../../providers/properties/properties.service");
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
+var single_select_component_1 = require("../../../components/form-fields/single-select-field/single-select.component");
 var CommonsModule = (function () {
     function CommonsModule() {
     }
@@ -34,7 +35,7 @@ var CommonsModule = (function () {
                 ng2_file_upload_1.FileUploadModule,
                 router_1.RouterModule.forChild(commons_routes_1.MODULE_ROUTES)
             ],
-            declarations: [commons_routes_1.MODULE_COMPONENTS],
+            declarations: [commons_routes_1.MODULE_COMPONENTS, single_select_component_1.SingleSelectfieldComponent],
             providers: [properties_service_1.PropertiesService, lookups_service_1.LookupsService]
         }), 
         __metadata('design:paramtypes', [])

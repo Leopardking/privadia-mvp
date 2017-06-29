@@ -37,8 +37,8 @@ export class AddpropertyComponent implements OnInit{
         ManagementCompanyId: new FormControl(),
         ManagementCompanyName: new FormControl(),
         ManagementCompany: new FormControl({
-            Id: 1,
-            Name: 'Ibiza',
+            Id: "6e78b138-4d18-4691-b988-c5057f599bf03",
+            Name: "Test Management Company3"
         }),
         ManagerUserId: new FormControl(),
         ManagerUserName: new FormControl(),
@@ -127,6 +127,8 @@ export class AddpropertyComponent implements OnInit{
     }
 
     private onSubmit() {
+        console.log('Submit ', this.propertyForm.value)
+        /*
         let newArr = [];
         _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
@@ -161,5 +163,6 @@ export class AddpropertyComponent implements OnInit{
         } else {
             this.errorForm = true
         }
+        */
     }
 }
