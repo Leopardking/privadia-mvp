@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response  } from '@angular/http';
+import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
@@ -7,8 +7,20 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class LoginService {
-	constructor ( private http: Http ) {
+	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+	private token: string = localStorage.getItem('id_token');
 
+	public userInfo: any;
+
+	constructor ( private http: Http ) {}
+
+	public getDataUser() {
+		this.getCurrentUser().subscribe(
+			d => {
+				this.userInfo = d;
+			},
+			e => { console.log('Error get user ', e) }
+		)
 	}
 
 	public login(apiUrl, email, password) {
@@ -20,13 +32,22 @@ export class LoginService {
 			let gtype = encodeURIComponent(grant_type);
 
 			return this.http.post(apiUrl + '/token', `grant_type=${grant_type}&username=${username}&password=${pwd}`)
-				.map(this.extractLoginData)
+				.map(this.extractData)
             	.catch(this.handleError);
         }
 
 	}
 
-	private extractLoginData(res:Response) {
+	private getCurrentUser() {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Users/GetCurrent', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	private extractData(res:Response) {
 		let body = res.json();
 
 	    return body || { };

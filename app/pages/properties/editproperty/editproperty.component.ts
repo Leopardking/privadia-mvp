@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { ActivatedRoute } from '@angular/router';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
+import {LoginService} from "../../../providers/login/login.service";
 
 declare const $:any;
 declare const _:any;
@@ -22,6 +23,7 @@ export class EditpropertyComponent implements OnInit{
     public propertyForm: FormGroup;
 
     constructor ( private propertiesService: PropertiesService,
+                  private loginService: LoginService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
         this.route.params.subscribe(params => {
@@ -31,6 +33,7 @@ export class EditpropertyComponent implements OnInit{
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        console.log('User Info Edit ', this.loginService.userInfo);
 
         setTimeout(() => {
             this.propertyForm = this.builder.group({

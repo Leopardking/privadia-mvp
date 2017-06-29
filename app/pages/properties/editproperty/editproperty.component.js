@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
+var login_service_1 = require("../../../providers/login/login.service");
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(propertiesService, route, builder) {
+    function EditpropertyComponent(propertiesService, loginService, route, builder) {
         var _this = this;
         this.propertiesService = propertiesService;
+        this.loginService = loginService;
         this.route = route;
         this.builder = builder;
         this.errorForm = false;
@@ -26,6 +28,7 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        console.log('User Info Edit ', this.loginService.userInfo);
         setTimeout(function () {
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,
@@ -172,7 +175,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, router_1.ActivatedRoute, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, router_1.ActivatedRoute, forms_1.FormBuilder])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());
