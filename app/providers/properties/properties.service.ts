@@ -6,6 +6,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
 import {LoginService} from "../login/login.service";
+import {LookupsService} from "../lookups/lookups.service";
 
 @Injectable()
 export class PropertiesService {
@@ -13,11 +14,16 @@ export class PropertiesService {
 	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 	private token: string = localStorage.getItem('id_token');
 
+	public owners = [];
 	public properties = [];
 	public property;
+	public regions = [];
+	public metadata = [];
+	public companies;
+	public managers;
+
 	public isReading;
 
-	public owners;
 	public regionArray;
 	// private ownerNames;
 
@@ -38,12 +44,12 @@ export class PropertiesService {
 	};
 
 	constructor ( private http: Http,
-				  private loginService: LoginService ) {
-		this.getDataProperties();
+				  private loginService: LoginService,
+				  private lookupsService: LookupsService ) {
 		console.log('Load Properties Service');
 	}
 
-	public getDataProperties() {
+	public readDataProperties() {
 		this.getAllProperties().subscribe(
 			d => {
 				this.properties = d;
@@ -54,7 +60,85 @@ export class PropertiesService {
 		);
 
 	}
-/*
+
+	public readDataProperty(id) {
+		this.isReading = true;
+		this.getPropertyById(id).subscribe(
+			d => {
+				this.property = d;
+				this.isReading = false;
+			},
+			e => {
+				console.log("error properties: ", e);
+			}
+		);
+
+	}
+
+	public readDataRegions() {
+		this.isReading = true;
+
+		//--------------		Reading data       -----------///////////
+		this.lookupsService.getRegions().subscribe(
+			d => {
+				this.regions = d;
+				this.isReading = false;
+			},
+			e => {
+				console.log("error regions:", e);
+			}
+		);
+	}
+
+	public readDataMetadata() {
+		this.isReading = true;
+
+		//--------------		Reading data       -----------///////////
+		this.lookupsService.getMetaData().subscribe(
+			d => {
+				this.metadata = d;
+				this.isReading = false;
+			},
+			e => {
+				console.log("error metadata:", e);
+			}
+		);
+	}
+
+	public readDataOwners() {
+		this.isReading = true;
+
+		//--------------		Reading data       -----------///////////
+		this.lookupsService.getOwners().subscribe(
+			d => {
+				this.owners = d;
+				this.isReading = false;
+			},
+			e => {
+				console.log("error owner:", e);
+			}
+		);
+	}
+
+	public getDataCompanies() {
+		this.lookupsService.getManagementCompanies().subscribe(
+			d => {
+				this.companies = d;
+			},
+			e => { console.log('Error ManagementCompanies', e) }
+		)
+	}
+
+	public getDataManagers() {
+		this.lookupsService.getManagersByCompany().subscribe(
+			d => {
+				this.managers = d;
+			},
+			e => { console.log('Error ManagersByCompany', e) }
+		)
+	}
+
+	/*
 	public getDataProperty(id) {
 		this.isReading = true;
 		this.getPropertyById(id).subscribe(

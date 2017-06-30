@@ -15,14 +15,19 @@ require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 require('rxjs/add/observable/throw');
 var login_service_1 = require("../login/login.service");
+var lookups_service_1 = require("../lookups/lookups.service");
 var PropertiesService = (function () {
-    function PropertiesService(http, loginService) {
+    function PropertiesService(http, loginService, lookupsService) {
         this.http = http;
         this.loginService = loginService;
+        this.lookupsService = lookupsService;
         // public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
+        this.owners = [];
         this.properties = [];
+        this.regions = [];
+        this.metadata = [];
         // private ownerNames;
         // public owner;
         // public ownerName;
@@ -38,10 +43,9 @@ var PropertiesService = (function () {
             Id: '',
             Name: ''
         };
-        this.getDataProperties();
         console.log('Load Properties Service');
     }
-    PropertiesService.prototype.getDataProperties = function () {
+    PropertiesService.prototype.readDataProperties = function () {
         var _this = this;
         this.getAllProperties().subscribe(function (d) {
             _this.properties = d;
@@ -49,69 +53,124 @@ var PropertiesService = (function () {
             console.log("error properties: ", e);
         });
     };
+    PropertiesService.prototype.readDataProperty = function (id) {
+        var _this = this;
+        this.isReading = true;
+        this.getPropertyById(id).subscribe(function (d) {
+            _this.property = d;
+            _this.isReading = false;
+        }, function (e) {
+            console.log("error properties: ", e);
+        });
+    };
+    PropertiesService.prototype.readDataRegions = function () {
+        var _this = this;
+        this.isReading = true;
+        //--------------		Reading data       -----------///////////
+        this.lookupsService.getRegions().subscribe(function (d) {
+            _this.regions = d;
+            _this.isReading = false;
+        }, function (e) {
+            console.log("error regions:", e);
+        });
+    };
+    PropertiesService.prototype.readDataMetadata = function () {
+        var _this = this;
+        this.isReading = true;
+        //--------------		Reading data       -----------///////////
+        this.lookupsService.getMetaData().subscribe(function (d) {
+            _this.metadata = d;
+            _this.isReading = false;
+        }, function (e) {
+            console.log("error metadata:", e);
+        });
+    };
+    PropertiesService.prototype.readDataOwners = function () {
+        var _this = this;
+        this.isReading = true;
+        //--------------		Reading data       -----------///////////
+        this.lookupsService.getOwners().subscribe(function (d) {
+            _this.owners = d;
+            _this.isReading = false;
+        }, function (e) {
+            console.log("error owner:", e);
+        });
+    };
+    PropertiesService.prototype.getDataCompanies = function () {
+        var _this = this;
+        this.lookupsService.getManagementCompanies().subscribe(function (d) {
+            _this.companies = d;
+        }, function (e) { console.log('Error ManagementCompanies', e); });
+    };
+    PropertiesService.prototype.getDataManagers = function () {
+        var _this = this;
+        this.lookupsService.getManagersByCompany().subscribe(function (d) {
+            _this.managers = d;
+        }, function (e) { console.log('Error ManagersByCompany', e); });
+    };
     /*
-        public getDataProperty(id) {
-            this.isReading = true;
-            this.getPropertyById(id).subscribe(
-                d => {
-                    this.property = d;
-    
-                        this.getMetaData().subscribe(
-                            d => {
-                                this.metadata = d;
-                            },
-                            e => { console.log("Error MetaData: ", e); }
-                        );
-    
-                        this.getRegions().subscribe(
-                            d => {
-                                this.regionArray = d;
-                                this.regions = d.map( (item, i) => { return item.Name; } );
-    
-                            },
-                            e => { console.log("Error Regions: ", e); }
-                        );
-    
-                        this.getOwners().subscribe(
-                            d => {
-                                this.owners = d;
-                                // this.ownerNames = d.map( (item, i) => { return item.Name; } );
-                            },
-                            e => { console.log("Error Owner: ", e); }
-                        );
-    
-                    this.isReading = false;
-                },
-                e => { console.log("Error Properties: ", e); }
-            );
-        }
-    
-        public getDataEmptyProperty() {
-            this.isReading = true;
-            this.getOwners().subscribe(
-                d => {
-                    this.owners = d;
-                    // this.ownerNames = d.map( (item, i) => { return item.Name; } );
-    
+    public getDataProperty(id) {
+        this.isReading = true;
+        this.getPropertyById(id).subscribe(
+            d => {
+                this.property = d;
+
+                    this.getMetaData().subscribe(
+                        d => {
+                            this.metadata = d;
+                        },
+                        e => { console.log("Error MetaData: ", e); }
+                    );
+
                     this.getRegions().subscribe(
                         d => {
                             this.regionArray = d;
                             this.regions = d.map( (item, i) => { return item.Name; } );
-    
-                            this.getMetaData().subscribe(
-                                d => {
-                                    this.metadata = d;
-                                    this.isReading = false;
-                                },
-                                e => { console.log("Error MetaData: ", e); }
-                            );	},
+
+                        },
                         e => { console.log("Error Regions: ", e); }
                     );
-                },
-                e => { console.log("Error Owner: ", e); }
-            );
-        }
-    */
+
+                    this.getOwners().subscribe(
+                        d => {
+                            this.owners = d;
+                            // this.ownerNames = d.map( (item, i) => { return item.Name; } );
+                        },
+                        e => { console.log("Error Owner: ", e); }
+                    );
+
+                this.isReading = false;
+            },
+            e => { console.log("Error Properties: ", e); }
+        );
+    }
+
+    public getDataEmptyProperty() {
+        this.isReading = true;
+        this.getOwners().subscribe(
+            d => {
+                this.owners = d;
+                // this.ownerNames = d.map( (item, i) => { return item.Name; } );
+
+                this.getRegions().subscribe(
+                    d => {
+                        this.regionArray = d;
+                        this.regions = d.map( (item, i) => { return item.Name; } );
+
+                        this.getMetaData().subscribe(
+                            d => {
+                                this.metadata = d;
+                                this.isReading = false;
+                            },
+                            e => { console.log("Error MetaData: ", e); }
+                        );	},
+                    e => { console.log("Error Regions: ", e); }
+                );
+            },
+            e => { console.log("Error Owner: ", e); }
+        );
+    }
+*/
     PropertiesService.prototype.getAllProperties = function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
@@ -197,7 +256,7 @@ var PropertiesService = (function () {
     };
     PropertiesService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService])
+        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService, lookups_service_1.LookupsService])
     ], PropertiesService);
     return PropertiesService;
 }());

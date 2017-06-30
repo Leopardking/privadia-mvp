@@ -20,7 +20,7 @@ export class PropertiesComponent implements OnInit{
     private datatableInited = false;
 
     constructor ( private propertiesService: PropertiesService, private loginService: LoginService ) {
-        propertiesService.getDataProperties()
+        propertiesService.readDataProperties()
     }
 
     ngOnInit(){

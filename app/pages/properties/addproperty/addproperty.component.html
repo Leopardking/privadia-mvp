@@ -67,7 +67,7 @@
                         <div class="tab-content m-l-r-20-negative m-t-25">
                             <!--  Property Info  -->
                             <div id="metatab-info" class="card-content p-b-none p-l-r-none p-t-none">
-                                <propertyinfo-cmp *ngIf="!propertiesService.isReading && !lookupsService.isReading"
+                                <propertyinfo-cmp *ngIf="propertiesService.metadata.length"
                                                   [group]="propertyForm"
                                                   [errorForm]="errorForm"></propertyinfo-cmp>
                             </div>
@@ -88,31 +88,31 @@
                             </div>
 
                             <div id="metatab-property-4" class="card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="!propertiesService.isReading"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata.length"
                                                          [group]="propertyForm"
                                                          [metadata]="propertiesService.metadata[3]"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-3" class="card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="!propertiesService.isReading"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata.length"
                                                          [group]="propertyForm"
                                                          [metadata]="propertiesService.metadata[2]"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-6" class="card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="!propertiesService.isReading"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata.length"
                                                          [group]="propertyForm"
                                                          [metadata]="propertiesService.metadata[5]"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-2" class="card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="!propertiesService.isReading"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata.length"
                                                          [group]="propertyForm"
                                                          [metadata]="propertiesService.metadata[1]"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-1" class="card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="!propertiesService.isReading"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata.length"
                                                          [group]="propertyForm"
                                                          [metadata]="propertiesService.metadata[0]"></property-metafilter-cmp>
                             </div>

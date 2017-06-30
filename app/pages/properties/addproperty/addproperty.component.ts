@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -16,7 +16,7 @@ declare const $:any;
     styleUrls: [ 'addproperty.component.css' ]
 })
 
-export class AddpropertyComponent implements OnInit, AfterViewInit{
+export class AddpropertyComponent implements OnInit {
     // private isActive = true;
     private isLoad = true;
     private errorForm = false;
@@ -84,9 +84,11 @@ export class AddpropertyComponent implements OnInit, AfterViewInit{
                   private lookupsService: LookupsService,
                   private builder: FormBuilder ) {
 
-        //propertiesService.getDataEmptyProperty();
-        lookupsService.getDataCompanies();
-        lookupsService.getDataManagers();
+        propertiesService.readDataMetadata();
+        propertiesService.readDataOwners();
+        propertiesService.readDataRegions();
+        propertiesService.getDataCompanies();
+        propertiesService.getDataManagers();
         console.log('Form init',this.propertiesService)
     }
 
@@ -108,9 +110,6 @@ export class AddpropertyComponent implements OnInit, AfterViewInit{
                 }
             });
         });
-    }
-
-    ngAfterViewInit () {
     }
 
     setRegion(region) {

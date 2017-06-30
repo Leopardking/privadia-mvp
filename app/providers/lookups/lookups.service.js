@@ -36,18 +36,6 @@ var LookupsService = (function () {
             _this.metadata = d;
         }, function (e) { console.log('Error ManagementCompanies', e); });
     };
-    LookupsService.prototype.getDataCompanies = function () {
-        var _this = this;
-        this.getManagementCompanies().subscribe(function (d) {
-            _this.companies = d;
-        }, function (e) { console.log('Error ManagementCompanies', e); });
-    };
-    LookupsService.prototype.getDataManagers = function () {
-        var _this = this;
-        this.getManagersByCompany().subscribe(function (d) {
-            _this.managers = d;
-        }, function (e) { console.log('Error ManagersByCompany', e); });
-    };
     LookupsService.prototype.getManagementCompanies = function () {
         if (!this.loginService.getPermission('Lookups/GetManagementCompanies'))
             return Observable_1.Observable.throw(null);

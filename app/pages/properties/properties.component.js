@@ -17,7 +17,7 @@ var PropertiesComponent = (function () {
         this.propertiesService = propertiesService;
         this.loginService = loginService;
         this.datatableInited = false;
-        propertiesService.getDataProperties();
+        propertiesService.readDataProperties();
     }
     PropertiesComponent.prototype.ngOnInit = function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);

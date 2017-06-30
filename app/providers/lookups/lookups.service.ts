@@ -39,24 +39,6 @@ export class LookupsService {
 		)
 	}
 
-	public getDataCompanies() {
-		this.getManagementCompanies().subscribe(
-			d => {
-				this.companies = d;
-			},
-			e => { console.log('Error ManagementCompanies', e) }
-		)
-	}
-
-	public getDataManagers() {
-		this.getManagersByCompany().subscribe(
-			d => {
-				this.managers = d;
-			},
-			e => { console.log('Error ManagersByCompany', e) }
-		)
-	}
-
 	public getManagementCompanies() {
 		if(!this.loginService.getPermission('Lookups/GetManagementCompanies'))
 			return Observable.throw(null);

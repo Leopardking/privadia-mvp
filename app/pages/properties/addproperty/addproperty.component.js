@@ -80,9 +80,11 @@ var AddpropertyComponent = (function () {
             LiftAvailable: new forms_1.FormControl(false),
             Benefits: new forms_1.FormControl(),
         });
-        //propertiesService.getDataEmptyProperty();
-        lookupsService.getDataCompanies();
-        lookupsService.getDataManagers();
+        propertiesService.readDataMetadata();
+        propertiesService.readDataOwners();
+        propertiesService.readDataRegions();
+        propertiesService.getDataCompanies();
+        propertiesService.getDataManagers();
         console.log('Form init', this.propertiesService);
     }
     AddpropertyComponent.prototype.ngOnInit = function () {
@@ -102,8 +104,6 @@ var AddpropertyComponent = (function () {
                 }
             });
         });
-    };
-    AddpropertyComponent.prototype.ngAfterViewInit = function () {
     };
     AddpropertyComponent.prototype.setRegion = function (region) {
         var regionFGs = this.builder.group({
