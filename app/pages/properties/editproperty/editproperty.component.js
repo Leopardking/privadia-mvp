@@ -12,20 +12,20 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
-var login_service_1 = require("../../../providers/login/login.service");
-var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(propertiesService, loginService, lookupsService, route, builder) {
+    function EditpropertyComponent(propertiesService, route, builder) {
+        var _this = this;
         this.propertiesService = propertiesService;
-        this.loginService = loginService;
-        this.lookupsService = lookupsService;
         this.route = route;
         this.builder = builder;
         this.errorForm = false;
         this.route.params.subscribe(function (params) {
-            //propertiesService.getDataProperty(this.propertyId = params['id']);
-            //lookupsService.getDataCompanies();
-            //lookupsService.getDataManagers();
+            propertiesService.readDataProperty(_this.propertyId = params['id']);
+            propertiesService.readDataMetadata();
+            propertiesService.readDataOwners();
+            propertiesService.readDataRegions();
+            propertiesService.readDataCompanies();
+            propertiesService.readDataManagers();
         });
     }
     EditpropertyComponent.prototype.ngOnInit = function () {
@@ -41,18 +41,18 @@ var EditpropertyComponent = (function () {
                 Address: _this.propertiesService.property.Address,
                 RegionId: _this.propertiesService.property.RegionId,
                 RegionName: _this.propertiesService.property.RegionName,
-                Region: { Id: _this.propertiesService.property.RegionId, Name: _this.propertiesService.property.RegionName },
+                Region: { Id: _this.propertiesService.property.Region.Id, Name: _this.propertiesService.property.Region.Name },
                 ManagementCompanyId: _this.propertiesService.property.ManagementCompanyId,
                 ManagementCompanyName: _this.propertiesService.property.ManagementCompanyName,
                 ManagerUserId: _this.propertiesService.property.ManagerUserId,
                 ManagerUserName: _this.propertiesService.property.ManagerUserName,
                 ManagementCompany: {
-                    Id: _this.propertiesService.property.ManagementCompanyId,
-                    Name: _this.propertiesService.property.ManagementCompanyName,
+                    Id: _this.propertiesService.property.ManagementCompany.Id,
+                    Name: _this.propertiesService.property.ManagementCompany.Name,
                 },
                 ManagerUser: {
-                    Id: _this.propertiesService.property.ManagerUserId,
-                    Name: _this.propertiesService.property.ManagerUserName,
+                    Id: _this.propertiesService.property.ManagerUser.Id,
+                    Name: _this.propertiesService.property.ManagerUser.Name,
                 },
                 Headline: _this.propertiesService.property.Headline,
                 Summary: _this.propertiesService.property.Summary,
@@ -156,31 +156,40 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.discardInfo = function () {
         console.log('Discard Info form');
     };
-    EditpropertyComponent.prototype.onSubmit = function () {
+    EditpropertyComponent.prototype.onSubmit = function (form) {
         var newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
+        _.mapValues(form.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
         });
-        this.propertyForm.value.MetaData = newArr;
+        form.MetaData = newArr;
+        form.ManagementCompanyId = form.ManagementCompany.Id;
+        form.ManagementCompanyName = form.ManagementCompany.Name;
+        form.ManagerUserId = form.ManagerUser.Id;
+        form.ManagerUserName = form.ManagerUser.Name;
         console.log('save ', this.propertyForm);
-        if (this.propertyForm.valid) {
-            this.propertiesService.addProperty(this.propertyForm.value).subscribe(function (d) {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Updated Successfully"
-                }, {
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-            }, function (e) { console.log("error:", e); });
-        }
-        else {
+        /*
+        if(this.propertyForm.valid) {
+            this.propertiesService.addProperty(form).subscribe(
+                d => {
+                    $.notify({
+                        icon: "notifications",
+                        message: "Property Updated Successfully"
+
+                    },{
+                        type: 'success',
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                },
+                e => { console.log("error:", e); }
+            );
+        } else {
             this.errorForm = true;
         }
+        */
     };
     EditpropertyComponent = __decorate([
         core_1.Component({
@@ -189,7 +198,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, lookups_service_1.LookupsService, router_1.ActivatedRoute, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, router_1.ActivatedRoute, forms_1.FormBuilder])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());

@@ -80,6 +80,8 @@ var LookupsService = (function () {
             .catch(this.handleError);
     };
     LookupsService.prototype.getPoITypes = function () {
+        if (!this.loginService.getPermission('Lookups/GetPointOfInterestTypes'))
+            return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetPointOfInterestTypes', options)

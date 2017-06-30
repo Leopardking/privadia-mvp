@@ -24,14 +24,15 @@ export class EditpropertyComponent implements OnInit {
     public propertyForm: FormGroup;
 
     constructor ( private propertiesService: PropertiesService,
-                  private loginService: LoginService,
-                  private lookupsService: LookupsService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
         this.route.params.subscribe(params => {
-            //propertiesService.getDataProperty(this.propertyId = params['id']);
-            //lookupsService.getDataCompanies();
-            //lookupsService.getDataManagers();
+            propertiesService.readDataProperty(this.propertyId = params['id']);
+            propertiesService.readDataMetadata();
+            propertiesService.readDataOwners();
+            propertiesService.readDataRegions();
+            propertiesService.readDataCompanies();
+            propertiesService.readDataManagers();
         });
     }
 
@@ -48,18 +49,18 @@ export class EditpropertyComponent implements OnInit {
                 Address: this.propertiesService.property.Address,
                 RegionId: this.propertiesService.property.RegionId,
                 RegionName: this.propertiesService.property.RegionName,
-                Region: { Id: this.propertiesService.property.RegionId, Name: this.propertiesService.property.RegionName},
+                Region: { Id: this.propertiesService.property.Region.Id, Name: this.propertiesService.property.Region.Name},
                 ManagementCompanyId: this.propertiesService.property.ManagementCompanyId,
                 ManagementCompanyName: this.propertiesService.property.ManagementCompanyName,
                 ManagerUserId: this.propertiesService.property.ManagerUserId,
                 ManagerUserName: this.propertiesService.property.ManagerUserName,
                 ManagementCompany: {
-                    Id: this.propertiesService.property.ManagementCompanyId,
-                    Name: this.propertiesService.property.ManagementCompanyName,
+                    Id: this.propertiesService.property.ManagementCompany.Id,
+                    Name: this.propertiesService.property.ManagementCompany.Name,
                 },
                 ManagerUser: {
-                    Id: this.propertiesService.property.ManagerUserId,
-                    Name: this.propertiesService.property.ManagerUserName,
+                    Id: this.propertiesService.property.ManagerUser.Id,
+                    Name: this.propertiesService.property.ManagerUser.Name,
                 },
                 Headline: this.propertiesService.property.Headline,
                 Summary: this.propertiesService.property.Summary,
@@ -168,16 +169,21 @@ export class EditpropertyComponent implements OnInit {
         console.log('Discard Info form')
     }
 
-    private onSubmit() {
+    private onSubmit(form) {
         let newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
+        _.mapValues(form.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
         });
-        this.propertyForm.value.MetaData = newArr;
+        form.MetaData = newArr;
+        form.ManagementCompanyId = form.ManagementCompany.Id;
+        form.ManagementCompanyName = form.ManagementCompany.Name;
+        form.ManagerUserId = form.ManagerUser.Id;
+        form.ManagerUserName = form.ManagerUser.Name;
 
         console.log('save ',this.propertyForm)
+        /*
         if(this.propertyForm.valid) {
-            this.propertiesService.addProperty(this.propertyForm.value).subscribe(
+            this.propertiesService.addProperty(form).subscribe(
                 d => {
                     $.notify({
                         icon: "notifications",
@@ -197,5 +203,6 @@ export class EditpropertyComponent implements OnInit {
         } else {
             this.errorForm = true;
         }
+        */
     }
 }

@@ -97,6 +97,9 @@ export class LookupsService {
 	}
 
 	public getPoITypes() {
+		if(!this.loginService.getPermission('Lookups/GetPointOfInterestTypes'))
+			return Observable.throw(null);
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 

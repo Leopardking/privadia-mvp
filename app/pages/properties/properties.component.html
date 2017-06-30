@@ -3,7 +3,7 @@
         <div class="toolbar row" *ngIf="loginService.getPermission('Properties/Post')">
             <div class="col-xs-12">
                 <button class="btn btn-simple btn-success btn-icon pull-right secondary-color shadow-grey"
-                        [routerLink]="['addproperty']"><i class="material-icons">add</i> Add Property
+                        [routerLink]="['add']"><i class="material-icons">add</i> Add Property
                 </button>
             </div>
         </div>
@@ -80,7 +80,7 @@
                                             </button>
                                             <button *ngIf="loginService.getPermission('Properties/Put')"
                                                     class="btn btn-simple btn-edit btn-icon"
-                                                    [routerLink]="['/properties/editproperty', item.Id]">
+                                                    [routerLink]="['/properties/edit', item.Id]">
                                                 <i class="material-icons">edit</i>Edit
                                             </button>
                                             <button *ngIf="loginService.getPermission('Properties/Delete')"
@@ -91,7 +91,7 @@
                                             </button>
                                             <button *ngIf="!loginService.getPermission('Properties/Put')"
                                                     class="btn btn-simple btn-edit btn-icon"
-                                                    [routerLink]="['/properties/editproperty', item.Id]">
+                                                    [routerLink]="['/properties/view', item.Id]">
                                                 <i class="material-icons">remove_red_eye</i>View
                                             </button>
                                         </td>
@@ -112,7 +112,7 @@
         <div class="toolbar row" *ngIf="loginService.getPermission('Properties/Post')">
             <div class="col-xs-12">
                 <button class="btn btn-simple btn-success btn-icon pull-right secondary-color shadow-grey"
-                        [routerLink]="['addproperty']"><i class="material-icons">add</i> Add Property
+                        [routerLink]="['add']"><i class="material-icons">add</i> Add Property
                 </button>
             </div>
         </div>

@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row" *ngIf="propertyForm">
             <form [formGroup]="propertyForm"
-                  (ngSubmit)="onSubmit()"
+                  (ngSubmit)="onSubmit(propertyForm.value)"
                   class="col-xs-12"
                   *ngIf="propertyForm.controls['Bathrooms'] &&
                          propertyForm.controls['Name'] &&
@@ -76,7 +76,7 @@
                         <div class="tab-content m-l-r-20-negative m-t-25">
                             <!--  Property Info  -->
                             <div id="metatab-info" class="fade active in card-content p-b-none p-l-r-none p-t-none">
-                                <propertyinfo-cmp *ngIf="!propertiesService.isReading && !lookupsService.isReading"
+                                <propertyinfo-cmp *ngIf="propertiesService.metadata.length"
                                                   [group]="propertyForm" [errorForm]="errorForm"></propertyinfo-cmp>
                             </div>
                             <!--  Property Image  -->
