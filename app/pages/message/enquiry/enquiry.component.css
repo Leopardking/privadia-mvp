@@ -236,9 +236,10 @@
     padding-left: 11px;
     padding-right: 18px;
     margin-top: 20px;
+    color: #3a3a3a;
 }
 
-.enquiry-body .terms h5 {
+.enquiry-body .terms h5, .enquiry-body .payment-terms h5 {
     font-size: 16px;
 }
 
@@ -258,13 +259,19 @@
     font-weight: 600;
 }
 
-.enquiry-body .terms ul {
+.enquiry-body .terms ul, .enquiry-body .payment-terms ul {
     list-style: none;
     padding-left: 8px;
 }
 
 .enquiry-body .terms ul > li {
     padding-bottom: 20px;
+}
+
+.enquiry-body .payment-terms ul > li .form-group {
+    display: inline-block;
+    min-width: 60px;
+    width: 60px;
 }
 
 .enquiry-body a {
@@ -282,6 +289,7 @@
 }
 
 .enquiry-body .no-proposal {
+    display: none; //tmp
     text-align: center;
     padding: 106px 62px 106px 66px;
 }
@@ -300,16 +308,60 @@
     padding: 0 15px;
 }
 
-.enquiry-body .form-group .control-label {
-    font-size: 12px;
-}
+/*.enquiry-body .form-group .control-label {*/
+    /*font-size: 12px;*/
+/*}*/
 
 .enquiry-body .input-group-addon {
     padding: 14px 20px 0;
 }
 
-.enquiry-body .input-group-addon.static {
-    padding: 34px 20px 0;
+.enquiry-body .form-control-static {
+    padding-left: 0;
+    display: block;
+}
+
+.enquiry-body .form-group .btn-remove {
+    margin: 0;
+    position: absolute;
+    bottom: 9px;
+    right: 24px;
+    padding: 6px;
+}
+
+.enquiry-body .form-group .btn-remove .material-icons {
+    width: 24px;
+    font-size: 24px;
+    color: #ff003d;
+}
+
+.enquiry-body .form-group .btn-remove .material-icons {
+    font-size: 24px;
+    color: #ff003d;
+}
+
+.enquiry-body .form-inline.rental-price {
+    display: inline-block;
+}
+
+.enquiry-body .form-inline.rental-price input {
+    width: 60px;
+}
+
+.enquiry-body .form-inline.rental-price .fees {
+    padding-top: 10px;
+    display: inline-block;
+}
+
+.enquiry-body .form-inline.rental-price .fees span {
+    font-size: 12px;
+    color: #c6c6c6;
+}
+
+.enquiry-body .form-inline.rental-price .fees .material-icons {
+    font-size: 16px;
+    color: #3a3a3a;
+    vertical-align: middle;
 }
 
 .enquiry-body .proposal-line {
@@ -318,7 +370,17 @@
     color: #747879;
     background-color: #f3f5f6;
     height: 24px;
-    margin-top: 20px;
+    margin: 20px 0;
+}
+
+.enquiry-body .terms .form-group {
+    padding-left: 40px;
+    padding-right: 24px;
+}
+
+.enquiry-body .terms .btn-back {
+    min-width: 86px;
+    margin: 0;
 }
 
 .enquiry-body .estimated-cost {
