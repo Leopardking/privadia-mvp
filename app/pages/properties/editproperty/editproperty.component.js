@@ -25,13 +25,14 @@ var EditpropertyComponent = (function () {
         this.errorForm = false;
         this.route.params.subscribe(function (params) {
             propertiesService.getDataProperty(_this.propertyId = params['id']);
-            //lookupsService.getDataCompanies();
-            //lookupsService.getDataManagers();
+            lookupsService.getDataCompanies();
+            lookupsService.getDataManagers();
         });
     }
     EditpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        console.log('User Info Edit ', this.loginService.userInfo);
         setTimeout(function () {
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,

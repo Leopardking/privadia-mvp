@@ -28,12 +28,15 @@ var PropertyinfoComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
-        var role = this.loginService.userInfo.Roles.filter(function (role) { return role.Name === 'Admin'; })[0];
-        if (role)
+        /*
+        const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Admin')[0];
+
+        if(role)
             this.propertyForm.controls['ManagementCompany'].reset({
                 value: this.lookupsService.companies[0],
                 disabled: true
             });
+
         /*
         $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab

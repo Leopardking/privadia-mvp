@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -20,6 +21,7 @@ export class LoginService {
 			d => {
 				this.userInfo = d;
 				this.isReading = false
+				localStorage.setItem('permissions', JSON.stringify(d.Permissions));
 			},
 			e => { console.log('Error get user ', e) }
 		)
@@ -40,9 +42,9 @@ export class LoginService {
 
 	}
 
-	public getPermission(permition) {
-		if(this.userInfo)
-			return this.userInfo.Permissions.filter( element => element.Name === permition)[0];
+	public getPermission(permission) {
+		const permissions = JSON.parse(localStorage.getItem('permissions'));
+		return permissions.filter( element => element.Name === permission)[0];
 	}
 
 	private getCurrentUser() {

@@ -36,8 +36,8 @@ var LookupsService = (function () {
         }, function (e) { console.log('Error ManagersByCompany', e); });
     };
     LookupsService.prototype.getManagementCompanies = function () {
-        if (!this.loginService.getPermission('Lookups/GetManagementCompanies'))
-            return Observable_1.Observable.throw(null);
+        // if(!this.loginService.getPermission('Lookups/GetManagementCompanies'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetManagementCompanies', options)
@@ -45,8 +45,8 @@ var LookupsService = (function () {
             .catch(this.handleError);
     };
     LookupsService.prototype.getManagersByCompany = function () {
-        if (!this.loginService.getPermission('Lookups/GetManagersByCompany'))
-            return Observable_1.Observable.throw(null);
+        // if(!this.loginService.getPermission('Lookups/GetManagersByCompany'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetManagersByCompany/6e78b138-4d18-4691-b988-c5057f599bf0', options)
