@@ -77,13 +77,13 @@ export class PropertiesService {
 	}
 
 	public readDataRegions() {
-		this.isReading = true;
+		//this.isReading = true;
 
 		//--------------		Reading data       -----------///////////
 		this.lookupsService.getRegions().subscribe(
 			d => {
 				this.regions = d;
-				this.isReading = false;
+				//this.isReading = false;
 			},
 			e => {
 				console.log("error regions:", e);
@@ -92,13 +92,13 @@ export class PropertiesService {
 	}
 
 	public readDataMetadata() {
-		this.isReading = true;
+		//this.isReading = true;
 
 		//--------------		Reading data       -----------///////////
 		this.lookupsService.getMetaData().subscribe(
 			d => {
 				this.metadata = d;
-				this.isReading = false;
+				//this.isReading = false;
 			},
 			e => {
 				console.log("error metadata:", e);
@@ -107,13 +107,13 @@ export class PropertiesService {
 	}
 
 	public readDataOwners() {
-		this.isReading = true;
+		//this.isReading = true;
 
 		//--------------		Reading data       -----------///////////
 		this.lookupsService.getOwners().subscribe(
 			d => {
 				this.owners = d;
-				this.isReading = false;
+				//this.isReading = false;
 			},
 			e => {
 				console.log("error owner:", e);
@@ -122,13 +122,13 @@ export class PropertiesService {
 	}
 
 	public readDataPoITypes() {
-		this.isReading = true;
+		//this.isReading = true;
 
 		//--------------		Reading data       -----------///////////
 		this.lookupsService.getPoITypes().subscribe(
 			d => {
 				this.PoITypes = d;
-				this.isReading = false;
+				//this.isReading = false;
 			},
 			e => {
 				console.log("error owner:", e);

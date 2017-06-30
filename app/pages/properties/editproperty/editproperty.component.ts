@@ -21,9 +21,12 @@ export class EditpropertyComponent implements OnInit {
     private propertyId;
 
     private errorForm = false;
+    private permission;
+
     public propertyForm: FormGroup;
 
     constructor ( private propertiesService: PropertiesService,
+                  private loginService: LoginService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
         this.route.params.subscribe(params => {
@@ -38,54 +41,61 @@ export class EditpropertyComponent implements OnInit {
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        this.permission = !this.loginService.getPermission('Properties/Put');
 
         setTimeout(() => {
             this.propertyForm = this.builder.group({
                 Id: this.propertyId,
-                Active: this.propertiesService.property.Active,
-                OwnerName: this.propertiesService.property.OwnerName,
-                InternalName: this.propertiesService.property.InternalName,
-                Name: [this.propertiesService.property.Name, Validators.required],
-                Address: this.propertiesService.property.Address,
-                RegionId: this.propertiesService.property.RegionId,
-                RegionName: this.propertiesService.property.RegionName,
-                Region: { Id: this.propertiesService.property.Region.Id, Name: this.propertiesService.property.Region.Name},
-                ManagementCompanyId: this.propertiesService.property.ManagementCompanyId,
-                ManagementCompanyName: this.propertiesService.property.ManagementCompanyName,
-                ManagerUserId: this.propertiesService.property.ManagerUserId,
-                ManagerUserName: this.propertiesService.property.ManagerUserName,
-                ManagementCompany: {
-                    Id: this.propertiesService.property.ManagementCompany.Id,
-                    Name: this.propertiesService.property.ManagementCompany.Name,
+                Active: { value: this.propertiesService.property.Active, disabled: this.permission },
+                OwnerName: { value: this.propertiesService.property.OwnerName, disabled: this.permission },
+                InternalName: { value: this.propertiesService.property.InternalName, disabled: this.permission },
+                Name: [{ value: this.propertiesService.property.Name, disabled: this.permission}, Validators.required],
+                Address: { value: this.propertiesService.property.Address, disabled: this.permission },
+                RegionId: { value: this.propertiesService.property.RegionId, disabled: this.permission },
+                RegionName: { value: this.propertiesService.property.RegionName, disabled: this.permission },
+                Region: { value: { Id: this.propertiesService.property.Region.Id, Name: this.propertiesService.property.Region.Name}, disabled: this.permission },
+                ManagementCompanyId: { value: this.propertiesService.property.ManagementCompanyId, disabled: this.permission },
+                ManagementCompanyName: { value: this.propertiesService.property.ManagementCompanyName, disabled: this.permission },
+                ManagerUserId: { value: this.propertiesService.property.ManagerUserId, disabled: this.permission },
+                ManagerUserName: { value: this.propertiesService.property.ManagerUserName, disabled: this.permission },
+                ManagementCompany: { value:
+                    {
+                        Id: this.propertiesService.property.ManagementCompany.Id,
+                        Name: this.propertiesService.property.ManagementCompany.Name,
+                    },
+                    disabled: this.permission
                 },
-                ManagerUser: {
-                    Id: this.propertiesService.property.ManagerUser.Id,
-                    Name: this.propertiesService.property.ManagerUser.Name,
+                ManagerUser: { value:
+                        {
+                        Id: this.propertiesService.property.ManagerUser.Id,
+                        Name: this.propertiesService.property.ManagerUser.Name,
+                    },
+                    disabled: this.permission
                 },
-                Headline: this.propertiesService.property.Headline,
-                Summary: this.propertiesService.property.Summary,
-                Description: this.propertiesService.property.Description,
-                OtherInfo: this.propertiesService.property.OtherInfo,
-                CollaboratorInitials: this.propertiesService.property.CollaboratorInitials,
-                BoxUrl: [this.propertiesService.property.BoxUrl, Validators.pattern('https?://.+')],
-                AgencyPackUrl: [this.propertiesService.property.AgencyPackUrl, Validators.pattern('https?://.+')],
-                MinimumStay: [this.propertiesService.property.MinimumStay, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
-                Bathrooms: [this.propertiesService.property.Bathrooms, Validators.required],
-                Bedrooms: [this.propertiesService.property.Bedrooms, Validators.required],
-                Sleeps: [this.propertiesService.property.Sleeps, Validators.required],
-                Capacity: this.propertiesService.property.Capacity,
-                LivingAreaSize: this.propertiesService.property.LivingAreaSize,
-                DiningCapacity: this.propertiesService.property.DiningCapacity,
-                KitchenInfo: this.propertiesService.property.KitchenInfo,
-                ChildrenAllowed: this.propertiesService.property.ChildrenAllowed,
-                SmokingAllowed: this.propertiesService.property.SmokingAllowed,
-                WheelchairAccessible: this.propertiesService.property.WheelchairAccessible,
-                PetsAllowed: this.propertiesService.property.PetsAllowed,
-                EventsAllowed: this.propertiesService.property.EventsAllowed,
-                LiftAvailable: this.propertiesService.property.LiftAvailable,
-                Benefits: this.propertiesService.property.Benefits,
-                Housekeeping: this.propertiesService.property.Housekeeping,
-                OtherHousekeepingInfo: this.propertiesService.property.OtherHousekeepingInfo,
+                Headline: { value: this.propertiesService.property.Headline, disabled: this.permission },
+                Summary: { value: this.propertiesService.property.Summary, disabled: this.permission },
+                Description: { value: this.propertiesService.property.Description, disabled: this.permission },
+                OtherInfo: { value: this.propertiesService.property.OtherInfo, disabled: this.permission },
+                CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
+                BoxUrl: [{ value: this.propertiesService.property.BoxUrl, disabled: this.permission }, Validators.pattern('https?://.+')],
+                AgencyPackUrl: [{ value: this.propertiesService.property.AgencyPackUrl, disabled: this.permission }, Validators.pattern('https?://.+')],
+                MinimumStay: [{ value: this.propertiesService.property.MinimumStay, disabled: this.permission }, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
+                Bathrooms: [{ value: this.propertiesService.property.Bathrooms, disabled: this.permission }, Validators.required],
+                Bedrooms: [{ value: this.propertiesService.property.Bedrooms, disabled: this.permission }, Validators.required],
+                Sleeps: [{ value: this.propertiesService.property.Sleeps, disabled: this.permission }, Validators.required],
+                Capacity: { value: this.propertiesService.property.Capacity, disabled: this.permission },
+                LivingAreaSize: { value: this.propertiesService.property.LivingAreaSize, disabled: this.permission },
+                DiningCapacity: { value: this.propertiesService.property.DiningCapacity, disabled: this.permission },
+                KitchenInfo: { value: this.propertiesService.property.KitchenInfo, disabled: this.permission },
+                ChildrenAllowed: { value: this.propertiesService.property.ChildrenAllowed, disabled: this.permission },
+                SmokingAllowed: { value: this.propertiesService.property.SmokingAllowed, disabled: this.permission },
+                WheelchairAccessible: { value: this.propertiesService.property.WheelchairAccessible, disabled: this.permission },
+                PetsAllowed: { value: this.propertiesService.property.PetsAllowed, disabled: this.permission },
+                EventsAllowed: { value: this.propertiesService.property.EventsAllowed, disabled: this.permission },
+                LiftAvailable: { value: this.propertiesService.property.LiftAvailable, disabled: this.permission },
+                Benefits: { value: this.propertiesService.property.Benefits, disabled: this.permission },
+                Housekeeping: { value: this.propertiesService.property.Housekeeping, disabled: this.permission },
+                OtherHousekeepingInfo: { value: this.propertiesService.property.OtherHousekeepingInfo, disabled: this.permission },
                 MetaDataTmp: {},
             });
             this.setContacts(this.propertiesService.property.Contacts);
@@ -96,16 +106,17 @@ export class EditpropertyComponent implements OnInit {
             this.setMetaDataTmp();
 
             $('.property-tabs a:first').tab('show')
-        }, 1000);
+        }, 1500);
     }
 
     setContacts(contacts) {
         const contactFGs = contacts.map(contact => this.builder.group({
-            JobTitle: contact.JobTitle,
-            FirstName: contact.FirstName,
-            LastName: contact.LastName,
-            EmailAddress: contact.EmailAddress,
-            Telephone: contact.Telephone,
+                JobTitle: { value: contact.JobTitle, disabled: this.permission },
+                FirstName: { value: contact.FirstName, disabled: this.permission },
+                LastName: { value: contact.LastName, disabled: this.permission },
+                EmailAddress: { value: contact.EmailAddress, disabled: this.permission },
+                Telephone: { value: contact.Telephone, disabled: this.permission },
+
         }));
         const contactFormArray = this.builder.array(contactFGs);
         this.propertyForm.setControl('Contacts', contactFormArray);
@@ -113,9 +124,9 @@ export class EditpropertyComponent implements OnInit {
 
     setRooms(rooms) {
         const roomFGs = rooms.map(room => this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+            Name: { value: room.Name, disabled: this.permission },
+            Description: { value: room.Description, disabled: this.permission },
+            PropertyRoomType: { value: room.PropertyRoomType, disabled: this.permission },
         }));
         const roomFormArray = this.builder.array(roomFGs);
         this.propertyForm.setControl('Rooms', roomFormArray);
@@ -123,10 +134,10 @@ export class EditpropertyComponent implements OnInit {
 
     setImages(images) {
         const imageFGs = images.map(image => this.builder.group({
-            Id: image.Id,
-            FileName: image.FileName,
-            ImageId: image.ImageId,
-            OrderIdx: image.OrderIdx,
+            Id: { value: image.Id, disabled: this.permission },
+            FileName: { value: image.FileName, disabled: this.permission },
+            ImageId: { value: image.ImageId, disabled: this.permission },
+            OrderIdx: { value: image.OrderIdx, disabled: this.permission },
         }));
         const imageFormArray = this.builder.array(imageFGs);
         this.propertyForm.setControl('Images', imageFormArray);
@@ -134,12 +145,12 @@ export class EditpropertyComponent implements OnInit {
 
     setPointsOfInterest(points) {
         const pointFGs = points.map(point => this.builder.group({
-            Id: point.Id,
-            Name: point.Name,
-            PointOfInterestTypeId: point.PointOfInterestTypeId,
-            PointOfInterestTypeName: point.PointOfInterestTypeName,
-            Available: point.Available,
-            Distance: point.Distance,
+            Id: { value: point.Id, disabled: this.permission },
+            Name: { value: point.Name, disabled: this.permission },
+            PointOfInterestTypeId: { value: point.PointOfInterestTypeId, disabled: this.permission },
+            PointOfInterestTypeName: { value: point.PointOfInterestTypeName, disabled: this.permission },
+            Available: { value: point.Available, disabled: this.permission },
+            Distance: { value: point.Distance, disabled: this.permission },
         }));
         const pointFormArray = this.builder.array(pointFGs);
         console.log('Point Form Array ',points)
@@ -148,9 +159,9 @@ export class EditpropertyComponent implements OnInit {
 
     setMetaData(metaDatas) {
         const metaDataFGs = metaDatas.map(metaDate => this.builder.group({
-            MetaDataId: metaDate.MetaDataId,
-            MetaDataName: metaDate.MetaDataName,
-            Available: metaDate.Available,
+            MetaDataId: { value: metaDate.MetaDataId, disabled: this.permission },
+            MetaDataName: { value: metaDate.MetaDataName, disabled: this.permission },
+            Available: { value: metaDate.Available, disabled: this.permission },
         }));
         const metaDataFormArray = this.builder.array(metaDataFGs);
         this.propertyForm.setControl('MetaData', metaDataFormArray);

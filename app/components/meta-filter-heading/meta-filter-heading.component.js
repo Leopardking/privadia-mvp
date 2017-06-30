@@ -12,12 +12,16 @@ var core_1 = require('@angular/core');
 var properties_service_1 = require('../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
 var lookups_service_1 = require("../../providers/lookups/lookups.service");
+var login_service_1 = require("../../providers/login/login.service");
 var MetafilterheadingComponent = (function () {
-    function MetafilterheadingComponent(propertiesService, lookupsService) {
+    function MetafilterheadingComponent(propertiesService, lookupsService, loginService) {
         this.propertiesService = propertiesService;
         this.lookupsService = lookupsService;
+        this.loginService = loginService;
     }
     MetafilterheadingComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.permission = !this.loginService.getPermission('Properties/Put');
         switch (this.name) {
             case "Points of Interest":
                 var control_1 = this.propertyForm.controls['PointsOfInterest'];
@@ -25,11 +29,11 @@ var MetafilterheadingComponent = (function () {
                     if (!control_1.value.length) {
                         d.forEach(function (item, index) {
                             control_1.push(new forms_1.FormGroup({
-                                Name: new forms_1.FormControl(''),
-                                PointOfInterestTypeId: new forms_1.FormControl(item.Id),
-                                PointOfInterestTypeName: new forms_1.FormControl(item.Name),
-                                Available: new forms_1.FormControl(false),
-                                Distance: new forms_1.FormControl(0),
+                                Name: new forms_1.FormControl({ value: null, disabled: _this.permission }),
+                                PointOfInterestTypeId: new forms_1.FormControl({ value: item.Id, disabled: _this.permission }),
+                                PointOfInterestTypeName: new forms_1.FormControl({ value: item.Name, disabled: _this.permission }),
+                                Available: new forms_1.FormControl({ value: false, disabled: _this.permission }),
+                                Distance: new forms_1.FormControl({ value: null, disabled: _this.permission }),
                             }));
                         });
                     }
@@ -57,7 +61,7 @@ var MetafilterheadingComponent = (function () {
             templateUrl: 'meta-filter-heading.component.html',
             styleUrls: ['meta-filter-heading.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService, login_service_1.LoginService])
     ], MetafilterheadingComponent);
     return MetafilterheadingComponent;
 }());

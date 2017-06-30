@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require("@angular/platform-browser");
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
+var login_service_1 = require("../../../providers/login/login.service");
 var PropertyinfoComponent = (function () {
-    function PropertyinfoComponent(propertiesService, _sanitizer) {
+    function PropertyinfoComponent(propertiesService, loginService, _sanitizer) {
         var _this = this;
         this.propertiesService = propertiesService;
+        this.loginService = loginService;
         this._sanitizer = _sanitizer;
         this.autocompleListFormatter = function (data) {
             var html = "" + data.Name;
@@ -24,6 +26,7 @@ var PropertyinfoComponent = (function () {
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
+        this.permission = !this.loginService.getPermission('Properties/Put');
         /*
         const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Admin')[0];
 
@@ -85,11 +88,11 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.showAddContact = function () {
         var control = this.propertyForm.controls['Contacts'];
         control.push(new forms_1.FormGroup({
-            JobTitle: new forms_1.FormControl(),
-            FirstName: new forms_1.FormControl(),
-            LastName: new forms_1.FormControl(),
-            EmailAddress: new forms_1.FormControl('', forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
-            Telephone: new forms_1.FormControl(),
+            JobTitle: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            FirstName: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            LastName: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            EmailAddress: new forms_1.FormControl({ value: null, disabled: this.permission }, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
+            Telephone: new forms_1.FormControl({ value: null, disabled: this.permission }),
         }));
     };
     PropertyinfoComponent.prototype.removeContact = function (i) {
@@ -99,9 +102,9 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.addBedroom = function () {
         var control = this.propertyForm.controls['Rooms'];
         control.push(new forms_1.FormGroup({
-            Description: new forms_1.FormControl(),
-            Name: new forms_1.FormControl(),
-            PropertyRoomType: new forms_1.FormControl(1),
+            Description: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            Name: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            PropertyRoomType: new forms_1.FormControl({ value: 1, disabled: this.permission }),
         }));
     };
     PropertyinfoComponent.prototype.removeBedroom = function (i) {
@@ -111,9 +114,9 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.addBathroom = function () {
         var control = this.propertyForm.controls['Rooms'];
         control.push(new forms_1.FormGroup({
-            Description: new forms_1.FormControl(),
-            Name: new forms_1.FormControl(),
-            PropertyRoomType: new forms_1.FormControl(2),
+            Description: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            Name: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            PropertyRoomType: new forms_1.FormControl({ value: 2, disabled: this.permission }),
         }));
     };
     PropertyinfoComponent.prototype.removeBathroom = function (i) {
@@ -149,7 +152,7 @@ var PropertyinfoComponent = (function () {
             templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, platform_browser_1.DomSanitizer])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, platform_browser_1.DomSanitizer])
     ], PropertyinfoComponent);
     return PropertyinfoComponent;
 }());

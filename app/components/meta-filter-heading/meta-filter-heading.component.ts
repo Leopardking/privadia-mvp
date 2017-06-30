@@ -3,6 +3,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { PropertiesService } from '../../providers/properties/properties.service';
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 import {LookupsService} from "../../providers/lookups/lookups.service";
+import {LoginService} from "../../providers/login/login.service";
 
 declare var $:any;
 
@@ -17,9 +18,13 @@ export class MetafilterheadingComponent implements OnInit{
 	@Input() name;
 	@Input('group') private propertyForm: FormGroup;
 
-	constructor( private propertiesService: PropertiesService, private lookupsService: LookupsService ) {}
+	private permission;
+
+	constructor( private propertiesService: PropertiesService, private lookupsService: LookupsService, private loginService: LoginService ) {}
 
 	ngOnInit() {
+		this.permission = !this.loginService.getPermission('Properties/Put');
+
 		switch (this.name) {
 			case "Points of Interest":
 				const control = <FormArray>this.propertyForm.controls['PointsOfInterest'];
@@ -29,11 +34,11 @@ export class MetafilterheadingComponent implements OnInit{
 							d.forEach( (item, index) => {
 								control.push(
 									new FormGroup({
-										Name: new FormControl(''),
-										PointOfInterestTypeId: new FormControl(item.Id),
-										PointOfInterestTypeName: new FormControl(item.Name),
-										Available: new FormControl(false),
-										Distance: new FormControl(0),
+										Name: new FormControl({ value: null, disabled: this.permission }),
+										PointOfInterestTypeId: new FormControl({ value: item.Id, disabled: this.permission }),
+										PointOfInterestTypeName: new FormControl({ value: item.Name, disabled: this.permission }),
+										Available: new FormControl({ value: false, disabled: this.permission }),
+										Distance: new FormControl({ value: null, disabled: this.permission }),
 									}),
 								);
 							} );

@@ -11,8 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var ng2_cloudinary_1 = require('ng2-cloudinary');
 var forms_1 = require("@angular/forms");
+var login_service_1 = require("../../../providers/login/login.service");
 var PropertyimageoComponent = (function () {
-    function PropertyimageoComponent() {
+    function PropertyimageoComponent(loginService) {
+        this.loginService = loginService;
         this.images = [];
         this.uploader = new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
             cloudName: 'privadia',
@@ -92,7 +94,7 @@ var PropertyimageoComponent = (function () {
             templateUrl: 'propertyimage.component.html',
             styleUrls: ['propertyimage.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [login_service_1.LoginService])
     ], PropertyimageoComponent);
     return PropertyimageoComponent;
 }());

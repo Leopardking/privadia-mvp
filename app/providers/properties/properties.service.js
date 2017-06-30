@@ -67,45 +67,45 @@ var PropertiesService = (function () {
         });
     };
     PropertiesService.prototype.readDataRegions = function () {
+        //this.isReading = true;
         var _this = this;
-        this.isReading = true;
         //--------------		Reading data       -----------///////////
         this.lookupsService.getRegions().subscribe(function (d) {
             _this.regions = d;
-            _this.isReading = false;
+            //this.isReading = false;
         }, function (e) {
             console.log("error regions:", e);
         });
     };
     PropertiesService.prototype.readDataMetadata = function () {
+        //this.isReading = true;
         var _this = this;
-        this.isReading = true;
         //--------------		Reading data       -----------///////////
         this.lookupsService.getMetaData().subscribe(function (d) {
             _this.metadata = d;
-            _this.isReading = false;
+            //this.isReading = false;
         }, function (e) {
             console.log("error metadata:", e);
         });
     };
     PropertiesService.prototype.readDataOwners = function () {
+        //this.isReading = true;
         var _this = this;
-        this.isReading = true;
         //--------------		Reading data       -----------///////////
         this.lookupsService.getOwners().subscribe(function (d) {
             _this.owners = d;
-            _this.isReading = false;
+            //this.isReading = false;
         }, function (e) {
             console.log("error owner:", e);
         });
     };
     PropertiesService.prototype.readDataPoITypes = function () {
+        //this.isReading = true;
         var _this = this;
-        this.isReading = true;
         //--------------		Reading data       -----------///////////
         this.lookupsService.getPoITypes().subscribe(function (d) {
             _this.PoITypes = d;
-            _this.isReading = false;
+            //this.isReading = false;
         }, function (e) {
             console.log("error owner:", e);
         });

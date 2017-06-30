@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
+var login_service_1 = require("../../../providers/login/login.service");
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(propertiesService, route, builder) {
+    function EditpropertyComponent(propertiesService, loginService, route, builder) {
         var _this = this;
         this.propertiesService = propertiesService;
+        this.loginService = loginService;
         this.route = route;
         this.builder = builder;
         this.errorForm = false;
@@ -31,53 +33,58 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        this.permission = !this.loginService.getPermission('Properties/Put');
         setTimeout(function () {
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,
-                Active: _this.propertiesService.property.Active,
-                OwnerName: _this.propertiesService.property.OwnerName,
-                InternalName: _this.propertiesService.property.InternalName,
-                Name: [_this.propertiesService.property.Name, forms_1.Validators.required],
-                Address: _this.propertiesService.property.Address,
-                RegionId: _this.propertiesService.property.RegionId,
-                RegionName: _this.propertiesService.property.RegionName,
-                Region: { Id: _this.propertiesService.property.Region.Id, Name: _this.propertiesService.property.Region.Name },
-                ManagementCompanyId: _this.propertiesService.property.ManagementCompanyId,
-                ManagementCompanyName: _this.propertiesService.property.ManagementCompanyName,
-                ManagerUserId: _this.propertiesService.property.ManagerUserId,
-                ManagerUserName: _this.propertiesService.property.ManagerUserName,
-                ManagementCompany: {
-                    Id: _this.propertiesService.property.ManagementCompany.Id,
-                    Name: _this.propertiesService.property.ManagementCompany.Name,
+                Active: { value: _this.propertiesService.property.Active, disabled: _this.permission },
+                OwnerName: { value: _this.propertiesService.property.OwnerName, disabled: _this.permission },
+                InternalName: { value: _this.propertiesService.property.InternalName, disabled: _this.permission },
+                Name: [{ value: _this.propertiesService.property.Name, disabled: _this.permission }, forms_1.Validators.required],
+                Address: { value: _this.propertiesService.property.Address, disabled: _this.permission },
+                RegionId: { value: _this.propertiesService.property.RegionId, disabled: _this.permission },
+                RegionName: { value: _this.propertiesService.property.RegionName, disabled: _this.permission },
+                Region: { value: { Id: _this.propertiesService.property.Region.Id, Name: _this.propertiesService.property.Region.Name }, disabled: _this.permission },
+                ManagementCompanyId: { value: _this.propertiesService.property.ManagementCompanyId, disabled: _this.permission },
+                ManagementCompanyName: { value: _this.propertiesService.property.ManagementCompanyName, disabled: _this.permission },
+                ManagerUserId: { value: _this.propertiesService.property.ManagerUserId, disabled: _this.permission },
+                ManagerUserName: { value: _this.propertiesService.property.ManagerUserName, disabled: _this.permission },
+                ManagementCompany: { value: {
+                        Id: _this.propertiesService.property.ManagementCompany.Id,
+                        Name: _this.propertiesService.property.ManagementCompany.Name,
+                    },
+                    disabled: _this.permission
                 },
-                ManagerUser: {
-                    Id: _this.propertiesService.property.ManagerUser.Id,
-                    Name: _this.propertiesService.property.ManagerUser.Name,
+                ManagerUser: { value: {
+                        Id: _this.propertiesService.property.ManagerUser.Id,
+                        Name: _this.propertiesService.property.ManagerUser.Name,
+                    },
+                    disabled: _this.permission
                 },
-                Headline: _this.propertiesService.property.Headline,
-                Summary: _this.propertiesService.property.Summary,
-                Description: _this.propertiesService.property.Description,
-                OtherInfo: _this.propertiesService.property.OtherInfo,
-                CollaboratorInitials: _this.propertiesService.property.CollaboratorInitials,
-                BoxUrl: [_this.propertiesService.property.BoxUrl, forms_1.Validators.pattern('https?://.+')],
-                AgencyPackUrl: [_this.propertiesService.property.AgencyPackUrl, forms_1.Validators.pattern('https?://.+')],
-                MinimumStay: [_this.propertiesService.property.MinimumStay, forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern('^[0-9]*$')])],
-                Bathrooms: [_this.propertiesService.property.Bathrooms, forms_1.Validators.required],
-                Bedrooms: [_this.propertiesService.property.Bedrooms, forms_1.Validators.required],
-                Sleeps: [_this.propertiesService.property.Sleeps, forms_1.Validators.required],
-                Capacity: _this.propertiesService.property.Capacity,
-                LivingAreaSize: _this.propertiesService.property.LivingAreaSize,
-                DiningCapacity: _this.propertiesService.property.DiningCapacity,
-                KitchenInfo: _this.propertiesService.property.KitchenInfo,
-                ChildrenAllowed: _this.propertiesService.property.ChildrenAllowed,
-                SmokingAllowed: _this.propertiesService.property.SmokingAllowed,
-                WheelchairAccessible: _this.propertiesService.property.WheelchairAccessible,
-                PetsAllowed: _this.propertiesService.property.PetsAllowed,
-                EventsAllowed: _this.propertiesService.property.EventsAllowed,
-                LiftAvailable: _this.propertiesService.property.LiftAvailable,
-                Benefits: _this.propertiesService.property.Benefits,
-                Housekeeping: _this.propertiesService.property.Housekeeping,
-                OtherHousekeepingInfo: _this.propertiesService.property.OtherHousekeepingInfo,
+                Headline: { value: _this.propertiesService.property.Headline, disabled: _this.permission },
+                Summary: { value: _this.propertiesService.property.Summary, disabled: _this.permission },
+                Description: { value: _this.propertiesService.property.Description, disabled: _this.permission },
+                OtherInfo: { value: _this.propertiesService.property.OtherInfo, disabled: _this.permission },
+                CollaboratorInitials: { value: _this.propertiesService.property.CollaboratorInitials, disabled: _this.permission },
+                BoxUrl: [{ value: _this.propertiesService.property.BoxUrl, disabled: _this.permission }, forms_1.Validators.pattern('https?://.+')],
+                AgencyPackUrl: [{ value: _this.propertiesService.property.AgencyPackUrl, disabled: _this.permission }, forms_1.Validators.pattern('https?://.+')],
+                MinimumStay: [{ value: _this.propertiesService.property.MinimumStay, disabled: _this.permission }, forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern('^[0-9]*$')])],
+                Bathrooms: [{ value: _this.propertiesService.property.Bathrooms, disabled: _this.permission }, forms_1.Validators.required],
+                Bedrooms: [{ value: _this.propertiesService.property.Bedrooms, disabled: _this.permission }, forms_1.Validators.required],
+                Sleeps: [{ value: _this.propertiesService.property.Sleeps, disabled: _this.permission }, forms_1.Validators.required],
+                Capacity: { value: _this.propertiesService.property.Capacity, disabled: _this.permission },
+                LivingAreaSize: { value: _this.propertiesService.property.LivingAreaSize, disabled: _this.permission },
+                DiningCapacity: { value: _this.propertiesService.property.DiningCapacity, disabled: _this.permission },
+                KitchenInfo: { value: _this.propertiesService.property.KitchenInfo, disabled: _this.permission },
+                ChildrenAllowed: { value: _this.propertiesService.property.ChildrenAllowed, disabled: _this.permission },
+                SmokingAllowed: { value: _this.propertiesService.property.SmokingAllowed, disabled: _this.permission },
+                WheelchairAccessible: { value: _this.propertiesService.property.WheelchairAccessible, disabled: _this.permission },
+                PetsAllowed: { value: _this.propertiesService.property.PetsAllowed, disabled: _this.permission },
+                EventsAllowed: { value: _this.propertiesService.property.EventsAllowed, disabled: _this.permission },
+                LiftAvailable: { value: _this.propertiesService.property.LiftAvailable, disabled: _this.permission },
+                Benefits: { value: _this.propertiesService.property.Benefits, disabled: _this.permission },
+                Housekeeping: { value: _this.propertiesService.property.Housekeeping, disabled: _this.permission },
+                OtherHousekeepingInfo: { value: _this.propertiesService.property.OtherHousekeepingInfo, disabled: _this.permission },
                 MetaDataTmp: {},
             });
             _this.setContacts(_this.propertiesService.property.Contacts);
@@ -87,16 +94,16 @@ var EditpropertyComponent = (function () {
             _this.setMetaData(_this.propertiesService.property.MetaData);
             _this.setMetaDataTmp();
             $('.property-tabs a:first').tab('show');
-        }, 1000);
+        }, 1500);
     };
     EditpropertyComponent.prototype.setContacts = function (contacts) {
         var _this = this;
         var contactFGs = contacts.map(function (contact) { return _this.builder.group({
-            JobTitle: contact.JobTitle,
-            FirstName: contact.FirstName,
-            LastName: contact.LastName,
-            EmailAddress: contact.EmailAddress,
-            Telephone: contact.Telephone,
+            JobTitle: { value: contact.JobTitle, disabled: _this.permission },
+            FirstName: { value: contact.FirstName, disabled: _this.permission },
+            LastName: { value: contact.LastName, disabled: _this.permission },
+            EmailAddress: { value: contact.EmailAddress, disabled: _this.permission },
+            Telephone: { value: contact.Telephone, disabled: _this.permission },
         }); });
         var contactFormArray = this.builder.array(contactFGs);
         this.propertyForm.setControl('Contacts', contactFormArray);
@@ -104,9 +111,9 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.setRooms = function (rooms) {
         var _this = this;
         var roomFGs = rooms.map(function (room) { return _this.builder.group({
-            Name: room.Name,
-            Description: room.Description,
-            PropertyRoomType: room.PropertyRoomType,
+            Name: { value: room.Name, disabled: _this.permission },
+            Description: { value: room.Description, disabled: _this.permission },
+            PropertyRoomType: { value: room.PropertyRoomType, disabled: _this.permission },
         }); });
         var roomFormArray = this.builder.array(roomFGs);
         this.propertyForm.setControl('Rooms', roomFormArray);
@@ -114,10 +121,10 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.setImages = function (images) {
         var _this = this;
         var imageFGs = images.map(function (image) { return _this.builder.group({
-            Id: image.Id,
-            FileName: image.FileName,
-            ImageId: image.ImageId,
-            OrderIdx: image.OrderIdx,
+            Id: { value: image.Id, disabled: _this.permission },
+            FileName: { value: image.FileName, disabled: _this.permission },
+            ImageId: { value: image.ImageId, disabled: _this.permission },
+            OrderIdx: { value: image.OrderIdx, disabled: _this.permission },
         }); });
         var imageFormArray = this.builder.array(imageFGs);
         this.propertyForm.setControl('Images', imageFormArray);
@@ -125,12 +132,12 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.setPointsOfInterest = function (points) {
         var _this = this;
         var pointFGs = points.map(function (point) { return _this.builder.group({
-            Id: point.Id,
-            Name: point.Name,
-            PointOfInterestTypeId: point.PointOfInterestTypeId,
-            PointOfInterestTypeName: point.PointOfInterestTypeName,
-            Available: point.Available,
-            Distance: point.Distance,
+            Id: { value: point.Id, disabled: _this.permission },
+            Name: { value: point.Name, disabled: _this.permission },
+            PointOfInterestTypeId: { value: point.PointOfInterestTypeId, disabled: _this.permission },
+            PointOfInterestTypeName: { value: point.PointOfInterestTypeName, disabled: _this.permission },
+            Available: { value: point.Available, disabled: _this.permission },
+            Distance: { value: point.Distance, disabled: _this.permission },
         }); });
         var pointFormArray = this.builder.array(pointFGs);
         console.log('Point Form Array ', points);
@@ -139,9 +146,9 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.setMetaData = function (metaDatas) {
         var _this = this;
         var metaDataFGs = metaDatas.map(function (metaDate) { return _this.builder.group({
-            MetaDataId: metaDate.MetaDataId,
-            MetaDataName: metaDate.MetaDataName,
-            Available: metaDate.Available,
+            MetaDataId: { value: metaDate.MetaDataId, disabled: _this.permission },
+            MetaDataName: { value: metaDate.MetaDataName, disabled: _this.permission },
+            Available: { value: metaDate.Available, disabled: _this.permission },
         }); });
         var metaDataFormArray = this.builder.array(metaDataFGs);
         this.propertyForm.setControl('MetaData', metaDataFormArray);
@@ -198,7 +205,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, router_1.ActivatedRoute, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, router_1.ActivatedRoute, forms_1.FormBuilder])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());

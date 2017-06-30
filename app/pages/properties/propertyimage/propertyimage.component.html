@@ -19,7 +19,7 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <div [formGroup]="propertyForm" class="text-center" *ngIf="propertyForm.controls.Images.value.length == 0">
+            <div [formGroup]="propertyForm" class="text-center" *ngIf="propertyForm.controls.Images.value.length == 0 && loginService.getPermission('Properties/Put')">
                 <label for="upload" class="upload-image">
                     <i class="material-icons">image</i><br /><br />
                     <i class="title">Upload a photo of your property</i><br /><br />
@@ -27,7 +27,7 @@
                     <input type="file" id="upload" accept="image/jpeg" style="display:none" ng2FileSelect [uploader]="uploader" (change)="fileChange()">
                 </label>
             </div>
-            <div [formGroup]="propertyForm" class="" *ngIf="propertyForm.controls.Images.value.length">
+            <div [formGroup]="propertyForm" class="" *ngIf="propertyForm.controls.Images.value.length && loginService.getPermission('Properties/Put')">
                 <label for="upload_2" class="upload-image">
                     <i class="btn btn-success">Upload more</i><br />
                     <input type="file" id="upload_2" accept="image/jpeg" style="display:none" ng2FileSelect [uploader]="uploader" (change)="fileChange()">

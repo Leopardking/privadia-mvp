@@ -43,13 +43,17 @@ export class PropertyinfoComponent implements OnInit{
     // public officialName;
     public address;
 
+    private permission;
+
     constructor ( private propertiesService: PropertiesService,
+                  private loginService: LoginService,
                   private _sanitizer: DomSanitizer ) {
 
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
+        this.permission = !this.loginService.getPermission('Properties/Put');
 
         /*
         const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Admin')[0];
@@ -123,11 +127,11 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Contacts'];
         control.push(
             new FormGroup({
-                JobTitle: new FormControl(),
-                FirstName: new FormControl(),
-                LastName: new FormControl(),
-                EmailAddress: new FormControl('', Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
-                Telephone: new FormControl(),
+                JobTitle: new FormControl({ value: null, disabled: this.permission }),
+                FirstName: new FormControl({ value: null, disabled: this.permission }),
+                LastName: new FormControl({ value: null, disabled: this.permission }),
+                EmailAddress: new FormControl({ value: null, disabled: this.permission }, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
+                Telephone: new FormControl({ value: null, disabled: this.permission }),
             }),
         );
     }
@@ -142,9 +146,9 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Rooms'];
         control.push(
             new FormGroup({
-                Description: new FormControl(),
-                Name: new FormControl(),
-                PropertyRoomType: new FormControl(1),
+                Description: new FormControl({ value: null, disabled: this.permission }),
+                Name: new FormControl({ value: null, disabled: this.permission }),
+                PropertyRoomType: new FormControl({ value: 1, disabled: this.permission }),
             }),
         );
     }
@@ -158,9 +162,9 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Rooms'];
         control.push(
             new FormGroup({
-                Description: new FormControl(),
-                Name: new FormControl(),
-                PropertyRoomType: new FormControl(2),
+                Description: new FormControl({ value: null, disabled: this.permission }),
+                Name: new FormControl({ value: null, disabled: this.permission }),
+                PropertyRoomType: new FormControl({ value: 2, disabled: this.permission }),
             }),
         );
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray } from "@angular/forms";
+import {LoginService} from "../../../providers/login/login.service";
 
 declare const $: any;
 
@@ -15,9 +16,13 @@ export class SelectTagsFieldComponent implements OnInit {
     @Input('subtype') private subtype: any;
     @Input('group') private field: FormGroup;
 
-    constructor () { }
+    private permission;
+
+    constructor ( private loginService: LoginService ) { }
 
     ngOnInit() {
+        this.permission = !this.loginService.getPermission('Properties/Put');
+
         const selectQuery = $(".selectpicker");
         setTimeout(()=> {
             selectQuery.selectpicker({
