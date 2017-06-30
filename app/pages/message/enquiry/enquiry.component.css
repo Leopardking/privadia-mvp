@@ -321,7 +321,11 @@
     display: block;
 }
 
-.enquiry-body .form-group .btn-remove {
+.enquiry-body .terms-wrp {
+    position: relative;
+}
+
+.enquiry-body .terms-wrp .btn-remove {
     margin: 0;
     position: absolute;
     bottom: 9px;
@@ -329,13 +333,13 @@
     padding: 6px;
 }
 
-.enquiry-body .form-group .btn-remove .material-icons {
+.enquiry-body .terms-wrp .btn-remove .material-icons {
     width: 24px;
     font-size: 24px;
     color: #ff003d;
 }
 
-.enquiry-body .form-group .btn-remove .material-icons {
+.enquiry-body .terms-wrp .btn-remove .material-icons {
     font-size: 24px;
     color: #ff003d;
 }
