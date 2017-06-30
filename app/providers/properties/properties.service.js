@@ -28,6 +28,9 @@ var PropertiesService = (function () {
         this.properties = [];
         this.regions = [];
         this.metadata = [];
+        this.companies = [];
+        this.managers = [];
+        this.PoITypes = [];
         // private ownerNames;
         // public owner;
         // public ownerName;
@@ -96,13 +99,24 @@ var PropertiesService = (function () {
             console.log("error owner:", e);
         });
     };
-    PropertiesService.prototype.getDataCompanies = function () {
+    PropertiesService.prototype.readDataPoITypes = function () {
+        var _this = this;
+        this.isReading = true;
+        //--------------		Reading data       -----------///////////
+        this.lookupsService.getPoITypes().subscribe(function (d) {
+            _this.PoITypes = d;
+            _this.isReading = false;
+        }, function (e) {
+            console.log("error owner:", e);
+        });
+    };
+    PropertiesService.prototype.readDataCompanies = function () {
         var _this = this;
         this.lookupsService.getManagementCompanies().subscribe(function (d) {
             _this.companies = d;
         }, function (e) { console.log('Error ManagementCompanies', e); });
     };
-    PropertiesService.prototype.getDataManagers = function () {
+    PropertiesService.prototype.readDataManagers = function () {
         var _this = this;
         this.lookupsService.getManagersByCompany().subscribe(function (d) {
             _this.managers = d;

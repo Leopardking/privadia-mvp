@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()" class="col-xs-12" novalidate>
+            <form [formGroup]="propertyForm" (ngSubmit)="onSubmit(propertyForm.value)" class="col-xs-12" novalidate>
                 <div class="card">
                     <div class="property-tabs card-content p-b-15">
                         <ul class="nav nav-pills main-nav-pills">

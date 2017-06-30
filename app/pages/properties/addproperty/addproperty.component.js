@@ -13,13 +13,11 @@ var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var _ = require('lodash');
-var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 //declare const _:any;
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(router, propertiesService, lookupsService, builder) {
+    function AddpropertyComponent(router, propertiesService, builder) {
         this.router = router;
         this.propertiesService = propertiesService;
-        this.lookupsService = lookupsService;
         this.builder = builder;
         // private isActive = true;
         this.isLoad = true;
@@ -83,9 +81,8 @@ var AddpropertyComponent = (function () {
         propertiesService.readDataMetadata();
         propertiesService.readDataOwners();
         propertiesService.readDataRegions();
-        propertiesService.getDataCompanies();
-        propertiesService.getDataManagers();
-        console.log('Form init', this.propertiesService);
+        propertiesService.readDataCompanies();
+        propertiesService.readDataManagers();
     }
     AddpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -118,16 +115,20 @@ var AddpropertyComponent = (function () {
     AddpropertyComponent.prototype.discardInfo = function () {
         console.log('Discard Info form');
     };
-    AddpropertyComponent.prototype.onSubmit = function () {
+    AddpropertyComponent.prototype.onSubmit = function (form) {
         var _this = this;
         var newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
+        _.mapValues(form.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
         });
-        this.propertyForm.value.MetaData = newArr;
+        form.MetaData = newArr;
+        form.ManagementCompanyId = form.ManagementCompany.Id;
+        form.ManagementCompanyName = form.ManagementCompany.Name;
+        form.ManagerUserId = form.ManagerUser.Id;
+        form.ManagerUserName = form.ManagerUser.Name;
         if (this.propertyForm.valid) {
             this.sending = true;
-            this.propertiesService.addProperty(this.propertyForm.value).subscribe(function (d) {
+            this.propertiesService.addProperty(form).subscribe(function (d) {
                 $.notify({
                     icon: "notifications",
                     message: "Property Added Successfully"
@@ -141,7 +142,6 @@ var AddpropertyComponent = (function () {
                 });
                 _this.router.navigate(['properties']);
                 _this.sending = false;
-                //this.dashboardService.readData();
             }, function (e) { console.log("error:", e); });
         }
         else {
@@ -155,7 +155,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService, lookups_service_1.LookupsService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());

@@ -19,8 +19,9 @@ export class PropertiesService {
 	public property;
 	public regions = [];
 	public metadata = [];
-	public companies;
-	public managers;
+	public companies = [];
+	public managers = [];
+	public PoITypes = [];
 
 	public isReading;
 
@@ -120,7 +121,22 @@ export class PropertiesService {
 		);
 	}
 
-	public getDataCompanies() {
+	public readDataPoITypes() {
+		this.isReading = true;
+
+		//--------------		Reading data       -----------///////////
+		this.lookupsService.getPoITypes().subscribe(
+			d => {
+				this.PoITypes = d;
+				this.isReading = false;
+			},
+			e => {
+				console.log("error owner:", e);
+			}
+		);
+	}
+
+	public readDataCompanies() {
 		this.lookupsService.getManagementCompanies().subscribe(
 			d => {
 				this.companies = d;
@@ -129,7 +145,7 @@ export class PropertiesService {
 		)
 	}
 
-	public getDataManagers() {
+	public readDataManagers() {
 		this.lookupsService.getManagersByCompany().subscribe(
 			d => {
 				this.managers = d;

@@ -12,14 +12,10 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require("@angular/platform-browser");
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
-var lookups_service_1 = require("../../../providers/lookups/lookups.service");
-var login_service_1 = require("../../../providers/login/login.service");
 var PropertyinfoComponent = (function () {
-    function PropertyinfoComponent(propertiesService, lookupsService, loginService, _sanitizer) {
+    function PropertyinfoComponent(propertiesService, _sanitizer) {
         var _this = this;
         this.propertiesService = propertiesService;
-        this.lookupsService = lookupsService;
-        this.loginService = loginService;
         this._sanitizer = _sanitizer;
         this.autocompleListFormatter = function (data) {
             var html = "" + data.Name;
@@ -153,7 +149,7 @@ var PropertyinfoComponent = (function () {
             templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService, login_service_1.LoginService, platform_browser_1.DomSanitizer])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, platform_browser_1.DomSanitizer])
     ], PropertyinfoComponent);
     return PropertyinfoComponent;
 }());

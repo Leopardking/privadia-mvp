@@ -81,15 +81,13 @@ export class AddpropertyComponent implements OnInit {
 
     constructor ( private router:Router,
                   private propertiesService: PropertiesService,
-                  private lookupsService: LookupsService,
                   private builder: FormBuilder ) {
 
         propertiesService.readDataMetadata();
         propertiesService.readDataOwners();
         propertiesService.readDataRegions();
-        propertiesService.getDataCompanies();
-        propertiesService.getDataManagers();
-        console.log('Form init',this.propertiesService)
+        propertiesService.readDataCompanies();
+        propertiesService.readDataManagers();
     }
 
     ngOnInit(){
@@ -129,17 +127,22 @@ export class AddpropertyComponent implements OnInit {
         console.log('Discard Info form')
     }
 
-    private onSubmit() {
+    private onSubmit(form) {
         let newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
+        _.mapValues(form.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
         })
-        this.propertyForm.value.MetaData = newArr;
+        form.MetaData = newArr;
+        form.ManagementCompanyId = form.ManagementCompany.Id;
+        form.ManagementCompanyName = form.ManagementCompany.Name;
+        form.ManagerUserId = form.ManagerUser.Id;
+        form.ManagerUserName = form.ManagerUser.Name;
+
 
         if(this.propertyForm.valid) {
             this.sending = true;
 
-            this.propertiesService.addProperty(this.propertyForm.value).subscribe(
+            this.propertiesService.addProperty(form).subscribe(
                 d => {
                     $.notify({
                         icon: "notifications",
@@ -157,7 +160,6 @@ export class AddpropertyComponent implements OnInit {
                     this.router.navigate(['properties']);
                     this.sending = false;
 
-                    //this.dashboardService.readData();
                 },
                 e => { console.log("error:", e); }
             );

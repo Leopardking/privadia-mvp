@@ -44,14 +44,13 @@ export class PropertyinfoComponent implements OnInit{
     public address;
 
     constructor ( private propertiesService: PropertiesService,
-                  private lookupsService: LookupsService,
-                  private loginService: LoginService,
                   private _sanitizer: DomSanitizer ) {
 
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
+
         /*
         const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Admin')[0];
 

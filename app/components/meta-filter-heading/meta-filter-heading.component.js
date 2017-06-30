@@ -11,59 +11,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var properties_service_1 = require('../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
+var lookups_service_1 = require("../../providers/lookups/lookups.service");
 var MetafilterheadingComponent = (function () {
-    // public housekeeperState = 0;
-    // public housekeepOtherInfo = "";
-    // public liftAvailable: boolean = false;
-    // public uniqueBenefits: string = "";
-    // public PoITypes = [];
-    function MetafilterheadingComponent(propertiesService) {
+    function MetafilterheadingComponent(propertiesService, lookupsService) {
         this.propertiesService = propertiesService;
+        this.lookupsService = lookupsService;
     }
     MetafilterheadingComponent.prototype.ngOnInit = function () {
         switch (this.name) {
             case "Points of Interest":
-                var control = this.propertyForm.controls['PointsOfInterest'];
-                /*
-                this.propertiesService.getPoITypes().subscribe(
-                    d => {
-                        // this.PoITypes = d;
-                        if(!control.value.length) {
-                            d.forEach( (item, index) => {
-                                control.push(
-                                    new FormGroup({
-                                        Name: new FormControl(''),
-                                        PointOfInterestTypeId: new FormControl(item.Id),
-                                        PointOfInterestTypeName: new FormControl(item.Name),
-                                        Available: new FormControl(false),
-                                        Distance: new FormControl(0),
-                                    }),
-                                );
-                            } );
-                        }
-                        console.log('PointsOfInterest init', control.value.length )
-                    },
-                    e => {
-                        console.log("Get Points of Types error: ", e);
+                var control_1 = this.propertyForm.controls['PointsOfInterest'];
+                this.lookupsService.getPoITypes().subscribe(function (d) {
+                    if (!control_1.value.length) {
+                        d.forEach(function (item, index) {
+                            control_1.push(new forms_1.FormGroup({
+                                Name: new forms_1.FormControl(''),
+                                PointOfInterestTypeId: new forms_1.FormControl(item.Id),
+                                PointOfInterestTypeName: new forms_1.FormControl(item.Name),
+                                Available: new forms_1.FormControl(false),
+                                Distance: new forms_1.FormControl(0),
+                            }));
+                        });
                     }
-                );
-                */
-                //console.log('this.propertyForm 1',this.propertyForm)
-                /*
-                this.propertiesService.getPoITypes().subscribe(
-                    d => {
-                        this.PoITypes = d;
-                        this.PoITypes.map( (item, index) => {
-                            item.typeName = "";
-                            item.distance = 0;
-                            item.checked = false;
-                        } );
-                    },
-                    e => {
-                        console.log("Get Points of Types error: ", e);
-                    }
-                );
-                */
+                }, function (e) {
+                    console.log("Get Points of Types error: ", e);
+                });
                 break;
         }
     };
@@ -85,7 +57,7 @@ var MetafilterheadingComponent = (function () {
             templateUrl: 'meta-filter-heading.component.html',
             styleUrls: ['meta-filter-heading.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService])
     ], MetafilterheadingComponent);
     return MetafilterheadingComponent;
 }());
