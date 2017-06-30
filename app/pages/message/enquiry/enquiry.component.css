@@ -286,6 +286,7 @@
 .enquiry-body .material-icons {
     font-size: 18px;
     color: #5399bc;
+    vertical-align: top;
 }
 
 .enquiry-body .no-proposal {
