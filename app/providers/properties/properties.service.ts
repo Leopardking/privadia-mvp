@@ -19,8 +19,6 @@ export class PropertiesService {
 
 	public owners;
 	public regionArray;
-	public regions;
-	public metadata;
 	// private ownerNames;
 
 	// public owner;
@@ -53,7 +51,7 @@ export class PropertiesService {
 		);
 
 	}
-
+/*
 	public getDataProperty(id) {
 		this.isReading = true;
 		this.getPropertyById(id).subscribe(
@@ -115,7 +113,7 @@ export class PropertiesService {
 			e => { console.log("Error Owner: ", e); }
 		);
 	}
-
+*/
 	public getAllProperties() {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -192,74 +190,11 @@ export class PropertiesService {
 				.catch(this.handleError);
 	}
 
-	public getRegions() {
-		if(!this.loginService.getPermission('Lookups/GetRegions'))
-			return Observable.throw(null);
-
-		let header = new Headers( {'Authorization': this.token} );
-		let options = new RequestOptions( {headers: header} );
-
-		return this.http.get( this.apiUrl + '/api/Lookups/GetRegions', options )
-				.map(this.extractData)
-				.catch(this.handleError);
-	}
-
-	public getOwners() {
-		if(!this.loginService.getPermission('Lookups/GetOwners'))
-			return Observable.throw(null);
-
-		let header = new Headers( {'Authorization': this.token} );
-		let options = new RequestOptions( {headers: header} );
-
-		return this.http.get( this.apiUrl + '/api/Lookups/GetOwners', options )
-				.map(this.extractData)
-				.catch(this.handleError);
-	}
-
-	public getPoITypes() {
-		let header = new Headers( {'Authorization': this.token} );
-		let options = new RequestOptions( {headers: header} );
-
-		return this.http.get( this.apiUrl + '/api/Lookups/GetPointOfInterestTypes', options )
-				.map(this.extractData)
-				.catch(this.handleError);
-	}
-
-	public getMetaData() {
-		if(!this.loginService.getPermission('Lookups/GetMetaData'))
-			return Observable.throw(null);
-
-		let header = new Headers( {'Authorization': this.token} );
-		let options = new RequestOptions( {headers: header} );
-
-		return this.http.get( this.apiUrl + '/api/Lookups/GetMetaData', options )
-				.map(this.extractData)
-				.catch(this.handleError);
-	}
-
-	public getChildrenAllowed() {
-		let header = new Headers( {'Authorization': this.token} );
-		let options = new RequestOptions( {headers: header} );
-
-		return this.http.get( this.apiUrl + '/api/Lookups/GetChildrenOptions', options )
-				.map(this.extractData)
-				.catch(this.handleError);
-	}
-
 	public getBookings(id) {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/bookings/property/' + id, options)
-				.map(this.extractData)
-				.catch(this.handleError);
-	}
-
-	public getHousekeepingOptions() {
-		let header = new Headers( {'Authorization': this.token} );
-		let options = new RequestOptions( {headers: header} );
-
-		return this.http.get( this.apiUrl + '/api/Lookups/GetHousekeepingOptions/', options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}

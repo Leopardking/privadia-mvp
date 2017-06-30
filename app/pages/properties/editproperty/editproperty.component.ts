@@ -29,7 +29,7 @@ export class EditpropertyComponent implements OnInit {
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
         this.route.params.subscribe(params => {
-            propertiesService.getDataProperty(this.propertyId = params['id']);
+            //propertiesService.getDataProperty(this.propertyId = params['id']);
             //lookupsService.getDataCompanies();
             //lookupsService.getDataManagers();
         });

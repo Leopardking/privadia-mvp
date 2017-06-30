@@ -84,7 +84,7 @@ export class AddpropertyComponent implements OnInit, AfterViewInit{
                   private lookupsService: LookupsService,
                   private builder: FormBuilder ) {
 
-        propertiesService.getDataEmptyProperty();
+        //propertiesService.getDataEmptyProperty();
         lookupsService.getDataCompanies();
         lookupsService.getDataManagers();
         console.log('Form init',this.propertiesService)

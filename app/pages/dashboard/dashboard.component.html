@@ -6,11 +6,13 @@
         <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#proposal">
             Create a Proposal
         </button>
-        <div class="row filter">
+        <div class="row filter" *ngIf="dashboardService.metadata.length">
         	<dashboard-filter-cmp [metafilters]="dashboardService.metadata"></dashboard-filter-cmp>
         </div>
-        <div class="col-lg-4 col-md-6 col-sm-6" *ngFor=" let item of dashboardService.villas; let i = index " >
-            <villa-cmp [villa]="item" [region]="dashboardService.regions[item.RegionId-1].Name"></villa-cmp>
+        <div class="row" *ngIf="dashboardService.regions.length">
+            <div class="col-lg-4 col-md-6 col-sm-6" *ngFor=" let item of dashboardService.villas; let i = index " >
+                <villa-cmp [villa]="item" [region]="dashboardService.regions[item.RegionId-1].Name"></villa-cmp>
+            </div>
         </div>
     </div>
 </div>

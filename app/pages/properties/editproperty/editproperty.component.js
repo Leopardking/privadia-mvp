@@ -16,7 +16,6 @@ var login_service_1 = require("../../../providers/login/login.service");
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var EditpropertyComponent = (function () {
     function EditpropertyComponent(propertiesService, loginService, lookupsService, route, builder) {
-        var _this = this;
         this.propertiesService = propertiesService;
         this.loginService = loginService;
         this.lookupsService = lookupsService;
@@ -24,15 +23,14 @@ var EditpropertyComponent = (function () {
         this.builder = builder;
         this.errorForm = false;
         this.route.params.subscribe(function (params) {
-            propertiesService.getDataProperty(_this.propertyId = params['id']);
-            lookupsService.getDataCompanies();
-            lookupsService.getDataManagers();
+            //propertiesService.getDataProperty(this.propertyId = params['id']);
+            //lookupsService.getDataCompanies();
+            //lookupsService.getDataManagers();
         });
     }
     EditpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        console.log('User Info Edit ', this.loginService.userInfo);
         setTimeout(function () {
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,

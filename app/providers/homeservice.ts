@@ -59,7 +59,7 @@ export class MainService {
 
 	public readData() {
 		this.isReading = true;
-
+/*
 		//--------------		Reading data of villas		-----------///////////
         this.propertiesService.getRegions().subscribe(
             d => {
@@ -86,7 +86,7 @@ export class MainService {
             },
             e => { console.log(e); }
         );
-
+*/
         //------------	Reading all properties -------------//
         this.propertiesService.getAllProperties().subscribe(
             d => {

@@ -22,30 +22,7 @@ var PropertiesService = (function () {
         // public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
-        this.properties = {
-            isReading: true,
-            data: []
-        };
-        this.property = {
-            isReading: true,
-            data: []
-        };
-        this.owners = {
-            isReading: true,
-            data: []
-        };
-        this.regionArray = {
-            isReading: true,
-            data: []
-        };
-        this.regions = {
-            isReading: true,
-            data: []
-        };
-        this.metadata = {
-            isReading: true,
-            data: []
-        };
+        this.properties = [];
         // private ownerNames;
         // public owner;
         // public ownerName;
@@ -65,68 +42,74 @@ var PropertiesService = (function () {
     PropertiesService.prototype.getDataProperties = function () {
         var _this = this;
         this.getAllProperties().subscribe(function (d) {
-            _this.properties = {
-                isReading: false,
-                data: d
-            };
+            _this.properties = d;
         }, function (e) {
             console.log("error properties: ", e);
         });
     };
-    PropertiesService.prototype.getDataProperty = function (id) {
-        var _this = this;
-        this.getPropertyById(id).subscribe(function (d) {
-            _this.property = {
-                isReading: false,
-                data: d
-            };
-        }, function (e) { console.log("Error Properties: ", e); });
-    };
-    PropertiesService.prototype.getDataMetadata = function () {
-        var _this = this;
-        this.getMetaData().subscribe(function (d) {
-            _this.metadata = {
-                isReading: false,
-                data: d
-            };
-        }, function (e) { console.log("Error MetaData: ", e); });
-    };
-    PropertiesService.prototype.getDataRegions = function () {
-        var _this = this;
-        this.getRegions().subscribe(function (d) {
-            _this.regionArray = {
-                isReading: false,
-                data: d
-            };
-            _this.regions = d.map(function (item, i) { return item.Name; });
-        }, function (e) { console.log("Error Regions: ", e); });
-    };
-    PropertiesService.prototype.getDataOwners = function () {
-        var _this = this;
-        this.getOwners().subscribe(function (d) {
-            _this.owners = {
-                isReading: false,
-                data: d
-            };
-            // this.ownerNames = d.map( (item, i) => { return item.Name; } );
-        }, function (e) { console.log("Error Owner: ", e); });
-    };
-    PropertiesService.prototype.getDataEmptyProperty = function () {
-        var _this = this;
-        this.isReading = true;
-        this.getOwners().subscribe(function (d) {
-            _this.owners = d;
-            // this.ownerNames = d.map( (item, i) => { return item.Name; } );
-            _this.getRegions().subscribe(function (d) {
-                _this.regionArray = d;
-                _this.regions = d.map(function (item, i) { return item.Name; });
-                _this.getMetaData().subscribe(function (d) {
-                    _this.metadata = d;
-                    _this.isReading = false;
-                }, function (e) { console.log("Error MetaData: ", e); });
-            }, function (e) { console.log("Error Regions: ", e); });
-        }, function (e) { console.log("Error Owner: ", e); });
-    };
+    /*
+        public getDataProperty(id) {
+            this.isReading = true;
+            this.getPropertyById(id).subscribe(
+                d => {
+                    this.property = d;
+    
+                        this.getMetaData().subscribe(
+                            d => {
+                                this.metadata = d;
+                            },
+                            e => { console.log("Error MetaData: ", e); }
+                        );
+    
+                        this.getRegions().subscribe(
+                            d => {
+                                this.regionArray = d;
+                                this.regions = d.map( (item, i) => { return item.Name; } );
+    
+                            },
+                            e => { console.log("Error Regions: ", e); }
+                        );
+    
+                        this.getOwners().subscribe(
+                            d => {
+                                this.owners = d;
+                                // this.ownerNames = d.map( (item, i) => { return item.Name; } );
+                            },
+                            e => { console.log("Error Owner: ", e); }
+                        );
+    
+                    this.isReading = false;
+                },
+                e => { console.log("Error Properties: ", e); }
+            );
+        }
+    
+        public getDataEmptyProperty() {
+            this.isReading = true;
+            this.getOwners().subscribe(
+                d => {
+                    this.owners = d;
+                    // this.ownerNames = d.map( (item, i) => { return item.Name; } );
+    
+                    this.getRegions().subscribe(
+                        d => {
+                            this.regionArray = d;
+                            this.regions = d.map( (item, i) => { return item.Name; } );
+    
+                            this.getMetaData().subscribe(
+                                d => {
+                                    this.metadata = d;
+                                    this.isReading = false;
+                                },
+                                e => { console.log("Error MetaData: ", e); }
+                            );	},
+                        e => { console.log("Error Regions: ", e); }
+                    );
+                },
+                e => { console.log("Error Owner: ", e); }
+            );
+        }
+    */
     PropertiesService.prototype.getAllProperties = function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
@@ -163,8 +146,8 @@ var PropertiesService = (function () {
             .catch(this.handleError);
     };
     PropertiesService.prototype.getVillas = function (filter) {
-        // if(!this.loginService.getPermission('Properties/SearchAvailable'))
-        // 	return Observable.throw(null);
+        if (!this.loginService.getPermission('Properties/SearchAvailable'))
+            return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.post(this.apiUrl + '/api/Properties/SearchAvailable', filter, options)
@@ -186,58 +169,10 @@ var PropertiesService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    PropertiesService.prototype.getRegions = function () {
-        // if(!this.loginService.getPermission('Lookups/GetRegions'))
-        // 	return Observable.throw(null);
-        var header = new http_1.Headers({ 'Authorization': this.token });
-        var options = new http_1.RequestOptions({ headers: header });
-        return this.http.get(this.apiUrl + '/api/Lookups/GetRegions', options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    PropertiesService.prototype.getOwners = function () {
-        // if(!this.loginService.getPermission('Lookups/GetOwners'))
-        // 	return Observable.throw(null);
-        var header = new http_1.Headers({ 'Authorization': this.token });
-        var options = new http_1.RequestOptions({ headers: header });
-        return this.http.get(this.apiUrl + '/api/Lookups/GetOwners', options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    PropertiesService.prototype.getPoITypes = function () {
-        var header = new http_1.Headers({ 'Authorization': this.token });
-        var options = new http_1.RequestOptions({ headers: header });
-        return this.http.get(this.apiUrl + '/api/Lookups/GetPointOfInterestTypes', options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    PropertiesService.prototype.getMetaData = function () {
-        // if(!this.loginService.getPermission('Lookups/GetMetaData'))
-        // 	return Observable.throw(null);
-        var header = new http_1.Headers({ 'Authorization': this.token });
-        var options = new http_1.RequestOptions({ headers: header });
-        return this.http.get(this.apiUrl + '/api/Lookups/GetMetaData', options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    PropertiesService.prototype.getChildrenAllowed = function () {
-        var header = new http_1.Headers({ 'Authorization': this.token });
-        var options = new http_1.RequestOptions({ headers: header });
-        return this.http.get(this.apiUrl + '/api/Lookups/GetChildrenOptions', options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
     PropertiesService.prototype.getBookings = function (id) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/bookings/property/' + id, options)
-            .map(this.extractData)
-            .catch(this.handleError);
-    };
-    PropertiesService.prototype.getHousekeepingOptions = function () {
-        var header = new http_1.Headers({ 'Authorization': this.token });
-        var options = new http_1.RequestOptions({ headers: header });
-        return this.http.get(this.apiUrl + '/api/Lookups/GetHousekeepingOptions/', options)
             .map(this.extractData)
             .catch(this.handleError);
     };

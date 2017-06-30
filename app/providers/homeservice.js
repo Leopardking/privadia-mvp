@@ -52,18 +52,34 @@ var MainService = (function () {
     MainService.prototype.readData = function () {
         var _this = this;
         this.isReading = true;
-        //--------------		Reading data of villas		-----------///////////
-        this.propertiesService.getRegions().subscribe(function (d) {
-            _this.regions = d;
-            _this.getVillas().subscribe(function (d) {
-                _this.villas = d;
-                _this.propertiesService.getMetaData().subscribe(function (d) {
-                    _this.metadata = d;
-                    console.log(d);
-                    _this.isReading = false;
-                }, function (e) { console.log("error: ", e); });
-            }, function (e) { console.log("error:", e); });
-        }, function (e) { console.log(e); });
+        /*
+                //--------------		Reading data of villas		-----------///////////
+                this.propertiesService.getRegions().subscribe(
+                    d => {
+                        this.regions = d;
+                        
+                this.getVillas().subscribe(
+                    d => {
+                        this.villas = d;
+        
+                this.propertiesService.getMetaData().subscribe(
+                    d => {
+                        this.metadata = d;
+        
+                        console.log(d);
+        
+                        this.isReading = false;
+                    },
+                    e => { console.log("error: ", e); }
+                );
+                    },
+                    e => { console.log("error:", e); }
+                );
+        
+                    },
+                    e => { console.log(e); }
+                );
+        */
         //------------	Reading all properties -------------//
         this.propertiesService.getAllProperties().subscribe(function (d) {
             _this.properties = d;

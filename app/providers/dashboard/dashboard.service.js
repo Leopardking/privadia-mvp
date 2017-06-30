@@ -12,28 +12,40 @@ var core_1 = require('@angular/core');
 var properties_service_1 = require('../properties/properties.service');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
+var lookups_service_1 = require("../lookups/lookups.service");
 var DashboardService = (function () {
-    function DashboardService(propertiesService) {
+    function DashboardService(propertiesService, lookupsService) {
         this.propertiesService = propertiesService;
+        this.lookupsService = lookupsService;
         this.filter = {};
-        this.regions = [];
         this.villas = [];
-        this.properties = [];
+        this.regions = [];
         this.metadata = [];
-        this.readData();
+        this.readDataVillas();
+        this.readDataRegions();
+        this.readDataMetadata();
     }
-    DashboardService.prototype.readData = function () {
+    DashboardService.prototype.readDataVillas = function () {
         var _this = this;
         this.isReading = true;
         //--------------		Reading data       -----------///////////
         this.propertiesService.getVillas(this.filter).subscribe(function (d) {
             _this.villas = d;
-            _this.propertiesService.getMetaData().subscribe(function (d) {
-                _this.metadata = d;
-            }, function (e) { console.log("error metadata: ", e); });
-            _this.propertiesService.getRegions().subscribe(function (d) {
-                _this.regions = d;
-            }, function (e) { console.log('error regions', e); });
+            /*
+            this.lookupsService.getMetaData().subscribe(
+                d => {
+                    this.metadata = d;
+                },
+                e => { console.log("error metadata: ", e); }
+            );
+
+            this.lookupsService.getRegions().subscribe(
+                d => {
+                    this.regions = d;
+                },
+                e => { console.log('error regions', e) }
+            );
+            */
             _this.isReading = false;
         }, function (e) {
             console.log("error villas:", e);
@@ -41,9 +53,31 @@ var DashboardService = (function () {
             // this.router.navigate(['/login']);
         });
     };
+    DashboardService.prototype.readDataRegions = function () {
+        var _this = this;
+        this.isReading = true;
+        //--------------		Reading data       -----------///////////
+        this.lookupsService.getRegions().subscribe(function (d) {
+            _this.regions = d;
+            _this.isReading = false;
+        }, function (e) {
+            console.log("error regions:", e);
+        });
+    };
+    DashboardService.prototype.readDataMetadata = function () {
+        var _this = this;
+        this.isReading = true;
+        //--------------		Reading data       -----------///////////
+        this.lookupsService.getMetaData().subscribe(function (d) {
+            _this.metadata = d;
+            _this.isReading = false;
+        }, function (e) {
+            console.log("error metadata:", e);
+        });
+    };
     DashboardService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService])
     ], DashboardService);
     return DashboardService;
 }());

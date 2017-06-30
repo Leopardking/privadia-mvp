@@ -22,6 +22,7 @@ import { InputfieldComponent } from "../../components/form-fields/input-field/in
 import { DatetimefieldComponent } from "../../components/form-fields/datetimepicker-field/datetimepicker-field.component";
 import { SelectfieldComponent } from "../../components/form-fields/select-field/select.component";
 import {Ng2CloudinaryModule} from "ng2-cloudinary";
+import {LookupsService} from "../../providers/lookups/lookups.service";
 
 @NgModule({
     imports: [
@@ -40,6 +41,6 @@ import {Ng2CloudinaryModule} from "ng2-cloudinary";
         DatetimefieldComponent,
         SelectfieldComponent
     ],
-    providers: [ DashboardService, PropertiesService, BookingService ]
+    providers: [ DashboardService, PropertiesService, LookupsService ]
 })
 export class DashboardModule {}

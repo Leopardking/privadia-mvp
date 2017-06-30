@@ -13,9 +13,29 @@ export class LookupsService {
 
 	public companies = [];
 	public managers = [];
+	public regions;
+	public metadata;
 
 	constructor ( private http: Http,
 				  private loginService: LoginService ) {}
+
+	public readDataRegions() {
+		this.getRegions().subscribe(
+			d => {
+				this.regions = d;
+			},
+			e => { console.log('Error ManagementCompanies', e) }
+		)
+	}
+
+	public readDataMetadata() {
+		this.getMetaData().subscribe(
+			d => {
+				this.metadata = d;
+			},
+			e => { console.log('Error ManagementCompanies', e) }
+		)
+	}
 
 	public getDataCompanies() {
 		this.getManagementCompanies().subscribe(
@@ -55,6 +75,69 @@ export class LookupsService {
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/Lookups/GetManagersByCompany/6e78b138-4d18-4691-b988-c5057f599bf0', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getRegions() {
+		if(!this.loginService.getPermission('Lookups/GetRegions'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetRegions', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getOwners() {
+		if(!this.loginService.getPermission('Lookups/GetOwners'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetOwners', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getHousekeepingOptions() {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetHousekeepingOptions/', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getPoITypes() {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetPointOfInterestTypes', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getMetaData() {
+		if(!this.loginService.getPermission('Lookups/GetMetaData'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetMetaData', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getChildrenAllowed() {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetChildrenOptions', options )
             .map(this.extractData)
             .catch(this.handleError);
 	}

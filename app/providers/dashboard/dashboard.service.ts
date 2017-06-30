@@ -5,25 +5,30 @@ import { PropertiesService } from '../properties/properties.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import {Router} from "@angular/router";
+import {LookupsService} from "../lookups/lookups.service";
 
 declare const moment: any;
 
 @Injectable()
 export class DashboardService {
 	public filter = {};
+	public villas = [];
 
 	public regions = [];
-	public villas = [];
-	public properties = [];
 	public metadata = [];
+
 
 	public isReading;
 
-	constructor ( private propertiesService: PropertiesService ) {
-		this.readData();
+	constructor ( private propertiesService: PropertiesService,
+				  private lookupsService: LookupsService ) {
+
+		this.readDataVillas();
+		this.readDataRegions();
+		this.readDataMetadata();
 	}
 
-	public readData() {
+	public readDataVillas() {
 		this.isReading = true;
 
 		//--------------		Reading data       -----------///////////
@@ -31,19 +36,21 @@ export class DashboardService {
 			d => {
 				this.villas = d;
 
-				this.propertiesService.getMetaData().subscribe(
+				/*
+				this.lookupsService.getMetaData().subscribe(
 					d => {
 						this.metadata = d;
 					},
 					e => { console.log("error metadata: ", e); }
 				);
 
-				this.propertiesService.getRegions().subscribe(
+				this.lookupsService.getRegions().subscribe(
 					d => {
 						this.regions = d;
 					},
 					e => { console.log('error regions', e) }
 				);
+				*/
 
 				this.isReading = false;
 			},
@@ -51,6 +58,36 @@ export class DashboardService {
 				console.log("error villas:", e);
 				// localStorage.removeItem('id_token');
 				// this.router.navigate(['/login']);
+			}
+		);
+	}
+
+	public readDataRegions() {
+		this.isReading = true;
+
+		//--------------		Reading data       -----------///////////
+		this.lookupsService.getRegions().subscribe(
+			d => {
+				this.regions = d;
+				this.isReading = false;
+			},
+			e => {
+				console.log("error regions:", e);
+			}
+		);
+	}
+
+	public readDataMetadata() {
+		this.isReading = true;
+
+		//--------------		Reading data       -----------///////////
+		this.lookupsService.getMetaData().subscribe(
+			d => {
+				this.metadata = d;
+				this.isReading = false;
+			},
+			e => {
+				console.log("error metadata:", e);
 			}
 		);
 	}

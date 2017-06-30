@@ -14,15 +14,12 @@ var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var _ = require('lodash');
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
-var login_service_1 = require("../../../providers/login/login.service");
 //declare const _:any;
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(router, route, propertiesService, lookupsService, loginService, builder) {
+    function AddpropertyComponent(router, propertiesService, lookupsService, builder) {
         this.router = router;
-        this.route = route;
         this.propertiesService = propertiesService;
         this.lookupsService = lookupsService;
-        this.loginService = loginService;
         this.builder = builder;
         // private isActive = true;
         this.isLoad = true;
@@ -83,21 +80,9 @@ var AddpropertyComponent = (function () {
             LiftAvailable: new forms_1.FormControl(false),
             Benefits: new forms_1.FormControl(),
         });
-        // propertiesService.getDataEmptyProperty();
-        //setTimeout(() => {
-        this.route.params.subscribe(function (params) {
-            if (loginService.getPermission('Lookups/GetMetaData'))
-                propertiesService.getDataMetadata();
-            if (loginService.getPermission('Lookups/GetRegions'))
-                propertiesService.getDataRegions();
-            if (loginService.getPermission('Lookups/GetOwners'))
-                propertiesService.getDataOwners();
-            if (loginService.getPermission('Lookups/GetManagementCompanies'))
-                lookupsService.getDataCompanies();
-            if (loginService.getPermission('Lookups/GetManagementCompanies'))
-                lookupsService.getDataManagers();
-        });
-        //}, 5000)
+        //propertiesService.getDataEmptyProperty();
+        lookupsService.getDataCompanies();
+        lookupsService.getDataManagers();
         console.log('Form init', this.propertiesService);
     }
     AddpropertyComponent.prototype.ngOnInit = function () {
@@ -170,7 +155,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, properties_service_1.PropertiesService, lookups_service_1.LookupsService, login_service_1.LoginService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService, lookups_service_1.LookupsService, forms_1.FormBuilder])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());

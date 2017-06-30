@@ -23,24 +23,31 @@ var MetafilterheadingComponent = (function () {
     MetafilterheadingComponent.prototype.ngOnInit = function () {
         switch (this.name) {
             case "Points of Interest":
-                var control_1 = this.propertyForm.controls['PointsOfInterest'];
-                this.propertiesService.getPoITypes().subscribe(function (d) {
-                    // this.PoITypes = d;
-                    if (!control_1.value.length) {
-                        d.forEach(function (item, index) {
-                            control_1.push(new forms_1.FormGroup({
-                                Name: new forms_1.FormControl(''),
-                                PointOfInterestTypeId: new forms_1.FormControl(item.Id),
-                                PointOfInterestTypeName: new forms_1.FormControl(item.Name),
-                                Available: new forms_1.FormControl(false),
-                                Distance: new forms_1.FormControl(0),
-                            }));
-                        });
+                var control = this.propertyForm.controls['PointsOfInterest'];
+                /*
+                this.propertiesService.getPoITypes().subscribe(
+                    d => {
+                        // this.PoITypes = d;
+                        if(!control.value.length) {
+                            d.forEach( (item, index) => {
+                                control.push(
+                                    new FormGroup({
+                                        Name: new FormControl(''),
+                                        PointOfInterestTypeId: new FormControl(item.Id),
+                                        PointOfInterestTypeName: new FormControl(item.Name),
+                                        Available: new FormControl(false),
+                                        Distance: new FormControl(0),
+                                    }),
+                                );
+                            } );
+                        }
+                        console.log('PointsOfInterest init', control.value.length )
+                    },
+                    e => {
+                        console.log("Get Points of Types error: ", e);
                     }
-                    console.log('PointsOfInterest init', control_1.value.length);
-                }, function (e) {
-                    console.log("Get Points of Types error: ", e);
-                });
+                );
+                */
                 //console.log('this.propertyForm 1',this.propertyForm)
                 /*
                 this.propertiesService.getPoITypes().subscribe(

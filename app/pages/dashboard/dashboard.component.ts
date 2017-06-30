@@ -3,6 +3,7 @@ import { DashboardService } from '../../providers/dashboard/dashboard.service';
 
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import {PropertiesService} from "../../providers/properties/properties.service";
+import {LookupsService} from "../../providers/lookups/lookups.service";
 
 declare const $:any;
 declare const moment:any;
@@ -18,7 +19,9 @@ export class DashboardComponent implements OnInit{
     public enquiryForm = new FormGroup ({});
     public proposalForm = new FormGroup ({});
 
-    constructor ( private dashboardService: DashboardService, private builder: FormBuilder) { }
+    constructor ( private dashboardService: DashboardService,
+                  private lookupsService: LookupsService,
+                  private builder: FormBuilder) { }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
