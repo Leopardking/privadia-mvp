@@ -17,7 +17,9 @@ export class LookupsService {
 	public metadata;
 
 	constructor ( private http: Http,
-				  private loginService: LoginService ) {}
+				  private loginService: LoginService ) {
+		console.log('Load Lookups Service');
+	}
 
 	public readDataRegions() {
 		this.getRegions().subscribe(

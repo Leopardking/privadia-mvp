@@ -38,6 +38,8 @@ var PropertiesService = (function () {
             Id: '',
             Name: ''
         };
+        this.getDataProperties();
+        console.log('Load Properties Service');
     }
     PropertiesService.prototype.getDataProperties = function () {
         var _this = this;

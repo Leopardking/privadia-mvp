@@ -22,6 +22,7 @@ var LookupsService = (function () {
         this.token = localStorage.getItem('id_token');
         this.companies = [];
         this.managers = [];
+        console.log('Load Lookups Service');
     }
     LookupsService.prototype.readDataRegions = function () {
         var _this = this;

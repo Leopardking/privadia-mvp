@@ -24,6 +24,7 @@ var DashboardService = (function () {
         this.readDataVillas();
         this.readDataRegions();
         this.readDataMetadata();
+        console.log('Load Dashboard Service');
     }
     DashboardService.prototype.readDataVillas = function () {
         var _this = this;
