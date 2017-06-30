@@ -23,6 +23,8 @@ export class EnquiryComponent implements OnInit {
     ngOnInit() {
         initDatetimepickers();
 
+        $('.messages-wrp').perfectScrollbar();
+
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
         setTimeout(() => {

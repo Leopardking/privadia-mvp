@@ -1,8 +1,22 @@
-.messages-wrp {
+.messages-container {
     padding-top: 52px;
     padding-left: 24px;
+    margin-right: -12px;
+}
+.messages-wrp {
+    width: 100%;
+    max-height: 70vh;
+    overflow: auto;
+    position: relative;
+    padding-right: 12px;
+}
+.messages {
+    text-align: center;
+    overflow: hidden;
 }
 .messages-wrp .messages .date-line {
+    width: 100%;
+    float: left;
     font-size: 14px;
     text-align: center;
     color: #747879;
@@ -16,7 +30,7 @@
     margin: 20px 0;
     position: relative;
     border-radius: 10px;
-    display: block;
+    display: inline-block;
 }
 
 .messages-wrp .messages .message:before {
@@ -35,6 +49,7 @@
 
 .messages-wrp .messages .message.from {
     float: left;
+    text-align: left;
     background-color: #f3f5f6;
 }
 
@@ -53,6 +68,7 @@
 }
 
 .messages-wrp .messages .message.to {
+    text-align: left;
     float: right;
     background-color: #d0effe;
 }
@@ -72,9 +88,12 @@
 }
 
 .messages-wrp .messages .message.info {
-    margin-left: 10%;
-    float: left;
+    width: 286px;
+    font-size: 16px;
+    text-align: center;
+    float: none;
     border-width: 0;
+    border-radius: 10px;
     background-color: #f3f5f6;
 }
 
@@ -84,6 +103,10 @@
 
 .messages-wrp .messages .message.info:after {
     border-width: 0;
+}
+
+.messages-wrp .messages .message.info i {
+    vertical-align: middle;
 }
 
 .messages-wrp .messages .message .message-text {
@@ -97,6 +120,30 @@
     float: right;
     color: #747879;
     display: inline-block;
+}
+
+.messages-container .message-send {
+    position: relative;
+}
+
+.messages-container .message-send .form-group {
+    margin: 0;
+}
+
+.messages-container .message-send .form-control {
+    background-image: none;
+}
+
+.messages-container .message-send .btn-send {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.messages-container .message-send .btn-send .material-icons {
+    font-size: 24px;
+    color: #5399bc;
 }
 
 .enquiry-header {
