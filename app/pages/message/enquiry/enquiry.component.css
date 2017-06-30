@@ -1,5 +1,9 @@
+.enquiry-detail {
+    position: relative;
+    top: -54px;
+}
 .messages-container {
-    padding-top: 52px;
+    padding-top: 66px;
     padding-left: 24px;
     margin-right: -12px;
 }
