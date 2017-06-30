@@ -24,29 +24,28 @@ export class AddpropertyComponent implements OnInit {
 
     public propertyForm = new FormGroup ({
         Active: new FormControl(true),
-        OwnerName: new FormControl(),
         InternalName: new FormControl(),
+        OwnerName: new FormControl(),
         Name: new FormControl(null, Validators.required),
         Address: new FormControl(),
-
-        RegionId: new FormControl(),
-        RegionName: new FormControl(),
         Region: new FormControl({
-            Id: 1,
-            Name: 'Ibiza',
-        }),
-        ManagementCompanyId: new FormControl(),
-        ManagementCompanyName: new FormControl(),
+            Id: null,
+            Name: null,
+        }, Validators.required),
         ManagementCompany: new FormControl({
             Id: null,
             Name: null,
-        }),
-        ManagerUserId: new FormControl(),
-        ManagerUserName: new FormControl(),
+        }, Validators.required),
         ManagerUser: new FormControl({
             Id: null,
             Name: null,
-        }),
+        }, Validators.required),
+        /*
+        OwnerUser: new FormControl({
+            Id: null,
+            Name: null,
+        }, Validators.required),
+        */
         Headline: new FormControl(),
         Summary: new FormControl(),
         Description: new FormControl(),
@@ -133,11 +132,6 @@ export class AddpropertyComponent implements OnInit {
             return newArr = _.concat(newArr, el)
         })
         form.MetaData = newArr;
-        form.ManagementCompanyId = form.ManagementCompany.Id;
-        form.ManagementCompanyName = form.ManagementCompany.Name;
-        form.ManagerUserId = form.ManagerUser.Id;
-        form.ManagerUserName = form.ManagerUser.Name;
-
 
         if(this.propertyForm.valid) {
             this.sending = true;

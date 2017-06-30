@@ -42,13 +42,7 @@ var EditpropertyComponent = (function () {
                 InternalName: { value: _this.propertiesService.property.InternalName, disabled: _this.permission },
                 Name: [{ value: _this.propertiesService.property.Name, disabled: _this.permission }, forms_1.Validators.required],
                 Address: { value: _this.propertiesService.property.Address, disabled: _this.permission },
-                RegionId: { value: _this.propertiesService.property.RegionId, disabled: _this.permission },
-                RegionName: { value: _this.propertiesService.property.RegionName, disabled: _this.permission },
                 Region: { value: { Id: _this.propertiesService.property.Region.Id, Name: _this.propertiesService.property.Region.Name }, disabled: _this.permission },
-                ManagementCompanyId: { value: _this.propertiesService.property.ManagementCompanyId, disabled: _this.permission },
-                ManagementCompanyName: { value: _this.propertiesService.property.ManagementCompanyName, disabled: _this.permission },
-                ManagerUserId: { value: _this.propertiesService.property.ManagerUserId, disabled: _this.permission },
-                ManagerUserName: { value: _this.propertiesService.property.ManagerUserName, disabled: _this.permission },
                 ManagementCompany: { value: {
                         Id: _this.propertiesService.property.ManagementCompany.Id,
                         Name: _this.propertiesService.property.ManagementCompany.Name,
@@ -169,34 +163,25 @@ var EditpropertyComponent = (function () {
             return newArr = _.concat(newArr, el);
         });
         form.MetaData = newArr;
-        form.ManagementCompanyId = form.ManagementCompany.Id;
-        form.ManagementCompanyName = form.ManagementCompany.Name;
-        form.ManagerUserId = form.ManagerUser.Id;
-        form.ManagerUserName = form.ManagerUser.Name;
         console.log('save ', this.propertyForm);
-        /*
-        if(this.propertyForm.valid) {
-            this.propertiesService.addProperty(form).subscribe(
-                d => {
-                    $.notify({
-                        icon: "notifications",
-                        message: "Property Updated Successfully"
-
-                    },{
-                        type: 'success',
-                        timer: 3000,
-                        placement: {
-                            from: 'top',
-                            align: 'right'
-                        }
-                    });
-                },
-                e => { console.log("error:", e); }
-            );
-        } else {
+        if (this.propertyForm.valid) {
+            this.propertiesService.addProperty(form).subscribe(function (d) {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Updated Successfully"
+                }, {
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+            }, function (e) { console.log("error:", e); });
+        }
+        else {
             this.errorForm = true;
         }
-        */
     };
     EditpropertyComponent = __decorate([
         core_1.Component({

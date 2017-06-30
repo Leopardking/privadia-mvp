@@ -124,12 +124,16 @@ var PropertyinfoComponent = (function () {
         control.removeAt(i);
     };
     PropertyinfoComponent.prototype.regionChanged = function (e) {
-        var controlId = this.propertyForm.controls['RegionId'];
+        /*
+        const controlId = <FormControl>this.propertyForm.controls['RegionId'];
         controlId.setValue(e.Id);
-        var controlName = this.propertyForm.controls['RegionName'];
+
+        const controlName = <FormControl>this.propertyForm.controls['RegionName'];
         controlName.setValue(e.Name);
+
         $("#regionName").removeClass('is-empty');
         $("#regionName").removeClass('has-error');
+        */
     };
     PropertyinfoComponent.prototype.changeTab = function (test, test1) {
         //const liNavID = "ID" + test.toString().split(/#(.+)?/)[1];

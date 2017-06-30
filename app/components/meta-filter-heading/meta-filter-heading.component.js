@@ -33,7 +33,7 @@ var MetafilterheadingComponent = (function () {
                                 PointOfInterestTypeId: new forms_1.FormControl({ value: item.Id, disabled: _this.permission }),
                                 PointOfInterestTypeName: new forms_1.FormControl({ value: item.Name, disabled: _this.permission }),
                                 Available: new forms_1.FormControl({ value: false, disabled: _this.permission }),
-                                Distance: new forms_1.FormControl({ value: null, disabled: _this.permission }),
+                                Distance: new forms_1.FormControl({ value: 0, disabled: _this.permission }),
                             }));
                         });
                     }

@@ -38,7 +38,7 @@ export class MetafilterheadingComponent implements OnInit{
 										PointOfInterestTypeId: new FormControl({ value: item.Id, disabled: this.permission }),
 										PointOfInterestTypeName: new FormControl({ value: item.Name, disabled: this.permission }),
 										Available: new FormControl({ value: false, disabled: this.permission }),
-										Distance: new FormControl({ value: null, disabled: this.permission }),
+										Distance: new FormControl({ value: 0, disabled: this.permission }),
 									}),
 								);
 							} );

@@ -51,13 +51,7 @@ export class EditpropertyComponent implements OnInit {
                 InternalName: { value: this.propertiesService.property.InternalName, disabled: this.permission },
                 Name: [{ value: this.propertiesService.property.Name, disabled: this.permission}, Validators.required],
                 Address: { value: this.propertiesService.property.Address, disabled: this.permission },
-                RegionId: { value: this.propertiesService.property.RegionId, disabled: this.permission },
-                RegionName: { value: this.propertiesService.property.RegionName, disabled: this.permission },
                 Region: { value: { Id: this.propertiesService.property.Region.Id, Name: this.propertiesService.property.Region.Name}, disabled: this.permission },
-                ManagementCompanyId: { value: this.propertiesService.property.ManagementCompanyId, disabled: this.permission },
-                ManagementCompanyName: { value: this.propertiesService.property.ManagementCompanyName, disabled: this.permission },
-                ManagerUserId: { value: this.propertiesService.property.ManagerUserId, disabled: this.permission },
-                ManagerUserName: { value: this.propertiesService.property.ManagerUserName, disabled: this.permission },
                 ManagementCompany: { value:
                     {
                         Id: this.propertiesService.property.ManagementCompany.Id,
@@ -66,7 +60,7 @@ export class EditpropertyComponent implements OnInit {
                     disabled: this.permission
                 },
                 ManagerUser: { value:
-                        {
+                    {
                         Id: this.propertiesService.property.ManagerUser.Id,
                         Name: this.propertiesService.property.ManagerUser.Name,
                     },
@@ -186,13 +180,8 @@ export class EditpropertyComponent implements OnInit {
             return newArr = _.concat(newArr, el)
         });
         form.MetaData = newArr;
-        form.ManagementCompanyId = form.ManagementCompany.Id;
-        form.ManagementCompanyName = form.ManagementCompany.Name;
-        form.ManagerUserId = form.ManagerUser.Id;
-        form.ManagerUserName = form.ManagerUser.Name;
 
         console.log('save ',this.propertyForm)
-        /*
         if(this.propertyForm.valid) {
             this.propertiesService.addProperty(form).subscribe(
                 d => {
@@ -214,6 +203,5 @@ export class EditpropertyComponent implements OnInit {
         } else {
             this.errorForm = true;
         }
-        */
     }
 }

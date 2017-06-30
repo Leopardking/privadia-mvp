@@ -25,28 +25,28 @@ var AddpropertyComponent = (function () {
         this.sending = false;
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
-            OwnerName: new forms_1.FormControl(),
             InternalName: new forms_1.FormControl(),
+            OwnerName: new forms_1.FormControl(),
             Name: new forms_1.FormControl(null, forms_1.Validators.required),
             Address: new forms_1.FormControl(),
-            RegionId: new forms_1.FormControl(),
-            RegionName: new forms_1.FormControl(),
             Region: new forms_1.FormControl({
-                Id: 1,
-                Name: 'Ibiza',
-            }),
-            ManagementCompanyId: new forms_1.FormControl(),
-            ManagementCompanyName: new forms_1.FormControl(),
+                Id: null,
+                Name: null,
+            }, forms_1.Validators.required),
             ManagementCompany: new forms_1.FormControl({
                 Id: null,
                 Name: null,
-            }),
-            ManagerUserId: new forms_1.FormControl(),
-            ManagerUserName: new forms_1.FormControl(),
+            }, forms_1.Validators.required),
             ManagerUser: new forms_1.FormControl({
                 Id: null,
                 Name: null,
-            }),
+            }, forms_1.Validators.required),
+            /*
+            OwnerUser: new FormControl({
+                Id: null,
+                Name: null,
+            }, Validators.required),
+            */
             Headline: new forms_1.FormControl(),
             Summary: new forms_1.FormControl(),
             Description: new forms_1.FormControl(),
@@ -122,10 +122,6 @@ var AddpropertyComponent = (function () {
             return newArr = _.concat(newArr, el);
         });
         form.MetaData = newArr;
-        form.ManagementCompanyId = form.ManagementCompany.Id;
-        form.ManagementCompanyName = form.ManagementCompany.Name;
-        form.ManagerUserId = form.ManagerUser.Id;
-        form.ManagerUserName = form.ManagerUser.Name;
         if (this.propertyForm.valid) {
             this.sending = true;
             this.propertiesService.addProperty(form).subscribe(function (d) {

@@ -175,6 +175,7 @@ export class PropertyinfoComponent implements OnInit{
     }
 
     private regionChanged(e) {
+        /*
         const controlId = <FormControl>this.propertyForm.controls['RegionId'];
         controlId.setValue(e.Id);
 
@@ -183,6 +184,7 @@ export class PropertyinfoComponent implements OnInit{
 
         $("#regionName").removeClass('is-empty');
         $("#regionName").removeClass('has-error');
+        */
     }
 
     public changeTab(test: any, test1: any) {
