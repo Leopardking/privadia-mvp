@@ -45,9 +45,9 @@ var LoginComponent = (function () {
     LoginComponent.prototype.onSubmit = function () {
         var _this = this;
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(function (d) {
-            localStorage.setItem('id_token', d.token_type + ' ' + d.access_token);
-            _this.loginService.getDataUser();
+            _this.loginService.getDataUser(d.token_type + ' ' + d.access_token);
             setTimeout(function () {
+                localStorage.setItem('id_token', d.token_type + ' ' + d.access_token);
                 _this.router.navigate(['dashboard']);
             }, 1500);
         }, function (e) {

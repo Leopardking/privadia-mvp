@@ -21,9 +21,9 @@ var LoginService = (function () {
         this.isReading = true;
         console.log('Load Login Service');
     }
-    LoginService.prototype.getDataUser = function () {
+    LoginService.prototype.getDataUser = function (header) {
         var _this = this;
-        this.getCurrentUser().subscribe(function (d) {
+        this.getCurrentUser(header).subscribe(function (d) {
             _this.userInfo = d;
             _this.isReading = false;
             localStorage.setItem('permissions', JSON.stringify(d.Permissions));
@@ -44,8 +44,8 @@ var LoginService = (function () {
         var permissions = JSON.parse(localStorage.getItem('permissions'));
         return permissions.filter(function (element) { return element.Name === permission; })[0];
     };
-    LoginService.prototype.getCurrentUser = function () {
-        var header = new http_1.Headers({ 'Authorization': this.token });
+    LoginService.prototype.getCurrentUser = function (headerToken) {
+        var header = new http_1.Headers({ 'Authorization': headerToken || this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Users/GetCurrent', options)
             .map(this.extractData)

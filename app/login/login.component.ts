@@ -48,10 +48,10 @@ export class LoginComponent implements OnInit {
     private onSubmit() {
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(
             d => {
-                localStorage.setItem('id_token', d.token_type + ' ' + d.access_token);
-                this.loginService.getDataUser();
+                this.loginService.getDataUser(d.token_type + ' ' + d.access_token);
 
                 setTimeout(() => {
+                    localStorage.setItem('id_token', d.token_type + ' ' + d.access_token);
                     this.router.navigate(['dashboard']);
                 }, 1500)
             },

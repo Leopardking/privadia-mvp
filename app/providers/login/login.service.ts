@@ -18,8 +18,8 @@ export class LoginService {
 		console.log('Load Login Service');
 	}
 
-	public getDataUser() {
-		this.getCurrentUser().subscribe(
+	public getDataUser(header) {
+		this.getCurrentUser(header).subscribe(
 			d => {
 				this.userInfo = d;
 				this.isReading = false;
@@ -49,8 +49,8 @@ export class LoginService {
 		return permissions.filter( element => element.Name === permission)[0];
 	}
 
-	public getCurrentUser() {
-		let header = new Headers( {'Authorization': this.token} );
+	public getCurrentUser(headerToken: any) {
+		let header = new Headers( {'Authorization': headerToken || this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/Users/GetCurrent', options )
