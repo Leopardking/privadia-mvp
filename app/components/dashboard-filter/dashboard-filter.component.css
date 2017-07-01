@@ -1,5 +1,5 @@
 .card .card-content {
-    padding: 5px 20px 5px 80px;
+    padding: 5px 20px 5px 75px;
 }
 .btn-filter-search {
     position: absolute;
@@ -9,7 +9,7 @@
     min-width: 41px;
     margin-top: 18px;
     margin-bottom: 18px;
-    padding: 12px 13px;
+    padding: 11px;
 }
 .filter-card {
     margin-bottom: 50px;
