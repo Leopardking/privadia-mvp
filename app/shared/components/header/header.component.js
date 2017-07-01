@@ -30,6 +30,7 @@ var HeaderComponent = (function () {
     };
     HeaderComponent.prototype.onLoggedout = function () {
         localStorage.removeItem('id_token');
+        localStorage.removeItem('permissions');
     };
     HeaderComponent = __decorate([
         core_1.Component({

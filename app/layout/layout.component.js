@@ -15,7 +15,7 @@ var LayoutComponent = (function () {
     function LayoutComponent(router, loginService) {
         this.router = router;
         this.loginService = loginService;
-        loginService.getDataUser();
+        //loginService.getDataUser();
     }
     LayoutComponent.prototype.ngOnInit = function () {
         if (this.router.url === '/') {

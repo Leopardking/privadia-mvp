@@ -22,7 +22,7 @@ export class LoginService {
 		this.getCurrentUser().subscribe(
 			d => {
 				this.userInfo = d;
-				this.isReading = false
+				this.isReading = false;
 				localStorage.setItem('permissions', JSON.stringify(d.Permissions));
 			},
 			e => { console.log('Error get user ', e) }
@@ -49,7 +49,7 @@ export class LoginService {
 		return permissions.filter( element => element.Name === permission)[0];
 	}
 
-	private getCurrentUser() {
+	public getCurrentUser() {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 

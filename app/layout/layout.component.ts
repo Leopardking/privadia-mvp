@@ -11,7 +11,7 @@ import {LoginService} from "../providers/login/login.service";
 export class LayoutComponent implements OnInit {
 
     constructor(public router: Router, public loginService: LoginService) {
-        loginService.getDataUser();
+        //loginService.getDataUser();
     }
 
     ngOnInit() {

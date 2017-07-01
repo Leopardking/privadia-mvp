@@ -46,7 +46,10 @@ var LoginComponent = (function () {
         var _this = this;
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(function (d) {
             localStorage.setItem('id_token', d.token_type + ' ' + d.access_token);
-            _this.router.navigate(['dashboard']);
+            _this.loginService.getDataUser();
+            setTimeout(function () {
+                _this.router.navigate(['dashboard']);
+            }, 1500);
         }, function (e) {
             console.log('On Submit error', e);
         });

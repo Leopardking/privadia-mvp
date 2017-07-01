@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
 
     onLoggedout() {
         localStorage.removeItem('id_token');
+        localStorage.removeItem('permissions');
     }
 /*
     constructor(private translate: TranslateService, public router: Router) {

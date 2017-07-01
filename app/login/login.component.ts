@@ -49,7 +49,11 @@ export class LoginComponent implements OnInit {
         this.loginService.login(this.apiUrl, this.loginForm.value.Email, this.loginForm.value.Password).subscribe(
             d => {
                 localStorage.setItem('id_token', d.token_type + ' ' + d.access_token);
-                this.router.navigate(['dashboard']);
+                this.loginService.getDataUser();
+
+                setTimeout(() => {
+                    this.router.navigate(['dashboard']);
+                }, 1500)
             },
             e => {
                 console.log('On Submit error', e)
