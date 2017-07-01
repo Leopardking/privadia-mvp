@@ -10,15 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var MessageComponent = (function () {
-    function MessageComponent(router) {
+var initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
+var EnquiryComponent = (function () {
+    function EnquiryComponent(router) {
         this.router = router;
         router.events.subscribe(function (val) {
             var hash = window.location.hash;
             hash && $('ul.nav a[href="' + hash + '"]').tab('show');
         });
     }
-    MessageComponent.prototype.ngOnInit = function () {
+    EnquiryComponent.prototype.ngOnInit = function () {
+        initDatetimepickers();
+        setTimeout(function () {
+            var selectQuery = $(".selectpicker");
+            selectQuery.selectpicker();
+            selectQuery.on('show.bs.select', function (e) {
+                $('.dropdown-menu.inner').perfectScrollbar();
+            });
+        }, 10);
+        $('.messages-wrp').perfectScrollbar({
+            'wheelPropagation': true
+        });
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         setTimeout(function () {
             var dataTableQuery = $('#datatables');
@@ -29,16 +41,16 @@ var MessageComponent = (function () {
             });
         }, 10);
     };
-    MessageComponent = __decorate([
+    EnquiryComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'message-cmp',
-            templateUrl: 'message.component.html',
-            styleUrls: ['message.component.css']
+            selector: 'enquiry-cmp',
+            templateUrl: 'enquiry.component.html',
+            styleUrls: ['enquiry.component.css']
         }), 
         __metadata('design:paramtypes', [router_1.Router])
-    ], MessageComponent);
-    return MessageComponent;
+    ], EnquiryComponent);
+    return EnquiryComponent;
 }());
-exports.MessageComponent = MessageComponent;
-//# sourceMappingURL=message.component.js.map
+exports.EnquiryComponent = EnquiryComponent;
+//# sourceMappingURL=enquiry.component.js.map

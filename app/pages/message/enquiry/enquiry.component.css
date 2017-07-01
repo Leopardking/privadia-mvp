@@ -1,0 +1,431 @@
+.enquiry-detail {
+    position: relative;
+    top: -54px;
+}
+.messages-container {
+    padding-top: 66px;
+    padding-left: 24px;
+    margin-right: -12px;
+}
+.messages-wrp {
+    width: 100%;
+    max-height: 70vh;
+    overflow: auto;
+    position: relative;
+    padding-right: 12px;
+}
+.messages {
+    text-align: center;
+    overflow: hidden;
+}
+.messages-wrp .messages .date-line {
+    width: 100%;
+    float: left;
+    font-size: 14px;
+    text-align: center;
+    color: #747879;
+    background-color: #f3f5f6;
+    height: 24px;
+    padding-bottom: 12px;
+}
+
+.messages-wrp .messages .message {
+    width: 80%;
+    margin: 20px 0;
+    position: relative;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.messages-wrp .messages .message:before {
+    position: absolute;
+    display: inline-block;
+    border-style: solid;
+    content: " ";
+}
+
+.messages-wrp .messages .message:after {
+    position: absolute;
+    display: inline-block;
+    border-style: solid;
+    content: " ";
+}
+
+.messages-wrp .messages .message.from {
+    float: left;
+    text-align: left;
+    background-color: #f3f5f6;
+}
+
+.messages-wrp .messages .message.from:before {
+    bottom: -18px;
+    left: 40px;
+    border-width: 0 0 18px 34px;
+    border-color: transparent #f3f5f6;
+}
+
+.messages-wrp .messages .message.from:after {
+    bottom: -18px;
+    left: 40px;
+    border-width: 0 0 18px 6px;
+    border-color: transparent #ffffff;
+}
+
+.messages-wrp .messages .message.to {
+    text-align: left;
+    float: right;
+    background-color: #d0effe;
+}
+
+.messages-wrp .messages .message.to:before {
+    bottom: -18px;
+    right: 40px;
+    border-width: 0 34px 18px 0;
+    border-color: transparent #d0effe;
+}
+
+.messages-wrp .messages .message.to:after {
+    bottom: -18px;
+    right: 40px;
+    border-width: 0 6px 18px 0;
+    border-color: transparent #ffffff;
+}
+
+.messages-wrp .messages .message.info {
+    width: 286px;
+    font-size: 16px;
+    text-align: center;
+    float: none;
+    border-width: 0;
+    border-radius: 10px;
+    background-color: #f3f5f6;
+}
+
+.messages-wrp .messages .message.info:before {
+    border-width: 0;
+}
+
+.messages-wrp .messages .message.info:after {
+    border-width: 0;
+}
+
+.messages-wrp .messages .message.info i {
+    vertical-align: middle;
+}
+
+.messages-wrp .messages .message .message-text {
+    padding: 16px;
+    font-size: 14px;
+}
+
+.messages-wrp .messages .message .message-date {
+    padding: 0 12px 12px;
+    font-size: 14px;
+    float: right;
+    color: #747879;
+    display: inline-block;
+}
+
+.messages-container .message-send {
+    position: relative;
+}
+
+.messages-container .message-send .form-group {
+    margin: 0;
+}
+
+.messages-container .message-send .form-control {
+    background-image: none;
+}
+
+.messages-container .message-send .btn-send {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.messages-container .message-send .btn-send .material-icons {
+    font-size: 24px;
+    color: #5399bc;
+}
+
+.enquiry-header {
+    position: relative;
+}
+
+.enquiry-header .image-wrp {
+    overflow: hidden;
+    border-top-right-radius: 6px;
+}
+
+.enquiry-header .image-wrp .image-villa:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top-right-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.enquiry-header .villa-container {
+    position: absolute;
+    width: 50%;
+    bottom: 10px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.enquiry-header .villa-container.left {
+    left: 0px;
+    padding-left: 45px;
+}
+
+.enquiry-header .villa-container.right {
+    right: 0px;
+    padding-right: 45px;
+    text-align: right;
+}
+
+.enquiry-header .villa-container .enquiry-status {
+    font-size: 12px;
+    font-weight: 300;
+    width: 74px;
+    height: 18px;
+    border-radius: 9px;
+    text-align: center;
+    color: #fff;
+    line-height: 18px;
+    display: none;
+}
+
+.enquiry-header .villa-container .enquiry-status.accepted {
+    background-color: #00bfa5;
+    display: inline-block;
+}
+
+.enquiry-header .villa-container .enquiry-status.declined {
+    background-color: #ff1744;
+    display: inline-block;
+}
+
+.enquiry-header .villa-container .enquiry-status.accepted {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.enquiry-header .enquiry-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.enquiry-header .villa-container .location {
+    font-size: 16px;
+}
+
+.enquiry-header .villa-container .price {
+    font-size: 18px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.enquiry-header .villa-container .material-icons {
+    font-size: 18px;
+    vertical-align: top;
+}
+
+.enquiry-body {
+    padding-left: 11px;
+    padding-right: 18px;
+    margin-top: 20px;
+    color: #3a3a3a;
+}
+
+.enquiry-body .terms h5, .enquiry-body .payment-terms h5 {
+    font-size: 16px;
+}
+
+.enquiry-body .terms ol {
+    counter-reset: item;
+    padding-left: 15px;
+}
+
+.enquiry-body .terms ol > li {
+    display: block;
+    padding-bottom: 20px;
+}
+
+.enquiry-body .terms ol > li:before {
+    content: counter(item) ". ";
+    counter-increment: item;
+    font-weight: 600;
+}
+
+.enquiry-body .terms ul, .enquiry-body .payment-terms ul {
+    list-style: none;
+    padding-left: 8px;
+}
+
+.enquiry-body .terms ul > li {
+    padding-bottom: 20px;
+}
+
+.enquiry-body .payment-terms ul > li .form-group {
+    display: inline-block;
+    min-width: 60px;
+    width: 60px;
+}
+
+.enquiry-body a {
+    text-decoration: underline;
+    color: #5399bc;
+}
+
+.enquiry-body a:hover {
+    color: #0b5a7c;
+}
+
+.enquiry-body .material-icons {
+    font-size: 18px;
+    color: #5399bc;
+    vertical-align: top;
+}
+
+.enquiry-body .no-proposal {
+    display: none; //tmp
+    text-align: center;
+    padding: 106px 62px 106px 66px;
+}
+
+.enquiry-body .stats {
+    padding-bottom: 15px;
+}
+
+.enquiry-body .i-group {
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+}
+
+.enquiry-body .i-group i {
+    padding: 0 15px;
+}
+
+/*.enquiry-body .form-group .control-label {*/
+    /*font-size: 12px;*/
+/*}*/
+
+.enquiry-body .input-group-addon {
+    padding: 14px 20px 0;
+}
+
+.enquiry-body .form-control-static {
+    padding-left: 0;
+    display: block;
+}
+
+.enquiry-body .terms-wrp {
+    position: relative;
+}
+
+.enquiry-body .terms-wrp .btn-remove {
+    margin: 0;
+    position: absolute;
+    bottom: 9px;
+    right: 24px;
+    padding: 6px;
+}
+
+.enquiry-body .terms-wrp .btn-remove .material-icons {
+    width: 24px;
+    font-size: 24px;
+    color: #ff003d;
+}
+
+.enquiry-body .terms-wrp .btn-remove .material-icons {
+    font-size: 24px;
+    color: #ff003d;
+}
+
+.enquiry-body .form-inline.rental-price {
+    display: inline-block;
+}
+
+.enquiry-body .form-inline.rental-price input {
+    width: 60px;
+}
+
+.enquiry-body .form-inline.rental-price .fees {
+    padding-top: 10px;
+    display: inline-block;
+}
+
+.enquiry-body .form-inline.rental-price .fees span {
+    font-size: 12px;
+    color: #c6c6c6;
+}
+
+.enquiry-body .form-inline.rental-price .fees .material-icons {
+    font-size: 16px;
+    color: #3a3a3a;
+    vertical-align: middle;
+}
+
+.enquiry-body .proposal-line {
+    font-size: 14px;
+    text-align: center;
+    color: #747879;
+    background-color: #f3f5f6;
+    height: 24px;
+    margin: 20px 0;
+}
+
+.enquiry-body .terms .form-group {
+    padding-left: 40px;
+    padding-right: 24px;
+}
+
+.enquiry-body .terms .btn-back {
+    min-width: 86px;
+    margin: 0;
+}
+
+.enquiry-body .estimated-cost {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.enquiry-body .estimated-cost span {
+    line-height: 21px;
+    font-weight: 300;
+}
+
+.enquiry-body .estimated-cost i {
+    line-height: 21px;
+    margin-right: 5px;
+}
+
+.enquiry-body .estimated-cost .control-label {
+    font-size: 12px;
+    margin-right: 20px;
+}
+
+@media (max-width: 991px) {
+    .messages-container {
+        padding: 52px 24px;
+    }
+
+    .enquiry-header .image-wrp {
+        border-top-right-radius: 0px;
+    }
+
+    .enquiry-header .image-wrp .image-villa:after {
+        border-top-right-radius: 0px;
+    }
+}

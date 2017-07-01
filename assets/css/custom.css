@@ -386,6 +386,14 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	transition-duration: 0.3s;
 }
 
+.form-group.label-floating.label-green label.control-label {
+	color: #00c4a4!important;
+}
+
+.form-group.label-floating.label-red label.control-label {
+	color: #ff003d!important;
+}
+
 /**
  * Custom button
  */
@@ -396,6 +404,16 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	box-shadow: 0px 7px 12px 0 rgba(83, 153, 188, 0.4);
 }
 .btn.btn-success:hover, .btn.btn-success:active, .btn.btn-success:focus, .btn.btn-success:focus:active, .btn.btn-success:active:hover {
+	background-color: #0b5a7c;
+	box-shadow: 0px 7px 12px 0 rgba(83, 153, 188, 0.4);
+}
+.btn.btn-success-green {
+	min-width: 120px;
+	padding: 12px 15px;
+	background-color: #00c4a4;
+	box-shadow: 0px 7px 12px 0 rgba(83, 153, 188, 0.4);
+}
+.btn.btn-success-green:hover, .btn.btn-success-green:active, .btn.btn-success-green:focus, .btn.btn-success-green:focus:active, .btn.btn-success-green:active:hover {
 	background-color: #0b5a7c;
 	box-shadow: 0px 7px 12px 0 rgba(83, 153, 188, 0.4);
 }

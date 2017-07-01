@@ -20,6 +20,7 @@ var router_1 = require('@angular/router');
 var message_component_1 = require('./message.component');
 var message_routing_module_1 = require('./message-routing.module');
 var ng2_cloudinary_1 = require("ng2-cloudinary");
+var enquiry_component_1 = require("./enquiry/enquiry.component");
 var MessageModule = (function () {
     function MessageModule() {
     }
@@ -33,6 +34,7 @@ var MessageModule = (function () {
             ],
             declarations: [
                 message_component_1.MessageComponent,
+                enquiry_component_1.EnquiryComponent
             ],
         }), 
         __metadata('design:paramtypes', [])

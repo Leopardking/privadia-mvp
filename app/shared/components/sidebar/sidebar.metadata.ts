@@ -1,7 +1,8 @@
 export enum MenuType {
     BRAND,
     LEFT,
-    RIGHT
+    RIGHT,
+    TOGGLE
 }
 
 export interface RouteInfo {
@@ -9,4 +10,11 @@ export interface RouteInfo {
     title: string;
     menuType: MenuType;
     icon: string;
+    children?: Array<{
+        path: string;
+        hash: string;
+        title: string;
+        menuType: MenuType;
+        icon: string;
+    }>;
 }
