@@ -7,7 +7,8 @@ exports.ROUTES = [
     { path: 'message', title: 'Messages', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'mail', children: [
             { path: 'message', hash: 'notifications', title: 'Notifications', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'dashboard' },
             { path: 'message', hash: 'enquiries', title: 'Enquiries', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'info' },
-            { path: 'message', hash: 'bookings', title: 'Bookings', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'confirmation_number' }
+            { path: 'message', hash: 'bookings', title: 'Bookings', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'confirmation_number' },
+            { path: 'message/dialogs', hash: null, title: 'Dialogs', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'confirmation_number' }
         ] },
     { path: 'users', title: 'Users', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'group' },
 ];
