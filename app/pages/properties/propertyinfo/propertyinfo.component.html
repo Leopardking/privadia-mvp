@@ -37,7 +37,7 @@
             <div [formGroup]="propertyForm">
                 <div class="row">
                     <div class="col-xs-4">
-                        <singleselect-field-cmp *ngIf="propertiesService.companies.length"
+                        <singleselect-field-cmp *ngIf="propertiesService.companies.length || propertyForm.controls.ManagementCompany.value"
                                                 [dataList]="propertiesService.companies"
                                                 [options]="{title: 'Management Company', default: 'Select Company'}"
                                                 [field]="propertyForm.controls.ManagementCompany"></singleselect-field-cmp>
