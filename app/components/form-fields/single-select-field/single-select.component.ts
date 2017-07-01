@@ -22,9 +22,11 @@ export class SingleSelectfieldComponent implements OnInit, AfterViewInit {
         const selectQuery = $(".custompicker");
 
         selectQuery.selectpicker();
+        console.log('ngInit')
     }
 
     ngAfterViewInit() {
+        console.log('ngAfterViewInit')
         const selectQuery = $(".custompicker");
         selectQuery.selectpicker('render');
         selectQuery.selectpicker('refresh');

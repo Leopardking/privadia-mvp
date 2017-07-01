@@ -35,7 +35,7 @@ export class EditpropertyComponent implements OnInit {
             propertiesService.readDataOwners();
             propertiesService.readDataRegions();
             propertiesService.readDataCompanies();
-            propertiesService.readDataManagers();
+            // propertiesService.readDataManagers();
         });
     }
 

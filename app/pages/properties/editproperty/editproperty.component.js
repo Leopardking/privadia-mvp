@@ -27,7 +27,7 @@ var EditpropertyComponent = (function () {
             propertiesService.readDataOwners();
             propertiesService.readDataRegions();
             propertiesService.readDataCompanies();
-            propertiesService.readDataManagers();
+            // propertiesService.readDataManagers();
         });
     }
     EditpropertyComponent.prototype.ngOnInit = function () {

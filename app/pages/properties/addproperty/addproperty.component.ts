@@ -86,7 +86,16 @@ export class AddpropertyComponent implements OnInit {
         propertiesService.readDataOwners();
         propertiesService.readDataRegions();
         propertiesService.readDataCompanies();
-        propertiesService.readDataManagers();
+        //propertiesService.readDataManagers();
+
+        this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {
+            propertiesService.readDataManagers(company.Id)
+            const selectQuery = $(".custompicker");
+            setTimeout(() => {
+                selectQuery.selectpicker('render');
+                selectQuery.selectpicker('refresh');
+            }, 500);
+        })
     }
 
     ngOnInit(){

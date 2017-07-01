@@ -145,8 +145,8 @@ export class PropertiesService {
 		)
 	}
 
-	public readDataManagers() {
-		this.lookupsService.getManagersByCompany().subscribe(
+	public readDataManagers(Id) {
+		this.lookupsService.getManagersByCompany(Id).subscribe(
 			d => {
 				this.managers = d;
 			},

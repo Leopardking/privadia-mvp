@@ -37,26 +37,26 @@ var LookupsService = (function () {
         }, function (e) { console.log('Error ManagementCompanies', e); });
     };
     LookupsService.prototype.getManagementCompanies = function () {
-        if (!this.loginService.getPermission('Lookups/GetManagementCompanies'))
-            return Observable_1.Observable.throw(null);
+        // if(!this.loginService.getPermission('Lookups/GetManagementCompanies'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetManagementCompanies', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    LookupsService.prototype.getManagersByCompany = function () {
-        if (!this.loginService.getPermission('Lookups/GetManagersByCompany'))
-            return Observable_1.Observable.throw(null);
+    LookupsService.prototype.getManagersByCompany = function (id) {
+        // if(!this.loginService.getPermission('Lookups/GetManagersByCompany'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
-        return this.http.get(this.apiUrl + '/api/Lookups/GetManagersByCompany/6e78b138-4d18-4691-b988-c5057f599bf0', options)
+        return this.http.get(this.apiUrl + '/api/Lookups/GetManagersByCompany/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     LookupsService.prototype.getRegions = function () {
-        if (!this.loginService.getPermission('Lookups/GetRegions'))
-            return Observable_1.Observable.throw(null);
+        // if(!this.loginService.getPermission('Lookups/GetRegions'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetRegions', options)
@@ -64,8 +64,8 @@ var LookupsService = (function () {
             .catch(this.handleError);
     };
     LookupsService.prototype.getOwners = function () {
-        if (!this.loginService.getPermission('Lookups/GetOwners'))
-            return Observable_1.Observable.throw(null);
+        // if(!this.loginService.getPermission('Lookups/GetOwners'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetOwners', options)
@@ -80,8 +80,8 @@ var LookupsService = (function () {
             .catch(this.handleError);
     };
     LookupsService.prototype.getPoITypes = function () {
-        if (!this.loginService.getPermission('Lookups/GetPointOfInterestTypes'))
-            return Observable_1.Observable.throw(null);
+        // if(!this.loginService.getPermission('Lookups/GetPointOfInterestTypes'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetPointOfInterestTypes', options)
@@ -89,8 +89,8 @@ var LookupsService = (function () {
             .catch(this.handleError);
     };
     LookupsService.prototype.getMetaData = function () {
-        if (!this.loginService.getPermission('Lookups/GetMetaData'))
-            return Observable_1.Observable.throw(null);
+        // if(!this.loginService.getPermission('Lookups/GetMetaData'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetMetaData', options)

@@ -116,9 +116,9 @@ var PropertiesService = (function () {
             _this.companies = d;
         }, function (e) { console.log('Error ManagementCompanies', e); });
     };
-    PropertiesService.prototype.readDataManagers = function () {
+    PropertiesService.prototype.readDataManagers = function (Id) {
         var _this = this;
-        this.lookupsService.getManagersByCompany().subscribe(function (d) {
+        this.lookupsService.getManagersByCompany(Id).subscribe(function (d) {
             _this.managers = d;
         }, function (e) { console.log('Error ManagersByCompany', e); });
     };

@@ -17,8 +17,10 @@ var SingleSelectfieldComponent = (function () {
     SingleSelectfieldComponent.prototype.ngOnInit = function () {
         var selectQuery = $(".custompicker");
         selectQuery.selectpicker();
+        console.log('ngInit');
     };
     SingleSelectfieldComponent.prototype.ngAfterViewInit = function () {
+        console.log('ngAfterViewInit');
         var selectQuery = $(".custompicker");
         selectQuery.selectpicker('render');
         selectQuery.selectpicker('refresh');

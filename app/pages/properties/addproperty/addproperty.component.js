@@ -82,7 +82,15 @@ var AddpropertyComponent = (function () {
         propertiesService.readDataOwners();
         propertiesService.readDataRegions();
         propertiesService.readDataCompanies();
-        propertiesService.readDataManagers();
+        //propertiesService.readDataManagers();
+        this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
+            propertiesService.readDataManagers(company.Id);
+            var selectQuery = $(".custompicker");
+            setTimeout(function () {
+                selectQuery.selectpicker('render');
+                selectQuery.selectpicker('refresh');
+            }, 500);
+        });
     }
     AddpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
