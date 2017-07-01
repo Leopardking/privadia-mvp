@@ -100,6 +100,19 @@ export class EditpropertyComponent implements OnInit {
             this.setMetaDataTmp();
 
             $('.property-tabs a:first').tab('show')
+            this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {
+                this.propertyForm.controls['ManagerUser'].reset({
+                    Id: null,
+                    Name: null,
+                });
+                this.propertiesService.readDataManagers(company.Id);
+                const selectQuery = $(".custompicker");
+                setTimeout(() => {
+                    selectQuery.selectpicker('destroy');
+                    selectQuery.selectpicker('render');
+                    selectQuery.selectpicker('refresh');
+                }, 500);
+            })
         }, 1500);
     }
 

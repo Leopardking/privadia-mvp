@@ -40,8 +40,8 @@ export class LookupsService {
 	}
 
 	public getManagementCompanies() {
-		// if(!this.loginService.getPermission('Lookups/GetManagementCompanies'))
-		// 	return Observable.throw(null);
+		if(!this.loginService.getPermission('Lookups/GetManagementCompanies'))
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -52,8 +52,8 @@ export class LookupsService {
 	}
 
 	public getManagersByCompany(id) {
-		// if(!this.loginService.getPermission('Lookups/GetManagersByCompany'))
-		// 	return Observable.throw(null);
+		if(!this.loginService.getPermission('Lookups/GetManagersByCompany'))
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -64,8 +64,8 @@ export class LookupsService {
 	}
 
 	public getRegions() {
-		// if(!this.loginService.getPermission('Lookups/GetRegions'))
-		// 	return Observable.throw(null);
+		if(!this.loginService.getPermission('Lookups/GetRegions'))
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -76,8 +76,8 @@ export class LookupsService {
 	}
 
 	public getOwners() {
-		// if(!this.loginService.getPermission('Lookups/GetOwners'))
-		// 	return Observable.throw(null);
+		if(!this.loginService.getPermission('Lookups/GetOwners'))
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -97,8 +97,8 @@ export class LookupsService {
 	}
 
 	public getPoITypes() {
-		// if(!this.loginService.getPermission('Lookups/GetPointOfInterestTypes'))
-		// 	return Observable.throw(null);
+		if(!this.loginService.getPermission('Lookups/GetPointOfInterestTypes'))
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
@@ -109,8 +109,8 @@ export class LookupsService {
 	}
 
 	public getMetaData() {
-		// if(!this.loginService.getPermission('Lookups/GetMetaData'))
-		// 	return Observable.throw(null);
+		if(!this.loginService.getPermission('Lookups/GetMetaData'))
+			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );

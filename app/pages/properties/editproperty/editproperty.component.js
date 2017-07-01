@@ -88,6 +88,19 @@ var EditpropertyComponent = (function () {
             _this.setMetaData(_this.propertiesService.property.MetaData);
             _this.setMetaDataTmp();
             $('.property-tabs a:first').tab('show');
+            _this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
+                _this.propertyForm.controls['ManagerUser'].reset({
+                    Id: null,
+                    Name: null,
+                });
+                _this.propertiesService.readDataManagers(company.Id);
+                var selectQuery = $(".custompicker");
+                setTimeout(function () {
+                    selectQuery.selectpicker('destroy');
+                    selectQuery.selectpicker('render');
+                    selectQuery.selectpicker('refresh');
+                }, 500);
+            });
         }, 1500);
     };
     EditpropertyComponent.prototype.setContacts = function (contacts) {
