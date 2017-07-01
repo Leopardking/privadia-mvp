@@ -17,7 +17,6 @@ var forms_1 = require("@angular/forms");
  */
 var dashboard_service_1 = require("../../providers/dashboard/dashboard.service");
 var properties_service_1 = require("../../providers/properties/properties.service");
-var booking_service_1 = require("../../providers/booking/booking.service");
 /**
  *  Components
  */
@@ -30,6 +29,7 @@ var input_field_component_1 = require("../../components/form-fields/input-field/
 var datetimepicker_field_component_1 = require("../../components/form-fields/datetimepicker-field/datetimepicker-field.component");
 var select_component_1 = require("../../components/form-fields/select-field/select.component");
 var ng2_cloudinary_1 = require("ng2-cloudinary");
+var lookups_service_1 = require("../../providers/lookups/lookups.service");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -51,7 +51,7 @@ var DashboardModule = (function () {
                 datetimepicker_field_component_1.DatetimefieldComponent,
                 select_component_1.SelectfieldComponent
             ],
-            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, booking_service_1.BookingService]
+            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService]
         }), 
         __metadata('design:paramtypes', [])
     ], DashboardModule);

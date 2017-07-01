@@ -9,15 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-//import { MainService } from './../../providers/homeservice';
-var dashboard_service_1 = require('./../../providers/dashboard/dashboard.service');
 var properties_service_1 = require('./../../providers/properties/properties.service');
+var login_service_1 = require("../../providers/login/login.service");
 //import initDataTable = require('../../../assets/js/init/initDataTable.js');
 var PropertiesComponent = (function () {
-    function PropertiesComponent(dashboardService, propertyService) {
-        this.dashboardService = dashboardService;
-        this.propertyService = propertyService;
+    function PropertiesComponent(propertiesService, loginService) {
+        this.propertiesService = propertiesService;
+        this.loginService = loginService;
         this.datatableInited = false;
+        propertiesService.readDataProperties();
     }
     PropertiesComponent.prototype.ngOnInit = function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
@@ -31,15 +31,14 @@ var PropertiesComponent = (function () {
             info: false,
         });
         $('#datatableSearch').on('keyup', function () {
-            console.log('Search ', $(this).text());
             tableWidget.search(this.value).draw();
         });
         this.datatableInited = true;
     };
     PropertiesComponent.prototype.removeProperty = function (el) {
         var _this = this;
-        this.propertyService.deleteProperty(el.propertyId).subscribe(function (d) {
-            _this.dashboardService.properties.splice(el.index, 1);
+        this.propertiesService.deleteProperty(el.propertyId).subscribe(function (d) {
+            _this.propertiesService.properties.splice(el.index, 1);
             console.log('Delete property ', d);
         }, function (e) { console.log("error:", e); });
     };
@@ -49,6 +48,8 @@ var PropertiesComponent = (function () {
     PropertiesComponent.prototype.editBooking = function () {
         console.log('edit');
     };
+    PropertiesComponent.prototype.permitoins = function (Permissions) {
+    };
     PropertiesComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -56,7 +57,7 @@ var PropertiesComponent = (function () {
             templateUrl: 'properties.component.html',
             styleUrls: ['properties.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService])
     ], PropertiesComponent);
     return PropertiesComponent;
 }());

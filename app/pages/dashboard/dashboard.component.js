@@ -11,9 +11,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
 var forms_1 = require('@angular/forms');
+var lookups_service_1 = require("../../providers/lookups/lookups.service");
 var DashboardComponent = (function () {
-    function DashboardComponent(dashboardService, builder) {
+    function DashboardComponent(dashboardService, lookupsService, builder) {
         this.dashboardService = dashboardService;
+        this.lookupsService = lookupsService;
         this.builder = builder;
         this.enquiryForm = new forms_1.FormGroup({});
         this.proposalForm = new forms_1.FormGroup({});
@@ -48,7 +50,7 @@ var DashboardComponent = (function () {
             templateUrl: 'dashboard.component.html',
             styleUrls: ['dashboard.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, lookups_service_1.LookupsService, forms_1.FormBuilder])
     ], DashboardComponent);
     return DashboardComponent;
 }());

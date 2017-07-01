@@ -6,8 +6,9 @@ import { SetratesComponent } from './setrates/setrates.component';
 export const MODULE_ROUTES: Route[] =[
     { path: '', children: [
         { path: '', component: PropertiesComponent },
-        { path: 'addproperty', loadChildren: 'app/pages/properties/commons/commons.module#CommonsModule' },
-        { path: 'editproperty', loadChildren: 'app/pages/properties/commons/commons.module#CommonsModule' },
+        { path: 'add', loadChildren: 'app/pages/properties/commons/commons.module#CommonsModule' },
+        { path: 'edit', loadChildren: 'app/pages/properties/commons/commons.module#CommonsModule' },
+        { path: 'view', loadChildren: 'app/pages/properties/commons/commons.module#CommonsModule' },
         // { path: 'setrates', loadChildren: 'app/pages/properties/commons/commons.module#CommonsModule' },
         { path: 'setrates/:id', component: SetratesComponent },
         //{ path: 'addproperty', loadChildren: 'app/pages/properties/addproperty/addproperty.module#AddpropertyModule' },

@@ -11,52 +11,35 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var properties_service_1 = require('../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
+var lookups_service_1 = require("../../providers/lookups/lookups.service");
+var login_service_1 = require("../../providers/login/login.service");
 var MetafilterheadingComponent = (function () {
-    // public housekeeperState = 0;
-    // public housekeepOtherInfo = "";
-    // public liftAvailable: boolean = false;
-    // public uniqueBenefits: string = "";
-    // public PoITypes = [];
-    function MetafilterheadingComponent(propertiesService) {
+    function MetafilterheadingComponent(propertiesService, lookupsService, loginService) {
         this.propertiesService = propertiesService;
+        this.lookupsService = lookupsService;
+        this.loginService = loginService;
     }
     MetafilterheadingComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.permission = !this.loginService.getPermission('Properties/Put');
         switch (this.name) {
             case "Points of Interest":
                 var control_1 = this.propertyForm.controls['PointsOfInterest'];
-                this.propertiesService.getPoITypes().subscribe(function (d) {
-                    // this.PoITypes = d;
+                this.lookupsService.getPoITypes().subscribe(function (d) {
                     if (!control_1.value.length) {
                         d.forEach(function (item, index) {
                             control_1.push(new forms_1.FormGroup({
-                                Name: new forms_1.FormControl(''),
-                                PointOfInterestTypeId: new forms_1.FormControl(item.Id),
-                                PointOfInterestTypeName: new forms_1.FormControl(item.Name),
-                                Available: new forms_1.FormControl(false),
-                                Distance: new forms_1.FormControl(0),
+                                Name: new forms_1.FormControl({ value: null, disabled: _this.permission }),
+                                PointOfInterestTypeId: new forms_1.FormControl({ value: item.Id, disabled: _this.permission }),
+                                PointOfInterestTypeName: new forms_1.FormControl({ value: item.Name, disabled: _this.permission }),
+                                Available: new forms_1.FormControl({ value: false, disabled: _this.permission }),
+                                Distance: new forms_1.FormControl({ value: 0, disabled: _this.permission }),
                             }));
                         });
                     }
-                    console.log('PointsOfInterest init', control_1.value.length);
                 }, function (e) {
                     console.log("Get Points of Types error: ", e);
                 });
-                //console.log('this.propertyForm 1',this.propertyForm)
-                /*
-                this.propertiesService.getPoITypes().subscribe(
-                    d => {
-                        this.PoITypes = d;
-                        this.PoITypes.map( (item, index) => {
-                            item.typeName = "";
-                            item.distance = 0;
-                            item.checked = false;
-                        } );
-                    },
-                    e => {
-                        console.log("Get Points of Types error: ", e);
-                    }
-                );
-                */
                 break;
         }
     };
@@ -78,7 +61,7 @@ var MetafilterheadingComponent = (function () {
             templateUrl: 'meta-filter-heading.component.html',
             styleUrls: ['meta-filter-heading.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService, login_service_1.LoginService])
     ], MetafilterheadingComponent);
     return MetafilterheadingComponent;
 }());

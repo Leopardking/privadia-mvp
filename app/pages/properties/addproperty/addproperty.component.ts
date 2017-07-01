@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
-import * as _ from "lodash";
 
-//import { MainService } from '../../../providers/homeservice';
-import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import { PropertiesService } from '../../../providers/properties/properties.service';
-
+import * as _ from 'lodash'
+import {LookupsService} from "../../../providers/lookups/lookups.service";
+import {LoginService} from "../../../providers/login/login.service";
 declare const $:any;
+//declare const _:any;
 
 @Component({
     moduleId: module.id,
@@ -16,7 +16,7 @@ declare const $:any;
     styleUrls: [ 'addproperty.component.css' ]
 })
 
-export class AddpropertyComponent implements OnInit{
+export class AddpropertyComponent implements OnInit {
     // private isActive = true;
     private isLoad = true;
     private errorForm = false;
@@ -24,16 +24,28 @@ export class AddpropertyComponent implements OnInit{
 
     public propertyForm = new FormGroup ({
         Active: new FormControl(true),
-        OwnerName: new FormControl(),
         InternalName: new FormControl(),
+        OwnerName: new FormControl(),
         Name: new FormControl(null, Validators.required),
         Address: new FormControl(),
-        RegionId: new FormControl(),
-        RegionName: new FormControl(),
         Region: new FormControl({
-            Id: 1,
-            Name: 'Ibiza',
-        }),
+            Id: null,
+            Name: null,
+        }, Validators.required),
+        ManagementCompany: new FormControl({
+            Id: null,
+            Name: null,
+        }, Validators.required),
+        ManagerUser: new FormControl({
+            Id: null,
+            Name: null,
+        }, Validators.required),
+        /*
+        OwnerUser: new FormControl({
+            Id: null,
+            Name: null,
+        }, Validators.required),
+        */
         Headline: new FormControl(),
         Summary: new FormControl(),
         Description: new FormControl(),
@@ -67,13 +79,25 @@ export class AddpropertyComponent implements OnInit{
     });
 
     constructor ( private router:Router,
-                  private dashboardService: DashboardService,
-                  private propertyService: PropertiesService,
+                  private propertiesService: PropertiesService,
                   private builder: FormBuilder ) {
-        console.log('Form init',this.propertyForm)
+
+        propertiesService.readDataMetadata();
+        propertiesService.readDataOwners();
+        propertiesService.readDataRegions();
+        propertiesService.readDataCompanies();
+        //propertiesService.readDataManagers();
+
+        this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {
+            propertiesService.readDataManagers(company.Id)
+            const selectQuery = $(".custompicker");
+            setTimeout(() => {
+                selectQuery.selectpicker('render');
+                selectQuery.selectpicker('refresh');
+            }, 500);
+        })
     }
 
-    // steve@freelancemvc.net, agent1@freelancemvc.net
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
@@ -103,107 +127,6 @@ export class AddpropertyComponent implements OnInit{
         this.propertyForm.setControl('Region', regionFGs);
     }
 
-    private saveInfo() {
-        //console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
-        let newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
-            return newArr = _.concat(newArr, el)
-        })
-        this.propertyForm.value.MetaData = newArr;
-        //console.log('this.propertyForm.value.MetaDataTmp', this.propertyForm.value)
-        /*
-        $(".title-error").removeClass("title-error");
-        $(".metafilter-names li a.has-error").removeClass("has-error");
-
-        let validateErrors = $(".tab-content .has-error");
-        if ( validateErrors.length ) {
-            $.notify({
-                icon: "notifications",
-                message: $(".tab-content .has-error").length + " Validation Errors Found"
-
-            },{
-                type: 'danger',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-
-            for (let i = 0; i < validateErrors.length; i++) {
-                let ele = validateErrors[i];
-
-                while (!ele.className.includes('card-content')) {
-                    if (ele.className.includes('panel-group')) {
-                        $(ele).addClass('title-error');
-                    }
-                    ele = ele.parentElement;
-                }
-
-                let eleTabName = document.getElementsByClassName(ele.id + "-tab-name");
-                $(eleTabName).addClass("has-error");
-            }
-
-            return;
-        }
-
-        $('.has-error').removeClass("has-error");
-
-        let metaData = [];
-        for (let i = 1; i < 125; i++) {
-            let available = this.pointsOfInterest.metafilters[i] 
-                        ||  this.features.metafilters[i] 
-                        ||  this.services.metafilters[i] 
-                        ||  this.villadescription.metafilters[i] 
-                        ||  this.localActivities.metafilters[i] 
-                        ||  this.trip.metafilters[i] ;
-            metaData.push({ 
-                Available: available ? 1 : 0,
-                MetaDataId: i
-            });
-        }
-
-        let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
-            return {
-                Available: item.checked ? 1 : 0,
-                Distance: item.distance,
-                Name: item.typeName,
-                PointOfInterestTypeId: item.Id
-            };
-        })
-        let data = {
-            Active: this.isActive,
-            Images: this.propertyImage.images,
-            MetaData: metaData,
-            Owner: this.propertyInfo.owner,
-            UserId: this.propertyInfo.owner.Id,
-            PointsOfInterest: poi,
-            Region: this.propertyInfo.region,
-        }*/
-        if(this.propertyForm.valid) {
-            this.propertyService.addProperty(this.propertyForm.value).subscribe(
-                d => {
-                    $.notify({
-                        icon: "notifications",
-                        message: "Property Added Successfully"
-
-                    },{
-                        type: 'success',
-                        timer: 3000,
-                        placement: {
-                            from: 'top',
-                            align: 'right'
-                        }
-                    });
-                    this.dashboardService.readData();
-                },
-                e => { console.log("error:", e); }
-            );
-        }
-        console.log('Property Form ', this.propertyForm);
-        console.log('Property Form Value ', this.propertyForm.value);
-    }
-
     private continueInfo() {
         console.log('Continue Info form')
     }
@@ -212,17 +135,17 @@ export class AddpropertyComponent implements OnInit{
         console.log('Discard Info form')
     }
 
-    private onSubmit() {
+    private onSubmit(form) {
         let newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, (el) => {
+        _.mapValues(form.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
         })
-        this.propertyForm.value.MetaData = newArr;
+        form.MetaData = newArr;
 
         if(this.propertyForm.valid) {
             this.sending = true;
 
-            this.propertyService.addProperty(this.propertyForm.value).subscribe(
+            this.propertiesService.addProperty(form).subscribe(
                 d => {
                     $.notify({
                         icon: "notifications",
@@ -240,7 +163,6 @@ export class AddpropertyComponent implements OnInit{
                     this.router.navigate(['properties']);
                     this.sending = false;
 
-                    //this.dashboardService.readData();
                 },
                 e => { console.log("error:", e); }
             );

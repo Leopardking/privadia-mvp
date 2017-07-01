@@ -6,8 +6,9 @@ import {Ng2CloudinaryModule} from "ng2-cloudinary";
 import {FileUploadModule} from "ng2-file-upload";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Ng2AutoCompleteModule} from "ng2-auto-complete";
-import {DashboardService} from "../../../providers/dashboard/dashboard.service";
 import {PropertiesService} from "../../../providers/properties/properties.service";
+import {LookupsService} from "../../../providers/lookups/lookups.service";
+import {SingleSelectfieldComponent} from "../../../components/form-fields/single-select-field/single-select.component";
 
 @NgModule({
     imports: [
@@ -21,8 +22,8 @@ import {PropertiesService} from "../../../providers/properties/properties.servic
         FileUploadModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],
-    declarations: [ MODULE_COMPONENTS ],
-    providers: [ DashboardService, PropertiesService ]
+    declarations: [ MODULE_COMPONENTS, SingleSelectfieldComponent ],
+    providers: [ PropertiesService, LookupsService ]
 })
 
 export class CommonsModule{}

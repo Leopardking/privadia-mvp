@@ -16,6 +16,7 @@ var ng2_cloudinary_1 = require("ng2-cloudinary");
 var forms_1 = require("@angular/forms");
 var dashboard_service_1 = require("../../providers/dashboard/dashboard.service");
 var properties_service_1 = require("../../providers/properties/properties.service");
+var lookups_service_1 = require("../../providers/lookups/lookups.service");
 var PropertiesModule = (function () {
     function PropertiesModule() {
     }
@@ -29,7 +30,7 @@ var PropertiesModule = (function () {
                 router_1.RouterModule.forChild(properties_routes_1.MODULE_ROUTES)
             ],
             declarations: [properties_routes_1.MODULE_COMPONENTS],
-            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService]
+            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService]
         }), 
         __metadata('design:paramtypes', [])
     ], PropertiesModule);

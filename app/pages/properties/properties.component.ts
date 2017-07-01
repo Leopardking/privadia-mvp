@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 //import { MainService } from './../../providers/homeservice';
 import { DashboardService } from './../../providers/dashboard/dashboard.service';
 import { PropertiesService } from './../../providers/properties/properties.service';
+import {LoginService} from "../../providers/login/login.service";
 
 declare const $:any;
 
@@ -18,8 +19,9 @@ declare const $:any;
 export class PropertiesComponent implements OnInit{
     private datatableInited = false;
 
-    constructor ( private dashboardService: DashboardService,
-                  private propertyService: PropertiesService ) {}
+    constructor ( private propertiesService: PropertiesService, private loginService: LoginService ) {
+        propertiesService.readDataProperties()
+    }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
@@ -34,16 +36,15 @@ export class PropertiesComponent implements OnInit{
             info: false,
         });
         $('#datatableSearch').on( 'keyup', function () {
-            console.log('Search ', $(this).text())
             tableWidget.search( this.value ).draw();
         } );
         this.datatableInited = true;
     }
 
     private removeProperty(el) {
-        this.propertyService.deleteProperty(el.propertyId).subscribe(
+        this.propertiesService.deleteProperty(el.propertyId).subscribe(
             d => {
-                this.dashboardService.properties.splice(el.index,1);
+                this.propertiesService.properties.splice(el.index,1);
                 console.log('Delete property ', d);
             },
             e => { console.log("error:", e); }
@@ -56,5 +57,9 @@ export class PropertiesComponent implements OnInit{
 
     private editBooking() {
         console.log('edit');
+    }
+
+    public permitoins(Permissions) {
+
     }
 }

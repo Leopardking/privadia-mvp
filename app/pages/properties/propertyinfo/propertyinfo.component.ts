@@ -8,6 +8,8 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 //import { MainService } from '../../../providers/homeservice';
 import { DashboardService } from '../../../providers/dashboard/dashboard.service';
 import {FormGroup, FormArray, FormControl, Validators} from "@angular/forms";
+import {LookupsService} from "../../../providers/lookups/lookups.service";
+import {LoginService} from "../../../providers/login/login.service";
 
 declare const $: any;
 
@@ -19,15 +21,11 @@ declare const $: any;
 })
 
 export class PropertyinfoComponent implements OnInit{
-    @Input('group')
-    public propertyForm: FormGroup;
+    @Input('group') public propertyForm: FormGroup;
+    @Input('errorForm') public errorForm: any;
 
-    @Input('errorForm')
-    public errorForm: any;
-
-    @ViewChild('villadescription') villadescription;
-
-    //public changeTab
+    // @ViewChild('villadescription') villadescription;
+    // public changeTab
     // name & address
     // public contacts;
     public bedrooms;
@@ -45,14 +43,27 @@ export class PropertyinfoComponent implements OnInit{
     // public officialName;
     public address;
 
-    constructor ( private propertyService: PropertiesService,
-                  private dashboardService: DashboardService,
+    private permission;
+
+    constructor ( private propertiesService: PropertiesService,
+                  private loginService: LoginService,
                   private _sanitizer: DomSanitizer ) {
 
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
+        this.permission = !this.loginService.getPermission('Properties/Put');
+
+        /*
+        const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Admin')[0];
+
+        if(role)
+            this.propertyForm.controls['ManagementCompany'].reset({
+                value: this.lookupsService.companies[0],
+                disabled: true
+            });
+        */
         /*
         $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
             var target = $(e.target).attr("href") // activated tab
@@ -61,7 +72,7 @@ export class PropertyinfoComponent implements OnInit{
             e.preventDefault()
         });
         */
-        console.log('this.property mainService', this.dashboardService.metadata )
+        //console.log('this.property mainService', this.dashboardService.metadata )
         //this.property// = this.getInfo();
         //console.log('Property ', this.property)
         //this.contacts = [];
@@ -83,8 +94,8 @@ export class PropertyinfoComponent implements OnInit{
             Name: ''
         };
         // description
-
-        this.propertyService.getOwners().subscribe(
+    /*
+        this.propertiesService.getOwners().subscribe(
             d => { 
                 this.owners = d;
                 this.ownerNames = d.map( (item, i) => { return item.Name; } );
@@ -92,13 +103,14 @@ export class PropertyinfoComponent implements OnInit{
             e => { console.log("error: ", e); }
         );
 
-        this.propertyService.getregions().subscribe(
+        this.propertiesService.getRegions().subscribe(
             d => {
                 this.regionArray = d;
                 this.regions = d.map( (item, i) => { return item.Name; } );
             },
             e => { console.log("error: ", e); }
         );
+        */
         $('.property-tab a:first').tab('show')
     }
 
@@ -115,11 +127,11 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Contacts'];
         control.push(
             new FormGroup({
-                JobTitle: new FormControl(),
-                FirstName: new FormControl(),
-                LastName: new FormControl(),
-                EmailAddress: new FormControl('', Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
-                Telephone: new FormControl(),
+                JobTitle: new FormControl({ value: null, disabled: this.permission }),
+                FirstName: new FormControl({ value: null, disabled: this.permission }),
+                LastName: new FormControl({ value: null, disabled: this.permission }),
+                EmailAddress: new FormControl({ value: null, disabled: this.permission }, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
+                Telephone: new FormControl({ value: null, disabled: this.permission }),
             }),
         );
     }
@@ -134,9 +146,9 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Rooms'];
         control.push(
             new FormGroup({
-                Description: new FormControl(),
-                Name: new FormControl(),
-                PropertyRoomType: new FormControl(1),
+                Description: new FormControl({ value: null, disabled: this.permission }),
+                Name: new FormControl({ value: null, disabled: this.permission }),
+                PropertyRoomType: new FormControl({ value: 1, disabled: this.permission }),
             }),
         );
     }
@@ -150,9 +162,9 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Rooms'];
         control.push(
             new FormGroup({
-                Description: new FormControl(),
-                Name: new FormControl(),
-                PropertyRoomType: new FormControl(2),
+                Description: new FormControl({ value: null, disabled: this.permission }),
+                Name: new FormControl({ value: null, disabled: this.permission }),
+                PropertyRoomType: new FormControl({ value: 2, disabled: this.permission }),
             }),
         );
     }
@@ -163,6 +175,7 @@ export class PropertyinfoComponent implements OnInit{
     }
 
     private regionChanged(e) {
+        /*
         const controlId = <FormControl>this.propertyForm.controls['RegionId'];
         controlId.setValue(e.Id);
 
@@ -171,6 +184,7 @@ export class PropertyinfoComponent implements OnInit{
 
         $("#regionName").removeClass('is-empty');
         $("#regionName").removeClass('has-error');
+        */
     }
 
     public changeTab(test: any, test1: any) {

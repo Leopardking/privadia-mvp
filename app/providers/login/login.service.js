@@ -16,7 +16,19 @@ require('rxjs/add/operator/map');
 var LoginService = (function () {
     function LoginService(http) {
         this.http = http;
+        this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+        this.token = localStorage.getItem('id_token');
+        this.isReading = true;
+        console.log('Load Login Service');
     }
+    LoginService.prototype.getDataUser = function () {
+        var _this = this;
+        this.getCurrentUser().subscribe(function (d) {
+            _this.userInfo = d;
+            _this.isReading = false;
+            localStorage.setItem('permissions', JSON.stringify(d.Permissions));
+        }, function (e) { console.log('Error get user ', e); });
+    };
     LoginService.prototype.login = function (apiUrl, email, password) {
         var grant_type = "password";
         if (email && password && grant_type) {
@@ -24,11 +36,22 @@ var LoginService = (function () {
             var pwd = encodeURIComponent(password);
             var gtype = encodeURIComponent(grant_type);
             return this.http.post(apiUrl + '/token', "grant_type=" + grant_type + "&username=" + username + "&password=" + pwd)
-                .map(this.extractLoginData)
+                .map(this.extractData)
                 .catch(this.handleError);
         }
     };
-    LoginService.prototype.extractLoginData = function (res) {
+    LoginService.prototype.getPermission = function (permission) {
+        var permissions = JSON.parse(localStorage.getItem('permissions'));
+        return permissions.filter(function (element) { return element.Name === permission; })[0];
+    };
+    LoginService.prototype.getCurrentUser = function () {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/Users/GetCurrent', options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    LoginService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};
     };

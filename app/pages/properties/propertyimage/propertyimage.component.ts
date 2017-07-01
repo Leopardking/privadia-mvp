@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
+import {LoginService} from "../../../providers/login/login.service";
 
 declare var $:any;
 declare var window: any;
@@ -17,7 +18,7 @@ export class PropertyimageoComponent implements OnInit{
 	private uploader: CloudinaryUploader;
 	@Input('group')	propertyForm: FormGroup;
 
-	constructor() {
+	constructor( private loginService: LoginService) {
 		this.uploader = new CloudinaryUploader(
 			new CloudinaryOptions({
 				cloudName: 'privadia',

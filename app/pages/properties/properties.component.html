@@ -1,9 +1,9 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="toolbar row">
+        <div class="toolbar row" *ngIf="loginService.getPermission('Properties/Post')">
             <div class="col-xs-12">
                 <button class="btn btn-simple btn-success btn-icon pull-right secondary-color shadow-grey"
-                        [routerLink]="['addproperty']"><i class="material-icons">add</i> Add Property
+                        [routerLink]="['add']"><i class="material-icons">add</i> Add Property
                 </button>
             </div>
         </div>
@@ -48,8 +48,8 @@
                                         <th></th>
                                     </tr>
                                 </tfoot>
-                                <tbody id="bookingTableBody" *ngIf="!dashboardService.isReading">
-                                    <tr *ngFor="let item of dashboardService.properties; let i = index; let last = last ">
+                                <tbody id="bookingTableBody" *ngIf="!propertiesService.isReading">
+                                    <tr *ngFor="let item of propertiesService.properties; let i = index; let last = last ">
                                         <td></td>
                                         <td class="thumb">
                                             <cl-image *ngIf="item.ImageId"
@@ -73,22 +73,30 @@
                                             <div class="property-status active" *ngIf="item.Active">Active</div>
                                         </td>
                                         <td class="text-right">
-                                            <button class="btn btn-simple btn-set-rates btn-icon"
+                                            <button *ngIf="loginService.getPermission('Properties/Post')"
+                                                    class="btn btn-simple btn-set-rates btn-icon"
                                                     [routerLink]="['/properties/setrates', item.Id]">
                                                 <i class="material-icons">attach_money</i>Set Rates
                                             </button>
-                                            <button class="btn btn-simple btn-edit btn-icon"
-                                                    [routerLink]="['/properties/editproperty', item.Id]">
+                                            <button *ngIf="loginService.getPermission('Properties/Put')"
+                                                    class="btn btn-simple btn-edit btn-icon"
+                                                    [routerLink]="['/properties/edit', item.Id]">
                                                 <i class="material-icons">edit</i>Edit
                                             </button>
-                                            <button class="btn btn-simple btn-delete btn-icon"
+                                            <button *ngIf="loginService.getPermission('Properties/Delete')"
+                                                    class="btn btn-simple btn-delete btn-icon"
                                                     type="button"
                                                     (click)="removeProperty({index: i, propertyId: item.Id})">
                                                 <i class="material-icons">delete</i>Remove
                                             </button>
+                                            <button *ngIf="!loginService.getPermission('Properties/Put')"
+                                                    class="btn btn-simple btn-edit btn-icon"
+                                                    [routerLink]="['/properties/view', item.Id]">
+                                                <i class="material-icons">remove_red_eye</i>View
+                                            </button>
                                         </td>
                                         <td></td>
-                                        {{ !dashboardService.isReading && last && !datatableInited ? finishReading() : "" }}
+                                        {{ !propertiesService.isReading && last && !datatableInited ? finishReading() : "" }}
                                     </tr>
                                 </tbody>
                             </table>
@@ -101,17 +109,17 @@
             <!-- end col-md-12 -->
         </div>
         <!-- end row -->
-        <div class="toolbar row">
+        <div class="toolbar row" *ngIf="loginService.getPermission('Properties/Post')">
             <div class="col-xs-12">
                 <button class="btn btn-simple btn-success btn-icon pull-right secondary-color shadow-grey"
-                        [routerLink]="['addproperty']"><i class="material-icons">add</i> Add Property
+                        [routerLink]="['add']"><i class="material-icons">add</i> Add Property
                 </button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="loader" [hidden]="!dashboardService.isReading">
+<div class="loader" [hidden]="!propertiesService.isReading">
     <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
     </svg>

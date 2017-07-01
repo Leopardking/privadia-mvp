@@ -11,15 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
-var _ = require("lodash");
-//import { MainService } from '../../../providers/homeservice';
-var dashboard_service_1 = require('../../../providers/dashboard/dashboard.service');
 var properties_service_1 = require('../../../providers/properties/properties.service');
+var _ = require('lodash');
+//declare const _:any;
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(router, dashboardService, propertyService, builder) {
+    function AddpropertyComponent(router, propertiesService, builder) {
         this.router = router;
-        this.dashboardService = dashboardService;
-        this.propertyService = propertyService;
+        this.propertiesService = propertiesService;
         this.builder = builder;
         // private isActive = true;
         this.isLoad = true;
@@ -27,16 +25,28 @@ var AddpropertyComponent = (function () {
         this.sending = false;
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
-            OwnerName: new forms_1.FormControl(),
             InternalName: new forms_1.FormControl(),
+            OwnerName: new forms_1.FormControl(),
             Name: new forms_1.FormControl(null, forms_1.Validators.required),
             Address: new forms_1.FormControl(),
-            RegionId: new forms_1.FormControl(),
-            RegionName: new forms_1.FormControl(),
             Region: new forms_1.FormControl({
-                Id: 1,
-                Name: 'Ibiza',
-            }),
+                Id: null,
+                Name: null,
+            }, forms_1.Validators.required),
+            ManagementCompany: new forms_1.FormControl({
+                Id: null,
+                Name: null,
+            }, forms_1.Validators.required),
+            ManagerUser: new forms_1.FormControl({
+                Id: null,
+                Name: null,
+            }, forms_1.Validators.required),
+            /*
+            OwnerUser: new FormControl({
+                Id: null,
+                Name: null,
+            }, Validators.required),
+            */
             Headline: new forms_1.FormControl(),
             Summary: new forms_1.FormControl(),
             Description: new forms_1.FormControl(),
@@ -68,9 +78,20 @@ var AddpropertyComponent = (function () {
             LiftAvailable: new forms_1.FormControl(false),
             Benefits: new forms_1.FormControl(),
         });
-        console.log('Form init', this.propertyForm);
+        propertiesService.readDataMetadata();
+        propertiesService.readDataOwners();
+        propertiesService.readDataRegions();
+        propertiesService.readDataCompanies();
+        //propertiesService.readDataManagers();
+        this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
+            propertiesService.readDataManagers(company.Id);
+            var selectQuery = $(".custompicker");
+            setTimeout(function () {
+                selectQuery.selectpicker('render');
+                selectQuery.selectpicker('refresh');
+            }, 500);
+        });
     }
-    // steve@freelancemvc.net, agent1@freelancemvc.net
     AddpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
@@ -96,119 +117,22 @@ var AddpropertyComponent = (function () {
         });
         this.propertyForm.setControl('Region', regionFGs);
     };
-    AddpropertyComponent.prototype.saveInfo = function () {
-        var _this = this;
-        //console.log('Save FORM', this.propertyForm.value.MetaDataTmp);
-        var newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
-            return newArr = _.concat(newArr, el);
-        });
-        this.propertyForm.value.MetaData = newArr;
-        //console.log('this.propertyForm.value.MetaDataTmp', this.propertyForm.value)
-        /*
-        $(".title-error").removeClass("title-error");
-        $(".metafilter-names li a.has-error").removeClass("has-error");
-
-        let validateErrors = $(".tab-content .has-error");
-        if ( validateErrors.length ) {
-            $.notify({
-                icon: "notifications",
-                message: $(".tab-content .has-error").length + " Validation Errors Found"
-
-            },{
-                type: 'danger',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-
-            for (let i = 0; i < validateErrors.length; i++) {
-                let ele = validateErrors[i];
-
-                while (!ele.className.includes('card-content')) {
-                    if (ele.className.includes('panel-group')) {
-                        $(ele).addClass('title-error');
-                    }
-                    ele = ele.parentElement;
-                }
-
-                let eleTabName = document.getElementsByClassName(ele.id + "-tab-name");
-                $(eleTabName).addClass("has-error");
-            }
-
-            return;
-        }
-
-        $('.has-error').removeClass("has-error");
-
-        let metaData = [];
-        for (let i = 1; i < 125; i++) {
-            let available = this.pointsOfInterest.metafilters[i]
-                        ||  this.features.metafilters[i]
-                        ||  this.services.metafilters[i]
-                        ||  this.villadescription.metafilters[i]
-                        ||  this.localActivities.metafilters[i]
-                        ||  this.trip.metafilters[i] ;
-            metaData.push({
-                Available: available ? 1 : 0,
-                MetaDataId: i
-            });
-        }
-
-        let poi = this.pointsOfInterest.metafilterHeading.PoITypes.map( (item, index) => {
-            return {
-                Available: item.checked ? 1 : 0,
-                Distance: item.distance,
-                Name: item.typeName,
-                PointOfInterestTypeId: item.Id
-            };
-        })
-        let data = {
-            Active: this.isActive,
-            Images: this.propertyImage.images,
-            MetaData: metaData,
-            Owner: this.propertyInfo.owner,
-            UserId: this.propertyInfo.owner.Id,
-            PointsOfInterest: poi,
-            Region: this.propertyInfo.region,
-        }*/
-        if (this.propertyForm.valid) {
-            this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
-                }, {
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                _this.dashboardService.readData();
-            }, function (e) { console.log("error:", e); });
-        }
-        console.log('Property Form ', this.propertyForm);
-        console.log('Property Form Value ', this.propertyForm.value);
-    };
     AddpropertyComponent.prototype.continueInfo = function () {
         console.log('Continue Info form');
     };
     AddpropertyComponent.prototype.discardInfo = function () {
         console.log('Discard Info form');
     };
-    AddpropertyComponent.prototype.onSubmit = function () {
+    AddpropertyComponent.prototype.onSubmit = function (form) {
         var _this = this;
         var newArr = [];
-        _.mapValues(this.propertyForm.value.MetaDataTmp, function (el) {
+        _.mapValues(form.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
         });
-        this.propertyForm.value.MetaData = newArr;
+        form.MetaData = newArr;
         if (this.propertyForm.valid) {
             this.sending = true;
-            this.propertyService.addProperty(this.propertyForm.value).subscribe(function (d) {
+            this.propertiesService.addProperty(form).subscribe(function (d) {
                 $.notify({
                     icon: "notifications",
                     message: "Property Added Successfully"
@@ -222,7 +146,6 @@ var AddpropertyComponent = (function () {
                 });
                 _this.router.navigate(['properties']);
                 _this.sending = false;
-                //this.dashboardService.readData();
             }, function (e) { console.log("error:", e); });
         }
         else {
@@ -236,7 +159,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router, dashboard_service_1.DashboardService, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());

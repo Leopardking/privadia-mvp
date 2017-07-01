@@ -7,6 +7,7 @@ import {FileUploadModule} from "ng2-file-upload";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DashboardService} from "../../providers/dashboard/dashboard.service";
 import {PropertiesService} from "../../providers/properties/properties.service";
+import {LookupsService} from "../../providers/lookups/lookups.service";
 
 @NgModule({
     imports: [
@@ -17,7 +18,7 @@ import {PropertiesService} from "../../providers/properties/properties.service";
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS ],
-    providers: [ DashboardService, PropertiesService ]
+    providers: [ DashboardService, PropertiesService, LookupsService ]
 })
 
 export class PropertiesModule{}

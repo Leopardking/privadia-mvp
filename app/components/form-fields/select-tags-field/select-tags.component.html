@@ -6,6 +6,7 @@
                     title="{{subtype.Name}}"
                     data-size="7"
                     multiple
+                    disabled="{{permission}}"
                     [(ngModel)]="metafiltersModel"
                     [ngModelOptions]="{standalone: true}"
                     (ngModelChange)="subfilterModelChange($event, 'type_' + subtype.Id)">
@@ -18,11 +19,12 @@
         </div>
         <div class="col-xs-9">
             <div class="bootstrap-tagsinput">
-            <span *ngFor="let option of data; let i = index">
+            <span *ngFor="let option of data; let i = index" >
                 <span class="tag label label-info"
+                      [ngClass]="{disabled: permission}"
                       *ngIf="option.Available">
-                    {{option.MetaDataName}}
-                    <span data-role="remove" (click)="removeMetafilter({index: i, type: 'type_' + subtype.Id})"></span>
+                        {{option.MetaDataName}}
+                    <span *ngIf="!permission" data-role="remove" (click)="removeMetafilter({index: i, type: 'type_' + subtype.Id})"></span>
                 </span>
             </span>
             </div>

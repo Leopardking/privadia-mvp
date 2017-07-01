@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
+var _ = require('lodash');
 var PropertyMetafilterComponent = (function () {
     function PropertyMetafilterComponent() {
     }

@@ -10,9 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var login_service_1 = require("../providers/login/login.service");
 var LayoutComponent = (function () {
-    function LayoutComponent(router) {
+    function LayoutComponent(router, loginService) {
         this.router = router;
+        this.loginService = loginService;
+        loginService.getDataUser();
     }
     LayoutComponent.prototype.ngOnInit = function () {
         if (this.router.url === '/') {
@@ -26,7 +29,7 @@ var LayoutComponent = (function () {
             templateUrl: 'layout.component.html',
             styleUrls: ['layout.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, login_service_1.LoginService])
     ], LayoutComponent);
     return LayoutComponent;
 }());

@@ -10,10 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
+var login_service_1 = require("../../../providers/login/login.service");
 var SelectTagsFieldComponent = (function () {
-    function SelectTagsFieldComponent() {
+    function SelectTagsFieldComponent(loginService) {
+        this.loginService = loginService;
     }
     SelectTagsFieldComponent.prototype.ngOnInit = function () {
+        this.permission = !this.loginService.getPermission('Properties/Put');
         var selectQuery = $(".selectpicker");
         setTimeout(function () {
             selectQuery.selectpicker({
@@ -66,7 +69,7 @@ var SelectTagsFieldComponent = (function () {
             templateUrl: 'select-tags.component.html',
             styleUrls: ['select-tags.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [login_service_1.LoginService])
     ], SelectTagsFieldComponent);
     return SelectTagsFieldComponent;
 }());

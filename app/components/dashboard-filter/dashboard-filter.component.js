@@ -12,9 +12,11 @@ var core_1 = require('@angular/core');
 var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
 var forms_1 = require('@angular/forms');
 var _ = require("lodash");
+var properties_service_1 = require("../../providers/properties/properties.service");
 var DashboardfilterComponent = (function () {
-    function DashboardfilterComponent(dashboardService, builder) {
+    function DashboardfilterComponent(dashboardService, propertiesService, builder) {
         this.dashboardService = dashboardService;
+        this.propertiesService = propertiesService;
         this.builder = builder;
         this.filterForm = new forms_1.FormGroup({});
     }
@@ -32,9 +34,7 @@ var DashboardfilterComponent = (function () {
     };
     DashboardfilterComponent.prototype.onSubmit = function (form) {
         var _this = this;
-        //form.Regions = _.uniq(form.Regions);
-        console.log('On submit', form);
-        this.dashboardService.getVillas(form).subscribe(function (d) {
+        this.propertiesService.getVillas(form).subscribe(function (d) {
             _this.dashboardService.villas = d;
             _this.dashboardService.isReading = false;
         }, function (e) {
@@ -59,7 +59,7 @@ var DashboardfilterComponent = (function () {
             templateUrl: 'dashboard-filter.component.html',
             styleUrls: ['dashboard-filter.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], DashboardfilterComponent);
     return DashboardfilterComponent;
 }());

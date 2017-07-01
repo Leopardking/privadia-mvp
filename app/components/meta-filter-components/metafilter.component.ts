@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormArray, FormControl } from "@angular/forms";
+import * as _ from 'lodash'
 
 declare const $:any;
-declare const _:any;
 
 
 @Component({
