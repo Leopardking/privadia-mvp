@@ -390,6 +390,10 @@
     margin: 0;
 }
 
+.enquiry-body .terms .btn-back:hover {
+    background-color: #fafafa;
+}
+
 .enquiry-body .estimated-cost {
     margin-top: 20px;
     margin-bottom: 10px;
