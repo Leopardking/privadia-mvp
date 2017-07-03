@@ -1,4 +1,4 @@
-<div class="modal fade" id="inquiry" tabindex="-1" role="dialog" aria-labelledby="inquiryLabel" aria-hidden="true">
+<div class="modal fade" id="enquiry" tabindex="-1" role="dialog" aria-labelledby="enquiryLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <form [formGroup]="enquiryForm" *ngIf="data" (submit)="onSubmit(enquiryForm.value)">
@@ -50,14 +50,14 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="material-icons">person</i></span>
                                 <input-field-cmp
-                                        [data]="{title: 'First Name', name: 'FirstName', value: '', type: 'text'}"
+                                        [data]="{title: 'First Name', name: 'ClientFirstName', type: 'text'}"
                                         [group]="enquiryForm"></input-field-cmp>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <input-field-cmp
-                                        [data]="{title: 'Last Name', name: 'LastName', value: '', type: 'text'}"
+                                        [data]="{title: 'Last Name', name: 'ClientLastName', type: 'text'}"
                                         [group]="enquiryForm"></input-field-cmp>
                             </div>
                         </div>

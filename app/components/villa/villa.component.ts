@@ -12,11 +12,8 @@ import {FormGroup} from "@angular/forms";
 export class VillaComponent implements OnInit{
     //@Input('open') public openEnquiry;
     @Output() openEnquiry = new EventEmitter<boolean>();
-    @Input('openVilla') public openVilla;
-    @Input('filter') public filterForm: FormGroup;
     @Input() villa;
     @Input() region;
-    voted = false;
 
     constructor ( private loginService: LoginService) { }
 
@@ -26,22 +23,11 @@ export class VillaComponent implements OnInit{
         return this.numberWithCommas(rate && parseFloat(rate).toFixed(2) || 0);
     }
 
-    /*
-    private openEnquiry(villa) {
-        this.openVilla = villa
-        console.log('Open enquiry villa', villa)
-    }
-    */
-
-    public vote(villa: boolean) {
+    public open(villa: boolean) {
         this.openEnquiry.emit(villa);
     }
 
     private copy() {
-
-        /// TS_IGNORE
-        //document.getElementById('villainfo-'+this.villa.Id).select();
-
         document.execCommand('copy');
     }
 

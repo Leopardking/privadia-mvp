@@ -46,14 +46,16 @@ export class DashboardComponent implements OnInit{
         });
 
         this.enquiryForm = this.builder.group({
-            FirstName: new FormControl(),
-            LastName: new FormControl(),
+            PropertyId: new FormControl(),
+            ClientFirstName: new FormControl('Test First Name', Validators.required),
+            ClientLastName: new FormControl('Test Last Name', Validators.required),
             CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            Message: new FormControl(),
+            Message: new FormControl('Test Message'),
         });
 
         this.proposalForm = this.builder.group({
+            PropertyId: new FormControl(),
             ClientName: new FormControl('Johnathan Robinson'),
             CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
@@ -69,19 +71,10 @@ export class DashboardComponent implements OnInit{
                 console.log('Error change form ', e)
             }
         )
-        console.log('Open filter ', this);
     }
 
     public openEnquiry(villa: any) {
-        console.log('onvoted ', villa);
+        this.enquiryForm.controls['PropertyId'].setValue(villa.Id);
         this.openVilla = villa;
     }
-
-    /*
-    public openEnquiry(villa) {
-        console.log('Open filter ', this.filterForm.controls['CheckIn'].value);
-        console.log('Open enquiry villa DASHBOARD', villa)
-        this.openVilla = villa;
-    }
-    */
 }

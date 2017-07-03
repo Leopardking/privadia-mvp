@@ -10,30 +10,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var login_service_1 = require("../../providers/login/login.service");
-var forms_1 = require("@angular/forms");
 var VillaComponent = (function () {
     function VillaComponent(loginService) {
         this.loginService = loginService;
         //@Input('open') public openEnquiry;
         this.openEnquiry = new core_1.EventEmitter();
-        this.voted = false;
     }
     VillaComponent.prototype.ngOnInit = function () { };
     VillaComponent.prototype.roundRate = function (rate) {
         return this.numberWithCommas(rate && parseFloat(rate).toFixed(2) || 0);
     };
-    /*
-    private openEnquiry(villa) {
-        this.openVilla = villa
-        console.log('Open enquiry villa', villa)
-    }
-    */
-    VillaComponent.prototype.vote = function (villa) {
+    VillaComponent.prototype.open = function (villa) {
         this.openEnquiry.emit(villa);
     };
     VillaComponent.prototype.copy = function () {
-        /// TS_IGNORE
-        //document.getElementById('villainfo-'+this.villa.Id).select();
         document.execCommand('copy');
     };
     VillaComponent.prototype.numberWithCommas = function (x) {
@@ -43,14 +33,6 @@ var VillaComponent = (function () {
         core_1.Output(), 
         __metadata('design:type', Object)
     ], VillaComponent.prototype, "openEnquiry", void 0);
-    __decorate([
-        core_1.Input('openVilla'), 
-        __metadata('design:type', Object)
-    ], VillaComponent.prototype, "openVilla", void 0);
-    __decorate([
-        core_1.Input('filter'), 
-        __metadata('design:type', forms_1.FormGroup)
-    ], VillaComponent.prototype, "filterForm", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

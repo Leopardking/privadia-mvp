@@ -8,7 +8,7 @@
         </div>
         <div class="row" *ngIf="dashboardService.regions.length">
             <div class="col-lg-4 col-md-6 col-sm-6" *ngFor=" let item of dashboardService.villas; let i = index " >
-                <villa-cmp (openEnquiry)="openEnquiry($event)" [filter]="filterForm" [villa]="item" [region]="dashboardService.regions[item.RegionId-1].Name"></villa-cmp>
+                <villa-cmp (openEnquiry)="openEnquiry($event)" [villa]="item" [region]="dashboardService.regions[item.RegionId-1].Name"></villa-cmp>
             </div>
         </div>
     </div>

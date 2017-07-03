@@ -10,14 +10,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
+var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var EnquiryComponent = (function () {
-    function EnquiryComponent() {
+    function EnquiryComponent(enquiryService) {
+        this.enquiryService = enquiryService;
     }
     EnquiryComponent.prototype.ngOnInit = function () {
         console.log('Data ', this.data);
     };
     EnquiryComponent.prototype.onSubmit = function (values) {
         console.log('Submit enquiry', values);
+        console.log('Valid form ', this.enquiryForm.status);
+        if (this.enquiryForm.status === 'INVALID')
+            return;
+        this.enquiryService.addEnquiry(values).subscribe(function (d) {
+            $('#enquiry').modal('hide');
+            $.notify({
+                icon: "notifications",
+                message: "Enquiry Submit Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            console.log('Added Enquiry ', d);
+        }, function (e) {
+            console.log('Error add enquiry ', e);
+        });
     };
     __decorate([
         core_1.Input('group'), 
@@ -34,7 +56,7 @@ var EnquiryComponent = (function () {
             templateUrl: 'enquiry.component.html',
             styleUrls: ['enquiry.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [enquiry_service_1.EnquiryService])
     ], EnquiryComponent);
     return EnquiryComponent;
 }());

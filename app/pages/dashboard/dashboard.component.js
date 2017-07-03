@@ -41,13 +41,15 @@ var DashboardComponent = (function () {
             MetaDataFilters: new forms_1.FormArray([]),
         });
         this.enquiryForm = this.builder.group({
-            FirstName: new forms_1.FormControl(),
-            LastName: new forms_1.FormControl(),
+            PropertyId: new forms_1.FormControl(),
+            ClientFirstName: new forms_1.FormControl('Test First Name', forms_1.Validators.required),
+            ClientLastName: new forms_1.FormControl('Test Last Name', forms_1.Validators.required),
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            Message: new forms_1.FormControl(),
+            Message: new forms_1.FormControl('Test Message'),
         });
         this.proposalForm = this.builder.group({
+            PropertyId: new forms_1.FormControl(),
             ClientName: new forms_1.FormControl('Johnathan Robinson'),
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
@@ -60,10 +62,9 @@ var DashboardComponent = (function () {
         }, function (e) {
             console.log('Error change form ', e);
         });
-        console.log('Open filter ', this);
     };
     DashboardComponent.prototype.openEnquiry = function (villa) {
-        console.log('onvoted ', villa);
+        this.enquiryForm.controls['PropertyId'].setValue(villa.Id);
         this.openVilla = villa;
     };
     DashboardComponent = __decorate([
