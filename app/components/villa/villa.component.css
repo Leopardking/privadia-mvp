@@ -1,25 +1,83 @@
-.card-description span{
-	display: block;
-	margin: 5px 0px;
+.card-actions {
+	display: flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+	width: calc(100% - 40px);
+	left: 22px;
+	right: 22px;
 }
-
-.card-description span:first-child {
+.card-actions .btn {
+	box-shadow: none;
+	text-transform: none;
+	font-size: 14px;
+	color: #3a3a3a;
+	font-weight: 300;
+}
+.card-actions .btn .material-icons {
+	font-size: 16px;
+	color: #5399bc;
+}
+.card .card-image {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+.card .card-title {
+	font-size: 18px;
+	font-weight: 100;
+}
+.card-product .card-description {
+	height: 50px;
+	text-align: left;
+	font-weight: 100;
+	color: #a6a6a6;
+}
+.card-product .category {
+	text-align: left;
+	color: #3a3a3a;
+}
+.card-product .category .material-icons {
+	font-size: 16px;
+	color: #5399bc;
+	top:2px;
+}
+.card-feature {
+	display: flex;
+	flex-direction:row;
+	justify-content:space-between;
+	align-items:center;
+}
+.card-feature .feature {
+	color: #3a3a3a;
 	margin-top: 20px;
+	padding-bottom: 10px;
+	font-size: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
-
-.card-content {
-	height: 150px;
+.card-feature .feature i {
+	font-size: 16px;
+	color: #5399bc;
+	padding-bottom: 2px;
+	padding-right: 15px;
 }
-
-.card-title {
+.card .card-footer {
+	border-color: #a6a6a6;
 }
-
-.card-title p {
-	font-size: 11px;
-	line-height: 16px;
-	margin-top: 4px;
+.card .card-footer .rate {
+	margin: 5px 0;
+	font-size: 14px;
+	font-weight: 300;
+	color: #3a3a3a;
+	line-height: 44px;
 }
-
-.p-r-10 {
-	padding-right: 10px;
+.card .card-footer .rate .material-icons{
+	font-size: 14px;
+	font-weight: 400;
+	position: relative;
+	top:2px;
+}
+.card .card-footer div.row {
+	display: block;
 }

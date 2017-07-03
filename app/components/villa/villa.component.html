@@ -7,38 +7,66 @@
     </div>
     <div class="card-content">
         <div class="card-actions">
+            <!--
             <button type="button" class="btn btn-danger btn-simple fix-broken-card">
                 <i class="material-icons">build</i> Fix Header!
             </button>
-            <a href="{{villa.BoxUrl}}" target="_blank" class="btn btn-default btn-simple" rel="tooltip" data-placement="bottom" title="View">
-                <i class="material-icons">art_track</i>
-            </a>
-            <button type="button" class="btn btn-success btn-simple" rel="tooltip" data-placement="bottom" title="Copy" (click)="copy()">
-                <i class="material-icons">copyright</i>
+            -->
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" > Select
+                </label>
+            </div>
+            <button type="button" class="btn btn-white" title="Copy">
+                <i class="material-icons">library_books</i>&nbsp;Copy
             </button>
-            <button type="button" class="btn btn-danger btn-simple" rel="tooltip" data-placement="bottom" title="Remove">
-                <i class="material-icons">close</i>
+            <button type="button" class="btn btn-white" title=".pdf">
+                <i class="material-icons">description</i>&nbsp;.pdf
             </button>
         </div>
-        <h4 class="card-title col-lg-12 col-md-12 col-sm-12">
-            <a href="#pablo">{{villa.Name}}</a>
-        </h4>
-        <div class="card-description col-lg-6 col-md-6 col-sm-12">
-            <span>{{villa.CollaboratorInitials}}</span>
+        <div class="row">
+            <h4 class="card-title m-b-15 col-lg-12 col-md-12 col-sm-12">
+                <a href="#pablo">{{villa.Name}}</a>
+            </h4>
         </div>
-        <div class="card-description col-lg-6 col-md-6 col-sm-12">
-            <span class="text-right p-r-10">{{villa.Bedrooms}} Bedrooms</span>
-            <span class="text-right p-r-10">{{villa.Bathrooms}} Bathrooms</span>
-            <span class="text-right p-r-10">{{villa.Sleeps}} Sleeps</span>
+        <div class="row">
+            <div class="card-description m-b-15 col-xs-12">
+                <span>{{villa.CollaboratorInitials}}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card-stats col-xs-12">
+                <p class="category"><i class="material-icons">place</i> {{region}}</p>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="card-feature">
+            <div class="feature">
+                <i class="material-icons">pool</i>
+                <span class="">{{villa.Bedrooms}}</span>
+            </div>
+            <div class="feature">
+                <i class="material-icons">hotel</i>
+                <span class="">{{villa.Sleeps}}</span>
+            </div>
+            <div class="feature">
+                <i class="material-icons">group</i>
+                <span class="">{{villa.Bathrooms}}</span>
+            </div>
         </div>
     </div>
     <div class="card-footer">
-        <div class="rate">
-            <h4>Rate: €{{roundRate(villa.TotalRate)}}</h4>
+        <div class="row">
+            <div class="col-xs-6">
+                <div class="rate">
+                    <i class="material-icons">euro_symbol</i> {{roundRate(villa.TotalRate)}}/night
+                </div>
+            </div>
+            <div class="col-xs-6">
+                <button type="button" (click)="openEnquiry(villa)" class="btn btn-success pull-right">Submit enquiry</button>
+            </div>
         </div>
-        <div class="stats pull-right">
-            <p class="category"><i class="material-icons">place</i> {{region}}</p>
-        </div>
-        <textarea id="villainfo-{{villa.Id}}" class="villainfotext" readonly="true" name="villainfo-{{villa.Id}}">{{villaInfo}}</textarea>
     </div>
 </div>

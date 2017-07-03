@@ -48,6 +48,10 @@ export class VillaComponent implements OnInit{
             "\nPrice: €" + this.villa.TotalRate + '\n\n';
     }
 
+    private openEnquiry(villa) {
+        console.log('Open enquiry villa', villa)
+    }
+
     private copy() {
 
         /// TS_IGNORE

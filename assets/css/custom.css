@@ -21,6 +21,9 @@ h5 {
 	font-size: 18px;
 	color: #3a3a3a;
 }
+a:hover, a:focus {
+	color: #5399bc;
+}
 /*
 .bootstrap-datetimepicker-widget {
 	left: -33px !important;
@@ -275,6 +278,18 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .checkbox+.checkbox, .radio+.radio {
 	margin-top: 10px;
 }
+.card-actions .checkbox label {
+	line-height: 20px;
+	font-weight: 300;
+}
+.card-actions .checkbox .checkbox-material .check {
+	width: 16px;
+	height: 16px;
+	border-color: #5399bc !important;
+}
+.card-actions .checkbox input[type=checkbox]:checked + .checkbox-material .check {
+	background: #5399bc;
+}
 .togglebutton {
 	display: inline-block;
 	line-height: 46px;
@@ -409,6 +424,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
  * Custom button
  */
 .btn.btn-success {
+	font-size: 14px;
 	min-width: 120px;
 	padding: 12px 15px;
 	background-color: #5399bc;

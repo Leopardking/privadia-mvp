@@ -37,6 +37,9 @@ var VillaComponent = (function () {
             "\nFull Info: " + this.villa.BoxUrl +
             "\nPrice: €" + this.villa.TotalRate + '\n\n';
     };
+    VillaComponent.prototype.openEnquiry = function (villa) {
+        console.log('Open enquiry villa', villa);
+    };
     VillaComponent.prototype.copy = function () {
         /// TS_IGNORE
         //document.getElementById('villainfo-'+this.villa.Id).select();
