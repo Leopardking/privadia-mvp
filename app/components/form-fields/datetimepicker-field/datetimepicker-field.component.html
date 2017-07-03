@@ -5,14 +5,9 @@
         <label class="control-label">{{data.title}}</label>
         <input type="text"
                class="form-control datepicker"
-               [formControlName]="data.name"/>
-        <!--
-        <input type="text"
-               class="form-control datepicker"
                #datePicker
-               [ngModel]="rate.controls.StartDate.value"
-               (blur)="rate.controls.StartDate.setValue(datePicker.value)"
-               [formControl]="rate.controls.StartDate"/>
-        -->
+               (blur)="filterForm.controls[data.name].setValue(datePicker.value)"
+               [ngModel]="filterForm.controls[data.name].value"
+               [formControlName]="data.name"/>
     </div>
 </div>

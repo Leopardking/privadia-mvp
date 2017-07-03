@@ -16,7 +16,8 @@ import {PropertiesService} from "../../providers/properties/properties.service";
 
 export class DashboardfilterComponent implements OnInit{
     @Input('metafilters') private metafilters: any;
-    public filterForm = new FormGroup ({});
+    @Input('group') private filterForm;
+    // public filterForm = new FormGroup ({});
 
     constructor ( private dashboardService: DashboardService,
                   private propertiesService: PropertiesService,
@@ -24,19 +25,19 @@ export class DashboardfilterComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.filterForm = this.builder.group({
-            Bedrooms: new FormControl(),
-            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            MaxRate: new FormControl(),
-            MinRate: new FormControl(),
-            OrderBy: new FormControl(),
-            Regions: new FormArray([]),
-            MetaDataFilters: new FormArray([]),
-        })
+        // this.filterForm = this.builder.group({
+        //     Bedrooms: new FormControl(),
+        //     CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
+        //     CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+        //     MaxRate: new FormControl(),
+        //     MinRate: new FormControl(),
+        //     OrderBy: new FormControl(),
+        //     Regions: new FormArray([]),
+        //     MetaDataFilters: new FormArray([]),
+        // })
     }
 
-    private onSubmit(form) {
+    public onSubmit(form) {
         this.propertiesService.getVillas(form).subscribe(
             d => {
                 this.dashboardService.villas = d;
@@ -48,7 +49,7 @@ export class DashboardfilterComponent implements OnInit{
         );
     }
 
-    private metadataChange(e) {
+    public metadataChange(e) {
         const control = <FormArray>this.filterForm.controls['MetaDataFilters'];
         const index = _.findIndex(control.value, (val) => { return val == e.target.value});
 

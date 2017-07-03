@@ -14,23 +14,23 @@ var forms_1 = require('@angular/forms');
 var _ = require("lodash");
 var properties_service_1 = require("../../providers/properties/properties.service");
 var DashboardfilterComponent = (function () {
+    // public filterForm = new FormGroup ({});
     function DashboardfilterComponent(dashboardService, propertiesService, builder) {
         this.dashboardService = dashboardService;
         this.propertiesService = propertiesService;
         this.builder = builder;
-        this.filterForm = new forms_1.FormGroup({});
     }
     DashboardfilterComponent.prototype.ngOnInit = function () {
-        this.filterForm = this.builder.group({
-            Bedrooms: new forms_1.FormControl(),
-            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            MaxRate: new forms_1.FormControl(),
-            MinRate: new forms_1.FormControl(),
-            OrderBy: new forms_1.FormControl(),
-            Regions: new forms_1.FormArray([]),
-            MetaDataFilters: new forms_1.FormArray([]),
-        });
+        // this.filterForm = this.builder.group({
+        //     Bedrooms: new FormControl(),
+        //     CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
+        //     CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+        //     MaxRate: new FormControl(),
+        //     MinRate: new FormControl(),
+        //     OrderBy: new FormControl(),
+        //     Regions: new FormArray([]),
+        //     MetaDataFilters: new FormArray([]),
+        // })
     };
     DashboardfilterComponent.prototype.onSubmit = function (form) {
         var _this = this;
@@ -52,6 +52,10 @@ var DashboardfilterComponent = (function () {
         core_1.Input('metafilters'), 
         __metadata('design:type', Object)
     ], DashboardfilterComponent.prototype, "metafilters", void 0);
+    __decorate([
+        core_1.Input('group'), 
+        __metadata('design:type', Object)
+    ], DashboardfilterComponent.prototype, "filterForm", void 0);
     DashboardfilterComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
