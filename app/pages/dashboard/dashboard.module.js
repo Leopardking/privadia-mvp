@@ -12,24 +12,25 @@ var core_1 = require('@angular/core');
 var common_1 = require("@angular/common");
 var router_1 = require('@angular/router');
 var forms_1 = require("@angular/forms");
+var ng2_cloudinary_1 = require("ng2-cloudinary");
 /**
  *  Providers
  */
 var dashboard_service_1 = require("../../providers/dashboard/dashboard.service");
 var properties_service_1 = require("../../providers/properties/properties.service");
+var lookups_service_1 = require("../../providers/lookups/lookups.service");
+var enquiry_service_1 = require("../../providers/enquery/enquiry.service");
 /**
  *  Components
  */
 var dashboard_component_1 = require('./dashboard.component');
 var villa_component_1 = require('../../components/villa/villa.component');
 var dashboard_routing_module_1 = require('./dashboard-routing.module');
-// import { MetafilterComponent } from "../../components/metafilter/metafilter.component";
 var dashboard_filter_component_1 = require("../../components/dashboard-filter/dashboard-filter.component");
 var input_field_component_1 = require("../../components/form-fields/input-field/input-field.component");
 var datetimepicker_field_component_1 = require("../../components/form-fields/datetimepicker-field/datetimepicker-field.component");
 var select_component_1 = require("../../components/form-fields/select-field/select.component");
-var ng2_cloudinary_1 = require("ng2-cloudinary");
-var lookups_service_1 = require("../../providers/lookups/lookups.service");
+var enquiry_component_1 = require("../../components/modal/enquiry/enquiry.component");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -49,9 +50,10 @@ var DashboardModule = (function () {
                 dashboard_filter_component_1.DashboardfilterComponent,
                 input_field_component_1.InputfieldComponent,
                 datetimepicker_field_component_1.DatetimefieldComponent,
-                select_component_1.SelectfieldComponent
+                select_component_1.SelectfieldComponent,
+                enquiry_component_1.EnquiryComponent
             ],
-            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService]
+            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, enquiry_service_1.EnquiryService]
         }), 
         __metadata('design:paramtypes', [])
     ], DashboardModule);
