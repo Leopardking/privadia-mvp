@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {LoginService} from "../../providers/login/login.service";
 
 @Component({
     moduleId: module.id,
@@ -15,7 +16,7 @@ export class VillaComponent implements OnInit{
     public villaInfo: string;
     private villaRegion: string;
 
-    constructor (  ) {
+    constructor ( private loginService: LoginService) {
 
     }
 

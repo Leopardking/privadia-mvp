@@ -9,8 +9,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var login_service_1 = require("../../providers/login/login.service");
 var VillaComponent = (function () {
-    function VillaComponent() {
+    function VillaComponent(loginService) {
+        this.loginService = loginService;
     }
     VillaComponent.prototype.ngOnInit = function () {
         this.villaInfo = this.getInfo();
@@ -63,7 +65,7 @@ var VillaComponent = (function () {
             templateUrl: 'villa.component.html',
             styleUrls: ['villa.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [login_service_1.LoginService])
     ], VillaComponent);
     return VillaComponent;
 }());
