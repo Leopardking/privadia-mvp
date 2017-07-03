@@ -19,8 +19,10 @@ var DashboardComponent = (function () {
         this.builder = builder;
         this.enquiryForm = new forms_1.FormGroup({});
         this.proposalForm = new forms_1.FormGroup({});
+        this.filterForm = new forms_1.FormGroup({});
     }
     DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         $('.modal').appendTo("body");
         /*
@@ -28,6 +30,16 @@ var DashboardComponent = (function () {
             $('.modal-content').perfectScrollbar();
         },100)
         */
+        this.filterForm = this.builder.group({
+            Bedrooms: new forms_1.FormControl(),
+            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            MaxRate: new forms_1.FormControl(),
+            MinRate: new forms_1.FormControl(),
+            OrderBy: new forms_1.FormControl(),
+            Regions: new forms_1.FormArray([]),
+            MetaDataFilters: new forms_1.FormArray([]),
+        });
         this.enquiryForm = this.builder.group({
             FirstName: new forms_1.FormControl(),
             LastName: new forms_1.FormControl(),
@@ -42,6 +54,17 @@ var DashboardComponent = (function () {
             RentalPrice: new forms_1.FormControl(1200),
             BookingPrice: new forms_1.FormControl(1495),
         });
+        this.filterForm.valueChanges.subscribe(function (d) {
+            _this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
+            _this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
+        }, function (e) {
+            console.log('Error change form ', e);
+        });
+        console.log('Open filter ', this);
+    };
+    DashboardComponent.prototype.openEnquiry = function (villa) {
+        console.log('onvoted ', villa);
+        this.openVilla = villa;
     };
     DashboardComponent = __decorate([
         core_1.Component({

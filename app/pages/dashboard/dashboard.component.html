@@ -1,17 +1,14 @@
 <div class="main-content">
     <div class="container-fluid">
-        <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#inquiry">
-            Create an Inquiry
-        </button>
         <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#proposal">
             Create a Proposal
         </button>
         <div class="row filter" *ngIf="dashboardService.metadata.length">
-        	<dashboard-filter-cmp [metafilters]="dashboardService.metadata"></dashboard-filter-cmp>
+        	<dashboard-filter-cmp [group]="filterForm" [metafilters]="dashboardService.metadata"></dashboard-filter-cmp>
         </div>
         <div class="row" *ngIf="dashboardService.regions.length">
             <div class="col-lg-4 col-md-6 col-sm-6" *ngFor=" let item of dashboardService.villas; let i = index " >
-                <villa-cmp [villa]="item" [region]="dashboardService.regions[item.RegionId-1].Name"></villa-cmp>
+                <villa-cmp (openEnquiry)="openEnquiry($event)" [filter]="filterForm" [villa]="item" [region]="dashboardService.regions[item.RegionId-1].Name"></villa-cmp>
             </div>
         </div>
     </div>
@@ -98,99 +95,4 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="inquiry" tabindex="-1" role="dialog" aria-labelledby="inquiryLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form [formGroup]="enquiryForm">
-                <div class="modal-header">
-                    <div class="image-villa">
-                        <cl-image data-u="image"
-                                  public-id="z7iro8k17pc69cguzetw"
-                                  cloud-name="privadia"
-                                  class="md-card-image"
-                                  crop="fill"
-                                  gravity="auto"
-                                  quality="80"
-                                  height="200"
-                                  width="600"
-                                  format="jpg">
-                        </cl-image>
-                    </div>
-                    <div class="villa-container">
-                        <h4 class="modal-title">Villa Name <span class="location"><i class="material-icons">place</i> San Jose</span></h4>
-                    </div>
-                </div>
-                <div class="modal-body m-t-none p-t-none">
-                    <div class="icons-group">
-                        <div class="feature">
-                            <i class="material-icons">pool</i>
-                            <span class="">3</span>
-                        </div>
-                        <div class="feature">
-                            <i class="material-icons">hotel</i>
-                            <span class="">5</span>
-                        </div>
-                        <div class="feature">
-                            <i class="material-icons">group</i>
-                            <span class="">7</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="estimated-cost">
-                                <span class="control-label">Estimated Booking Cost:</span>
-                                <i class="material-icons">euro_symbol</i>
-                                <span class="">1295</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h5 class="text-center m-none">Create Enquiry</h5>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="material-icons">person</i></span>
-                                <input-field-cmp
-                                        [data]="{title: 'First Name', name: 'FirstName', value: '', type: 'text'}"
-                                        [group]="enquiryForm"></input-field-cmp>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <div class="form-group">
-                                <input-field-cmp
-                                        [data]="{title: 'Last Name', name: 'LastName', value: '', type: 'text'}"
-                                        [group]="enquiryForm"></input-field-cmp>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <datetimepicker-field-cmp [data]="{title: 'Check In', name: 'CheckIn', value: '06/21/2017'}"
-                                                      [classes]="{withIcon: true}"
-                                                      [group]="enquiryForm"></datetimepicker-field-cmp>
-                        </div>
-                        <div class="col-xs-6">
-                            <datetimepicker-field-cmp [data]="{title: 'Check Out', name: 'CheckOut', value: '06/21/2017'}"
-                                                      [classes]="{withIcon: false}"
-                                                      [group]="enquiryForm"></datetimepicker-field-cmp>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="material-icons">local_post_office</i></span>
-                                <input-field-cmp
-                                        [data]="{title: 'Your Message', name: 'Message', value: '', type: 'text'}"
-                                        [group]="enquiryForm"></input-field-cmp>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <button type="button" class="btn btn-success">Submit Booking Enquiry</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-simple" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
+<enquiry-cmp [group]="enquiryForm" [data]="openVilla"></enquiry-cmp>

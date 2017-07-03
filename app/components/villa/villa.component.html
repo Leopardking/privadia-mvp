@@ -65,7 +65,10 @@
                 </div>
             </div>
             <div class="col-xs-6" *ngIf="loginService.getPermission('Enquiries/Post')">
-                <button type="button" (click)="openEnquiry(villa)" class="btn btn-success pull-right">Submit enquiry</button>
+                <button type="button"
+                        class="btn btn-success pull-right"
+                        data-toggle="modal" data-target="#inquiry"
+                        (click)="vote(villa)">Submit enquiry</button>
             </div>
         </div>
     </div>

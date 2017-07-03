@@ -18,10 +18,12 @@ declare const moment:any;
 export class DashboardComponent implements OnInit{
     public enquiryForm = new FormGroup ({});
     public proposalForm = new FormGroup ({});
+    public filterForm = new FormGroup ({});
+    public openVilla;
 
     constructor ( private dashboardService: DashboardService,
                   private lookupsService: LookupsService,
-                  private builder: FormBuilder) { }
+                  public builder: FormBuilder) { }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
@@ -31,6 +33,17 @@ export class DashboardComponent implements OnInit{
             $('.modal-content').perfectScrollbar();
         },100)
         */
+
+        this.filterForm = this.builder.group({
+            Bedrooms: new FormControl(),
+            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            MaxRate: new FormControl(),
+            MinRate: new FormControl(),
+            OrderBy: new FormControl(),
+            Regions: new FormArray([]),
+            MetaDataFilters: new FormArray([]),
+        });
 
         this.enquiryForm = this.builder.group({
             FirstName: new FormControl(),
@@ -46,6 +59,29 @@ export class DashboardComponent implements OnInit{
             CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             RentalPrice: new FormControl(1200),
             BookingPrice: new FormControl(1495),
-        })
+        });
+        this.filterForm.valueChanges.subscribe(
+            d => {
+                this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
+                this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
+            },
+            e => {
+                console.log('Error change form ', e)
+            }
+        )
+        console.log('Open filter ', this);
     }
+
+    public openEnquiry(villa: any) {
+        console.log('onvoted ', villa);
+        this.openVilla = villa;
+    }
+
+    /*
+    public openEnquiry(villa) {
+        console.log('Open filter ', this.filterForm.controls['CheckIn'].value);
+        console.log('Open enquiry villa DASHBOARD', villa)
+        this.openVilla = villa;
+    }
+    */
 }

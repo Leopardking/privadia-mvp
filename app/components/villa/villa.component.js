@@ -10,37 +10,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var login_service_1 = require("../../providers/login/login.service");
+var forms_1 = require("@angular/forms");
 var VillaComponent = (function () {
     function VillaComponent(loginService) {
         this.loginService = loginService;
+        //@Input('open') public openEnquiry;
+        this.openEnquiry = new core_1.EventEmitter();
+        this.voted = false;
     }
-    VillaComponent.prototype.ngOnInit = function () {
-        this.villaInfo = this.getInfo();
-    };
+    VillaComponent.prototype.ngOnInit = function () { };
     VillaComponent.prototype.roundRate = function (rate) {
         return this.numberWithCommas(rate && parseFloat(rate).toFixed(2) || 0);
     };
-    VillaComponent.prototype.getRichInfo = function () {
-        return "<b>" + this.villa.Name + "</b>" +
-            "<br>" + this.villa.Bedrooms.toString() +
-            ((this.villa.Bedrooms === 1) ? " Bedroom" : " Bedrooms") +
-            " | " + this.villa.CollaboratorInitials +
-            "<br>Area: " + this.region +
-            "<br>Full Info: <a href='" + this.villa.BoxUrl + "'>" +
-            this.villa.BoxUrl + "</a>" +
-            "<br><b><u>Price: €" + this.villa.TotalRate + "</u></b><br><br><br>";
-    };
-    VillaComponent.prototype.getInfo = function () {
-        return this.villa.Name +
-            "\n" + this.villa.Bedrooms.toString() +
-            ((this.villa.Bedrooms === 1) ? " Bedroom" : " Bedrooms") +
-            " | " + this.villa.CollaboratorInitials +
-            "\nArea: " + this.region +
-            "\nFull Info: " + this.villa.BoxUrl +
-            "\nPrice: €" + this.villa.TotalRate + '\n\n';
-    };
-    VillaComponent.prototype.openEnquiry = function (villa) {
-        console.log('Open enquiry villa', villa);
+    /*
+    private openEnquiry(villa) {
+        this.openVilla = villa
+        console.log('Open enquiry villa', villa)
+    }
+    */
+    VillaComponent.prototype.vote = function (villa) {
+        this.openEnquiry.emit(villa);
     };
     VillaComponent.prototype.copy = function () {
         /// TS_IGNORE
@@ -50,6 +39,18 @@ var VillaComponent = (function () {
     VillaComponent.prototype.numberWithCommas = function (x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     };
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', Object)
+    ], VillaComponent.prototype, "openEnquiry", void 0);
+    __decorate([
+        core_1.Input('openVilla'), 
+        __metadata('design:type', Object)
+    ], VillaComponent.prototype, "openVilla", void 0);
+    __decorate([
+        core_1.Input('filter'), 
+        __metadata('design:type', forms_1.FormGroup)
+    ], VillaComponent.prototype, "filterForm", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
