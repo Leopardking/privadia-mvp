@@ -22,6 +22,7 @@ export class EnquiryComponent implements OnInit{
 
 	ngOnInit() {
 		console.log('Data ', this.data)
+		console.log('Valid form ', this.enquiryForm)
 	}
 
 	private onSubmit(values) {

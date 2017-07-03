@@ -13,7 +13,6 @@ var login_service_1 = require("../../providers/login/login.service");
 var VillaComponent = (function () {
     function VillaComponent(loginService) {
         this.loginService = loginService;
-        //@Input('open') public openEnquiry;
         this.openEnquiry = new core_1.EventEmitter();
     }
     VillaComponent.prototype.ngOnInit = function () { };
@@ -37,10 +36,6 @@ var VillaComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], VillaComponent.prototype, "villa", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], VillaComponent.prototype, "region", void 0);
     VillaComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

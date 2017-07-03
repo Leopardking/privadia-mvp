@@ -14,24 +14,11 @@ var forms_1 = require('@angular/forms');
 var _ = require("lodash");
 var properties_service_1 = require("../../providers/properties/properties.service");
 var DashboardfilterComponent = (function () {
-    // public filterForm = new FormGroup ({});
-    function DashboardfilterComponent(dashboardService, propertiesService, builder) {
+    function DashboardfilterComponent(dashboardService, propertiesService) {
         this.dashboardService = dashboardService;
         this.propertiesService = propertiesService;
-        this.builder = builder;
     }
-    DashboardfilterComponent.prototype.ngOnInit = function () {
-        // this.filterForm = this.builder.group({
-        //     Bedrooms: new FormControl(),
-        //     CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
-        //     CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-        //     MaxRate: new FormControl(),
-        //     MinRate: new FormControl(),
-        //     OrderBy: new FormControl(),
-        //     Regions: new FormArray([]),
-        //     MetaDataFilters: new FormArray([]),
-        // })
-    };
+    DashboardfilterComponent.prototype.ngOnInit = function () { };
     DashboardfilterComponent.prototype.onSubmit = function (form) {
         var _this = this;
         this.propertiesService.getVillas(form).subscribe(function (d) {
@@ -63,7 +50,7 @@ var DashboardfilterComponent = (function () {
             templateUrl: 'dashboard-filter.component.html',
             styleUrls: ['dashboard-filter.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, properties_service_1.PropertiesService])
     ], DashboardfilterComponent);
     return DashboardfilterComponent;
 }());

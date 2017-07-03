@@ -9,17 +9,15 @@
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons">euro_symbol</i></span>
-                            <input-field-cmp
-                                    [data]="{title: 'From ($)', name: 'MinRate', type: 'number'}"
-                                    [group]="filterForm"></input-field-cmp>
+                            <input-field-cmp [data]="{title: 'From ($)', name: 'MinRate', type: 'number'}"
+                                             [field]="filterForm.controls.MinRate"></input-field-cmp>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons">euro_symbol</i></span>
-                            <input-field-cmp
-                                    [data]="{title: 'To $', name: 'MaxRate', type: 'number'}"
-                                    [group]="filterForm"></input-field-cmp>
+                            <input-field-cmp [data]="{title: 'To $', name: 'MaxRate', type: 'number'}"
+                                             [field]="filterForm.controls.MaxRate"></input-field-cmp>
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
@@ -33,9 +31,8 @@
                                                   [group]="filterForm"></datetimepicker-field-cmp>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
-                        <input-field-cmp
-                                [data]="{title: 'Bedrooms', name: 'Bedrooms', type: 'number'}"
-                                [group]="filterForm"></input-field-cmp>
+                        <input-field-cmp [data]="{title: 'Bedrooms', name: 'Bedrooms', type: 'number'}"
+                                         [field]="filterForm.controls.Bedrooms"></input-field-cmp>
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                         <select-field-cmp *ngIf="dashboardService.regions.length"

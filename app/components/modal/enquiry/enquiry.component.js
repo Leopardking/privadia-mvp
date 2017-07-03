@@ -17,6 +17,7 @@ var EnquiryComponent = (function () {
     }
     EnquiryComponent.prototype.ngOnInit = function () {
         console.log('Data ', this.data);
+        console.log('Valid form ', this.enquiryForm);
     };
     EnquiryComponent.prototype.onSubmit = function (values) {
         console.log('Submit enquiry', values);

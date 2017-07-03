@@ -10,10 +10,8 @@ import {FormGroup} from "@angular/forms";
 })
 
 export class VillaComponent implements OnInit{
-    //@Input('open') public openEnquiry;
     @Output() openEnquiry = new EventEmitter<boolean>();
     @Input() villa;
-    @Input() region;
 
     constructor ( private loginService: LoginService) { }
 

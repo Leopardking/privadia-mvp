@@ -14,8 +14,7 @@ var InputfieldComponent = (function () {
     function InputfieldComponent() {
         this.static = false;
     }
-    InputfieldComponent.prototype.ngOnInit = function () {
-    };
+    InputfieldComponent.prototype.ngOnInit = function () { };
     __decorate([
         core_1.Input('data'), 
         __metadata('design:type', Object)
@@ -25,9 +24,9 @@ var InputfieldComponent = (function () {
         __metadata('design:type', Boolean)
     ], InputfieldComponent.prototype, "static", void 0);
     __decorate([
-        core_1.Input('group'), 
-        __metadata('design:type', forms_1.FormGroup)
-    ], InputfieldComponent.prototype, "filterForm", void 0);
+        core_1.Input('field'), 
+        __metadata('design:type', forms_1.FormControl)
+    ], InputfieldComponent.prototype, "field", void 0);
     InputfieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

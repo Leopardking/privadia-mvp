@@ -49,16 +49,14 @@
                         <div class="col-xs-6">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="material-icons">person</i></span>
-                                <input-field-cmp
-                                        [data]="{title: 'First Name', name: 'ClientFirstName', type: 'text'}"
-                                        [group]="enquiryForm"></input-field-cmp>
+                                <input-field-cmp [data]="{title: 'First Name', name: 'ClientFirstName', type: 'text'}"
+                                                 [field]="enquiryForm.controls.ClientFirstName"></input-field-cmp>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
-                                <input-field-cmp
-                                        [data]="{title: 'Last Name', name: 'ClientLastName', type: 'text'}"
-                                        [group]="enquiryForm"></input-field-cmp>
+                                <input-field-cmp [data]="{title: 'Last Name', name: 'ClientLastName', type: 'text'}"
+                                                 [field]="enquiryForm.controls.ClientLastName"></input-field-cmp>
                             </div>
                         </div>
                         <div class="col-xs-6">
@@ -74,9 +72,8 @@
                         <div class="col-xs-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="material-icons">local_post_office</i></span>
-                                <input-field-cmp
-                                        [data]="{title: 'Your Message', name: 'Message', value: '', type: 'text'}"
-                                        [group]="enquiryForm"></input-field-cmp>
+                                <input-field-cmp [data]="{title: 'Your Message', name: 'Message', value: '', type: 'text'}"
+                                                 [field]="enquiryForm.controls.Message"></input-field-cmp>
                             </div>
                         </div>
                     </div>
