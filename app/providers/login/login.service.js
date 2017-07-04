@@ -26,7 +26,7 @@ var LoginService = (function () {
         this.getCurrentUser(header).subscribe(function (d) {
             _this.userInfo = d;
             _this.isReading = false;
-            localStorage.setItem('permissions', JSON.stringify(d.Permissions));
+            localStorage.setItem('user', JSON.stringify(d));
         }, function (e) { console.log('Error get user ', e); });
     };
     LoginService.prototype.login = function (apiUrl, email, password) {
@@ -41,8 +41,11 @@ var LoginService = (function () {
         }
     };
     LoginService.prototype.getPermission = function (permission) {
-        var permissions = JSON.parse(localStorage.getItem('permissions'));
+        var permissions = JSON.parse(localStorage.getItem('user')).Permissions;
         return permissions.filter(function (element) { return element.Name === permission; })[0];
+    };
+    LoginService.prototype.getUser = function () {
+        return JSON.parse(localStorage.getItem('user'));
     };
     LoginService.prototype.getCurrentUser = function (headerToken) {
         var header = new http_1.Headers({ 'Authorization': headerToken || this.token });

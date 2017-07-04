@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
+declare const $: any;
 @Component({
     moduleId: module.id,
     selector: 'dialog-cmp ',
@@ -8,9 +9,19 @@ import { Component, OnInit, Input } from '@angular/core';
 })  
 
 export class DialogComponent implements OnInit{
-	@Input('data')	private data: any;
+	@Input() private data: any;
+    private user;
 
-	constructor( ) { }
+	constructor( ) {
+	    this.user = JSON.parse(localStorage.getItem('user'))
+    }
 
-	ngOnInit() { }
+	ngOnInit() {
+        $('.messages-wrp').perfectScrollbar({
+            'wheelPropagation': true
+        });
+
+        console.log('data ', this.data)
+	    console.log('User ', this.user)
+    }
 }

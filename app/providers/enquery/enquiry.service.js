@@ -35,7 +35,7 @@ var EnquiryService = (function () {
         this.getEnquiryById(id).subscribe(function (d) {
             _this.enquiry = d;
         }, function (e) {
-            console.log('Error Enquiry', e);
+            console.log('Error Enquiries', e);
         });
     };
     EnquiryService.prototype.getEnquiries = function () {

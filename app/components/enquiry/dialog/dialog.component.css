@@ -22,7 +22,7 @@
     color: #747879;
     background-color: #f3f5f6;
     height: 24px;
-    padding-bottom: 12px;
+    line-height: 24px;
 }
 
 .messages-wrp .messages .message {

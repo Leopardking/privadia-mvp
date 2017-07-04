@@ -11,10 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var DialogComponent = (function () {
     function DialogComponent() {
+        this.user = JSON.parse(localStorage.getItem('user'));
     }
-    DialogComponent.prototype.ngOnInit = function () { };
+    DialogComponent.prototype.ngOnInit = function () {
+        $('.messages-wrp').perfectScrollbar({
+            'wheelPropagation': true
+        });
+        console.log('data ', this.data);
+        console.log('User ', this.user);
+    };
     __decorate([
-        core_1.Input('data'), 
+        core_1.Input(), 
         __metadata('design:type', Object)
     ], DialogComponent.prototype, "data", void 0);
     DialogComponent = __decorate([

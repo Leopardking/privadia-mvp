@@ -42,10 +42,6 @@ export class EnquiryComponent implements OnInit {
             });
         }, 10)
 
-        $('.messages-wrp').perfectScrollbar({
-            'wheelPropagation': true
-        });
-
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         /*
         setTimeout(() => {

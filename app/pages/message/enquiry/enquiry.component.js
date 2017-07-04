@@ -37,9 +37,6 @@ var EnquiryComponent = (function () {
                 $('.dropdown-menu.inner').perfectScrollbar();
             });
         }, 10);
-        $('.messages-wrp').perfectScrollbar({
-            'wheelPropagation': true
-        });
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         /*
         setTimeout(() => {

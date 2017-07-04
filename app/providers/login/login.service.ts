@@ -23,7 +23,7 @@ export class LoginService {
 			d => {
 				this.userInfo = d;
 				this.isReading = false;
-				localStorage.setItem('permissions', JSON.stringify(d.Permissions));
+				localStorage.setItem('user', JSON.stringify(d));
 			},
 			e => { console.log('Error get user ', e) }
 		)
@@ -45,8 +45,12 @@ export class LoginService {
 	}
 
 	public getPermission(permission) {
-		const permissions = JSON.parse(localStorage.getItem('permissions'));
+		const permissions = JSON.parse(localStorage.getItem('user')).Permissions;
 		return permissions.filter( element => element.Name === permission)[0];
+	}
+
+	public getUser() {
+		return JSON.parse(localStorage.getItem('user'));
 	}
 
 	public getCurrentUser(headerToken: any) {

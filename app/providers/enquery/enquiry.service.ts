@@ -36,7 +36,7 @@ export class EnquiryService {
 				this.enquiry = d;
 			},
 			e => {
-				console.log('Error Enquiry', e)
+				console.log('Error Enquiries', e)
 			}
 		)
 	}
