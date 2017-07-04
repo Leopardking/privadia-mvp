@@ -14,34 +14,39 @@ var router_1 = require('@angular/router');
 /**
  *  Providers
  */
-var enquiry_service_1 = require("../../providers/enquery/enquiry.service");
+var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 /**
  *  Components
  */
-var message_component_1 = require('./message.component');
-var message_routing_module_1 = require('./message-routing.module');
+var enquiry_component_1 = require("./enquiry.component");
+var enquiry_routing_module_1 = require('./enquiry-routing.module');
 var ng2_cloudinary_1 = require("ng2-cloudinary");
-var enquiries_component_1 = require("../../components/tables/enquiries/enquiries.component");
-var MessageModule = (function () {
-    function MessageModule() {
+var dialog_component_1 = require("../../../components/enquiry/dialog/dialog.component");
+var forms_1 = require("@angular/forms");
+var input_field_component_1 = require("../../../components/form-fields/input-field/input-field.component");
+var EnquiryModule = (function () {
+    function EnquiryModule() {
     }
-    MessageModule = __decorate([
+    EnquiryModule = __decorate([
         core_1.NgModule({
             imports: [
+                forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 common_1.CommonModule,
-                message_routing_module_1.MessageRoutingModule,
+                enquiry_routing_module_1.EnquiryRoutingModule,
                 router_1.RouterModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule
             ],
             declarations: [
-                message_component_1.MessageComponent,
-                enquiries_component_1.EnquiriesTableComponent,
+                enquiry_component_1.EnquiryComponent,
+                dialog_component_1.DialogComponent,
+                input_field_component_1.InputfieldComponent
             ],
             providers: [enquiry_service_1.EnquiryService]
         }), 
         __metadata('design:paramtypes', [])
-    ], MessageModule);
-    return MessageModule;
+    ], EnquiryModule);
+    return EnquiryModule;
 }());
-exports.MessageModule = MessageModule;
-//# sourceMappingURL=message.module.js.map
+exports.EnquiryModule = EnquiryModule;
+//# sourceMappingURL=enquiry.module.js.map

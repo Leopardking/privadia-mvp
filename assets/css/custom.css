@@ -420,6 +420,10 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	border-bottom: 1px dotted #D2D2D2;
 }
 
+.messages-container .message-send .form-control {
+	background-image: none;
+}
+
 /**
  * Custom button
  */

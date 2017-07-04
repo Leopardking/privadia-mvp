@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {FormGroup, FormControl, Validators} from "@angular/forms";
 
 declare const $: any;
 @Component({
@@ -11,9 +12,13 @@ declare const $: any;
 export class DialogComponent implements OnInit{
 	@Input() private data: any;
     private user;
+    public messageForm = new FormGroup({
+        Content: new FormControl('Test message send', Validators.required)
+    });
 
 	constructor( ) {
 	    this.user = JSON.parse(localStorage.getItem('user'))
+
     }
 
 	ngOnInit() {

@@ -9,8 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require("@angular/forms");
 var DialogComponent = (function () {
     function DialogComponent() {
+        this.messageForm = new forms_1.FormGroup({
+            Content: new forms_1.FormControl('Test message send', forms_1.Validators.required)
+        });
         this.user = JSON.parse(localStorage.getItem('user'));
     }
     DialogComponent.prototype.ngOnInit = function () {

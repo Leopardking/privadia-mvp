@@ -130,14 +130,10 @@
     margin: 0;
 }
 
-.messages-container .message-send .form-control {
-    background-image: none;
-}
-
 .messages-container .message-send .btn-send {
     margin: 0;
     position: absolute;
-    top: 0;
+    top: -4px;
     right: 0;
 }
 

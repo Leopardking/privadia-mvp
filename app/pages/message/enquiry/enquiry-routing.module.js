@@ -10,24 +10,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var message_component_1 = require('./message.component');
+var enquiry_component_1 = require('./enquiry.component');
 var routes = [
-    { path: '', children: [
-            { path: '', component: message_component_1.MessageComponent },
-            { path: 'dialogs', loadChildren: 'app/pages/message/enquiry/enquiry.module#EnquiryModule' }
-        ] },
+    { path: ':id', component: enquiry_component_1.EnquiryComponent }
 ];
-var MessageRoutingModule = (function () {
-    function MessageRoutingModule() {
+var EnquiryRoutingModule = (function () {
+    function EnquiryRoutingModule() {
     }
-    MessageRoutingModule = __decorate([
+    EnquiryRoutingModule = __decorate([
         core_1.NgModule({
             imports: [router_1.RouterModule.forChild(routes)],
             exports: [router_1.RouterModule]
         }), 
         __metadata('design:paramtypes', [])
-    ], MessageRoutingModule);
-    return MessageRoutingModule;
+    ], EnquiryRoutingModule);
+    return EnquiryRoutingModule;
 }());
-exports.MessageRoutingModule = MessageRoutingModule;
-//# sourceMappingURL=message-routing.module.js.map
+exports.EnquiryRoutingModule = EnquiryRoutingModule;
+//# sourceMappingURL=enquiry-routing.module.js.map

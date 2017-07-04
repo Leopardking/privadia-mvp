@@ -97,11 +97,9 @@
         </div>
     </div>
     <div class="divider"></div>
-    <div class="message-send">
-        <div class="form-group label-floating">
-            <label class="control-label">Type in your message</label>
-            <input class="form-control">
-        </div>
+    <div [formGroup]="messageForm" class="message-send">
+        <input-field-cmp [data]="{title: 'Type in your message', type: 'text'}"
+                         [field]="messageForm.controls.Content"></input-field-cmp>
         <button class="btn btn-just-icon btn-simple btn-send" data-placement="bottom"
                 rel="tooltip" title="Send" type="button">
             <i class="material-icons">send</i>
