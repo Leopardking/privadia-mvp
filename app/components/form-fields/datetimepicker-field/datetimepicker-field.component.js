@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 var forms_1 = require("@angular/forms");
+var initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 var DatetimefieldComponent = (function () {
     function DatetimefieldComponent() {
     }
@@ -26,9 +26,9 @@ var DatetimefieldComponent = (function () {
         __metadata('design:type', Object)
     ], DatetimefieldComponent.prototype, "classes", void 0);
     __decorate([
-        core_1.Input('group'), 
-        __metadata('design:type', forms_1.FormGroup)
-    ], DatetimefieldComponent.prototype, "filterForm", void 0);
+        core_1.Input('field'), 
+        __metadata('design:type', forms_1.FormControl)
+    ], DatetimefieldComponent.prototype, "field", void 0);
     DatetimefieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

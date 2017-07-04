@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from "@angular/forms";
 import initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
-import {FormGroup} from "@angular/forms";
 
 @Component({
     moduleId: module.id,
@@ -12,7 +12,7 @@ import {FormGroup} from "@angular/forms";
 export class DatetimefieldComponent implements OnInit{
     @Input('data') private data: any;
     @Input('classes') private classes: any;
-    @Input('group') private filterForm: FormGroup;
+    @Input('field') private field: FormControl;
 
     constructor ( ) { }
 

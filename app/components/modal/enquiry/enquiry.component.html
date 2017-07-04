@@ -17,7 +17,7 @@
                         </cl-image>
                     </div>
                     <div class="villa-container">
-                        <h4 class="modal-title">{{data.Name}} <span class="location"><i class="material-icons">place</i> {{data.RegionId}}</span></h4>
+                        <h4 class="modal-title">{{data.Name}} <span class="location"><i class="material-icons">place</i> {{data.RegionName}}</span></h4>
                     </div>
                 </div>
                 <div class="modal-body m-t-none p-t-none">
@@ -60,14 +60,14 @@
                             </div>
                         </div>
                         <div class="col-xs-6">
-                            <datetimepicker-field-cmp [data]="{title: 'Check In', name: 'CheckIn', value: '06/21/2017'}"
+                            <datetimepicker-field-cmp [data]="{title: 'Check In'}"
                                                       [classes]="{withIcon: true}"
-                                                      [group]="enquiryForm"></datetimepicker-field-cmp>
+                                                      [field]="enquiryForm.controls.CheckIn"></datetimepicker-field-cmp>
                         </div>
                         <div class="col-xs-6">
-                            <datetimepicker-field-cmp [data]="{title: 'Check Out', name: 'CheckOut', value: '06/21/2017'}"
+                            <datetimepicker-field-cmp [data]="{title: 'Check Out'}"
                                                       [classes]="{withIcon: false}"
-                                                      [group]="enquiryForm"></datetimepicker-field-cmp>
+                                                      [field]="enquiryForm.controls.CheckOut"></datetimepicker-field-cmp>
                         </div>
                         <div class="col-xs-12">
                             <div class="input-group">

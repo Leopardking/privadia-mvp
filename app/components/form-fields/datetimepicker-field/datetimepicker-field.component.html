@@ -1,13 +1,12 @@
-<div [formGroup]="filterForm"
-     [ngClass]="{'input-group': classes.withIcon}" >
+<div [ngClass]="{'input-group': classes.withIcon}" >
     <span *ngIf="classes.withIcon" class="input-group-addon"><i class="material-icons">insert_invitation</i></span>
     <div class="form-group label-floating">
         <label class="control-label">{{data.title}}</label>
         <input type="text"
                class="form-control datepicker"
                #datePicker
-               (blur)="filterForm.controls[data.name].setValue(datePicker.value)"
-               [ngModel]="filterForm.controls[data.name].value"
-               [formControlName]="data.name"/>
+               (blur)="field.setValue(datePicker.value)"
+               [ngModel]="field.value"
+               [formControl]="field"/>
     </div>
 </div>
