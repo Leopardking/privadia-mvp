@@ -1,0 +1,36 @@
+<div class="form-group label-floating select-component always-visible">
+    <label class="control-label">{{data.title}}</label>
+    <select class="selectpicker"
+            multiple
+            data-style="select-with-transition"
+            title="Select"
+            data-size="7"
+            [(ngModel)]="metafiltersModel"
+            [ngModelOptions]="{standalone: true}"
+            (change)="regionChange($event)">
+        <optgroup label="Spain" style="font-size: 16px">
+            <option *ngFor="let region of regions; let i = index" [value]="region.Id">{{region.Name}}</option>
+        </optgroup>
+    </select>
+</div>
+
+<!--
+<div class="form-group label-floating">
+    <label class="control-label">{{data.title}}</label>
+    <input [type]="data.type" [value]="data.value" [name]="data.name" class="form-control" formControlName="Sleeps">
+    <select class="metafilter-select selectpicker "
+            data-style="select-with-transition"
+            title="{{subtype.Name}}"
+            data-size="7"
+            multiple
+            [(ngModel)]="metafiltersModel"
+            [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="subfilterModelChange($event, 'type_' + subtype.Id)">
+        <option *ngFor="let option of propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].controls; let i = index"
+                [formGroupName]="i"
+                [ngValue]="option.value">
+            {{option.controls.MetaDataName.value}}
+        </option>
+    </select>
+</div>
+-->

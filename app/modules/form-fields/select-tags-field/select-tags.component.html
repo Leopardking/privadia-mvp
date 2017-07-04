@@ -1,0 +1,33 @@
+<div >
+    <div [formGroup]="field" class="row">
+        <div formArrayName="{{'type_' + subtype.Id}}" class="col-xs-3">
+            <select class="metafilter-select selectpicker "
+                    data-style="select-with-transition"
+                    title="{{subtype.Name}}"
+                    data-size="7"
+                    multiple
+                    disabled="{{permission}}"
+                    [(ngModel)]="metafiltersModel"
+                    [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="subfilterModelChange($event, 'type_' + subtype.Id)">
+                <option *ngFor="let option of field.controls['type_' + subtype.Id].controls; let i = index"
+                        [formGroupName]="i"
+                        [ngValue]="option.value">
+                    {{option.controls.MetaDataName.value}}
+                </option>
+            </select>
+        </div>
+        <div class="col-xs-9">
+            <div class="bootstrap-tagsinput">
+            <span *ngFor="let option of data; let i = index" >
+                <span class="tag label label-info"
+                      [ngClass]="{disabled: permission}"
+                      *ngIf="option.Available">
+                        {{option.MetaDataName}}
+                    <span *ngIf="!permission" data-role="remove" (click)="removeMetafilter({index: i, type: 'type_' + subtype.Id})"></span>
+                </span>
+            </span>
+            </div>
+        </div>
+    </div>
+</div>

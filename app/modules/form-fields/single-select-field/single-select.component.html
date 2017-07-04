@@ -1,0 +1,10 @@
+<div [formGroup]="field" class="form-group label-floating select-component always-visible">
+    <label class="control-label">{{options.title}}</label>
+    <select class="custompicker"
+            title="{{field.value.Name || options.default}}"
+            [formControl]="field"
+            data-style="select-with-transition"
+            data-size="7">
+            <option *ngFor="let item of dataList" [ngValue]="item">{{item.Name}}</option>
+    </select>
+</div>

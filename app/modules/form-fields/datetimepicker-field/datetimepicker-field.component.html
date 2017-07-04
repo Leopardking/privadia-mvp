@@ -1,0 +1,12 @@
+<div [ngClass]="{'input-group': classes.withIcon}" >
+    <span *ngIf="classes.withIcon" class="input-group-addon"><i class="material-icons">insert_invitation</i></span>
+    <div class="form-group label-floating">
+        <label class="control-label">{{data.title}}</label>
+        <input type="text"
+               class="form-control datepicker"
+               #datePicker
+               (blur)="field.setValue(datePicker.value)"
+               [ngModel]="field.value"
+               [formControl]="field"/>
+    </div>
+</div>
