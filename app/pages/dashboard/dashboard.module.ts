@@ -19,10 +19,14 @@ import { DashboardComponent } from './dashboard.component';
 import { VillaComponent } from '../../components/villa/villa.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardfilterComponent } from "../../components/dashboard-filter/dashboard-filter.component";
-import { InputfieldComponent } from "../../components/form-fields/input-field/input-field.component";
 import { DatetimefieldComponent } from "../../components/form-fields/datetimepicker-field/datetimepicker-field.component";
 import { SelectfieldComponent } from "../../components/form-fields/select-field/select.component";
 import { EnquiryComponent } from "../../components/modal/enquiry/enquiry.component";
+
+/**
+ *  My Modules
+ */
+import { FormFieldsModule } from "../../modules/form-fields/form-field.module";
 
 @NgModule({
     imports: [
@@ -31,13 +35,13 @@ import { EnquiryComponent } from "../../components/modal/enquiry/enquiry.compone
         RouterModule,
         FormsModule,
         ReactiveFormsModule,
-        Ng2CloudinaryModule
+        Ng2CloudinaryModule,
+        FormFieldsModule
     ],
     declarations: [
         DashboardComponent,
         VillaComponent,
         DashboardfilterComponent,
-        InputfieldComponent,
         DatetimefieldComponent,
         SelectfieldComponent,
         EnquiryComponent

@@ -11,19 +11,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var common_1 = require("@angular/common");
 var router_1 = require('@angular/router');
+var forms_1 = require("@angular/forms");
+var ng2_cloudinary_1 = require("ng2-cloudinary");
 /**
  *  Providers
  */
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
+var messages_service_1 = require("../../../providers/messages/messages.service");
 /**
  *  Components
  */
 var enquiry_component_1 = require("./enquiry.component");
 var enquiry_routing_module_1 = require('./enquiry-routing.module');
-var ng2_cloudinary_1 = require("ng2-cloudinary");
 var dialog_component_1 = require("../../../components/enquiry/dialog/dialog.component");
-var forms_1 = require("@angular/forms");
-var input_field_component_1 = require("../../../components/form-fields/input-field/input-field.component");
+/**
+ *  My Modules
+ */
+var form_field_module_1 = require("../../../modules/form-fields/form-field.module");
 var EnquiryModule = (function () {
     function EnquiryModule() {
     }
@@ -35,14 +39,14 @@ var EnquiryModule = (function () {
                 common_1.CommonModule,
                 enquiry_routing_module_1.EnquiryRoutingModule,
                 router_1.RouterModule,
-                ng2_cloudinary_1.Ng2CloudinaryModule
+                ng2_cloudinary_1.Ng2CloudinaryModule,
+                form_field_module_1.FormFieldsModule
             ],
             declarations: [
                 enquiry_component_1.EnquiryComponent,
                 dialog_component_1.DialogComponent,
-                input_field_component_1.InputfieldComponent
             ],
-            providers: [enquiry_service_1.EnquiryService]
+            providers: [enquiry_service_1.EnquiryService, messages_service_1.MessagesService]
         }), 
         __metadata('design:paramtypes', [])
     ], EnquiryModule);

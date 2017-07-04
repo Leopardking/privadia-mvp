@@ -1,21 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Ng2CloudinaryModule } from "ng2-cloudinary";
 
 /**
  *  Providers
  */
 import { EnquiryService } from "../../../providers/enquery/enquiry.service";
+import { MessagesService } from "../../../providers/messages/messages.service";
 
 /**
  *  Components
  */
 import { EnquiryComponent } from "./enquiry.component";
 import { EnquiryRoutingModule } from './enquiry-routing.module';
-import { Ng2CloudinaryModule } from "ng2-cloudinary";
 import { DialogComponent } from "../../../components/enquiry/dialog/dialog.component";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { InputfieldComponent } from "../../../components/form-fields/input-field/input-field.component";
+
+/**
+ *  My Modules
+ */
+import { FormFieldsModule } from "../../../modules/form-fields/form-field.module";
 
 @NgModule({
     imports: [
@@ -24,13 +29,13 @@ import { InputfieldComponent } from "../../../components/form-fields/input-field
         CommonModule,
         EnquiryRoutingModule,
         RouterModule,
-        Ng2CloudinaryModule
+        Ng2CloudinaryModule,
+        FormFieldsModule
     ],
     declarations: [
         EnquiryComponent,
         DialogComponent,
-        InputfieldComponent
     ],
-    providers: [ EnquiryService ]
+    providers: [ EnquiryService, MessagesService ]
 })
 export class EnquiryModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {FormGroup, FormControl, Validators} from "@angular/forms";
+import {FormGroup, FormControl, Validators } from "@angular/forms";
+import {MessagesService} from "../../../providers/messages/messages.service";
 
 declare const $: any;
 @Component({
@@ -11,14 +12,14 @@ declare const $: any;
 
 export class DialogComponent implements OnInit{
 	@Input() private data: any;
+	@Input() private enquiryId: any;
+
+    private messageForm: FormGroup;
+
     private user;
-    public messageForm = new FormGroup({
-        Content: new FormControl('Test message send', Validators.required)
-    });
 
-	constructor( ) {
-	    this.user = JSON.parse(localStorage.getItem('user'))
-
+	constructor( private messagesService: MessagesService ) {
+	    this.user = JSON.parse(localStorage.getItem('user'));
     }
 
 	ngOnInit() {
@@ -26,7 +27,20 @@ export class DialogComponent implements OnInit{
             'wheelPropagation': true
         });
 
-        console.log('data ', this.data)
-	    console.log('User ', this.user)
+        this.messageForm = new FormGroup({
+            MessageThreadId: new FormControl(this.enquiryId),
+            Content: new FormControl('Test message send', Validators.required)
+        });
+    }
+
+    public onSubmit(value) {
+        this.messagesService.addMessage(value).subscribe(
+            d => {
+                console.log('Send Message', d)
+            },
+            e => {
+                console.log('Send Message Error', e)
+            }
+        )
     }
 }

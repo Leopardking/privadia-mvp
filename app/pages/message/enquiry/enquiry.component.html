@@ -32,7 +32,8 @@
                 <div class="enquiry-detail">
                     <div class="row">
                         <div class="col-md-6">
-                            <dialog-cmp *ngIf="enquiryService.enquiry" [data]="enquiryService.enquiry.Messages"></dialog-cmp>
+                            <dialog-cmp *ngIf="enquiryService.enquiry"
+                                        [data]="enquiryService.enquiry.Messages" [enquiryId]="enquiryId"></dialog-cmp>
                         </div>
                         <div class="col-md-6">
                             <div class="enquiry-header">

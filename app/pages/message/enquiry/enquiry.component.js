@@ -13,18 +13,12 @@ var router_1 = require('@angular/router');
 var initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var EnquiryComponent = (function () {
-    function EnquiryComponent(router, route, enquiryService) {
-        this.router = router;
+    function EnquiryComponent(route, enquiryService) {
+        var _this = this;
         this.route = route;
         this.enquiryService = enquiryService;
-        console.log('Load enquiry Module', enquiry_service_1.EnquiryService);
-        // router.events.subscribe((val) => {
-        //     console.log('Load route', val);
-        //     const hash = window.location.hash;
-        //     hash && $('ul.nav a[href="' + hash + '"]').tab('show');
-        //     enquiryService.readDataEnquiry(val)
-        // });
         route.params.subscribe(function (params) {
+            _this.enquiryId = params['id'];
             enquiryService.readDataEnquiry(params['id']);
         });
     }
@@ -38,15 +32,6 @@ var EnquiryComponent = (function () {
             });
         }, 10);
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        /*
-        setTimeout(() => {
-            let dataTableQuery: any = $('#datatables');
-            const tableWidget = dataTableQuery.DataTable({
-                bLengthChange: false,
-                ordering: false,
-                info: false,
-            });
-        }, 10);*/
     };
     EnquiryComponent = __decorate([
         core_1.Component({
@@ -55,7 +40,7 @@ var EnquiryComponent = (function () {
             templateUrl: 'enquiry.component.html',
             styleUrls: ['enquiry.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, enquiry_service_1.EnquiryService])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, enquiry_service_1.EnquiryService])
     ], EnquiryComponent);
     return EnquiryComponent;
 }());

@@ -1,16 +1,22 @@
 <div class="messages-container">
     <div class="messages-wrp">
         <div class="messages">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="date-line">28 Jun 2017</div>
+                </div>
+            </div>
             <div class="row" *ngFor="let item of data; let i = index">
                 <div class="col-xs-12">
-                    <div class="date-line">
-                        28 Jun 2017
-                    </div>
                     <div class="message to">
                         <div class="message-text">{{item.Content}}</div>
                         <div class="message-date pull-left">Read at 1:42 pm</div>
                         <div class="message-date">1:38 pm</div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
                     <div class="message info">
                         <div class="message-text">
                             <i class="material-icons">info_outline</i> Proposal has been updated
@@ -18,92 +24,15 @@
                     </div>
                 </div>
             </div>
-            <!--
-            <div class="date-line">
-                30 Jun 2017
-            </div>
-            <div class="message from">
-                <div class="message-text">
-                    Hello! There is a request for Villa Name in Ibiza. They would like to
-                    book
-                    12/06/17 - 15/06/17. Please tell me if all conditions are suitable.
-                    Thank
-                    you.
-                </div>
-                <div class="message-date">1:38 pm</div>
-            </div>
-            <div class="message to">
-                <div class="message-text">
-                    Hi! Thanks for your message, everything is fine. I’m going to approve
-                    your
-                    enquiry and will be waiting for payment. Thank you!
-                </div>
-                <div class="message-date pull-left">Read at 1:42 pm</div>
-                <div class="message-date">1:38 pm</div>
-            </div>
-            <div class="message from">
-                <div class="message-text">
-                    Hello! There is a request for Villa Name in Ibiza. They would like to
-                    book
-                    12/06/17 - 15/06/17. Please tell me if all conditions are suitable.
-                    Thank
-                    you.
-                </div>
-                <div class="message-date">1:38 pm</div>
-            </div>
-            <div class="message info">
-                <div class="message-text">
-                    <i class="material-icons">info_outline</i> Proposal has been updated
-                </div>
-            </div>
-            <div class="date-line">
-                29 Jun 2017
-            </div>
-            <div class="message from">
-                <div class="message-text">
-                    Hello! There is a request for Villa Name in Ibiza. They would like to
-                    book
-                    12/06/17 - 15/06/17. Please tell me if all conditions are suitable.
-                    Thank
-                    you.
-                </div>
-                <div class="message-date">1:38 pm</div>
-            </div>
-            <div class="message to">
-                <div class="message-text">
-                    Hi! Thanks for your message, everything is fine. I’m going to approve
-                    your
-                    enquiry and will be waiting for payment. Thank you!
-                </div>
-                <div class="message-date pull-left">Read at 1:42 pm</div>
-                <div class="message-date">1:38 pm</div>
-            </div>
-            <div class="message from">
-                <div class="message-text">
-                    Hello! There is a request for Villa Name in Ibiza. They would like to
-                    book
-                    12/06/17 - 15/06/17. Please tell me if all conditions are suitable.
-                    Thank
-                    you.
-                </div>
-                <div class="message-date">1:38 pm</div>
-            </div>
-            <div class="message info">
-                <div class="message-text">
-                    <i class="material-icons">info_outline</i> Proposal has been updated
-                </div>
-            </div>
-            -->
         </div>
     </div>
     <div class="divider"></div>
-    <div [formGroup]="messageForm" class="message-send">
+    <form [formGroup]="messageForm" class="message-send" (submit)="onSubmit(messageForm.value)">
         <input-field-cmp [data]="{title: 'Type in your message', type: 'text'}"
                          [field]="messageForm.controls.Content"></input-field-cmp>
-        <button class="btn btn-just-icon btn-simple btn-send" data-placement="bottom"
-                rel="tooltip" title="Send" type="button">
+        <button class="btn btn-just-icon btn-simple btn-send" title="Send" type="submit">
             <i class="material-icons">send</i>
             <div class="ripple-container"></div>
         </button>
-    </div>
+    </form>
 </div>

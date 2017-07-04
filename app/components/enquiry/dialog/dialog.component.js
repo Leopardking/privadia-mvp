@@ -10,24 +10,36 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
+var messages_service_1 = require("../../../providers/messages/messages.service");
 var DialogComponent = (function () {
-    function DialogComponent() {
-        this.messageForm = new forms_1.FormGroup({
-            Content: new forms_1.FormControl('Test message send', forms_1.Validators.required)
-        });
+    function DialogComponent(messagesService) {
+        this.messagesService = messagesService;
         this.user = JSON.parse(localStorage.getItem('user'));
     }
     DialogComponent.prototype.ngOnInit = function () {
         $('.messages-wrp').perfectScrollbar({
             'wheelPropagation': true
         });
-        console.log('data ', this.data);
-        console.log('User ', this.user);
+        this.messageForm = new forms_1.FormGroup({
+            MessageThreadId: new forms_1.FormControl(this.enquiryId),
+            Content: new forms_1.FormControl('Test message send', forms_1.Validators.required)
+        });
+    };
+    DialogComponent.prototype.onSubmit = function (value) {
+        this.messagesService.addMessage(value).subscribe(function (d) {
+            console.log('Send Message', d);
+        }, function (e) {
+            console.log('Send Message Error', e);
+        });
     };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
     ], DialogComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], DialogComponent.prototype, "enquiryId", void 0);
     DialogComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -35,7 +47,7 @@ var DialogComponent = (function () {
             templateUrl: 'dialog.component.html',
             styleUrls: ['dialog.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [messages_service_1.MessagesService])
     ], DialogComponent);
     return DialogComponent;
 }());
