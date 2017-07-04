@@ -3,87 +3,6 @@
     top: -54px;
 }
 
-.enquiry-header {
-    position: relative;
-}
-
-.enquiry-header .image-wrp {
-    overflow: hidden;
-    border-top-right-radius: 6px;
-}
-
-.enquiry-header .image-wrp .image-villa:after {
-    content: "";
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-top-right-radius: 6px;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-.enquiry-header .villa-container {
-    position: absolute;
-    width: 50%;
-    bottom: 10px;
-    color: #ffffff;
-    font-weight: 300;
-}
-
-.enquiry-header .villa-container.left {
-    left: 0px;
-    padding-left: 45px;
-}
-
-.enquiry-header .villa-container.right {
-    right: 0px;
-    padding-right: 45px;
-    text-align: right;
-}
-
-.enquiry-header .villa-container .enquiry-status {
-    font-size: 12px;
-    font-weight: 300;
-    width: 74px;
-    height: 18px;
-    border-radius: 9px;
-    text-align: center;
-    color: #fff;
-    line-height: 18px;
-    display: none;
-}
-
-.enquiry-header .villa-container .enquiry-status.accepted {
-    background-color: #00bfa5;
-    display: inline-block;
-}
-
-.enquiry-header .villa-container .enquiry-status.declined {
-    background-color: #ff1744;
-    display: inline-block;
-}
-
-.enquiry-header .enquiry-title {
-    margin-bottom: 10px;
-    font-size: 18px;
-}
-
-.enquiry-header .villa-container .location {
-    font-size: 16px;
-}
-
-.enquiry-header .villa-container .price {
-    font-size: 18px;
-    font-weight: 600;
-    vertical-align: middle;
-}
-
-.enquiry-header .villa-container .material-icons {
-    font-size: 18px;
-    vertical-align: top;
-}
-
 .enquiry-body {
     padding-left: 11px;
     padding-right: 18px;
@@ -142,7 +61,7 @@
 }
 
 .enquiry-body .no-proposal {
-    display: none; //tmp
+    display: none;
     text-align: center;
     padding: 106px 62px 106px 66px;
 }

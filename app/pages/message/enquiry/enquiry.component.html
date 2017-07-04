@@ -36,71 +36,8 @@
                                         [data]="enquiryService.enquiry.Messages" [enquiryId]="enquiryId"></dialog-cmp>
                         </div>
                         <div class="col-md-6">
-                            <div class="enquiry-header">
-                                <div class="image-wrp">
-                                    <div class="image-villa">
-                                        <cl-image data-u="image"
-                                                  public-id="z7iro8k17pc69cguzetw"
-                                                  cloud-name="privadia"
-                                                  class="md-card-image"
-                                                  crop="fill"
-                                                  gravity="auto"
-                                                  quality="80"
-                                                  height="200"
-                                                  width="600"
-                                                  format="jpg">
-                                        </cl-image>
-                                    </div>
-                                </div>
-                                <div class="villa-container left">
-                                    <div class="enquiry-status declined">Declined</div>
-                                    <h4 class="enquiry-title">Villa Name</h4>
-                                    <p class="location"><i class="material-icons">place</i> San Jose</p>
-                                </div>
-                                <div class="villa-container right">
-                                    <h4 class="enquiry-title">Rental Price</h4>
-                                    <p class="price"><i class="material-icons">euro_symbol</i> 1500</p>
-                                </div>
-                            </div>
+                            <property-info-cmp *ngIf="enquiryService.enquiry" [data]="enquiryService.enquiry.Enquiry"></property-info-cmp>
                             <div class="enquiry-body">
-                                <div class="row stats">
-                                    <div class="col-xs-4">
-                                        <div class="i-group">
-                                            <i class="material-icons">pool</i>
-                                            <span>3</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="i-group">
-                                            <i class="material-icons">hotel</i>
-                                            <span>5</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-4">
-                                        <div class="i-group">
-                                            <i class="material-icons">group</i>
-                                            <span>7</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="material-icons">person</i></span>
-                                            <div class="form-group">
-                                                Mary Johnson
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-xs-6">
-                                        <div class="input-group">
-                                            <span class="input-group-addon"><i class="material-icons">event</i></span>
-                                            <div class="form-group">
-                                                06/12/17 - 06/15/17
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="proposal-line">Proposal</div>

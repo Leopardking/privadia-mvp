@@ -1,0 +1,109 @@
+.enquiry-header {
+    position: relative;
+}
+
+.enquiry-header .image-wrp {
+    overflow: hidden;
+    border-top-right-radius: 6px;
+}
+
+.enquiry-header .image-wrp .image-villa:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top-right-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.enquiry-header .villa-container {
+    position: absolute;
+    width: 50%;
+    bottom: 10px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.enquiry-header .villa-container.left {
+    left: 0px;
+    padding-left: 35px;
+}
+
+.enquiry-header .villa-container.right {
+    right: 0px;
+    padding-right: 35px;
+    text-align: right;
+}
+
+.enquiry-header .villa-container .enquiry-status {
+    font-size: 12px;
+    font-weight: 300;
+    width: 74px;
+    height: 18px;
+    border-radius: 9px;
+    text-align: center;
+    color: #fff;
+    line-height: 18px;
+    display: none;
+}
+
+.enquiry-header .villa-container .enquiry-status.accepted {
+    background-color: #00bfa5;
+    display: inline-block;
+}
+
+.enquiry-header .villa-container .enquiry-status.declined {
+    background-color: #ff1744;
+    display: inline-block;
+}
+
+.enquiry-header .enquiry-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.enquiry-header .villa-container .location {
+    font-size: 16px;
+}
+
+.enquiry-header .villa-container .price {
+    font-size: 18px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.enquiry-header .villa-container .material-icons {
+    font-size: 18px;
+    vertical-align: top;
+}
+.icons-group {
+    display: flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin: auto 15px;
+}
+.icons-group .feature {
+    font-size: 18px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
+}
+.icons-group .feature i {
+    font-size: 18px;
+    color: #5399bc;
+    font-weight: 400;
+    padding-bottom: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.icons-group .feature span {
+    color: #3a3a3a;
+    font-weight: 300;
+}
+

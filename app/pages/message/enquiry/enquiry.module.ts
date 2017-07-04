@@ -16,6 +16,7 @@ import { MessagesService } from "../../../providers/messages/messages.service";
 import { EnquiryComponent } from "./enquiry.component";
 import { EnquiryRoutingModule } from './enquiry-routing.module';
 import { DialogComponent } from "../../../components/enquiry/dialog/dialog.component";
+import { PropertyInfoComponent } from "../../../components/enquiry/property-info/property-info.component";
 
 /**
  *  My Modules
@@ -35,6 +36,7 @@ import { FormFieldsModule } from "../../../modules/form-fields/form-field.module
     declarations: [
         EnquiryComponent,
         DialogComponent,
+        PropertyInfoComponent
     ],
     providers: [ EnquiryService, MessagesService ]
 })
