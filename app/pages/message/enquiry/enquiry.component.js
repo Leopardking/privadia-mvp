@@ -11,12 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
+var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var EnquiryComponent = (function () {
-    function EnquiryComponent(router) {
+    function EnquiryComponent(router, route, enquiryService) {
         this.router = router;
-        router.events.subscribe(function (val) {
-            var hash = window.location.hash;
-            hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+        this.route = route;
+        this.enquiryService = enquiryService;
+        console.log('Load enquiry Module', enquiry_service_1.EnquiryService);
+        // router.events.subscribe((val) => {
+        //     console.log('Load route', val);
+        //     const hash = window.location.hash;
+        //     hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+        //     enquiryService.readDataEnquiry(val)
+        // });
+        route.params.subscribe(function (params) {
+            enquiryService.readDataEnquiry(params['id']);
         });
     }
     EnquiryComponent.prototype.ngOnInit = function () {
@@ -32,14 +41,15 @@ var EnquiryComponent = (function () {
             'wheelPropagation': true
         });
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        setTimeout(function () {
-            var dataTableQuery = $('#datatables');
-            var tableWidget = dataTableQuery.DataTable({
+        /*
+        setTimeout(() => {
+            let dataTableQuery: any = $('#datatables');
+            const tableWidget = dataTableQuery.DataTable({
                 bLengthChange: false,
                 ordering: false,
                 info: false,
             });
-        }, 10);
+        }, 10);*/
     };
     EnquiryComponent = __decorate([
         core_1.Component({
@@ -48,7 +58,7 @@ var EnquiryComponent = (function () {
             templateUrl: 'enquiry.component.html',
             styleUrls: ['enquiry.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, router_1.ActivatedRoute, enquiry_service_1.EnquiryService])
     ], EnquiryComponent);
     return EnquiryComponent;
 }());

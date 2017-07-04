@@ -15,6 +15,7 @@ import { MessageRoutingModule } from './message-routing.module';
 import { Ng2CloudinaryModule } from "ng2-cloudinary";
 import { EnquiryComponent } from "./enquiry/enquiry.component";
 import { EnquiriesTableComponent } from "../../components/tables/enquiries/enquiries.component";
+import {DialogComponent} from "../../components/enquiry/dialog/dialog.component";
 
 @NgModule({
     imports: [
@@ -26,7 +27,8 @@ import { EnquiriesTableComponent } from "../../components/tables/enquiries/enqui
     declarations: [
         MessageComponent,
         EnquiryComponent,
-        EnquiriesTableComponent
+        EnquiriesTableComponent,
+        DialogComponent
     ],
     providers: [ EnquiryService ]
 })

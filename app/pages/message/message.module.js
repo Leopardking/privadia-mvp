@@ -23,6 +23,7 @@ var message_routing_module_1 = require('./message-routing.module');
 var ng2_cloudinary_1 = require("ng2-cloudinary");
 var enquiry_component_1 = require("./enquiry/enquiry.component");
 var enquiries_component_1 = require("../../components/tables/enquiries/enquiries.component");
+var dialog_component_1 = require("../../components/enquiry/dialog/dialog.component");
 var MessageModule = (function () {
     function MessageModule() {
     }
@@ -37,7 +38,8 @@ var MessageModule = (function () {
             declarations: [
                 message_component_1.MessageComponent,
                 enquiry_component_1.EnquiryComponent,
-                enquiries_component_1.EnquiriesTableComponent
+                enquiries_component_1.EnquiriesTableComponent,
+                dialog_component_1.DialogComponent
             ],
             providers: [enquiry_service_1.EnquiryService]
         }), 

@@ -30,12 +30,20 @@ var EnquiryService = (function () {
             console.log('Error Enquiries', e);
         });
     };
+    EnquiryService.prototype.readDataEnquiry = function (id) {
+        var _this = this;
+        this.getEnquiryById(id).subscribe(function (d) {
+            _this.enquiry = d;
+        }, function (e) {
+            console.log('Error Enquiry', e);
+        });
+    };
     EnquiryService.prototype.getEnquiries = function () {
         if (!this.loginService.getPermission('Lookups/GetRegions'))
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
-        return this.http.get(this.apiUrl + '/api/Enquiries', options)
+        return this.http.get(this.apiUrl + "/api/Enquiries", options)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -44,7 +52,16 @@ var EnquiryService = (function () {
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
-        return this.http.post(this.apiUrl + '/api/Enquiries', data, options)
+        return this.http.post(this.apiUrl + "/api/Enquiries", data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    EnquiryService.prototype.getEnquiryById = function (id) {
+        if (!this.loginService.getPermission('Lookups/GetRegions'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + "/api/Enquiries/" + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };

@@ -12,6 +12,7 @@ export class EnquiryService {
 	private token: string = localStorage.getItem('id_token');
 
 	public enquiries;
+	public enquiry;
 
 	constructor ( private http: Http,
 				  private loginService: LoginService ) {
@@ -29,6 +30,17 @@ export class EnquiryService {
 		)
 	}
 
+	public readDataEnquiry(id) {
+		this.getEnquiryById(id).subscribe(
+			d => {
+				this.enquiry = d;
+			},
+			e => {
+				console.log('Error Enquiry', e)
+			}
+		)
+	}
+
 	public getEnquiries() {
 		if(!this.loginService.getPermission('Lookups/GetRegions'))
 			return Observable.throw(null);
@@ -36,7 +48,7 @@ export class EnquiryService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.get( this.apiUrl + '/api/Enquiries', options )
+		return this.http.get( `${this.apiUrl}/api/Enquiries`, options )
             .map(this.extractData)
             .catch(this.handleError);
 	}
@@ -49,7 +61,19 @@ export class EnquiryService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.post( this.apiUrl + '/api/Enquiries', data, options )
+		return this.http.post( `${this.apiUrl}/api/Enquiries`, data, options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getEnquiryById(id) {
+		if(!this.loginService.getPermission('Lookups/GetRegions'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( `${this.apiUrl}/api/Enquiries/${id}`, options )
             .map(this.extractData)
             .catch(this.handleError);
 	}

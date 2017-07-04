@@ -13,6 +13,7 @@ declare const $:any;
 
 export class MessageComponent implements OnInit{
     constructor ( private router: Router, private enquiryService: EnquiryService) {
+        console.log('Load Message Module');
         enquiryService.readDataEnquiries();
         router.events.subscribe((val) => {
             const hash = window.location.hash;

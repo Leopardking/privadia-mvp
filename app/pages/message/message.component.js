@@ -15,6 +15,7 @@ var MessageComponent = (function () {
     function MessageComponent(router, enquiryService) {
         this.router = router;
         this.enquiryService = enquiryService;
+        console.log('Load Message Module');
         enquiryService.readDataEnquiries();
         router.events.subscribe(function (val) {
             var hash = window.location.hash;
