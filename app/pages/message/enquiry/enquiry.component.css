@@ -59,15 +59,15 @@
 
 .messages-wrp .messages .message.from:before {
     bottom: -18px;
-    left: 40px;
-    border-width: 0 0 18px 34px;
+    left: 36px;
+    border-width: 0 0 18px 36px;
     border-color: transparent #f3f5f6;
 }
 
 .messages-wrp .messages .message.from:after {
     bottom: -18px;
-    left: 40px;
-    border-width: 0 0 18px 6px;
+    left: 36px;
+    border-width: 0 0 18px 4px;
     border-color: transparent #ffffff;
 }
 
@@ -79,15 +79,15 @@
 
 .messages-wrp .messages .message.to:before {
     bottom: -18px;
-    right: 40px;
-    border-width: 0 34px 18px 0;
+    right: 36px;
+    border-width: 0 36px 18px 0;
     border-color: transparent #d0effe;
 }
 
 .messages-wrp .messages .message.to:after {
     bottom: -18px;
-    right: 40px;
-    border-width: 0 6px 18px 0;
+    right: 36px;
+    border-width: 0 4px 18px 0;
     border-color: transparent #ffffff;
 }
 
@@ -209,11 +209,6 @@
 .enquiry-header .villa-container .enquiry-status.declined {
     background-color: #ff1744;
     display: inline-block;
-}
-
-.enquiry-header .villa-container .enquiry-status.accepted {
-    margin-bottom: 10px;
-    font-size: 18px;
 }
 
 .enquiry-header .enquiry-title {
@@ -338,15 +333,14 @@
     padding: 6px;
 }
 
-.enquiry-body .terms-wrp .btn-remove .material-icons {
-    width: 24px;
-    font-size: 24px;
-    color: #ff003d;
+.enquiry-body .terms-wrp .btn-remove.btn-just-icon {
+    line-height: 14px;
 }
 
 .enquiry-body .terms-wrp .btn-remove .material-icons {
-    font-size: 24px;
-    color: #ff003d;
+    width: 14px;
+    font-size: 14px;
+    color: #ff1744;
 }
 
 .enquiry-body .form-inline.rental-price {
@@ -373,6 +367,10 @@
     vertical-align: middle;
 }
 
+.enquiry-body .input-group.booking-price {
+    text-align: center;
+}
+
 .enquiry-body .proposal-line {
     font-size: 14px;
     text-align: center;
@@ -390,6 +388,10 @@
 .enquiry-body .terms .btn-back {
     min-width: 86px;
     margin: 0;
+}
+
+.enquiry-body .terms .btn-back:hover {
+    background-color: #fafafa;
 }
 
 .enquiry-body .estimated-cost {
