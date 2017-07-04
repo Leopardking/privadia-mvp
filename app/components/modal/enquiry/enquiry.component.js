@@ -14,17 +14,16 @@ var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var EnquiryComponent = (function () {
     function EnquiryComponent(enquiryService) {
         this.enquiryService = enquiryService;
+        this.errorForm = false;
     }
-    EnquiryComponent.prototype.ngOnInit = function () {
-        console.log('Data ', this.data);
-        console.log('Valid form ', this.enquiryForm);
-    };
+    EnquiryComponent.prototype.ngOnInit = function () { };
     EnquiryComponent.prototype.onSubmit = function (values) {
-        console.log('Submit enquiry', values);
-        console.log('Valid form ', this.enquiryForm.status);
+        var _this = this;
+        console.log('Valid form ', this.enquiryForm);
         if (this.enquiryForm.status === 'INVALID')
-            return;
+            return this.errorForm = true;
         this.enquiryService.addEnquiry(values).subscribe(function (d) {
+            _this.errorForm = false;
             $('#enquiry').modal('hide');
             $.notify({
                 icon: "notifications",
@@ -39,6 +38,7 @@ var EnquiryComponent = (function () {
             });
             console.log('Added Enquiry ', d);
         }, function (e) {
+            _this.errorForm = true;
             console.log('Error add enquiry ', e);
         });
     };

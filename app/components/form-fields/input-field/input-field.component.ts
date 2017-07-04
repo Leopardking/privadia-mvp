@@ -10,7 +10,8 @@ import { FormControl } from "@angular/forms";
 
 export class InputfieldComponent implements OnInit{
     @Input('data') private data: any;
-    @Input('static') private static: boolean = false;
+    @Input('errorForm') private errorForm: any;
+    @Input('static') private staticField: boolean = false;
     @Input('field') private field: FormControl;
 
     constructor ( ) {

@@ -12,7 +12,7 @@ var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var InputfieldComponent = (function () {
     function InputfieldComponent() {
-        this.static = false;
+        this.staticField = false;
     }
     InputfieldComponent.prototype.ngOnInit = function () { };
     __decorate([
@@ -20,9 +20,13 @@ var InputfieldComponent = (function () {
         __metadata('design:type', Object)
     ], InputfieldComponent.prototype, "data", void 0);
     __decorate([
+        core_1.Input('errorForm'), 
+        __metadata('design:type', Object)
+    ], InputfieldComponent.prototype, "errorForm", void 0);
+    __decorate([
         core_1.Input('static'), 
         __metadata('design:type', Boolean)
-    ], InputfieldComponent.prototype, "static", void 0);
+    ], InputfieldComponent.prototype, "staticField", void 0);
     __decorate([
         core_1.Input('field'), 
         __metadata('design:type', forms_1.FormControl)

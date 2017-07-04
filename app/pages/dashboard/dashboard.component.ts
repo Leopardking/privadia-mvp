@@ -62,6 +62,7 @@ export class DashboardComponent implements OnInit{
             RentalPrice: new FormControl(1200),
             BookingPrice: new FormControl(1495),
         });
+
         this.filterForm.valueChanges.subscribe(
             d => {
                 this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);

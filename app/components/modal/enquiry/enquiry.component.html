@@ -50,12 +50,14 @@
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="material-icons">person</i></span>
                                 <input-field-cmp [data]="{title: 'First Name', name: 'ClientFirstName', type: 'text'}"
+                                                 [errorForm]="errorForm"
                                                  [field]="enquiryForm.controls.ClientFirstName"></input-field-cmp>
                             </div>
                         </div>
                         <div class="col-xs-6">
                             <div class="form-group">
                                 <input-field-cmp [data]="{title: 'Last Name', name: 'ClientLastName', type: 'text'}"
+                                                 [errorForm]="errorForm"
                                                  [field]="enquiryForm.controls.ClientLastName"></input-field-cmp>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
-<div class="form-group label-floating">
+<div class="form-group label-floating" [ngClass]="{'form-error': !field.valid && errorForm }">
     <label class="control-label">{{data.title}}</label>
-    <span *ngIf="static" class="form-control-static">{{field.value}}</span>
-    <input *ngIf="!static"
+    <span *ngIf="staticField" class="form-control-static">{{field.value}}</span>
+    <input *ngIf="!staticField"
            [type]="data.type"
            class="form-control"
            [formControl]="field">

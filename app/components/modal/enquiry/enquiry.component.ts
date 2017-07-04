@@ -16,25 +16,22 @@ declare const $: any;
 export class EnquiryComponent implements OnInit{
 	@Input('group')	private enquiryForm: FormGroup;
 	@Input('data')	private data: any;
+	public errorForm = false;
 
-	constructor( private enquiryService: EnquiryService) {
-	}
+	constructor( private enquiryService: EnquiryService) { }
 
-	ngOnInit() {
-		console.log('Data ', this.data)
-		console.log('Valid form ', this.enquiryForm)
-	}
+	ngOnInit() { }
 
 	private onSubmit(values) {
-		console.log('Submit enquiry', values)
-		console.log('Valid form ', this.enquiryForm.status)
+		console.log('Valid form ', this.enquiryForm)
 
 		if(this.enquiryForm.status === 'INVALID')
-			return;
+			return this.errorForm = true;
 
 		this.enquiryService.addEnquiry(values).subscribe(
 			d => {
-				$('#enquiry').modal('hide')
+				this.errorForm = false;
+				$('#enquiry').modal('hide');
 				$.notify({
 					icon: "notifications",
 					message: "Enquiry Submit Successfully"
@@ -51,6 +48,7 @@ export class EnquiryComponent implements OnInit{
 				console.log('Added Enquiry ', d)
 			},
 			e => {
+				this.errorForm = true;
 				console.log('Error add enquiry ', e)
 			}
 		)
