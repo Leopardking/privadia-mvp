@@ -11,10 +11,36 @@ export class EnquiryService {
 	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 	private token: string = localStorage.getItem('id_token');
 
+	public enquiries;
+
 	constructor ( private http: Http,
 				  private loginService: LoginService ) {
 		console.log('Load Enquiry Service');
 	}
+
+	public readDataEnquiries() {
+		this.getEnquiries().subscribe(
+			d => {
+				this.enquiries = d;
+			},
+			e => {
+				console.log('Error Enquiries', e)
+			}
+		)
+	}
+
+	public getEnquiries() {
+		if(!this.loginService.getPermission('Lookups/GetRegions'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Enquiries', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
 
 	public addEnquiry(data) {
 		if(!this.loginService.getPermission('Lookups/GetRegions'))

@@ -5,7 +5,7 @@ import { EnquiryComponent } from './enquiry/enquiry.component';
 
 const routes: Routes = [
     { path: '', component: MessageComponent },
-    { path: 'dialogs', component: EnquiryComponent }
+    { path: 'dialogs/:id', component: EnquiryComponent }
 ];
 
 @NgModule({

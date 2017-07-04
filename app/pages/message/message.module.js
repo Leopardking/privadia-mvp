@@ -14,6 +14,7 @@ var router_1 = require('@angular/router');
 /**
  *  Providers
  */
+var enquiry_service_1 = require("../../providers/enquery/enquiry.service");
 /**
  *  Components
  */
@@ -21,6 +22,7 @@ var message_component_1 = require('./message.component');
 var message_routing_module_1 = require('./message-routing.module');
 var ng2_cloudinary_1 = require("ng2-cloudinary");
 var enquiry_component_1 = require("./enquiry/enquiry.component");
+var enquiries_component_1 = require("../../components/tables/enquiries/enquiries.component");
 var MessageModule = (function () {
     function MessageModule() {
     }
@@ -34,8 +36,10 @@ var MessageModule = (function () {
             ],
             declarations: [
                 message_component_1.MessageComponent,
-                enquiry_component_1.EnquiryComponent
+                enquiry_component_1.EnquiryComponent,
+                enquiries_component_1.EnquiriesTableComponent
             ],
+            providers: [enquiry_service_1.EnquiryService]
         }), 
         __metadata('design:paramtypes', [])
     ], MessageModule);

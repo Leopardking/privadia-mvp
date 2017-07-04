@@ -22,6 +22,23 @@ var EnquiryService = (function () {
         this.token = localStorage.getItem('id_token');
         console.log('Load Enquiry Service');
     }
+    EnquiryService.prototype.readDataEnquiries = function () {
+        var _this = this;
+        this.getEnquiries().subscribe(function (d) {
+            _this.enquiries = d;
+        }, function (e) {
+            console.log('Error Enquiries', e);
+        });
+    };
+    EnquiryService.prototype.getEnquiries = function () {
+        if (!this.loginService.getPermission('Lookups/GetRegions'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/Enquiries', options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     EnquiryService.prototype.addEnquiry = function (data) {
         if (!this.loginService.getPermission('Lookups/GetRegions'))
             return Observable_1.Observable.throw(null);

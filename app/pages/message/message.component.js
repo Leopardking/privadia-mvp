@@ -10,9 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
+var enquiry_service_1 = require("../../providers/enquery/enquiry.service");
 var MessageComponent = (function () {
-    function MessageComponent(router) {
+    function MessageComponent(router, enquiryService) {
         this.router = router;
+        this.enquiryService = enquiryService;
+        enquiryService.readDataEnquiries();
         router.events.subscribe(function (val) {
             var hash = window.location.hash;
             hash && $('ul.nav a[href="' + hash + '"]').tab('show');
@@ -20,14 +23,16 @@ var MessageComponent = (function () {
     }
     MessageComponent.prototype.ngOnInit = function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        setTimeout(function () {
-            var dataTableQuery = $('#datatables');
-            var tableWidget = dataTableQuery.DataTable({
+        /*
+        setTimeout(()=> {
+            let dataTableQuery: any = $('#datatables');
+            const tableWidget = dataTableQuery.DataTable({
                 bLengthChange: false,
                 ordering: false,
                 info: false,
             });
-        }, 10);
+        }, 10)
+        */
     };
     MessageComponent = __decorate([
         core_1.Component({
@@ -36,7 +41,7 @@ var MessageComponent = (function () {
             templateUrl: 'message.component.html',
             styleUrls: ['message.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router])
+        __metadata('design:paramtypes', [router_1.Router, enquiry_service_1.EnquiryService])
     ], MessageComponent);
     return MessageComponent;
 }());

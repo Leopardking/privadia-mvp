@@ -5,14 +5,16 @@ import { RouterModule } from '@angular/router';
 /**
  *  Providers
  */
+import { EnquiryService } from "../../providers/enquery/enquiry.service";
 
 /**
  *  Components
  */
 import { MessageComponent } from './message.component';
 import { MessageRoutingModule } from './message-routing.module';
-import {Ng2CloudinaryModule} from "ng2-cloudinary";
-import {EnquiryComponent} from "./enquiry/enquiry.component";
+import { Ng2CloudinaryModule } from "ng2-cloudinary";
+import { EnquiryComponent } from "./enquiry/enquiry.component";
+import { EnquiriesTableComponent } from "../../components/tables/enquiries/enquiries.component";
 
 @NgModule({
     imports: [
@@ -23,7 +25,9 @@ import {EnquiryComponent} from "./enquiry/enquiry.component";
     ],
     declarations: [
         MessageComponent,
-        EnquiryComponent
+        EnquiryComponent,
+        EnquiriesTableComponent
     ],
+    providers: [ EnquiryService ]
 })
 export class MessageModule {}

@@ -1,0 +1,63 @@
+<div class="material-datatables">
+    <table id="datatables" class="table table-enquiries m-t-none">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr *ngFor="let item of data; let i = index; let last = last" [ngClass]="{unread: item.UnreadCount}" [routerLink]="['/message/dialogs', item.ThreadId]">
+            <td>
+                <span class="badge" *ngIf="item.UnreadCount">{{item.UnreadCount}}</span>
+            </td>
+            <td>
+                <div class="photo">
+                    <cl-image data-u="image"
+                              public-id="z7iro8k17pc69cguzetw"
+                              cloud-name="privadia"
+                              class="md-card-image"
+                              crop="fill"
+                              gravity="auto"
+                              quality="80"
+                              height="32"
+                              width="32"
+                              format="jpg">
+                    </cl-image>
+                </div>
+            </td>
+            <td>{{ item.ToName }}</td>
+            <td>{{ item.PropertyName }} 06/12/17 - 06/15/17</td>
+            <td>{{ dateFormat(item.SentAt, 'D MMMM h:mmA') }}</td>
+            <td>
+                <div class="enquiry-status">{{item.EnquiryStatusDesc}}</div>
+            </td>
+            <td class="button-cell">
+                <button class="btn btn-simple btn-icon">
+                    <i class="material-icons">delete</i>
+                </button>
+            </td>
+            <td></td>
+            {{ data && last && !datatableInited ? finishReading() : "" }}
+        </tr>
+        </tbody>
+    </table>
+</div>
