@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {PropertiesService} from "../../../providers/properties/properties.service";
+import {EnquiryService} from "../../../providers/enquery/enquiry.service";
 
-declare const $: any;
+declare const moment: any;
 @Component({
     moduleId: module.id,
     selector: 'property-info-cmp ',
@@ -10,9 +12,17 @@ declare const $: any;
 
 export class PropertyInfoComponent implements OnInit{
 	@Input() private data: any;
+	private property;
 
-	constructor( ) {}
+	constructor( private propertiesService: PropertiesService,
+                 private enquiryService: EnquiryService ) {
+    }
 
 	ngOnInit() {
+        this.propertiesService.readDataProperty(this.data.PropertyId);
+    }
+
+    private dateFormat(date, format) {
+        return moment(date).format(format);
     }
 }

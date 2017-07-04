@@ -29,6 +29,8 @@ var property_info_component_1 = require("../../../components/enquiry/property-in
  *  My Modules
  */
 var form_field_module_1 = require("../../../modules/form-fields/form-field.module");
+var properties_service_1 = require("../../../providers/properties/properties.service");
+var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var EnquiryModule = (function () {
     function EnquiryModule() {
     }
@@ -48,7 +50,7 @@ var EnquiryModule = (function () {
                 dialog_component_1.DialogComponent,
                 property_info_component_1.PropertyInfoComponent
             ],
-            providers: [enquiry_service_1.EnquiryService, messages_service_1.MessagesService]
+            providers: [enquiry_service_1.EnquiryService, messages_service_1.MessagesService, properties_service_1.PropertiesService, lookups_service_1.LookupsService]
         }), 
         __metadata('design:paramtypes', [])
     ], EnquiryModule);

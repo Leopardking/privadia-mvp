@@ -9,10 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var properties_service_1 = require("../../../providers/properties/properties.service");
+var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var PropertyInfoComponent = (function () {
-    function PropertyInfoComponent() {
+    function PropertyInfoComponent(propertiesService, enquiryService) {
+        this.propertiesService = propertiesService;
+        this.enquiryService = enquiryService;
     }
     PropertyInfoComponent.prototype.ngOnInit = function () {
+        this.propertiesService.readDataProperty(this.data.PropertyId);
+    };
+    PropertyInfoComponent.prototype.dateFormat = function (date, format) {
+        return moment(date).format(format);
     };
     __decorate([
         core_1.Input(), 
@@ -25,7 +33,7 @@ var PropertyInfoComponent = (function () {
             templateUrl: 'property-info.component.html',
             styleUrls: ['property-info.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, enquiry_service_1.EnquiryService])
     ], PropertyInfoComponent);
     return PropertyInfoComponent;
 }());

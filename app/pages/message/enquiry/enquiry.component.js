@@ -12,11 +12,13 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
+var properties_service_1 = require("../../../providers/properties/properties.service");
 var EnquiryComponent = (function () {
-    function EnquiryComponent(route, enquiryService) {
+    function EnquiryComponent(route, enquiryService, propertiesService) {
         var _this = this;
         this.route = route;
         this.enquiryService = enquiryService;
+        this.propertiesService = propertiesService;
         route.params.subscribe(function (params) {
             _this.enquiryId = params['id'];
             enquiryService.readDataEnquiry(params['id']);
@@ -40,7 +42,7 @@ var EnquiryComponent = (function () {
             templateUrl: 'enquiry.component.html',
             styleUrls: ['enquiry.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, enquiry_service_1.EnquiryService])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, enquiry_service_1.EnquiryService, properties_service_1.PropertiesService])
     ], EnquiryComponent);
     return EnquiryComponent;
 }());

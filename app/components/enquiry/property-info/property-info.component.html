@@ -1,9 +1,10 @@
-<div class="property-info">
+<div class="property-info" *ngIf="propertiesService.property">
     <div class="enquiry-header">
         <div class="image-wrp">
             <div class="image-villa">
-                <cl-image data-u="image"
-                          public-id="z7iro8k17pc69cguzetw"
+                <cl-image *ngIf="propertiesService.property.Images[0].ImageId"
+                          data-u="image"
+                          public-id="{{propertiesService.property.Images[0].ImageId}}"
                           cloud-name="privadia"
                           class="md-card-image"
                           crop="fill"
@@ -13,12 +14,13 @@
                           width="600"
                           format="jpg">
                 </cl-image>
+                <img *ngIf="!propertiesService.property.Images[0].ImageId" class="img" src="../assets/img/image_placeholder.jpg">
             </div>
         </div>
         <div class="villa-container left">
             <div class="enquiry-status declined">Declined</div>
-            <h4 class="enquiry-title">Villa Name</h4>
-            <p class="location"><i class="material-icons">place</i> San Jose</p>
+            <h4 class="enquiry-title">{{propertiesService.property.Name}}</h4>
+            <p class="location"><i class="material-icons">place</i> {{propertiesService.property.Region.Name}}</p>
         </div>
         <div class="villa-container right">
             <h4 class="enquiry-title">Rental Price</h4>
@@ -30,13 +32,13 @@
             <div class="col-xs-12">
                 <div class="icons-group">
                     <div class="feature">
-                        <i class="material-icons">pool</i><span>3</span>
+                        <i class="material-icons">pool</i><span>{{propertiesService.property.Bathrooms}}</span>
                     </div>
                     <div class="feature">
-                        <i class="material-icons">hotel</i><span>3</span>
+                        <i class="material-icons">hotel</i><span>{{propertiesService.property.Bedrooms}}</span>
                     </div>
                     <div class="feature">
-                        <i class="material-icons">group</i><span>3</span>
+                        <i class="material-icons">group</i><span>{{propertiesService.property.Sleeps}}</span>
                     </div>
                 </div>
             </div>
@@ -45,10 +47,10 @@
             <div class="col-xs-12">
                 <div class="icons-group">
                     <div class="feature">
-                        <i class="material-icons">person</i><span class="font-16">Mary Johnson</span>
+                        <i class="material-icons">person</i><span class="font-16">{{data.ClientName}}</span>
                     </div>
                     <div class="feature">
-                        <i class="material-icons">event</i><span class="font-16">06/12/17 - 06/15/17</span>
+                        <i class="material-icons">event</i><span class="font-16">{{dateFormat(data.CheckIn, 'MM/DD/YYYY')}} - {{dateFormat(data.CheckOut, 'MM/DD/YYYY')}}</span>
                     </div>
                 </div>
             </div>
