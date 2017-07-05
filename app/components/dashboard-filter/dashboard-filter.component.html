@@ -2,7 +2,7 @@
     <div class="card filter-card">
         <div class="card-content">
             <form [formGroup]="filterForm" (ngSubmit)="onSubmit(filterForm.value)">
-                <button class="btn btn-white btn-round btn-just-icon btn-filter-search">
+                <button class="btn btn-success btn-filter-search">
                     <i class="material-icons">search</i>
                 </button>
                 <div class="row">
@@ -75,6 +75,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <button class="btn btn-success pull-right m-b-30">Apply Filter</button>
                                 </div>
                             </div>
                         </div>

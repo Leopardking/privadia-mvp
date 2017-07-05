@@ -1,10 +1,10 @@
 .card .card-content {
-    padding: 5px 20px 5px 75px;
+    padding: 5px 95px 5px 20px;
 }
 .btn-filter-search {
     position: absolute;
     top:0px;
-    left:16px;
+    right:35px;
     width: 41px;
     min-width: 41px;
     margin-top: 18px;
@@ -27,7 +27,7 @@
 }
 .btn-fab {
     position: absolute;
-    top:9px;
+    top:13px;
     right: -25px;
     width: 48px;
     min-width: 48px;
