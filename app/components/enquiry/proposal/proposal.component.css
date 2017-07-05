@@ -1,7 +1,6 @@
 .enquiry-body {
     padding-left: 11px;
     padding-right: 18px;
-    margin-top: 20px;
     color: #3a3a3a;
 }
 
@@ -45,6 +44,11 @@
     color: #5399bc;
 }
 
+.enquiry-body .input-group .input-group-addon {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
 .enquiry-body a:hover {
     color: #0b5a7c;
 }
@@ -53,12 +57,6 @@
     font-size: 18px;
     color: #5399bc;
     vertical-align: top;
-}
-
-.enquiry-body .no-proposal {
-    display: none;
-    text-align: center;
-    padding: 106px 62px 106px 66px;
 }
 
 .enquiry-body .stats {
@@ -73,14 +71,6 @@
 
 .enquiry-body .i-group i {
     padding: 0 15px;
-}
-
-/*.enquiry-body .form-group .control-label {*/
-/*font-size: 12px;*/
-/*}*/
-
-.enquiry-body .input-group-addon {
-    padding: 14px 20px 0;
 }
 
 .enquiry-body .form-control-static {
@@ -144,6 +134,7 @@
     color: #747879;
     background-color: #f3f5f6;
     height: 24px;
+    line-height: 24px;
     margin: 20px 0;
 }
 

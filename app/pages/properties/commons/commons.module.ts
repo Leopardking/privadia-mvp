@@ -9,6 +9,7 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
 import {PropertiesService} from "../../../providers/properties/properties.service";
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {SingleSelectfieldComponent} from "../../../components/form-fields/single-select-field/single-select.component";
+import {FormFieldsModule} from "../../../modules/form-fields/form-field.module";
 
 @NgModule({
     imports: [
@@ -20,9 +21,10 @@ import {SingleSelectfieldComponent} from "../../../components/form-fields/single
         FileUploadModule,
         Ng2CloudinaryModule,
         FileUploadModule,
-        RouterModule.forChild(MODULE_ROUTES)
+        RouterModule.forChild(MODULE_ROUTES),
+        FormFieldsModule
     ],
-    declarations: [ MODULE_COMPONENTS, SingleSelectfieldComponent ],
+    declarations: [ MODULE_COMPONENTS ],
     providers: [ PropertiesService, LookupsService ]
 })
 

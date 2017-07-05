@@ -38,7 +38,8 @@
                         <div class="col-md-6">
                             <property-info-cmp *ngIf="enquiryService.enquiry"
                                                [data]="enquiryService.enquiry.Enquiry"></property-info-cmp>
-                            <proposal-cmp></proposal-cmp>
+                            <proposal-cmp *ngIf="enquiryService.enquiry"
+                                          [data]="enquiryService.enquiry"></proposal-cmp>
                         </div>
                     </div>
                 </div>
