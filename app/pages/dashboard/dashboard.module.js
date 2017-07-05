@@ -27,8 +27,6 @@ var dashboard_component_1 = require('./dashboard.component');
 var villa_component_1 = require('../../components/villa/villa.component');
 var dashboard_routing_module_1 = require('./dashboard-routing.module');
 var dashboard_filter_component_1 = require("../../components/dashboard-filter/dashboard-filter.component");
-var datetimepicker_field_component_1 = require("../../components/form-fields/datetimepicker-field/datetimepicker-field.component");
-var select_component_1 = require("../../components/form-fields/select-field/select.component");
 var enquiry_component_1 = require("../../components/modal/enquiry/enquiry.component");
 /**
  *  My Modules
@@ -52,8 +50,6 @@ var DashboardModule = (function () {
                 dashboard_component_1.DashboardComponent,
                 villa_component_1.VillaComponent,
                 dashboard_filter_component_1.DashboardfilterComponent,
-                datetimepicker_field_component_1.DatetimefieldComponent,
-                select_component_1.SelectfieldComponent,
                 enquiry_component_1.EnquiryComponent
             ],
             providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, enquiry_service_1.EnquiryService]

@@ -42,8 +42,6 @@ import { FormFieldsModule } from "../../modules/form-fields/form-field.module";
         DashboardComponent,
         VillaComponent,
         DashboardfilterComponent,
-        DatetimefieldComponent,
-        SelectfieldComponent,
         EnquiryComponent
     ],
     providers: [ DashboardService, PropertiesService, LookupsService, EnquiryService ]
