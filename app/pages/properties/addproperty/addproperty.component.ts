@@ -79,30 +79,27 @@ export class AddpropertyComponent implements OnInit {
     });
 
     constructor ( private router:Router,
-                  private propertiesService: PropertiesService,
-                  private builder: FormBuilder ) {
-
+                  private propertiesService: PropertiesService ) {
         propertiesService.readDataMetadata();
         propertiesService.readDataOwners();
         propertiesService.readDataRegions();
         propertiesService.readDataCompanies();
-        //propertiesService.readDataManagers();
-
-        this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {
-            propertiesService.readDataManagers(company.Id)
-            const selectQuery = $(".custompicker");
-            setTimeout(() => {
-                selectQuery.selectpicker('render');
-                selectQuery.selectpicker('refresh');
-            }, 500);
-        })
     }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
+        this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {
+            this.propertiesService.readDataManagers(company.Id);
+            const selectQuery = $(".custompicker");
+            setTimeout(() => {
+                selectQuery.selectpicker('render');
+                selectQuery.selectpicker('refresh');
+            }, 1000);
+        });
+
         setTimeout(() => {
-            $('.property-tabs a:first').tab('show')
+            $('.property-tabs a:first').tab('show');
 
             $('button[data-toggle="tab"]').click((e)=>{
                 if(this.propertyForm.valid) {
@@ -118,15 +115,6 @@ export class AddpropertyComponent implements OnInit {
         });
     }
 
-    setRegion(region) {
-        const regionFGs = this.builder.group({
-            Id: [region.RegionId],
-            Name: [region.RegionName]
-        });
-
-        this.propertyForm.setControl('Region', regionFGs);
-    }
-
     private continueInfo() {
         console.log('Continue Info form')
     }
@@ -139,7 +127,7 @@ export class AddpropertyComponent implements OnInit {
         let newArr = [];
         _.mapValues(form.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
-        })
+        });
         form.MetaData = newArr;
 
         if(this.propertyForm.valid) {

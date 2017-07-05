@@ -1,8 +1,7 @@
-import {Component, OnInit, Input, AfterViewInit} from '@angular/core';
-import {FormGroup, FormArray, FormControl, FormBuilder} from "@angular/forms";
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { FormGroup } from "@angular/forms";
 
 declare const $: any;
-import * as _ from "lodash";
 
 @Component({
     moduleId: module.id,
@@ -22,14 +21,14 @@ export class SingleSelectfieldComponent implements OnInit, AfterViewInit {
         const selectQuery = $(".custompicker");
 
         selectQuery.selectpicker();
-        console.log('ngInit')
     }
 
     ngAfterViewInit() {
-        console.log('ngAfterViewInit')
         const selectQuery = $(".custompicker");
-        selectQuery.selectpicker('render');
-        selectQuery.selectpicker('refresh');
+        setTimeout(() => {
+            selectQuery.selectpicker('render');
+            selectQuery.selectpicker('refresh');
+        });
 
         selectQuery.on('show.bs.select', function (e) {
             $('.dropdown-menu.inner').perfectScrollbar('update');

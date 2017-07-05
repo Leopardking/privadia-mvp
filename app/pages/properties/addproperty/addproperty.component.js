@@ -15,10 +15,9 @@ var properties_service_1 = require('../../../providers/properties/properties.ser
 var _ = require('lodash');
 //declare const _:any;
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(router, propertiesService, builder) {
+    function AddpropertyComponent(router, propertiesService) {
         this.router = router;
         this.propertiesService = propertiesService;
-        this.builder = builder;
         // private isActive = true;
         this.isLoad = true;
         this.errorForm = false;
@@ -82,19 +81,18 @@ var AddpropertyComponent = (function () {
         propertiesService.readDataOwners();
         propertiesService.readDataRegions();
         propertiesService.readDataCompanies();
-        //propertiesService.readDataManagers();
-        this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
-            propertiesService.readDataManagers(company.Id);
-            var selectQuery = $(".custompicker");
-            setTimeout(function () {
-                selectQuery.selectpicker('render');
-                selectQuery.selectpicker('refresh');
-            }, 500);
-        });
     }
     AddpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
+            _this.propertiesService.readDataManagers(company.Id);
+            var selectQuery = $(".custompicker");
+            setTimeout(function () {
+                selectQuery.selectpicker('render');
+                selectQuery.selectpicker('refresh');
+            }, 1000);
+        });
         setTimeout(function () {
             $('.property-tabs a:first').tab('show');
             $('button[data-toggle="tab"]').click(function (e) {
@@ -109,13 +107,6 @@ var AddpropertyComponent = (function () {
                 }
             });
         });
-    };
-    AddpropertyComponent.prototype.setRegion = function (region) {
-        var regionFGs = this.builder.group({
-            Id: [region.RegionId],
-            Name: [region.RegionName]
-        });
-        this.propertyForm.setControl('Region', regionFGs);
     };
     AddpropertyComponent.prototype.continueInfo = function () {
         console.log('Continue Info form');
@@ -159,7 +150,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());
