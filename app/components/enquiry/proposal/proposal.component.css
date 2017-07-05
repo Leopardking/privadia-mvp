@@ -1,0 +1,186 @@
+.enquiry-body {
+    padding-left: 11px;
+    padding-right: 18px;
+    margin-top: 20px;
+    color: #3a3a3a;
+}
+
+.enquiry-body .terms h5, .enquiry-body .payment-terms h5 {
+    font-size: 16px;
+}
+
+.enquiry-body .terms ol {
+    counter-reset: item;
+    padding-left: 15px;
+}
+
+.enquiry-body .terms ol > li {
+    display: block;
+    padding-bottom: 20px;
+}
+
+.enquiry-body .terms ol > li:before {
+    content: counter(item) ". ";
+    counter-increment: item;
+    font-weight: 600;
+}
+
+.enquiry-body .terms ul, .enquiry-body .payment-terms ul {
+    list-style: none;
+    padding-left: 8px;
+}
+
+.enquiry-body .terms ul > li {
+    padding-bottom: 20px;
+}
+
+.enquiry-body .payment-terms ul > li .form-group {
+    display: inline-block;
+    min-width: 60px;
+    width: 60px;
+}
+
+.enquiry-body a {
+    text-decoration: underline;
+    color: #5399bc;
+}
+
+.enquiry-body a:hover {
+    color: #0b5a7c;
+}
+
+.enquiry-body .material-icons {
+    font-size: 18px;
+    color: #5399bc;
+    vertical-align: top;
+}
+
+.enquiry-body .no-proposal {
+    display: none;
+    text-align: center;
+    padding: 106px 62px 106px 66px;
+}
+
+.enquiry-body .stats {
+    padding-bottom: 15px;
+}
+
+.enquiry-body .i-group {
+    text-align: center;
+    position: relative;
+    font-size: 18px;
+}
+
+.enquiry-body .i-group i {
+    padding: 0 15px;
+}
+
+/*.enquiry-body .form-group .control-label {*/
+/*font-size: 12px;*/
+/*}*/
+
+.enquiry-body .input-group-addon {
+    padding: 14px 20px 0;
+}
+
+.enquiry-body .form-control-static {
+    padding-left: 0;
+    display: block;
+}
+
+.enquiry-body .terms-wrp {
+    position: relative;
+}
+
+.enquiry-body .terms-wrp .btn-remove {
+    margin: 0;
+    position: absolute;
+    bottom: 9px;
+    right: 24px;
+    padding: 6px;
+}
+
+.enquiry-body .terms-wrp .btn-remove.btn-just-icon {
+    line-height: 14px;
+}
+
+.enquiry-body .terms-wrp .btn-remove .material-icons {
+    width: 14px;
+    font-size: 14px;
+    color: #ff1744;
+}
+
+.enquiry-body .form-inline.rental-price {
+    display: inline-block;
+}
+
+.enquiry-body .form-inline.rental-price input {
+    width: 60px;
+}
+
+.enquiry-body .form-inline.rental-price .fees {
+    padding-top: 10px;
+    display: inline-block;
+}
+
+.enquiry-body .form-inline.rental-price .fees span {
+    font-size: 12px;
+    color: #c6c6c6;
+}
+
+.enquiry-body .form-inline.rental-price .fees .material-icons {
+    font-size: 16px;
+    color: #3a3a3a;
+    vertical-align: middle;
+}
+
+.enquiry-body .input-group.booking-price {
+    text-align: center;
+}
+
+.enquiry-body .proposal-line {
+    font-size: 14px;
+    text-align: center;
+    color: #747879;
+    background-color: #f3f5f6;
+    height: 24px;
+    margin: 20px 0;
+}
+
+.enquiry-body .terms .form-group {
+    padding-left: 40px;
+    padding-right: 24px;
+}
+
+.enquiry-body .terms .btn-back {
+    min-width: 86px;
+    margin: 0;
+}
+
+.enquiry-body .terms .btn-back:hover {
+    background-color: #fafafa;
+}
+
+.enquiry-body .estimated-cost {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.enquiry-body .estimated-cost span {
+    line-height: 21px;
+    font-weight: 300;
+}
+
+.enquiry-body .estimated-cost i {
+    line-height: 21px;
+    margin-right: 5px;
+}
+
+.enquiry-body .estimated-cost .control-label {
+    font-size: 12px;
+    margin-right: 20px;
+}

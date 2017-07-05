@@ -17,6 +17,7 @@ import { EnquiryComponent } from "./enquiry.component";
 import { EnquiryRoutingModule } from './enquiry-routing.module';
 import { DialogComponent } from "../../../components/enquiry/dialog/dialog.component";
 import { PropertyInfoComponent } from "../../../components/enquiry/property-info/property-info.component";
+import { ProposalComponent } from "../../../components/enquiry/proposal/proposal.component";
 
 /**
  *  My Modules
@@ -38,7 +39,8 @@ import {LookupsService} from "../../../providers/lookups/lookups.service";
     declarations: [
         EnquiryComponent,
         DialogComponent,
-        PropertyInfoComponent
+        PropertyInfoComponent,
+        ProposalComponent
     ],
     providers: [ EnquiryService, MessagesService, PropertiesService, LookupsService ]
 })

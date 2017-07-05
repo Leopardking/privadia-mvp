@@ -25,6 +25,7 @@ var enquiry_component_1 = require("./enquiry.component");
 var enquiry_routing_module_1 = require('./enquiry-routing.module');
 var dialog_component_1 = require("../../../components/enquiry/dialog/dialog.component");
 var property_info_component_1 = require("../../../components/enquiry/property-info/property-info.component");
+var proposal_component_1 = require("../../../components/enquiry/proposal/proposal.component");
 /**
  *  My Modules
  */
@@ -48,7 +49,8 @@ var EnquiryModule = (function () {
             declarations: [
                 enquiry_component_1.EnquiryComponent,
                 dialog_component_1.DialogComponent,
-                property_info_component_1.PropertyInfoComponent
+                property_info_component_1.PropertyInfoComponent,
+                proposal_component_1.ProposalComponent
             ],
             providers: [enquiry_service_1.EnquiryService, messages_service_1.MessagesService, properties_service_1.PropertiesService, lookups_service_1.LookupsService]
         }), 
