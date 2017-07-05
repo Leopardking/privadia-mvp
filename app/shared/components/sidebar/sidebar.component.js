@@ -29,6 +29,10 @@ var SidebarComponent = (function () {
         //$("dashboard-cmp .main-content").scrollTop(0);
         //return true;
     };
+    SidebarComponent.prototype.getFullName = function () {
+        var user = JSON.parse(localStorage.getItem('user'));
+        return user.FirstName + " " + user.LastName;
+    };
     SidebarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
