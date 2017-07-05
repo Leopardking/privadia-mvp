@@ -22,8 +22,10 @@ var SingleSelectfieldComponent = (function () {
     SingleSelectfieldComponent.prototype.ngAfterViewInit = function () {
         console.log('ngAfterViewInit');
         var selectQuery = $(".custompicker");
-        selectQuery.selectpicker('render');
-        selectQuery.selectpicker('refresh');
+        setTimeout(function () {
+            selectQuery.selectpicker('render');
+            selectQuery.selectpicker('refresh');
+        });
         selectQuery.on('show.bs.select', function (e) {
             $('.dropdown-menu.inner').perfectScrollbar('update');
         });

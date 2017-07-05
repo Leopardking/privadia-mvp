@@ -12,14 +12,16 @@ var core_1 = require('@angular/core');
 var input_field_component_1 = require("./input-field/input-field.component");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
+var single_select_component_1 = require("./single-select-field/single-select.component");
+var datetimepicker_field_component_1 = require("./datetimepicker-field/datetimepicker-field.component");
 var FormFieldsModule = (function () {
     function FormFieldsModule() {
     }
     FormFieldsModule = __decorate([
         core_1.NgModule({
-            declarations: [input_field_component_1.InputfieldComponent],
+            declarations: [input_field_component_1.InputfieldComponent, single_select_component_1.SingleSelectfieldComponent, datetimepicker_field_component_1.DatetimefieldComponent],
             imports: [common_1.CommonModule, forms_1.ReactiveFormsModule],
-            exports: [input_field_component_1.InputfieldComponent]
+            exports: [input_field_component_1.InputfieldComponent, single_select_component_1.SingleSelectfieldComponent, datetimepicker_field_component_1.DatetimefieldComponent]
         }), 
         __metadata('design:paramtypes', [])
     ], FormFieldsModule);

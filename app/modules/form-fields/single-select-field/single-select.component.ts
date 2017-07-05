@@ -28,8 +28,10 @@ export class SingleSelectfieldComponent implements OnInit, AfterViewInit {
     ngAfterViewInit() {
         console.log('ngAfterViewInit')
         const selectQuery = $(".custompicker");
-        selectQuery.selectpicker('render');
-        selectQuery.selectpicker('refresh');
+        setTimeout(() => {
+            selectQuery.selectpicker('render');
+            selectQuery.selectpicker('refresh');
+        })
 
         selectQuery.on('show.bs.select', function (e) {
             $('.dropdown-menu.inner').perfectScrollbar('update');
