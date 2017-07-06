@@ -22,6 +22,7 @@ var BookingComponent = (function () {
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     BookingComponent.prototype.ngOnInit = function () {
         var _this = this;
+        localStorage.setItem('title', '');
         //------------------    Reading data of booking        -----------------/
         this.bookingService.allBookings().subscribe(function (d) {
             _this.bookings = d;

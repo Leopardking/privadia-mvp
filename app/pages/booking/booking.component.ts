@@ -25,6 +25,7 @@ export class BookingComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
+        localStorage.setItem('title', '');
 
         //------------------    Reading data of booking        -----------------/
         this.bookingService.allBookings().subscribe(

@@ -26,13 +26,10 @@ export class DashboardComponent implements OnInit{
                   public builder: FormBuilder) { }
 
     ngOnInit(){
+        localStorage.setItem('title', '');
+
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         $('.modal').appendTo("body");
-        /*
-        setTimeout(()=> {
-            $('.modal-content').perfectScrollbar();
-        },100)
-        */
 
         this.filterForm = this.builder.group({
             Bedrooms: new FormControl(),
@@ -47,11 +44,11 @@ export class DashboardComponent implements OnInit{
 
         this.enquiryForm = this.builder.group({
             PropertyId: new FormControl(),
-            ClientFirstName: new FormControl('Test First Name', Validators.required),
-            ClientLastName: new FormControl('Test Last Name', Validators.required),
+            ClientFirstName: new FormControl('', Validators.required),
+            ClientLastName: new FormControl('', Validators.required),
             CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            Message: new FormControl('Test Message'),
+            Message: new FormControl(''),
         });
 
         this.proposalForm = this.builder.group({

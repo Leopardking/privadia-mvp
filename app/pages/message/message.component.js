@@ -23,17 +23,8 @@ var MessageComponent = (function () {
         });
     }
     MessageComponent.prototype.ngOnInit = function () {
+        localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        /*
-        setTimeout(()=> {
-            let dataTableQuery: any = $('#datatables');
-            const tableWidget = dataTableQuery.DataTable({
-                bLengthChange: false,
-                ordering: false,
-                info: false,
-            });
-        }, 10)
-        */
     };
     MessageComponent = __decorate([
         core_1.Component({

@@ -87,6 +87,7 @@ export class AddpropertyComponent implements OnInit {
     }
 
     ngOnInit(){
+        localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
         this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {

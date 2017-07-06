@@ -24,6 +24,7 @@ export class PropertiesComponent implements OnInit{
     }
 
     ngOnInit(){
+        localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
     }
 

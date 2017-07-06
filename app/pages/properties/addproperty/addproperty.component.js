@@ -84,6 +84,7 @@ var AddpropertyComponent = (function () {
     }
     AddpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
+        localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
             _this.propertiesService.readDataManagers(company.Id);

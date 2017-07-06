@@ -20,6 +20,7 @@ var PropertiesComponent = (function () {
         propertiesService.readDataProperties();
     }
     PropertiesComponent.prototype.ngOnInit = function () {
+        localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
     };
     PropertiesComponent.prototype.finishReading = function () {

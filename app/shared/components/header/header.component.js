@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var navbar_routes_config_1 = require('./navbar-routes.config');
 var common_1 = require("@angular/common");
+var _ = require('lodash');
 var HeaderComponent = (function () {
     function HeaderComponent(location) {
         this.activePage = {
@@ -18,14 +19,23 @@ var HeaderComponent = (function () {
             title: null,
             icon: null
         };
+        this.activePageTmp = {
+            path: null,
+            title: null,
+            icon: null
+        };
+        this.title = null;
         this.location = location;
     }
     HeaderComponent.prototype.ngOnInit = function () { };
     HeaderComponent.prototype.ngDoCheck = function () {
         var title = this.location.prepareExternalUrl(this.location.path());
-        this.activePage = navbar_routes_config_1.ROUTES.find(function (item) {
+        this.activePage = _.find(navbar_routes_config_1.ROUTES, function (item) {
             return title.indexOf(item.path) >= 0;
         });
+        this.title = this.activePage.title;
+        if (localStorage.getItem('title') != null || localStorage.getItem('title') != 'null')
+            this.title = this.activePage.title.replace(':id', "\"" + localStorage.getItem('title') + "\"");
     };
     HeaderComponent.prototype.onLoggedout = function () {
         localStorage.removeItem('id_token');

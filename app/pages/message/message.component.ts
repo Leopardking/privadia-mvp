@@ -21,16 +21,7 @@ export class MessageComponent implements OnInit{
     }); }
 
     ngOnInit(){
+        localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
-        /*
-        setTimeout(()=> {
-            let dataTableQuery: any = $('#datatables');
-            const tableWidget = dataTableQuery.DataTable({
-                bLengthChange: false,
-                ordering: false,
-                info: false,
-            });
-        }, 10)
-        */
     }
 }

@@ -101,6 +101,7 @@ var EditpropertyComponent = (function () {
                     selectQuery.selectpicker('refresh');
                 }, 500);
             });
+            localStorage.setItem('title', _this.propertiesService.property.Name);
         }, 1500);
     };
     EditpropertyComponent.prototype.setContacts = function (contacts) {

@@ -25,7 +25,7 @@ export class EditpropertyComponent implements OnInit {
 
     public propertyForm: FormGroup;
 
-    constructor ( private propertiesService: PropertiesService,
+    constructor ( public propertiesService: PropertiesService,
                   private loginService: LoginService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
@@ -112,7 +112,9 @@ export class EditpropertyComponent implements OnInit {
                     selectQuery.selectpicker('render');
                     selectQuery.selectpicker('refresh');
                 }, 500);
-            })
+            });
+
+            localStorage.setItem('title', this.propertiesService.property.Name);
         }, 1500);
     }
 

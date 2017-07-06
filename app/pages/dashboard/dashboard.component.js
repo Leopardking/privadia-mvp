@@ -23,13 +23,9 @@ var DashboardComponent = (function () {
     }
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
+        localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         $('.modal').appendTo("body");
-        /*
-        setTimeout(()=> {
-            $('.modal-content').perfectScrollbar();
-        },100)
-        */
         this.filterForm = this.builder.group({
             Bedrooms: new forms_1.FormControl(),
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
@@ -42,11 +38,11 @@ var DashboardComponent = (function () {
         });
         this.enquiryForm = this.builder.group({
             PropertyId: new forms_1.FormControl(),
-            ClientFirstName: new forms_1.FormControl('Test First Name', forms_1.Validators.required),
-            ClientLastName: new forms_1.FormControl('Test Last Name', forms_1.Validators.required),
+            ClientFirstName: new forms_1.FormControl('', forms_1.Validators.required),
+            ClientLastName: new forms_1.FormControl('', forms_1.Validators.required),
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-            Message: new forms_1.FormControl('Test Message'),
+            Message: new forms_1.FormControl(''),
         });
         this.proposalForm = this.builder.group({
             PropertyId: new forms_1.FormControl(),
