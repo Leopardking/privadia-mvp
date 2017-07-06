@@ -2,7 +2,7 @@
     <div class="enquiry-header">
         <div class="image-wrp">
             <div class="image-villa">
-                <cl-image *ngIf="propertiesService.property.Images[0].ImageId"
+                <cl-image *ngIf="propertiesService.property.Images[0]"
                           data-u="image"
                           public-id="{{propertiesService.property.Images[0].ImageId}}"
                           cloud-name="privadia"
@@ -14,7 +14,7 @@
                           width="600"
                           format="jpg">
                 </cl-image>
-                <img *ngIf="!propertiesService.property.Images[0].ImageId" class="img" src="../assets/img/image_placeholder.jpg">
+                <img *ngIf="!propertiesService.property.Images[0]" class="img" src="../assets/img/image_placeholder.jpg">
             </div>
         </div>
         <div class="villa-container left">
