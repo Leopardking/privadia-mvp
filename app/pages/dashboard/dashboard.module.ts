@@ -19,8 +19,6 @@ import { DashboardComponent } from './dashboard.component';
 import { VillaComponent } from '../../components/villa/villa.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardfilterComponent } from "../../components/dashboard-filter/dashboard-filter.component";
-import { DatetimefieldComponent } from "../../components/form-fields/datetimepicker-field/datetimepicker-field.component";
-import { SelectfieldComponent } from "../../components/form-fields/select-field/select.component";
 import { EnquiryComponent } from "../../components/modal/enquiry/enquiry.component";
 
 /**

@@ -1,15 +1,17 @@
-import { MenuType, RouteInfo } from './navbar.metadata';
+import { RouteInfo } from './navbar.metadata';
 
 export const ROUTES: RouteInfo[] = [
-    { path: '/', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'dashboard' },
-    { path: '/dashboard', title: 'Dashboard', menuType: MenuType.LEFT, icon: 'dashboard' },
-    { path: '/booking', title: 'Bookings', menuType: MenuType.LEFT, icon: 'confirmation_number' },
+    // { path: '/', title: 'Dashboard', icon: 'dashboard' },
+    { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
+    { path: '/booking', title: 'Bookings', icon: 'confirmation_number' },
 
-    { path: '/properties', title: 'Properties', menuType: MenuType.LEFT, icon: 'store' },
-    { path: '/properties/addproperty', title: 'Add Property', menuType: MenuType.LEFT, icon: 'store' },
-    { path: '/properties/editproperty', title: 'Edit Property', menuType: MenuType.LEFT, icon: 'store' },
+    { path: '/properties/add', title: 'Add Property', icon: 'store' },
+    { path: '/properties/edit', title: 'Edit Property', icon: 'store' },
+    { path: '/properties/view', title: 'View Property', icon: 'store' },
+    { path: '/properties', title: 'Properties', icon: 'store' },
 
-    { path: '/notifications', title: 'Notifications', menuType: MenuType.LEFT, icon: 'notifications' },
-    { path: '/message', title: 'Messages', menuType: MenuType.LEFT, icon: 'mail' },
-    { path: '/users', title: 'Users', menuType: MenuType.LEFT, icon: 'group' },
+    { path: '/notifications', title: 'Notifications', icon: 'notifications' },
+    { path: '/message', title: 'Messages', icon: 'mail' },
+    { path: '/message/dialogs', title: 'Messages', icon: 'mail' },
+    { path: '/users', title: 'Users', icon: 'group' },
 ];

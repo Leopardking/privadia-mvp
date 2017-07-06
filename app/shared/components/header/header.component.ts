@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ROUTES } from './navbar-routes.config';
-import { MenuType } from './navbar.metadata';
-import {Location} from "@angular/common";
-// import { Router, NavigationEnd } from '@angular/router';
-// import { TranslateService } from '@ngx-translate/core';
+import { Location } from "@angular/common";
 
 @Component({
     moduleId: module.id,
@@ -14,7 +11,11 @@ import {Location} from "@angular/common";
 })
 export class HeaderComponent implements OnInit {
     public menuItems: any[];
-    public activePage;
+    public activePage = {
+        path: null,
+        title: null,
+        icon: null
+    };
 
     location: Location;
     constructor( location: Location ) {
@@ -25,43 +26,15 @@ export class HeaderComponent implements OnInit {
     }
 
     ngDoCheck() {
-        this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
-
         let title = this.location.prepareExternalUrl(this.location.path());
-        this.activePage = this.menuItems.find((item) => {
-            return item.path == title
-        })
+        this.activePage = ROUTES.find((item) => {
+            return title.indexOf(item.path) >= 0;
+        });
 
-        this.activePage = this.activePage || { path: '/properties/editproperty', title: 'Edit Property', menuType: MenuType.LEFT, icon: 'store'}
     }
 
     onLoggedout() {
         localStorage.removeItem('id_token');
         localStorage.removeItem('permissions');
     }
-/*
-    constructor(private translate: TranslateService, public router: Router) {
-        this.router.events.subscribe((val) => {
-            if (val instanceof NavigationEnd && window.innerWidth <= 992) {
-                this.toggleSidebar();
-            }
-        });
-    }
-    ngOnInit() {}
-
-    toggleSidebar() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle('push-right');
-    }
-
-    rltAndLtr() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle('rtl');
-    }
-
-
-    changeLang(language: string) {
-        //this.translate.use(language);
-    }
- */
 }

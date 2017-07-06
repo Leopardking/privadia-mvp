@@ -1,14 +1,15 @@
 "use strict";
-var navbar_metadata_1 = require('./navbar.metadata');
 exports.ROUTES = [
-    { path: '/', title: 'Dashboard', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'dashboard' },
-    { path: '/dashboard', title: 'Dashboard', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'dashboard' },
-    { path: '/booking', title: 'Bookings', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'confirmation_number' },
-    { path: '/properties', title: 'Properties', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'store' },
-    { path: '/properties/addproperty', title: 'Add Property', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'store' },
-    { path: '/properties/editproperty', title: 'Edit Property', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'store' },
-    { path: '/notifications', title: 'Notifications', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'notifications' },
-    { path: '/message', title: 'Messages', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'mail' },
-    { path: '/users', title: 'Users', menuType: navbar_metadata_1.MenuType.LEFT, icon: 'group' },
+    // { path: '/', title: 'Dashboard', icon: 'dashboard' },
+    { path: '/dashboard', title: 'Dashboard', icon: 'dashboard' },
+    { path: '/booking', title: 'Bookings', icon: 'confirmation_number' },
+    { path: '/properties/add', title: 'Add Property', icon: 'store' },
+    { path: '/properties/edit', title: 'Edit Property', icon: 'store' },
+    { path: '/properties/view', title: 'View Property', icon: 'store' },
+    { path: '/properties', title: 'Properties', icon: 'store' },
+    { path: '/notifications', title: 'Notifications', icon: 'notifications' },
+    { path: '/message', title: 'Messages', icon: 'mail' },
+    { path: '/message/dialogs', title: 'Messages', icon: 'mail' },
+    { path: '/users', title: 'Users', icon: 'group' },
 ];
 //# sourceMappingURL=navbar-routes.config.js.map
