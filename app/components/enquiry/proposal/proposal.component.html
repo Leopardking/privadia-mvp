@@ -5,145 +5,145 @@
                 <div class="proposal-line">Proposal</div>
             </div>
         </div>
-        <div class="row">
+        <div *ngIf="!data.Enquiry.Proposal" class="row">
             <div class="col-xs-12 text-center">
                 <p>You have no proposal created for this Enquiry yet</p>
             </div>
         </div>
-        <!--proposal block -->
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="input-group p-l-5">
-                    <span class="input-group-addon"><i class="material-icons">person</i></span>
-                    <input-field-cmp [data]="{title: 'Customer Name', type: 'text'}"
-                                     [field]="proposalManagerForm.controls.CustomerName"></input-field-cmp>
+        <div *ngIf="data.Enquiry.Proposal">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group p-l-5">
+                        <span class="input-group-addon"><i class="material-icons">person</i></span>
+                        <input-field-cmp [data]="{title: 'Customer Name', type: 'text'}"
+                                         [field]="proposalManagerForm.controls.CustomerName"></input-field-cmp>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="input-group p-r-15">
+                        <span class="input-group-addon"><i class="material-icons">location_city</i></span>
+                        <input-field-cmp [data]="{title: 'Property', type: 'text'}"
+                                         [field]="proposalManagerForm.controls.PropertyName"></input-field-cmp>
+                    </div>
                 </div>
             </div>
-            <div class="col-xs-6">
-                <div class="input-group p-r-15">
-                    <span class="input-group-addon"><i class="material-icons">location_city</i></span>
-                    <input-field-cmp [data]="{title: 'Property', type: 'text'}"
-                                     [field]="proposalManagerForm.controls.PropertyName"></input-field-cmp>
+            <div class="row">
+                <div class="col-xs-6 normalize-datetitme">
+                    <datetimepicker-field-cmp [data]="{title: 'Check In'}"
+                                              [classes]="{withIcon: true}"
+                                              [field]="proposalManagerForm.controls.CheckIn"></datetimepicker-field-cmp>
+                </div>
+                <div class="col-xs-6 normalize-datetitme">
+                    <datetimepicker-field-cmp [data]="{title: 'Check Out'}"
+                                              [classes]="{withIcon: true}"
+                                              [field]="proposalManagerForm.controls.CheckOut"></datetimepicker-field-cmp>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6 normalize-datetitme">
-                <datetimepicker-field-cmp [data]="{title: 'Check In'}"
-                                          [classes]="{withIcon: true}"
-                                          [field]="proposalManagerForm.controls.CheckIn"></datetimepicker-field-cmp>
-            </div>
-            <div class="col-xs-6 normalize-datetitme">
-                <datetimepicker-field-cmp [data]="{title: 'Check Out'}"
-                                          [classes]="{withIcon: true}"
-                                          [field]="proposalManagerForm.controls.CheckOut"></datetimepicker-field-cmp>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="form-inline rental-price p-l-5">
-                    <div class="input-group">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="form-inline rental-price p-l-5">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="material-icons">euro_symbol</i></span>
+                            <input-field-cmp [data]="{title: 'Rental Price', type: 'text'}"
+                                             [field]="proposalManagerForm.controls.RentalPrice"></input-field-cmp>
+                        </div>
+                        <div class="input-group fees">
+                            <span>+ fees </span><i class="material-icons">euro_symbol</i> 100
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="input-group booking-price p-r-15">
                         <span class="input-group-addon"><i class="material-icons">euro_symbol</i></span>
-                        <input-field-cmp [data]="{title: 'Rental Price', type: 'text'}"
-                                         [field]="proposalManagerForm.controls.RentalPrice"></input-field-cmp>
-                    </div>
-                    <div class="input-group fees">
-                        <span>+ fees </span><i class="material-icons">euro_symbol</i> 100
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="input-group booking-price p-r-15">
-                    <span class="input-group-addon"><i class="material-icons">euro_symbol</i></span>
-                    <div class="form-group label-floating">
-                        <label class="control-label"></label>
-                        <span class="form-control-static text-left">
+                        <div class="form-group label-floating">
+                            <label class="control-label"></label>
+                            <span class="form-control-static text-left">
                             {{proposalManagerForm.controls.RentalPrice.value + proposalManagerForm.controls.FeesPrice.value}}
                         </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--manager contracts-->
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="input-group p-l-5">
-                    <span class="input-group-addon"><i class="material-icons">description</i></span>
-                    <div class="form-group label-floating select-component always-visible">
-                        <singleselect-field-cmp *ngIf="proposalManagerForm.controls.TermsContract.value"
-                                                [dataList]="proposalManagerForm.controls.TermsContract.value"
-                                                [options]="{title: 'Terms & Conditions Contract', default: 'Default Contract'}"
-                                                [field]="proposalManagerForm.controls.TermsContractGroup"></singleselect-field-cmp>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="input-group p-r-15">
-                    <span class="input-group-addon"><i class="material-icons">description</i></span>
-                    <div class="form-group label-floating select-component always-visible">
-                        <label class="control-label">Cancellation Policy Contract</label>
-                        <singleselect-field-cmp *ngIf="proposalManagerForm.controls.TermsContract.value"
-                                                [dataList]="proposalManagerForm.controls.TermsContract.value"
-                                                [options]="{title: 'Cancellation Policy Contract', default: 'Default Contract'}"
-                                                [field]="proposalManagerForm.controls.TermsContractGroup"></singleselect-field-cmp>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 p-l-r-30">
-                <div class="divider"></div>
-                <div formArrayName="TermsList" class="terms p-l-r-10">
-                    <h5>Terms</h5>
-                    <div class="terms-wrp" *ngFor="let term of proposalManagerForm.controls['TermsList'].value; let i = index">
-                        <div class="form-group m-none">
-                            <input type="text" class="form-control" [formControlName]="i">
-                        </div>
-                        <button class="btn btn-just-icon btn-simple btn-remove" title="Remove" type="button" (click)="removeTerm()">
-                            <i class="material-icons">clear</i>
-                        </button>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <button type="button"
-                                    class="btn btn-default btn-simple btn-back btn-success pull-right"
-                                    (click)="addTerm()">+ Add</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 p-l-r-30">
-                <div class="divider"></div>
-                <div [formGroup]="proposalManagerForm.controls['Payment']" class="payment-terms p-l-r-10">
-                    <h5>Payment Terms</h5>
-                    <ul>
-                        <li>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group p-l-5">
+                        <span class="input-group-addon"><i class="material-icons">description</i></span>
+                        <div class="form-group label-floating select-component always-visible">
+                            <singleselect-field-cmp *ngIf="proposalManagerForm.controls.TermsContract.value"
+                                                    [dataList]="proposalManagerForm.controls.TermsContract.value"
+                                                    [options]="{title: 'Terms & Conditions Contract', default: 'Default Contract'}"
+                                                    [field]="proposalManagerForm.controls.TermsContractGroup"></singleselect-field-cmp>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="input-group p-r-15">
+                        <span class="input-group-addon"><i class="material-icons">description</i></span>
+                        <div class="form-group label-floating select-component always-visible">
+                            <label class="control-label">Cancellation Policy Contract</label>
+                            <singleselect-field-cmp *ngIf="proposalManagerForm.controls.TermsContract.value"
+                                                    [dataList]="proposalManagerForm.controls.TermsContract.value"
+                                                    [options]="{title: 'Cancellation Policy Contract', default: 'Default Contract'}"
+                                                    [field]="proposalManagerForm.controls.TermsContractGroup"></singleselect-field-cmp>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 p-l-r-30">
+                    <div class="divider"></div>
+                    <div formArrayName="TermsList" class="terms p-l-r-10">
+                        <h5>Terms</h5>
+                        <div class="terms-wrp" *ngFor="let term of proposalManagerForm.controls['TermsList'].value; let i = index">
                             <div class="form-group m-none">
-                                <input type="text" class="form-control" formControlName="PayUpfront">
+                                <input type="text" class="form-control" [formControlName]="i">
                             </div>
-                            <span>% payable upfront</span></li>
-                        <li>
-                            <div class="form-group m-none">
-                                <input type="text" class="form-control" formControlName="PayPercent">
+                            <button class="btn btn-just-icon btn-simple btn-remove" title="Remove" type="button" (click)="removeTerm()">
+                                <i class="material-icons">clear</i>
+                            </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="button"
+                                        class="btn btn-default btn-simple btn-back btn-success pull-right"
+                                        (click)="addTerm()">+ Add</button>
                             </div>
-                            <span>% payable</span>
-                            <div class="form-group m-none">
-                                <input type="text" class="form-control" formControlName="PayWeeks">
-                            </div>
-                            <span>weeks before check in</span>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 p-l-r-30">
+                    <div class="divider"></div>
+                    <div [formGroup]="proposalManagerForm.controls['Payment']" class="payment-terms p-l-r-10">
+                        <h5>Payment Terms</h5>
+                        <ul>
+                            <li>
+                                <div class="form-group m-none">
+                                    <input type="text" class="form-control" formControlName="PayUpfront">
+                                </div>
+                                <span>% payable upfront</span></li>
+                            <li>
+                                <div class="form-group m-none">
+                                    <input type="text" class="form-control" formControlName="PayPercent">
+                                </div>
+                                <span>% payable</span>
+                                <div class="form-group m-none">
+                                    <input type="text" class="form-control" formControlName="PayWeeks">
+                                </div>
+                                <span>weeks before check in</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="enquiry-footer p-l-r-30">
         <!--no proposal manager buttons-->
-        <div *ngIf="data.Enquiry.Proposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal" class="row">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-default btn-simple btn-back btn-danger">Cancel</button>
+                <button type="button" class="btn btn-danger m-l-10">Cancel</button>
             </div>
             <div class="col-xs-6">
                 <button type="button" class="btn btn-success pull-right font-16 m-r-20 p-l-r-20">Create Proposal</button>
@@ -151,7 +151,7 @@
         </div>
         <!--no proposal manager buttons end-->
         <!--proposal manager buttons-->
-        <div *ngIf="!data.Enquiry.Proposal" class="row">
+        <div *ngIf="data.Enquiry.Proposal" class="row">
             <div class="col-xs-4">
                 <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
             </div>

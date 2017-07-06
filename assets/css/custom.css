@@ -459,10 +459,12 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 /**
  * Custom button
  */
-.btn.btn-success {
+.btn.btn-success, .btn.btn-danger {
 	font-size: 14px;
 	min-width: 120px;
 	padding: 12px 15px;
+}
+.btn.btn-success {
 	background-color: #5399bc;
 	box-shadow: 0px 7px 12px 0 rgba(83, 153, 188, 0.4);
 }
