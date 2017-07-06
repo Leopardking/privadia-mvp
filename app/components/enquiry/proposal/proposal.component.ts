@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators, FormArray} from "@angular/forms";
+import {LoginService} from "../../../providers/login/login.service";
 
 declare const moment: any;
 @Component({
@@ -14,7 +15,8 @@ export class ProposalComponent implements OnInit{
     public proposalForm: FormGroup;
     public proposalManagerForm: FormGroup;
 
-	constructor( private builder: FormBuilder) {
+	constructor( private builder: FormBuilder,
+				 private loginService: LoginService ) {
 	    this.proposalForm = builder.group({
 	        CustomerName: new FormControl({ value: 'Customer Name', disabled: true}),
             PropertyName: new FormControl({ value: 'Property Name', disabled: true}),

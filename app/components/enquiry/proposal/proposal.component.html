@@ -1,8 +1,8 @@
-<div [formGroup]="proposalManagerForm">
+<div [formGroup]="proposalManagerForm" *ngIf="loginService.getRoles('Manager')">
     <div class="enquiry-body">
         <div class="row">
             <div class="col-xs-12">
-                <div class="proposal-line">Proposal by Menager</div>
+                <div class="proposal-line">Proposal</div>
             </div>
         </div>
         <div class="row">
@@ -165,118 +165,120 @@
 
 
 </div>
-<div [formGroup]="proposalForm">
+<div [formGroup]="proposalForm" *ngIf="loginService.getRoles('Agent')">
     <div class="enquiry-body">
         <div class="row">
             <div class="col-xs-12">
-                <div class="proposal-line">Proposal by Agent</div>
+                <div class="proposal-line">Proposal</div>
             </div>
         </div>
-        <div *ngIf="data.Enquiry.Proposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal" class="row">
             <div class="col-xs-12 text-center">
                 <p>There’s no proposal created by manager of this property.</p>
                 <p>Please wait for proposal</p>
             </div>
         </div>
-        <div *ngIf="!data.Enquiry.Proposal" class="row">
-            <div class="col-xs-6">
-                <div class="input-group p-l-5">
-                    <span class="input-group-addon"><i class="material-icons">person</i></span>
-                    <input-field-cmp [data]="{title: 'Customer Name', type: 'text'}"
-                                     [field]="proposalForm.controls.CustomerName"></input-field-cmp>
+        <div *ngIf="data.Enquiry.Proposal">
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group p-l-5">
+                        <span class="input-group-addon"><i class="material-icons">person</i></span>
+                        <input-field-cmp [data]="{title: 'Customer Name', type: 'text'}"
+                                         [field]="proposalForm.controls.CustomerName"></input-field-cmp>
+                    </div>
                 </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="input-group p-r-15">
-                    <span class="input-group-addon"><i class="material-icons">location_city</i></span>
-                    <input-field-cmp [data]="{title: 'Property', type: 'text'}"
-                                     [field]="proposalForm.controls.PropertyName"></input-field-cmp>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="input-group p-l-5">
-                    <span class="input-group-addon"><i class="material-icons">insert_invitation</i></span>
-                    <input-field-cmp [data]="{title: 'Check In', type: 'text'}"
-                                     [field]="proposalForm.controls.CheckIn"></input-field-cmp>
-                </div>
-            </div>
-            <div class="col-xs-6">
-                <div class="input-group p-r-15">
-                    <span class="input-group-addon"><i class="material-icons">insert_invitation</i></span>
-                    <input-field-cmp [data]="{title: 'CheckOut', type: 'text'}"
-                                     [field]="proposalForm.controls.CheckOut"></input-field-cmp>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="input-group p-l-5 p-r-15">
-                    <span class="input-group-addon"><i class="material-icons">euro_symbol</i></span>
-                    <input-field-cmp [data]="{title: 'Rental Price', type: 'text'}"
-                                     [field]="proposalForm.controls.RentalPrice"></input-field-cmp>
-                </div>
-            </div>
-        </div>
-        <!--agent contracts-->
-        <div class="row">
-            <div class="col-xs-6">
-                <div class="input-group p-l-5">
-                    <span class="input-group-addon"><i class="material-icons">description</i></span>
-                    <div class="form-group label-floating">
-                        <label class="control-label">Terms & Conditions Contract</label>
-                        <span class="form-control-static"><a href="#">{{proposalForm.controls.TermsPdf.value}}</a></span>
+                <div class="col-xs-6">
+                    <div class="input-group p-r-15">
+                        <span class="input-group-addon"><i class="material-icons">location_city</i></span>
+                        <input-field-cmp [data]="{title: 'Property', type: 'text'}"
+                                         [field]="proposalForm.controls.PropertyName"></input-field-cmp>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6">
-                <div class="input-group p-r-15">
-                    <span class="input-group-addon"><i class="material-icons">description</i></span>
-                    <div class="form-group label-floating">
-                        <label class="control-label">Cancellation Policy Contract</label>
-                        <span class="form-control-static"><a href="#">{{proposalForm.controls.PolicyPdf.value}}</a></span>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group p-l-5">
+                        <span class="input-group-addon"><i class="material-icons">insert_invitation</i></span>
+                        <input-field-cmp [data]="{title: 'Check In', type: 'text'}"
+                                         [field]="proposalForm.controls.CheckIn"></input-field-cmp>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="input-group p-r-15">
+                        <span class="input-group-addon"><i class="material-icons">insert_invitation</i></span>
+                        <input-field-cmp [data]="{title: 'CheckOut', type: 'text'}"
+                                         [field]="proposalForm.controls.CheckOut"></input-field-cmp>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 p-l-r-30">
-                <div class="divider"></div>
-                <div class="terms p-l-r-10">
-                    <h5>Terms</h5>
-                    <ol class="m-b-none">
-                        <li *ngFor="let term of proposalForm.controls.TermsList.value">{{term}}</li>
-                    </ol>
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group p-l-5 p-r-15">
+                        <span class="input-group-addon"><i class="material-icons">euro_symbol</i></span>
+                        <input-field-cmp [data]="{title: 'Rental Price', type: 'text'}"
+                                         [field]="proposalForm.controls.RentalPrice"></input-field-cmp>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 p-l-r-30">
-                <div class="divider"></div>
-                <div class="terms p-l-r-10">
-                    <h5>Payment Terms</h5>
-                    <ul>
-                        <li><strong>{{proposalForm.controls['Payment'].controls['PayUpfront'].value}}%</strong> payable upfront</li>
-                        <li>
-                            <strong>{{proposalForm.controls['Payment'].controls['PayPercent'].value}}%</strong> payable
-                            <strong>{{proposalForm.controls['Payment'].controls['PayWeeks'].value}}</strong> weeks before check in
-                        </li>
-                    </ul>
+            <!--agent contracts-->
+            <div class="row">
+                <div class="col-xs-6">
+                    <div class="input-group p-l-5">
+                        <span class="input-group-addon"><i class="material-icons">description</i></span>
+                        <div class="form-group label-floating">
+                            <label class="control-label">Terms & Conditions Contract</label>
+                            <span class="form-control-static"><a href="#">{{proposalForm.controls.TermsPdf.value}}</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="input-group p-r-15">
+                        <span class="input-group-addon"><i class="material-icons">description</i></span>
+                        <div class="form-group label-floating">
+                            <label class="control-label">Cancellation Policy Contract</label>
+                            <span class="form-control-static"><a href="#">{{proposalForm.controls.PolicyPdf.value}}</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 p-l-r-30">
+                    <div class="divider"></div>
+                    <div class="terms p-l-r-10">
+                        <h5>Terms</h5>
+                        <ol class="m-b-none">
+                            <li *ngFor="let term of proposalForm.controls.TermsList.value">{{term}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 p-l-r-30">
+                    <div class="divider"></div>
+                    <div class="terms p-l-r-10">
+                        <h5>Payment Terms</h5>
+                        <ul>
+                            <li><strong>{{proposalForm.controls['Payment'].controls['PayUpfront'].value}}%</strong> payable upfront</li>
+                            <li>
+                                <strong>{{proposalForm.controls['Payment'].controls['PayPercent'].value}}%</strong> payable
+                                <strong>{{proposalForm.controls['Payment'].controls['PayWeeks'].value}}</strong> weeks before check in
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="enquiry-footer p-l-r-30">
         <!--no proposal agent buttons-->
-        <div *ngIf="data.Enquiry.Proposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal" class="row">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-default btn-simple btn-back btn-danger">Cancel</button>
+                <button type="button" class="btn btn-danger m-l-10">Cancel</button>
             </div>
         </div>
         <!--no proposal agent buttons end-->
         <!--proposal agent buttons-->
-        <div *ngIf="!data.Enquiry.Proposal" class="row">
+        <div *ngIf="data.Enquiry.Proposal" class="row">
             <div class="col-xs-6">
                 <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
             </div>

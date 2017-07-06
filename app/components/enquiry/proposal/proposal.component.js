@@ -10,9 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
+var login_service_1 = require("../../../providers/login/login.service");
 var ProposalComponent = (function () {
-    function ProposalComponent(builder) {
+    function ProposalComponent(builder, loginService) {
         this.builder = builder;
+        this.loginService = loginService;
         this.proposalForm = builder.group({
             CustomerName: new forms_1.FormControl({ value: 'Customer Name', disabled: true }),
             PropertyName: new forms_1.FormControl({ value: 'Property Name', disabled: true }),
@@ -113,7 +115,7 @@ var ProposalComponent = (function () {
             templateUrl: 'proposal.component.html',
             styleUrls: ['proposal.component.css']
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService])
     ], ProposalComponent);
     return ProposalComponent;
 }());
