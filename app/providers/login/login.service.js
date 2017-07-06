@@ -42,7 +42,11 @@ var LoginService = (function () {
     };
     LoginService.prototype.getPermission = function (permission) {
         var permissions = JSON.parse(localStorage.getItem('user')).Permissions;
-        return permissions.filter(function (element) { return element.Name === permission; })[0];
+        return permissions.find(function (element) { return element.Name === permission; });
+    };
+    LoginService.prototype.getRoles = function (role) {
+        var roles = JSON.parse(localStorage.getItem('user')).Roles;
+        return roles.find(function (element) { return element.Name === role; });
     };
     LoginService.prototype.getUser = function () {
         return JSON.parse(localStorage.getItem('user'));

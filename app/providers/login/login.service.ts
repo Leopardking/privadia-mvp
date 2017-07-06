@@ -46,7 +46,12 @@ export class LoginService {
 
 	public getPermission(permission) {
 		const permissions = JSON.parse(localStorage.getItem('user')).Permissions;
-		return permissions.filter( element => element.Name === permission)[0];
+		return permissions.find( element => element.Name === permission);
+	}
+
+	public getRoles(role) {
+		const roles = JSON.parse(localStorage.getItem('user')).Roles;
+		return roles.find( element => element.Name === role);
 	}
 
 	public getUser() {

@@ -9,12 +9,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var login_service_1 = require("../../../providers/login/login.service");
 var EnquiriesTableComponent = (function () {
-    function EnquiriesTableComponent() {
+    function EnquiriesTableComponent(loginService) {
+        this.loginService = loginService;
         this.datatableInited = false;
     }
-    EnquiriesTableComponent.prototype.ngOnInit = function () {
-    };
+    EnquiriesTableComponent.prototype.ngOnInit = function () { };
     EnquiriesTableComponent.prototype.finishReading = function () {
         var dataTableQuery = $('#datatables');
         dataTableQuery.DataTable({
@@ -39,7 +40,7 @@ var EnquiriesTableComponent = (function () {
             templateUrl: 'enquiries.component.html',
             styleUrls: ['enquiries.component.css']
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [login_service_1.LoginService])
     ], EnquiriesTableComponent);
     return EnquiriesTableComponent;
 }());

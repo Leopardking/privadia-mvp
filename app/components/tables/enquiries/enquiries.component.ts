@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {LoginService} from "../../../providers/login/login.service";
 
 declare const moment: any;
 
@@ -13,11 +14,9 @@ export class EnquiriesTableComponent implements OnInit{
     @Input() data;
     private datatableInited = false;
 
-    constructor( ) { }
+    constructor( private loginService: LoginService ) { }
 
-	ngOnInit() {
-
-	}
+	ngOnInit() { }
 
     public finishReading() {
         let dataTableQuery: any = $('#datatables');
