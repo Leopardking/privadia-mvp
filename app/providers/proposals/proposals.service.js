@@ -22,7 +22,7 @@ var ProposalsService = (function () {
         this.token = localStorage.getItem('id_token');
         console.log('Load Proposals Service');
     }
-    ProposalsService.prototype.saveProposals = function (data) {
+    ProposalsService.prototype.createProposals = function (data) {
         if (!this.loginService.getPermission('Proposals/Post'))
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });

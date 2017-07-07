@@ -11,13 +11,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../../providers/login/login.service");
-var proposals_service_1 = require("../../../providers/proposals/proposals.service");
+var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var ProposalComponent = (function () {
-    function ProposalComponent(builder, loginService, proposalsService) {
+    function ProposalComponent(builder, loginService, enquiryService) {
         this.builder = builder;
         this.loginService = loginService;
-        this.proposalsService = proposalsService;
+        this.enquiryService = enquiryService;
         this.isCreateProposal = false;
+        this.TermsContract = [{
+                Id: 1,
+                Name: 'Contract',
+            }, {
+                Id: 2,
+                Name: 'Contract 2',
+            }, {
+                Id: 3,
+                Name: 'Contract 3',
+            }, {
+                Id: 4,
+                Name: 'Contract 4',
+            }];
         console.log('Data ', this.data);
         this.proposalForm = builder.group({
             CustomerName: new forms_1.FormControl({ value: 'Customer Name', disabled: true }),
@@ -45,43 +58,26 @@ var ProposalComponent = (function () {
         console.log('Proposal Form', this.proposalForm);
         console.log('Proposal Manager Form', this.proposalManagerForm);
         this.proposalManagerForm = this.builder.group({
-            Id: new forms_1.FormControl(this.data.Id),
+            EnquiryMessageThreadId: new forms_1.FormControl(this.data.Id),
+            CheckIn: new forms_1.FormControl(this.data.Enquiry.CheckIn),
+            CheckOut: new forms_1.FormControl(this.data.Enquiry.CheckOut),
             CustomerName: new forms_1.FormControl({ value: this.data.Enquiry.ClientName, disabled: false }),
             PropertyName: new forms_1.FormControl({ value: this.data.Enquiry.PropertyName, disabled: false }),
-            CheckIn: new forms_1.FormControl(moment(this.data.Enquiry.CheckIn).format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment(this.data.Enquiry.CheckOut).format('MM/DD/YYYY')),
-            RentalPrice: new forms_1.FormControl('1500'),
-            FeesPrice: new forms_1.FormControl('100'),
-            TermsPdf: new forms_1.FormControl('Customer Name'),
-            TermsContract: new forms_1.FormArray([
-                new forms_1.FormGroup({
-                    Id: new forms_1.FormControl(1),
-                    Name: new forms_1.FormControl('Contract'),
-                }),
-                new forms_1.FormGroup({
-                    Id: new forms_1.FormControl(2),
-                    Name: new forms_1.FormControl('Contract 2'),
-                }),
-                new forms_1.FormGroup({
-                    Id: new forms_1.FormControl(3),
-                    Name: new forms_1.FormControl('Contract 3'),
-                }),
-                new forms_1.FormGroup({
-                    Id: new forms_1.FormControl(4),
-                    Name: new forms_1.FormControl('Contract 4'),
-                }),
-            ]),
-            TermsContractGroup: new forms_1.FormControl({
-                Id: 1,
-                Name: 'Contract',
-            }),
+            RentalCost: new forms_1.FormControl(1500),
+            Fees: new forms_1.FormControl(11),
+            ExchangeFeePercentage: new forms_1.FormControl(10),
             TermsList: new forms_1.FormArray([]),
-            Payment: new forms_1.FormGroup({
-                PayUpfront: new forms_1.FormControl(40),
-                PayPercent: new forms_1.FormControl(40),
-                PayWeeks: new forms_1.FormControl(2),
+            DepositPercentage: new forms_1.FormControl(40),
+            BalancePercentage: new forms_1.FormControl(40),
+            BalanceDaysBeforeCheckIn: new forms_1.FormControl(2),
+            DefaultTerms: new forms_1.FormControl({
+                Id: 0,
+                Name: 'Default Contract'
             }),
-            PolicyPdf: new forms_1.FormControl('Customer Name')
+            CancellationPolicy: new forms_1.FormControl({
+                Id: 0,
+                Name: 'Default Contract'
+            }),
         });
     };
     ProposalComponent.prototype.onSubmitManager = function () {
@@ -97,7 +93,8 @@ var ProposalComponent = (function () {
         console.log('remove Term');
     };
     ProposalComponent.prototype.createProposal = function () {
-        this.isCreateProposal = true;
+        console.log('Create Proposal');
+        this.enquiryService.createProposal({ EnquiryMessageThreadId: this.data.Id });
     };
     ProposalComponent.prototype.acceptProposal = function () {
         console.log('Accept Proposal');
@@ -105,19 +102,29 @@ var ProposalComponent = (function () {
     ProposalComponent.prototype.submitProposal = function () {
         console.log('Submit Proposal Form', this.proposalManagerForm);
         console.log('Submit Proposal');
-        this.proposalsService.submitProposals(this.proposalManagerForm.value).subscribe(function (d) {
-            console.log('Submit Proposal ', d);
-        }, function (e) {
-            console.log('Submit Proposal Error', e);
-        });
+        /*
+        this.proposalsService.submitProposals(this.proposalManagerForm.value).subscribe(
+            d => {
+                console.log('Submit Proposal ', d)
+            },
+            e => {
+                console.log('Submit Proposal Error', e)
+            }
+        )
+        */
     };
     ProposalComponent.prototype.saveProposal = function () {
         console.log('Save Proposal');
-        this.proposalsService.saveProposals(this.proposalManagerForm.value).subscribe(function (d) {
-            console.log('Submit Proposal ', d);
-        }, function (e) {
-            console.log('Submit Proposal Error', e);
-        });
+        /*
+        this.proposalsService.saveProposals({EnquiryMessageThreadId: this.data.Id}).subscribe(
+            d => {
+                console.log('Submit Proposal ', d)
+            },
+            e => {
+                console.log('Submit Proposal Error', e)
+            }
+        )
+        */
     };
     ProposalComponent.prototype.declineProposal = function () {
         console.log('Decline Proposal');
@@ -133,7 +140,7 @@ var ProposalComponent = (function () {
             templateUrl: 'proposal.component.html',
             styleUrls: ['proposal.component.css']
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, proposals_service_1.ProposalsService])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, enquiry_service_1.EnquiryService])
     ], ProposalComponent);
     return ProposalComponent;
 }());

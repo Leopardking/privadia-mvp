@@ -5,12 +5,12 @@
                 <div class="proposal-line">Proposal</div>
             </div>
         </div>
-        <div *ngIf="!data.Enquiry.Proposal && !isCreateProposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal" class="row">
             <div class="col-xs-12 text-center">
                 <p>You have no proposal created for this Enquiry yet</p>
             </div>
         </div>
-        <div *ngIf="data.Enquiry.Proposal || !isCreateProposal">
+        <div *ngIf="data.Enquiry.Proposal">
             <div class="row">
                 <div class="col-xs-6">
                     <div class="input-group p-l-5">
@@ -45,7 +45,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="material-icons">euro_symbol</i></span>
                             <input-field-cmp [data]="{title: 'Rental Price', type: 'text'}"
-                                             [field]="proposalManagerForm.controls.RentalPrice"></input-field-cmp>
+                                             [field]="proposalManagerForm.controls.RentalCost"></input-field-cmp>
                         </div>
                         <div class="input-group fees">
                             <span>+ fees </span><i class="material-icons">euro_symbol</i> 100
@@ -58,7 +58,7 @@
                         <div class="form-group label-floating">
                             <label class="control-label"></label>
                             <span class="form-control-static text-left">
-                            {{proposalManagerForm.controls.RentalPrice.value + proposalManagerForm.controls.FeesPrice.value}}
+                            {{proposalManagerForm.controls.RentalCost.value + proposalManagerForm.controls.Fees.value}}
                         </span>
                         </div>
                     </div>
@@ -69,10 +69,10 @@
                     <div class="input-group p-l-5">
                         <span class="input-group-addon"><i class="material-icons">description</i></span>
                         <div class="form-group label-floating select-component always-visible">
-                            <singleselect-field-cmp *ngIf="proposalManagerForm.controls.TermsContract.value"
-                                                    [dataList]="proposalManagerForm.controls.TermsContract.value"
+                            <singleselect-field-cmp *ngIf="TermsContract"
+                                                    [dataList]="TermsContract"
                                                     [options]="{title: 'Terms & Conditions Contract', default: 'Default Contract'}"
-                                                    [field]="proposalManagerForm.controls.TermsContractGroup"></singleselect-field-cmp>
+                                                    [field]="proposalManagerForm.controls.DefaultTerms"></singleselect-field-cmp>
                         </div>
                     </div>
                 </div>
@@ -81,10 +81,10 @@
                         <span class="input-group-addon"><i class="material-icons">description</i></span>
                         <div class="form-group label-floating select-component always-visible">
                             <label class="control-label">Cancellation Policy Contract</label>
-                            <singleselect-field-cmp *ngIf="proposalManagerForm.controls.TermsContract.value"
-                                                    [dataList]="proposalManagerForm.controls.TermsContract.value"
+                            <singleselect-field-cmp *ngIf="TermsContract"
+                                                    [dataList]="TermsContract"
                                                     [options]="{title: 'Cancellation Policy Contract', default: 'Default Contract'}"
-                                                    [field]="proposalManagerForm.controls.TermsContractGroup"></singleselect-field-cmp>
+                                                    [field]="proposalManagerForm.controls.CancellationPolicy"></singleselect-field-cmp>
                         </div>
                     </div>
                 </div>
@@ -115,21 +115,21 @@
             <div class="row">
                 <div class="col-xs-12 p-l-r-30">
                     <div class="divider"></div>
-                    <div [formGroup]="proposalManagerForm.controls['Payment']" class="payment-terms p-l-r-10">
+                    <div class="payment-terms p-l-r-10">
                         <h5>Payment Terms</h5>
                         <ul>
                             <li>
                                 <div class="form-group m-none">
-                                    <input type="text" class="form-control" formControlName="PayUpfront">
+                                    <input type="text" class="form-control" [formControl]="proposalManagerForm.controls.DepositPercentage">
                                 </div>
                                 <span>% payable upfront</span></li>
                             <li>
                                 <div class="form-group m-none">
-                                    <input type="text" class="form-control" formControlName="PayPercent">
+                                    <input type="text" class="form-control" [formControl]="proposalManagerForm.controls.BalancePercentage">
                                 </div>
                                 <span>% payable</span>
                                 <div class="form-group m-none">
-                                    <input type="text" class="form-control" formControlName="PayWeeks">
+                                    <input type="text" class="form-control" [formControl]="proposalManagerForm.controls.BalanceDaysBeforeCheckIn">
                                 </div>
                                 <span>weeks before check in</span>
                             </li>
@@ -141,22 +141,22 @@
     </div>
     <div class="enquiry-footer p-l-r-30">
         <!--no proposal manager buttons-->
-        <div *ngIf="!data.Enquiry.Proposal && !isCreateProposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal" class="row">
             <div class="col-xs-6">
                 <button type="button" class="btn btn-danger m-l-10">Cancel</button>
             </div>
             <div class="col-xs-6">
-                <button type="button" class="btn btn-success pull-right font-16 m-r-20 p-l-r-20" (click)="createProposal()">Create Proposal</button>
+                <button type="button" class="btn btn-success pull-right font-16 m-r-10" (click)="createProposal()">Create Proposal</button>
             </div>
         </div>
         <!--no proposal manager buttons end-->
         <!--proposal manager buttons-->
-        <div *ngIf="data.Enquiry.Proposal || !isCreateProposal" class="row">
+        <div *ngIf="data.Enquiry.Proposal" class="row">
             <div class="col-xs-4">
                 <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
             </div>
             <div class="col-xs-8">
-                <button type="button" class="btn btn-success-green pull-right font-16 p-l-r-20 m-r-10" (click)="submitProposal()">Submit</button>
+                <button type="button" class="btn btn-success-green pull-right font-16 m-r-10" (click)="submitProposal()">Submit</button>
                 <button type="button" class="btn btn-success pull-right font-16 m-r-20 p-l-r-20" (click)="saveProposal()">Save</button>
             </div>
         </div>

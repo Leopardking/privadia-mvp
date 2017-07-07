@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators, FormArray} from "@angular/forms";
 import {LoginService} from "../../../providers/login/login.service";
 import {ProposalsService} from "../../../providers/proposals/proposals.service";
+import {EnquiryService} from "../../../providers/enquery/enquiry.service";
 
 declare const moment: any;
 
@@ -18,9 +19,23 @@ export class ProposalComponent implements OnInit{
     public proposalManagerForm: FormGroup;
     public isCreateProposal = false;
 
+    public TermsContract = [{
+			Id: 1,
+			Name: 'Contract',
+		}, {
+			Id: 2,
+			Name: 'Contract 2',
+		}, {
+			Id: 3,
+			Name: 'Contract 3',
+		}, {
+			Id: 4,
+			Name: 'Contract 4',
+		}];
+
 	constructor( private builder: FormBuilder,
 				 private loginService: LoginService,
-				 private proposalsService: ProposalsService ) {
+				 private enquiryService: EnquiryService ) {
 		console.log('Data ', this.data)
 	    this.proposalForm = builder.group({
 	        CustomerName: new FormControl({ value: 'Customer Name', disabled: true}),
@@ -51,43 +66,26 @@ export class ProposalComponent implements OnInit{
 	    console.log('Proposal Manager Form', this.proposalManagerForm);
 
 	    this.proposalManagerForm = this.builder.group({
-			Id: new FormControl(this.data.Id),
+			EnquiryMessageThreadId: new FormControl(this.data.Id),
+			CheckIn: new FormControl(this.data.Enquiry.CheckIn),
+			CheckOut: new FormControl(this.data.Enquiry.CheckOut),
 			CustomerName: new FormControl({ value: this.data.Enquiry.ClientName, disabled: false}),
 			PropertyName: new FormControl({ value: this.data.Enquiry.PropertyName, disabled: false}),
-			CheckIn: new FormControl(moment(this.data.Enquiry.CheckIn).format('MM/DD/YYYY')),
-			CheckOut: new FormControl(moment(this.data.Enquiry.CheckOut).format('MM/DD/YYYY')),
-			RentalPrice: new FormControl('1500'),
-			FeesPrice: new FormControl('100'),
-			TermsPdf: new FormControl('Customer Name'),
-			TermsContract: new FormArray([
-				new FormGroup({
-					Id: new FormControl(1),
-					Name: new FormControl('Contract'),
-				}),
-				new FormGroup({
-					Id: new FormControl(2),
-					Name: new FormControl('Contract 2'),
-				}),
-				new FormGroup({
-					Id: new FormControl(3),
-					Name: new FormControl('Contract 3'),
-				}),
-				new FormGroup({
-					Id: new FormControl(4),
-					Name: new FormControl('Contract 4'),
-				}),
-			]),
-			TermsContractGroup: new FormControl({
-				Id: 1,
-				Name: 'Contract',
-			}),
+			RentalCost: new FormControl(1500),
+			Fees: new FormControl(11),
+			ExchangeFeePercentage: new FormControl(10),
 			TermsList: new FormArray([]),
-			Payment: new FormGroup({
-				PayUpfront: new FormControl(40),
-				PayPercent: new FormControl(40),
-				PayWeeks: new FormControl(2),
+			DepositPercentage: new FormControl(40),
+			BalancePercentage: new FormControl(40),
+			BalanceDaysBeforeCheckIn: new FormControl(2),
+			DefaultTerms: new FormControl({
+				Id: 0,
+				Name: 'Default Contract'
 			}),
-			PolicyPdf: new FormControl('Customer Name')
+			CancellationPolicy: new FormControl({
+				Id: 0,
+				Name: 'Default Contract'
+			}),
 		})
     }
 
@@ -106,7 +104,8 @@ export class ProposalComponent implements OnInit{
 	}
 
 	private createProposal() {
-		this.isCreateProposal = true
+		console.log('Create Proposal')
+		this.enquiryService.createProposal({EnquiryMessageThreadId: this.data.Id});
 	}
 
 	private acceptProposal() {
@@ -116,6 +115,7 @@ export class ProposalComponent implements OnInit{
     private submitProposal() {
 		console.log('Submit Proposal Form', this.proposalManagerForm);
 	    console.log('Submit Proposal')
+		/*
 		this.proposalsService.submitProposals(this.proposalManagerForm.value).subscribe(
 			d => {
 				console.log('Submit Proposal ', d)
@@ -124,11 +124,13 @@ export class ProposalComponent implements OnInit{
 				console.log('Submit Proposal Error', e)
 			}
 		)
+		*/
     }
 
     private saveProposal() {
-	    console.log('Save Proposal')
-		this.proposalsService.saveProposals(this.proposalManagerForm.value).subscribe(
+	    console.log('Save Proposal');
+	    /*
+		this.proposalsService.saveProposals({EnquiryMessageThreadId: this.data.Id}).subscribe(
 			d => {
 				console.log('Submit Proposal ', d)
 			},
@@ -136,6 +138,7 @@ export class ProposalComponent implements OnInit{
 				console.log('Submit Proposal Error', e)
 			}
 		)
+		*/
     }
 
     private declineProposal() {

@@ -20,7 +20,7 @@ var LoginComponent = (function () {
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.errorForm = false;
         this.loginForm = new forms_1.FormGroup({
-            Email: new forms_1.FormControl('manager@freelancemvc.net', forms_1.Validators.compose([
+            Email: new forms_1.FormControl('manager41@freelancemvc.net', forms_1.Validators.compose([
                 forms_1.Validators.required,
                 forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
             ])),

@@ -32,6 +32,7 @@ var enquiry_component_1 = require("../../components/modal/enquiry/enquiry.compon
  *  My Modules
  */
 var form_field_module_1 = require("../../modules/form-fields/form-field.module");
+var proposals_service_1 = require("../../providers/proposals/proposals.service");
 var DashboardModule = (function () {
     function DashboardModule() {
     }
@@ -52,7 +53,7 @@ var DashboardModule = (function () {
                 dashboard_filter_component_1.DashboardfilterComponent,
                 enquiry_component_1.EnquiryComponent
             ],
-            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, enquiry_service_1.EnquiryService]
+            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, enquiry_service_1.EnquiryService, proposals_service_1.ProposalsService]
         }), 
         __metadata('design:paramtypes', [])
     ], DashboardModule);

@@ -14,10 +14,12 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var login_service_1 = require("../login/login.service");
+var proposals_service_1 = require("../proposals/proposals.service");
 var EnquiryService = (function () {
-    function EnquiryService(http, loginService) {
+    function EnquiryService(http, loginService, proposalsService) {
         this.http = http;
         this.loginService = loginService;
+        this.proposalsService = proposalsService;
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
         console.log('Load Enquiry Service');
@@ -36,6 +38,14 @@ var EnquiryService = (function () {
             _this.enquiry = d;
         }, function (e) {
             console.log('Error Enquiries', e);
+        });
+    };
+    EnquiryService.prototype.createProposal = function (id) {
+        var _this = this;
+        this.proposalsService.createProposals(id).subscribe(function (d) {
+            _this.enquiry = d;
+        }, function (e) {
+            console.log('Error Create Proposal', e);
         });
     };
     EnquiryService.prototype.getEnquiries = function () {
@@ -83,7 +93,7 @@ var EnquiryService = (function () {
     };
     EnquiryService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService])
+        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService, proposals_service_1.ProposalsService])
     ], EnquiryService);
     return EnquiryService;
 }());

@@ -25,6 +25,7 @@ import { EnquiryComponent } from "../../components/modal/enquiry/enquiry.compone
  *  My Modules
  */
 import { FormFieldsModule } from "../../modules/form-fields/form-field.module";
+import {ProposalsService} from "../../providers/proposals/proposals.service";
 
 @NgModule({
     imports: [
@@ -42,6 +43,6 @@ import { FormFieldsModule } from "../../modules/form-fields/form-field.module";
         DashboardfilterComponent,
         EnquiryComponent
     ],
-    providers: [ DashboardService, PropertiesService, LookupsService, EnquiryService ]
+    providers: [ DashboardService, PropertiesService, LookupsService, EnquiryService, ProposalsService ]
 })
 export class DashboardModule {}

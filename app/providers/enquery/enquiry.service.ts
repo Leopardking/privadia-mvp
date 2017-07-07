@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import {LoginService} from "../login/login.service";
+import {ProposalsService} from "../proposals/proposals.service";
 
 @Injectable()
 export class EnquiryService {
@@ -15,7 +16,8 @@ export class EnquiryService {
 	public enquiry;
 
 	constructor ( private http: Http,
-				  private loginService: LoginService ) {
+				  private loginService: LoginService,
+				  private proposalsService: ProposalsService ) {
 		console.log('Load Enquiry Service');
 	}
 
@@ -37,6 +39,17 @@ export class EnquiryService {
 			},
 			e => {
 				console.log('Error Enquiries', e)
+			}
+		)
+	}
+
+	public createProposal(id) {
+		this.proposalsService.createProposals(id).subscribe(
+			d => {
+				this.enquiry = d;
+			},
+			e => {
+				console.log('Error Create Proposal', e)
 			}
 		)
 	}

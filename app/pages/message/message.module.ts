@@ -14,6 +14,7 @@ import { MessageComponent } from './message.component';
 import { MessageRoutingModule } from './message-routing.module';
 import { Ng2CloudinaryModule } from "ng2-cloudinary";
 import { EnquiriesTableComponent } from "../../components/tables/enquiries/enquiries.component";
+import {ProposalsService} from "../../providers/proposals/proposals.service";
 
 @NgModule({
     imports: [
@@ -26,6 +27,6 @@ import { EnquiriesTableComponent } from "../../components/tables/enquiries/enqui
         MessageComponent,
         EnquiriesTableComponent,
     ],
-    providers: [ EnquiryService ]
+    providers: [ EnquiryService, ProposalsService ]
 })
 export class MessageModule {}

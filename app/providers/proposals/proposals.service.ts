@@ -16,7 +16,7 @@ export class ProposalsService {
 		console.log('Load Proposals Service');
 	}
 
-	public saveProposals(data) {
+	public createProposals(data) {
 		if(!this.loginService.getPermission('Proposals/Post'))
 			return Observable.throw(null);
 
