@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, OnChanges} from '@angular/core';
 import {FormGroup, FormControl, Validators } from "@angular/forms";
 import {MessagesService} from "../../../providers/messages/messages.service";
 
@@ -10,7 +10,7 @@ declare const $: any;
     styleUrls: [ 'dialog.component.css' ]
 })  
 
-export class DialogComponent implements OnInit{
+export class DialogComponent implements OnInit, OnChanges{
 	@Input() private data: any;
 	@Input() private enquiryId: any;
 
@@ -33,6 +33,9 @@ export class DialogComponent implements OnInit{
         });
     }
 
+    ngOnChanges() {
+	    console.log('Changes')
+    }
     public onSubmit(value) {
         this.messagesService.addMessage(value).subscribe(
             d => {

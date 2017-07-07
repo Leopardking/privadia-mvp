@@ -8,16 +8,12 @@
             </div>
             <div class="row" *ngFor="let item of data; let i = index">
                 <div class="col-xs-12">
-                    <div class="message to">
+                    <div *ngIf="!item.SystemGenerated" class="message to">
                         <div class="message-text">{{item.Content}}</div>
                         <div class="message-date pull-left">Read at 1:42 pm</div>
                         <div class="message-date">1:38 pm</div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="message info">
+                    <div *ngIf="item.SystemGenerated" class="message info">
                         <div class="message-text">
                             <i class="material-icons">info_outline</i> Proposal has been updated
                         </div>

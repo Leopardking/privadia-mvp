@@ -11,12 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../../providers/login/login.service");
+var proposals_service_1 = require("../../../providers/proposals/proposals.service");
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var ProposalComponent = (function () {
-    function ProposalComponent(builder, loginService, enquiryService) {
+    function ProposalComponent(builder, loginService, enquiryService, proposalsService) {
         this.builder = builder;
         this.loginService = loginService;
         this.enquiryService = enquiryService;
+        this.proposalsService = proposalsService;
+        this.isAgent = this.loginService.getRoles('Agent');
         this.isCreateProposal = false;
         this.TermsContract = [{
                 Id: 1,
@@ -32,51 +35,74 @@ var ProposalComponent = (function () {
                 Name: 'Contract 4',
             }];
         console.log('Data ', this.data);
+        /*
         this.proposalForm = builder.group({
-            CustomerName: new forms_1.FormControl({ value: 'Customer Name', disabled: true }),
-            PropertyName: new forms_1.FormControl({ value: 'Property Name', disabled: true }),
-            CheckIn: new forms_1.FormControl({ value: '06/27/2017', disabled: true }),
-            CheckOut: new forms_1.FormControl({ value: '06/29/2017', disabled: true }),
-            RentalPrice: new forms_1.FormControl({ value: '1500', disabled: true }),
-            TermsPdf: new forms_1.FormControl({ value: 'Customer Name', disabled: true }),
-            TermsList: new forms_1.FormArray([
-                new forms_1.FormControl({ value: 'Term 1', disabled: true }),
-                new forms_1.FormControl({ value: 'Term 2', disabled: true }),
-                new forms_1.FormControl({ value: 'Term 3', disabled: true }),
-                new forms_1.FormControl({ value: 'Term 4', disabled: true }),
+            CustomerName: new FormControl({ value: 'Customer Name', disabled: true}),
+            PropertyName: new FormControl({ value: 'Property Name', disabled: true}),
+            CheckIn: new FormControl({ value: '06/27/2017', disabled: true}),
+            CheckOut: new FormControl({ value: '06/29/2017', disabled: true}),
+            RentalPrice: new FormControl({ value: '1500', disabled: true}),
+            TermsPdf: new FormControl({ value: 'Customer Name', disabled: true}),
+            TermsList: new FormArray([
+                new FormControl({ value: 'Term 1', disabled: true}),
+                new FormControl({ value: 'Term 2', disabled: true}),
+                new FormControl({ value: 'Term 3', disabled: true}),
+                new FormControl({ value: 'Term 4', disabled: true}),
             ]),
-            Payment: new forms_1.FormGroup({
-                PayUpfront: new forms_1.FormControl({ value: 40, disabled: true }),
-                PayPercent: new forms_1.FormControl({ value: 40, disabled: true }),
-                PayWeeks: new forms_1.FormControl({ value: 2, disabled: true }),
+            Payment: new FormGroup({
+                PayUpfront: new FormControl({ value: 40, disabled: true}),
+                PayPercent: new FormControl({ value: 40, disabled: true}),
+                PayWeeks: new FormControl({ value: 2, disabled: true}),
             }),
-            PolicyPdf: new forms_1.FormControl({ value: 'Customer Name', disabled: true })
+            PolicyPdf: new FormControl({ value: 'Customer Name', disabled: true})
         });
+        */
     }
     ProposalComponent.prototype.ngOnInit = function () {
-        console.log('Data Proposal', this.data);
+        console.log('Data Proposal');
         console.log('Proposal Form', this.proposalForm);
         console.log('Proposal Manager Form', this.proposalManagerForm);
+        this.initForm(this.data);
+    };
+    ProposalComponent.prototype.initForm = function (data) {
         this.proposalManagerForm = this.builder.group({
             EnquiryMessageThreadId: new forms_1.FormControl(this.data.Id),
-            CheckIn: new forms_1.FormControl(this.data.Enquiry.CheckIn),
-            CheckOut: new forms_1.FormControl(this.data.Enquiry.CheckOut),
-            CustomerName: new forms_1.FormControl({ value: this.data.Enquiry.ClientName, disabled: false }),
-            PropertyName: new forms_1.FormControl({ value: this.data.Enquiry.PropertyName, disabled: false }),
-            RentalCost: new forms_1.FormControl(1500),
-            Fees: new forms_1.FormControl(11),
-            ExchangeFeePercentage: new forms_1.FormControl(10),
+            CheckIn: new forms_1.FormControl({ value: moment(data.Enquiry.CheckIn).format('MM/DD/YYYY'), disabled: true }),
+            CheckOut: new forms_1.FormControl({ value: moment(data.Enquiry.CheckOut).format('MM/DD/YYYY'), disabled: true }),
+            CustomerName: new forms_1.FormControl({ value: data.Enquiry.ClientName, disabled: true }),
+            PropertyName: new forms_1.FormControl({ value: data.Enquiry.PropertyName, disabled: true }),
+            RentalCost: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost || 0,
+                disabled: this.isAgent
+            }),
+            Fees: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.Fees || 0,
+                disabled: this.isAgent
+            }),
+            ExchangeFeePercentage: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
+                disabled: this.isAgent
+            }),
             TermsList: new forms_1.FormArray([]),
-            DepositPercentage: new forms_1.FormControl(40),
-            BalancePercentage: new forms_1.FormControl(40),
-            BalanceDaysBeforeCheckIn: new forms_1.FormControl(2),
+            DepositPercentage: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
+                disabled: this.isAgent
+            }),
+            BalancePercentage: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalancePercentage || 0,
+                disabled: this.isAgent
+            }),
+            BalanceDaysBeforeCheckIn: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalanceDaysBeforeCheckIn || 0,
+                disabled: this.isAgent
+            }),
             DefaultTerms: new forms_1.FormControl({
-                Id: 0,
-                Name: 'Default Contract'
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.DefaultTerms || null,
+                disabled: this.isAgent
             }),
             CancellationPolicy: new forms_1.FormControl({
-                Id: 0,
-                Name: 'Default Contract'
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.CancellationPolicy || null,
+                disabled: this.isAgent
             }),
         });
     };
@@ -93,38 +119,31 @@ var ProposalComponent = (function () {
         console.log('remove Term');
     };
     ProposalComponent.prototype.createProposal = function () {
-        console.log('Create Proposal');
+        var _this = this;
+        console.log('Create Proposal set', this.enquiryService.enquiry);
+        console.log('Create Proposal', this.proposalManagerForm);
         this.enquiryService.createProposal({ EnquiryMessageThreadId: this.data.Id });
+        setTimeout(function () {
+            _this.initForm(_this.enquiryService.enquiry);
+        }, 500);
     };
     ProposalComponent.prototype.acceptProposal = function () {
         console.log('Accept Proposal');
     };
     ProposalComponent.prototype.submitProposal = function () {
-        console.log('Submit Proposal Form', this.proposalManagerForm);
-        console.log('Submit Proposal');
-        /*
-        this.proposalsService.submitProposals(this.proposalManagerForm.value).subscribe(
-            d => {
-                console.log('Submit Proposal ', d)
-            },
-            e => {
-                console.log('Submit Proposal Error', e)
-            }
-        )
-        */
+        var _this = this;
+        this.enquiryService.submitProposal({ EnquiryMessageThreadId: this.data.Id });
+        setTimeout(function () {
+            _this.initForm(_this.enquiryService.enquiry);
+        }, 1000);
     };
     ProposalComponent.prototype.saveProposal = function () {
         console.log('Save Proposal');
-        /*
-        this.proposalsService.saveProposals({EnquiryMessageThreadId: this.data.Id}).subscribe(
-            d => {
-                console.log('Submit Proposal ', d)
-            },
-            e => {
-                console.log('Submit Proposal Error', e)
-            }
-        )
-        */
+        this.proposalsService.saveProposals(this.proposalManagerForm.value).subscribe(function (d) {
+            console.log('Submit Proposal ', d);
+        }, function (e) {
+            console.log('Submit Proposal Error', e);
+        });
     };
     ProposalComponent.prototype.declineProposal = function () {
         console.log('Decline Proposal');
@@ -140,7 +159,7 @@ var ProposalComponent = (function () {
             templateUrl: 'proposal.component.html',
             styleUrls: ['proposal.component.css']
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, enquiry_service_1.EnquiryService])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, enquiry_service_1.EnquiryService, proposals_service_1.ProposalsService])
     ], ProposalComponent);
     return ProposalComponent;
 }());

@@ -54,6 +54,17 @@ export class EnquiryService {
 		)
 	}
 
+	public submitProposal(id) {
+		this.proposalsService.submitProposals(id).subscribe(
+			d => {
+				this.enquiry = d;
+			},
+			e => {
+				console.log('Error Create Proposal', e)
+			}
+		)
+	}
+
 	public getEnquiries() {
 		if(!this.loginService.getPermission('Lookups/GetRegions'))
 			return Observable.throw(null);

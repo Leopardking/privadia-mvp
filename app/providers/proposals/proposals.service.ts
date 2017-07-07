@@ -28,6 +28,18 @@ export class ProposalsService {
             .catch(this.handleError);
 	}
 
+	public saveProposals(data) {
+		if(!this.loginService.getPermission('Proposals/Post'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.put( `${this.apiUrl}/api/Proposals`, data, options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
 	public submitProposals(data) {
 		if(!this.loginService.getPermission('Proposals/Submit'))
 			return Observable.throw(null);

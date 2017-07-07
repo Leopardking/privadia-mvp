@@ -31,6 +31,15 @@ var ProposalsService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    ProposalsService.prototype.saveProposals = function (data) {
+        if (!this.loginService.getPermission('Proposals/Post'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.put(this.apiUrl + "/api/Proposals", data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     ProposalsService.prototype.submitProposals = function (data) {
         if (!this.loginService.getPermission('Proposals/Submit'))
             return Observable_1.Observable.throw(null);

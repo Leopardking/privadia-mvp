@@ -25,6 +25,9 @@ var DialogComponent = (function () {
             Content: new forms_1.FormControl('Test message send', forms_1.Validators.required)
         });
     };
+    DialogComponent.prototype.ngOnChanges = function () {
+        console.log('Changes');
+    };
     DialogComponent.prototype.onSubmit = function (value) {
         this.messagesService.addMessage(value).subscribe(function (d) {
             console.log('Send Message', d);

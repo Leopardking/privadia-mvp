@@ -17,6 +17,7 @@ export class ProposalComponent implements OnInit{
     @Input() private data;
     public proposalForm: FormGroup;
     public proposalManagerForm: FormGroup;
+	public isAgent = this.loginService.getRoles('Agent');
     public isCreateProposal = false;
 
     public TermsContract = [{
@@ -35,8 +36,9 @@ export class ProposalComponent implements OnInit{
 
 	constructor( private builder: FormBuilder,
 				 private loginService: LoginService,
-				 private enquiryService: EnquiryService ) {
+				 private enquiryService: EnquiryService, private proposalsService: ProposalsService ) {
 		console.log('Data ', this.data)
+		/*
 	    this.proposalForm = builder.group({
 	        CustomerName: new FormControl({ value: 'Customer Name', disabled: true}),
             PropertyName: new FormControl({ value: 'Property Name', disabled: true}),
@@ -57,38 +59,58 @@ export class ProposalComponent implements OnInit{
             }),
 	        PolicyPdf: new FormControl({ value: 'Customer Name', disabled: true})
         });
-
+		*/
     }
 
 	ngOnInit() {
-	    console.log('Data Proposal', this.data);
+	    console.log('Data Proposal', );
 	    console.log('Proposal Form', this.proposalForm);
 	    console.log('Proposal Manager Form', this.proposalManagerForm);
-
-	    this.proposalManagerForm = this.builder.group({
-			EnquiryMessageThreadId: new FormControl(this.data.Id),
-			CheckIn: new FormControl(this.data.Enquiry.CheckIn),
-			CheckOut: new FormControl(this.data.Enquiry.CheckOut),
-			CustomerName: new FormControl({ value: this.data.Enquiry.ClientName, disabled: false}),
-			PropertyName: new FormControl({ value: this.data.Enquiry.PropertyName, disabled: false}),
-			RentalCost: new FormControl(1500),
-			Fees: new FormControl(11),
-			ExchangeFeePercentage: new FormControl(10),
-			TermsList: new FormArray([]),
-			DepositPercentage: new FormControl(40),
-			BalancePercentage: new FormControl(40),
-			BalanceDaysBeforeCheckIn: new FormControl(2),
-			DefaultTerms: new FormControl({
-				Id: 0,
-				Name: 'Default Contract'
-			}),
-			CancellationPolicy: new FormControl({
-				Id: 0,
-				Name: 'Default Contract'
-			}),
-		})
+		this.initForm(this.data)
     }
 
+    private initForm(data) {
+		this.proposalManagerForm = this.builder.group({
+			EnquiryMessageThreadId: new FormControl(this.data.Id),
+			CheckIn: new FormControl({ value: moment(data.Enquiry.CheckIn).format('MM/DD/YYYY'), disabled: true}),
+			CheckOut: new FormControl({ value: moment(data.Enquiry.CheckOut).format('MM/DD/YYYY'), disabled: true}),
+			CustomerName: new FormControl({ value: data.Enquiry.ClientName, disabled: true}),
+			PropertyName: new FormControl({ value: data.Enquiry.PropertyName, disabled: true}),
+			RentalCost: new FormControl({
+				value: data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost || 0,
+				disabled: this.isAgent
+			}),
+			Fees: new FormControl({
+				value: data.Enquiry.Proposal && data.Enquiry.Proposal.Fees || 0,
+				disabled: this.isAgent
+			}),
+			ExchangeFeePercentage: new FormControl({
+				value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
+				disabled: this.isAgent
+			}),
+			TermsList: new FormArray([]),
+			DepositPercentage: new FormControl({
+				value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
+				disabled: this.isAgent
+			}),
+			BalancePercentage: new FormControl({
+				value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalancePercentage || 0,
+				disabled: this.isAgent
+			}),
+			BalanceDaysBeforeCheckIn: new FormControl({
+				value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalanceDaysBeforeCheckIn || 0,
+				disabled: this.isAgent
+			}),
+			DefaultTerms: new FormControl({
+				value: data.Enquiry.Proposal && data.Enquiry.Proposal.DefaultTerms || null,
+				disabled: this.isAgent
+			}),
+			CancellationPolicy: new FormControl({
+				value: data.Enquiry.Proposal && data.Enquiry.Proposal.CancellationPolicy || null,
+				disabled: this.isAgent
+			}),
+		})
+	}
     private onSubmitManager() {
 	}
     private addTerm() {
@@ -104,8 +126,13 @@ export class ProposalComponent implements OnInit{
 	}
 
 	private createProposal() {
-		console.log('Create Proposal')
+		console.log('Create Proposal set', this.enquiryService.enquiry);
+		console.log('Create Proposal', this.proposalManagerForm);
+
 		this.enquiryService.createProposal({EnquiryMessageThreadId: this.data.Id});
+		setTimeout(() => {
+			this.initForm(this.enquiryService.enquiry)
+		}, 500)
 	}
 
 	private acceptProposal() {
@@ -113,24 +140,16 @@ export class ProposalComponent implements OnInit{
     }
 
     private submitProposal() {
-		console.log('Submit Proposal Form', this.proposalManagerForm);
-	    console.log('Submit Proposal')
-		/*
-		this.proposalsService.submitProposals(this.proposalManagerForm.value).subscribe(
-			d => {
-				console.log('Submit Proposal ', d)
-			},
-			e => {
-				console.log('Submit Proposal Error', e)
-			}
-		)
-		*/
+		this.enquiryService.submitProposal({EnquiryMessageThreadId: this.data.Id});
+
+		setTimeout(() => {
+			this.initForm(this.enquiryService.enquiry)
+		}, 1000)
     }
 
     private saveProposal() {
 	    console.log('Save Proposal');
-	    /*
-		this.proposalsService.saveProposals({EnquiryMessageThreadId: this.data.Id}).subscribe(
+		this.proposalsService.saveProposals(this.proposalManagerForm.value).subscribe(
 			d => {
 				console.log('Submit Proposal ', d)
 			},
@@ -138,7 +157,6 @@ export class ProposalComponent implements OnInit{
 				console.log('Submit Proposal Error', e)
 			}
 		)
-		*/
     }
 
     private declineProposal() {
