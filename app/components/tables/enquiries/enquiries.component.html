@@ -46,7 +46,7 @@
             </td>
             <td *ngIf="loginService.getRoles('Agent')">{{ item.ToName }}</td>
             <td *ngIf="loginService.getRoles('Manager')">{{ item.FromName }}</td>
-            <td>{{ item.PropertyName }}</td>
+            <td>{{ item.Subject }}</td>
             <td>{{ dateFormat(item.SentAt, 'D MMMM h:mmA') }}</td>
             <td>
                 <div class="enquiry-status1">{{item.EnquiryStatusDesc}}</div>
