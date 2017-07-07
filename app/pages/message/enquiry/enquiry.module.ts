@@ -25,6 +25,7 @@ import { ProposalComponent } from "../../../components/enquiry/proposal/proposal
 import { FormFieldsModule } from "../../../modules/form-fields/form-field.module";
 import {PropertiesService} from "../../../providers/properties/properties.service";
 import {LookupsService} from "../../../providers/lookups/lookups.service";
+import {ProposalsService} from "../../../providers/proposals/proposals.service";
 
 @NgModule({
     imports: [
@@ -42,6 +43,6 @@ import {LookupsService} from "../../../providers/lookups/lookups.service";
         PropertyInfoComponent,
         ProposalComponent
     ],
-    providers: [ EnquiryService, MessagesService, PropertiesService, LookupsService ]
+    providers: [ EnquiryService, MessagesService, PropertiesService, LookupsService, ProposalsService ]
 })
 export class EnquiryModule {}

@@ -5,12 +5,12 @@
                 <div class="proposal-line">Proposal</div>
             </div>
         </div>
-        <div *ngIf="!data.Enquiry.Proposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal && !isCreateProposal" class="row">
             <div class="col-xs-12 text-center">
                 <p>You have no proposal created for this Enquiry yet</p>
             </div>
         </div>
-        <div *ngIf="data.Enquiry.Proposal">
+        <div *ngIf="data.Enquiry.Proposal || !isCreateProposal">
             <div class="row">
                 <div class="col-xs-6">
                     <div class="input-group p-l-5">
@@ -141,17 +141,17 @@
     </div>
     <div class="enquiry-footer p-l-r-30">
         <!--no proposal manager buttons-->
-        <div *ngIf="!data.Enquiry.Proposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal && !isCreateProposal" class="row">
             <div class="col-xs-6">
                 <button type="button" class="btn btn-danger m-l-10">Cancel</button>
             </div>
             <div class="col-xs-6">
-                <button type="button" class="btn btn-success pull-right font-16 m-r-20 p-l-r-20">Create Proposal</button>
+                <button type="button" class="btn btn-success pull-right font-16 m-r-20 p-l-r-20" (click)="createProposal()">Create Proposal</button>
             </div>
         </div>
         <!--no proposal manager buttons end-->
         <!--proposal manager buttons-->
-        <div *ngIf="data.Enquiry.Proposal" class="row">
+        <div *ngIf="data.Enquiry.Proposal || !isCreateProposal" class="row">
             <div class="col-xs-4">
                 <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
             </div>

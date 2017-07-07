@@ -32,6 +32,7 @@ var proposal_component_1 = require("../../../components/enquiry/proposal/proposa
 var form_field_module_1 = require("../../../modules/form-fields/form-field.module");
 var properties_service_1 = require("../../../providers/properties/properties.service");
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
+var proposals_service_1 = require("../../../providers/proposals/proposals.service");
 var EnquiryModule = (function () {
     function EnquiryModule() {
     }
@@ -52,7 +53,7 @@ var EnquiryModule = (function () {
                 property_info_component_1.PropertyInfoComponent,
                 proposal_component_1.ProposalComponent
             ],
-            providers: [enquiry_service_1.EnquiryService, messages_service_1.MessagesService, properties_service_1.PropertiesService, lookups_service_1.LookupsService]
+            providers: [enquiry_service_1.EnquiryService, messages_service_1.MessagesService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, proposals_service_1.ProposalsService]
         }), 
         __metadata('design:paramtypes', [])
     ], EnquiryModule);

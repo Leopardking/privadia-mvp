@@ -11,10 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../../providers/login/login.service");
+var proposals_service_1 = require("../../../providers/proposals/proposals.service");
 var ProposalComponent = (function () {
-    function ProposalComponent(builder, loginService) {
+    function ProposalComponent(builder, loginService, proposalsService) {
         this.builder = builder;
         this.loginService = loginService;
+        this.proposalsService = proposalsService;
+        this.isCreateProposal = false;
+        console.log('Data ', this.data);
         this.proposalForm = builder.group({
             CustomerName: new forms_1.FormControl({ value: 'Customer Name', disabled: true }),
             PropertyName: new forms_1.FormControl({ value: 'Property Name', disabled: true }),
@@ -35,11 +39,17 @@ var ProposalComponent = (function () {
             }),
             PolicyPdf: new forms_1.FormControl({ value: 'Customer Name', disabled: true })
         });
-        this.proposalManagerForm = builder.group({
-            CustomerName: new forms_1.FormControl({ value: 'Customer Name', disabled: true }),
-            PropertyName: new forms_1.FormControl({ value: 'Property Name', disabled: true }),
-            CheckIn: new forms_1.FormControl('06/27/2017'),
-            CheckOut: new forms_1.FormControl('06/29/2017'),
+    }
+    ProposalComponent.prototype.ngOnInit = function () {
+        console.log('Data Proposal', this.data);
+        console.log('Proposal Form', this.proposalForm);
+        console.log('Proposal Manager Form', this.proposalManagerForm);
+        this.proposalManagerForm = this.builder.group({
+            Id: new forms_1.FormControl(this.data.Id),
+            CustomerName: new forms_1.FormControl({ value: this.data.Enquiry.ClientName, disabled: false }),
+            PropertyName: new forms_1.FormControl({ value: this.data.Enquiry.PropertyName, disabled: false }),
+            CheckIn: new forms_1.FormControl(moment(this.data.Enquiry.CheckIn).format('MM/DD/YYYY')),
+            CheckOut: new forms_1.FormControl(moment(this.data.Enquiry.CheckOut).format('MM/DD/YYYY')),
             RentalPrice: new forms_1.FormControl('1500'),
             FeesPrice: new forms_1.FormControl('100'),
             TermsPdf: new forms_1.FormControl('Customer Name'),
@@ -73,11 +83,6 @@ var ProposalComponent = (function () {
             }),
             PolicyPdf: new forms_1.FormControl('Customer Name')
         });
-    }
-    ProposalComponent.prototype.ngOnInit = function () {
-        console.log('Data Proposal', this.data);
-        console.log('Proposal Form', this.proposalForm);
-        console.log('Proposal Manager Form', this.proposalManagerForm);
     };
     ProposalComponent.prototype.onSubmitManager = function () {
     };
@@ -91,15 +96,28 @@ var ProposalComponent = (function () {
         control.removeAt(i);
         console.log('remove Term');
     };
+    ProposalComponent.prototype.createProposal = function () {
+        this.isCreateProposal = true;
+    };
     ProposalComponent.prototype.acceptProposal = function () {
         console.log('Accept Proposal');
     };
     ProposalComponent.prototype.submitProposal = function () {
         console.log('Submit Proposal Form', this.proposalManagerForm);
         console.log('Submit Proposal');
+        this.proposalsService.submitProposals(this.proposalManagerForm.value).subscribe(function (d) {
+            console.log('Submit Proposal ', d);
+        }, function (e) {
+            console.log('Submit Proposal Error', e);
+        });
     };
     ProposalComponent.prototype.saveProposal = function () {
         console.log('Save Proposal');
+        this.proposalsService.saveProposals(this.proposalManagerForm.value).subscribe(function (d) {
+            console.log('Submit Proposal ', d);
+        }, function (e) {
+            console.log('Submit Proposal Error', e);
+        });
     };
     ProposalComponent.prototype.declineProposal = function () {
         console.log('Decline Proposal');
@@ -115,7 +133,7 @@ var ProposalComponent = (function () {
             templateUrl: 'proposal.component.html',
             styleUrls: ['proposal.component.css']
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, proposals_service_1.ProposalsService])
     ], ProposalComponent);
     return ProposalComponent;
 }());
