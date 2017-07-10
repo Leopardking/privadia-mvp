@@ -37,35 +37,9 @@ export class ProposalComponent implements OnInit{
 	constructor( private builder: FormBuilder,
 				 private loginService: LoginService,
 				 private enquiryService: EnquiryService, private proposalsService: ProposalsService ) {
-		console.log('Data ', this.data)
-		/*
-	    this.proposalForm = builder.group({
-	        CustomerName: new FormControl({ value: 'Customer Name', disabled: true}),
-            PropertyName: new FormControl({ value: 'Property Name', disabled: true}),
-	        CheckIn: new FormControl({ value: '06/27/2017', disabled: true}),
-	        CheckOut: new FormControl({ value: '06/29/2017', disabled: true}),
-	        RentalPrice: new FormControl({ value: '1500', disabled: true}),
-	        TermsPdf: new FormControl({ value: 'Customer Name', disabled: true}),
-	        TermsList: new FormArray([
-	            new FormControl({ value: 'Term 1', disabled: true}),
-	            new FormControl({ value: 'Term 2', disabled: true}),
-	            new FormControl({ value: 'Term 3', disabled: true}),
-	            new FormControl({ value: 'Term 4', disabled: true}),
-            ]),
-	        Payment: new FormGroup({
-                PayUpfront: new FormControl({ value: 40, disabled: true}),
-                PayPercent: new FormControl({ value: 40, disabled: true}),
-                PayWeeks: new FormControl({ value: 2, disabled: true}),
-            }),
-	        PolicyPdf: new FormControl({ value: 'Customer Name', disabled: true})
-        });
-		*/
     }
 
 	ngOnInit() {
-	    console.log('Data Proposal', );
-	    console.log('Proposal Form', this.proposalForm);
-	    console.log('Proposal Manager Form', this.proposalManagerForm);
 		this.initForm(this.data)
     }
 
@@ -125,9 +99,6 @@ export class ProposalComponent implements OnInit{
 	}
 
 	private createProposal() {
-		console.log('Create Proposal set', this.enquiryService.enquiry);
-		console.log('Create Proposal', this.proposalManagerForm);
-
 		this.enquiryService.createProposal({EnquiryMessageThreadId: this.data.Id});
 		setTimeout(() => {
 			this.initForm(this.enquiryService.enquiry)
@@ -139,11 +110,12 @@ export class ProposalComponent implements OnInit{
     }
 
     private submitProposal() {
+		console.log('Submit Proposal',)
 		this.enquiryService.submitProposal({EnquiryMessageThreadId: this.data.Id});
 
 		setTimeout(() => {
 			this.initForm(this.enquiryService.enquiry)
-		}, 1000)
+		}, 500)
     }
 
     private saveProposal() {

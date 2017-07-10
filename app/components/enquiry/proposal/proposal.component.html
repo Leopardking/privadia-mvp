@@ -5,12 +5,12 @@
                 <div class="proposal-line">Proposal</div>
             </div>
         </div>
-        <div *ngIf="!data.Enquiry.Proposal && (!data.Enquiry.DeclinedAt || !data.Enquiry.CancelledAt)" class="row">
+        <div *ngIf="!data.Enquiry.Proposal && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-12 text-center">
                 <p>You have no proposal created for this Enquiry yet</p>
             </div>
         </div>
-        <div *ngIf="data.Enquiry.DeclinedAt && data.Enquiry.CancelledAt" class="row">
+        <div *ngIf="data.Enquiry.DeclinedAt" class="row">
             <div class="col-xs-12 text-center">
                 <p>Enquiry was decline</p>
             </div>
@@ -79,8 +79,8 @@
                     <div class="input-group p-l-5">
                         <span class="input-group-addon"><i class="material-icons">description</i></span>
                         <div class="form-group label-floating select-component always-visible">
-                            <singleselect-field-cmp *ngIf="TermsContract"
-                                                    [dataList]="TermsContract"
+                            <singleselect-field-cmp *ngIf="proposalManagerForm.controls.DefaultTerms.value"
+                                                    [dataList]="[proposalManagerForm.controls.DefaultTerms.value]"
                                                     [options]="{title: 'Terms & Conditions Contract', default: 'Default Contract'}"
                                                     [field]="proposalManagerForm.controls.DefaultTerms"></singleselect-field-cmp>
                         </div>
@@ -91,8 +91,8 @@
                         <span class="input-group-addon"><i class="material-icons">description</i></span>
                         <div class="form-group label-floating select-component always-visible">
                             <label class="control-label">Cancellation Policy Contract</label>
-                            <singleselect-field-cmp *ngIf="TermsContract"
-                                                    [dataList]="TermsContract"
+                            <singleselect-field-cmp *ngIf="proposalManagerForm.controls.CancellationPolicy.value"
+                                                    [dataList]="[proposalManagerForm.controls.CancellationPolicy.value]"
                                                     [options]="{title: 'Cancellation Policy Contract', default: 'Default Contract'}"
                                                     [field]="proposalManagerForm.controls.CancellationPolicy"></singleselect-field-cmp>
                         </div>
@@ -151,7 +151,7 @@
     </div>
     <div class="enquiry-footer p-l-r-30">
         <!--no proposal manager buttons-->
-        <div *ngIf="!data.Enquiry.Proposal && !data.Enquiry.CancelledAt" class="row">
+        <div *ngIf="!data.Enquiry.Proposal && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-6">
                 <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
             </div>
@@ -180,23 +180,23 @@
                 <div class="proposal-line">Proposal</div>
             </div>
         </div>
-        <div *ngIf="(!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt) && !data.Enquiry.CancelledAt" class="row">
+        <div *ngIf="(!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt) && !data.Enquiry.CancelledAt && !data.Enquiry.DeclinedAt" class="row">
             <div class="col-xs-12 text-center">
                 <p>There’s no proposal created by manager of this property.</p>
                 <p>Please wait for proposal</p>
             </div>
         </div>
-        <div *ngIf="data.Enquiry.DeclinedAt && data.Enquiry.CancelledAt" class="row">
+        <div *ngIf="data.Enquiry.DeclinedAt" class="row">
             <div class="col-xs-12 text-center">
                 <p>Enquiry was decline</p>
             </div>
         </div>
-        <div *ngIf="!data.Enquiry.DeclinedAt && data.Enquiry.CancelledAt" class="row">
+        <div *ngIf="data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-12 text-center">
                 <p>Enquiry was cancelled</p>
             </div>
         </div>
-        <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt && !data.Enquiry.DeclinedAt">
+        <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt && !data.Enquiry.CancelledAt && !data.Enquiry.DeclinedAt">
             <div class="row">
                 <div class="col-xs-6">
                     <div class="input-group p-l-5">
@@ -289,14 +289,14 @@
     </div>
     <div class="enquiry-footer p-l-r-30">
         <!--no proposal agent buttons-->
-        <div *ngIf="(!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt) && !data.Enquiry.CancelledAt" class="row">
+        <div *ngIf="(!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt) && !data.Enquiry.CancelledAt && !data.Enquiry.DeclinedAt" class="row">
             <div class="col-xs-6">
                 <button type="button" class="btn btn-danger m-l-10" (click)="cancelProposal()">Cancel</button>
             </div>
         </div>
         <!--no proposal agent buttons end-->
         <!--proposal agent buttons-->
-        <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt && !data.Enquiry.DeclinedAt" class="row">
+        <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-6">
                 <button type="button" class="btn btn-danger m-l-10" (click)="cancelProposal()">Cancel</button>
             </div>

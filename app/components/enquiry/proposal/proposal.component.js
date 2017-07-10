@@ -34,34 +34,8 @@ var ProposalComponent = (function () {
                 Id: 4,
                 Name: 'Contract 4',
             }];
-        console.log('Data ', this.data);
-        /*
-        this.proposalForm = builder.group({
-            CustomerName: new FormControl({ value: 'Customer Name', disabled: true}),
-            PropertyName: new FormControl({ value: 'Property Name', disabled: true}),
-            CheckIn: new FormControl({ value: '06/27/2017', disabled: true}),
-            CheckOut: new FormControl({ value: '06/29/2017', disabled: true}),
-            RentalPrice: new FormControl({ value: '1500', disabled: true}),
-            TermsPdf: new FormControl({ value: 'Customer Name', disabled: true}),
-            TermsList: new FormArray([
-                new FormControl({ value: 'Term 1', disabled: true}),
-                new FormControl({ value: 'Term 2', disabled: true}),
-                new FormControl({ value: 'Term 3', disabled: true}),
-                new FormControl({ value: 'Term 4', disabled: true}),
-            ]),
-            Payment: new FormGroup({
-                PayUpfront: new FormControl({ value: 40, disabled: true}),
-                PayPercent: new FormControl({ value: 40, disabled: true}),
-                PayWeeks: new FormControl({ value: 2, disabled: true}),
-            }),
-            PolicyPdf: new FormControl({ value: 'Customer Name', disabled: true})
-        });
-        */
     }
     ProposalComponent.prototype.ngOnInit = function () {
-        console.log('Data Proposal');
-        console.log('Proposal Form', this.proposalForm);
-        console.log('Proposal Manager Form', this.proposalManagerForm);
         this.initForm(this.data);
     };
     ProposalComponent.prototype.initForm = function (data) {
@@ -118,8 +92,6 @@ var ProposalComponent = (function () {
     };
     ProposalComponent.prototype.createProposal = function () {
         var _this = this;
-        console.log('Create Proposal set', this.enquiryService.enquiry);
-        console.log('Create Proposal', this.proposalManagerForm);
         this.enquiryService.createProposal({ EnquiryMessageThreadId: this.data.Id });
         setTimeout(function () {
             _this.initForm(_this.enquiryService.enquiry);
@@ -130,10 +102,11 @@ var ProposalComponent = (function () {
     };
     ProposalComponent.prototype.submitProposal = function () {
         var _this = this;
+        console.log('Submit Proposal');
         this.enquiryService.submitProposal({ EnquiryMessageThreadId: this.data.Id });
         setTimeout(function () {
             _this.initForm(_this.enquiryService.enquiry);
-        }, 1000);
+        }, 500);
     };
     ProposalComponent.prototype.saveProposal = function () {
         console.log('Save Proposal');
