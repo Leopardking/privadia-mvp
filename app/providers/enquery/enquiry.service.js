@@ -57,7 +57,7 @@ var EnquiryService = (function () {
         });
     };
     EnquiryService.prototype.getEnquiries = function () {
-        if (!this.loginService.getPermission('Lookups/GetRegions'))
+        if (!this.loginService.getPermission('Enquiries/Get'))
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
@@ -66,7 +66,7 @@ var EnquiryService = (function () {
             .catch(this.handleError);
     };
     EnquiryService.prototype.addEnquiry = function (data) {
-        if (!this.loginService.getPermission('Lookups/GetRegions'))
+        if (!this.loginService.getPermission('Enquiries/Post'))
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
@@ -75,7 +75,7 @@ var EnquiryService = (function () {
             .catch(this.handleError);
     };
     EnquiryService.prototype.getEnquiryById = function (id) {
-        if (!this.loginService.getPermission('Lookups/GetRegions'))
+        if (!this.loginService.getPermission('Enquiries/GetById'))
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });

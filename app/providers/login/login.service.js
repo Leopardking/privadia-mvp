@@ -42,6 +42,7 @@ var LoginService = (function () {
     };
     LoginService.prototype.getPermission = function (permission) {
         var permissions = JSON.parse(localStorage.getItem('user')).Permissions;
+        console.log('Permission ', permissions);
         return permissions.find(function (element) { return element.Name === permission; });
     };
     LoginService.prototype.getRoles = function (role) {

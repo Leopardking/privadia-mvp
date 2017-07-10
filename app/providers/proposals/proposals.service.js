@@ -32,7 +32,7 @@ var ProposalsService = (function () {
             .catch(this.handleError);
     };
     ProposalsService.prototype.saveProposals = function (data) {
-        if (!this.loginService.getPermission('Proposals/Post'))
+        if (!this.loginService.getPermission('Proposals/Put'))
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });

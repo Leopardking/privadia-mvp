@@ -66,7 +66,7 @@ export class EnquiryService {
 	}
 
 	public getEnquiries() {
-		if(!this.loginService.getPermission('Lookups/GetRegions'))
+		if(!this.loginService.getPermission('Enquiries/Get'))
 			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
@@ -79,7 +79,7 @@ export class EnquiryService {
 
 
 	public addEnquiry(data) {
-		if(!this.loginService.getPermission('Lookups/GetRegions'))
+		if(!this.loginService.getPermission('Enquiries/Post'))
 			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
@@ -91,7 +91,7 @@ export class EnquiryService {
 	}
 
 	public getEnquiryById(id) {
-		if(!this.loginService.getPermission('Lookups/GetRegions'))
+		if(!this.loginService.getPermission('Enquiries/GetById'))
 			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );

@@ -25,20 +25,6 @@ export class PropertiesService {
 
 	public isReading;
 
-	public regionArray;
-	// private ownerNames;
-
-	// public owner;
-	// public ownerName;
-
-	// public ownerName = "";
-	// public regionName = "";
-	/*
-	public owner = {
-		Id: '',
-		Name: ''
-	};
-	*/
 	public region = {
 		Id: '',
 		Name: ''
@@ -77,13 +63,9 @@ export class PropertiesService {
 	}
 
 	public readDataRegions() {
-		//this.isReading = true;
-
-		//--------------		Reading data       -----------///////////
 		this.lookupsService.getRegions().subscribe(
 			d => {
 				this.regions = d;
-				//this.isReading = false;
 			},
 			e => {
 				console.log("error regions:", e);
@@ -92,13 +74,9 @@ export class PropertiesService {
 	}
 
 	public readDataMetadata() {
-		//this.isReading = true;
-
-		//--------------		Reading data       -----------///////////
 		this.lookupsService.getMetaData().subscribe(
 			d => {
 				this.metadata = d;
-				//this.isReading = false;
 			},
 			e => {
 				console.log("error metadata:", e);
@@ -107,13 +85,9 @@ export class PropertiesService {
 	}
 
 	public readDataOwners() {
-		//this.isReading = true;
-
-		//--------------		Reading data       -----------///////////
 		this.lookupsService.getOwners().subscribe(
 			d => {
 				this.owners = d;
-				//this.isReading = false;
 			},
 			e => {
 				console.log("error owner:", e);
@@ -122,13 +96,9 @@ export class PropertiesService {
 	}
 
 	public readDataPoITypes() {
-		//this.isReading = true;
-
-		//--------------		Reading data       -----------///////////
 		this.lookupsService.getPoITypes().subscribe(
 			d => {
 				this.PoITypes = d;
-				//this.isReading = false;
 			},
 			e => {
 				console.log("error owner:", e);
@@ -154,70 +124,10 @@ export class PropertiesService {
 		)
 	}
 
-	/*
-	public getDataProperty(id) {
-		this.isReading = true;
-		this.getPropertyById(id).subscribe(
-			d => {
-				this.property = d;
-
-					this.getMetaData().subscribe(
-						d => {
-							this.metadata = d;
-						},
-						e => { console.log("Error MetaData: ", e); }
-					);
-
-					this.getRegions().subscribe(
-						d => {
-							this.regionArray = d;
-							this.regions = d.map( (item, i) => { return item.Name; } );
-
-						},
-						e => { console.log("Error Regions: ", e); }
-					);
-
-					this.getOwners().subscribe(
-						d => {
-							this.owners = d;
-							// this.ownerNames = d.map( (item, i) => { return item.Name; } );
-						},
-						e => { console.log("Error Owner: ", e); }
-					);
-
-				this.isReading = false;
-			},
-			e => { console.log("Error Properties: ", e); }
-		);
-	}
-
-	public getDataEmptyProperty() {
-		this.isReading = true;
-		this.getOwners().subscribe(
-			d => {
-				this.owners = d;
-				// this.ownerNames = d.map( (item, i) => { return item.Name; } );
-
-				this.getRegions().subscribe(
-					d => {
-						this.regionArray = d;
-						this.regions = d.map( (item, i) => { return item.Name; } );
-
-						this.getMetaData().subscribe(
-							d => {
-								this.metadata = d;
-								this.isReading = false;
-							},
-							e => { console.log("Error MetaData: ", e); }
-						);	},
-					e => { console.log("Error Regions: ", e); }
-				);
-			},
-			e => { console.log("Error Owner: ", e); }
-		);
-	}
-*/
 	public getAllProperties() {
+		if(!this.loginService.getPermission('Properties/Get'))
+			return Observable.throw(null);
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
@@ -227,6 +137,9 @@ export class PropertiesService {
 	}
 
 	public getPropertyById(id) {
+		if(!this.loginService.getPermission('Properties/GetById'))
+			return Observable.throw(null);
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
@@ -236,6 +149,9 @@ export class PropertiesService {
 	}
 
 	public updateProperty(data) {
+		if(!this.loginService.getPermission('Properties/Put'))
+			return Observable.throw(null);
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
@@ -245,6 +161,9 @@ export class PropertiesService {
 	}
 
 	public addProperty(data) {
+		if(!this.loginService.getPermission('Properties/Post'))
+			return Observable.throw(null);
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
@@ -254,6 +173,9 @@ export class PropertiesService {
 	}
 
 	public deleteProperty(id) {
+		if(!this.loginService.getPermission('Properties/Delete'))
+			return Observable.throw(null);
+
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
