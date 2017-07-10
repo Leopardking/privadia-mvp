@@ -111,8 +111,7 @@ export class ProposalComponent implements OnInit{
 			}),
 		})
 	}
-    private onSubmitManager() {
-	}
+
     private addTerm() {
 		const control = <FormArray>this.proposalManagerForm.controls['TermsList'];
 		control.push(new FormControl('Term 1'));
@@ -161,5 +160,11 @@ export class ProposalComponent implements OnInit{
 
     private declineProposal() {
 	    console.log('Decline Proposal')
+		this.enquiryService.declineProposal({EnquiryThreadId: this.data.Id})
+    }
+
+    private cancelProposal() {
+	    console.log('Cancel Proposal')
+		this.enquiryService.cancelProposal({EnquiryThreadId: this.data.Id})
     }
 }

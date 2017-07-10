@@ -56,6 +56,22 @@ var EnquiryService = (function () {
             console.log('Error Create Proposal', e);
         });
     };
+    EnquiryService.prototype.cancelProposal = function (id) {
+        var _this = this;
+        this.cancelEnquiry(id).subscribe(function (d) {
+            _this.enquiry = d;
+        }, function (e) {
+            console.log('Error Create Proposal', e);
+        });
+    };
+    EnquiryService.prototype.declineProposal = function (id) {
+        var _this = this;
+        this.declineEnquiry(id).subscribe(function (d) {
+            _this.enquiry = d;
+        }, function (e) {
+            console.log('Error Create Proposal', e);
+        });
+    };
     EnquiryService.prototype.getEnquiries = function () {
         if (!this.loginService.getPermission('Enquiries/Get'))
             return Observable_1.Observable.throw(null);

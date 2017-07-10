@@ -106,8 +106,6 @@ var ProposalComponent = (function () {
             }),
         });
     };
-    ProposalComponent.prototype.onSubmitManager = function () {
-    };
     ProposalComponent.prototype.addTerm = function () {
         var control = this.proposalManagerForm.controls['TermsList'];
         control.push(new forms_1.FormControl('Term 1'));
@@ -147,6 +145,11 @@ var ProposalComponent = (function () {
     };
     ProposalComponent.prototype.declineProposal = function () {
         console.log('Decline Proposal');
+        this.enquiryService.declineProposal({ EnquiryThreadId: this.data.Id });
+    };
+    ProposalComponent.prototype.cancelProposal = function () {
+        console.log('Cancel Proposal');
+        this.enquiryService.cancelProposal({ EnquiryThreadId: this.data.Id });
     };
     __decorate([
         core_1.Input(), 

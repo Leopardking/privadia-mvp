@@ -65,6 +65,28 @@ export class EnquiryService {
 		)
 	}
 
+	public cancelProposal(id) {
+		this.cancelEnquiry(id).subscribe(
+			d => {
+				this.enquiry = d;
+			},
+			e => {
+				console.log('Error Create Proposal', e)
+			}
+		)
+	}
+
+	public declineProposal(id) {
+		this.declineEnquiry(id).subscribe(
+			d => {
+				this.enquiry = d;
+			},
+			e => {
+				console.log('Error Create Proposal', e)
+			}
+		)
+	}
+
 	public getEnquiries() {
 		if(!this.loginService.getPermission('Enquiries/Get'))
 			return Observable.throw(null);

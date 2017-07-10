@@ -5,12 +5,22 @@
                 <div class="proposal-line">Proposal</div>
             </div>
         </div>
-        <div *ngIf="!data.Enquiry.Proposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal && (!data.Enquiry.DeclinedAt || !data.Enquiry.CancelledAt)" class="row">
             <div class="col-xs-12 text-center">
                 <p>You have no proposal created for this Enquiry yet</p>
             </div>
         </div>
-        <div *ngIf="data.Enquiry.Proposal">
+        <div *ngIf="data.Enquiry.DeclinedAt && data.Enquiry.CancelledAt" class="row">
+            <div class="col-xs-12 text-center">
+                <p>Enquiry was decline</p>
+            </div>
+        </div>
+        <div *ngIf="!data.Enquiry.DeclinedAt && data.Enquiry.CancelledAt" class="row">
+            <div class="col-xs-12 text-center">
+                <p>Enquiry was cancelled</p>
+            </div>
+        </div>
+        <div *ngIf="data.Enquiry.Proposal && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt">
             <div class="row">
                 <div class="col-xs-6">
                     <div class="input-group p-l-5">
@@ -141,9 +151,9 @@
     </div>
     <div class="enquiry-footer p-l-r-30">
         <!--no proposal manager buttons-->
-        <div *ngIf="!data.Enquiry.Proposal" class="row">
+        <div *ngIf="!data.Enquiry.Proposal && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-danger m-l-10">Cancel</button>
+                <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
             </div>
             <div class="col-xs-6">
                 <button type="button" class="btn btn-success pull-right font-16 m-r-10" (click)="createProposal()">Create Proposal</button>
@@ -151,7 +161,7 @@
         </div>
         <!--no proposal manager buttons end-->
         <!--proposal manager buttons-->
-        <div *ngIf="data.Enquiry.Proposal" class="row">
+        <div *ngIf="data.Enquiry.Proposal && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-4">
                 <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
             </div>
@@ -162,8 +172,6 @@
         </div>
         <!--proposal manager buttons end-->
     </div>
-
-
 </div>
 <div [formGroup]="proposalManagerForm" *ngIf="loginService.getRoles('Agent')">
     <div class="enquiry-body">
@@ -172,13 +180,23 @@
                 <div class="proposal-line">Proposal</div>
             </div>
         </div>
-        <div *ngIf="!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt" class="row">
+        <div *ngIf="(!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt) && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-12 text-center">
                 <p>There’s no proposal created by manager of this property.</p>
                 <p>Please wait for proposal</p>
             </div>
         </div>
-        <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt">
+        <div *ngIf="data.Enquiry.DeclinedAt && data.Enquiry.CancelledAt" class="row">
+            <div class="col-xs-12 text-center">
+                <p>Enquiry was decline</p>
+            </div>
+        </div>
+        <div *ngIf="!data.Enquiry.DeclinedAt && data.Enquiry.CancelledAt" class="row">
+            <div class="col-xs-12 text-center">
+                <p>Enquiry was cancelled</p>
+            </div>
+        </div>
+        <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt && !data.Enquiry.DeclinedAt">
             <div class="row">
                 <div class="col-xs-6">
                     <div class="input-group p-l-5">
@@ -271,16 +289,16 @@
     </div>
     <div class="enquiry-footer p-l-r-30">
         <!--no proposal agent buttons-->
-        <div *ngIf="!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt" class="row">
+        <div *ngIf="(!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt) && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-danger m-l-10">Cancel</button>
+                <button type="button" class="btn btn-danger m-l-10" (click)="cancelProposal()">Cancel</button>
             </div>
         </div>
         <!--no proposal agent buttons end-->
         <!--proposal agent buttons-->
-        <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt" class="row">
+        <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt && !data.Enquiry.DeclinedAt" class="row">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
+                <button type="button" class="btn btn-danger m-l-10" (click)="cancelProposal()">Cancel</button>
             </div>
             <div class="col-xs-6">
                 <button type="submit" class="btn btn-success pull-right font-16 m-r-10" (click)="acceptProposal()">Accept</button>

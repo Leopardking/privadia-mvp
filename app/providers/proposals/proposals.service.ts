@@ -29,8 +29,8 @@ export class ProposalsService {
 	}
 
 	public saveProposals(data) {
-		if(!this.loginService.getPermission('Proposals/Put'))
-			return Observable.throw(null);
+		// if(!this.loginService.getPermission('Proposals/Put'))
+		// 	return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );

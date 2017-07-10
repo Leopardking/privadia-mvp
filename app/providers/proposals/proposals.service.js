@@ -32,8 +32,8 @@ var ProposalsService = (function () {
             .catch(this.handleError);
     };
     ProposalsService.prototype.saveProposals = function (data) {
-        if (!this.loginService.getPermission('Proposals/Put'))
-            return Observable_1.Observable.throw(null);
+        // if(!this.loginService.getPermission('Proposals/Put'))
+        // 	return Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.put(this.apiUrl + "/api/Proposals", data, options)
