@@ -83,6 +83,24 @@ var EnquiryService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    EnquiryService.prototype.cancelEnquiry = function (data) {
+        if (!this.loginService.getPermission('Enquiries/Cancel'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + "/api/Enquiries/Cancel", data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    EnquiryService.prototype.declineEnquiry = function (data) {
+        if (!this.loginService.getPermission('Enquiries/Decline'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + "/api/Enquiries/Decline", data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     EnquiryService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};

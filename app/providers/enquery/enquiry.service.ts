@@ -102,6 +102,30 @@ export class EnquiryService {
             .catch(this.handleError);
 	}
 
+	public cancelEnquiry(data) {
+		if(!this.loginService.getPermission('Enquiries/Cancel'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.post( `${this.apiUrl}/api/Enquiries/Cancel`, data, options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public declineEnquiry(data) {
+		if(!this.loginService.getPermission('Enquiries/Decline'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.post( `${this.apiUrl}/api/Enquiries/Decline`, data, options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
 	private extractData(res:Response) {
 		let body = res.json();
 
