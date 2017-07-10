@@ -38,8 +38,8 @@ var DashboardComponent = (function () {
         });
         this.enquiryForm = this.builder.group({
             PropertyId: new forms_1.FormControl(),
-            ClientFirstName: new forms_1.FormControl('', forms_1.Validators.required),
-            ClientLastName: new forms_1.FormControl('', forms_1.Validators.required),
+            ClientFirstName: new forms_1.FormControl(),
+            ClientLastName: new forms_1.FormControl(),
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             Message: new forms_1.FormControl(''),
@@ -53,8 +53,10 @@ var DashboardComponent = (function () {
             BookingPrice: new forms_1.FormControl(1495),
         });
         this.filterForm.valueChanges.subscribe(function (d) {
-            _this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
-            _this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
+            _this.enquiryForm.controls['CheckIn'].setValue(moment().add(6, 'day').format('MM/DD/YYYY'));
+            _this.enquiryForm.controls['CheckOut'].setValue(moment().add(1, 'day').format('MM/DD/YYYY'));
+            // this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
+            // this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
         }, function (e) {
             console.log('Error change form ', e);
         });

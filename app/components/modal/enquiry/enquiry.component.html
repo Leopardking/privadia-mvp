@@ -61,6 +61,8 @@
                                                  [field]="enquiryForm.controls.ClientLastName"></input-field-cmp>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-xs-6">
                             <datetimepicker-field-cmp [data]="{title: 'Check In'}"
                                                       [classes]="{withIcon: true}"
@@ -71,7 +73,9 @@
                                                       [classes]="{withIcon: false}"
                                                       [field]="enquiryForm.controls.CheckOut"></datetimepicker-field-cmp>
                         </div>
-                        <div class="col-xs-12">
+                    </div>
+                    <div class="row">
+                            <div class="col-xs-12">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="material-icons">local_post_office</i></span>
                                 <input-field-cmp [data]="{title: 'Your Message', name: 'Message', value: '', type: 'text'}"

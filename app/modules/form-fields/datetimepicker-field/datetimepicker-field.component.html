@@ -1,6 +1,6 @@
-<div [ngClass]="{'input-group': classes.withIcon}" >
+<div [ngClass]="{'input-group': classes.withIcon}">
     <span *ngIf="classes.withIcon" class="input-group-addon"><i class="material-icons">insert_invitation</i></span>
-    <div class="form-group label-floating">
+    <div class="form-group label-floating" [ngClass]="{'form-error': !field.valid}" >
         <label class="control-label">{{data.title}}</label>
         <input type="text"
                class="form-control datepicker"
@@ -8,5 +8,13 @@
                (blur)="field.setValue(datePicker.value)"
                [ngModel]="field.value"
                [formControl]="field"/>
+        <div *ngIf="field.errors" class="errors">
+            <div *ngIf="field.errors.serverError.length == 1" class="error-list">
+                <p *ngFor="let err of field.errors.serverError; let i of index" class="text-danger">{{err}}</p>
+            </div>
+            <ol *ngIf="field.errors.serverError.length > 1" class="error-list">
+                <li *ngFor="let err of field.errors.serverError; let i of index" class="text-danger">{{err}}</li>
+            </ol>
+        </div>
     </div>
 </div>

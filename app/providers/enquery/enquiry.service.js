@@ -126,7 +126,8 @@ var EnquiryService = (function () {
         if (error instanceof http_1.Response) {
             var body = error.json() || '';
             var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+            console.log('err', body);
+            errMsg = body;
         }
         else {
             errMsg = error.message ? error.message : error.toString();

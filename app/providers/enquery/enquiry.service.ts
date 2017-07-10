@@ -159,7 +159,9 @@ export class EnquiryService {
 	    if (error instanceof Response) {
 	      const body = error.json() || '';
 	      const err = body.error || JSON.stringify(body);
-	      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+	      console.log('err',body)
+	      errMsg = body;
+	      // errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
 	    } else {
 	      errMsg = error.message ? error.message : error.toString();
 	    }

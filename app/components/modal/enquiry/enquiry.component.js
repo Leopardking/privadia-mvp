@@ -15,13 +15,16 @@ var EnquiryComponent = (function () {
     function EnquiryComponent(enquiryService) {
         this.enquiryService = enquiryService;
         this.errorForm = false;
+        this.errorsList = {};
     }
     EnquiryComponent.prototype.ngOnInit = function () { };
     EnquiryComponent.prototype.onSubmit = function (values) {
         var _this = this;
-        console.log('Valid form ', this.enquiryForm);
-        if (this.enquiryForm.status === 'INVALID')
+        console.log('Valid form ', this.enquiryForm.controls['CheckOut'].valid);
+        /*
+        if(this.enquiryForm.status === 'INVALID')
             return this.errorForm = true;
+        */
         this.enquiryService.addEnquiry(values).subscribe(function (d) {
             _this.errorForm = false;
             $('#enquiry').modal('hide');
@@ -39,7 +42,12 @@ var EnquiryComponent = (function () {
             console.log('Added Enquiry ', d);
         }, function (e) {
             _this.errorForm = true;
-            console.log('Error add enquiry ', e);
+            var fileds = Object.keys(e.ModelState || {});
+            _this.errorsList = e.ModelState;
+            fileds.forEach(function (field) {
+                _this.enquiryForm.controls[field].setErrors({ serverError: e.ModelState[field] });
+            });
+            console.log('Error ', _this.errorsList);
         });
     };
     __decorate([

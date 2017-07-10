@@ -1,3 +1,14 @@
+.error-list {
+    margin-bottom: 0px;
+    padding-left: 15px;
+    font-size: 12px;
+}
+div.error-list {
+    padding-left: 0px;
+}
+div.error-list p {
+    margin-bottom: 0px;
+}
 input {
     color: #3a3a3a;
 }

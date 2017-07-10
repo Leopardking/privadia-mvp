@@ -44,8 +44,8 @@ export class DashboardComponent implements OnInit{
 
         this.enquiryForm = this.builder.group({
             PropertyId: new FormControl(),
-            ClientFirstName: new FormControl('', Validators.required),
-            ClientLastName: new FormControl('', Validators.required),
+            ClientFirstName: new FormControl(),
+            ClientLastName: new FormControl(),
             CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             Message: new FormControl(''),
@@ -62,8 +62,10 @@ export class DashboardComponent implements OnInit{
 
         this.filterForm.valueChanges.subscribe(
             d => {
-                this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
-                this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
+                this.enquiryForm.controls['CheckIn'].setValue(moment().add(6, 'day').format('MM/DD/YYYY'));
+                this.enquiryForm.controls['CheckOut'].setValue(moment().add(1, 'day').format('MM/DD/YYYY'));
+                // this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
+                // this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
             },
             e => {
                 console.log('Error change form ', e)
