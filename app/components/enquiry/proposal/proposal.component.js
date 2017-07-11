@@ -63,7 +63,12 @@ var ProposalComponent = (function () {
                 value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
                 disabled: this.isAgent
             }),
-            TermsList: new forms_1.FormArray([]),
+            TermsList: new forms_1.FormArray([
+                new forms_1.FormControl('Term 1'),
+                new forms_1.FormControl('Term 2'),
+                new forms_1.FormControl('Term 3'),
+                new forms_1.FormControl('Term 4'),
+            ]),
             DepositPercentage: new forms_1.FormControl({
                 value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
                 disabled: this.isAgent

@@ -68,7 +68,12 @@ export class ProposalComponent implements OnInit{
 				value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
 				disabled: this.isAgent
 			}),
-			TermsList: new FormArray([]),
+			TermsList: new FormArray([
+				new FormControl('Term 1'),
+				new FormControl('Term 2'),
+				new FormControl('Term 3'),
+				new FormControl('Term 4'),
+			]),
 			DepositPercentage: new FormControl({
 				value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
 				disabled: this.isAgent
