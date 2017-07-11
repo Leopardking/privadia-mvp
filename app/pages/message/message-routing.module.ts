@@ -5,7 +5,7 @@ import { MessageComponent } from './message.component';
 const routes: Routes = [
     { path: '', children: [
         { path: '', component: MessageComponent },
-        { path: 'dialogs', loadChildren: 'app/pages/message/enquiry/enquiry.module#EnquiryModule' }
+        { path: 'enquiry', loadChildren: 'app/pages/message/enquiry/enquiry.module#EnquiryModule' }
     ]},
 ];
 

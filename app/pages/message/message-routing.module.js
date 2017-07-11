@@ -14,7 +14,7 @@ var message_component_1 = require('./message.component');
 var routes = [
     { path: '', children: [
             { path: '', component: message_component_1.MessageComponent },
-            { path: 'dialogs', loadChildren: 'app/pages/message/enquiry/enquiry.module#EnquiryModule' }
+            { path: 'enquiry', loadChildren: 'app/pages/message/enquiry/enquiry.module#EnquiryModule' }
         ] },
 ];
 var MessageRoutingModule = (function () {
