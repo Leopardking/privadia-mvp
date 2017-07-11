@@ -656,7 +656,7 @@ div.dataTables_wrapper div.dataTables_paginate {
 .alert.alert-danger {
 	background-color: #b71c1c;
 }
-.alert.alert-danger i {
+.alert.alert-danger > i {
 	color: #b71c1c;
 }
 

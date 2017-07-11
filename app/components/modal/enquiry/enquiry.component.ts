@@ -25,11 +25,6 @@ export class EnquiryComponent implements OnInit{
 	ngOnInit() { }
 
 	private onSubmit(values) {
-		console.log('Valid form ', this.enquiryForm.controls['CheckOut'].valid)
-		/*
-		if(this.enquiryForm.status === 'INVALID')
-			return this.errorForm = true;
-		*/
 		this.enquiryService.addEnquiry(values).subscribe(
 			d => {
 				this.errorForm = false;
@@ -56,22 +51,19 @@ export class EnquiryComponent implements OnInit{
 				this.errorsList = e.ModelState;
 				fileds.forEach((field) => {
 					this.enquiryForm.controls[field].setErrors({ serverError: e.ModelState[field] });
-					e.ModelState[field].forEach((error) => {
-						$.notify({
-							icon: "notifications",
-							message: `Error ${field} field: ${error}`
-
-						},{
-							type: 'danger',
-							timer: 3000,
-							placement: {
-								from: 'top',
-								align: 'right'
-							}
-						});
-					})
 				});
-				console.log('Error ',this.errorsList)
+				$.notify({
+					icon: "notifications",
+					message: `Please, fix form inputs.`
+
+				},{
+					type: 'danger',
+					timer: 3000,
+					placement: {
+						from: 'top',
+						align: 'right'
+					}
+				});
 			}
 		)
 	}
