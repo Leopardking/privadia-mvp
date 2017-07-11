@@ -56,6 +56,20 @@ export class EnquiryComponent implements OnInit{
 				this.errorsList = e.ModelState;
 				fileds.forEach((field) => {
 					this.enquiryForm.controls[field].setErrors({ serverError: e.ModelState[field] });
+					e.ModelState[field].forEach((error) => {
+						$.notify({
+							icon: "notifications",
+							message: `Error ${field} field: ${error}`
+
+						},{
+							type: 'danger',
+							timer: 60000,
+							placement: {
+								from: 'top',
+								align: 'right'
+							}
+						});
+					})
 				});
 				console.log('Error ',this.errorsList)
 			}

@@ -647,4 +647,17 @@ div.dataTables_wrapper div.dataTables_paginate {
     margin-right: 36px;
 }
 
+/*
+ *  Notify styles
+ */
+.alert.alert-with-icon {
+	z-index: 2041 !important;
+}
+.alert.alert-danger {
+	background-color: #b71c1c;
+}
+.alert.alert-danger i {
+	color: #b71c1c;
+}
+
 

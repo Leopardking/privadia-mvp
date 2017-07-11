@@ -46,6 +46,19 @@ var EnquiryComponent = (function () {
             _this.errorsList = e.ModelState;
             fileds.forEach(function (field) {
                 _this.enquiryForm.controls[field].setErrors({ serverError: e.ModelState[field] });
+                e.ModelState[field].forEach(function (error) {
+                    $.notify({
+                        icon: "notifications",
+                        message: "Error " + field + " field: " + error
+                    }, {
+                        type: 'danger',
+                        timer: 60000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                });
             });
             console.log('Error ', _this.errorsList);
         });
