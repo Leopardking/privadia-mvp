@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../providers/login/login.service");
+var helpers_1 = require('../helpers/helpers');
 var LoginComponent = (function () {
     function LoginComponent(loginService, router) {
         this.loginService = loginService;
@@ -51,6 +52,7 @@ var LoginComponent = (function () {
                 _this.router.navigate(['dashboard']);
             }, 1500);
         }, function (e) {
+            helpers_1.handlerErrorNotify(e.error_description);
             console.log('On Submit error', e);
         });
         this.errorForm = true;

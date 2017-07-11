@@ -155,13 +155,9 @@ export class EnquiryService {
 	}
 
 	private handleError(error: Response | any) {
-		let errMsg: string;
+		let errMsg: any;
 	    if (error instanceof Response) {
-	      const body = error.json() || '';
-	      const err = body.error || JSON.stringify(body);
-	      console.log('err',body)
-	      errMsg = body;
-	      // errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+	      errMsg = error.json() || '';
 	    } else {
 	      errMsg = error.message ? error.message : error.toString();
 	    }

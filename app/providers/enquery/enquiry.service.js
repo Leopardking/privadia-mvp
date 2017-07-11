@@ -124,10 +124,7 @@ var EnquiryService = (function () {
     EnquiryService.prototype.handleError = function (error) {
         var errMsg;
         if (error instanceof http_1.Response) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            console.log('err', body);
-            errMsg = body;
+            errMsg = error.json() || '';
         }
         else {
             errMsg = error.message ? error.message : error.toString();

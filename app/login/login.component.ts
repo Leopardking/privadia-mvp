@@ -3,6 +3,10 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { LoginService } from "../providers/login/login.service";
 
+import { handlerErrorFieds, handlerErrorNotify } from '../helpers/helpers';
+
+declare const $:any;
+
 @Component({
     moduleId: module.id,
     selector: 'app-login',
@@ -56,6 +60,7 @@ export class LoginComponent implements OnInit {
                 }, 1500)
             },
             e => {
+                handlerErrorNotify(e.error_description);
                 console.log('On Submit error', e)
             }
         );

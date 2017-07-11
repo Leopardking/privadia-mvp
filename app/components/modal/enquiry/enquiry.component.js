@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
+var helpers_1 = require("../../../helpers/helpers");
 var EnquiryComponent = (function () {
     function EnquiryComponent(enquiryService) {
         this.enquiryService = enquiryService;
@@ -34,25 +35,10 @@ var EnquiryComponent = (function () {
                     align: 'right'
                 }
             });
-            console.log('Added Enquiry ', d);
         }, function (e) {
             _this.errorForm = true;
-            var fileds = Object.keys(e.ModelState || {});
-            _this.errorsList = e.ModelState;
-            fileds.forEach(function (field) {
-                _this.enquiryForm.controls[field].setErrors({ serverError: e.ModelState[field] });
-            });
-            $.notify({
-                icon: "notifications",
-                message: "Please, fix form inputs."
-            }, {
-                type: 'danger',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
+            helpers_1.handlerErrorFieds(e, _this.enquiryForm);
+            helpers_1.handlerErrorNotify('Please, fix form inputs.');
         });
     };
     __decorate([

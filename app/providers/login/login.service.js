@@ -13,6 +13,7 @@ var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
+require('rxjs/add/observable/throw');
 var LoginService = (function () {
     function LoginService(http) {
         this.http = http;
@@ -27,7 +28,9 @@ var LoginService = (function () {
             _this.userInfo = d;
             _this.isReading = false;
             localStorage.setItem('user', JSON.stringify(d));
-        }, function (e) { console.log('Error get user ', e); });
+        }, function (e) {
+            console.log('Error get user ', e);
+        });
     };
     LoginService.prototype.login = function (apiUrl, email, password) {
         var grant_type = "password";
@@ -65,10 +68,9 @@ var LoginService = (function () {
     };
     LoginService.prototype.handleError = function (error) {
         var errMsg;
+        console.log('Error Login', error);
         if (error instanceof http_1.Response) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+            errMsg = error.json() || '';
         }
         else {
             errMsg = error.message ? error.message : error.toString();

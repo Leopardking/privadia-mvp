@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/observable/throw'
 
 @Injectable()
 export class LoginService {
@@ -25,7 +26,9 @@ export class LoginService {
 				this.isReading = false;
 				localStorage.setItem('user', JSON.stringify(d));
 			},
-			e => { console.log('Error get user ', e) }
+			e => {
+				console.log('Error get user ', e)
+			}
 		)
 	}
 
@@ -75,11 +78,10 @@ export class LoginService {
 	}
 
 	private handleError(error: Response | any) {
-		let errMsg: string;
+		let errMsg: any;
+		console.log('Error Login', error)
 	    if (error instanceof Response) {
-	      const body = error.json() || '';
-	      const err = body.error || JSON.stringify(body);
-	      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+	      errMsg = error.json() || '';
 	    } else {
 	      errMsg = error.message ? error.message : error.toString();
 	    }
