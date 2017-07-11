@@ -88,7 +88,7 @@
 }
 
 .messages-wrp .messages .message.info {
-    width: 286px;
+    width: 310px;
     font-size: 16px;
     text-align: center;
     float: none;
@@ -107,6 +107,7 @@
 
 .messages-wrp .messages .message.info i {
     vertical-align: middle;
+    margin-top: -4px;
 }
 
 .messages-wrp .messages .message .message-text {

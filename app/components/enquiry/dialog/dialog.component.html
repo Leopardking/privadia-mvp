@@ -14,8 +14,8 @@
                         <div class="message-date">{{formatTime(item.SentAt, 'H:mm a')}}</div>
                     </div>
                     <div *ngIf="item.SystemGenerated" class="message info">
-                        <div class="message-text">
-                            <i class="material-icons">info_outline</i> Proposal has been updated
+                        <div class="message-text" style="line-height: 24px">
+                            <i class="material-icons">info_outline</i> {{item.Content}}
                         </div>
                     </div>
                 </div>

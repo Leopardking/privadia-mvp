@@ -27,7 +27,7 @@ var EnquiriesTableComponent = (function () {
         this.datatableInited = true;
     };
     EnquiriesTableComponent.prototype.dateFormat = function (date, format) {
-        return moment(date).format(format);
+        return moment.utc(date).local().format(format);
     };
     __decorate([
         core_1.Input(), 

@@ -30,6 +30,6 @@ export class EnquiriesTableComponent implements OnInit{
     }
 
     private dateFormat(date, format) {
-        return moment(date).format(format);
+        return moment.utc(date).local().format(format);
     }
 }
