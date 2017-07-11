@@ -1,10 +1,16 @@
 .enquiry-header {
     position: relative;
 }
+.enquiry-header .img{
+    width: auto;
+    height: 200px;
+}
 
 .enquiry-header .image-wrp {
+    text-align: center;
     overflow: hidden;
     border-top-right-radius: 6px;
+    background-color: #e7e7e7;
 }
 
 .enquiry-header .image-wrp .image-villa:after {
