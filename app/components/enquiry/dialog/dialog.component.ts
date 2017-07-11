@@ -3,6 +3,8 @@ import {FormGroup, FormControl, Validators } from "@angular/forms";
 import {MessagesService} from "../../../providers/messages/messages.service";
 
 declare const $: any;
+declare const moment: any;
+
 @Component({
     moduleId: module.id,
     selector: 'dialog-cmp ',
@@ -36,6 +38,7 @@ export class DialogComponent implements OnInit, OnChanges{
     ngOnChanges() {
 	    console.log('Changes')
     }
+
     public onSubmit(value) {
         value.IsMine = true;
         this.data.push(value);
@@ -48,5 +51,9 @@ export class DialogComponent implements OnInit, OnChanges{
                 console.log('Send Message Error', e)
             }
         )
+    }
+
+    public formatTime(time, format) {
+	    return moment(time).utcOffset(moment().utcOffset()).format(format);
     }
 }

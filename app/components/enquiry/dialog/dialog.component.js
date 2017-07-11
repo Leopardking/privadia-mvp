@@ -37,6 +37,9 @@ var DialogComponent = (function () {
             console.log('Send Message Error', e);
         });
     };
+    DialogComponent.prototype.formatTime = function (time, format) {
+        return moment(time).utcOffset(moment().utcOffset()).format(format);
+    };
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

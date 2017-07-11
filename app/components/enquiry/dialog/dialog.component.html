@@ -10,8 +10,8 @@
                 <div class="col-xs-12">
                     <div *ngIf="!item.SystemGenerated" class="message" [ngClass]="{to: item.IsMine, from: !item.IsMine}">
                         <div class="message-text">{{item.Content}}</div>
-                        <div class="message-date pull-left">Read at 1:42 pm</div>
-                        <div class="message-date">1:38 pm</div>
+                        <div *ngIf="item.ReadAt && item.IsMine" class="message-date pull-left">Read at {{formatTime(item.ReadAt, 'H:mm a')}}</div>
+                        <div class="message-date">{{formatTime(item.SentAt, 'H:mm a')}}</div>
                     </div>
                     <div *ngIf="item.SystemGenerated" class="message info">
                         <div class="message-text">
