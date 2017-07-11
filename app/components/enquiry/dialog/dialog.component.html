@@ -2,11 +2,11 @@
     <div class="messages-wrp">
         <div class="messages">
             <div class="row">
-                <div class="col-xs-12">
-                    <div class="date-line">28 Jun 2017</div>
-                </div>
             </div>
             <div class="row" *ngFor="let item of data; let i = index">
+                <div *ngIf="i == 0 || formatDate(data[i-1].SentAt, 'D MMMM') != formatDate(item.SentAt, 'D MMMM')" class="col-xs-12">
+                    <div class="date-line">{{formatDate(item.SentAt, 'D MMMM')}}</div>
+                </div>
                 <div class="col-xs-12">
                     <div *ngIf="!item.SystemGenerated" class="message" [ngClass]="{to: item.IsMine, from: !item.IsMine}">
                         <div class="message-text">{{item.Content}}</div>

@@ -37,6 +37,9 @@ var DialogComponent = (function () {
             console.log('Send Message Error', e);
         });
     };
+    DialogComponent.prototype.formatDate = function (date, format) {
+        return moment.utc(date).local().format(format);
+    };
     DialogComponent.prototype.formatTime = function (time, format) {
         return moment.utc(time).local().format(format);
     };

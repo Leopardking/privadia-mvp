@@ -54,6 +54,10 @@ export class DialogComponent implements OnInit, OnChanges{
         )
     }
 
+    public formatDate(date, format) {
+	    return moment.utc(date).local().format(format);
+    }
+
     public formatTime(time, format) {
 	    return moment.utc(time).local().format(format);
     }
