@@ -29,8 +29,8 @@ export class AddpropertyComponent implements OnInit {
         Name: new FormControl(null, Validators.required),
         Address: new FormControl(),
         Region: new FormControl({
-            Id: null,
-            Name: null,
+            Id: '',
+            Name: '',
         }, Validators.required),
         ManagementCompany: new FormControl({
             Id: null,
@@ -125,6 +125,7 @@ export class AddpropertyComponent implements OnInit {
     }
 
     private onSubmit(form) {
+        console.log('Form ', this.propertyForm)
         let newArr = [];
         _.mapValues(form.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)

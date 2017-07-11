@@ -29,8 +29,8 @@ var AddpropertyComponent = (function () {
             Name: new forms_1.FormControl(null, forms_1.Validators.required),
             Address: new forms_1.FormControl(),
             Region: new forms_1.FormControl({
-                Id: null,
-                Name: null,
+                Id: '',
+                Name: '',
             }, forms_1.Validators.required),
             ManagementCompany: new forms_1.FormControl({
                 Id: null,
@@ -117,6 +117,7 @@ var AddpropertyComponent = (function () {
     };
     AddpropertyComponent.prototype.onSubmit = function (form) {
         var _this = this;
+        console.log('Form ', this.propertyForm);
         var newArr = [];
         _.mapValues(form.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
