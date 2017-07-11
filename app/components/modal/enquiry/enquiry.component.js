@@ -52,7 +52,7 @@ var EnquiryComponent = (function () {
                         message: "Error " + field + " field: " + error
                     }, {
                         type: 'danger',
-                        timer: 60000,
+                        timer: 3000,
                         placement: {
                             from: 'top',
                             align: 'right'

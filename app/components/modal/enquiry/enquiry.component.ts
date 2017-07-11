@@ -63,7 +63,7 @@ export class EnquiryComponent implements OnInit{
 
 						},{
 							type: 'danger',
-							timer: 60000,
+							timer: 3000,
 							placement: {
 								from: 'top',
 								align: 'right'
