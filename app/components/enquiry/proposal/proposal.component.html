@@ -153,7 +153,7 @@
         <!--no proposal manager buttons-->
         <div *ngIf="!data.Enquiry.Proposal && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
+                <button type="button" class="btn btn-danger font-16 m-l-10" (click)="declineProposal()">Decline</button>
             </div>
             <div class="col-xs-6">
                 <button type="button" class="btn btn-success pull-right font-16 m-r-10" (click)="createProposal()">Create Proposal</button>
@@ -163,7 +163,7 @@
         <!--proposal manager buttons-->
         <div *ngIf="data.Enquiry.Proposal && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-4">
-                <button type="button" class="btn btn-danger m-l-10" (click)="declineProposal()">Decline</button>
+                <button type="button" class="btn btn-danger font-16 m-l-10" (click)="declineProposal()">Decline</button>
             </div>
             <div class="col-xs-8">
                 <button type="button" class="btn btn-success-green pull-right font-16 m-r-10" (click)="submitProposal()">Submit</button>
@@ -291,14 +291,14 @@
         <!--no proposal agent buttons-->
         <div *ngIf="(!data.Enquiry.Proposal || !data.Enquiry.Proposal.SubmittedAt) && !data.Enquiry.CancelledAt && !data.Enquiry.DeclinedAt" class="row">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-danger m-l-10" (click)="cancelProposal()">Cancel</button>
+                <button type="button" class="btn btn-danger font-16 m-l-10" (click)="cancelProposal()">Cancel</button>
             </div>
         </div>
         <!--no proposal agent buttons end-->
         <!--proposal agent buttons-->
         <div *ngIf="data.Enquiry.Proposal && data.Enquiry.Proposal.SubmittedAt && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-6">
-                <button type="button" class="btn btn-danger m-l-10" (click)="cancelProposal()">Cancel</button>
+                <button type="button" class="btn btn-danger font-16 m-l-10" (click)="cancelProposal()">Cancel</button>
             </div>
             <div class="col-xs-6">
                 <button type="submit" class="btn btn-success pull-right font-16 m-r-10" (click)="acceptProposal()">Accept</button>

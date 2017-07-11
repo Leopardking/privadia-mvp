@@ -256,7 +256,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
  *  Font
  */
 .font-16 {
-	font-size: 16px;
+	font-size: 16px !important;
 }
 
 /**
