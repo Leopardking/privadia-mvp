@@ -29,6 +29,8 @@ var DialogComponent = (function () {
         console.log('Changes');
     };
     DialogComponent.prototype.onSubmit = function (value) {
+        value.IsMine = true;
+        this.data.push(value);
         this.messagesService.addMessage(value).subscribe(function (d) {
             console.log('Send Message', d);
         }, function (e) {

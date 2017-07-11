@@ -23,7 +23,8 @@ i {
 .nav li > a,
 .nav li:hover > a,
 .nav li > a i,
-.nav li:hover > a i {
+.nav li:hover > a i,
+.user .info span {
     color: #FFFFFF;
 }
 p, span, a {

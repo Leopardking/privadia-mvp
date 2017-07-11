@@ -37,6 +37,9 @@ export class DialogComponent implements OnInit, OnChanges{
 	    console.log('Changes')
     }
     public onSubmit(value) {
+        value.IsMine = true;
+        this.data.push(value);
+
         this.messagesService.addMessage(value).subscribe(
             d => {
                 console.log('Send Message', d)
