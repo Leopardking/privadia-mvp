@@ -166,7 +166,7 @@
                 <button type="button" class="btn btn-danger font-16 m-l-10" (click)="declineProposal()">Decline</button>
             </div>
             <div class="col-xs-8">
-                <button type="button" class="btn btn-success-green pull-right font-16 m-r-10" (click)="submitProposal()">Submit</button>
+                <button type="button" class="btn btn-success-green pull-right font-16 m-r-10" [disabled]="data.Enquiry.Proposal.SubmittedAt" (click)="submitProposal()">Submit</button>
                 <button type="button" class="btn btn-success pull-right font-16 m-r-10 p-l-r-20" (click)="saveProposal()">Save</button>
             </div>
         </div>

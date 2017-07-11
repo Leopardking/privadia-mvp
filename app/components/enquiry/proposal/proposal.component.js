@@ -37,6 +37,12 @@ var ProposalComponent = (function () {
     }
     ProposalComponent.prototype.ngOnInit = function () {
         this.initForm(this.data);
+        /*
+        const date = moment('2017-07-10T14:23:28+00:00').utcOffset(moment().utcOffset());
+        console.log('Date ', date.format())
+        console.log('Moment ', moment().utc().format())
+        console.log('Moment ', moment().utcOffset())
+        */
     };
     ProposalComponent.prototype.initForm = function (data) {
         this.proposalManagerForm = this.builder.group({

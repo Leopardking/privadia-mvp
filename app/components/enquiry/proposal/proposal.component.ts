@@ -41,6 +41,12 @@ export class ProposalComponent implements OnInit{
 
 	ngOnInit() {
 		this.initForm(this.data)
+		/*
+		const date = moment('2017-07-10T14:23:28+00:00').utcOffset(moment().utcOffset());
+		console.log('Date ', date.format())
+		console.log('Moment ', moment().utc().format())
+		console.log('Moment ', moment().utcOffset())
+		*/
     }
 
     private initForm(data) {
