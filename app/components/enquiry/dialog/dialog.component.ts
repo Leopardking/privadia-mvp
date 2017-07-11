@@ -2,6 +2,7 @@ import {Component, OnInit, Input, OnChanges} from '@angular/core';
 import {FormGroup, FormControl, Validators } from "@angular/forms";
 import {MessagesService} from "../../../providers/messages/messages.service";
 
+import * as _ from 'lodash';
 declare const $: any;
 declare const moment: any;
 
@@ -54,6 +55,6 @@ export class DialogComponent implements OnInit, OnChanges{
     }
 
     public formatTime(time, format) {
-	    return moment(time).utcOffset(moment().utcOffset()).format(format);
+	    return moment.utc(time).local().format(format);
     }
 }

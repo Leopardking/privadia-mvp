@@ -38,7 +38,7 @@ var DialogComponent = (function () {
         });
     };
     DialogComponent.prototype.formatTime = function (time, format) {
-        return moment(time).utcOffset(moment().utcOffset()).format(format);
+        return moment.utc(time).local().format(format);
     };
     __decorate([
         core_1.Input(), 
