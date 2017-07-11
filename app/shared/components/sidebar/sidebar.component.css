@@ -12,14 +12,22 @@
     font-size: 14px !important;
     font-weight: 100;
 }
+/*
 i {
     color:white !important;
 }
+*/
 .nav li.active.visible > a:not([data-toggle="collapse"]) i {
     color: rgba(60, 72, 88, 0.8) !important;
 }
+.nav li > a,
+.nav li:hover > a,
+.nav li > a i,
+.nav li:hover > a i {
+    color: #FFFFFF;
+}
 p, span, a {
-    color: white;
+    /*color: white;*/
     font-size: 14px !important;
     font-weight: 100;
     text-align: left;
