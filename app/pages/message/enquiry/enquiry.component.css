@@ -1,3 +1,8 @@
+.nav-tabs a, .nav-tabs i {
+    font-size: 14px;
+    text-transform: none;
+    font-weight: 300;
+}
 .enquiry-detail {
     position: relative;
     top: -54px;
