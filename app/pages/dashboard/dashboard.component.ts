@@ -33,8 +33,8 @@ export class DashboardComponent implements OnInit{
 
         this.filterForm = this.builder.group({
             Bedrooms: new FormControl(),
-            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             MaxRate: new FormControl(),
             MinRate: new FormControl(),
             OrderBy: new FormControl(),
@@ -46,26 +46,26 @@ export class DashboardComponent implements OnInit{
             PropertyId: new FormControl(),
             ClientFirstName: new FormControl(),
             ClientLastName: new FormControl(),
-            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             Message: new FormControl(''),
         });
 
         this.proposalForm = this.builder.group({
             PropertyId: new FormControl(),
             ClientName: new FormControl('Johnathan Robinson'),
-            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             RentalPrice: new FormControl(1200),
             BookingPrice: new FormControl(1495),
         });
 
         this.filterForm.valueChanges.subscribe(
             d => {
-                this.enquiryForm.controls['CheckIn'].setValue(moment().add(6, 'day').format('MM/DD/YYYY'));
-                this.enquiryForm.controls['CheckOut'].setValue(moment().add(1, 'day').format('MM/DD/YYYY'));
-                // this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
-                // this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
+                // this.enquiryForm.controls['CheckIn'].setValue(moment().add(6, 'day').format('DD/MM/YYYY'));
+                // this.enquiryForm.controls['CheckOut'].setValue(moment().add(1, 'day').format('DD/MM/YYYY'));
+                this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
+                this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
             },
             e => {
                 console.log('Error change form ', e)

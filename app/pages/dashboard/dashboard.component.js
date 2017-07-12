@@ -28,8 +28,8 @@ var DashboardComponent = (function () {
         $('.modal').appendTo("body");
         this.filterForm = this.builder.group({
             Bedrooms: new forms_1.FormControl(),
-            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             MaxRate: new forms_1.FormControl(),
             MinRate: new forms_1.FormControl(),
             OrderBy: new forms_1.FormControl(),
@@ -40,23 +40,23 @@ var DashboardComponent = (function () {
             PropertyId: new forms_1.FormControl(),
             ClientFirstName: new forms_1.FormControl(),
             ClientLastName: new forms_1.FormControl(),
-            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             Message: new forms_1.FormControl(''),
         });
         this.proposalForm = this.builder.group({
             PropertyId: new forms_1.FormControl(),
             ClientName: new forms_1.FormControl('Johnathan Robinson'),
-            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             RentalPrice: new forms_1.FormControl(1200),
             BookingPrice: new forms_1.FormControl(1495),
         });
         this.filterForm.valueChanges.subscribe(function (d) {
-            _this.enquiryForm.controls['CheckIn'].setValue(moment().add(6, 'day').format('MM/DD/YYYY'));
-            _this.enquiryForm.controls['CheckOut'].setValue(moment().add(1, 'day').format('MM/DD/YYYY'));
-            // this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
-            // this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
+            // this.enquiryForm.controls['CheckIn'].setValue(moment().add(6, 'day').format('DD/MM/YYYY'));
+            // this.enquiryForm.controls['CheckOut'].setValue(moment().add(1, 'day').format('DD/MM/YYYY'));
+            _this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
+            _this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
         }, function (e) {
             console.log('Error change form ', e);
         });
