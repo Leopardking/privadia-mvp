@@ -87,7 +87,7 @@ export class SetratesComponent implements OnInit{
 
         let datepickerWidget: any = $(".datepicker");
         datepickerWidget.datetimepicker({
-            format: 'MM/DD/YYYY',
+            format: 'DD/MM/YYYY',
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -162,8 +162,8 @@ export class SetratesComponent implements OnInit{
             IsNew: rate.rate.controls.IsNew.value,
             LengthOfStay: rate.rate.controls.LengthOfStay.value,
             PropertyId: rate.rate.controls.PropertyId.value,
-            EndDate: moment().format('MM/DD/YYYY'),
-            StartDate: moment().format('MM/DD/YYYY'),
+            EndDate: moment().format('DD/MM/YYYY'),
+            StartDate: moment().format('DD/MM/YYYY'),
             Value: null,
         });
     }
@@ -174,12 +174,12 @@ export class SetratesComponent implements OnInit{
         control.push(
             new FormGroup({
                 Currency: new FormControl('EUR'),
-                EndDate: new FormControl(moment().format('MM/DD/YYYY')),
+                EndDate: new FormControl(moment().format('DD/MM/YYYY')),
                 Id: new FormControl(),
                 IsNew: new FormControl(),
                 LengthOfStay: new FormControl(),
                 PropertyId: new FormControl(14489),
-                StartDate: new FormControl(moment().format('MM/DD/YYYY')),
+                StartDate: new FormControl(moment().format('DD/MM/YYYY')),
                 Value: new FormControl(),
             }),
         );

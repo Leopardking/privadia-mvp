@@ -47,8 +47,8 @@ var ProposalComponent = (function () {
     ProposalComponent.prototype.initForm = function (data) {
         this.proposalManagerForm = this.builder.group({
             EnquiryMessageThreadId: new forms_1.FormControl(this.data.Id),
-            CheckIn: new forms_1.FormControl({ value: moment(data.Enquiry.CheckIn).format('MM/DD/YYYY'), disabled: this.isAgent }),
-            CheckOut: new forms_1.FormControl({ value: moment(data.Enquiry.CheckOut).format('MM/DD/YYYY'), disabled: this.isAgent }),
+            CheckIn: new forms_1.FormControl({ value: moment(data.Enquiry.CheckIn).format('DD/MM/YYYY'), disabled: this.isAgent }),
+            CheckOut: new forms_1.FormControl({ value: moment(data.Enquiry.CheckOut).format('DD/MM/YYYY'), disabled: this.isAgent }),
             CustomerName: new forms_1.FormControl({ value: data.Enquiry.ClientName, disabled: true }),
             PropertyName: new forms_1.FormControl({ value: data.Enquiry.PropertyName, disabled: true }),
             RentalCost: new forms_1.FormControl({
@@ -63,12 +63,7 @@ var ProposalComponent = (function () {
                 value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
                 disabled: this.isAgent
             }),
-            TermsList: new forms_1.FormArray([
-                new forms_1.FormControl('Term 1'),
-                new forms_1.FormControl('Term 2'),
-                new forms_1.FormControl('Term 3'),
-                new forms_1.FormControl('Term 4'),
-            ]),
+            TermsList: new forms_1.FormArray([]),
             DepositPercentage: new forms_1.FormControl({
                 value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
                 disabled: this.isAgent
@@ -94,12 +89,10 @@ var ProposalComponent = (function () {
     ProposalComponent.prototype.addTerm = function () {
         var control = this.proposalManagerForm.controls['TermsList'];
         control.push(new forms_1.FormControl('Term 1'));
-        console.log('Add Term');
     };
     ProposalComponent.prototype.removeTerm = function (i) {
         var control = this.proposalManagerForm.controls['TermsList'];
         control.removeAt(i);
-        console.log('remove Term');
     };
     ProposalComponent.prototype.createProposal = function () {
         var _this = this;
@@ -113,7 +106,6 @@ var ProposalComponent = (function () {
     };
     ProposalComponent.prototype.submitProposal = function () {
         var _this = this;
-        console.log('Submit Proposal');
         this.enquiryService.submitProposal({ EnquiryMessageThreadId: this.data.Id });
         setTimeout(function () {
             _this.initForm(_this.enquiryService.enquiry);
@@ -128,11 +120,9 @@ var ProposalComponent = (function () {
         });
     };
     ProposalComponent.prototype.declineProposal = function () {
-        console.log('Decline Proposal');
         this.enquiryService.declineProposal({ EnquiryThreadId: this.data.Id });
     };
     ProposalComponent.prototype.cancelProposal = function () {
-        console.log('Cancel Proposal');
         this.enquiryService.cancelProposal({ EnquiryThreadId: this.data.Id });
     };
     __decorate([
