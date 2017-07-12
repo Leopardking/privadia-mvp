@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 
+declare const $: any;
+declare const moment: any;
+
 @Component({
     moduleId: module.id,
     selector: 'datetimepicker-field-cmp',

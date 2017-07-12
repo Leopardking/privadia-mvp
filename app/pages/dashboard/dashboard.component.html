@@ -1,8 +1,5 @@
 <div class="main-content">
     <div class="container-fluid">
-        <button class="btn btn-success btn-raised hidden" data-toggle="modal" data-target="#proposal">
-            Create a Proposal
-        </button>
         <div class="row filter" *ngIf="dashboardService.metadata.length">
         	<dashboard-filter-cmp [group]="filterForm" [metafilters]="dashboardService.metadata"></dashboard-filter-cmp>
         </div>
@@ -18,83 +15,5 @@
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
     </svg>
 </div>
-<!--
-<div class="modal fade" id="proposal" tabindex="-1" role="dialog" aria-labelledby="proposalLabel" aria-hidden="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form [formGroup]="proposalForm">
-                <div class="modal-header">
-                    <h5 class="m-t-25 m-b-none text-center">Create a Proposal</h5>
-                </div>
-                <div class="modal-body m-t-none">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="material-icons">person</i></span>
-                                <input-field-cmp
-                                        [data]="{title: 'Client Name', name: 'ClientName', value: '', type: 'text'}"
-                                        [static]="true"
-                                        [group]="proposalForm"></input-field-cmp>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
-                            <datetimepicker-field-cmp [data]="{title: 'Check In', name: 'CheckIn'}"
-                                                      [classes]="{withIcon: true}"
-                                                      [group]="proposalForm"></datetimepicker-field-cmp>
-                        </div>
-                        <div class="col-xs-6">
-                            <datetimepicker-field-cmp [data]="{title: 'Check Out', name: 'CheckOut'}"
-                                                      [classes]="{withIcon: false}"
-                                                      [group]="proposalForm"></datetimepicker-field-cmp>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="material-icons">local_post_office</i></span>
-                                <input-field-cmp
-                                        [data]="{title: 'Rental Price', name: 'RentalPrice', type: 'text'}"
-                                        [group]="proposalForm"></input-field-cmp>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="material-icons">local_post_office</i></span>
-                                <input-field-cmp
-                                        [data]="{title: 'Booking Price', name: 'BookingPrice', type: 'text'}"
-                                        [static]="true"
-                                        [group]="proposalForm"></input-field-cmp>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="divider"></div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="btn-toolbar">
-                                <button class="btn btn-success btn-simple m-none" type="button">Terms</button>
-                            </div>
-                            <div class="btn-toolbar">
-                                <button class="btn btn-success btn-simple m-none" type="button">Payment Terms</button>
-                            </div>
-                        </div>
-                        <div class="col-xs-6">
 
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <div class="row">
-                        <button type="button" class="btn btn-success">Submit</button>
-                    </div>
-                    <div class="row">
-                        <button type="button" class="btn btn-simple" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
--->
 <enquiry-cmp [group]="enquiryForm" [data]="openVilla"></enquiry-cmp>

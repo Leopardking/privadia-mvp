@@ -76,7 +76,7 @@ var SetratesComponent = (function () {
 
         let datepickerWidget: any = $(".datepicker");
         datepickerWidget.datetimepicker({
-            format: 'DD/MM/YYYY',
+            format: 'MM/DD/YYYY',
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -144,8 +144,8 @@ var SetratesComponent = (function () {
             IsNew: rate.rate.controls.IsNew.value,
             LengthOfStay: rate.rate.controls.LengthOfStay.value,
             PropertyId: rate.rate.controls.PropertyId.value,
-            EndDate: moment().format('DD/MM/YYYY'),
-            StartDate: moment().format('DD/MM/YYYY'),
+            EndDate: moment().format('MM/DD/YYYY'),
+            StartDate: moment().format('MM/DD/YYYY'),
             Value: null,
         });
     };
@@ -154,12 +154,12 @@ var SetratesComponent = (function () {
         var control = this.ratesForm.controls['Rates'];
         control.push(new forms_1.FormGroup({
             Currency: new forms_1.FormControl('EUR'),
-            EndDate: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
+            EndDate: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             Id: new forms_1.FormControl(),
             IsNew: new forms_1.FormControl(),
             LengthOfStay: new forms_1.FormControl(),
-            PropertyId: new forms_1.FormControl(14489),
-            StartDate: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
+            PropertyId: new forms_1.FormControl(),
+            StartDate: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             Value: new forms_1.FormControl(),
         }));
     };

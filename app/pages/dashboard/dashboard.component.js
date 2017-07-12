@@ -18,18 +18,16 @@ var DashboardComponent = (function () {
         this.lookupsService = lookupsService;
         this.builder = builder;
         this.enquiryForm = new forms_1.FormGroup({});
-        this.proposalForm = new forms_1.FormGroup({});
         this.filterForm = new forms_1.FormGroup({});
     }
     DashboardComponent.prototype.ngOnInit = function () {
-        var _this = this;
         localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         $('.modal').appendTo("body");
         this.filterForm = this.builder.group({
             Bedrooms: new forms_1.FormControl(),
-            CheckIn: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
+            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             MaxRate: new forms_1.FormControl(),
             MinRate: new forms_1.FormControl(),
             OrderBy: new forms_1.FormControl(),
@@ -40,28 +38,28 @@ var DashboardComponent = (function () {
             PropertyId: new forms_1.FormControl(),
             ClientFirstName: new forms_1.FormControl(),
             ClientLastName: new forms_1.FormControl(),
-            CheckIn: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
+            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             Message: new forms_1.FormControl(''),
         });
-        this.proposalForm = this.builder.group({
-            PropertyId: new forms_1.FormControl(),
-            ClientName: new forms_1.FormControl('Johnathan Robinson'),
-            CheckIn: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
-            RentalPrice: new forms_1.FormControl(1200),
-            BookingPrice: new forms_1.FormControl(1495),
-        });
-        this.filterForm.valueChanges.subscribe(function (d) {
-            // this.enquiryForm.controls['CheckIn'].setValue(moment().add(6, 'day').format('DD/MM/YYYY'));
-            // this.enquiryForm.controls['CheckOut'].setValue(moment().add(1, 'day').format('DD/MM/YYYY'));
-            _this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
-            _this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
-        }, function (e) {
-            console.log('Error change form ', e);
-        });
+        /*
+        this.filterForm.valueChanges.subscribe(
+            d => {
+                // this.enquiryForm.controls['CheckIn'].setValue(moment().add(6, 'day').format('MM/DD/YYYY'));
+                // this.enquiryForm.controls['CheckOut'].setValue(moment().add(1, 'day').format('MM/DD/YYYY'));
+                this.enquiryForm.controls['CheckIn'].setValue(d.CheckIn);
+                this.enquiryForm.controls['CheckOut'].setValue(d.CheckOut);
+            },
+            e => {
+                console.log('Error change form ', e)
+            }
+        )
+        */
     };
     DashboardComponent.prototype.openEnquiry = function (villa) {
+        this.enquiryForm.reset();
+        this.enquiryForm.controls['CheckIn'].setValue(this.filterForm.controls['CheckIn'].value);
+        this.enquiryForm.controls['CheckOut'].setValue(this.filterForm.controls['CheckOut'].value);
         this.enquiryForm.controls['PropertyId'].setValue(villa.Id);
         this.openVilla = villa;
     };
