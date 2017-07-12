@@ -44,8 +44,7 @@
                     </cl-image>
                 </div>
             </td>
-            <td *ngIf="loginService.getRoles('Agent')">{{ item.ToName }}</td>
-            <td *ngIf="loginService.getRoles('Manager')">{{ item.FromName }}</td>
+            <td>{{ item.RecipientName }}</td>
             <td>{{ item.Subject }}</td>
             <td>{{ dateFormat(item.SentAt, 'D MMMM h:mmA') }}</td>
             <td>
