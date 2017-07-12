@@ -44,7 +44,7 @@
     position: absolute;
     top: 77px;
     right: -29px;
-    width: 70%;
+    width: 90%;
     z-index: 4;
 }
 .extend-filter-container .card {
@@ -73,13 +73,15 @@
 .extend-filter-container .nav-pill.active .form-control-static {
     background-size: 100% 2px, 100% 1px;
     transition-duration: 0.3s;
+    padding-right: 28px;
 }
 .extend-filter-container .nav-pill .caret {
     position: absolute;
     top: 50%;
-    right: 16px;
+    right: 10px;
     margin-top: -5px;
     vertical-align: middle;
+    color: #0b5a7c;
 }
 .extend-filter-container .nav-pill.active .caret {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);

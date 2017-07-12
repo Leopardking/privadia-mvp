@@ -53,7 +53,7 @@
                                         <label class="control-label">{{metafilter.Name}}</label>
                                         <a class="form-control-static" data-toggle="tab" [href]="'#metafilter-' + metafilter.Id">
                                             Select
-                                            <span class="caret"></span>
+                                            <span class="bs-caret"><span class="caret"></span></span>
                                         </a>
                                     </div>
                                 </li>
@@ -93,63 +93,3 @@
         </div>
     </div>
 </div>
-
-
-<!--
-<div class="col-md-12 col-lg-12 metafilter-container">
-    <div class="metafilter-container-header card">
-        <div class="card-header">
-            <h6 class="card-title">
-                <span>{{mainService.villas.length}} Villas Found</span>
-                <span (click)="filterDisplayChange()" class="pull-right metafilter-expand {{ collapsed ? ' collapsed' : ''}}">More Filters </span>
-                <div class="order-type pull-right">
-                    <select class="selectpicker" data-style="select-with-transition" (change)="orderChange($event)">
-                        <option value="0">Price High to Low</option>
-                        <option value="1">Price Low to High</option>
-                    </select>
-                </div>
-            </h6>
-        </div>
-        <div class="card-content" [hidden]="collapsed">
-            <div class="row">
-                <div class="col-md-3 p-b-15 metafilter-names">
-                    <ul class="nav nav-pills nav-pills-icons nav-pills-grey nav-stacked" role="tablist">
-                        <li *ngFor="let metadata of mainService.metadata; let i = index" class="{{ i == 0 ? 'active' : ''}} showtick">
-                            <a href="#metatab-{{metadata.Id}}" role="tab" data-toggle="tab" class="secondary-color">
-                                {{metadata.Name}}
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-9 subtype-filters-names">
-                    <div class="tab-content">
-                        <div class="" *ngFor="let metadata of mainService.metadata; let i = index; let last = last" class="tab-pane {{ i == 0 ? 'active' : ''}}"  id="metatab-{{metadata.Id}}">
-                            {{last ? finished() : ""}}
-                            <div class="card meta-filter" *ngFor="let subtype of metadata.MetaDataSubTypes" id="{{subtype.Id}}">
-                                
-                                    <h6 class="card-title">{{subtype.Name}}</h6>
-                                <div class="card-content">
-                                    <button class="subtype-filter btn btn-xs {{ metafilters[option.Id] ? 'btn-success' : 'btn-default'}}" *ngFor="let option of subtype.MetaData" id="{{option.Id}}" (click)="subfilterChange($event)">
-                                        <span class="btn-label">
-                                            <i class="material-icons">{{ metafilters[option.Id] ? 'check' : 'close' }}</i>
-                                        </span>
-                                        {{option.Name}}
-                                    </button>
-                                    <select class="hidden selectpicker" multiple data-style="select-with-transition" multiple title="Choose Metadata">
-                                        <option *ngFor="let option of subtype.MetaData; let last = last" value="{{option.Id}}">{{option.Name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-right li-applybutton">                        
-                            <button class="btn button btn-success secondary-color shadow-grey" (click)="applyMetafilter()">
-                                Apply Filters
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
