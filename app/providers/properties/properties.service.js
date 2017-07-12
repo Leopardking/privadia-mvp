@@ -182,10 +182,7 @@ var PropertiesService = (function () {
     PropertiesService.prototype.handleError = function (error) {
         var errMsg;
         if (error instanceof http_1.Response) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            console.log('body', err);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+            errMsg = error.json() || '';
         }
         else {
             errMsg = error.message ? error.message : error.toString();

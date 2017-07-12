@@ -6,6 +6,7 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 import * as _ from 'lodash'
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {LoginService} from "../../../providers/login/login.service";
+import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
 declare const $:any;
 //declare const _:any;
 
@@ -26,20 +27,20 @@ export class AddpropertyComponent implements OnInit {
         Active: new FormControl(true),
         InternalName: new FormControl(),
         OwnerName: new FormControl(),
-        Name: new FormControl(null, Validators.required),
+        Name: new FormControl(null),
         Address: new FormControl(),
         Region: new FormControl({
             Id: '',
             Name: '',
-        }, Validators.required),
+        }),
         ManagementCompany: new FormControl({
             Id: null,
             Name: null,
-        }, Validators.required),
+        }),
         ManagerUser: new FormControl({
             Id: null,
             Name: null,
-        }, Validators.required),
+        }),
         /*
         OwnerUser: new FormControl({
             Id: null,
@@ -53,9 +54,9 @@ export class AddpropertyComponent implements OnInit {
         CollaboratorInitials: new FormControl(),
         BoxUrl: new FormControl(null, Validators.pattern('https?://.+')),
         AgencyPackUrl: new FormControl(null, Validators.pattern('https?://.+')),
-        Bathrooms: new FormControl(null, Validators.required),
-        Bedrooms: new FormControl(null, Validators.required),
-        Sleeps: new FormControl(null, Validators.required),
+        Bathrooms: new FormControl(null),
+        Bedrooms: new FormControl(null),
+        Sleeps: new FormControl(null),
         Capacity: new FormControl(null),
         LivingAreaSize: new FormControl(null),
         DiningCapacity: new FormControl(null),
@@ -68,7 +69,7 @@ export class AddpropertyComponent implements OnInit {
         Contacts: new FormArray([]),
         Rooms: new FormArray([]),
         Images: new FormArray([]),
-        MinimumStay: new FormControl(0, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])),
+        MinimumStay: new FormControl(0, Validators.pattern('^[0-9]*$')),
         PointsOfInterest: new FormArray([]),
         MetaData: new FormArray([]),
         MetaDataTmp: new FormGroup({}),
@@ -126,38 +127,39 @@ export class AddpropertyComponent implements OnInit {
 
     private onSubmit(form) {
         console.log('Form ', this.propertyForm)
+        this.sending = true;
         let newArr = [];
         _.mapValues(form.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
         });
         form.MetaData = newArr;
 
-        if(this.propertyForm.valid) {
-            this.sending = true;
+        this.propertiesService.addProperty(form).subscribe(
+            d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
 
-            this.propertiesService.addProperty(form).subscribe(
-                d => {
-                    $.notify({
-                        icon: "notifications",
-                        message: "Property Added Successfully"
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
 
-                    },{
-                        type: 'success',
-                        timer: 3000,
-                        placement: {
-                            from: 'top',
-                            align: 'right'
-                        }
-                    });
+                this.router.navigate(['properties']);
+                this.sending = false;
+            },
+            e => {
+                console.log("error:", e);
+                this.errorForm = true;
+                this.sending = false;
 
-                    this.router.navigate(['properties']);
-                    this.sending = false;
-
-                },
-                e => { console.log("error:", e); }
-            );
-        } else {
-            this.errorForm = true
-        }
+                handlerErrorFieds(e, this.propertyForm);
+                handlerErrorNotify('Please, fix form inputs.');
+            }
+        );
     }
 }

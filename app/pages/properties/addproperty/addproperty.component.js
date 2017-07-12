@@ -13,6 +13,7 @@ var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var _ = require('lodash');
+var helpers_1 = require("../../../helpers/helpers");
 //declare const _:any;
 var AddpropertyComponent = (function () {
     function AddpropertyComponent(router, propertiesService) {
@@ -26,20 +27,20 @@ var AddpropertyComponent = (function () {
             Active: new forms_1.FormControl(true),
             InternalName: new forms_1.FormControl(),
             OwnerName: new forms_1.FormControl(),
-            Name: new forms_1.FormControl(null, forms_1.Validators.required),
+            Name: new forms_1.FormControl(null),
             Address: new forms_1.FormControl(),
             Region: new forms_1.FormControl({
                 Id: '',
                 Name: '',
-            }, forms_1.Validators.required),
+            }),
             ManagementCompany: new forms_1.FormControl({
                 Id: null,
                 Name: null,
-            }, forms_1.Validators.required),
+            }),
             ManagerUser: new forms_1.FormControl({
                 Id: null,
                 Name: null,
-            }, forms_1.Validators.required),
+            }),
             /*
             OwnerUser: new FormControl({
                 Id: null,
@@ -53,9 +54,9 @@ var AddpropertyComponent = (function () {
             CollaboratorInitials: new forms_1.FormControl(),
             BoxUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
             AgencyPackUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
-            Bathrooms: new forms_1.FormControl(null, forms_1.Validators.required),
-            Bedrooms: new forms_1.FormControl(null, forms_1.Validators.required),
-            Sleeps: new forms_1.FormControl(null, forms_1.Validators.required),
+            Bathrooms: new forms_1.FormControl(null),
+            Bedrooms: new forms_1.FormControl(null),
+            Sleeps: new forms_1.FormControl(null),
             Capacity: new forms_1.FormControl(null),
             LivingAreaSize: new forms_1.FormControl(null),
             DiningCapacity: new forms_1.FormControl(null),
@@ -68,7 +69,7 @@ var AddpropertyComponent = (function () {
             Contacts: new forms_1.FormArray([]),
             Rooms: new forms_1.FormArray([]),
             Images: new forms_1.FormArray([]),
-            MinimumStay: new forms_1.FormControl(0, forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern('^[0-9]*$')])),
+            MinimumStay: new forms_1.FormControl(0, forms_1.Validators.pattern('^[0-9]*$')),
             PointsOfInterest: new forms_1.FormArray([]),
             MetaData: new forms_1.FormArray([]),
             MetaDataTmp: new forms_1.FormGroup({}),
@@ -118,32 +119,33 @@ var AddpropertyComponent = (function () {
     AddpropertyComponent.prototype.onSubmit = function (form) {
         var _this = this;
         console.log('Form ', this.propertyForm);
+        this.sending = true;
         var newArr = [];
         _.mapValues(form.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
         });
         form.MetaData = newArr;
-        if (this.propertyForm.valid) {
-            this.sending = true;
-            this.propertiesService.addProperty(form).subscribe(function (d) {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
-                }, {
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                _this.router.navigate(['properties']);
-                _this.sending = false;
-            }, function (e) { console.log("error:", e); });
-        }
-        else {
-            this.errorForm = true;
-        }
+        this.propertiesService.addProperty(form).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Property Added Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            _this.router.navigate(['properties']);
+            _this.sending = false;
+        }, function (e) {
+            console.log("error:", e);
+            _this.errorForm = true;
+            _this.sending = false;
+            helpers_1.handlerErrorFieds(e, _this.propertyForm);
+            helpers_1.handlerErrorNotify('Please, fix form inputs.');
+        });
     };
     AddpropertyComponent = __decorate([
         core_1.Component({

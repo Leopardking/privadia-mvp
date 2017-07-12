@@ -3,7 +3,7 @@ function handlerErrorFieds(e, form) {
     var fileds = Object.keys(e.ModelState || {});
     this.errorsList = e.ModelState;
     fileds.forEach(function (field) {
-        form.controls[field].setErrors({ serverError: e.ModelState[field] });
+        form.controls[field.split('.')[0]].setErrors({ serverError: e.ModelState[field] });
     });
 }
 exports.handlerErrorFieds = handlerErrorFieds;

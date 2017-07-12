@@ -233,10 +233,7 @@ export class PropertiesService {
 	public handleError(error: Response | any) {
 		let errMsg: string;
 		if (error instanceof Response) {
-			const body = error.json() || '';
-			const err = body.error || JSON.stringify(body);
-			console.log('body',err)
-			errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+			errMsg = error.json() || '';
 		} else {
 			errMsg = error.message ? error.message : error.toString();
 		}
