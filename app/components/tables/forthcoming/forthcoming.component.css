@@ -1,5 +1,6 @@
-.table-enquiries > tbody > tr {
+.table-enquiries > tbody > tr:hover {
     cursor: pointer;
+    background-color: #e7ebed;
 }
 .table-enquiries > tbody > tr > td:first-child,
 .table-enquiries > tbody > tr > td:last-child,
