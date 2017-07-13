@@ -9,7 +9,7 @@ const routes: Routes = [
             { path: 'dashboard', loadChildren: '/app/pages/dashboard/dashboard.module#DashboardModule' },
             { path: 'booking', loadChildren: 'app/pages/booking/booking.module#BookingModule' },
             { path: 'properties', loadChildren: 'app/pages/properties/properties.module#PropertiesModule' },
-            { path: 'message', loadChildren: 'app/pages/message/message.module#MessageModule' },
+            { path: 'messages', loadChildren: 'app/pages/message/message.module#MessageModule' },
         ]
     }
 ];
