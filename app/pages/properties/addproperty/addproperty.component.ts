@@ -22,6 +22,7 @@ export class AddpropertyComponent implements OnInit {
     private isLoad = true;
     private errorForm = false;
     private sending = false;
+    private role = !this.loginService.getRoles('Admin');
 
     public propertyForm = new FormGroup ({
         Active: new FormControl(true),
@@ -34,8 +35,11 @@ export class AddpropertyComponent implements OnInit {
             Name: '',
         }),
         ManagementCompany: new FormControl({
-            Id: null,
-            Name: null,
+            value: {
+                Id: null,
+                Name: null,
+            },
+            disabled: this.role
         }),
         ManagerUser: new FormControl({
             Id: null,
@@ -80,6 +84,7 @@ export class AddpropertyComponent implements OnInit {
     });
 
     constructor ( private router:Router,
+                  private loginService: LoginService,
                   private propertiesService: PropertiesService ) {
         propertiesService.readDataMetadata();
         propertiesService.readDataOwners();
@@ -90,6 +95,13 @@ export class AddpropertyComponent implements OnInit {
     ngOnInit(){
         localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+
+        if(this.role) {
+            setTimeout(() => {
+                this.propertyForm.controls['ManagementCompany'].setValue(this.propertiesService.companies[0])
+                this.propertiesService.readDataManagers(this.propertiesService.companies[0].Id);
+            }, 500);
+        }
 
         this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {
             this.propertiesService.readDataManagers(company.Id);

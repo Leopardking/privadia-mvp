@@ -27,27 +27,27 @@ var EditpropertyComponent = (function () {
             propertiesService.readDataOwners();
             propertiesService.readDataRegions();
             propertiesService.readDataCompanies();
-            // propertiesService.readDataManagers();
         });
     }
     EditpropertyComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.permission = !this.loginService.getPermission('Properties/Put');
+        this.role = !this.loginService.getRoles('Admin');
         setTimeout(function () {
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,
                 Active: { value: _this.propertiesService.property.Active, disabled: _this.permission },
                 OwnerName: { value: _this.propertiesService.property.OwnerName, disabled: _this.permission },
                 InternalName: { value: _this.propertiesService.property.InternalName, disabled: _this.permission },
-                Name: [{ value: _this.propertiesService.property.Name, disabled: _this.permission }, forms_1.Validators.required],
+                Name: [{ value: _this.propertiesService.property.Name, disabled: _this.permission }],
                 Address: { value: _this.propertiesService.property.Address, disabled: _this.permission },
                 Region: { value: { Id: _this.propertiesService.property.Region.Id, Name: _this.propertiesService.property.Region.Name }, disabled: _this.permission },
                 ManagementCompany: { value: {
                         Id: _this.propertiesService.property.ManagementCompany.Id,
                         Name: _this.propertiesService.property.ManagementCompany.Name,
                     },
-                    disabled: _this.permission
+                    disabled: _this.role || _this.permission
                 },
                 ManagerUser: { value: {
                         Id: _this.propertiesService.property.ManagerUser.Id,
@@ -62,10 +62,10 @@ var EditpropertyComponent = (function () {
                 CollaboratorInitials: { value: _this.propertiesService.property.CollaboratorInitials, disabled: _this.permission },
                 BoxUrl: [{ value: _this.propertiesService.property.BoxUrl, disabled: _this.permission }, forms_1.Validators.pattern('https?://.+')],
                 AgencyPackUrl: [{ value: _this.propertiesService.property.AgencyPackUrl, disabled: _this.permission }, forms_1.Validators.pattern('https?://.+')],
-                MinimumStay: [{ value: _this.propertiesService.property.MinimumStay, disabled: _this.permission }, forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern('^[0-9]*$')])],
-                Bathrooms: [{ value: _this.propertiesService.property.Bathrooms, disabled: _this.permission }, forms_1.Validators.required],
-                Bedrooms: [{ value: _this.propertiesService.property.Bedrooms, disabled: _this.permission }, forms_1.Validators.required],
-                Sleeps: [{ value: _this.propertiesService.property.Sleeps, disabled: _this.permission }, forms_1.Validators.required],
+                MinimumStay: [{ value: _this.propertiesService.property.MinimumStay, disabled: _this.permission }, forms_1.Validators.pattern('^[0-9]*$')],
+                Bathrooms: [{ value: _this.propertiesService.property.Bathrooms, disabled: _this.permission }],
+                Bedrooms: [{ value: _this.propertiesService.property.Bedrooms, disabled: _this.permission }],
+                Sleeps: [{ value: _this.propertiesService.property.Sleeps, disabled: _this.permission }],
                 Capacity: { value: _this.propertiesService.property.Capacity, disabled: _this.permission },
                 LivingAreaSize: { value: _this.propertiesService.property.LivingAreaSize, disabled: _this.permission },
                 DiningCapacity: { value: _this.propertiesService.property.DiningCapacity, disabled: _this.permission },
@@ -87,6 +87,7 @@ var EditpropertyComponent = (function () {
             _this.setPointsOfInterest(_this.propertiesService.property.PointsOfInterest);
             _this.setMetaData(_this.propertiesService.property.MetaData);
             _this.setMetaDataTmp();
+            _this.propertiesService.readDataManagers(_this.propertiesService.property.ManagementCompany.Id);
             $('.property-tabs a:first').tab('show');
             _this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
                 _this.propertyForm.controls['ManagerUser'].reset({
@@ -101,6 +102,14 @@ var EditpropertyComponent = (function () {
                     selectQuery.selectpicker('refresh');
                 }, 500);
             });
+            /*
+            const selectQuery = $(".custompicker");
+            setTimeout(() => {
+                selectQuery.selectpicker('destroy');
+                selectQuery.selectpicker('render');
+                selectQuery.selectpicker('refresh');
+            }, 1500);
+            */
             localStorage.setItem('title', _this.propertiesService.property.Name);
         }, 1500);
     };

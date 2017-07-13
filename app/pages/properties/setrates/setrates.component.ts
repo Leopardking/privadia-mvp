@@ -38,7 +38,7 @@ export class SetratesComponent implements OnInit{
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
         console.log('moment',moment().format())
-        this.propertyService.getRates(14489).subscribe(
+        this.propertyService.getRates(2).subscribe(
             d => {
                 this.listRates = d;
                 this.setArray(d);

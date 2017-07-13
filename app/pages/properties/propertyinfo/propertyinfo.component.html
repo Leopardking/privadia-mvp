@@ -43,7 +43,11 @@
                                                 [field]="propertyForm.controls.ManagementCompany"></singleselect-field-cmp>
                     </div>
                     <div class="col-xs-4">
-                        <singleselect-field-cmp *ngIf="propertiesService.managers.length || propertyForm.controls.ManagerUser.value"
+                        <singleselect-field-cmp *ngIf="propertiesService.managers.length"
+                                                [dataList]="propertiesService.managers"
+                                                [options]="{title: 'Manager*', default: 'Select Manager'}"
+                                                [field]="propertyForm.controls.ManagerUser"></singleselect-field-cmp>
+                        <singleselect-field-cmp *ngIf="!propertiesService.managers.length && propertyForm.controls.ManagerUser.value"
                                                 [dataList]="propertiesService.managers"
                                                 [options]="{title: 'Manager*', default: 'Select Manager'}"
                                                 [field]="propertyForm.controls.ManagerUser"></singleselect-field-cmp>

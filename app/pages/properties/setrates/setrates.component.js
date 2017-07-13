@@ -31,7 +31,7 @@ var SetratesComponent = (function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         console.log('moment', moment().format());
-        this.propertyService.getRates(14489).subscribe(function (d) {
+        this.propertyService.getRates(2).subscribe(function (d) {
             _this.listRates = d;
             _this.setArray(d);
             _this.ratesForm = _this.builder.group({

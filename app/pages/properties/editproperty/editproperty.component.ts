@@ -22,6 +22,7 @@ export class EditpropertyComponent implements OnInit {
 
     private errorForm = false;
     private permission;
+    private role;
 
     public propertyForm: FormGroup;
 
@@ -35,13 +36,13 @@ export class EditpropertyComponent implements OnInit {
             propertiesService.readDataOwners();
             propertiesService.readDataRegions();
             propertiesService.readDataCompanies();
-            // propertiesService.readDataManagers();
         });
     }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.permission = !this.loginService.getPermission('Properties/Put');
+        this.role = !this.loginService.getRoles('Admin');
 
         setTimeout(() => {
             this.propertyForm = this.builder.group({
@@ -49,7 +50,7 @@ export class EditpropertyComponent implements OnInit {
                 Active: { value: this.propertiesService.property.Active, disabled: this.permission },
                 OwnerName: { value: this.propertiesService.property.OwnerName, disabled: this.permission },
                 InternalName: { value: this.propertiesService.property.InternalName, disabled: this.permission },
-                Name: [{ value: this.propertiesService.property.Name, disabled: this.permission}, Validators.required],
+                Name: [{ value: this.propertiesService.property.Name, disabled: this.permission}],
                 Address: { value: this.propertiesService.property.Address, disabled: this.permission },
                 Region: { value: { Id: this.propertiesService.property.Region.Id, Name: this.propertiesService.property.Region.Name}, disabled: this.permission },
                 ManagementCompany: { value:
@@ -57,7 +58,7 @@ export class EditpropertyComponent implements OnInit {
                         Id: this.propertiesService.property.ManagementCompany.Id,
                         Name: this.propertiesService.property.ManagementCompany.Name,
                     },
-                    disabled: this.permission
+                    disabled: this.role || this.permission
                 },
                 ManagerUser: { value:
                     {
@@ -73,10 +74,10 @@ export class EditpropertyComponent implements OnInit {
                 CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
                 BoxUrl: [{ value: this.propertiesService.property.BoxUrl, disabled: this.permission }, Validators.pattern('https?://.+')],
                 AgencyPackUrl: [{ value: this.propertiesService.property.AgencyPackUrl, disabled: this.permission }, Validators.pattern('https?://.+')],
-                MinimumStay: [{ value: this.propertiesService.property.MinimumStay, disabled: this.permission }, Validators.compose([Validators.required, Validators.pattern('^[0-9]*$')])],
-                Bathrooms: [{ value: this.propertiesService.property.Bathrooms, disabled: this.permission }, Validators.required],
-                Bedrooms: [{ value: this.propertiesService.property.Bedrooms, disabled: this.permission }, Validators.required],
-                Sleeps: [{ value: this.propertiesService.property.Sleeps, disabled: this.permission }, Validators.required],
+                MinimumStay: [{ value: this.propertiesService.property.MinimumStay, disabled: this.permission }, Validators.pattern('^[0-9]*$')],
+                Bathrooms: [{ value: this.propertiesService.property.Bathrooms, disabled: this.permission }],
+                Bedrooms: [{ value: this.propertiesService.property.Bedrooms, disabled: this.permission }],
+                Sleeps: [{ value: this.propertiesService.property.Sleeps, disabled: this.permission }],
                 Capacity: { value: this.propertiesService.property.Capacity, disabled: this.permission },
                 LivingAreaSize: { value: this.propertiesService.property.LivingAreaSize, disabled: this.permission },
                 DiningCapacity: { value: this.propertiesService.property.DiningCapacity, disabled: this.permission },
@@ -98,6 +99,7 @@ export class EditpropertyComponent implements OnInit {
             this.setPointsOfInterest(this.propertiesService.property.PointsOfInterest);
             this.setMetaData(this.propertiesService.property.MetaData);
             this.setMetaDataTmp();
+            this.propertiesService.readDataManagers(this.propertiesService.property.ManagementCompany.Id);
 
             $('.property-tabs a:first').tab('show')
             this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {
@@ -113,7 +115,14 @@ export class EditpropertyComponent implements OnInit {
                     selectQuery.selectpicker('refresh');
                 }, 500);
             });
-
+            /*
+            const selectQuery = $(".custompicker");
+            setTimeout(() => {
+                selectQuery.selectpicker('destroy');
+                selectQuery.selectpicker('render');
+                selectQuery.selectpicker('refresh');
+            }, 1500);
+            */
             localStorage.setItem('title', this.propertiesService.property.Name);
         }, 1500);
     }

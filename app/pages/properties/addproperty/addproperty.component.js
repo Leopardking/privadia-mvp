@@ -13,16 +13,19 @@ var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var _ = require('lodash');
+var login_service_1 = require("../../../providers/login/login.service");
 var helpers_1 = require("../../../helpers/helpers");
 //declare const _:any;
 var AddpropertyComponent = (function () {
-    function AddpropertyComponent(router, propertiesService) {
+    function AddpropertyComponent(router, loginService, propertiesService) {
         this.router = router;
+        this.loginService = loginService;
         this.propertiesService = propertiesService;
         // private isActive = true;
         this.isLoad = true;
         this.errorForm = false;
         this.sending = false;
+        this.role = !this.loginService.getRoles('Admin');
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
             InternalName: new forms_1.FormControl(),
@@ -34,8 +37,11 @@ var AddpropertyComponent = (function () {
                 Name: '',
             }),
             ManagementCompany: new forms_1.FormControl({
-                Id: null,
-                Name: null,
+                value: {
+                    Id: null,
+                    Name: null,
+                },
+                disabled: this.role
             }),
             ManagerUser: new forms_1.FormControl({
                 Id: null,
@@ -87,6 +93,12 @@ var AddpropertyComponent = (function () {
         var _this = this;
         localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+        if (this.role) {
+            setTimeout(function () {
+                _this.propertyForm.controls['ManagementCompany'].setValue(_this.propertiesService.companies[0]);
+                _this.propertiesService.readDataManagers(_this.propertiesService.companies[0].Id);
+            }, 500);
+        }
         this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
             _this.propertiesService.readDataManagers(company.Id);
             var selectQuery = $(".custompicker");
@@ -154,7 +166,7 @@ var AddpropertyComponent = (function () {
             templateUrl: 'addproperty.component.html',
             styleUrls: ['addproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.Router, properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [router_1.Router, login_service_1.LoginService, properties_service_1.PropertiesService])
     ], AddpropertyComponent);
     return AddpropertyComponent;
 }());
