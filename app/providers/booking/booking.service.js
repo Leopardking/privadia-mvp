@@ -13,61 +13,90 @@ var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
+var login_service_1 = require("../login/login.service");
 var BookingService = (function () {
-    /*
-    public setApiURL(url) {
-        this.apiUrl = url;
-    }
-    */
-    function BookingService(http) {
+    function BookingService(http, loginService) {
         this.http = http;
+        this.loginService = loginService;
         // private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
-        this.setToken(localStorage.getItem('id_token'));
+        this.token = localStorage.getItem('id_token');
+        this.bookings = [];
     }
-    BookingService.prototype.setToken = function (str) {
-        this.token = str;
-        this.header = new http_1.Headers({ 'Authorization': this.token });
-        this.options = new http_1.RequestOptions({ headers: this.header });
+    BookingService.prototype.getDataBookings = function () {
+        var _this = this;
+        this.allBookings().subscribe(function (d) {
+            _this.bookings = d;
+        }, function (e) {
+            console.log("error: ", e);
+        });
     };
     BookingService.prototype.allBookings = function () {
-        return this.http.get(this.apiUrl + '/api/bookings/', this.options)
+        if (!this.loginService.getPermission('Bookings/Get'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/Bookings/', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     //Get Booking By Id
     BookingService.prototype.getBookingById = function (id) {
-        return this.http.get(this.apiUrl + '/api/bookings/' + id, this.options)
+        if (!this.loginService.getPermission('Properties/GetById'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/Bookings/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     //Update Booking
     BookingService.prototype.updateBooking = function (data) {
-        return this.http.post(this.apiUrl + '/api/bookings/', data, this.options)
+        if (!this.loginService.getPermission('Properties/GetById'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/Bookings/', data, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     //Add New Booking
     BookingService.prototype.addBooking = function (data) {
-        return this.http.post(this.apiUrl + '/api/bookings/', data, this.options)
+        if (!this.loginService.getPermission('Properties/GetById'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/Bookings/', data, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     //Delete Booking
     BookingService.prototype.deleteBooking = function (id) {
-        return this.http.delete(this.apiUrl + '/api/bookings/' + id, this.options)
+        if (!this.loginService.getPermission('Properties/GetById'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.delete(this.apiUrl + '/api/Bookings/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     //Searchh Properties
     BookingService.prototype.searchProperties = function (name) {
-        return this.http.post(this.apiUrl + '/api/properties/search?name=' + name, null, this.options)
+        if (!this.loginService.getPermission('Properties/GetById'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/properties/search?name=' + name, null, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
     //All Properties
     BookingService.prototype.allProperties = function (name) {
-        return this.http.get(this.apiUrl + '/api/properties/', this.options)
+        if (!this.loginService.getPermission('Properties/GetById'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/properties/', options)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -89,7 +118,7 @@ var BookingService = (function () {
     };
     BookingService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
+        __metadata('design:paramtypes', [http_1.Http, login_service_1.LoginService])
     ], BookingService);
     return BookingService;
 }());

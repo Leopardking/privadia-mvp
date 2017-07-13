@@ -25,25 +25,12 @@ export class BookingComponent implements OnInit{
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     ngOnInit(){
-        localStorage.setItem('title', '');
-
-        //------------------    Reading data of booking        -----------------/
-        this.bookingService.allBookings().subscribe(
-            d => {
-                this.bookings = d;
-                this.reading = false;
-                this.datatableInited = false;
-            },
-            e => {
-                console.log("error: ", e);
-                this.reading = false;
-            }
-        );
+        this.bookingService.getDataBookings();
     }
     
     private finishReading() {
-        initDataTable();
-        this.datatableInited = true;
+        // initDataTable();
+        // this.datatableInited = true;
     }
 
     private addBooking() {

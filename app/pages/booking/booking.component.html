@@ -1,5 +1,49 @@
 <div class="main-content">
     <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-tabs" data-background-color="darkblue">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <ul id="myTabs" class="nav nav-tabs" data-tabs="tabs">
+                            <li class="active">
+                                <a href="#forthcoming" data-toggle="tab">Forthcoming</a>
+                            </li>
+                            <li class="">
+                                <a href="#current" data-toggle="tab">Current</a>
+                            </li>
+                            <li class="">
+                                <a href="#past" data-toggle="tab">Past</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content p-l-r-none p-t-none">
+                <div class="tab-content m-t-none">
+                    <div class="tab-pane active" id="forthcoming">
+                        <forthcoming-table-cmp [data]="bookingService.bookings"></forthcoming-table-cmp>
+                    </div>
+                    <div class="tab-pane" id="current">
+                        <!--
+                        <enquiries-table-cmp [data]="enquiryService.enquiries"></enquiries-table-cmp>
+                        -->
+                    </div>
+                    <div class="tab-pane" id="past">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="loader" [hidden]="true">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
+<!--
+<div class="main-content">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -9,7 +53,6 @@
                     <div class="card-content">
                         <h4 class="card-title">Booking</h4>
                         <div class="toolbar">
-                            <!--        Here you can write extra buttons/actions for the toolbar              -->
                             <button class="btn btn-simple secondary-color shadow-grey pull-right" (click)="addBooking">
                             	Add Booking
                             </button>
@@ -53,17 +96,9 @@
                             </table>
                         </div>
                     </div>
-                    <!-- end content-->
                 </div>
-                <!--  end card  -->
             </div>
-            <!-- end col-md-12 -->
         </div>
-        <!-- end row -->
     </div>
 </div>
-<div class="loader" [hidden]="!reading">
-    <svg class="circular" viewBox="25 25 50 50">
-        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
-    </svg>
-</div>
+-->

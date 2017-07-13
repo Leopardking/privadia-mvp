@@ -1,0 +1,48 @@
+<div class="material-datatables">
+    <table id="datatables" class="table table-enquiries m-t-none">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr *ngFor="let item of data; let i = index; let last = last">
+                <td></td>
+                <td>
+                    <div class="photo">
+                        <cl-image data-u="image" public-id="z7iro8k17pc69cguzetw" cloud-name="privadia" class="md-card-image" crop="fill" gravity="auto" quality="80" height="32" width="32" format="jpg"></cl-image>
+                    </div>
+                </td>
+                <td>{{ item.ClientName }}</td>
+                <td>{{ item.PropertyName }}</td>
+                <td>
+                    {{ dateFormat(item.CheckIn, 'DD/MM/YYYY') }} - {{ dateFormat(item.CheckOut, 'DD/MM/YYYY') }}
+                </td>
+                <td class="button-cell">
+                    <button class="btn btn-simple btn-icon">
+                        <i class="material-icons">edit</i>
+                    </button>
+                </td>
+                <td></td>
+                {{ data && last && !datatableInited ? finishReading() : "" }}
+            </tr>
+        </tbody>
+    </table>
+</div>
