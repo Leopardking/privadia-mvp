@@ -54,6 +54,17 @@ export class EnquiryService {
 		)
 	}
 
+	public acceptProposal(id) {
+		this.proposalsService.acceptProposals(id).subscribe(
+			d => {
+				this.enquiry = d;
+			},
+			e => {
+				console.log('Error Create Proposal', e)
+			}
+		)
+	}
+
 	public submitProposal(id) {
 		this.proposalsService.submitProposals(id).subscribe(
 			d => {

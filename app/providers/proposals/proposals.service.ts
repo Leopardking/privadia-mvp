@@ -52,6 +52,19 @@ export class ProposalsService {
             .catch(this.handleError);
 	}
 
+
+	public acceptProposals(data) {
+		if(!this.loginService.getPermission('Proposals/Accept'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.post( `${this.apiUrl}/api/Proposals/Accept`, data, options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
 	private extractData(res:Response) {
 		let body = res.json();
 

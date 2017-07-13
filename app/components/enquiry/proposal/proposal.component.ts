@@ -36,7 +36,8 @@ export class ProposalComponent implements OnInit{
 
 	constructor( private builder: FormBuilder,
 				 private loginService: LoginService,
-				 private enquiryService: EnquiryService, private proposalsService: ProposalsService ) {
+				 private enquiryService: EnquiryService,
+				 private proposalsService: ProposalsService ) {
     }
 
 	ngOnInit() {
@@ -109,13 +110,18 @@ export class ProposalComponent implements OnInit{
 
 	private createProposal() {
 		this.enquiryService.createProposal({EnquiryMessageThreadId: this.data.Id});
+
 		setTimeout(() => {
 			this.initForm(this.enquiryService.enquiry)
 		}, 500)
 	}
 
 	private acceptProposal() {
-	    console.log('Accept Proposal')
+		this.enquiryService.acceptProposal({EnquiryMessageThreadId: this.data.Id});
+
+		setTimeout(() => {
+			this.initForm(this.enquiryService.enquiry)
+		}, 500)
     }
 
     private submitProposal() {

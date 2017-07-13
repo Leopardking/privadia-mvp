@@ -102,7 +102,11 @@ var ProposalComponent = (function () {
         }, 500);
     };
     ProposalComponent.prototype.acceptProposal = function () {
-        console.log('Accept Proposal');
+        var _this = this;
+        this.enquiryService.acceptProposal({ EnquiryMessageThreadId: this.data.Id });
+        setTimeout(function () {
+            _this.initForm(_this.enquiryService.enquiry);
+        }, 500);
     };
     ProposalComponent.prototype.submitProposal = function () {
         var _this = this;
