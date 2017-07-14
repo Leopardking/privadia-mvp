@@ -4,7 +4,7 @@
             <form [formGroup]="enquiryForm" *ngIf="data" (submit)="onSubmit(enquiryForm.value)">
                 <div class="modal-header">
                     <div class="image-villa">
-                        <cl-image *ngIf="!data.ImageId"
+                        <cl-image *ngIf="data.ImageId"
                                   data-u="image"
                                   [public-id]="data.ImageId"
                                   cloud-name="privadia"
@@ -16,7 +16,7 @@
                                   width="600"
                                   format="jpg">
                         </cl-image>
-                        <img *ngIf="data.ImageId" class="img" src="../assets/img/image_placeholder.jpg">
+                        <img *ngIf="!data.ImageId" class="img" src="../assets/img/image_placeholder.jpg">
                     </div>
                     <div class="villa-container">
                         <h4 class="modal-title">{{data.Name}} <span class="location"><i class="material-icons">place</i> {{data.RegionName}}</span></h4>
