@@ -114,7 +114,7 @@
                                 <i class="material-icons">clear</i>
                             </button>
                         </div>
-                        <div class="row">
+                        <div *ngIf="data.Enquiry.Proposal && !data.Enquiry.Proposal.AcceptedAt" class="row">
                             <div class="col-xs-12">
                                 <button type="button"
                                         class="btn btn-default btn-simple btn-back btn-success pull-right"
@@ -163,7 +163,7 @@
         </div>
         <!--no proposal manager buttons end-->
         <!--proposal manager buttons-->
-        <div *ngIf="data.Enquiry.Proposal && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
+        <div *ngIf="data.Enquiry.Proposal && !data.Enquiry.Proposal.AcceptedAt && !data.Enquiry.DeclinedAt && !data.Enquiry.CancelledAt" class="row">
             <div class="col-xs-4">
                 <button type="button" class="btn btn-danger font-16 m-l-10" (click)="declineProposal()">Decline</button>
             </div>
