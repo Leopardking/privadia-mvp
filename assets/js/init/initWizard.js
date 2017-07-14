@@ -6,9 +6,11 @@ if ('undefined' !== typeof module) {
             'tabClass': 'nav nav-pills',
             'nextSelector': '.btn-next',
             'previousSelector': '.btn-previous',
-            onNext: function(tab, navigation, index) { },
+            onNext: function(tab, navigation, index) {
+              console.log('Wizard next')
+            },
             onInit : function(tab, navigation, index){
-
+              console.log('Wizard init')
               //check number of tabs and fill the entire row
               var $total = navigation.find('li').length;
               $width = 100/$total;
@@ -55,6 +57,14 @@ if ('undefined' !== typeof module) {
 
                 var button_text = navigation.find('li:nth-child(' + $current + ') a').html();
 
+                console.log('Current ', $current)
+                /*
+                if(navigation.find('li:nth-child(' + $current + ') a').parent().hasClass('form-error'))
+                  $('.moving-tab').addClass('form-error');
+                else
+                  $('.moving-tab').removeClass('form-error');
+                */
+
                 setTimeout(function(){
                     $('.moving-tab').text(button_text);
                 }, 150);
@@ -78,18 +88,6 @@ if ('undefined' !== typeof module) {
             }
       	});
 
-        //Function to show image before upload
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#wizardPicturePreview').attr('src', e.target.result).fadeIn('slow');
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
         $(window).resize(function(){
             $('.wizard-card').each(function(){
                 $wizard = $(this);
@@ -101,7 +99,7 @@ if ('undefined' !== typeof module) {
                 });
             });
         });
-
+        
         function refreshAnimation($wizard, index){
             total_steps = $wizard.find('li.wizzard-nav-pill').length;
             move_distance = $wizard.width() / total_steps;

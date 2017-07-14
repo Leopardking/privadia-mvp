@@ -20,15 +20,6 @@
                     <li class="wizzard-nav-pill">
                         <a href="#heading-conditions" data-toggle="tab">Conditions</a>
                     </li>
-                    <li class="wizzard-nav-pill">
-                        <a href="#about" data-toggle="tab">About</a>
-                    </li>
-                    <li class="wizzard-nav-pill">
-                        <a href="#account" data-toggle="tab">Account</a>
-                    </li>
-                    <li class="wizzard-nav-pill" >
-                        <a href="#address" data-toggle="tab">Address</a>
-                    </li>
                 </ul>
             </div>
             <div class="tab-content p-b-none">
@@ -37,6 +28,7 @@
                         <div class="col-xs-4">
                             <singleselect-field-cmp *ngIf="propertiesService.companies.length || propertyForm.controls.ManagementCompany.value"
                                                     [dataList]="propertiesService.companies"
+                                                    [disabled]="role"
                                                     [options]="{title: 'Management Company*', default: 'Select Company'}"
                                                     [field]="propertyForm.controls.ManagementCompany"></singleselect-field-cmp>
                         </div>

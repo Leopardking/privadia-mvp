@@ -189,6 +189,7 @@ var EditpropertyComponent = (function () {
         form.MetaData = newArr;
         console.log('save ', this.propertyForm);
         this.propertiesService.addProperty(form).subscribe(function (d) {
+            _this.errorForm = false;
             $.notify({
                 icon: "notifications",
                 message: "Property Updated Successfully"

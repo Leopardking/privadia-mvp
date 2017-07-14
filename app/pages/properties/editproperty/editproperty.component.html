@@ -137,7 +137,7 @@
                         </button>
                     </div>
                     <div class="col-xs-8">
-                        <button *ngIf="!permission" class="btn btn-success pull-right m-r-20 p-l-r-20 font-16" type="submit">Save</button>
+                        <button id="wizard-form" *ngIf="!permission" class="btn btn-success pull-right m-r-20 p-l-r-20 font-16" type="submit">Save</button>
                         <div class="togglebutton pull-right">
                             <label>
                                 <input type="checkbox" formControlName="Active" *ngIf="!propertiesService.isReading"> Active status

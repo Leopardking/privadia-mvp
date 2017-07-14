@@ -208,6 +208,8 @@ export class EditpropertyComponent implements OnInit {
         console.log('save ',this.propertyForm)
         this.propertiesService.addProperty(form).subscribe(
             d => {
+                this.errorForm = false;
+
                 $.notify({
                     icon: "notifications",
                     message: "Property Updated Successfully"

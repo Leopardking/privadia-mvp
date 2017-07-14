@@ -20,6 +20,7 @@ var PropertyinfoComponent = (function () {
         this.propertiesService = propertiesService;
         this.loginService = loginService;
         this._sanitizer = _sanitizer;
+        this.role = !this.loginService.getRoles('Admin');
         this.autocompleListFormatter = function (data) {
             var html = "" + data.Name;
             return _this._sanitizer.bypassSecurityTrustHtml(html);

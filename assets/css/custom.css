@@ -246,7 +246,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 .nav-pills:before, .nav-pills:after {
 	display: none;
 }
-.main-nav-pills > .nav-pill.form-error a {
+.main-nav-pills > .nav-pill.form-error a, .wizzard-nav-pill.form-error a, .wizard-card .nav-pills > li.form-error > a {
 	color: #b71c1c !important;
 }
 .nav-pills.sub-pills .nav-pill.form-error.active a {
@@ -483,6 +483,12 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	color: #0b5a7c;
 	right: 10px;
 }
+.wizard-card .form-group.disabled {
+	cursor: not-allowed;
+}
+.wizard-card .form-group.disabled button {
+	pointer-events: none;
+}
 /**
  * Custom button
  */
@@ -690,7 +696,21 @@ div.dataTables_wrapper div.dataTables_paginate {
 /**
  *	Wizard form
  */
-.wizard-card .btn.disabled {
+.wizard-card .tab-content {
+	padding: 20px;
+}
+.wizard-card .nav-pills > li > a, .wizard-card .moving-tab {
+	font-size: 14px;
+	font-weight: 300;
+	line-height: 24px;
+}
+.wizard-card .moving-tab {
+	padding: 14px;
+}
+.wizard-card .btn.disabled, .wizard-card .form-group.disabled {
 	display: block;
 }
-
+.wizard-card[data-color="dark-blue"] .moving-tab.form-error {
+	background-color: #b71c1c;
+	box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(244, 67, 54, 0.4);
+}

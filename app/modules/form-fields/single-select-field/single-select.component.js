@@ -13,8 +13,10 @@ var forms_1 = require("@angular/forms");
 var SingleSelectfieldComponent = (function () {
     function SingleSelectfieldComponent() {
         this.dataList = [];
+        this.disabled = false;
     }
     SingleSelectfieldComponent.prototype.ngOnInit = function () {
+        console.log('disabled', this.disabled);
         var selectQuery = $(".custompicker");
         selectQuery.selectpicker();
         console.log('ngInit');
@@ -42,6 +44,10 @@ var SingleSelectfieldComponent = (function () {
         core_1.Input('options'), 
         __metadata('design:type', Object)
     ], SingleSelectfieldComponent.prototype, "options", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], SingleSelectfieldComponent.prototype, "disabled", void 0);
     SingleSelectfieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

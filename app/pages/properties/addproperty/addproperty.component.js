@@ -40,8 +40,7 @@ var AddpropertyComponent = (function () {
                 value: {
                     Id: null,
                     Name: null,
-                },
-                disabled: this.role
+                }
             }),
             ManagerUser: new forms_1.FormControl({
                 Id: null,

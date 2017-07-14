@@ -38,8 +38,7 @@ export class AddpropertyComponent implements OnInit {
             value: {
                 Id: null,
                 Name: null,
-            },
-            disabled: this.role
+            }
         }),
         ManagerUser: new FormControl({
             Id: null,

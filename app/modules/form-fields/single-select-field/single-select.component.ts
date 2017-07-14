@@ -15,10 +15,12 @@ export class SingleSelectfieldComponent implements OnInit, AfterViewInit {
     @Input('field') public field: FormGroup;
     @Input('dataList') public dataList = [];
     @Input('options') public options: any;
+    @Input() public disabled = false;
 
     constructor ( ) {}
 
     ngOnInit() {
+        console.log('disabled', this.disabled)
         const selectQuery = $(".custompicker");
 
         selectQuery.selectpicker();

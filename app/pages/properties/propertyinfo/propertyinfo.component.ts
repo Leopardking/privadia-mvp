@@ -27,6 +27,7 @@ export class PropertyinfoComponent implements OnInit{
     @Input('errorForm') public errorForm: any;
 
     private permission;
+    public role = !this.loginService.getRoles('Admin');
 
     constructor ( private propertiesService: PropertiesService,
                   private loginService: LoginService,
