@@ -44,6 +44,17 @@ var EnquiryService = (function () {
         var _this = this;
         this.proposalsService.createProposals(id).subscribe(function (d) {
             _this.enquiry = d;
+            $.notify({
+                icon: "notifications",
+                message: "Proposal Created Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
         }, function (e) {
             console.log('Error Create Proposal', e);
         });
@@ -52,6 +63,17 @@ var EnquiryService = (function () {
         var _this = this;
         this.proposalsService.acceptProposals(id).subscribe(function (d) {
             _this.enquiry = d;
+            $.notify({
+                icon: "notifications",
+                message: "Proposal Accepted Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
         }, function (e) {
             console.log('Error Create Proposal', e);
         });
@@ -60,6 +82,17 @@ var EnquiryService = (function () {
         var _this = this;
         this.proposalsService.submitProposals(id).subscribe(function (d) {
             _this.enquiry = d;
+            $.notify({
+                icon: "notifications",
+                message: "Proposal Submitted Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
         }, function (e) {
             console.log('Error Create Proposal', e);
         });
@@ -68,6 +101,17 @@ var EnquiryService = (function () {
         var _this = this;
         this.cancelEnquiry(id).subscribe(function (d) {
             _this.enquiry = d;
+            $.notify({
+                icon: "notifications",
+                message: "Proposal Canceled Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
         }, function (e) {
             console.log('Error Create Proposal', e);
         });
@@ -76,6 +120,17 @@ var EnquiryService = (function () {
         var _this = this;
         this.declineEnquiry(id).subscribe(function (d) {
             _this.enquiry = d;
+            $.notify({
+                icon: "notifications",
+                message: "Proposal Declined Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
         }, function (e) {
             console.log('Error Create Proposal', e);
         });

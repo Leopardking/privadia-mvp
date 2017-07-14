@@ -7,6 +7,7 @@ import 'rxjs/add/operator/map';
 import {LoginService} from "../login/login.service";
 import {ProposalsService} from "../proposals/proposals.service";
 
+declare const $: any;
 @Injectable()
 export class EnquiryService {
 	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
@@ -47,6 +48,18 @@ export class EnquiryService {
 		this.proposalsService.createProposals(id).subscribe(
 			d => {
 				this.enquiry = d;
+				$.notify({
+					icon: "notifications",
+					message: "Proposal Created Successfully"
+
+				},{
+					type: 'success',
+					timer: 3000,
+					placement: {
+						from: 'top',
+						align: 'right'
+					}
+				});
 			},
 			e => {
 				console.log('Error Create Proposal', e)
@@ -58,6 +71,18 @@ export class EnquiryService {
 		this.proposalsService.acceptProposals(id).subscribe(
 			d => {
 				this.enquiry = d;
+				$.notify({
+					icon: "notifications",
+					message: "Proposal Accepted Successfully"
+
+				},{
+					type: 'success',
+					timer: 3000,
+					placement: {
+						from: 'top',
+						align: 'right'
+					}
+				});
 			},
 			e => {
 				console.log('Error Create Proposal', e)
@@ -69,6 +94,18 @@ export class EnquiryService {
 		this.proposalsService.submitProposals(id).subscribe(
 			d => {
 				this.enquiry = d;
+				$.notify({
+					icon: "notifications",
+					message: "Proposal Submitted Successfully"
+
+				},{
+					type: 'success',
+					timer: 3000,
+					placement: {
+						from: 'top',
+						align: 'right'
+					}
+				});
 			},
 			e => {
 				console.log('Error Create Proposal', e)
@@ -80,6 +117,18 @@ export class EnquiryService {
 		this.cancelEnquiry(id).subscribe(
 			d => {
 				this.enquiry = d;
+				$.notify({
+					icon: "notifications",
+					message: "Proposal Canceled Successfully"
+
+				},{
+					type: 'success',
+					timer: 3000,
+					placement: {
+						from: 'top',
+						align: 'right'
+					}
+				});
 			},
 			e => {
 				console.log('Error Create Proposal', e)
@@ -91,6 +140,18 @@ export class EnquiryService {
 		this.declineEnquiry(id).subscribe(
 			d => {
 				this.enquiry = d;
+				$.notify({
+					icon: "notifications",
+					message: "Proposal Declined Successfully"
+
+				},{
+					type: 'success',
+					timer: 3000,
+					placement: {
+						from: 'top',
+						align: 'right'
+					}
+				});
 			},
 			e => {
 				console.log('Error Create Proposal', e)
