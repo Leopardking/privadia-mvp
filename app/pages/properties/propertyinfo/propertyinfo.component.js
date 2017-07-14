@@ -13,6 +13,7 @@ var platform_browser_1 = require("@angular/platform-browser");
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../../providers/login/login.service");
+var initWizard = require("../../../../assets/js/init/initWizard.js");
 var PropertyinfoComponent = (function () {
     function PropertyinfoComponent(propertiesService, loginService, _sanitizer) {
         var _this = this;
@@ -24,62 +25,9 @@ var PropertyinfoComponent = (function () {
             return _this._sanitizer.bypassSecurityTrustHtml(html);
         };
     }
-    // steve@freelancemvc.net, agent1@freelancemvc.net 
     PropertyinfoComponent.prototype.ngOnInit = function () {
+        initWizard();
         this.permission = !this.loginService.getPermission('Properties/Put');
-        /*
-        const role = this.loginService.userInfo.Roles.filter( role => role.Name === 'Admin')[0];
-
-        if(role)
-            this.propertyForm.controls['ManagementCompany'].reset({
-                value: this.lookupsService.companies[0],
-                disabled: true
-            });
-        */
-        /*
-        $('button[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            var target = $(e.target).attr("href") // activated tab
-            console.log('Target 1',target);
-            $(target).tab('show')
-            e.preventDefault()
-        });
-        */
-        //console.log('this.property mainService', this.dashboardService.metadata )
-        //this.property// = this.getInfo();
-        //console.log('Property ', this.property)
-        //this.contacts = [];
-        //this.bedrooms = [];
-        //this.bathrooms = [];
-        //this.ownerNames = [];
-        //this.regions = [];
-        this.ownerName = "";
-        this.regionName = "";
-        this.owner = {
-            Id: '',
-            Name: ''
-        };
-        this.region = {
-            Id: '',
-            Name: ''
-        };
-        // description
-        /*
-            this.propertiesService.getOwners().subscribe(
-                d => {
-                    this.owners = d;
-                    this.ownerNames = d.map( (item, i) => { return item.Name; } );
-                },
-                e => { console.log("error: ", e); }
-            );
-    
-            this.propertiesService.getRegions().subscribe(
-                d => {
-                    this.regionArray = d;
-                    this.regions = d.map( (item, i) => { return item.Name; } );
-                },
-                e => { console.log("error: ", e); }
-            );
-            */
         $('.property-tab a:first').tab('show');
     };
     PropertyinfoComponent.prototype.autosize = function (e) {
@@ -123,24 +71,6 @@ var PropertyinfoComponent = (function () {
         var control = this.propertyForm.controls['Rooms'];
         control.removeAt(i);
     };
-    PropertyinfoComponent.prototype.regionChanged = function (e) {
-        /*
-        const controlId = <FormControl>this.propertyForm.controls['RegionId'];
-        controlId.setValue(e.Id);
-
-        const controlName = <FormControl>this.propertyForm.controls['RegionName'];
-        controlName.setValue(e.Name);
-
-        $("#regionName").removeClass('is-empty');
-        $("#regionName").removeClass('has-error');
-        */
-    };
-    PropertyinfoComponent.prototype.changeTab = function (test, test1) {
-        //const liNavID = "ID" + test.toString().split(/#(.+)?/)[1];
-        //document.getElementById(test1).classList.remove('active');
-        //document.getElementById(liNavID).classList.add('active');
-        //console.log(liNavID);
-    };
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
@@ -153,7 +83,8 @@ var PropertyinfoComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: ' propertyinfo-cmp ',
-            templateUrl: 'propertyinfo.component.html',
+            templateUrl: 'test.html',
+            // templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
         __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, platform_browser_1.DomSanitizer])

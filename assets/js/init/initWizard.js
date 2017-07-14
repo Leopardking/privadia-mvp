@@ -1,44 +1,12 @@
-
 if ('undefined' !== typeof module) {
 
     module.exports = function initWizard(){
-
-        // Code for the Validator
-        var $validator = $('.wizard-card form').validate({
-    		  rules: {
-    		    firstname: {
-    		      required: true,
-    		      minlength: 3
-    		    },
-    		    lastname: {
-    		      required: true,
-    		      minlength: 3
-    		    },
-    		    email: {
-    		      required: true,
-    		      minlength: 3,
-    		    }
-            },
-
-            errorPlacement: function(error, element) {
-                $(element).parent('div').addClass('has-error');
-             }
-    	});
-
         // Wizard Initialization
       	$('.wizard-card').bootstrapWizard({
             'tabClass': 'nav nav-pills',
             'nextSelector': '.btn-next',
             'previousSelector': '.btn-previous',
-
-            onNext: function(tab, navigation, index) {
-            	var $valid = $('.wizard-card form').valid();
-            	if(!$valid) {
-            		$validator.focusInvalid();
-            		return false;
-            	}
-            },
-
+            onNext: function(tab, navigation, index) { },
             onInit : function(tab, navigation, index){
 
               //check number of tabs and fill the entire row
@@ -110,34 +78,7 @@ if ('undefined' !== typeof module) {
             }
       	});
 
-
-        // Prepare the preview for profile picture
-        $("#wizard-picture").change(function(){
-            readURL(this);
-        });
-
-        $('[data-toggle="wizard-radio"]').click(function(){
-            wizard = $(this).closest('.wizard-card');
-            wizard.find('[data-toggle="wizard-radio"]').removeClass('active');
-            $(this).addClass('active');
-            $(wizard).find('[type="radio"]').removeAttr('checked');
-            $(this).find('[type="radio"]').attr('checked','true');
-        });
-
-        $('[data-toggle="wizard-checkbox"]').click(function(){
-            if( $(this).hasClass('active')){
-                $(this).removeClass('active');
-                $(this).find('[type="checkbox"]').removeAttr('checked');
-            } else {
-                $(this).addClass('active');
-                $(this).find('[type="checkbox"]').attr('checked','true');
-            }
-        });
-
-        $('.set-full-height').css('height', 'auto');
-
-         //Function to show image before upload
-
+        //Function to show image before upload
         function readURL(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
@@ -162,7 +103,7 @@ if ('undefined' !== typeof module) {
         });
 
         function refreshAnimation($wizard, index){
-            total_steps = $wizard.find('li').length;
+            total_steps = $wizard.find('li.wizzard-nav-pill').length;
             move_distance = $wizard.width() / total_steps;
             step_width = move_distance;
             move_distance *= index;
@@ -179,9 +120,7 @@ if ('undefined' !== typeof module) {
             $('.moving-tab').css({
                 'transform':'translate3d(' + move_distance + 'px, 0, 0)',
                 'transition': 'all 0.5s cubic-bezier(0.29, 1.42, 0.79, 1)'
-
             });
         }
-
     }
 }

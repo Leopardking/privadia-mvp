@@ -1,0 +1,394 @@
+<div class="wizard-container">
+    <div class="card wizard-card m-t-b-none" data-color="dark-blue" id="wizardProfile">
+        <form [formGroup]="propertyForm" (ngSubmit)="onSubmit(propertyForm.value)" novalidate>
+            <div class="wizard-navigation">
+                <ul class="m-t-none">
+                    <li class="wizzard-nav-pill" [ngClass]="{'form-error': !propertyForm.controls['Name'].valid && errorForm}">
+                        <a href="#heading-name_address" data-toggle="tab">Name and Address</a>
+                    </li>
+                    <li class="wizzard-nav-pill" [ngClass]="{'form-error': !propertyForm.controls['BoxUrl'].valid && errorForm}">
+                        <a href="#heading-description" data-toggle="tab">Description</a>
+                    </li>
+                    <li class="wizzard-nav-pill">
+                        <a href="#heading-admin_info" data-toggle="tab">Admin Info</a>
+                    </li>
+                    <li class="wizzard-nav-pill" [ngClass]="{'form-error': (!propertyForm.controls['Bathrooms'].valid ||
+                                  !propertyForm.controls['Bedrooms'].valid ||
+                                  !propertyForm.controls['Sleeps'].valid) && errorForm}">
+                        <a href="#heading-size_rooms" data-toggle="tab">Size and Rooms</a>
+                    </li>
+                    <li class="wizzard-nav-pill">
+                        <a href="#heading-conditions" data-toggle="tab">Conditions</a>
+                    </li>
+                    <li class="wizzard-nav-pill">
+                        <a href="#about" data-toggle="tab">About</a>
+                    </li>
+                    <li class="wizzard-nav-pill">
+                        <a href="#account" data-toggle="tab">Account</a>
+                    </li>
+                    <li class="wizzard-nav-pill" >
+                        <a href="#address" data-toggle="tab">Address</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="tab-content p-b-none">
+                <div [formGroup]="propertyForm" class="tab-pane" id="heading-name_address">
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <singleselect-field-cmp *ngIf="propertiesService.companies.length || propertyForm.controls.ManagementCompany.value"
+                                                    [dataList]="propertiesService.companies"
+                                                    [options]="{title: 'Management Company*', default: 'Select Company'}"
+                                                    [field]="propertyForm.controls.ManagementCompany"></singleselect-field-cmp>
+                        </div>
+                        <div class="col-xs-4">
+                            <singleselect-field-cmp *ngIf="propertiesService.managers.length"
+                                                    [dataList]="propertiesService.managers"
+                                                    [options]="{title: 'Manager*', default: 'Select Manager'}"
+                                                    [field]="propertyForm.controls.ManagerUser"></singleselect-field-cmp>
+                            <singleselect-field-cmp *ngIf="!propertiesService.managers.length && propertyForm.controls.ManagerUser.value"
+                                                    [dataList]="propertiesService.managers"
+                                                    [options]="{title: 'Manager*', default: 'Select Manager'}"
+                                                    [field]="propertyForm.controls.ManagerUser"></singleselect-field-cmp>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames" class="form-group label-floating">
+                                <label class="control-label">Select Owner</label>
+                                <input class="form-control" id="owner-name" formControlName="OwnerName">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Listing Name</label>
+                                <input type="text" class="form-control" formControlName="InternalName">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating" [ngClass]="{'form-error': !propertyForm.controls['Name'].valid && errorForm}">
+                                <label class="control-label">Official Name *</label>
+                                <input type="text" class="form-control" formControlName="Name">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Address</label>
+                                <input type="text" class="form-control" formControlName="Address">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="regionName"
+                                 class="form-group label-floating"
+                                 [ngClass]="{'has-error':!propertyForm.controls['Region'].valid && errorForm}">
+                                <label class="control-label">Select Region *</label>
+                                <input class="form-control"
+                                       ng2-auto-complete
+                                       formControlName="Region"
+                                       [(ngModel)]="propertyForm.controls.Region.value"
+                                       [max-num-list]="10"
+                                       [source]="propertiesService.regions"
+                                       [list-formatter]="autocompleListFormatter"
+                                       value-property-name="Id"
+                                       display-property-name="Name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div [formGroup]="propertyForm" class="tab-pane" id="heading-description">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Headline</label>
+                                <input type="text" class="form-control" formControlName="Headline">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Summary</label>
+                                <textarea class="form-control" formControlName="Summary" (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Description</label>
+                                <textarea class="form-control" formControlName="Description" (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Other Important Information</label>
+                                <textarea class="form-control" formControlName="OtherInfo" (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Collaborator Initials</label>
+                                <input type="text" class="form-control" formControlName="CollaboratorInitials">
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="form-group label-floating" [ngClass]="{'form-error': !propertyForm.controls['BoxUrl'].valid}">
+                                <label class="control-label">Box Url</label>
+                                <input type="text" class="form-control" formControlName="BoxUrl">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <property-metafilter-cmp [group]="propertyForm" [metadata]="propertiesService.metadata[4]" #villadescription></property-metafilter-cmp>
+                        </div>
+                    </div>
+                </div>
+
+                <div [formGroup]="propertyForm" class="tab-pane" id="heading-admin_info">
+                    <div formArrayName="Contacts" class="row">
+                        <div class="contact col-xs-12 col-sm-6 col-md-4" *ngFor="let control of propertyForm.controls.Contacts.controls; let i = index">
+                            <div class="form-group label-floating">
+                                <label class="control-label">Job Title</label>
+                                <input type="text" class="form-control" [formControl]="control.controls.JobTitle">
+                            </div>
+                            <div class="form-group label-floating">
+                                <label class="control-label">First Name</label>
+                                <input type="text" class="form-control" [formControl]="control.controls.FirstName">
+                            </div>
+                            <div class="form-group label-floating">
+                                <label class="control-label">Last Name</label>
+                                <input type="text" class="form-control" [formControl]="control.controls.LastName">
+                            </div>
+                            <div class="form-group label-floating" [ngClass]="{'form-error': !control.controls.EmailAddress.valid}">
+                                <label class="control-label">Email Address</label>
+                                <input type="email" class="form-control" [formControl]="control.controls.EmailAddress">
+                            </div>
+                            <div class="form-group label-floating">
+                                <label class="control-label">Telephone</label>
+                                <input type="text" class="form-control" [formControl]="control.controls.Telephone">
+                            </div>
+                            <div *ngIf="loginService.getPermission('Properties/Put')" class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-danger btn-icon" type="button" (click)="removeContact()">
+                                        <i class="material-icons">delete</i> Remove Contact
+                                    </button>
+                                </div>
+                                <div class="col-sm-6 col-md-6 col-lg-6" *ngIf="propertyForm.controls.Contacts.controls.length == (i + 1)">
+                                    <button class="btn btn-success btn-icon pull-right" type="button" (click)="showAddContact()">
+                                        <i class="material-icons">add</i> Add Contact
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" *ngIf="propertyForm.controls.Contacts.controls.length == 0 && loginService.getPermission('Properties/Put')">
+                        <div class="col-xs-12">
+                            <button class="btn btn-success btn-icon" type="button" (click)="showAddContact()">
+                                <i class="material-icons">add</i> Add Contact
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="heading-size_rooms">
+                    <div [formGroup]="propertyForm">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group label-floating"[ngClass]="{'form-error':!propertyForm.controls['Bathrooms'].valid && errorForm}">
+                                    <label class="control-label">Number of Bathrooms*</label>
+                                    <input type="number" class="form-control" formControlName="Bathrooms">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group label-floating" [ngClass]="{'form-error':!propertyForm.controls['Bedrooms'].valid && errorForm}">
+                                    <label class="control-label">Number of bedrooms*</label>
+                                    <input type="number" class="form-control" formControlName="Bedrooms">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group label-floating" [ngClass]="{'form-error':!propertyForm.controls['Sleeps'].valid && errorForm}">
+                                    <label class="control-label">Sleeps*</label>
+                                    <input type="number" class="form-control" formControlName="Sleeps">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Maximum Capacity</label>
+                                    <input type="number" class="form-control" formControlName="Capacity">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Living Area (m<sup>2</sup>)</label>
+                                    <input type="number" class="form-control" formControlName="LivingAreaSize">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Dining Capacity</label>
+                                    <input type="number" class="form-control" formControlName="DiningCapacity">
+                                </div>
+                            </div>
+                            <div class="col-sm-12 col-md-6 col-lg-4">
+                                <div class="form-group label-floating">
+                                    <label class="control-label">Kitchen Information</label>
+                                    <textarea md-autosize type="text" class="form-control" formControlName="KitchenInfo" (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div formArrayName="Rooms" class="m-t-25">
+                            <label>Bedroom Information</label>
+                            <div class="row" *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
+                                <div *ngIf="control.controls.PropertyRoomType.value == 1">
+                                    <div class="">
+                                        <div class="col-sm-12 col-md-4 col-lg-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Bedroom Name</label>
+                                                <input type="text" class="form-control" [formControl]="control.controls.Name">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-4 col-lg-4">
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Bedroom Description</label>
+                                                <textarea class="form-control" [formControl]="control.controls.Description" (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="loginService.getPermission('Properties/Put')" class="col-sm-12 col-md-4 col-lg-4">
+                                            <button class="btn btn-success btn-icon pull-right" type="button" (click)="addBedroom()" *ngIf="false">
+                                                <i class="material-icons">add</i> Add BEDROOM
+                                            </button>
+                                            <button class="btn btn-danger btn-icon pull-right" type="button" (click)="removeBedroom()">
+                                                <i class="material-icons">delete</i> REMOVE BEDROOM
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="loginService.getPermission('Properties/Put')" class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <button class="btn btn-success btn-icon" type="button" (click)="addBedroom()">
+                                        <i class="material-icons">add</i> Add BEDROOM
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div formArrayName="Rooms" class="m-t-25">
+                            <label>Bathroom Information</label>
+                            <div class="row" *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
+                                <div *ngIf="control.controls.PropertyRoomType.value == 2">
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Bathroom Name</label>
+                                            <input type="text" class="form-control" [formControl]="control.controls.Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Bathroom Description</label>
+                                            <textarea class="form-control" [formControl]="control.controls.Description" (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="loginService.getPermission('Properties/Put')" class="col-sm-12 col-md-4 col-lg-4">
+                                        <button class="btn btn-success btn-icon pull-right" type="button" (click)="addBathroom()" *ngIf="false">
+                                            <i class="material-icons">add</i> Add BATHROOM
+                                        </button>
+                                        <button class="btn btn-danger btn-icon pull-right" type="button" (click)="removeBathroom()">
+                                            <i class="material-icons">delete</i> REMOVE BATHROOM
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="loginService.getPermission('Properties/Put')" class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <button class="btn btn-success btn-icon" type="button" (click)="addBathroom()">
+                                        <i class="material-icons">add</i> Add Bathroom
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row p-b-none hidden">
+                        <div class="col-xs-6">
+                            <button href="#heading-admin_info" role="tab" data-toggle="tab" class="btn btn-success">Back</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button href="#heading-conditions" role="tab" data-toggle="tab" class="btn btn-success pull-right">Next</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="heading-conditions">
+                    <div [formGroup]="propertyForm">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h5 class="m-b-none">Children Allowed</h5>
+                            </div>
+                            <div class="radio col-xs-12">
+                                <label>
+                                    <input type="radio" [value]="0" formControlName="ChildrenAllowed"> Children Welcome
+                                </label>
+                            </div>
+                            <div class="radio col-xs-12">
+                                <label>
+                                    <input type="radio" [value]="1" formControlName="ChildrenAllowed"> Ask Owner
+                                </label>
+                            </div>
+                            <div class="radio col-xs-12">
+                                <label>
+                                    <input type="radio" [value]="2" formControlName="ChildrenAllowed"> Not Suitable For Children
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row m-t-15">
+                            <div class="col-xs-12">
+                                <h5 class="m-b-none">Children Allowed</h5>
+                            </div>
+                            <div class="checkbox col-xs-3">
+                                <label>
+                                    <input type="checkbox" formControlName="SmokingAllowed"> Smoking Allowed
+                                </label>
+                            </div>
+                            <div class="checkbox col-xs-3">
+                                <label>
+                                    <input type="checkbox" formControlName="WheelchairAccessible"> Wheelchairs Allowed
+                                </label>
+                            </div>
+                            <div class="checkbox col-xs-3">
+                                <label>
+                                    <input type="checkbox" formControlName="PetsAllowed"> Pets Allowed
+                                </label>
+                            </div>
+                            <div class="checkbox col-xs-3">
+                                <label>
+                                    <input type="checkbox" formControlName="EventsAllowed"> Events Allowed
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row hidden">
+                        <div class="col-xs-6">
+                            <button href="#heading-size_rooms" role="tab" data-toggle="tab" class="btn btn-success">Back</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button href="#metatab-images" role="tab" data-toggle="tab" class="btn btn-success pull-right">Finish</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

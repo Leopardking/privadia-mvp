@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import {LoginService} from "../../../providers/login/login.service";
 import {LookupsService} from "../../../providers/lookups/lookups.service";
+import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
 
 declare const $:any;
 declare const _:any;
@@ -42,7 +43,6 @@ export class EditpropertyComponent implements OnInit {
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.permission = !this.loginService.getPermission('Properties/Put');
-        this.role = !this.loginService.getRoles('Admin');
 
         setTimeout(() => {
             this.propertyForm = this.builder.group({
@@ -58,7 +58,7 @@ export class EditpropertyComponent implements OnInit {
                         Id: this.propertiesService.property.ManagementCompany.Id,
                         Name: this.propertiesService.property.ManagementCompany.Name,
                     },
-                    disabled: this.role || this.permission
+                    disabled: this.permission
                 },
                 ManagerUser: { value:
                     {
@@ -206,26 +206,27 @@ export class EditpropertyComponent implements OnInit {
         form.MetaData = newArr;
 
         console.log('save ',this.propertyForm)
-        if(this.propertyForm.valid) {
-            this.propertiesService.addProperty(form).subscribe(
-                d => {
-                    $.notify({
-                        icon: "notifications",
-                        message: "Property Updated Successfully"
+        this.propertiesService.addProperty(form).subscribe(
+            d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Updated Successfully"
 
-                    },{
-                        type: 'success',
-                        timer: 3000,
-                        placement: {
-                            from: 'top',
-                            align: 'right'
-                        }
-                    });
-                },
-                e => { console.log("error:", e); }
-            );
-        } else {
-            this.errorForm = true;
-        }
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+            },
+            e => {
+                this.errorForm = true;
+
+                handlerErrorFieds(e, this.propertyForm);
+                handlerErrorNotify('Please, fix form inputs.');
+            }
+        );
     }
 }

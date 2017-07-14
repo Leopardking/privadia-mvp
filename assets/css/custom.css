@@ -687,4 +687,10 @@ div.dataTables_wrapper div.dataTables_paginate {
 	color: #b71c1c;
 }
 
+/**
+ *	Wizard form
+ */
+.wizard-card .btn.disabled {
+	display: block;
+}
 

@@ -13,6 +13,7 @@ var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var login_service_1 = require("../../../providers/login/login.service");
+var helpers_1 = require("../../../helpers/helpers");
 var EditpropertyComponent = (function () {
     function EditpropertyComponent(propertiesService, loginService, route, builder) {
         var _this = this;
@@ -33,7 +34,6 @@ var EditpropertyComponent = (function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.permission = !this.loginService.getPermission('Properties/Put');
-        this.role = !this.loginService.getRoles('Admin');
         setTimeout(function () {
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,
@@ -47,7 +47,7 @@ var EditpropertyComponent = (function () {
                         Id: _this.propertiesService.property.ManagementCompany.Id,
                         Name: _this.propertiesService.property.ManagementCompany.Name,
                     },
-                    disabled: _this.role || _this.permission
+                    disabled: _this.permission
                 },
                 ManagerUser: { value: {
                         Id: _this.propertiesService.property.ManagerUser.Id,
@@ -181,30 +181,30 @@ var EditpropertyComponent = (function () {
         console.log('Discard Info form');
     };
     EditpropertyComponent.prototype.onSubmit = function (form) {
+        var _this = this;
         var newArr = [];
         _.mapValues(form.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
         });
         form.MetaData = newArr;
         console.log('save ', this.propertyForm);
-        if (this.propertyForm.valid) {
-            this.propertiesService.addProperty(form).subscribe(function (d) {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Updated Successfully"
-                }, {
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-            }, function (e) { console.log("error:", e); });
-        }
-        else {
-            this.errorForm = true;
-        }
+        this.propertiesService.addProperty(form).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Property Updated Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+        }, function (e) {
+            _this.errorForm = true;
+            helpers_1.handlerErrorFieds(e, _this.propertyForm);
+            helpers_1.handlerErrorNotify('Please, fix form inputs.');
+        });
     };
     EditpropertyComponent = __decorate([
         core_1.Component({
