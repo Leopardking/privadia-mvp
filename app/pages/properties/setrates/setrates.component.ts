@@ -147,6 +147,34 @@ export class SetratesComponent implements OnInit{
         }, 100);
     }
 
+    private saveRates(object) {
+        this.propertyService.saveRates(this.ratesForm.controls['Rates'].value[0]).subscribe(
+            d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                this.isEdit[object.index] = !this.isEdit[object.index];
+
+                setTimeout(() => {
+                    initDatetimepickers();
+                }, 100);
+            },
+            e => {
+                console.log('Error ', e)
+            }
+        )
+
+    }
+
     private removeRates(object) {
         console.log('removeRates')
         const control = <FormArray>this.ratesForm.controls['Rates'];
@@ -158,11 +186,11 @@ export class SetratesComponent implements OnInit{
 
         rate.rate.setValue({
             Currency: 'EUR',
-            Id: rate.rate.controls.Id.value,
+            //Id: rate.rate.controls.Id.value,
             IsNew: rate.rate.controls.IsNew.value,
-            LengthOfStay: rate.rate.controls.LengthOfStay.value,
+            //LengthOfStay: rate.rate.controls.LengthOfStay.value,
             PropertyId: rate.rate.controls.PropertyId.value,
-            EndDate: moment().format('MM/DD/YYYY'),
+            EndDate: moment().add(1, 'day').format('MM/DD/YYYY'),
             StartDate: moment().format('MM/DD/YYYY'),
             Value: null,
         });
@@ -174,13 +202,13 @@ export class SetratesComponent implements OnInit{
         control.push(
             new FormGroup({
                 Currency: new FormControl('EUR'),
-                EndDate: new FormControl(moment().format('MM/DD/YYYY')),
-                Id: new FormControl(),
+                EndDate: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+                //Id: new FormControl(),
                 IsNew: new FormControl(),
-                LengthOfStay: new FormControl(),
-                PropertyId: new FormControl(),
+                //LengthOfStay: new FormControl(),
+                PropertyId: new FormControl(2),
                 StartDate: new FormControl(moment().format('MM/DD/YYYY')),
-                Value: new FormControl(),
+                Value: new FormControl(1),
             }),
         );
     }
