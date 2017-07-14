@@ -1,0 +1,109 @@
+.enquiry-header {
+    position: relative;
+}
+.enquiry-header .img{
+    width: auto;
+    height: 200px;
+}
+
+.enquiry-header .image-wrp {
+    text-align: center;
+    overflow: hidden;
+    border-top-right-radius: 6px;
+    background-color: #e7e7e7;
+}
+
+.enquiry-header .image-wrp .image-villa:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-top-right-radius: 6px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.enquiry-header .villa-container {
+    position: absolute;
+    width: 50%;
+    bottom: 10px;
+    color: #ffffff;
+    font-weight: 300;
+}
+
+.enquiry-header .villa-container.left {
+    left: 0px;
+    padding-left: 35px;
+}
+
+.enquiry-header .villa-container.right {
+    right: 0px;
+    padding-right: 12px;
+    text-align: right;
+}
+
+.enquiry-header .enquiry-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.enquiry-header .villa-container .location {
+    font-size: 16px;
+}
+
+.enquiry-header .villa-container .price {
+    font-size: 18px;
+    font-weight: 600;
+    vertical-align: middle;
+}
+
+.enquiry-header .villa-container .material-icons {
+    font-size: 18px;
+    vertical-align: top;
+}
+.icons-group {
+    display: flex;
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin: auto 15px;
+}
+.icons-group .feature {
+    font-size: 18px;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 20px;
+}
+.icons-group .feature i {
+    font-size: 18px;
+    color: #5399bc;
+    font-weight: 400;
+    padding-bottom: 2px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.icons-group .feature span {
+    color: #3a3a3a;
+    font-weight: 300;
+}
+
+.input-group {
+    margin: auto 15px;
+}
+
+.input-group .input-group-addon {
+    padding: 14px 15px 0px;
+}
+
+.input-group .input-group-addon i {
+    font-size: 18px;
+    color: #5399bc;
+    font-weight: 400;
+    padding-bottom: 2px;
+    padding-left: 6px;
+}
+

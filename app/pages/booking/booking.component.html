@@ -16,6 +16,9 @@
                                     <li class="">
                                         <a href="#past" data-toggle="tab">Past</a>
                                     </li>
+                                    <li class="">
+                                        <a href="#forthcoming-details" data-toggle="tab">Forthcoming Details</a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="col-xs-2">
@@ -39,6 +42,19 @@
                     </div>
                     <div class="tab-pane" id="past">
 
+                    </div>
+                    <div class="tab-pane" id="forthcoming-details">
+                        <div class="booking-detail">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <property-info-cmp [data]=""></property-info-cmp>
+                                    <payment-status-cmp></payment-status-cmp>
+                                </div>
+                                <div class="col-md-6">
+                                    <proposal-cmp [data]=""></proposal-cmp>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
