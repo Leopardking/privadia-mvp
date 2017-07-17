@@ -47,7 +47,7 @@ export class BookingService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.get(this.apiUrl + '/api/Bookings/'+id, options)
+		return this.http.get(this.apiUrl + '/api/Bookings/' + id, options)
 				.map(this.extractData)
 				.catch(this.handleError);
     }

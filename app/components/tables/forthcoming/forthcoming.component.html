@@ -23,7 +23,7 @@
             </tr>
         </tfoot>
         <tbody>
-            <tr *ngFor="let item of data; let i = index; let last = last">
+            <tr *ngFor="let item of data; let i = index; let last = last" [routerLink]="['/booking/forthcoming/', item.Id]">
                 <td></td>
                 <td>
                     <div class="photo">

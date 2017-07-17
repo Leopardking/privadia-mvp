@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MODULE_ROUTES, MODULE_COMPONENTS } from './booking.routes';
+import { MODULE_ROUTES, MODULE_COMPONENTS } from './booking-routing.module';
 import {CommonModule} from "@angular/common";
 import {Ng2CloudinaryModule} from "ng2-cloudinary";
-import {FileUploadModule} from "ng2-file-upload";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {BookingService} from "../../providers/booking/booking.service";
 import {ForthcomingTableComponent} from "../../components/tables/forthcoming/forthcoming.component";
@@ -33,7 +32,6 @@ import {ProposalsService} from "../../providers/proposals/proposals.service";
 
         CommonModule,
         Ng2CloudinaryModule,
-        // FileUploadModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS, ForthcomingTableComponent,
