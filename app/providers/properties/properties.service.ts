@@ -16,6 +16,7 @@ export class PropertiesService {
 
 	public owners = [];
 	public properties = [];
+	public rates = [];
 	public property;
 	public regions = [];
 	public metadata = [];
@@ -124,6 +125,15 @@ export class PropertiesService {
 		)
 	}
 
+	public readDataRates(Id) {
+		this.getRates(Id).subscribe(
+			d => {
+				this.rates = d;
+			},
+			e => { console.log('Error readDataManagers', e) }
+		)
+	}
+
 	public getAllProperties() {
 		if(!this.loginService.getPermission('Properties/Get'))
 			return Observable.throw(null);
@@ -201,7 +211,7 @@ export class PropertiesService {
 		let options = new RequestOptions( {headers: header} );
 		this.isReading = true;
 
-		return this.http.get( this.apiUrl + '/api/Rates/' + id, options )
+		return this.http.get( this.apiUrl + '/api/Rates/ByProperty/' + id, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}

@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DashboardService} from "../../providers/dashboard/dashboard.service";
 import {PropertiesService} from "../../providers/properties/properties.service";
 import {LookupsService} from "../../providers/lookups/lookups.service";
+import {FormFieldsModule} from "../../modules/form-fields/form-field.module";
 
 @NgModule({
     imports: [
@@ -15,6 +16,7 @@ import {LookupsService} from "../../providers/lookups/lookups.service";
         FormsModule,
         ReactiveFormsModule,
         Ng2CloudinaryModule,
+        FormFieldsModule,
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS ],

@@ -7,6 +7,7 @@ import { DashboardService } from '../../../providers/dashboard/dashboard.service
 import { PropertiesService } from '../../../providers/properties/properties.service';
 
 import initDatetimepickers = require('../../../../assets/js/init/initDatetimepickers.js');
+import {handlerErrorNotify, handlerErrorFieds} from "../../../helpers/helpers";
 declare const moment: any
 declare const $: any
 
@@ -20,15 +21,21 @@ declare const $: any
 
 export class SetratesComponent implements OnInit{
     private datatableInited = false;
-    private listRates = [];
+    private propertyId: number;
 
     private isEdit = [];
-    public ratesForm = new FormGroup ({
-        Rates: new FormArray([]),
+    public rateForm = new FormGroup ({
+        Currency: new FormControl(),
+        EndDate: new FormControl(),
+        Id: new FormControl(),
+        LengthOfStay: new FormControl(),
+        PropertyId: new FormControl(),
+        StartDate: new FormControl(),
+        Value: new FormControl(),
     });
     public date;
 
-    constructor ( private dashboardService: DashboardService,
+    constructor ( private route: ActivatedRoute,
                   private propertyService: PropertiesService,
                   private builder: FormBuilder ) {
         console.log('Form init')
@@ -37,95 +44,14 @@ export class SetratesComponent implements OnInit{
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
-        console.log('moment',moment().format())
-        this.propertyService.getRates(2).subscribe(
-            d => {
-                this.listRates = d;
-                this.setArray(d);
-                this.ratesForm = this.builder.group({
-                    Currency: d.Currency || 'EUR',
-                    EndDate: d.EndDate || moment().format(),
-                    Id: d.Id || null,
-                    IsNew: d.IsNew || false,
-                    LengthOfStay: d.LengthOfStay,
-                    PropertyId: d.PropertyId || 14489,
-                    StartDate: d.StartDate || moment().format(),
-                    Value: d.Value,
-                });
-
-                this.propertyService.isReading = false;
-                console.log('Get rates ', d)
-            },
-            e => {
-                /*
-                this.ratesForm = this.builder.group({
-                    Currency: 'EUR',
-                    EndDate: moment().format(),
-                    Id: null,
-                    IsNew: false,
-                    LengthOfStay: null,
-                    PropertyId: 14489,
-                    StartDate: moment().format(),
-                    Value: null,
-                });
-                */
-                this.propertyService.isReading = false;
-                console.log('Error ', e)
-            }
-        )
-        /*
-        let DataTable: any = $('#datatables');
-        DataTable.DataTable({
-            //select: true,
-            //paging: false,
-            bLengthChange: false,
-            ordering: false,
-            searching: false,
-            info: false,
+        this.route.params.subscribe(params => {
+            this.propertyService.readDataRates(this.propertyId = params['id']);
         });
-        this.datatableInited = true;
-
-        let datepickerWidget: any = $(".datepicker");
-        datepickerWidget.datetimepicker({
-            format: 'MM/DD/YYYY',
-            icons: {
-                time: "fa fa-clock-o",
-                date: "fa fa-calendar",
-                up: "fa fa-chevron-up",
-                down: "fa fa-chevron-down",
-                previous: 'fa fa-chevron-left',
-                next: 'fa fa-chevron-right',
-                today: 'fa fa-screenshot',
-                clear: 'fa fa-trash',
-                close: 'fa fa-remove',
-                inline: true,
-            },
-            //sideBySide: true,
-            //keepOpen: true,
-            //debug:true,
-        });
-        */
-    }
-
-    private setArray(rates) {
-        const rateFGs = rates.map(rate => this.builder.group({
-            Currency: rate.Currency || 'EUR',
-            EndDate: rate.EndDate || moment().format(),
-            Id: rate.Id || null,
-            IsNew: rate.IsNew || false,
-            LengthOfStay: rate.LengthOfStay,
-            PropertyId: rate.PropertyId || 14489,
-            StartDate: rate.StartDate || moment().format(),
-            Value: rate.Value,
-        }));
-        const rateFormArray = this.builder.array(rateFGs);
-        this.ratesForm.setControl('Rates', rateFormArray);
     }
 
     private finishReading() {
         let DataTable: any = $('#datatables');
         DataTable.DataTable({
-            //select: true,
             paging: false,
             bLengthChange: false,
             ordering: false,
@@ -135,20 +61,51 @@ export class SetratesComponent implements OnInit{
         this.datatableInited = true;
     }
 
-    private changeDate(e) {
-        console.log('Change Rate',e.target.value)
+    private initRateToForm(data) {
+        this.rateForm = this.builder.group({
+            Currency: data.Currency || 'EUR',
+            EndDate: moment(data.EndDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
+            Id: data.Id,
+            PropertyId: this.propertyId,
+            StartDate: moment(data.StartDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
+            Value: data.Value,
+        })
+    }
+
+    private addRow() {
+        this.isEdit = [];
+        this.propertyService.rates.push({
+            Currency: 'EUR',
+            EndDate: moment().add(1, 'day'),
+            PropertyId: this.propertyId,
+            StartDate: moment(),
+            Value: null,
+        });
+        this.rateForm = this.builder.group({
+            Currency: new FormControl('EUR'),
+            EndDate: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
+            PropertyId: new FormControl(this.propertyId),
+            StartDate: new FormControl(moment().format('DD/MM/YYYY')),
+            Value: new FormControl(),
+        });
+        this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
     }
 
     private editRates(object) {
         this.isEdit[object.index] = !this.isEdit[object.index];
+        this.initRateToForm(this.propertyService.rates[object.index]);
+    }
 
-        setTimeout(() => {
-            initDatetimepickers();
-        }, 100);
+    private formatDate(date, format) {
+        return moment(date).format(format);
+    }
+
+    private clearRates(rate) {
+        this.isEdit[rate.index] = !this.isEdit[rate.index];
     }
 
     private saveRates(object) {
-        this.propertyService.saveRates(this.ratesForm.controls['Rates'].value[0]).subscribe(
+        this.propertyService.saveRates(this.rateForm.value).subscribe(
             d => {
                 $.notify({
                     icon: "notifications",
@@ -163,6 +120,7 @@ export class SetratesComponent implements OnInit{
                     }
                 });
                 this.isEdit[object.index] = !this.isEdit[object.index];
+                this.propertyService.rates[object.index] = d;
 
                 setTimeout(() => {
                     initDatetimepickers();
@@ -170,6 +128,8 @@ export class SetratesComponent implements OnInit{
             },
             e => {
                 console.log('Error ', e)
+                handlerErrorFieds(e, this.rateForm);
+                handlerErrorNotify('Please, fix form inputs.')
             }
         )
 
@@ -177,62 +137,8 @@ export class SetratesComponent implements OnInit{
 
     private removeRates(object) {
         console.log('removeRates')
-        const control = <FormArray>this.ratesForm.controls['Rates'];
+        const control = <FormArray>this.rateForm.controls['Rates'];
         control.removeAt(object.index);
     }
 
-    private clearRates(rate) {
-        this.isEdit[rate.index] = !this.isEdit[rate.index];
-
-        rate.rate.setValue({
-            Currency: 'EUR',
-            //Id: rate.rate.controls.Id.value,
-            IsNew: rate.rate.controls.IsNew.value,
-            //LengthOfStay: rate.rate.controls.LengthOfStay.value,
-            PropertyId: rate.rate.controls.PropertyId.value,
-            EndDate: moment().add(1, 'day').format('MM/DD/YYYY'),
-            StartDate: moment().format('MM/DD/YYYY'),
-            Value: null,
-        });
-    }
-
-    private addRow() {
-        console.log('Data', this.date)
-        const control = <FormArray>this.ratesForm.controls['Rates'];
-        control.push(
-            new FormGroup({
-                Currency: new FormControl('EUR'),
-                EndDate: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
-                //Id: new FormControl(),
-                IsNew: new FormControl(),
-                //LengthOfStay: new FormControl(),
-                PropertyId: new FormControl(2),
-                StartDate: new FormControl(moment().format('MM/DD/YYYY')),
-                Value: new FormControl(1),
-            }),
-        );
-    }
-
-    private onSubmit() {
-        console.log('On submit ', this.ratesForm.controls['Rates'].value)
-        this.propertyService.saveRates(this.ratesForm.controls['Rates'].value).subscribe(
-            d => {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
-
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-            },
-            e => {
-                console.log('Error ', e)
-            }
-        )
-    }
 }

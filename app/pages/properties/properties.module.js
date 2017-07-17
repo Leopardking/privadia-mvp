@@ -17,6 +17,7 @@ var forms_1 = require("@angular/forms");
 var dashboard_service_1 = require("../../providers/dashboard/dashboard.service");
 var properties_service_1 = require("../../providers/properties/properties.service");
 var lookups_service_1 = require("../../providers/lookups/lookups.service");
+var form_field_module_1 = require("../../modules/form-fields/form-field.module");
 var PropertiesModule = (function () {
     function PropertiesModule() {
     }
@@ -27,6 +28,7 @@ var PropertiesModule = (function () {
                 forms_1.FormsModule,
                 forms_1.ReactiveFormsModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,
+                form_field_module_1.FormFieldsModule,
                 router_1.RouterModule.forChild(properties_routes_1.MODULE_ROUTES)
             ],
             declarations: [properties_routes_1.MODULE_COMPONENTS],

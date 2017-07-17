@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <form [formGroup]="ratesForm" (ngSubmit)="onSubmit()" class="col-xs-12">
+            <form [formGroup]="rateForm" (ngSubmit)="onSubmit()" class="col-xs-12">
                 <div class="card">
                     <div class="card-header card-header-icon" data-background-color="blue">
                         <i class="material-icons">assignment</i>
@@ -30,7 +30,73 @@
                                     <th class="disabled-sorting text-right"></th>
                                 </tr>
                                 </tfoot>
-                                <tbody formArrayName="Rates" id="bookingTableBody" *ngIf="ratesForm.controls.Rates">
+                                <tbody id="bookingTableBody" *ngIf="propertyService.rates.length">
+                                <!-- <tbody formArrayName="Rates" id="bookingTableBody" *ngIf="ratesForm.controls.Rates">-->
+                                    <tr *ngFor="let rate of propertyService.rates; let i = index">
+                                        <td width="30%">
+                                            <datetimepicker-field-cmp *ngIf="isEdit[i]"
+                                                                      [data]="{title: 'Check In'}"
+                                                                      [classes]="{withIcon: true}"
+                                                                      [field]="rateForm.controls.StartDate"></datetimepicker-field-cmp>
+                                            <div class="form-group date-group" *ngIf="!isEdit[i]">
+                                                <i class="material-icons">insert_invitation</i>
+                                                <span class="text-value">{{formatDate(rate.StartDate, 'DD/MM/YYYY')}}</span>
+                                            </div>
+                                        </td>
+                                        <td width="30%">
+                                            <datetimepicker-field-cmp *ngIf="isEdit[i]"
+                                                                      [data]="{title: 'Check In'}"
+                                                                      [classes]="{withIcon: true}"
+                                                                      [field]="rateForm.controls.EndDate"></datetimepicker-field-cmp>
+                                            <div class="form-group date-group" *ngIf="!isEdit[i]">
+                                                <i class="material-icons">insert_invitation</i>
+                                                <span class="text-value">{{formatDate(rate.EndDate, 'DD/MM/YYYY')}}</span>
+                                            </div>
+                                        </td>
+                                        <td width="20%">
+                                            <div class="form-group" *ngIf="isEdit[i]">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       [formControl]="rateForm.controls.Value" />
+                                            </div>
+                                            <div class="form-group" *ngIf="!isEdit[i]">
+                                                <span class="text-value">{{rate.Value}}</span>
+                                            </div>
+                                        </td>
+                                        <td width="10%">
+                                            <div class="form-group">
+                                                <span>{{rate.Currency}}</span>
+                                            </div>
+                                        </td>
+                                        <td width="10%" class="text-right">
+                                            <button class="btn btn-simple btn-edit btn-icon"
+                                                    type="button"
+                                                    *ngIf="!isEdit[i]"
+                                                    (click)="editRates({index: i})">
+                                                <i class="material-icons text-primary">edit</i>
+                                            </button>
+                                            <button class="btn btn-simple btn-delete btn-icon"
+                                                    type="button"
+                                                    *ngIf="!isEdit[i]"
+                                                    (click)="removeRates({index: i})">
+                                                <i class="material-icons text-danger">delete</i>
+                                            </button>
+                                            <button class="btn btn-simple btn-edit btn-icon"
+                                                    type="button"
+                                                    *ngIf="isEdit[i]"
+                                                    (click)="saveRates({index: i})">
+                                                <i class="material-icons text-primary">done</i>
+                                            </button>
+                                            <button class="btn btn-simple btn-delete btn-icon"
+                                                    type="button"
+                                                    *ngIf="isEdit[i]"
+                                                    (click)="clearRates({rate: rate, index: i})">
+                                                <i class="material-icons text-danger">clear</i>
+                                            </button>
+                                        </td>
+                                        {{ propertyService.rates.length && !datatableInited ? finishReading() : "" }}
+                                    </tr>
+                                    <!--
                                     <tr *ngFor="let rate of ratesForm.controls.Rates.controls; let i = index">
                                         <td width="30%">
                                             <div class="form-group date-group" *ngIf="isEdit[i]">
@@ -105,6 +171,7 @@
                                         </td>
                                         {{ !propertyService.isReading && !datatableInited ? finishReading() : "" }}
                                     </tr>
+                                    -->
                                 </tbody>
                             </table>
                             <div class="row">
@@ -114,7 +181,7 @@
                                             (click)="addRow()">
                                         <i class="material-icons">add</i>Add Rate
                                     </button>
-                                    <button class="btn btn-success btn-edit btn-icon"
+                                    <button class="btn btn-success btn-edit btn-icon hidden"
                                             type="button"
                                             (click)="onSubmit()">
                                         Save

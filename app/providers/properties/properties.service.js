@@ -26,6 +26,7 @@ var PropertiesService = (function () {
         this.token = localStorage.getItem('id_token');
         this.owners = [];
         this.properties = [];
+        this.rates = [];
         this.regions = [];
         this.metadata = [];
         this.companies = [];
@@ -99,6 +100,12 @@ var PropertiesService = (function () {
             _this.managers = d;
         }, function (e) { console.log('Error ManagersByCompany', e); });
     };
+    PropertiesService.prototype.readDataRates = function (Id) {
+        var _this = this;
+        this.getRates(Id).subscribe(function (d) {
+            _this.rates = d;
+        }, function (e) { console.log('Error readDataManagers', e); });
+    };
     PropertiesService.prototype.getAllProperties = function () {
         if (!this.loginService.getPermission('Properties/Get'))
             return Observable_1.Observable.throw(null);
@@ -157,7 +164,7 @@ var PropertiesService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         this.isReading = true;
-        return this.http.get(this.apiUrl + '/api/Rates/' + id, options)
+        return this.http.get(this.apiUrl + '/api/Rates/ByProperty/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
