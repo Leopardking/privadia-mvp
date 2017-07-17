@@ -11,6 +11,7 @@
     overflow: hidden;
     border-top-right-radius: 6px;
     background-color: #e7e7e7;
+    min-height: 180px;
 }
 
 .enquiry-header .image-wrp .image-villa:after {
