@@ -34,20 +34,42 @@
                                 <!-- <tbody formArrayName="Rates" id="bookingTableBody" *ngIf="ratesForm.controls.Rates">-->
                                     <tr *ngFor="let rate of propertyService.rates; let i = index">
                                         <td width="30%">
+                                            <div class="form-group date-group" *ngIf="isEdit[i]">
+                                                <i class="material-icons">insert_invitation</i>
+                                                <input type="text"
+                                                       class="form-control datepicker"
+                                                       #datePicker
+                                                       [ngModel]="rateForm.controls.StartDate.value"
+                                                       (blur)="rateForm.controls.StartDate.setValue(datePicker.value)"
+                                                       [formControl]="rateForm.controls.StartDate"/>
+                                            </div>
+                                            <!--
                                             <datetimepicker-field-cmp *ngIf="isEdit[i]"
                                                                       [data]="{title: 'Check In'}"
-                                                                      [classes]="{withIcon: true}"
+                                                                      [classes]="{withIcon: true, otherClasses: ''}"
                                                                       [field]="rateForm.controls.StartDate"></datetimepicker-field-cmp>
+                                            -->
                                             <div class="form-group date-group" *ngIf="!isEdit[i]">
                                                 <i class="material-icons">insert_invitation</i>
                                                 <span class="text-value">{{formatDate(rate.StartDate, 'DD/MM/YYYY')}}</span>
                                             </div>
                                         </td>
                                         <td width="30%">
+                                            <div class="form-group date-group" *ngIf="isEdit[i]">
+                                                <i class="material-icons">insert_invitation</i>
+                                                <input type="text"
+                                                       class="form-control datepicker"
+                                                       #datePicker
+                                                       [ngModel]="rateForm.controls.EndDate.value"
+                                                       (blur)="rateForm.controls.EndDate.setValue(datePicker.value)"
+                                                       [formControl]="rateForm.controls.EndDate"/>
+                                            </div>
+                                            <!--
                                             <datetimepicker-field-cmp *ngIf="isEdit[i]"
                                                                       [data]="{title: 'Check In'}"
                                                                       [classes]="{withIcon: true}"
                                                                       [field]="rateForm.controls.EndDate"></datetimepicker-field-cmp>
+                                            -->
                                             <div class="form-group date-group" *ngIf="!isEdit[i]">
                                                 <i class="material-icons">insert_invitation</i>
                                                 <span class="text-value">{{formatDate(rate.EndDate, 'DD/MM/YYYY')}}</span>
