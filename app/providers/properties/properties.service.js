@@ -168,10 +168,17 @@ var PropertiesService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    PropertiesService.prototype.saveRates = function (data) {
+    PropertiesService.prototype.saveRate = function (data) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.post(this.apiUrl + '/api/Rates/', data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    PropertiesService.prototype.deleteRate = function (id) {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.delete(this.apiUrl + '/api/Rates/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };

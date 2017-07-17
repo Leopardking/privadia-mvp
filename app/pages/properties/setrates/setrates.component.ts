@@ -105,7 +105,7 @@ export class SetratesComponent implements OnInit{
     }
 
     private saveRates(object) {
-        this.propertyService.saveRates(this.rateForm.value).subscribe(
+        this.propertyService.saveRate(this.rateForm.value).subscribe(
             d => {
                 $.notify({
                     icon: "notifications",
@@ -135,10 +135,33 @@ export class SetratesComponent implements OnInit{
 
     }
 
-    private removeRates(object) {
-        console.log('removeRates')
-        const control = <FormArray>this.rateForm.controls['Rates'];
-        control.removeAt(object.index);
+    private deleteRate(object) {
+        console.log('delete ', this.propertyService.rates[object.index].Id)
+        this.propertyService.deleteRate(this.propertyService.rates[object.index].Id).subscribe(
+            d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Property Added Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                this.propertyService.rates.splice(object.index, 1);
+
+                setTimeout(() => {
+                    initDatetimepickers();
+                }, 100);
+            },
+            e => {
+                console.log('Error ', e)
+                handlerErrorNotify('Delete error')
+            }
+        )
     }
 
 }

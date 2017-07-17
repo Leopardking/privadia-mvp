@@ -90,7 +90,7 @@ var SetratesComponent = (function () {
     };
     SetratesComponent.prototype.saveRates = function (object) {
         var _this = this;
-        this.propertyService.saveRates(this.rateForm.value).subscribe(function (d) {
+        this.propertyService.saveRate(this.rateForm.value).subscribe(function (d) {
             $.notify({
                 icon: "notifications",
                 message: "Property Added Successfully"
@@ -113,10 +113,29 @@ var SetratesComponent = (function () {
             helpers_1.handlerErrorNotify('Please, fix form inputs.');
         });
     };
-    SetratesComponent.prototype.removeRates = function (object) {
-        console.log('removeRates');
-        var control = this.rateForm.controls['Rates'];
-        control.removeAt(object.index);
+    SetratesComponent.prototype.deleteRate = function (object) {
+        var _this = this;
+        console.log('delete ', this.propertyService.rates[object.index].Id);
+        this.propertyService.deleteRate(this.propertyService.rates[object.index].Id).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Property Added Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+            _this.propertyService.rates.splice(object.index, 1);
+            setTimeout(function () {
+                initDatetimepickers();
+            }, 100);
+        }, function (e) {
+            console.log('Error ', e);
+            helpers_1.handlerErrorNotify('Delete error');
+        });
     };
     SetratesComponent = __decorate([
         core_1.Component({

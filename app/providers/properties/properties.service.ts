@@ -216,11 +216,20 @@ export class PropertiesService {
 				.catch(this.handleError);
 	}
 
-	public saveRates(data) {
+	public saveRate(data) {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.post( this.apiUrl + '/api/Rates/', data, options )
+				.map(this.extractData)
+				.catch(this.handleError);
+	}
+
+	public deleteRate(id) {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.delete( this.apiUrl + '/api/Rates/' + id, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
