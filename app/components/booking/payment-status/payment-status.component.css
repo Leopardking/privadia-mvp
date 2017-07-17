@@ -1,0 +1,55 @@
+.payment-status {
+    padding-left: 29px;
+}
+
+.payment-status .heading-line {
+    font-size: 14px;
+    text-align: center;
+    color: #747879;
+    background-color: #f3f5f6;
+    height: 24px;
+    line-height: 24px;
+    margin: 20px 0;
+}
+
+.payment-status .status-line {
+    font-size: 16px;
+    padding: 21px 12px;
+}
+
+.payment-status .status-line button {
+    margin-top: -12px;
+    margin-right: 5px;
+}
+
+.payment-status .status-line .status-date {
+    font-size: 14px;
+    font-weight: normal;
+    color: #c6c6c6;
+}
+
+.payment-status .status-line.done {
+    font-weight: 500;
+}
+
+.payment-status .status-line.current {
+    background-color: #f3f5f6;
+}
+
+.payment-status .status-line:before {
+    top: 3px;
+    content: " ";
+    width: 19px;
+    height: 19px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid #3a3a3a;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 10px;
+}
+
+.payment-status .status-line.done:before {
+    background-color: #00bfa5;
+    border: 1px solid #00bfa5;
+}

@@ -3,3 +3,17 @@
     text-transform: none;
     font-weight: 300;
 }
+.booking-detail {
+    position: relative;
+    top: -54px;
+}
+
+@media (max-width: 991px) {
+    .booking-header .image-wrp {
+        border-top-right-radius: 0px;
+    }
+
+    .booking-header .image-wrp .image-villa:after {
+        border-top-right-radius: 0px;
+    }
+}
