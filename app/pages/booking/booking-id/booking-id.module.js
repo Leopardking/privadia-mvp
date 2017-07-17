@@ -16,6 +16,12 @@ var ng2_cloudinary_1 = require("ng2-cloudinary");
 var forms_1 = require("@angular/forms");
 var booking_service_1 = require("../../../providers/booking/booking.service");
 /**
+ *  Components
+ */
+var property_info_component_1 = require("../../../components/booking/property-info/property-info.component");
+var proposal_component_1 = require("../../../components/booking/proposal/proposal.component");
+var payment_status_component_1 = require("../../../components/booking/payment-status/payment-status.component");
+/**
  *  My Modules
  */
 var form_field_module_1 = require("../../../modules/form-fields/form-field.module");
@@ -39,6 +45,9 @@ var BookingIdModule = (function () {
                 router_1.RouterModule.forChild(booking_id_routes_1.MODULE_ROUTES)
             ],
             declarations: [booking_id_routes_1.MODULE_COMPONENTS,
+                property_info_component_1.PropertyInfoComponent,
+                proposal_component_1.ProposalComponent,
+                payment_status_component_1.PaymentStatusComponent
             ],
             providers: [booking_service_1.BookingService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, proposals_service_1.ProposalsService]
         }), 

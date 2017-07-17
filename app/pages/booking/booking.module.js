@@ -19,9 +19,9 @@ var forthcoming_component_1 = require("../../components/tables/forthcoming/forth
 /**
  *  Components
  */
-var property_info_component_1 = require("../../components/booking/property-info/property-info.component");
-var proposal_component_1 = require("../../components/booking/proposal/proposal.component");
-var payment_status_component_1 = require("../../components/booking/payment-status/payment-status.component");
+// import { PropertyInfoComponent } from "../../components/booking/property-info/property-info.component";
+// import { ProposalComponent } from "../../components/booking/proposal/proposal.component";
+// import { PaymentStatusComponent } from "../../components/booking/payment-status/payment-status.component";
 /**
  *  My Modules
  */
@@ -45,9 +45,7 @@ var BookingModule = (function () {
                 router_1.RouterModule.forChild(booking_routing_module_1.MODULE_ROUTES)
             ],
             declarations: [booking_routing_module_1.MODULE_COMPONENTS, forthcoming_component_1.ForthcomingTableComponent,
-                property_info_component_1.PropertyInfoComponent,
-                proposal_component_1.ProposalComponent,
-                payment_status_component_1.PaymentStatusComponent],
+            ],
             providers: [booking_service_1.BookingService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, proposals_service_1.ProposalsService]
         }), 
         __metadata('design:paramtypes', [])

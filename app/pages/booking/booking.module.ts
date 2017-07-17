@@ -10,9 +10,9 @@ import {ForthcomingTableComponent} from "../../components/tables/forthcoming/for
 /**
  *  Components
  */
-import { PropertyInfoComponent } from "../../components/booking/property-info/property-info.component";
-import { ProposalComponent } from "../../components/booking/proposal/proposal.component";
-import { PaymentStatusComponent } from "../../components/booking/payment-status/payment-status.component";
+// import { PropertyInfoComponent } from "../../components/booking/property-info/property-info.component";
+// import { ProposalComponent } from "../../components/booking/proposal/proposal.component";
+// import { PaymentStatusComponent } from "../../components/booking/payment-status/payment-status.component";
 
 /**
  *  My Modules
@@ -35,9 +35,10 @@ import {ProposalsService} from "../../providers/proposals/proposals.service";
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS, ForthcomingTableComponent,
-        PropertyInfoComponent,
-        ProposalComponent,
-        PaymentStatusComponent],
+        // PropertyInfoComponent,
+        // ProposalComponent,
+        // PaymentStatusComponent
+    ],
     providers: [ BookingService, PropertiesService, LookupsService, ProposalsService ]
 })
 

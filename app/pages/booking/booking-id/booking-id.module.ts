@@ -37,9 +37,9 @@ import {ProposalsService} from "../../../providers/proposals/proposals.service";
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS,
-        // PropertyInfoComponent,
-        // ProposalComponent,
-        // PaymentStatusComponent
+        PropertyInfoComponent,
+        ProposalComponent,
+        PaymentStatusComponent
     ],
     providers: [ BookingService, PropertiesService, LookupsService, ProposalsService ]
 })
