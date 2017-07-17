@@ -186,11 +186,9 @@
                                             (click)="onSubmit()">
                                         Save
                                     </button>
-                                    <button class="btn btn-default btn-delete btn-icon"
-                                            type="button"
-                                            (click)="removeRates({index: 1, propertyId: 1})">
+                                    <a class="btn btn-default font-14 btn-delete btn-icon" [routerLink]="['/properties']">
                                         Cancel
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
