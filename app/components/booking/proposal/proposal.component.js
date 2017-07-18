@@ -19,7 +19,8 @@ var ProposalComponent = (function () {
         this.builder = builder;
         this.loginService = loginService;
         this.proposalsService = proposalsService;
-        this.isAgent = this.loginService.getRoles('Agent');
+        this.isAgent = true;
+        // public isAgent = this.loginService.getRoles('Agent');
         this.isCreateProposal = false;
         this.TermsContract = [{
                 Id: 1,
@@ -45,51 +46,46 @@ var ProposalComponent = (function () {
         */
     };
     ProposalComponent.prototype.initForm = function (data) {
-        // this.proposalManagerForm = this.builder.group({
-        // 	EnquiryMessageThreadId: new FormControl(this.data.Id),
-        // 	CheckIn: new FormControl({ value: moment(data.Enquiry.CheckIn).format('MM/DD/YYYY'), disabled: this.isAgent}),
-        // 	CheckOut: new FormControl({ value: moment(data.Enquiry.CheckOut).format('MM/DD/YYYY'), disabled: this.isAgent}),
-        // 	CustomerName: new FormControl({ value: data.Enquiry.ClientName, disabled: true}),
-        // 	PropertyName: new FormControl({ value: data.Enquiry.PropertyName, disabled: true}),
-        // 	RentalCost: new FormControl({
-        // 		value: data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost || 0,
-        // 		disabled: this.isAgent
-        // 	}),
-        // 	Fees: new FormControl({
-        // 		value: data.Enquiry.Proposal && data.Enquiry.Proposal.Fees || 0,
-        // 		disabled: this.isAgent
-        // 	}),
-        // 	ExchangeFeePercentage: new FormControl({
-        // 		value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
-        // 		disabled: this.isAgent
-        // 	}),
-        // 	TermsList: new FormArray([
-        // 		/*new FormControl('Term 1'),
-        // 		new FormControl('Term 2'),
-        // 		new FormControl('Term 3'),
-        // 		new FormControl('Term 4'),*/
-        // 	]),
-        // 	DepositPercentage: new FormControl({
-        // 		value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
-        // 		disabled: this.isAgent
-        // 	}),
-        // 	BalancePercentage: new FormControl({
-        // 		value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalancePercentage || 0,
-        // 		disabled: this.isAgent
-        // 	}),
-        // 	BalanceDaysBeforeCheckIn: new FormControl({
-        // 		value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalanceDaysBeforeCheckIn || 0,
-        // 		disabled: this.isAgent
-        // 	}),
-        // 	DefaultTerms: new FormControl({
-        // 		value: data.Enquiry.Proposal && data.Enquiry.Proposal.DefaultTerms || null,
-        // 		disabled: this.isAgent
-        // 	}),
-        // 	CancellationPolicy: new FormControl({
-        // 		value: data.Enquiry.Proposal && data.Enquiry.Proposal.CancellationPolicy || null,
-        // 		disabled: this.isAgent
-        // 	}),
-        // })
+        this.proposalManagerForm = this.builder.group({
+            EnquiryMessageThreadId: new forms_1.FormControl(this.data.Id),
+            CheckIn: new forms_1.FormControl({ value: moment(data.Enquiry.CheckIn).format('MM/DD/YYYY'), disabled: this.isAgent }),
+            CheckOut: new forms_1.FormControl({ value: moment(data.Enquiry.CheckOut).format('MM/DD/YYYY'), disabled: this.isAgent }),
+            CustomerName: new forms_1.FormControl({ value: data.Enquiry.ClientName, disabled: true }),
+            PropertyName: new forms_1.FormControl({ value: data.Enquiry.PropertyName, disabled: true }),
+            RentalCost: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost || 0,
+                disabled: this.isAgent
+            }),
+            Fees: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.Fees || 0,
+                disabled: this.isAgent
+            }),
+            ExchangeFeePercentage: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
+                disabled: this.isAgent
+            }),
+            TermsList: new forms_1.FormArray([]),
+            DepositPercentage: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
+                disabled: this.isAgent
+            }),
+            BalancePercentage: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalancePercentage || 0,
+                disabled: this.isAgent
+            }),
+            BalanceDaysBeforeCheckIn: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalanceDaysBeforeCheckIn || 0,
+                disabled: this.isAgent
+            }),
+            DefaultTerms: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.DefaultTerms || null,
+                disabled: this.isAgent
+            }),
+            CancellationPolicy: new forms_1.FormControl({
+                value: data.Enquiry.Proposal && data.Enquiry.Proposal.CancellationPolicy || null,
+                disabled: this.isAgent
+            }),
+        });
     };
     ProposalComponent.prototype.addTerm = function () {
         // const control = <FormArray>this.proposalManagerForm.controls['TermsList'];
