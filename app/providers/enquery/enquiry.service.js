@@ -29,7 +29,7 @@ var EnquiryService = (function () {
         this.getEnquiries().subscribe(function (d) {
             _this.enquiries = d;
         }, function (e) {
-            console.log('Error Enquiries', e);
+            console.log('Error Enquiries 1', e);
         });
     };
     EnquiryService.prototype.readDataEnquiry = function (id) {
@@ -37,7 +37,7 @@ var EnquiryService = (function () {
         this.getEnquiryById(id).subscribe(function (d) {
             _this.enquiry = d;
         }, function (e) {
-            console.log('Error Enquiries', e);
+            console.log('Error Enquiries 2', e);
         });
     };
     EnquiryService.prototype.createProposal = function (id) {

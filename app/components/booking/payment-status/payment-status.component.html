@@ -12,10 +12,14 @@
                  }">
                 {{item.Description}}
                 <div class="status-date pull-right"
-                     *ngIf="item.CompletedAt">{{formatDate(item.CompletedAt, 'DD/MM/YYYY')}}</div>
-                <div *ngIf="!item.CompletedAt && data[i - 1] && data[i - 1].Complete"
+                     *ngIf="item.Complete">{{formatDate(item.CompletedAt, 'DD/MM/YYYY')}}</div>
+
+                <div *ngIf="(i == 0 && !item.Complete && !loginService.getRoles(item.RoleResponsible)) ||
+                            (data[i - 1] && data[i - 1].Complete && !item.Complete && !loginService.getRoles(item.RoleResponsible))"
                      class="status-date pull-right">Pending</div>
+
                 <button *ngIf="(loginService.getRoles(item.RoleResponsible) && data[i - 1] && data[i - 1].Complete) || (loginService.getRoles(item.RoleResponsible) && !data[i - 1])"
+                        (click)="confirmStatus(item.TransactionId)"
                         class="btn btn-success-green font-14 pull-right">Confirm</button>
             </div>
             <div class="status-line current hidden">

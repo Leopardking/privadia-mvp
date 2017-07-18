@@ -9,14 +9,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var properties_service_1 = require("../../../providers/properties/properties.service");
 var login_service_1 = require("../../../providers/login/login.service");
+var router_1 = require("@angular/router");
+var booking_service_1 = require("../../../providers/booking/booking.service");
+var helpers_1 = require("../../../helpers/helpers");
 var PaymentStatusComponent = (function () {
-    function PaymentStatusComponent(propertiesService, loginService) {
-        this.propertiesService = propertiesService;
+    function PaymentStatusComponent(bookingService, loginService, route) {
+        this.bookingService = bookingService;
         this.loginService = loginService;
+        this.route = route;
     }
-    PaymentStatusComponent.prototype.ngOnInit = function () { };
+    PaymentStatusComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            _this.bookingId = params['id'];
+        });
+    };
+    PaymentStatusComponent.prototype.confirmStatus = function (TransactionId) {
+        this.bookingService.confirmPayment({ BookingId: this.bookingId, TransactionId: TransactionId }).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Booking Updated Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+        }, function (e) {
+            console.log('Error', e);
+            helpers_1.handlerErrorNotify('Error');
+        });
+    };
     PaymentStatusComponent.prototype.dateFormat = function (date, format) {
         return moment(date).format(format);
     };
@@ -31,7 +57,7 @@ var PaymentStatusComponent = (function () {
             templateUrl: 'payment-status.component.html',
             styleUrls: ['payment-status.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService])
+        __metadata('design:paramtypes', [booking_service_1.BookingService, login_service_1.LoginService, router_1.ActivatedRoute])
     ], PaymentStatusComponent);
     return PaymentStatusComponent;
 }());

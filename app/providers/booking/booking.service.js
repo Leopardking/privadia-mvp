@@ -68,6 +68,16 @@ var BookingService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    //Update Booking
+    BookingService.prototype.confirmPayment = function (data) {
+        if (!this.loginService.getPermission('Bookings/ConfirmPayment'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/Bookings/ConfirmPayment', data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     //Add New Booking
     BookingService.prototype.addBooking = function (data) {
         if (!this.loginService.getPermission('Properties/GetById'))

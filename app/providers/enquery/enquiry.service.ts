@@ -28,7 +28,7 @@ export class EnquiryService {
 				this.enquiries = d;
 			},
 			e => {
-				console.log('Error Enquiries', e)
+				console.log('Error Enquiries 1', e)
 			}
 		)
 	}
@@ -39,7 +39,7 @@ export class EnquiryService {
 				this.enquiry = d;
 			},
 			e => {
-				console.log('Error Enquiries', e)
+				console.log('Error Enquiries 2', e)
 			}
 		)
 	}

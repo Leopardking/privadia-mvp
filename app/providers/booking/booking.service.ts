@@ -78,6 +78,19 @@ export class BookingService {
 				.catch(this.handleError);
     }
 
+    //Update Booking
+    public confirmPayment(data) {
+		if(!this.loginService.getPermission('Bookings/ConfirmPayment'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.post(this.apiUrl + '/api/Bookings/ConfirmPayment', data, options)
+				.map(this.extractData)
+				.catch(this.handleError);
+    }
+
     //Add New Booking
     public addBooking(data) {
 		if(!this.loginService.getPermission('Properties/GetById'))
