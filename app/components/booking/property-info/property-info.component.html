@@ -68,7 +68,11 @@
                     <span class="input-group-addon"><i class="material-icons">assignment</i></span>
                     <div class="form-group label-floating">
                         <label class="control-label">Notes</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea type="text"
+                                  class="form-control"
+                                  (keyup)="autosize($event)"
+                                  (click)="autosize($event)"
+                        ></textarea>
                     </div>
                 </div>
             </div>

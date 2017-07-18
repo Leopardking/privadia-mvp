@@ -110,7 +110,7 @@ var SetratesComponent = (function () {
         }, function (e) {
             console.log('Error ', e);
             helpers_1.handlerErrorFieds(e, _this.rateForm);
-            helpers_1.handlerErrorNotify('Please, fix form inputs.');
+            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
         });
     };
     SetratesComponent.prototype.deleteRate = function (object) {

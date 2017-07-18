@@ -18,6 +18,9 @@ var PropertyInfoComponent = (function () {
         console.log('Propery Info status', this.propertyId, this.data);
         this.propertiesService.readDataProperty(this.propertyId);
     };
+    PropertyInfoComponent.prototype.autosize = function (e) {
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
+    };
     PropertyInfoComponent.prototype.dateFormat = function (date, format) {
         return moment(date).format(format);
     };

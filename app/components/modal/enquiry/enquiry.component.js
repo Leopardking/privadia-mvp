@@ -38,7 +38,7 @@ var EnquiryComponent = (function () {
         }, function (e) {
             _this.errorForm = true;
             helpers_1.handlerErrorFieds(e, _this.enquiryForm);
-            helpers_1.handlerErrorNotify('Please, fix form inputs.');
+            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
         });
     };
     __decorate([
