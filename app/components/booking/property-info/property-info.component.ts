@@ -21,6 +21,10 @@ export class PropertyInfoComponent implements OnInit{
         //this.propertiesService.readDataProperty(this.data.PropertyId);
     }
 
+    private autosize(e){
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
+    }
+
     private dateFormat(date, format) {
         return moment(date).format(format);
     }

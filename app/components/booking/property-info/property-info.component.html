@@ -70,14 +70,16 @@
                 </div>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="material-icons">assignment</i></span>
-                    <!--replace by input-field-cmp-->
                     <div class="form-group label-floating">
                         <label class="control-label">Notes</label>
-                        <input
-                               type="text"
-                               class="form-control">
+                        <textarea
+                                md-autosize
+                                type="text"
+                                class="form-control"
+                                (keyup)="autosize($event)"
+                                (click)="autosize($event)"
+                        ></textarea>
                     </div>
-                    <!--end replace by input-field-cmp-->
                 </div>
             </div>
         </div>
