@@ -119,7 +119,6 @@ export class SetratesComponent implements OnInit{
                 $.notify({
                     icon: "notifications",
                     message: this.saveMessage
-
                 },{
                     type: 'success',
                     timer: 3000,
