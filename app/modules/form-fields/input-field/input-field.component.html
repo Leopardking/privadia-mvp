@@ -5,7 +5,7 @@
            [type]="data.type"
            class="form-control"
            [formControl]="field">
-    <div *ngIf="field.errors" class="errors">
+    <div *ngIf="field.errors && field.errors.serverError" class="errors">
         <div *ngIf="field.errors.serverError.length == 1" class="error-list">
             <p *ngFor="let err of field.errors.serverError; let i of index" class="text-danger">{{err}}</p>
         </div>

@@ -13,18 +13,28 @@ var booking_service_1 = require('../../../providers/booking/booking.service');
 var router_1 = require("@angular/router");
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var login_service_1 = require("../../../providers/login/login.service");
+var forms_1 = require("@angular/forms");
+var helpers_1 = require("../../../helpers/helpers");
 var BookingIdComponent = (function () {
     function BookingIdComponent(bookingService, enquiryService, loginService, route) {
         this.bookingService = bookingService;
         this.enquiryService = enquiryService;
         this.loginService = loginService;
         this.route = route;
+        this.bookingForm = new forms_1.FormGroup({
+            BookingId: new forms_1.FormControl(),
+            ClientContactEmail: new forms_1.FormControl(null, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
+            Notes: new forms_1.FormControl(),
+        });
     }
     BookingIdComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.route.params.subscribe(function (params) {
             _this.bookingService.readDataBookingById(params['id']);
+            _this.bookingForm.controls['BookingId'].setValue(params['id']);
             setTimeout(function () {
+                _this.bookingForm.controls['ClientContactEmail'].setValue(_this.bookingService.booking.ClientContactEmail);
+                _this.bookingForm.controls['Notes'].setValue(_this.bookingService.booking.Notes);
                 _this.enquiryService.readDataEnquiry(_this.bookingService.booking.EnquiryMessageThreadId);
             }, 1000);
         });
@@ -43,7 +53,24 @@ var BookingIdComponent = (function () {
         console.log('Cancel booking');
     };
     BookingIdComponent.prototype.saveBooking = function () {
-        console.log('Save booking');
+        var _this = this;
+        console.log('Save booking', this.bookingForm);
+        this.bookingService.updateBooking(this.bookingForm.value).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Booking Updated Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+        }, function (e) {
+            helpers_1.handlerErrorFieds(e, _this.bookingForm);
+            helpers_1.handlerErrorNotify('Error');
+        });
     };
     BookingIdComponent = __decorate([
         core_1.Component({

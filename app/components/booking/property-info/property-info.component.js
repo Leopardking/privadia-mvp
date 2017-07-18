@@ -32,6 +32,10 @@ var PropertyInfoComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], PropertyInfoComponent.prototype, "propertyId", void 0);
+    __decorate([
+        core_1.Input('group'), 
+        __metadata('design:type', Object)
+    ], PropertyInfoComponent.prototype, "bookingForm", void 0);
     PropertyInfoComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

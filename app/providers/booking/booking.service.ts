@@ -67,13 +67,13 @@ export class BookingService {
 
     //Update Booking
     public updateBooking(data) {
-		if(!this.loginService.getPermission('Bookings/GetById'))
+		if(!this.loginService.getPermission('Bookings/Put'))
 			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.post(this.apiUrl + '/api/Bookings/', data, options)
+		return this.http.put(this.apiUrl + '/api/Bookings/', data, options)
 				.map(this.extractData)
 				.catch(this.handleError);
     }

@@ -109,7 +109,7 @@ export class SetratesComponent implements OnInit{
     }
 
     private saveRates(object) {
-        if (this.rateForm.controls.Id) {
+        if (this.rateForm.controls['Id']) {
             this.saveMessage = 'Property Updated Successfully'
         } else {
             this.saveMessage = 'Property Added Successfully'

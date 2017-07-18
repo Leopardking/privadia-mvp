@@ -13,6 +13,7 @@ declare const moment: any;
 export class PropertyInfoComponent implements OnInit{
 	@Input() private data: any;
 	@Input() private propertyId: any;
+	@Input('group') private bookingForm: any;
 	private property;
 
 	constructor( private propertiesService: PropertiesService) {

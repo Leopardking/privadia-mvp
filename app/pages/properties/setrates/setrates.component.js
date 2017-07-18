@@ -94,7 +94,7 @@ var SetratesComponent = (function () {
     };
     SetratesComponent.prototype.saveRates = function (object) {
         var _this = this;
-        if (this.rateForm.controls.Id) {
+        if (this.rateForm.controls['Id']) {
             this.saveMessage = 'Property Updated Successfully';
         }
         else {
