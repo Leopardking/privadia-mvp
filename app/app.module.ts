@@ -1,7 +1,8 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule } from '@angular/http';
+import { ExtendedHttpService } from './providers/extendedHttp/extended-http.service';
 
 import { AppComponent }   from './app.component';
 
@@ -18,6 +19,7 @@ import {AppRoutingModule} from "./app-routing.module";
     ],
     providers: [
         AuthGuard,
+        {provide: Http, useClass: ExtendedHttpService}
     ],
     bootstrap:    [ AppComponent ]
 })
