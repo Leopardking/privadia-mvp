@@ -15,8 +15,8 @@ var PropertyInfoComponent = (function () {
         this.propertiesService = propertiesService;
     }
     PropertyInfoComponent.prototype.ngOnInit = function () {
-        console.log('Propery Info status', this.data);
-        //this.propertiesService.readDataProperty(this.data.PropertyId);
+        console.log('Propery Info status', this.propertyId, this.data);
+        this.propertiesService.readDataProperty(this.propertyId);
     };
     PropertyInfoComponent.prototype.dateFormat = function (date, format) {
         return moment(date).format(format);
@@ -25,6 +25,10 @@ var PropertyInfoComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], PropertyInfoComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PropertyInfoComponent.prototype, "propertyId", void 0);
     PropertyInfoComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

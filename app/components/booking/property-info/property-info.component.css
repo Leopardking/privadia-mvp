@@ -1,5 +1,7 @@
 .enquiry-header {
     position: relative;
+    overflow: hidden;
+    border-top-left-radius: 6px;
 }
 .enquiry-header .img{
     width: auto;
@@ -9,7 +11,7 @@
 .enquiry-header .image-wrp {
     text-align: center;
     overflow: hidden;
-    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
     background-color: #e7e7e7;
 }
 

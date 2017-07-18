@@ -12,14 +12,15 @@ declare const moment: any;
 
 export class PropertyInfoComponent implements OnInit{
 	@Input() private data: any;
+	@Input() private propertyId: any;
 	private property;
 
 	constructor( private propertiesService: PropertiesService) {
     }
 
 	ngOnInit() {
-        console.log('Propery Info status', this.data)
-        //this.propertiesService.readDataProperty(this.data.PropertyId);
+        console.log('Propery Info status', this.propertyId, this.data)
+        this.propertiesService.readDataProperty(this.propertyId);
     }
 
     private dateFormat(date, format) {
