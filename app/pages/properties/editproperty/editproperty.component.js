@@ -204,7 +204,7 @@ var EditpropertyComponent = (function () {
         }, function (e) {
             _this.errorForm = true;
             helpers_1.handlerErrorFieds(e, _this.propertyForm);
-            helpers_1.handlerErrorNotify('Please, fix form inputs.');
+            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
         });
     };
     EditpropertyComponent = __decorate([

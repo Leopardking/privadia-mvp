@@ -169,7 +169,7 @@ export class AddpropertyComponent implements OnInit {
                 this.sending = false;
 
                 handlerErrorFieds(e, this.propertyForm);
-                handlerErrorNotify('Please, fix form inputs.');
+                handlerErrorNotify('There were errors with your submission, please see form for details.');
             }
         );
     }

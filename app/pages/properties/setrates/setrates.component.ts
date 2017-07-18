@@ -129,7 +129,7 @@ export class SetratesComponent implements OnInit{
             e => {
                 console.log('Error ', e)
                 handlerErrorFieds(e, this.rateForm);
-                handlerErrorNotify('Please, fix form inputs.')
+                handlerErrorNotify('There were errors with your submission, please see form for details.')
             }
         )
 

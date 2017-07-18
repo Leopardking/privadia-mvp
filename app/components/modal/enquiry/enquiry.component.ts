@@ -47,7 +47,7 @@ export class EnquiryComponent implements OnInit{
 				this.errorForm = true;
 
 				handlerErrorFieds(e, this.enquiryForm);
-				handlerErrorNotify('Please, fix form inputs.');
+				handlerErrorNotify('There were errors with your submission, please see form for details.');
 			}
 		)
 	}
