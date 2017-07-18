@@ -17,8 +17,7 @@ declare const $: any;
 @Component({
     moduleId: module.id,
     selector: ' propertyinfo-cmp ',
-    templateUrl: 'test.html',
-    // templateUrl: 'propertyinfo.component.html',
+    templateUrl: 'propertyinfo.component.html',
     styleUrls: [ 'propertyinfo.component.css' ]
 })
 

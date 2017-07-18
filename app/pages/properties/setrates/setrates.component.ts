@@ -69,7 +69,10 @@ export class SetratesComponent implements OnInit{
             PropertyId: this.propertyId,
             StartDate: moment(data.StartDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
             Value: data.Value,
-        })
+        });
+        setTimeout(() => {
+            initDatetimepickers();
+        }, 1000)
     }
 
     private addRow() {

@@ -59,6 +59,9 @@ var SetratesComponent = (function () {
             StartDate: moment(data.StartDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
             Value: data.Value,
         });
+        setTimeout(function () {
+            initDatetimepickers();
+        }, 1000);
     };
     SetratesComponent.prototype.addRow = function () {
         this.isEdit = [];

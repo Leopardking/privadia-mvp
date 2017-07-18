@@ -84,8 +84,7 @@ var PropertyinfoComponent = (function () {
         core_1.Component({
             moduleId: module.id,
             selector: ' propertyinfo-cmp ',
-            templateUrl: 'test.html',
-            // templateUrl: 'propertyinfo.component.html',
+            templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
         __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, platform_browser_1.DomSanitizer])
