@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var router_1 = require('@angular/router');
 var http_1 = require('@angular/http');
+var extended_http_service_1 = require('./providers/extendedHttp/extended-http.service');
 var app_component_1 = require('./app.component');
 var auth_guard_1 = require("./shared/guard/auth.guard");
 var app_routing_module_1 = require("./app-routing.module");
@@ -29,6 +30,7 @@ var AppModule = (function () {
             ],
             providers: [
                 auth_guard_1.AuthGuard,
+                { provide: http_1.Http, useClass: extended_http_service_1.ExtendedHttpService }
             ],
             bootstrap: [app_component_1.AppComponent]
         }), 

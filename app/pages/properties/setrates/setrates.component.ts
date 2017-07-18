@@ -24,6 +24,7 @@ export class SetratesComponent implements OnInit{
     private propertyId: number;
 
     private isEdit = [];
+    private saveMessage = '';
     public rateForm = new FormGroup ({
         Currency: new FormControl(),
         EndDate: new FormControl(),
@@ -108,11 +109,16 @@ export class SetratesComponent implements OnInit{
     }
 
     private saveRates(object) {
+        if (this.rateForm.controls.Id) {
+            this.saveMessage = 'Property Updated Successfully'
+        } else {
+            this.saveMessage = 'Property Added Successfully'
+        }
         this.propertyService.saveRate(this.rateForm.value).subscribe(
             d => {
                 $.notify({
                     icon: "notifications",
-                    message: "Property Added Successfully"
+                    message: this.saveMessage
 
                 },{
                     type: 'success',

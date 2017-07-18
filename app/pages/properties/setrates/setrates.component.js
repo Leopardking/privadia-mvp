@@ -21,6 +21,7 @@ var SetratesComponent = (function () {
         this.builder = builder;
         this.datatableInited = false;
         this.isEdit = [];
+        this.saveMessage = '';
         this.rateForm = new forms_1.FormGroup({
             Currency: new forms_1.FormControl(),
             EndDate: new forms_1.FormControl(),
@@ -93,10 +94,16 @@ var SetratesComponent = (function () {
     };
     SetratesComponent.prototype.saveRates = function (object) {
         var _this = this;
+        if (this.rateForm.controls.Id) {
+            this.saveMessage = 'Property Updated Successfully';
+        }
+        else {
+            this.saveMessage = 'Property Added Successfully';
+        }
         this.propertyService.saveRate(this.rateForm.value).subscribe(function (d) {
             $.notify({
                 icon: "notifications",
-                message: "Property Added Successfully"
+                message: _this.saveMessage
             }, {
                 type: 'success',
                 timer: 3000,
