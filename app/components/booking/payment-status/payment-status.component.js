@@ -15,12 +15,8 @@ var PaymentStatusComponent = (function () {
     function PaymentStatusComponent(propertiesService, loginService) {
         this.propertiesService = propertiesService;
         this.loginService = loginService;
-        loginService.getRoles('');
     }
-    PaymentStatusComponent.prototype.ngOnInit = function () {
-        console.log('Payment status', this.data);
-        //this.propertiesService.readDataProperty(this.data.PropertyId);
-    };
+    PaymentStatusComponent.prototype.ngOnInit = function () { };
     PaymentStatusComponent.prototype.dateFormat = function (date, format) {
         return moment(date).format(format);
     };

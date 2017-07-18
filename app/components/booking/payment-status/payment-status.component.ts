@@ -13,16 +13,10 @@ declare const moment: any;
 
 export class PaymentStatusComponent implements OnInit{
 	@Input() private data: any;
-	private property;
 
-	constructor( private propertiesService: PropertiesService, private loginService: LoginService) {
-	    loginService.getRoles('')
-    }
+	constructor( private propertiesService: PropertiesService, private loginService: LoginService) { }
 
-	ngOnInit() {
-	    console.log('Payment status', this.data)
-        //this.propertiesService.readDataProperty(this.data.PropertyId);
-    }
+	ngOnInit() { }
 
     private dateFormat(date, format) {
         return moment(date).format(format);

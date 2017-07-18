@@ -11,7 +11,10 @@
                     current: (loginService.getRoles(item.RoleResponsible) && data[i - 1] && data[i - 1].Complete) || (loginService.getRoles(item.RoleResponsible) && !data[i - 1])
                  }">
                 {{item.Description}}
-                <div class="status-date pull-right" *ngIf="item.CompletedAt">{{formatDate(item.CompletedAt, 'DD/MM/YYYY')}}</div>
+                <div class="status-date pull-right"
+                     *ngIf="item.CompletedAt">{{formatDate(item.CompletedAt, 'DD/MM/YYYY')}}</div>
+                <div *ngIf="!item.CompletedAt && data[i - 1] && data[i - 1].Complete"
+                     class="status-date pull-right">Pending</div>
                 <button *ngIf="(loginService.getRoles(item.RoleResponsible) && data[i - 1] && data[i - 1].Complete) || (loginService.getRoles(item.RoleResponsible) && !data[i - 1])"
                         class="btn btn-success-green font-14 pull-right">Confirm</button>
             </div>
