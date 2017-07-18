@@ -5,6 +5,7 @@ import { BookingService } from '../../../providers/booking/booking.service';
 import initDataTable = require('../../../../assets/js/init/initDataTable.js');
 import {ActivatedRoute} from "@angular/router";
 import {EnquiryService} from "../../../providers/enquery/enquiry.service";
+import {LoginService} from "../../../providers/login/login.service";
 
 @Component({
     moduleId: module.id,
@@ -18,6 +19,7 @@ export class BookingIdComponent implements OnInit{
 
     constructor ( private bookingService: BookingService,
                   private enquiryService: EnquiryService,
+                  private loginService: LoginService,
                   private route: ActivatedRoute) { }
 
     ngOnInit(){
@@ -40,5 +42,13 @@ export class BookingIdComponent implements OnInit{
 
     private editBooking() {
         console.log('edit');
+    }
+
+    private cancelBooking() {
+        console.log('Cancel booking');
+    }
+
+    private saveBooking() {
+        console.log('Save booking');
     }
 }

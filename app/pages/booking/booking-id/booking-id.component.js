@@ -12,10 +12,12 @@ var core_1 = require('@angular/core');
 var booking_service_1 = require('../../../providers/booking/booking.service');
 var router_1 = require("@angular/router");
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
+var login_service_1 = require("../../../providers/login/login.service");
 var BookingIdComponent = (function () {
-    function BookingIdComponent(bookingService, enquiryService, route) {
+    function BookingIdComponent(bookingService, enquiryService, loginService, route) {
         this.bookingService = bookingService;
         this.enquiryService = enquiryService;
+        this.loginService = loginService;
         this.route = route;
     }
     BookingIdComponent.prototype.ngOnInit = function () {
@@ -37,6 +39,12 @@ var BookingIdComponent = (function () {
     BookingIdComponent.prototype.editBooking = function () {
         console.log('edit');
     };
+    BookingIdComponent.prototype.cancelBooking = function () {
+        console.log('Cancel booking');
+    };
+    BookingIdComponent.prototype.saveBooking = function () {
+        console.log('Save booking');
+    };
     BookingIdComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
@@ -44,7 +52,7 @@ var BookingIdComponent = (function () {
             templateUrl: 'booking-id.component.html',
             styleUrls: ['booking-id.component.css']
         }), 
-        __metadata('design:paramtypes', [booking_service_1.BookingService, enquiry_service_1.EnquiryService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [booking_service_1.BookingService, enquiry_service_1.EnquiryService, login_service_1.LoginService, router_1.ActivatedRoute])
     ], BookingIdComponent);
     return BookingIdComponent;
 }());
