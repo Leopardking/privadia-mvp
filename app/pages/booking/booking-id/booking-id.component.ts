@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { BookingService } from '../../../providers/booking/booking.service';
 
 import initDataTable = require('../../../../assets/js/init/initDataTable.js');
+import {ActivatedRoute} from "@angular/router";
+import {EnquiryService} from "../../../providers/enquery/enquiry.service";
 
 @Component({
     moduleId: module.id,
@@ -14,10 +16,17 @@ import initDataTable = require('../../../../assets/js/init/initDataTable.js');
 export class BookingIdComponent implements OnInit{
     private booking;
 
-    constructor ( private bookingService: BookingService) { }
+    constructor ( private bookingService: BookingService,
+                  private enquiryService: EnquiryService,
+                  private route: ActivatedRoute) { }
 
     ngOnInit(){
-        this.bookingService.getDataBookings();
+        this.route.params.subscribe(params => {
+            this.bookingService.readDataBookingById(params['id']);
+            setTimeout(() => {
+                this.enquiryService.readDataEnquiry(this.bookingService.booking.EnquiryMessageThreadId)
+            }, 1000)
+        });
     }
     
     private finishReading() {

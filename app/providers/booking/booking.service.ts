@@ -13,6 +13,8 @@ export class BookingService {
 	private token: string = localStorage.getItem('id_token');
 
 	public bookings = [];
+	public booking;
+
 	constructor ( private http: Http,
 				  private loginService: LoginService ) { }
 
@@ -20,6 +22,17 @@ export class BookingService {
 		this.allBookings().subscribe(
 			d => {
 				this.bookings = d;
+			},
+			e => {
+				console.log("error: ", e);
+			}
+		);
+	}
+
+	public readDataBookingById(id) {
+		this.getBookingById(id).subscribe(
+			d => {
+				this.booking = d;
 			},
 			e => {
 				console.log("error: ", e);
@@ -41,7 +54,7 @@ export class BookingService {
 
     //Get Booking By Id
     public getBookingById(id) {
-		if(!this.loginService.getPermission('Properties/GetById'))
+		if(!this.loginService.getPermission('Bookings/GetById'))
 			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );
@@ -54,7 +67,7 @@ export class BookingService {
 
     //Update Booking
     public updateBooking(data) {
-		if(!this.loginService.getPermission('Properties/GetById'))
+		if(!this.loginService.getPermission('Bookings/GetById'))
 			return Observable.throw(null);
 
 		let header = new Headers( {'Authorization': this.token} );

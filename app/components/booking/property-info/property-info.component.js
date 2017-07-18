@@ -15,6 +15,7 @@ var PropertyInfoComponent = (function () {
         this.propertiesService = propertiesService;
     }
     PropertyInfoComponent.prototype.ngOnInit = function () {
+        console.log('Propery Info status', this.data);
         //this.propertiesService.readDataProperty(this.data.PropertyId);
     };
     PropertyInfoComponent.prototype.dateFormat = function (date, format) {

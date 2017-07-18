@@ -22,6 +22,7 @@ import { FormFieldsModule } from "../../../modules/form-fields/form-field.module
 import {PropertiesService} from "../../../providers/properties/properties.service";
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {ProposalsService} from "../../../providers/proposals/proposals.service";
+import {EnquiryService} from "../../../providers/enquery/enquiry.service";
 
 @NgModule({
     imports: [
@@ -41,7 +42,7 @@ import {ProposalsService} from "../../../providers/proposals/proposals.service";
         ProposalComponent,
         PaymentStatusComponent
     ],
-    providers: [ BookingService, PropertiesService, LookupsService, ProposalsService ]
+    providers: [ BookingService, PropertiesService, LookupsService, ProposalsService, EnquiryService ]
 })
 
 export class BookingIdModule {}

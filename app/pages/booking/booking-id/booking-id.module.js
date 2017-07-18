@@ -28,6 +28,7 @@ var form_field_module_1 = require("../../../modules/form-fields/form-field.modul
 var properties_service_1 = require("../../../providers/properties/properties.service");
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var proposals_service_1 = require("../../../providers/proposals/proposals.service");
+var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var BookingIdModule = (function () {
     function BookingIdModule() {
     }
@@ -49,7 +50,7 @@ var BookingIdModule = (function () {
                 proposal_component_1.ProposalComponent,
                 payment_status_component_1.PaymentStatusComponent
             ],
-            providers: [booking_service_1.BookingService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, proposals_service_1.ProposalsService]
+            providers: [booking_service_1.BookingService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, proposals_service_1.ProposalsService, enquiry_service_1.EnquiryService]
         }), 
         __metadata('design:paramtypes', [])
     ], BookingIdModule);

@@ -15,11 +15,16 @@ var PaymentStatusComponent = (function () {
         this.propertiesService = propertiesService;
     }
     PaymentStatusComponent.prototype.ngOnInit = function () {
+        console.log('Payment status', this.data);
         //this.propertiesService.readDataProperty(this.data.PropertyId);
     };
     PaymentStatusComponent.prototype.dateFormat = function (date, format) {
         return moment(date).format(format);
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], PaymentStatusComponent.prototype, "data", void 0);
     PaymentStatusComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

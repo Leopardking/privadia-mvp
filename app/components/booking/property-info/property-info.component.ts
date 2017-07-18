@@ -18,6 +18,7 @@ export class PropertyInfoComponent implements OnInit{
     }
 
 	ngOnInit() {
+        console.log('Propery Info status', this.data)
         //this.propertiesService.readDataProperty(this.data.PropertyId);
     }
 

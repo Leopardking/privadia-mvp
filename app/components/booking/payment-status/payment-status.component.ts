@@ -11,13 +11,14 @@ declare const moment: any;
 })  
 
 export class PaymentStatusComponent implements OnInit{
-	//@Input() private data: any;
+	@Input() private data: any;
 	private property;
 
 	constructor( private propertiesService: PropertiesService) {
     }
 
 	ngOnInit() {
+	    console.log('Payment status', this.data)
         //this.propertiesService.readDataProperty(this.data.PropertyId);
     }
 

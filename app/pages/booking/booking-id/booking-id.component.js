@@ -10,12 +10,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var booking_service_1 = require('../../../providers/booking/booking.service');
+var router_1 = require("@angular/router");
+var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var BookingIdComponent = (function () {
-    function BookingIdComponent(bookingService) {
+    function BookingIdComponent(bookingService, enquiryService, route) {
         this.bookingService = bookingService;
+        this.enquiryService = enquiryService;
+        this.route = route;
     }
     BookingIdComponent.prototype.ngOnInit = function () {
-        this.bookingService.getDataBookings();
+        var _this = this;
+        this.route.params.subscribe(function (params) {
+            _this.bookingService.readDataBookingById(params['id']);
+            setTimeout(function () {
+                _this.enquiryService.readDataEnquiry(_this.bookingService.booking.EnquiryMessageThreadId);
+            }, 1000);
+        });
     };
     BookingIdComponent.prototype.finishReading = function () {
         // initDataTable();
@@ -34,7 +44,7 @@ var BookingIdComponent = (function () {
             templateUrl: 'booking-id.component.html',
             styleUrls: ['booking-id.component.css']
         }), 
-        __metadata('design:paramtypes', [booking_service_1.BookingService])
+        __metadata('design:paramtypes', [booking_service_1.BookingService, enquiry_service_1.EnquiryService, router_1.ActivatedRoute])
     ], BookingIdComponent);
     return BookingIdComponent;
 }());

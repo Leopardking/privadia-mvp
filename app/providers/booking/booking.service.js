@@ -31,6 +31,14 @@ var BookingService = (function () {
             console.log("error: ", e);
         });
     };
+    BookingService.prototype.readDataBookingById = function (id) {
+        var _this = this;
+        this.getBookingById(id).subscribe(function (d) {
+            _this.booking = d;
+        }, function (e) {
+            console.log("error: ", e);
+        });
+    };
     BookingService.prototype.allBookings = function () {
         if (!this.loginService.getPermission('Bookings/Get'))
             return Observable_1.Observable.throw(null);
@@ -42,7 +50,7 @@ var BookingService = (function () {
     };
     //Get Booking By Id
     BookingService.prototype.getBookingById = function (id) {
-        if (!this.loginService.getPermission('Properties/GetById'))
+        if (!this.loginService.getPermission('Bookings/GetById'))
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
@@ -52,7 +60,7 @@ var BookingService = (function () {
     };
     //Update Booking
     BookingService.prototype.updateBooking = function (data) {
-        if (!this.loginService.getPermission('Properties/GetById'))
+        if (!this.loginService.getPermission('Bookings/GetById'))
             return Observable_1.Observable.throw(null);
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
