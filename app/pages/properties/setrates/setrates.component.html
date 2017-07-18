@@ -81,7 +81,7 @@
                                                        class="form-control"
                                                        [formControl]="rateForm.controls.Value" />
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" *ngIf="!isEdit[i]">
                                                 <span class="text-value">{{rate.Value}}</span>
                                             </div>
                                         </td>
