@@ -10,9 +10,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var properties_service_1 = require("../../../providers/properties/properties.service");
+var login_service_1 = require("../../../providers/login/login.service");
 var PaymentStatusComponent = (function () {
-    function PaymentStatusComponent(propertiesService) {
+    function PaymentStatusComponent(propertiesService, loginService) {
         this.propertiesService = propertiesService;
+        this.loginService = loginService;
+        loginService.getRoles('');
     }
     PaymentStatusComponent.prototype.ngOnInit = function () {
         console.log('Payment status', this.data);
@@ -32,7 +35,7 @@ var PaymentStatusComponent = (function () {
             templateUrl: 'payment-status.component.html',
             styleUrls: ['payment-status.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService])
     ], PaymentStatusComponent);
     return PaymentStatusComponent;
 }());

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {PropertiesService} from "../../../providers/properties/properties.service";
 import {EnquiryService} from "../../../providers/enquery/enquiry.service";
+import {LoginService} from "../../../providers/login/login.service";
 
 declare const moment: any;
 @Component({
@@ -14,7 +15,8 @@ export class PaymentStatusComponent implements OnInit{
 	@Input() private data: any;
 	private property;
 
-	constructor( private propertiesService: PropertiesService) {
+	constructor( private propertiesService: PropertiesService, private loginService: LoginService) {
+	    loginService.getRoles('')
     }
 
 	ngOnInit() {
