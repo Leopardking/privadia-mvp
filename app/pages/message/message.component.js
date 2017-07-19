@@ -17,6 +17,7 @@ var MessageComponent = (function () {
         this.enquiryService = enquiryService;
         console.log('Load Message Module');
         enquiryService.readDataEnquiries();
+        console.log(enquiryService.enquiries);
         router.events.subscribe(function (val) {
             var hash = window.location.hash;
             hash && $('ul.nav a[href="' + hash + '"]').tab('show');
