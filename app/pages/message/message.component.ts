@@ -15,7 +15,6 @@ export class MessageComponent implements OnInit{
     constructor ( private router: Router, private enquiryService: EnquiryService) {
         console.log('Load Message Module');
         enquiryService.readDataEnquiries();
-        console.log(enquiryService.enquiries);
         router.events.subscribe((val) => {
             const hash = window.location.hash;
             hash && $('ul.nav a[href="' + hash + '"]').tab('show');

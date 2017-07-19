@@ -65,10 +65,10 @@ export class SetratesComponent implements OnInit{
     private initRateToForm(data) {
         this.rateForm = this.builder.group({
             Currency: data.Currency || 'EUR',
-            EndDate: moment(data.EndDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
+            EndDate: moment(data.EndDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
             Id: data.Id,
             PropertyId: this.propertyId,
-            StartDate: moment(data.StartDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
+            StartDate: moment(data.StartDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
             Value: data.Value,
         });
         setTimeout(() => {
@@ -87,9 +87,9 @@ export class SetratesComponent implements OnInit{
         });
         this.rateForm = this.builder.group({
             Currency: new FormControl('EUR'),
-            EndDate: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
+            EndDate: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             PropertyId: new FormControl(this.propertyId),
-            StartDate: new FormControl(moment().format('DD/MM/YYYY')),
+            StartDate: new FormControl(moment().format('MM/DD/YYYY')),
             Value: new FormControl(),
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
