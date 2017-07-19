@@ -9,7 +9,7 @@ import {DashboardService} from "../../providers/dashboard/dashboard.service";
 import {PropertiesService} from "../../providers/properties/properties.service";
 import {LookupsService} from "../../providers/lookups/lookups.service";
 import {FormFieldsModule} from "../../modules/form-fields/form-field.module";
-import { PopoverModule } from 'ng2-pop-over';
+import { PopoverModule } from 'ng2-popover';
 
 @NgModule({
     imports: [

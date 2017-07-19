@@ -86,8 +86,7 @@
                                             <button *ngIf="loginService.getPermission('Properties/Delete')"
                                                     class="btn btn-simple btn-delete btn-icon"
                                                     type="button"
-                                                    [pop-over-trigger]="i"
-                                                    [show-on]="'click'"
+                                                    [popover]="i"
                                             >
                                                 <i class="material-icons">delete</i>Remove
                                             </button>
@@ -96,12 +95,14 @@
                                                     [routerLink]="['/properties/view', item.Id]">
                                                 <i class="material-icons">remove_red_eye</i>View
                                             </button>
-                                            <pop-over #i [my]="'center right'" [at]="'center left'"
-                                                      [anchor-to]="true" [x-offset]="15">
+                                            <popover-content #i
+                                                     placement="left"
+                                                     [animation]="true"
+                                                     [closeOnClickOutside]="true">
                                                 <h3>Are you sure?</h3>
                                                 <button class="btn btn-danger font-14" (click)="removeProperty({index: i, propertyId: item.Id})">Yes, remove</button>
-                                                <button class="btn btn-success-green font-14" (click)="test.hide($event)">Cancel</button>
-                                            </pop-over>
+                                                <button class="btn btn-success-green font-14" (click)="i.hide($event)">Cancel</button>
+                                            </popover-content>
                                         </td>
                                         <td></td>
                                         {{ !propertiesService.isReading && last && !datatableInited ? finishReading() : "" }}
