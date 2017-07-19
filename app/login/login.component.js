@@ -17,8 +17,8 @@ var LoginComponent = (function () {
     function LoginComponent(loginService, router) {
         this.loginService = loginService;
         this.router = router;
-        //public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
-        this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+        this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
+        // public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.errorForm = false;
         this.loginForm = new forms_1.FormGroup({
             Email: new forms_1.FormControl('manager41@freelancemvc.net', forms_1.Validators.compose([

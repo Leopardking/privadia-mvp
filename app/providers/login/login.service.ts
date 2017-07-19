@@ -9,8 +9,8 @@ import 'rxjs/add/observable/throw'
 
 @Injectable()
 export class LoginService {
-	// private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
-	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+	private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	// private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 	private token: string = localStorage.getItem('id_token');
 
 	public userInfo: any;

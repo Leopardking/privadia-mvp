@@ -14,8 +14,8 @@ declare const $:any;
     styleUrls: ['login.component.css']
 })
 export class LoginComponent implements OnInit {
-    //public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
-    public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+    public apiUrl:string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+    // public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
     private errorForm = false;
 
     public loginForm = new FormGroup({

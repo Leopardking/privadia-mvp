@@ -8,8 +8,8 @@ import {LoginService} from "../login/login.service";
 
 @Injectable()
 export class ProposalsService {
-	// private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
-	private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+	private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	// private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 	private token: string = localStorage.getItem('id_token');
 
 	constructor ( private http: Http,
