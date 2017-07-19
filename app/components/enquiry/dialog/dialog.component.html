@@ -23,8 +23,9 @@
         </div>
     </div>
     <div class="divider"></div>
-    <form [formGroup]="messageForm" class="message-send" (submit)="onSubmit(messageForm.value)">
+    <form [formGroup]="messageForm" class="message-send" (submit)="onSubmit(messageForm)">
         <input-field-cmp [data]="{title: 'Type in your message', type: 'text'}"
+                         [errorForm]="errorForm"
                          [field]="messageForm.controls.Content"></input-field-cmp>
         <button class="btn btn-just-icon btn-simple btn-send" title="Send" type="submit">
             <i class="material-icons">send</i>
