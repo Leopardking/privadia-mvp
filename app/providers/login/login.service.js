@@ -17,6 +17,7 @@ require('rxjs/add/observable/throw');
 var LoginService = (function () {
     function LoginService(http) {
         this.http = http;
+        // private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
         this.apiUrl = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
         this.isReading = true;

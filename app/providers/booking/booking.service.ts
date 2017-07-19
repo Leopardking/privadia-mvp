@@ -11,8 +11,8 @@ declare const $: any;
 
 @Injectable()
 export class BookingService {
-	// private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
-	public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
+	private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
+	// public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 	private token: string = localStorage.getItem('id_token');
 
 	public bookings = [];
