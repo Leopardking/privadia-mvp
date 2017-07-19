@@ -100,8 +100,8 @@
                                                      [animation]="true"
                                                      [closeOnClickOutside]="true">
                                                 <h3>Are you sure?</h3>
-                                                <button class="btn btn-danger font-14" (click)="removeProperty({index: i, propertyId: item.Id})">Yes, remove</button>
-                                                <button class="btn btn-success-green font-14" (click)="i.hide($event)">Cancel</button>
+                                                <button type="button" class="btn btn-danger font-14" (click)="removeProperty({index: i, propertyId: item.Id})">Yes, remove</button>
+                                                <button type="button" class="btn btn-success-green font-14" (click)="i.hide($event)">Cancel</button>
                                             </popover-content>
                                         </td>
                                         <td></td>

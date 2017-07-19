@@ -120,16 +120,16 @@
                                                              [animation]="true"
                                                              [closeOnClickOutside]="true">
                                                 <h3>Are you sure?</h3>
-                                                <button class="btn btn-danger font-14" (click)="clearRates({rate: rate, index: i})">Yes, remove</button>
-                                                <button class="btn btn-success-green font-14" (click)="clearRatePopover.hide($event)">Cancel</button>
+                                                <button type="button" class="btn btn-danger font-14" (click)="clearRates({rate: rate, index: i})">Yes, remove</button>
+                                                <button type="button" class="btn btn-success-green font-14" (click)="clearRatePopover.hide($event)">Cancel</button>
                                             </popover-content>
                                             <popover-content #deleteRatePopover
                                                              placement="left"
                                                              [animation]="true"
                                                              [closeOnClickOutside]="true">
                                                 <h3>Are you sure?</h3>
-                                                <button class="btn btn-danger font-14" (click)="deleteRate({index: i})">Yes, remove</button>
-                                                <button class="btn btn-success-green font-14" (click)="deleteRatePopover.hide($event)">Cancel</button>
+                                                <button type="button" class="btn btn-danger font-14" (click)="deleteRate({index: i})">Yes, remove</button>
+                                                <button type="button" class="btn btn-success-green font-14" (click)="deleteRatePopover.hide($event)">Cancel</button>
                                             </popover-content>
                                         </td>
                                         {{ propertyService.rates.length && !datatableInited ? finishReading() : "" }}
