@@ -80,6 +80,22 @@
     align-items: center;
     padding-right: 20px;
 }
+.enquiry-header .villa-container .enquiry-status {
+    font-size: 12px;
+    font-weight: 300;
+    padding: 0 10px;
+    height: 18px;
+    border-radius: 9px;
+    text-align: center;
+    color: #fff;
+    line-height: 18px;
+    display: none;
+}
+
+.enquiry-header .villa-container .enquiry-status.accepted {
+    background-color: #00bfa5;
+    display: inline-block;
+}
 .icons-group .feature i {
     font-size: 18px;
     color: #5399bc;
