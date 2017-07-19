@@ -68,7 +68,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="loginService.getRoles('Agent')">
                 <div class="col-xs-6 p-l-r-30"><p style="line-height: 64px;margin: 0">The contract requires your signature</p></div>
                 <div class="col-xs-6"><button class="btn btn-success" (click)="signContract()">Sign Contract</button></div>
             </div>

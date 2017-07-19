@@ -22,7 +22,7 @@
             <p class="location"><i class="material-icons">place</i> {{propertiesService.property.Region.Name}}</p>
         </div>
         <div class="villa-container right">
-            <button class="btn btn-success pull-right font-16 m-r-10">View enquiry</button>
+            <a class="btn btn-success pull-right font-16 m-r-10" [routerLink]="['/messages/enquiry/' + data.EnquiryMessageThreadId]">View enquiry</a>
         </div>
     </div>
     <div class="enquiry-body">
