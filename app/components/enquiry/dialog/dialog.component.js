@@ -17,31 +17,65 @@ var DialogComponent = (function () {
         this.user = JSON.parse(localStorage.getItem('user'));
     }
     DialogComponent.prototype.ngOnInit = function () {
+        var _this = this;
         $('.messages-wrp').perfectScrollbar({
             'wheelPropagation': true
         });
+        setTimeout(function () {
+            _this.scrollToBottom();
+        }, 500);
         this.messageForm = new forms_1.FormGroup({
             MessageThreadId: new forms_1.FormControl(this.enquiryId),
-            Content: new forms_1.FormControl('Test message send', forms_1.Validators.required)
+            Content: new forms_1.FormControl(null, forms_1.Validators.required)
         });
     };
     DialogComponent.prototype.ngOnChanges = function () {
         console.log('Changes');
     };
     DialogComponent.prototype.onSubmit = function (value) {
+        var _this = this;
         value.IsMine = true;
         this.data.push(value);
         this.messagesService.addMessage(value).subscribe(function (d) {
+            $.notify({
+                icon: "notifications",
+                message: "Message Submitted Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
             console.log('Send Message', d);
         }, function (e) {
+            $.notify({
+                icon: "notifications",
+                message: "Message Submitted Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
             console.log('Send Message Error', e);
+            _this.scrollToBottom();
         });
+        this.scrollToBottom();
+        this.messageForm.controls['Content'].reset();
     };
     DialogComponent.prototype.formatDate = function (date, format) {
         return moment.utc(date).local().format(format);
     };
     DialogComponent.prototype.formatTime = function (time, format) {
         return moment.utc(time).local().format(format);
+    };
+    DialogComponent.prototype.scrollToBottom = function () {
+        $('.messages-wrp').scrollTop($('.messages-wrp').prop('scrollHeight'));
+        $('.messages-wrp').perfectScrollbar('update');
     };
     __decorate([
         core_1.Input(), 

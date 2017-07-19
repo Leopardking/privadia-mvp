@@ -29,10 +29,13 @@ export class DialogComponent implements OnInit, OnChanges{
         $('.messages-wrp').perfectScrollbar({
             'wheelPropagation': true
         });
+        setTimeout(() => {
+            this.scrollToBottom();
+        },500);
 
         this.messageForm = new FormGroup({
             MessageThreadId: new FormControl(this.enquiryId),
-            Content: new FormControl('Test message send', Validators.required)
+            Content: new FormControl(null, Validators.required)
         });
     }
 
@@ -46,12 +49,39 @@ export class DialogComponent implements OnInit, OnChanges{
 
         this.messagesService.addMessage(value).subscribe(
             d => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Message Submitted Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
                 console.log('Send Message', d)
             },
             e => {
+                $.notify({
+                    icon: "notifications",
+                    message: "Message Submitted Successfully"
+
+                },{
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
                 console.log('Send Message Error', e)
+                this.scrollToBottom();
             }
-        )
+        );
+        this.scrollToBottom();
+        this.messageForm.controls['Content'].reset();
     }
 
     public formatDate(date, format) {
@@ -60,5 +90,10 @@ export class DialogComponent implements OnInit, OnChanges{
 
     public formatTime(time, format) {
 	    return moment.utc(time).local().format(format);
+    }
+
+    private scrollToBottom() {
+        $('.messages-wrp').scrollTop($('.messages-wrp').prop('scrollHeight') );
+        $('.messages-wrp').perfectScrollbar('update');
     }
 }
