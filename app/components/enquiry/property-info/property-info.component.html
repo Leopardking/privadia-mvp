@@ -18,9 +18,8 @@
             </div>
         </div>
         <div class="villa-container left">
-            <div *ngIf="data.DeclinedAt" class="enquiry-status declined">Declined</div>
-            <div *ngIf="data.CancelledAt" class="enquiry-status declined">Cancelled</div>
-            <div *ngIf="data.Proposal && data.Proposal.AcceptedAt" class="enquiry-status accepted">Accepted</div>
+            <div *ngIf="data.Status === 'Enquiry Cancelled' || data.Status === 'Enquiry Declined'" class="enquiry-status declined">{{data.Status}}</div>
+            <div *ngIf="!(data.Status === 'Enquiry Cancelled' || data.Status === 'Enquiry Declined')" class="enquiry-status accepted">{{data.Status}}</div>
             <h4 class="enquiry-title">{{propertiesService.property.Name}}</h4>
             <p class="location"><i class="material-icons">place</i> {{propertiesService.property.Region.Name}}</p>
         </div>
