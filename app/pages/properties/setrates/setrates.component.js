@@ -81,6 +81,9 @@ var SetratesComponent = (function () {
             Value: new forms_1.FormControl(),
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
+        setTimeout(function () {
+            initDatetimepickers();
+        }, 100);
     };
     SetratesComponent.prototype.editRates = function (object) {
         this.isEdit[object.index] = !this.isEdit[object.index];
