@@ -26,7 +26,7 @@ var EnquiryComponent = (function () {
             $('#enquiry').modal('hide');
             $.notify({
                 icon: "notifications",
-                message: "Enquiry Submit Successfully"
+                message: "Enquiry Submitted Successfully"
             }, {
                 type: 'success',
                 timer: 3000,

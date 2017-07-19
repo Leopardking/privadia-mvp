@@ -32,7 +32,7 @@ export class EnquiryComponent implements OnInit{
 				$('#enquiry').modal('hide');
 				$.notify({
 					icon: "notifications",
-					message: "Enquiry Submit Successfully"
+					message: "Enquiry Submitted Successfully"
 
 				},{
 					type: 'success',
