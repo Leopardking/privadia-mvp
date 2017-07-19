@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormGroup, FormControl, Validators, FormArray} from "@angular/forms";
 import {LoginService} from "../../../providers/login/login.service";
 import {ProposalsService} from "../../../providers/proposals/proposals.service";
+import {BookingService} from "../../../providers/booking/booking.service";
+import {ActivatedRoute} from "@angular/router";
 // import {EnquiryService} from "../../../providers/enquery/enquiry.service";
 
 declare const moment: any;
@@ -20,6 +22,7 @@ export class ProposalComponent implements OnInit{
 	public isAgent = true;
 	// public isAgent = this.loginService.getRoles('Agent');
     public isCreateProposal = false;
+    public bookingId;
 
     public TermsContract = [{
 			Id: 1,
@@ -37,8 +40,11 @@ export class ProposalComponent implements OnInit{
 
 	constructor( private builder: FormBuilder,
 				 private loginService: LoginService,
-				 // private enquiryService: EnquiryService,
-				 private proposalsService: ProposalsService ) {
+				 private bookingService: BookingService,
+				 private route: ActivatedRoute ) {
+		route.params.subscribe(params => {
+			this.bookingId = params['id'];
+		})
     }
 
 	ngOnInit() {
@@ -99,14 +105,8 @@ export class ProposalComponent implements OnInit{
 		})
 	}
 
-    private addTerm() {
-		// const control = <FormArray>this.proposalManagerForm.controls['TermsList'];
-		// control.push(new FormControl('Term 1'));
-	}
-
-    private removeTerm(i: number) {
-		// const control = <FormArray>this.proposalManagerForm.controls['TermsList'];
-		// control.removeAt(i);
+	private signContract() {
+		this.bookingService.readDataSignContract({BookingId: this.bookingId})
 	}
 
 	private createProposal() {

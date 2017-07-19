@@ -5,6 +5,9 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import {LoginService} from "../login/login.service";
+import {handlerErrorNotify} from "../../helpers/helpers";
+
+declare const $: any;
 
 @Injectable()
 export class BookingService {
@@ -33,6 +36,53 @@ export class BookingService {
 		this.getBookingById(id).subscribe(
 			d => {
 				this.booking = d;
+			},
+			e => {
+				console.log("error: ", e);
+			}
+		);
+	}
+
+	public readDataConfirmPayment(data) {
+		this.confirmPayment(data).subscribe(
+			d => {
+				this.booking = d;
+				$.notify({
+					icon: "notifications",
+					message: "Payment Confirmed Successfully"
+
+				},{
+					type: 'success',
+					timer: 3000,
+					placement: {
+						from: 'top',
+						align: 'right'
+					}
+				});
+			},
+			e => {
+				console.log("error: ", e);
+				handlerErrorNotify('Error');
+			}
+		);
+	}
+
+	public readDataSignContract(id) {
+		this.signContract(id).subscribe(
+			d => {
+				this.booking = d;
+				$.notify({
+					icon: "notifications",
+					message: "Contract Signed Successfully"
+
+				},{
+					type: 'success',
+					timer: 3000,
+					placement: {
+						from: 'top',
+						align: 'right'
+					}
+				});
 			},
 			e => {
 				console.log("error: ", e);
@@ -78,7 +128,19 @@ export class BookingService {
 				.catch(this.handleError);
     }
 
-    //Update Booking
+    public signContract(data) {
+		if(!this.loginService.getPermission('Bookings/SignContract'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.post(this.apiUrl + '/api/Bookings/SignContract', data, options)
+				.map(this.extractData)
+				.catch(this.handleError);
+    }
+
+
     public confirmPayment(data) {
 		if(!this.loginService.getPermission('Bookings/ConfirmPayment'))
 			return Observable.throw(null);

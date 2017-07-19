@@ -14,6 +14,7 @@ var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
 var login_service_1 = require("../login/login.service");
+var helpers_1 = require("../../helpers/helpers");
 var BookingService = (function () {
     function BookingService(http, loginService) {
         this.http = http;
@@ -35,6 +36,45 @@ var BookingService = (function () {
         var _this = this;
         this.getBookingById(id).subscribe(function (d) {
             _this.booking = d;
+        }, function (e) {
+            console.log("error: ", e);
+        });
+    };
+    BookingService.prototype.readDataConfirmPayment = function (data) {
+        var _this = this;
+        this.confirmPayment(data).subscribe(function (d) {
+            _this.booking = d;
+            $.notify({
+                icon: "notifications",
+                message: "Payment Confirmed Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
+        }, function (e) {
+            console.log("error: ", e);
+            helpers_1.handlerErrorNotify('Error');
+        });
+    };
+    BookingService.prototype.readDataSignContract = function (id) {
+        var _this = this;
+        this.signContract(id).subscribe(function (d) {
+            _this.booking = d;
+            $.notify({
+                icon: "notifications",
+                message: "Contract Signed Successfully"
+            }, {
+                type: 'success',
+                timer: 3000,
+                placement: {
+                    from: 'top',
+                    align: 'right'
+                }
+            });
         }, function (e) {
             console.log("error: ", e);
         });
@@ -68,7 +108,15 @@ var BookingService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
-    //Update Booking
+    BookingService.prototype.signContract = function (data) {
+        if (!this.loginService.getPermission('Bookings/SignContract'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/Bookings/SignContract', data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     BookingService.prototype.confirmPayment = function (data) {
         if (!this.loginService.getPermission('Bookings/ConfirmPayment'))
             return Observable_1.Observable.throw(null);

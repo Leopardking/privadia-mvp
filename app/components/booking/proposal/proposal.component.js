@@ -11,14 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../../providers/login/login.service");
-var proposals_service_1 = require("../../../providers/proposals/proposals.service");
+var booking_service_1 = require("../../../providers/booking/booking.service");
+var router_1 = require("@angular/router");
 var ProposalComponent = (function () {
-    function ProposalComponent(builder, loginService, 
-        // private enquiryService: EnquiryService,
-        proposalsService) {
+    function ProposalComponent(builder, loginService, bookingService, route) {
+        var _this = this;
         this.builder = builder;
         this.loginService = loginService;
-        this.proposalsService = proposalsService;
+        this.bookingService = bookingService;
+        this.route = route;
         this.isAgent = true;
         // public isAgent = this.loginService.getRoles('Agent');
         this.isCreateProposal = false;
@@ -35,6 +36,9 @@ var ProposalComponent = (function () {
                 Id: 4,
                 Name: 'Contract 4',
             }];
+        route.params.subscribe(function (params) {
+            _this.bookingId = params['id'];
+        });
     }
     ProposalComponent.prototype.ngOnInit = function () {
         this.initForm(this.data);
@@ -87,13 +91,8 @@ var ProposalComponent = (function () {
             }),
         });
     };
-    ProposalComponent.prototype.addTerm = function () {
-        // const control = <FormArray>this.proposalManagerForm.controls['TermsList'];
-        // control.push(new FormControl('Term 1'));
-    };
-    ProposalComponent.prototype.removeTerm = function (i) {
-        // const control = <FormArray>this.proposalManagerForm.controls['TermsList'];
-        // control.removeAt(i);
+    ProposalComponent.prototype.signContract = function () {
+        this.bookingService.readDataSignContract({ BookingId: this.bookingId });
     };
     ProposalComponent.prototype.createProposal = function () {
         // this.enquiryService.createProposal({EnquiryMessageThreadId: this.data.Id});
@@ -143,7 +142,7 @@ var ProposalComponent = (function () {
             templateUrl: 'proposal.component.html',
             styleUrls: ['proposal.component.css']
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, proposals_service_1.ProposalsService])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, booking_service_1.BookingService, router_1.ActivatedRoute])
     ], ProposalComponent);
     return ProposalComponent;
 }());
