@@ -30,29 +30,10 @@ export class PaymentStatusComponent implements OnInit{
     }
 
 	private confirmStatus(TransactionId) {
-        this.bookingService.confirmPayment({BookingId: this.bookingId, TransactionId: TransactionId}).subscribe(
-            d => {
-                $.notify({
-                    icon: "notifications",
-                    message: "Booking Updated Successfully"
-
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-            },
-            e => {
-                console.log('Error', e)
-                handlerErrorNotify('Error');
-            }
-        )
+        this.bookingService.readDataConfirmPayment({BookingId: this.bookingId, TransactionId: TransactionId})
     }
 
-    private dateFormat(date, format) {
+    private formatDate(date, format) {
         return moment(date).format(format);
     }
 }

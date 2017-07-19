@@ -12,7 +12,6 @@ var core_1 = require('@angular/core');
 var login_service_1 = require("../../../providers/login/login.service");
 var router_1 = require("@angular/router");
 var booking_service_1 = require("../../../providers/booking/booking.service");
-var helpers_1 = require("../../../helpers/helpers");
 var PaymentStatusComponent = (function () {
     function PaymentStatusComponent(bookingService, loginService, route) {
         this.bookingService = bookingService;
@@ -26,24 +25,9 @@ var PaymentStatusComponent = (function () {
         });
     };
     PaymentStatusComponent.prototype.confirmStatus = function (TransactionId) {
-        this.bookingService.confirmPayment({ BookingId: this.bookingId, TransactionId: TransactionId }).subscribe(function (d) {
-            $.notify({
-                icon: "notifications",
-                message: "Booking Updated Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
-        }, function (e) {
-            console.log('Error', e);
-            helpers_1.handlerErrorNotify('Error');
-        });
+        this.bookingService.readDataConfirmPayment({ BookingId: this.bookingId, TransactionId: TransactionId });
     };
-    PaymentStatusComponent.prototype.dateFormat = function (date, format) {
+    PaymentStatusComponent.prototype.formatDate = function (date, format) {
         return moment(date).format(format);
     };
     __decorate([
