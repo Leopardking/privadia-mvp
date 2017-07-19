@@ -100,7 +100,7 @@
                                             <button class="btn btn-simple btn-delete btn-icon"
                                                     type="button"
                                                     *ngIf="!isEdit[i]"
-                                                    (click)="deleteRate({index: i})">
+                                                    [popover]="deleteRatePopover">
                                                 <i class="material-icons text-danger">delete</i>
                                             </button>
                                             <button class="btn btn-simple btn-edit btn-icon"
@@ -112,9 +112,25 @@
                                             <button class="btn btn-simple btn-delete btn-icon"
                                                     type="button"
                                                     *ngIf="isEdit[i]"
-                                                    (click)="clearRates({rate: rate, index: i})">
+                                                    [popover]="clearRatePopover">
                                                 <i class="material-icons text-danger">clear</i>
                                             </button>
+                                            <popover-content #clearRatePopover
+                                                             placement="left"
+                                                             [animation]="true"
+                                                             [closeOnClickOutside]="true">
+                                                <h3>Are you sure?</h3>
+                                                <button class="btn btn-danger font-14" (click)="clearRates({rate: rate, index: i})">Yes, remove</button>
+                                                <button class="btn btn-success-green font-14" (click)="clearRatePopover.hide($event)">Cancel</button>
+                                            </popover-content>
+                                            <popover-content #deleteRatePopover
+                                                             placement="left"
+                                                             [animation]="true"
+                                                             [closeOnClickOutside]="true">
+                                                <h3>Are you sure?</h3>
+                                                <button class="btn btn-danger font-14" (click)="deleteRate({index: i})">Yes, remove</button>
+                                                <button class="btn btn-success-green font-14" (click)="deleteRatePopover.hide($event)">Cancel</button>
+                                            </popover-content>
                                         </td>
                                         {{ propertyService.rates.length && !datatableInited ? finishReading() : "" }}
                                     </tr>

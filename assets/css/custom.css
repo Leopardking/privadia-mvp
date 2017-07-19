@@ -706,6 +706,11 @@ div.dataTables_wrapper div.dataTables_paginate {
  */
 .popover {
 	border-radius: 4px;
+	max-width: 100%;
+}
+
+.popover.left>.arrow {
+	margin-top: 0;
 }
 
 .popover .popover-content {
@@ -715,6 +720,7 @@ div.dataTables_wrapper div.dataTables_paginate {
 .popover .popover-content h3 {
 	font-size: 18px;
 	text-align: center;
+	padding: 8px;
 }
 
 .popover .popover-content .btn {
