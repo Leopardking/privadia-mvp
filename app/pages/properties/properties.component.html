@@ -86,7 +86,9 @@
                                             <button *ngIf="loginService.getPermission('Properties/Delete')"
                                                     class="btn btn-simple btn-delete btn-icon"
                                                     type="button"
-                                                    (click)="removeProperty({index: i, propertyId: item.Id})">
+                                                    [pop-over-trigger]="i"
+                                                    [show-on]="'click'"
+                                            >
                                                 <i class="material-icons">delete</i>Remove
                                             </button>
                                             <button *ngIf="!loginService.getPermission('Properties/Put')"
@@ -94,6 +96,12 @@
                                                     [routerLink]="['/properties/view', item.Id]">
                                                 <i class="material-icons">remove_red_eye</i>View
                                             </button>
+                                            <pop-over #i [my]="'center right'" [at]="'center left'"
+                                                      [anchor-to]="true" [x-offset]="15">
+                                                <h3>Are you sure?</h3>
+                                                <button class="btn btn-danger font-14" (click)="removeProperty({index: i, propertyId: item.Id})">Yes, remove</button>
+                                                <button class="btn btn-success-green font-14" (click)="test.hide($event)">Cancel</button>
+                                            </pop-over>
                                         </td>
                                         <td></td>
                                         {{ !propertiesService.isReading && last && !datatableInited ? finishReading() : "" }}

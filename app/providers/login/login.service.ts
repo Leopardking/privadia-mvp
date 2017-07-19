@@ -49,7 +49,6 @@ export class LoginService {
 
 	public getPermission(permission) {
 		const permissions = JSON.parse(localStorage.getItem('user')).Permissions;
-		console.log('Permission ', permissions);
 		return permissions.find( element => element.Name === permission);
 	}
 
