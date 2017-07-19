@@ -18,7 +18,17 @@ var DashboardfilterComponent = (function () {
         this.dashboardService = dashboardService;
         this.propertiesService = propertiesService;
     }
-    DashboardfilterComponent.prototype.ngOnInit = function () { };
+    DashboardfilterComponent.prototype.ngOnInit = function () {
+        $(document).mouseup(function (event) {
+            var container = $(".extend-filter-container.collapse");
+            var _opened = container.hasClass("in");
+            if (_opened && !container.is(event.target) && container.has(event.target).length === 0) {
+                $('.nav-pills li.active').removeClass('active');
+                $('.tab-content div.active').removeClass('active');
+                $("#openFilter").click();
+            }
+        });
+    };
     DashboardfilterComponent.prototype.onSubmit = function (form) {
         var _this = this;
         this.propertiesService.getVillas(form).subscribe(function (d) {

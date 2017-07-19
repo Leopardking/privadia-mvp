@@ -4,6 +4,8 @@ import { DashboardService } from '../../providers/dashboard/dashboard.service';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 
 declare const moment: any;
+declare const $: any;
+
 import * as _ from "lodash";
 import {PropertiesService} from "../../providers/properties/properties.service";
 
@@ -22,7 +24,18 @@ export class DashboardfilterComponent implements OnInit{
                   private propertiesService: PropertiesService ) {
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+        $(document).mouseup(function (event) {
+            const container = $(".extend-filter-container.collapse");
+            const _opened = container.hasClass("in")
+
+            if (_opened && !container.is(event.target) && container.has(event.target).length === 0) {
+                $('.nav-pills li.active').removeClass('active');
+                $('.tab-content div.active').removeClass('active');
+                $("#openFilter").click();
+            }
+        });
+    }
 
     public onSubmit(form) {
         this.propertiesService.getVillas(form).subscribe(
