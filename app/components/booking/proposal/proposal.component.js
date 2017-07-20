@@ -135,6 +135,10 @@ var ProposalComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], ProposalComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], ProposalComponent.prototype, "status", void 0);
     ProposalComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

@@ -42,7 +42,7 @@
                                                             [data]="bookingService.booking.Payments"></payment-status-cmp>
                                     </div>
                                     <div class="col-md-6">
-                                        <proposal-cmp *ngIf="enquiryService.enquiry" [data]="enquiryService.enquiry"></proposal-cmp>
+                                        <proposal-cmp *ngIf="enquiryService.enquiry" [data]="enquiryService.enquiry" [status]="bookingService.booking.Status"></proposal-cmp>
                                         <div class="enquiry-footer p-l-r-30">
                                             <div class="row">
                                                 <div class="col-xs-6">

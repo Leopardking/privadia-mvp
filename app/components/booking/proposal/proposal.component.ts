@@ -17,6 +17,7 @@ declare const moment: any;
 
 export class ProposalComponent implements OnInit{
     @Input() private data;
+    @Input() private status;
     public proposalForm: FormGroup;
     public proposalManagerForm: FormGroup;
 	public isAgent = true;
