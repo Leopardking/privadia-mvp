@@ -77,6 +77,7 @@
                             <!--  Property Info  -->
                             <div id="metatab-info" class="fade active in card-content p-b-none p-l-r-none p-t-none">
                                 <propertyinfo-cmp *ngIf="propertiesService.metadata.length"
+                                                  [errorForm]="errorForm"
                                                   [group]="propertyForm" [errorForm]="errorForm"></propertyinfo-cmp>
                             </div>
                             <!--  Property Image  -->

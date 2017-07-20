@@ -47,6 +47,10 @@ var SingleSelectfieldComponent = (function () {
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)
+    ], SingleSelectfieldComponent.prototype, "errorForm", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
     ], SingleSelectfieldComponent.prototype, "disabled", void 0);
     SingleSelectfieldComponent = __decorate([
         core_1.Component({

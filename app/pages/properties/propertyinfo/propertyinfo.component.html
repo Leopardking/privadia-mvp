@@ -40,6 +40,7 @@
                             <singleselect-field-cmp *ngIf="!propertiesService.managers.length && propertyForm.controls.ManagerUser.value"
                                                     [dataList]="propertiesService.managers"
                                                     [options]="{title: 'Manager*', default: 'Select Manager'}"
+                                                    [errorForm]="errorForm"
                                                     [field]="propertyForm.controls.ManagerUser"></singleselect-field-cmp>
                         </div>
                     </div>

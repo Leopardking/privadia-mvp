@@ -6,7 +6,6 @@ var propertyimage_component_1 = require("../propertyimage/propertyimage.componen
 var propertymarketing_component_1 = require("../marketing/propertymarketing.component");
 var meta_filter_heading_component_1 = require("../../../components/meta-filter-heading/meta-filter-heading.component");
 var metafilter_component_1 = require("../../../components/meta-filter-components/metafilter.component");
-var select_tags_component_1 = require("../../../components/form-fields/select-tags-field/select-tags.component");
 var calendar_component_1 = require("../../../components/calendar/calendar.component");
 exports.MODULE_ROUTES = [
     { path: '', component: addproperty_component_1.AddpropertyComponent },
@@ -20,7 +19,6 @@ exports.MODULE_COMPONENTS = [
     propertyinfo_component_1.PropertyinfoComponent,
     propertyimage_component_1.PropertyimageoComponent,
     propertymarketing_component_1.PropertymarketingComponent,
-    select_tags_component_1.SelectTagsFieldComponent,
     calendar_component_1.CalendarComponent,
 ];
 //# sourceMappingURL=commons.routes.js.map

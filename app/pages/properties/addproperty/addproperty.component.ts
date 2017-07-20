@@ -147,6 +147,7 @@ export class AddpropertyComponent implements OnInit {
 
         this.propertiesService.addProperty(form).subscribe(
             d => {
+                this.errorForm = false;
                 $.notify({
                     icon: "notifications",
                     message: "Property Added Successfully"
@@ -170,6 +171,7 @@ export class AddpropertyComponent implements OnInit {
 
                 handlerErrorFieds(e, this.propertyForm);
                 handlerErrorNotify('There were errors with your submission, please see form for details.');
+                console.log('Error Form ', this.propertyForm)
             }
         );
     }

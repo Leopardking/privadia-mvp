@@ -137,6 +137,7 @@ var AddpropertyComponent = (function () {
         });
         form.MetaData = newArr;
         this.propertiesService.addProperty(form).subscribe(function (d) {
+            _this.errorForm = false;
             $.notify({
                 icon: "notifications",
                 message: "Property Added Successfully"
@@ -156,6 +157,7 @@ var AddpropertyComponent = (function () {
             _this.sending = false;
             helpers_1.handlerErrorFieds(e, _this.propertyForm);
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
+            console.log('Error Form ', _this.propertyForm);
         });
     };
     AddpropertyComponent = __decorate([

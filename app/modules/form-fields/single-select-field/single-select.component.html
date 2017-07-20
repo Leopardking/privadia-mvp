@@ -1,5 +1,5 @@
-<div [formGroup]="field" class="form-group label-floating select-component always-visible" [ngClass]="{'form-error': !field.valid, disabled: disabled}">
-    <label class="control-label">{{options.title}}</label>
+<div [formGroup]="field" class="form-group label-floating select-component always-visible" [ngClass]="{'form-error': !field.valid && errorForm, disabled: disabled}">
+    <label class="control-label">{{options.title}} - {{field.valid}} - {{errorForm}}</label>
     <select class="custompicker"
             title="{{field.value.Name || options.default}}"
             [formControl]="field"

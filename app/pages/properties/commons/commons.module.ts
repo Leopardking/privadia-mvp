@@ -8,7 +8,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Ng2AutoCompleteModule} from "ng2-auto-complete";
 import {PropertiesService} from "../../../providers/properties/properties.service";
 import {LookupsService} from "../../../providers/lookups/lookups.service";
-import {SingleSelectfieldComponent} from "../../../components/form-fields/single-select-field/single-select.component";
 import {FormFieldsModule} from "../../../modules/form-fields/form-field.module";
 
 @NgModule({

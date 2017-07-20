@@ -7,7 +7,6 @@ import {PropertyimageoComponent} from "../propertyimage/propertyimage.component"
 import {PropertymarketingComponent} from "../marketing/propertymarketing.component";
 import {MetafilterheadingComponent} from "../../../components/meta-filter-heading/meta-filter-heading.component";
 import {PropertyMetafilterComponent} from "../../../components/meta-filter-components/metafilter.component";
-import {SelectTagsFieldComponent} from "../../../components/form-fields/select-tags-field/select-tags.component";
 import {CalendarComponent} from "../../../components/calendar/calendar.component";
 
 export const MODULE_ROUTES: Route[] =[
@@ -31,6 +30,5 @@ export const MODULE_COMPONENTS = [
     PropertyinfoComponent,
     PropertyimageoComponent,
     PropertymarketingComponent,
-    SelectTagsFieldComponent,
     CalendarComponent,
 ];

@@ -15,6 +15,7 @@ export class SingleSelectfieldComponent implements OnInit, AfterViewInit {
     @Input('field') public field: FormGroup;
     @Input('dataList') public dataList = [];
     @Input('options') public options: any;
+    @Input() public errorForm: any;
     @Input() public disabled = false;
 
     constructor ( ) {}

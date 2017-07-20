@@ -15,6 +15,7 @@ var forms_1 = require("@angular/forms");
 var single_select_component_1 = require("./single-select-field/single-select.component");
 var datetimepicker_field_component_1 = require("./datetimepicker-field/datetimepicker-field.component");
 var select_component_1 = require("./select-field/select.component");
+var select_tags_component_1 = require("./select-tags-field/select-tags.component");
 var FormFieldsModule = (function () {
     function FormFieldsModule() {
     }
@@ -25,6 +26,7 @@ var FormFieldsModule = (function () {
                 single_select_component_1.SingleSelectfieldComponent,
                 datetimepicker_field_component_1.DatetimefieldComponent,
                 select_component_1.SelectfieldComponent,
+                select_tags_component_1.SelectTagsFieldComponent
             ],
             imports: [common_1.CommonModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
             exports: [
@@ -32,6 +34,7 @@ var FormFieldsModule = (function () {
                 single_select_component_1.SingleSelectfieldComponent,
                 datetimepicker_field_component_1.DatetimefieldComponent,
                 select_component_1.SelectfieldComponent,
+                select_tags_component_1.SelectTagsFieldComponent
             ]
         }), 
         __metadata('design:paramtypes', [])

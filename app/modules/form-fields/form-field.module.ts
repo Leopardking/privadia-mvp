@@ -13,7 +13,7 @@ import {SelectTagsFieldComponent} from "./select-tags-field/select-tags.componen
         SingleSelectfieldComponent,
         DatetimefieldComponent,
         SelectfieldComponent,
-        //SelectTagsFieldComponent
+        SelectTagsFieldComponent
     ],
     imports: [ CommonModule, FormsModule, ReactiveFormsModule],
     exports: [
@@ -21,7 +21,7 @@ import {SelectTagsFieldComponent} from "./select-tags-field/select-tags.componen
         SingleSelectfieldComponent,
         DatetimefieldComponent,
         SelectfieldComponent,
-        //SelectTagsFieldComponent
+        SelectTagsFieldComponent
     ]
 })
 export class FormFieldsModule{}
