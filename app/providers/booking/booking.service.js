@@ -57,7 +57,7 @@ var BookingService = (function () {
             });
         }, function (e) {
             console.log("error: ", e);
-            helpers_1.handlerErrorNotify('Error');
+            helpers_1.handlerErrorNotify(e.ExceptionMessage);
         });
     };
     BookingService.prototype.readDataSignContract = function (id) {
@@ -173,9 +173,7 @@ var BookingService = (function () {
     BookingService.prototype.handleError = function (error) {
         var errMsg;
         if (error instanceof http_1.Response) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+            errMsg = error.json() || '';
         }
         else {
             errMsg = error.message ? error.message : error.toString();

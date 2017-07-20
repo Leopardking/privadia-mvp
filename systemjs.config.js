@@ -29,7 +29,8 @@
       'ng2-file-upload': 'npm:ng2-file-upload/bundles/ng2-file-upload.umd.js',
       // other libraries
       'lodash': 'npm:lodash',
-      'rxjs':                      'npm:rxjs',
+      'rxjs': 
+      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       'ng2-popover': 'npm:ng2-popover'
     },

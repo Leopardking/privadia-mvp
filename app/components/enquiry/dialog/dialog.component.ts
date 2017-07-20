@@ -18,8 +18,9 @@ export class DialogComponent implements OnInit, OnChanges{
 	@Input() private enquiryId: any;
 
     private messageForm: FormGroup;
-
     private user;
+
+    public errorForm = false;
 
 	constructor( private messagesService: MessagesService ) {
 	    this.user = JSON.parse(localStorage.getItem('user'));
@@ -43,11 +44,15 @@ export class DialogComponent implements OnInit, OnChanges{
 	    console.log('Changes')
     }
 
-    public onSubmit(value) {
-        value.IsMine = true;
-        this.data.push(value);
+    public onSubmit(form) {
+        if(form.status === 'INVALID')
+            return this.errorForm = true;
 
-        this.messagesService.addMessage(value).subscribe(
+        form.value.IsMine = true;
+        this.data.push(form.value);
+        this.errorForm = false;
+
+        this.messagesService.addMessage(form.value).subscribe(
             d => {
                 $.notify({
                     icon: "notifications",

@@ -14,6 +14,7 @@ var messages_service_1 = require("../../../providers/messages/messages.service")
 var DialogComponent = (function () {
     function DialogComponent(messagesService) {
         this.messagesService = messagesService;
+        this.errorForm = false;
         this.user = JSON.parse(localStorage.getItem('user'));
     }
     DialogComponent.prototype.ngOnInit = function () {
@@ -32,11 +33,14 @@ var DialogComponent = (function () {
     DialogComponent.prototype.ngOnChanges = function () {
         console.log('Changes');
     };
-    DialogComponent.prototype.onSubmit = function (value) {
+    DialogComponent.prototype.onSubmit = function (form) {
         var _this = this;
-        value.IsMine = true;
-        this.data.push(value);
-        this.messagesService.addMessage(value).subscribe(function (d) {
+        if (form.status === 'INVALID')
+            return this.errorForm = true;
+        form.value.IsMine = true;
+        this.data.push(form.value);
+        this.errorForm = false;
+        this.messagesService.addMessage(form.value).subscribe(function (d) {
             $.notify({
                 icon: "notifications",
                 message: "Message Submitted Successfully"

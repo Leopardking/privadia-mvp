@@ -234,6 +234,32 @@ export class PropertiesService {
 				.catch(this.handleError);
 	}
 
+	public getQuote(data) {
+		if(!this.loginService.getPermission('Rates/GetQuote'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.post( this.apiUrl + '/api/Rates/GetQuote', data, options )
+            .map(this.extractData)
+			.catch(this.handleError);
+
+	}
+
+	public getRentalQuote(data) {
+		if(!this.loginService.getPermission('Rates/GetRentalQuote'))
+			return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.post( this.apiUrl + '/api/Rates/GetRentalQuote', data, options )
+            .map(this.extractData)
+			.catch(this.handleError);
+
+	}
+
 	public getBookings(id) {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );

@@ -49,6 +49,10 @@ var EnquiryComponent = (function () {
         core_1.Input('data'), 
         __metadata('design:type', Object)
     ], EnquiryComponent.prototype, "data", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Object)
+    ], EnquiryComponent.prototype, "rentalQuote", void 0);
     EnquiryComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

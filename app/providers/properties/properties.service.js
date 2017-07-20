@@ -182,6 +182,24 @@ var PropertiesService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    PropertiesService.prototype.getQuote = function (data) {
+        if (!this.loginService.getPermission('Rates/GetQuote'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/Rates/GetQuote', data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    PropertiesService.prototype.getRentalQuote = function (data) {
+        if (!this.loginService.getPermission('Rates/GetRentalQuote'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.post(this.apiUrl + '/api/Rates/GetRentalQuote', data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     PropertiesService.prototype.getBookings = function (id) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
