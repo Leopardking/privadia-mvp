@@ -32,6 +32,10 @@
 	font-weight: 100;
 	color: #a6a6a6;
 }
+.card-product .card-description p {
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
 .card-product .category {
 	text-align: left;
 	color: #3a3a3a;
