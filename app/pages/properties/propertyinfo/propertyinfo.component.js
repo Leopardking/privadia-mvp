@@ -31,9 +31,7 @@ var PropertyinfoComponent = (function () {
         this.permission = !this.loginService.getPermission('Properties/Put');
         $('.property-tab a:first').tab('show');
     };
-    PropertyinfoComponent.prototype.setRegionValue = function (e) {
-        this.propertyForm.controls['Region'].setValue(e.Name);
-    };
+    PropertyinfoComponent.prototype.regionChanged = function (e) { };
     PropertyinfoComponent.prototype.autosize = function (e) {
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     };
