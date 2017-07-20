@@ -54,11 +54,11 @@ export class ProposalComponent implements OnInit{
 			CustomerName: new FormControl({ value: data.Enquiry.ClientName, disabled: true}),
 			PropertyName: new FormControl({ value: data.Enquiry.PropertyName, disabled: true}),
 			RentalCost: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost || 0,
+				value: Math.round(data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost * 100) / 100 || 0,
 				disabled: this.isAgent || (data.Enquiry.Proposal && data.Enquiry.Proposal.AcceptedAt)
 			}),
 			Fees: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.Fees || 0,
+				value:Math.round(data.Enquiry.Proposal && data.Enquiry.Proposal.Fees * 100) / 100 || 0,
 				disabled: this.isAgent || (data.Enquiry.Proposal && data.Enquiry.Proposal.AcceptedAt)
 			}),
 			ExchangeFeePercentage: new FormControl({
