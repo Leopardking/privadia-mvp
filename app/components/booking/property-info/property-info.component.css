@@ -90,6 +90,7 @@
     color: #fff;
     line-height: 18px;
     display: none;
+    white-space: nowrap;
 }
 
 .enquiry-header .villa-container .enquiry-status.accepted {
