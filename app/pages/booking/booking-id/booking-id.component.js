@@ -23,22 +23,20 @@ var BookingIdComponent = (function () {
         this.route = route;
         this.isAgent = this.loginService.getRoles('Agent');
         this.errorForm = false;
-        this.bookingForm = new forms_1.FormGroup({
-            BookingId: new forms_1.FormControl(),
-            ClientContactEmail: new forms_1.FormControl(null, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
-            Notes: new forms_1.FormControl(),
-        });
+        this.bookingForm = new forms_1.FormGroup({});
     }
     BookingIdComponent.prototype.ngOnInit = function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.route.params.subscribe(function (params) {
             _this.bookingService.readDataBookingById(params['id']);
-            //this.bookingForm.controls['BookingId'].setValue(params['id']);
             setTimeout(function () {
                 _this.bookingForm = new forms_1.FormGroup({
                     BookingId: new forms_1.FormControl(params['id']),
-                    ClientContactEmail: new forms_1.FormControl(_this.bookingService.booking.ClientContactEmail, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
+                    ClientContactEmail: new forms_1.FormControl({
+                        value: _this.bookingService.booking.ClientContactEmail,
+                        disabled: _this.isAgent
+                    }, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
                     Notes: new forms_1.FormControl(_this.bookingService.booking.Notes),
                 });
                 /*
