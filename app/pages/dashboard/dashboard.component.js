@@ -21,6 +21,7 @@ var DashboardComponent = (function () {
         this.builder = builder;
         this.enquiryForm = new forms_1.FormGroup({});
         this.filterForm = new forms_1.FormGroup({});
+        this.rentalQuote = 0;
     }
     DashboardComponent.prototype.ngOnInit = function () {
         localStorage.setItem('title', '');
@@ -59,16 +60,18 @@ var DashboardComponent = (function () {
         */
     };
     DashboardComponent.prototype.openEnquiry = function (villa) {
+        var _this = this;
         this.enquiryForm.reset();
         this.enquiryForm.controls['CheckIn'].setValue(this.filterForm.controls['CheckIn'].value);
         this.enquiryForm.controls['CheckOut'].setValue(this.filterForm.controls['CheckOut'].value);
         this.enquiryForm.controls['PropertyId'].setValue(villa.Id);
-        this.propertiesService.getQuote({
+        this.propertiesService.getRentalQuote({
             PropertyId: villa.Id,
             CheckIn: this.filterForm.controls['CheckIn'].value,
             CheckOut: this.filterForm.controls['CheckOut'].value
         }).subscribe(function (d) {
-            console.log('Quote', d);
+            _this.rentalQuote = Math.round(d * 100) / 100;
+            console.log('Quote', _this.rentalQuote);
         }, function (e) {
             console.log('Quote error', e);
         });

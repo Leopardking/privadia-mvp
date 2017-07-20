@@ -18,6 +18,8 @@ declare const $: any;
 export class EnquiryComponent implements OnInit{
 	@Input('group')	private enquiryForm: FormGroup;
 	@Input('data')	private data: any;
+	@Input() private rentalQuote: any;
+
 	public errorForm = false;
 	public errorsList = {};
 

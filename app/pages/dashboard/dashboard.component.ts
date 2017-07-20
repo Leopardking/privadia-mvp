@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit{
     public enquiryForm = new FormGroup ({});
     public filterForm = new FormGroup ({});
     public openVilla;
+    public rentalQuote = 0;
 
     constructor ( private dashboardService: DashboardService,
                   private lookupsService: LookupsService,
@@ -71,13 +72,14 @@ export class DashboardComponent implements OnInit{
         this.enquiryForm.controls['CheckIn'].setValue(this.filterForm.controls['CheckIn'].value);
         this.enquiryForm.controls['CheckOut'].setValue(this.filterForm.controls['CheckOut'].value);
         this.enquiryForm.controls['PropertyId'].setValue(villa.Id);
-        this.propertiesService.getQuote({
+        this.propertiesService.getRentalQuote({
             PropertyId: villa.Id,
             CheckIn: this.filterForm.controls['CheckIn'].value,
             CheckOut: this.filterForm.controls['CheckOut'].value
         }).subscribe(
             d => {
-                console.log('Quote',d)
+                this.rentalQuote = Math.round(d * 100) / 100
+                console.log('Quote',this.rentalQuote)
             },
             e => {
                 console.log('Quote error', e)
