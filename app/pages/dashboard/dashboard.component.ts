@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit{
 
     constructor ( private dashboardService: DashboardService,
                   private lookupsService: LookupsService,
+                  private propertiesService: PropertiesService,
                   public builder: FormBuilder) { }
 
     ngOnInit(){
@@ -70,6 +71,18 @@ export class DashboardComponent implements OnInit{
         this.enquiryForm.controls['CheckIn'].setValue(this.filterForm.controls['CheckIn'].value);
         this.enquiryForm.controls['CheckOut'].setValue(this.filterForm.controls['CheckOut'].value);
         this.enquiryForm.controls['PropertyId'].setValue(villa.Id);
+        this.propertiesService.getQuote({
+            PropertyId: villa.Id,
+            CheckIn: this.filterForm.controls['CheckIn'].value,
+            CheckOut: this.filterForm.controls['CheckOut'].value
+        }).subscribe(
+            d => {
+                console.log('Quote',d)
+            },
+            e => {
+                console.log('Quote error', e)
+            }
+        )
         this.openVilla = villa;
     }
 }

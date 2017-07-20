@@ -19,6 +19,7 @@ var Observable_1 = require('rxjs/Observable');
 var router_1 = require('@angular/router');
 require('rxjs/add/operator/catch');
 require('rxjs/add/observable/throw');
+var helpers_1 = require("../../helpers/helpers");
 var ExtendedHttpService = (function (_super) {
     __extends(ExtendedHttpService, _super);
     function ExtendedHttpService(backend, defaultOptions, router) {
@@ -40,11 +41,14 @@ var ExtendedHttpService = (function (_super) {
     ExtendedHttpService.prototype.catchErrors = function () {
         var _this = this;
         return function (res) {
-            if (res.status === 401 || res.status === 403) {
+            if (res.status === 401 /*|| res.status === 403*/) {
                 //handle authorization errors
                 //in this example I am navigating to logout route which brings the login screen
                 localStorage.clear();
                 _this.router.navigate(['/login']);
+            }
+            if (res.status === 403) {
+                helpers_1.handlerErrorNotify('You do not have the required permission for this request.');
             }
             return Observable_1.Observable.throw(res);
         };

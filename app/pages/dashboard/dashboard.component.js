@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var dashboard_service_1 = require('../../providers/dashboard/dashboard.service');
 var forms_1 = require('@angular/forms');
+var properties_service_1 = require("../../providers/properties/properties.service");
 var lookups_service_1 = require("../../providers/lookups/lookups.service");
 var DashboardComponent = (function () {
-    function DashboardComponent(dashboardService, lookupsService, builder) {
+    function DashboardComponent(dashboardService, lookupsService, propertiesService, builder) {
         this.dashboardService = dashboardService;
         this.lookupsService = lookupsService;
+        this.propertiesService = propertiesService;
         this.builder = builder;
         this.enquiryForm = new forms_1.FormGroup({});
         this.filterForm = new forms_1.FormGroup({});
@@ -61,6 +63,15 @@ var DashboardComponent = (function () {
         this.enquiryForm.controls['CheckIn'].setValue(this.filterForm.controls['CheckIn'].value);
         this.enquiryForm.controls['CheckOut'].setValue(this.filterForm.controls['CheckOut'].value);
         this.enquiryForm.controls['PropertyId'].setValue(villa.Id);
+        this.propertiesService.getQuote({
+            PropertyId: villa.Id,
+            CheckIn: this.filterForm.controls['CheckIn'].value,
+            CheckOut: this.filterForm.controls['CheckOut'].value
+        }).subscribe(function (d) {
+            console.log('Quote', d);
+        }, function (e) {
+            console.log('Quote error', e);
+        });
         this.openVilla = villa;
     };
     DashboardComponent = __decorate([
@@ -70,7 +81,7 @@ var DashboardComponent = (function () {
             templateUrl: 'dashboard.component.html',
             styleUrls: ['dashboard.component.css']
         }), 
-        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, lookups_service_1.LookupsService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [dashboard_service_1.DashboardService, lookups_service_1.LookupsService, properties_service_1.PropertiesService, forms_1.FormBuilder])
     ], DashboardComponent);
     return DashboardComponent;
 }());
