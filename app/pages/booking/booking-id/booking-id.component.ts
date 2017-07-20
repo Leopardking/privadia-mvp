@@ -8,6 +8,7 @@ import {EnquiryService} from "../../../providers/enquery/enquiry.service";
 import {LoginService} from "../../../providers/login/login.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {handlerErrorNotify, handlerErrorFieds} from "../../../helpers/helpers";
+import {PropertiesService} from "../../../providers/properties/properties.service";
 
 declare const $: any;
 
@@ -26,7 +27,7 @@ export class BookingIdComponent implements OnInit{
     private bookingForm = new FormGroup({});
 
     constructor ( private bookingService: BookingService,
-                  private enquiryService: EnquiryService,
+                  private propertiesService: PropertiesService,
                   private loginService: LoginService,
                   private route: ActivatedRoute) { }
 
@@ -44,20 +45,12 @@ export class BookingIdComponent implements OnInit{
                         },
                         Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
                     ),
-                    Notes: new FormControl(this.bookingService.booking.Notes),
+                    Notes: new FormControl({
+                        value: this.bookingService.booking.Notes,
+                        disabled: this.isAgent
+                    }),
                 });
-                /*
-                this.bookingForm.controls['ClientContactEmail'].setValue(
-                    this.bookingService.booking.ClientContactEmail,
-                    Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-                );
-                this.bookingForm.controls['Notes'].setValue(this.bookingService.booking.Notes);
-                if (this.isAgent) {
-                    this.bookingForm.controls['ClientContactEmail'].disable();
-                    this.bookingForm.controls['Notes'].disable();
-                }
-                */
-                this.enquiryService.readDataEnquiry(this.bookingService.booking.EnquiryMessageThreadId)
+                this.propertiesService.readDataProperty(this.bookingService.booking.PropertyId);
             }, 1000)
         });
     }

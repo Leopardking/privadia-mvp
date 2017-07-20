@@ -14,10 +14,7 @@ var PropertyInfoComponent = (function () {
     function PropertyInfoComponent(propertiesService) {
         this.propertiesService = propertiesService;
     }
-    PropertyInfoComponent.prototype.ngOnInit = function () {
-        console.log('Propery Info status', this.propertyId, this.data);
-        this.propertiesService.readDataProperty(this.propertyId);
-    };
+    PropertyInfoComponent.prototype.ngOnInit = function () { };
     PropertyInfoComponent.prototype.autosize = function (e) {
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     };
@@ -28,10 +25,6 @@ var PropertyInfoComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], PropertyInfoComponent.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], PropertyInfoComponent.prototype, "propertyId", void 0);
     __decorate([
         core_1.Input(), 
         __metadata('design:type', Object)

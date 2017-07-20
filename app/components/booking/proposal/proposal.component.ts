@@ -17,12 +17,9 @@ declare const moment: any;
 
 export class ProposalComponent implements OnInit{
     @Input() private data;
-    @Input() private status;
-    public proposalForm: FormGroup;
     public proposalManagerForm: FormGroup;
 	public isAgent = true;
-	// public isAgent = this.loginService.getRoles('Agent');
-    public isCreateProposal = false;
+	public isCreateProposal = false;
     public bookingId;
 
     public TermsContract = [{
@@ -50,32 +47,26 @@ export class ProposalComponent implements OnInit{
 
 	ngOnInit() {
 		this.initForm(this.data)
-		/*
-		const date = moment('2017-07-10T14:23:28+00:00').utcOffset(moment().utcOffset());
-		console.log('Date ', date.format())
-		console.log('Moment ', moment().utc().format())
-		console.log('Moment ', moment().utcOffset())
-		*/
     }
 
     private initForm(data) {
 		this.proposalManagerForm = this.builder.group({
 			EnquiryMessageThreadId: new FormControl(this.data.Id),
-			CheckIn: new FormControl({ value: moment(data.Enquiry.CheckIn).format('MM/DD/YYYY'), disabled: this.isAgent}),
-			CheckOut: new FormControl({ value: moment(data.Enquiry.CheckOut).format('MM/DD/YYYY'), disabled: this.isAgent}),
-			CustomerName: new FormControl({ value: data.Enquiry.ClientName, disabled: true}),
-			PropertyName: new FormControl({ value: data.Enquiry.PropertyName, disabled: true}),
+			CheckIn: new FormControl({ value: moment(data.CheckIn).format('MM/DD/YYYY'), disabled: true}),
+			CheckOut: new FormControl({ value: moment(data.CheckOut).format('MM/DD/YYYY'), disabled: true}),
+			CustomerName: new FormControl({ value: data.ClientName, disabled: true}),
+			PropertyName: new FormControl({ value: data.PropertyName, disabled: true}),
 			RentalCost: new FormControl({
-				value: Math.round(data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost * 100) / 100 || 0,
+				value: Math.round(data.RentalCost * 100) / 100 || 0,
 				disabled: this.isAgent
 			}),
 			Fees: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.Fees || 0,
-				disabled: this.isAgent
+				value: data.Fees || 0,
+				disabled: true
 			}),
 			ExchangeFeePercentage: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
-				disabled: this.isAgent
+				value: data.ExchangeFeePercentage || 0,
+				disabled: true
 			}),
 			TermsList: new FormArray([
 				/*new FormControl('Term 1'),
@@ -84,24 +75,24 @@ export class ProposalComponent implements OnInit{
 				new FormControl('Term 4'),*/
 			]),
 			DepositPercentage: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
-				disabled: this.isAgent
+				value: data.DepositPercentage || null,
+				disabled: true
 			}),
 			BalancePercentage: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalancePercentage || 0,
-				disabled: this.isAgent
+				value: data.BalancePercentage || 0,
+				disabled: true
 			}),
 			BalanceDaysBeforeCheckIn: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalanceDaysBeforeCheckIn || 0,
-				disabled: this.isAgent
+				value: data.BalanceDaysBeforeCheckIn || 0,
+				disabled: true
 			}),
 			DefaultTerms: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.DefaultTerms || null,
-				disabled: this.isAgent
+				value: data.DefaultTerms || null,
+				disabled: true
 			}),
 			CancellationPolicy: new FormControl({
-				value: data.Enquiry.Proposal && data.Enquiry.Proposal.CancellationPolicy || null,
-				disabled: this.isAgent
+				value: data.CancellationPolicy || null,
+				disabled: true
 			}),
 		})
 	}

@@ -34,16 +34,15 @@
                             <form [formGroup]="bookingForm">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <property-info-cmp *ngIf="bookingService.booking && enquiryService.enquiry"
+                                        <property-info-cmp *ngIf="bookingService.booking && propertiesService.property"
                                                            [data]="bookingService.booking"
                                                            [group]="bookingForm"
-                                                           [errorForm]="errorForm"
-                                                           [propertyId]="enquiryService.enquiry.Enquiry.PropertyId"></property-info-cmp>
+                                                           [errorForm]="errorForm"></property-info-cmp>
                                         <payment-status-cmp *ngIf="bookingService.booking"
                                                             [data]="bookingService.booking.Payments"></payment-status-cmp>
                                     </div>
                                     <div class="col-md-6">
-                                        <proposal-cmp *ngIf="enquiryService.enquiry" [data]="enquiryService.enquiry" [status]="bookingService.booking.Status"></proposal-cmp>
+                                        <proposal-cmp *ngIf="bookingService.booking" [data]="bookingService.booking"></proposal-cmp>
                                         <div class="enquiry-footer p-l-r-30">
                                             <div class="row">
                                                 <div class="col-xs-6">
@@ -64,7 +63,7 @@
         </div>
     </div>
 </div>
-<div class="loader" [hidden]="bookingService.booking && enquiryService.enquiry">
+<div class="loader" [hidden]="bookingService.booking && propertiesService.property">
     <svg class="circular" viewBox="25 25 50 50">
         <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
     </svg>

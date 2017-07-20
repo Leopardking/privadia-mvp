@@ -58,7 +58,7 @@ export class ProposalComponent implements OnInit{
 				disabled: this.isAgent || (data.Enquiry.Proposal && data.Enquiry.Proposal.AcceptedAt)
 			}),
 			Fees: new FormControl({
-				value:Math.round(data.Enquiry.Proposal && data.Enquiry.Proposal.Fees * 100) / 100 || 0,
+				value: Math.round(data.Enquiry.Proposal && data.Enquiry.Proposal.Fees * 100) / 100 || 0,
 				disabled: this.isAgent || (data.Enquiry.Proposal && data.Enquiry.Proposal.AcceptedAt)
 			}),
 			ExchangeFeePercentage: new FormControl({

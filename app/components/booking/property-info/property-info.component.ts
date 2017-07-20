@@ -12,7 +12,6 @@ declare const moment: any;
 
 export class PropertyInfoComponent implements OnInit{
 	@Input() private data: any;
-	@Input() private propertyId: any;
 	@Input() private errorForm: any;
 	@Input('group') private bookingForm: any;
 	private property;
@@ -20,10 +19,7 @@ export class PropertyInfoComponent implements OnInit{
 	constructor( private propertiesService: PropertiesService) {
     }
 
-	ngOnInit() {
-        console.log('Propery Info status', this.propertyId, this.data)
-        this.propertiesService.readDataProperty(this.propertyId);
-    }
+	ngOnInit() { }
 
     private autosize(e){
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';

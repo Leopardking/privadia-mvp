@@ -21,7 +21,6 @@ var ProposalComponent = (function () {
         this.bookingService = bookingService;
         this.route = route;
         this.isAgent = true;
-        // public isAgent = this.loginService.getRoles('Agent');
         this.isCreateProposal = false;
         this.TermsContract = [{
                 Id: 1,
@@ -42,52 +41,46 @@ var ProposalComponent = (function () {
     }
     ProposalComponent.prototype.ngOnInit = function () {
         this.initForm(this.data);
-        /*
-        const date = moment('2017-07-10T14:23:28+00:00').utcOffset(moment().utcOffset());
-        console.log('Date ', date.format())
-        console.log('Moment ', moment().utc().format())
-        console.log('Moment ', moment().utcOffset())
-        */
     };
     ProposalComponent.prototype.initForm = function (data) {
         this.proposalManagerForm = this.builder.group({
             EnquiryMessageThreadId: new forms_1.FormControl(this.data.Id),
-            CheckIn: new forms_1.FormControl({ value: moment(data.Enquiry.CheckIn).format('MM/DD/YYYY'), disabled: this.isAgent }),
-            CheckOut: new forms_1.FormControl({ value: moment(data.Enquiry.CheckOut).format('MM/DD/YYYY'), disabled: this.isAgent }),
-            CustomerName: new forms_1.FormControl({ value: data.Enquiry.ClientName, disabled: true }),
-            PropertyName: new forms_1.FormControl({ value: data.Enquiry.PropertyName, disabled: true }),
+            CheckIn: new forms_1.FormControl({ value: moment(data.CheckIn).format('MM/DD/YYYY'), disabled: true }),
+            CheckOut: new forms_1.FormControl({ value: moment(data.CheckOut).format('MM/DD/YYYY'), disabled: true }),
+            CustomerName: new forms_1.FormControl({ value: data.ClientName, disabled: true }),
+            PropertyName: new forms_1.FormControl({ value: data.PropertyName, disabled: true }),
             RentalCost: new forms_1.FormControl({
-                value: Math.round(data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost * 100) / 100 || 0,
+                value: Math.round(data.RentalCost * 100) / 100 || 0,
                 disabled: this.isAgent
             }),
             Fees: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.Fees || 0,
-                disabled: this.isAgent
+                value: data.Fees || 0,
+                disabled: true
             }),
             ExchangeFeePercentage: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.ExchangeFeePercentage || 0,
-                disabled: this.isAgent
+                value: data.ExchangeFeePercentage || 0,
+                disabled: true
             }),
             TermsList: new forms_1.FormArray([]),
             DepositPercentage: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.DepositPercentage || null,
-                disabled: this.isAgent
+                value: data.DepositPercentage || null,
+                disabled: true
             }),
             BalancePercentage: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalancePercentage || 0,
-                disabled: this.isAgent
+                value: data.BalancePercentage || 0,
+                disabled: true
             }),
             BalanceDaysBeforeCheckIn: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.BalanceDaysBeforeCheckIn || 0,
-                disabled: this.isAgent
+                value: data.BalanceDaysBeforeCheckIn || 0,
+                disabled: true
             }),
             DefaultTerms: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.DefaultTerms || null,
-                disabled: this.isAgent
+                value: data.DefaultTerms || null,
+                disabled: true
             }),
             CancellationPolicy: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.CancellationPolicy || null,
-                disabled: this.isAgent
+                value: data.CancellationPolicy || null,
+                disabled: true
             }),
         });
     };
@@ -135,10 +128,6 @@ var ProposalComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Object)
     ], ProposalComponent.prototype, "data", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Object)
-    ], ProposalComponent.prototype, "status", void 0);
     ProposalComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

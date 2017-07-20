@@ -11,14 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var booking_service_1 = require('../../../providers/booking/booking.service');
 var router_1 = require("@angular/router");
-var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
 var login_service_1 = require("../../../providers/login/login.service");
 var forms_1 = require("@angular/forms");
 var helpers_1 = require("../../../helpers/helpers");
+var properties_service_1 = require("../../../providers/properties/properties.service");
 var BookingIdComponent = (function () {
-    function BookingIdComponent(bookingService, enquiryService, loginService, route) {
+    function BookingIdComponent(bookingService, propertiesService, loginService, route) {
         this.bookingService = bookingService;
-        this.enquiryService = enquiryService;
+        this.propertiesService = propertiesService;
         this.loginService = loginService;
         this.route = route;
         this.isAgent = this.loginService.getRoles('Agent');
@@ -37,20 +37,12 @@ var BookingIdComponent = (function () {
                         value: _this.bookingService.booking.ClientContactEmail,
                         disabled: _this.isAgent
                     }, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
-                    Notes: new forms_1.FormControl(_this.bookingService.booking.Notes),
+                    Notes: new forms_1.FormControl({
+                        value: _this.bookingService.booking.Notes,
+                        disabled: _this.isAgent
+                    }),
                 });
-                /*
-                this.bookingForm.controls['ClientContactEmail'].setValue(
-                    this.bookingService.booking.ClientContactEmail,
-                    Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
-                );
-                this.bookingForm.controls['Notes'].setValue(this.bookingService.booking.Notes);
-                if (this.isAgent) {
-                    this.bookingForm.controls['ClientContactEmail'].disable();
-                    this.bookingForm.controls['Notes'].disable();
-                }
-                */
-                _this.enquiryService.readDataEnquiry(_this.bookingService.booking.EnquiryMessageThreadId);
+                _this.propertiesService.readDataProperty(_this.bookingService.booking.PropertyId);
             }, 1000);
         });
     };
@@ -99,7 +91,7 @@ var BookingIdComponent = (function () {
             templateUrl: 'booking-id.component.html',
             styleUrls: ['booking-id.component.css']
         }), 
-        __metadata('design:paramtypes', [booking_service_1.BookingService, enquiry_service_1.EnquiryService, login_service_1.LoginService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [booking_service_1.BookingService, properties_service_1.PropertiesService, login_service_1.LoginService, router_1.ActivatedRoute])
     ], BookingIdComponent);
     return BookingIdComponent;
 }());
