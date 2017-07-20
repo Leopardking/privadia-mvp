@@ -23,11 +23,7 @@ export class BookingIdComponent implements OnInit{
     public isAgent = this.loginService.getRoles('Agent');
     private errorForm = false;
 
-    private bookingForm = new FormGroup({
-        BookingId: new FormControl(),
-        ClientContactEmail: new FormControl(null, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
-        Notes: new FormControl(),
-    });
+    private bookingForm = new FormGroup({});
 
     constructor ( private bookingService: BookingService,
                   private enquiryService: EnquiryService,
@@ -39,13 +35,13 @@ export class BookingIdComponent implements OnInit{
 
         this.route.params.subscribe(params => {
             this.bookingService.readDataBookingById(params['id']);
-            //this.bookingForm.controls['BookingId'].setValue(params['id']);
-
             setTimeout(() => {
                 this.bookingForm = new FormGroup({
                     BookingId: new FormControl(params['id']),
-                    ClientContactEmail: new FormControl(
-                        this.bookingService.booking.ClientContactEmail,
+                    ClientContactEmail: new FormControl({
+                            value:this.bookingService.booking.ClientContactEmail,
+                            disabled: this.isAgent
+                        },
                         Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
                     ),
                     Notes: new FormControl(this.bookingService.booking.Notes),
