@@ -12,7 +12,6 @@
     padding: 11px;
 }
 .filter-card {
-    margin-bottom: 50px;
     padding: 0 30px 0 15px;
     border-radius:0px;
     box-shadow: 0px 5px 10px 0 rgba(170, 168, 168, 0.4);
@@ -97,8 +96,24 @@
     color: #b0bec5;
 }
 
+.sort-by {
+    padding-bottom: 50px;
+    padding-left: 36px;
+}
 
+.sort-by .form-group {
+    margin-top: 0;
+}
 
+.sort-by .form-group .control-label {
+    font-size: 14px;
+    color: #3a3a3a !important;
+}
+
+.sort-by .select-with-transition {
+    background-image: none !important;
+    background-color: transparent !important;
+}
 
 /*
 .card {

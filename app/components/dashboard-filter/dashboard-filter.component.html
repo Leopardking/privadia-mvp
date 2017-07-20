@@ -61,7 +61,6 @@
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div formArrayName="MetaDataFilters" class="tab-content">
-
                                         <div *ngFor="let metafilter of metafilters" [id]="'metafilter-' + metafilter.Id" class="tab-pane">
                                             <div class="row">
                                                 <div *ngFor="let metadata of metafilter.MetaDataSubTypes" class="col-xs-3">
@@ -90,6 +89,17 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+    <div class="sort-by">
+        <div class="form-group select-component always-visible">
+            <label class="control-label">Sort by:</label>
+            <select class="custompicker"
+                    title=""
+                    data-style="select-with-transition">
+                <option value="1">Price High to Low</option>
+                <option value="2">Price Low to High</option>
+            </select>
         </div>
     </div>
 </div>

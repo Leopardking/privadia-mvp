@@ -19,6 +19,8 @@ var DashboardfilterComponent = (function () {
         this.propertiesService = propertiesService;
     }
     DashboardfilterComponent.prototype.ngOnInit = function () {
+        //Tmp select picker init
+        $('.custompicker').selectpicker();
         $(document).mouseup(function (event) {
             var container = $(".extend-filter-container.collapse");
             var _opened = container.hasClass("in");

@@ -359,6 +359,12 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	top: -6px;
 	left: -1px;
 }
+.sort-by .bootstrap-select {
+	width: 150px !important;
+}
+.sort-by .select-with-transition, .sort-by .form-group .select-with-transition {
+	background-image: none;
+}
 .select-component .bootstrap-select {
 	margin-top: 0px;
 }
