@@ -13,8 +13,10 @@ var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../../providers/login/login.service");
 var proposals_service_1 = require("../../../providers/proposals/proposals.service");
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
+var router_1 = require("@angular/router");
 var ProposalComponent = (function () {
-    function ProposalComponent(builder, loginService, enquiryService, proposalsService) {
+    function ProposalComponent(router, builder, loginService, enquiryService, proposalsService) {
+        this.router = router;
         this.builder = builder;
         this.loginService = loginService;
         this.enquiryService = enquiryService;
@@ -37,12 +39,6 @@ var ProposalComponent = (function () {
     }
     ProposalComponent.prototype.ngOnInit = function () {
         this.initForm(this.data);
-        /*
-        const date = moment('2017-07-10T14:23:28+00:00').utcOffset(moment().utcOffset());
-        console.log('Date ', date.format())
-        console.log('Moment ', moment().utc().format())
-        console.log('Moment ', moment().utcOffset())
-        */
     };
     ProposalComponent.prototype.initForm = function (data) {
         this.proposalManagerForm = this.builder.group({
@@ -52,11 +48,11 @@ var ProposalComponent = (function () {
             CustomerName: new forms_1.FormControl({ value: data.Enquiry.ClientName, disabled: true }),
             PropertyName: new forms_1.FormControl({ value: data.Enquiry.PropertyName, disabled: true }),
             RentalCost: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost || 0,
+                value: Math.round(data.Enquiry.Proposal && data.Enquiry.Proposal.RentalCost * 100) / 100 || 0,
                 disabled: this.isAgent || (data.Enquiry.Proposal && data.Enquiry.Proposal.AcceptedAt)
             }),
             Fees: new forms_1.FormControl({
-                value: data.Enquiry.Proposal && data.Enquiry.Proposal.Fees || 0,
+                value: Math.round(data.Enquiry.Proposal && data.Enquiry.Proposal.Fees * 100) / 100 || 0,
                 disabled: this.isAgent || (data.Enquiry.Proposal && data.Enquiry.Proposal.AcceptedAt)
             }),
             ExchangeFeePercentage: new forms_1.FormControl({
@@ -106,6 +102,7 @@ var ProposalComponent = (function () {
         this.enquiryService.acceptProposal({ EnquiryMessageThreadId: this.data.Id });
         setTimeout(function () {
             _this.initForm(_this.enquiryService.enquiry);
+            _this.router.navigate(['/booking/forthcoming/' + _this.enquiryService.enquiry.Enquiry.Proposal.BookingId]);
         }, 500);
     };
     ProposalComponent.prototype.submitProposal = function () {
@@ -140,7 +137,7 @@ var ProposalComponent = (function () {
             templateUrl: 'proposal.component.html',
             styleUrls: ['proposal.component.css']
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder, login_service_1.LoginService, enquiry_service_1.EnquiryService, proposals_service_1.ProposalsService])
+        __metadata('design:paramtypes', [router_1.Router, forms_1.FormBuilder, login_service_1.LoginService, enquiry_service_1.EnquiryService, proposals_service_1.ProposalsService])
     ], ProposalComponent);
     return ProposalComponent;
 }());

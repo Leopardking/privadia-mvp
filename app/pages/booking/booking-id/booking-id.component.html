@@ -37,6 +37,7 @@
                                         <property-info-cmp *ngIf="bookingService.booking && enquiryService.enquiry"
                                                            [data]="bookingService.booking"
                                                            [group]="bookingForm"
+                                                           [errorForm]="errorForm"
                                                            [propertyId]="enquiryService.enquiry.Enquiry.PropertyId"></property-info-cmp>
                                         <payment-status-cmp *ngIf="bookingService.booking"
                                                             [data]="bookingService.booking.Payments"></payment-status-cmp>

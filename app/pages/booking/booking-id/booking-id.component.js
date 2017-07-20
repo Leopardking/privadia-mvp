@@ -22,6 +22,7 @@ var BookingIdComponent = (function () {
         this.loginService = loginService;
         this.route = route;
         this.isAgent = this.loginService.getRoles('Agent');
+        this.errorForm = false;
         this.bookingForm = new forms_1.FormGroup({
             BookingId: new forms_1.FormControl(),
             ClientContactEmail: new forms_1.FormControl(null, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
@@ -30,16 +31,27 @@ var BookingIdComponent = (function () {
     }
     BookingIdComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.route.params.subscribe(function (params) {
             _this.bookingService.readDataBookingById(params['id']);
-            _this.bookingForm.controls['BookingId'].setValue(params['id']);
+            //this.bookingForm.controls['BookingId'].setValue(params['id']);
             setTimeout(function () {
-                _this.bookingForm.controls['ClientContactEmail'].setValue(_this.bookingService.booking.ClientContactEmail);
-                _this.bookingForm.controls['Notes'].setValue(_this.bookingService.booking.Notes);
-                if (_this.isAgent) {
-                    _this.bookingForm.controls['ClientContactEmail'].disable();
-                    _this.bookingForm.controls['Notes'].disable();
+                _this.bookingForm = new forms_1.FormGroup({
+                    BookingId: new forms_1.FormControl(params['id']),
+                    ClientContactEmail: new forms_1.FormControl(_this.bookingService.booking.ClientContactEmail, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
+                    Notes: new forms_1.FormControl(_this.bookingService.booking.Notes),
+                });
+                /*
+                this.bookingForm.controls['ClientContactEmail'].setValue(
+                    this.bookingService.booking.ClientContactEmail,
+                    Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+                );
+                this.bookingForm.controls['Notes'].setValue(this.bookingService.booking.Notes);
+                if (this.isAgent) {
+                    this.bookingForm.controls['ClientContactEmail'].disable();
+                    this.bookingForm.controls['Notes'].disable();
                 }
+                */
                 _this.enquiryService.readDataEnquiry(_this.bookingService.booking.EnquiryMessageThreadId);
             }, 1000);
         });
@@ -60,6 +72,11 @@ var BookingIdComponent = (function () {
     BookingIdComponent.prototype.saveBooking = function () {
         var _this = this;
         console.log('Save booking', this.bookingForm);
+        if (this.bookingForm.status === 'INVALID') {
+            helpers_1.handlerErrorNotify('Error field');
+            return this.errorForm = true;
+        }
+        this.errorForm = false;
         this.bookingService.updateBooking(this.bookingForm.value).subscribe(function (d) {
             $.notify({
                 icon: "notifications",
