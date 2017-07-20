@@ -20,6 +20,7 @@ declare const $: any;
 
 export class BookingIdComponent implements OnInit{
     private booking;
+    public isAgent = this.loginService.getRoles('Agent');
 
     private bookingForm = new FormGroup({
         BookingId: new FormControl(),
@@ -40,6 +41,10 @@ export class BookingIdComponent implements OnInit{
             setTimeout(() => {
                 this.bookingForm.controls['ClientContactEmail'].setValue(this.bookingService.booking.ClientContactEmail);
                 this.bookingForm.controls['Notes'].setValue(this.bookingService.booking.Notes);
+                if (this.isAgent) {
+                    this.bookingForm.controls['ClientContactEmail'].disable();
+                    this.bookingForm.controls['Notes'].disable();
+                }
                 this.enquiryService.readDataEnquiry(this.bookingService.booking.EnquiryMessageThreadId)
             }, 1000)
         });

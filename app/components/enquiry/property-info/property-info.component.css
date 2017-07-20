@@ -47,13 +47,14 @@
 .enquiry-header .villa-container .enquiry-status {
     font-size: 12px;
     font-weight: 300;
-    width: 74px;
+    /*width: 74px;*/
     height: 18px;
     border-radius: 9px;
     text-align: center;
     color: #fff;
     line-height: 18px;
-    display: none;
+    /*display: none;*/
+    padding: 0 9px;
 }
 
 .enquiry-header .villa-container .enquiry-status.accepted {

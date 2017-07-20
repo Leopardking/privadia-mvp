@@ -21,6 +21,7 @@ var BookingIdComponent = (function () {
         this.enquiryService = enquiryService;
         this.loginService = loginService;
         this.route = route;
+        this.isAgent = this.loginService.getRoles('Agent');
         this.bookingForm = new forms_1.FormGroup({
             BookingId: new forms_1.FormControl(),
             ClientContactEmail: new forms_1.FormControl(null, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
@@ -35,6 +36,10 @@ var BookingIdComponent = (function () {
             setTimeout(function () {
                 _this.bookingForm.controls['ClientContactEmail'].setValue(_this.bookingService.booking.ClientContactEmail);
                 _this.bookingForm.controls['Notes'].setValue(_this.bookingService.booking.Notes);
+                if (_this.isAgent) {
+                    _this.bookingForm.controls['ClientContactEmail'].disable();
+                    _this.bookingForm.controls['Notes'].disable();
+                }
                 _this.enquiryService.readDataEnquiry(_this.bookingService.booking.EnquiryMessageThreadId);
             }, 1000);
         });

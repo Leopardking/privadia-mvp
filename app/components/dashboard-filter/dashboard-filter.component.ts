@@ -25,6 +25,9 @@ export class DashboardfilterComponent implements OnInit{
     }
 
     ngOnInit() {
+        //Tmp select picker init
+        $('.custompicker').selectpicker();
+
         $(document).mouseup(function (event) {
             const container = $(".extend-filter-container.collapse");
             const _opened = container.hasClass("in")

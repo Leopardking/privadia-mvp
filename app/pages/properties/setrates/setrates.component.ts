@@ -93,6 +93,10 @@ export class SetratesComponent implements OnInit{
             Value: new FormControl(),
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
+
+        setTimeout(() => {
+            initDatetimepickers();
+        }, 100);
     }
 
     private editRates(object) {
