@@ -30,6 +30,7 @@ var BookingIdComponent = (function () {
     }
     BookingIdComponent.prototype.ngOnInit = function () {
         var _this = this;
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.route.params.subscribe(function (params) {
             _this.bookingService.readDataBookingById(params['id']);
             _this.bookingForm.controls['BookingId'].setValue(params['id']);

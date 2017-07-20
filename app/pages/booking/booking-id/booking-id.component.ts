@@ -34,6 +34,8 @@ export class BookingIdComponent implements OnInit{
                   private route: ActivatedRoute) { }
 
     ngOnInit(){
+        $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
+
         this.route.params.subscribe(params => {
             this.bookingService.readDataBookingById(params['id']);
             this.bookingForm.controls['BookingId'].setValue(params['id']);

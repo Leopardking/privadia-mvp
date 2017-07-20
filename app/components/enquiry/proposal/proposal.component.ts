@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, FormControl, Validators, FormArray} from "@angul
 import {LoginService} from "../../../providers/login/login.service";
 import {ProposalsService} from "../../../providers/proposals/proposals.service";
 import {EnquiryService} from "../../../providers/enquery/enquiry.service";
+import {Router} from "@angular/router";
 
 declare const moment: any;
 
@@ -34,20 +35,15 @@ export class ProposalComponent implements OnInit{
 			Name: 'Contract 4',
 		}];
 
-	constructor( private builder: FormBuilder,
+	constructor( private router: Router,
+				 private builder: FormBuilder,
 				 private loginService: LoginService,
 				 private enquiryService: EnquiryService,
 				 private proposalsService: ProposalsService ) {
     }
 
 	ngOnInit() {
-		this.initForm(this.data)
-		/*
-		const date = moment('2017-07-10T14:23:28+00:00').utcOffset(moment().utcOffset());
-		console.log('Date ', date.format())
-		console.log('Moment ', moment().utc().format())
-		console.log('Moment ', moment().utcOffset())
-		*/
+		this.initForm(this.data);
     }
 
     private initForm(data) {
@@ -121,6 +117,7 @@ export class ProposalComponent implements OnInit{
 
 		setTimeout(() => {
 			this.initForm(this.enquiryService.enquiry)
+			this.router.navigate(['/booking/forthcoming/' + this.enquiryService.enquiry.Enquiry.Proposal.BookingId]);
 		}, 500)
     }
 
