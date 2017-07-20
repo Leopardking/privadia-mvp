@@ -67,7 +67,6 @@ export class PropertyinfoComponent implements OnInit{
     }
 
     private removeContact(i: number) {
-        console.log(i);
         const control = <FormArray>this.propertyForm.controls['Contacts'];
         control.removeAt(i);
     }
