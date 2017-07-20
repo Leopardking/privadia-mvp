@@ -29,6 +29,7 @@
     color: #fff;
     line-height: 18px;
     display: none;
+    white-space: nowrap;
 }
 .table-enquiries .enquiry-status.accepted {
     background-color: #00bfa5;

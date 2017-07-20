@@ -21,6 +21,7 @@ declare const $: any;
 export class BookingIdComponent implements OnInit{
     private booking;
     public isAgent = this.loginService.getRoles('Agent');
+    private errorForm = false;
 
     private bookingForm = new FormGroup({
         BookingId: new FormControl(),
@@ -38,15 +39,28 @@ export class BookingIdComponent implements OnInit{
 
         this.route.params.subscribe(params => {
             this.bookingService.readDataBookingById(params['id']);
-            this.bookingForm.controls['BookingId'].setValue(params['id']);
+            //this.bookingForm.controls['BookingId'].setValue(params['id']);
 
             setTimeout(() => {
-                this.bookingForm.controls['ClientContactEmail'].setValue(this.bookingService.booking.ClientContactEmail);
+                this.bookingForm = new FormGroup({
+                    BookingId: new FormControl(params['id']),
+                    ClientContactEmail: new FormControl(
+                        this.bookingService.booking.ClientContactEmail,
+                        Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+                    ),
+                    Notes: new FormControl(this.bookingService.booking.Notes),
+                });
+                /*
+                this.bookingForm.controls['ClientContactEmail'].setValue(
+                    this.bookingService.booking.ClientContactEmail,
+                    Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)
+                );
                 this.bookingForm.controls['Notes'].setValue(this.bookingService.booking.Notes);
                 if (this.isAgent) {
                     this.bookingForm.controls['ClientContactEmail'].disable();
                     this.bookingForm.controls['Notes'].disable();
                 }
+                */
                 this.enquiryService.readDataEnquiry(this.bookingService.booking.EnquiryMessageThreadId)
             }, 1000)
         });
@@ -71,6 +85,12 @@ export class BookingIdComponent implements OnInit{
 
     private saveBooking() {
         console.log('Save booking', this.bookingForm);
+        if(this.bookingForm.status === 'INVALID') {
+            handlerErrorNotify('Error field');
+            return this.errorForm = true;
+        }
+
+        this.errorForm = false;
         this.bookingService.updateBooking(this.bookingForm.value).subscribe(
             d => {
                 $.notify({

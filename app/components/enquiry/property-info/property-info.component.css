@@ -55,6 +55,7 @@
     line-height: 18px;
     /*display: none;*/
     padding: 0 9px;
+    white-space: nowrap;
 }
 
 .enquiry-header .villa-container .enquiry-status.accepted {
