@@ -48,6 +48,7 @@ var PropertyinfoComponent = (function () {
         }));
     };
     PropertyinfoComponent.prototype.removeContact = function (i) {
+        console.log(i);
         var control = this.propertyForm.controls['Contacts'];
         control.removeAt(i);
     };
