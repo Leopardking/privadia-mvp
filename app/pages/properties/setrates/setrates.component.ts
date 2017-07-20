@@ -66,6 +66,7 @@ export class SetratesComponent implements OnInit{
         this.rateForm = this.builder.group({
             Currency: data.Currency || 'EUR',
             EndDate: moment(data.EndDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
+            LengthOfStay: 7,
             Id: data.Id,
             PropertyId: this.propertyId,
             StartDate: moment(data.StartDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
@@ -80,6 +81,7 @@ export class SetratesComponent implements OnInit{
         this.isEdit = [];
         this.propertyService.rates.push({
             Currency: 'EUR',
+            LengthOfStay: 7,
             EndDate: moment().add(1, 'day'),
             PropertyId: this.propertyId,
             StartDate: moment(),
@@ -87,6 +89,7 @@ export class SetratesComponent implements OnInit{
         });
         this.rateForm = this.builder.group({
             Currency: new FormControl('EUR'),
+            LengthOfStay: 7,
             EndDate: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             PropertyId: new FormControl(this.propertyId),
             StartDate: new FormControl(moment().format('MM/DD/YYYY')),
