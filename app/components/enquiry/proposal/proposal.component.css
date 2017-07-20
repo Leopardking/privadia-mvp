@@ -104,8 +104,8 @@
     display: inline-block;
 }
 
-.enquiry-body .form-inline.rental-price input {
-    width: 60px;
+:host /deep/ .enquiry-body .form-inline.rental-price input {
+    width: 68px;
 }
 
 .enquiry-body .form-inline.rental-price .fees {
