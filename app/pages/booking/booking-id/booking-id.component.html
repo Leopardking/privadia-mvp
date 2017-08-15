@@ -6,17 +6,7 @@
                     <div class="nav-tabs-wrapper">
                         <div class="row">
                             <div class="col-xs-10">
-                                <ul id="myTabs" class="nav nav-tabs" data-tabs="tabs">
-                                    <li class="active">
-                                        <a [routerLink]="['/booking']" data-toggle="tab">Forthcoming</a>
-                                    </li>
-                                    <li class="">
-                                        <a [routerLink]="['/booking/current']" data-toggle="tab">Current</a>
-                                    </li>
-                                    <li class="">
-                                        <a [routerLink]="['/booking/past']" data-toggle="tab">Past</a>
-                                    </li>
-                                </ul>
+                                <booking-tabs-cmp></booking-tabs-cmp>
                             </div>
                             <div class="col-xs-2 hidden">
                                 <button type="button" class="btn btn-success-green font-16 pull-right m-t-b-none">

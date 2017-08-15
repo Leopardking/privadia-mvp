@@ -23,6 +23,7 @@ import {PropertiesService} from "../../../providers/properties/properties.servic
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {ProposalsService} from "../../../providers/proposals/proposals.service";
 import {EnquiryService} from "../../../providers/enquery/enquiry.service";
+import { CommonsModule } from '../commons/commons.module';
 
 @NgModule({
     imports: [
@@ -31,6 +32,7 @@ import {EnquiryService} from "../../../providers/enquery/enquiry.service";
         RouterModule,
         Ng2CloudinaryModule,
         FormFieldsModule,
+        CommonsModule,
 
         CommonModule,
         Ng2CloudinaryModule,

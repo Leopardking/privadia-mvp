@@ -13,6 +13,7 @@ var common_1 = require("@angular/common");
 var router_1 = require('@angular/router');
 var forms_1 = require("@angular/forms");
 var ng2_cloudinary_1 = require("ng2-cloudinary");
+var commons_module_1 = require('../commons/commons.module');
 /**
  *  Providers
  */
@@ -45,7 +46,8 @@ var EnquiryModule = (function () {
                 enquiry_routing_module_1.EnquiryRoutingModule,
                 router_1.RouterModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,
-                form_field_module_1.FormFieldsModule
+                form_field_module_1.FormFieldsModule,
+                commons_module_1.CommonsModule
             ],
             declarations: [
                 enquiry_component_1.EnquiryComponent,

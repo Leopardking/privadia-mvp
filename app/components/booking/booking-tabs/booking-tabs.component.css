@@ -1,0 +1,9 @@
+.nav-tabs > li > a {
+    font-size: 14px;
+    text-transform: none;
+    font-weight: 300;
+}
+
+.nav-tabs > li {
+    cursor: pointer;
+}

@@ -9,25 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var message_component_1 = require('./message.component');
-var routes = [
-    { path: '', children: [
-            { path: '', component: message_component_1.MessageComponent },
-            { path: 'enquiry', loadChildren: 'app/pages/message/enquiry/enquiry.module#EnquiryModule' }
-        ] },
-];
-var MessageRoutingModule = (function () {
-    function MessageRoutingModule() {
+var BookingTabsComponent = (function () {
+    function BookingTabsComponent() {
     }
-    MessageRoutingModule = __decorate([
-        core_1.NgModule({
-            imports: [router_1.RouterModule.forChild(routes)],
-            exports: [router_1.RouterModule]
+    BookingTabsComponent.prototype.ngOnInit = function () {
+    };
+    BookingTabsComponent = __decorate([
+        core_1.Component({
+            moduleId: module.id,
+            selector: 'booking-tabs-cmp',
+            templateUrl: 'booking-tabs.component.html',
+            styleUrls: ['booking-tabs.component.css']
         }), 
         __metadata('design:paramtypes', [])
-    ], MessageRoutingModule);
-    return MessageRoutingModule;
+    ], BookingTabsComponent);
+    return BookingTabsComponent;
 }());
-exports.MessageRoutingModule = MessageRoutingModule;
-//# sourceMappingURL=message-routing.module.js.map
+exports.BookingTabsComponent = BookingTabsComponent;
+//# sourceMappingURL=booking-tabs.component.js.map

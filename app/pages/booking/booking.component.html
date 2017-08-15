@@ -6,22 +6,7 @@
                     <div class="nav-tabs-wrapper">
                         <div class="row">
                             <div class="col-xs-10">
-                                <ul id="myTabs" class="nav nav-tabs" data-tabs="tabs">
-                                    <li class="active">
-                                        <a href="#forthcoming" data-toggle="tab">Forthcoming</a>
-                                    </li>
-                                    <li class="">
-                                        <a href="#current" data-toggle="tab">Current</a>
-                                    </li>
-                                    <li class="">
-                                        <a href="#past" data-toggle="tab">Past</a>
-                                    </li>
-<!--
-                                    <li class="">
-                                        <a href="#forthcoming-details" data-toggle="tab">Forthcoming Details</a>
-                                    </li>
--->
-                                </ul>
+                                <booking-tabs-cmp></booking-tabs-cmp>
                             </div>
                             <div class="col-xs-2 hidden">
                                 <button type="button" class="btn btn-success-green font-16 pull-right m-t-b-none">
@@ -33,34 +18,7 @@
                 </div>
             </div>
             <div class="card-content p-l-r-none p-t-none">
-                <div class="tab-content m-t-none">
-                    <div class="tab-pane active" id="forthcoming">
-                        <forthcoming-table-cmp [data]="bookingService.bookings"></forthcoming-table-cmp>
-                    </div>
-                    <div class="tab-pane" id="current">
-                        <!--
-                        <enquiries-table-cmp [data]="enquiryService.enquiries"></enquiries-table-cmp>
-                        -->
-                    </div>
-                    <div class="tab-pane" id="past">
-
-                    </div>
-<!--
-                    <div class="tab-pane" id="forthcoming-details">
-                        <div class="booking-detail">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <property-info-cmp [data]=""></property-info-cmp>
-                                    <payment-status-cmp></payment-status-cmp>
-                                </div>
-                                <div class="col-md-6">
-                                    <proposal-cmp [data]=""></proposal-cmp>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
--->
-                </div>
+                <forthcoming-table-cmp [data]="bookingService.bookings"></forthcoming-table-cmp>
             </div>
         </div>
     </div>

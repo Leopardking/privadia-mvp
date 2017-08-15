@@ -10,32 +10,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var enquiry_service_1 = require("../../providers/enquery/enquiry.service");
-var MessageComponent = (function () {
-    function MessageComponent(router, enquiryService) {
+var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
+var EnquiriesComponent = (function () {
+    function EnquiriesComponent(router, enquiryService) {
         this.router = router;
         this.enquiryService = enquiryService;
-        console.log('Load Message Module');
+        console.log('Load Enquiry Module');
         enquiryService.readDataEnquiries();
-        router.events.subscribe(function (val) {
-            var hash = window.location.hash;
-            hash && $('ul.nav a[href="' + hash + '"]').tab('show');
-        });
     }
-    MessageComponent.prototype.ngOnInit = function () {
+    EnquiriesComponent.prototype.ngOnInit = function () {
         localStorage.setItem('title', '');
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
     };
-    MessageComponent = __decorate([
+    EnquiriesComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'message-cmp',
-            templateUrl: 'message.component.html',
-            styleUrls: ['message.component.css']
+            selector: 'enquiries-cmp',
+            templateUrl: 'enquiries.component.html',
+            styleUrls: ['enquiries.component.css']
         }), 
         __metadata('design:paramtypes', [router_1.Router, enquiry_service_1.EnquiryService])
-    ], MessageComponent);
-    return MessageComponent;
+    ], EnquiriesComponent);
+    return EnquiriesComponent;
 }());
-exports.MessageComponent = MessageComponent;
-//# sourceMappingURL=message.component.js.map
+exports.EnquiriesComponent = EnquiriesComponent;
+//# sourceMappingURL=enquiries.component.js.map

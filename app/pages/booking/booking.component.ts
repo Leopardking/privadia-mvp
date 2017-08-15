@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { BookingService } from '../../providers/booking/booking.service';
 
+import {EnquiryService} from "../../providers/enquery/enquiry.service";
+
 import initDataTable = require('../../../assets/js/init/initDataTable.js');
 
 @Component({
@@ -19,8 +21,8 @@ export class BookingComponent implements OnInit{
 
     private bookingTable = "";
 
-    constructor ( private bookingService: BookingService) {
-
+    constructor ( private bookingService: BookingService, private enquiryService: EnquiryService) {
+        enquiryService.readDataEnquiries();
     }
 
     // steve@freelancemvc.net, agent1@freelancemvc.net 

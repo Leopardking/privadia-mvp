@@ -4,26 +4,7 @@
             <div class="card-header card-header-tabs" data-background-color="darkblue">
                 <div class="nav-tabs-navigation">
                     <div class="nav-tabs-wrapper">
-                        <ul id="myTabs" class="nav nav-tabs" data-tabs="tabs">
-                            <li class="">
-                                <a [routerLink]="['/messages']" fragment="notifications" data-toggle="tab">
-                                    <i class="material-icons">notifications</i> Notifications
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a [routerLink]="['/messages']" fragment="enquiries" data-toggle="tab">
-                                    <i class="material-icons">info</i> Enquiries (1)
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
-                            <li class="">
-                                <a [routerLink]="['/messages']" fragment="bookings" data-toggle="tab">
-                                    <i class="material-icons">confirmation_number</i> Bookings
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
-                        </ul>
+                        <booking-tabs-cmp></booking-tabs-cmp>
                     </div>
                 </div>
             </div>

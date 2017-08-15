@@ -1,0 +1,16 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header card-header-tabs" data-background-color="darkblue">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper">
+                        <booking-tabs-cmp></booking-tabs-cmp>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content p-l-r-none p-t-none">
+                <enquiries-table-cmp [data]="enquiryService.enquiries"></enquiries-table-cmp>
+            </div>
+        </div>
+    </div>
+</div>

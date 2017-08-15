@@ -29,6 +29,7 @@ var properties_service_1 = require("../../../providers/properties/properties.ser
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var proposals_service_1 = require("../../../providers/proposals/proposals.service");
 var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
+var commons_module_1 = require('../commons/commons.module');
 var BookingIdModule = (function () {
     function BookingIdModule() {
     }
@@ -40,6 +41,7 @@ var BookingIdModule = (function () {
                 router_1.RouterModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,
                 form_field_module_1.FormFieldsModule,
+                commons_module_1.CommonsModule,
                 common_1.CommonModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,
                 // FileUploadModule,

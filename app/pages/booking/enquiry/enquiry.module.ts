@@ -3,6 +3,7 @@ import { CommonModule } from "@angular/common";
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2CloudinaryModule } from "ng2-cloudinary";
+import { CommonsModule } from '../commons/commons.module';
 
 /**
  *  Providers
@@ -35,7 +36,8 @@ import {ProposalsService} from "../../../providers/proposals/proposals.service";
         EnquiryRoutingModule,
         RouterModule,
         Ng2CloudinaryModule,
-        FormFieldsModule
+        FormFieldsModule,
+        CommonsModule
     ],
     declarations: [
         EnquiryComponent,

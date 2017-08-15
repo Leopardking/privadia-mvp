@@ -14,11 +14,12 @@ var booking_routing_module_1 = require('./booking-routing.module');
 var common_1 = require("@angular/common");
 var ng2_cloudinary_1 = require("ng2-cloudinary");
 var forms_1 = require("@angular/forms");
-var booking_service_1 = require("../../providers/booking/booking.service");
-var forthcoming_component_1 = require("../../components/tables/forthcoming/forthcoming.component");
 /**
  *  Components
  */
+var forthcoming_component_1 = require("../../components/tables/forthcoming/forthcoming.component");
+var enquiries_component_1 = require("../../components/tables/enquiries/enquiries.component");
+var commons_module_1 = require('./commons/commons.module');
 // import { PropertyInfoComponent } from "../../components/booking/property-info/property-info.component";
 // import { ProposalComponent } from "../../components/booking/proposal/proposal.component";
 // import { PaymentStatusComponent } from "../../components/booking/payment-status/payment-status.component";
@@ -26,8 +27,13 @@ var forthcoming_component_1 = require("../../components/tables/forthcoming/forth
  *  My Modules
  */
 var form_field_module_1 = require("../../modules/form-fields/form-field.module");
+var enquiry_service_1 = require("../../providers/enquery/enquiry.service");
+/**
+ * Providers
+ */
 var properties_service_1 = require("../../providers/properties/properties.service");
 var lookups_service_1 = require("../../providers/lookups/lookups.service");
+var booking_service_1 = require("../../providers/booking/booking.service");
 var proposals_service_1 = require("../../providers/proposals/proposals.service");
 var BookingModule = (function () {
     function BookingModule() {
@@ -42,11 +48,14 @@ var BookingModule = (function () {
                 form_field_module_1.FormFieldsModule,
                 common_1.CommonModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule,
-                router_1.RouterModule.forChild(booking_routing_module_1.MODULE_ROUTES)
+                router_1.RouterModule.forChild(booking_routing_module_1.MODULE_ROUTES),
+                commons_module_1.CommonsModule
             ],
-            declarations: [booking_routing_module_1.MODULE_COMPONENTS, forthcoming_component_1.ForthcomingTableComponent,
+            declarations: [booking_routing_module_1.MODULE_COMPONENTS,
+                forthcoming_component_1.ForthcomingTableComponent,
+                enquiries_component_1.EnquiriesTableComponent,
             ],
-            providers: [booking_service_1.BookingService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, proposals_service_1.ProposalsService]
+            providers: [booking_service_1.BookingService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, proposals_service_1.ProposalsService, enquiry_service_1.EnquiryService]
         }), 
         __metadata('design:paramtypes', [])
     ], BookingModule);
