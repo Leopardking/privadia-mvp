@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
     { path: '', children: [
-        { path: '', component: Enq },
         { path: 'enquiry', loadChildren: 'app/pages/message/enquiry/enquiry.module#EnquiryModule' }
     ]},
 ];

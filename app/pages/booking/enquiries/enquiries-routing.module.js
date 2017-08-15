@@ -12,7 +12,6 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var routes = [
     { path: '', children: [
-            { path: '', component: Enq },
             { path: 'enquiry', loadChildren: 'app/pages/message/enquiry/enquiry.module#EnquiryModule' }
         ] },
 ];

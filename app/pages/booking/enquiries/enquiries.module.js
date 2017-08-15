@@ -19,7 +19,7 @@ var enquiry_service_1 = require("../../../providers/enquery/enquiry.service");
  *  Components
  */
 var enquiries_component_1 = require('./enquiries.component');
-var enquiries_routing_module_1 = require('./enquiries-routing.module');
+// import { EnquiriesRoutingModule } from './enquiries-routing.module';
 var ng2_cloudinary_1 = require("ng2-cloudinary");
 var enquiries_component_2 = require("../../../components/tables/enquiries/enquiries.component");
 var proposals_service_1 = require("../../../providers/proposals/proposals.service");
@@ -30,7 +30,7 @@ var EnquiryModule = (function () {
         core_1.NgModule({
             imports: [
                 common_1.CommonModule,
-                enquiries_routing_module_1.EnquiriesRoutingModule,
+                // EnquiriesRoutingModule,
                 router_1.RouterModule,
                 ng2_cloudinary_1.Ng2CloudinaryModule
             ],

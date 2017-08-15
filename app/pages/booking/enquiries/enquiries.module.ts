@@ -11,7 +11,7 @@ import { EnquiryService } from "../../../providers/enquery/enquiry.service";
  *  Components
  */
 import { EnquiriesComponent} from './enquiries.component';
-import { EnquiriesRoutingModule } from './enquiries-routing.module';
+// import { EnquiriesRoutingModule } from './enquiries-routing.module';
 import { Ng2CloudinaryModule } from "ng2-cloudinary";
 import { EnquiriesTableComponent } from "../../../components/tables/enquiries/enquiries.component";
 import {ProposalsService} from "../../../providers/proposals/proposals.service";
@@ -19,7 +19,7 @@ import {ProposalsService} from "../../../providers/proposals/proposals.service";
 @NgModule({
     imports: [
         CommonModule,
-        EnquiriesRoutingModule,
+        // EnquiriesRoutingModule,
         RouterModule,
         Ng2CloudinaryModule
     ],
