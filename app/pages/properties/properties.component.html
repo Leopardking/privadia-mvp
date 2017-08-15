@@ -73,6 +73,9 @@
                                             <div class="property-status active" *ngIf="item.Active">Active</div>
                                         </td>
                                         <td class="text-right">
+                                            <button *ngIf="true" class="btn btn-simple btn-set-rates btn-icon">
+                                                <i class="material-icons">date_range</i>Availability
+                                            </button>
                                             <button *ngIf="loginService.getPermission('Properties/Post')"
                                                     class="btn btn-simple btn-set-rates btn-icon"
                                                     [routerLink]="['/properties/setrates', item.Id]">
