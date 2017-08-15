@@ -9,8 +9,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/properties/view', title: 'View Property :id', icon: 'store' },
     { path: '/properties', title: 'Properties', icon: 'store' },
 
-    { path: '/notifications', title: 'Notifications', icon: 'notifications' },
-    { path: '/message', title: 'Messages', icon: 'mail' },
+    { path: '/notifications', title: 'Notifications', icon: 'mail' },
     { path: '/message/dialogs', title: 'Messages', icon: 'mail' },
     { path: '/users', title: 'Users', icon: 'group' },
     { path: '/', title: 'Dashboard', icon: 'dashboard' },
