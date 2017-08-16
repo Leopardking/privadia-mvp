@@ -1,16 +1,37 @@
 <div class="main-content">
     <div class="container-fluid">
+        <div class="toolbar row">
+            <div class="col-xs-12 buttons-bar">
+                <button class="btn btn-simple btn-switch btn-icon">
+                    <i class="material-icons">date_range</i>Calendar
+                </button>
+                <button class="btn btn-simple btn-switch btn-icon available">
+                    <i class="material-icons">list</i>List
+                </button>
+                <button class="btn btn-simple btn-success btn-icon secondary-color shadow-grey">
+                    <i class="material-icons">refresh</i> Update Availability
+                </button>
+            </div>
+        </div>
         <div class="row">
-            <div class="card">
-                <calendar-cmp *ngIf="!propertiesService.isReading"
-                    [errorForm]="errorForm">
-                </calendar-cmp>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="col-md-12">
+                        <div class="card-header card-header-icon" data-background-color="blue">
+                            <i class="material-icons">date_range</i>
+                        </div>
+                        <h4 class="card-title m-t-15">Villa name</h4>
+                    </div>
+                    <calendar-cmp *ngIf="!propertiesService.isReading"
+                                  [errorForm]="errorForm">
+                    </calendar-cmp>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!--<div class="loader" [hidden]="!propertiesService.isReading">-->
-    <!--<svg class="circular" viewBox="25 25 50 50">-->
-        <!--<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>-->
-    <!--</svg>-->
-<!--</div>-->
+<div class="loader" [hidden]="!propertiesService.isReading">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>

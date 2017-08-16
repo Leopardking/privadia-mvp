@@ -1,0 +1,26 @@
+.toolbar .buttons-bar {
+    text-align: right;
+}
+.btn-switch {
+    min-width: 80px;
+    padding: 14px 0;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    text-transform: none;
+    border-radius: 0;
+}
+
+.btn-switch:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.btn-switch.available {
+    color: #5399bc;
+}
+
+.btn-switch i {
+    font-size: 24px;
+    padding: 4px 0;
+    display: block;
+}
