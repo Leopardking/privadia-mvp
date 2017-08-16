@@ -10,16 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var booking_service_1 = require('../../providers/booking/booking.service');
-var enquiry_service_1 = require("../../providers/enquery/enquiry.service");
 var BookingComponent = (function () {
-    function BookingComponent(bookingService, enquiryService) {
+    function BookingComponent(bookingService) {
         this.bookingService = bookingService;
-        this.enquiryService = enquiryService;
         this.reading = true;
         this.datatableInited = false;
         this.bookings = [];
         this.bookingTable = "";
-        enquiryService.readDataEnquiries();
     }
     // steve@freelancemvc.net, agent1@freelancemvc.net 
     BookingComponent.prototype.ngOnInit = function () {
@@ -42,7 +39,7 @@ var BookingComponent = (function () {
             templateUrl: 'booking.component.html',
             styleUrls: ['booking.component.css']
         }), 
-        __metadata('design:paramtypes', [booking_service_1.BookingService, enquiry_service_1.EnquiryService])
+        __metadata('design:paramtypes', [booking_service_1.BookingService])
     ], BookingComponent);
     return BookingComponent;
 }());
