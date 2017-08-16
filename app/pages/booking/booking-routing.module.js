@@ -7,7 +7,7 @@ exports.MODULE_ROUTES = [
             { path: 'tentative', component: booking_component_1.BookingComponent },
             { path: 'tentative', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
             { path: 'confirmed', component: booking_component_1.BookingComponent },
-            { path: 'confirmed', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
+            // { path: 'confirmed', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
             { path: 'enquiry', component: enquiries_component_1.EnquiriesComponent },
             { path: 'enquiry', loadChildren: 'app/pages/booking/enquiry/enquiry.module#EnquiryModule' }
         ] },
