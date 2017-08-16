@@ -4,7 +4,7 @@ import { EnquiriesComponent } from './enquiries/enquiries.component'
 
 export const MODULE_ROUTES: Route[] =[
     { path: '', children: [
-        { path: '', redirectTo: 'forthcoming', pathMatch: 'full' },
+        { path: '', redirectTo: 'tentative', pathMatch: 'full' },
         { path: 'tentative', component: BookingComponent },
         { path: 'tentative', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
         { path: 'confirmed', component: BookingComponent },
