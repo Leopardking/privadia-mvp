@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import {EnquiryService} from "../../providers/enquery/enquiry.service";
 
 declare const $:any;
 
@@ -14,7 +13,6 @@ declare const $:any;
 export class NotificationComponent implements OnInit{
     constructor (
         private router: Router,
-        // private enquiryService: EnquiryService
     ) {
         console.log('Load Notification Module');
         router.events.subscribe((val) => {
