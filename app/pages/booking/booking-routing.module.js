@@ -4,8 +4,10 @@ var enquiries_component_1 = require('./enquiries/enquiries.component');
 exports.MODULE_ROUTES = [
     { path: '', children: [
             { path: '', redirectTo: 'forthcoming', pathMatch: 'full' },
-            { path: 'forthcoming', component: booking_component_1.BookingComponent },
-            { path: 'forthcoming', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
+            { path: 'tentative', component: booking_component_1.BookingComponent },
+            { path: 'tentative', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
+            { path: 'confirmed', component: booking_component_1.BookingComponent },
+            { path: 'confirmed', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
             { path: 'enquiry', component: enquiries_component_1.EnquiriesComponent },
             { path: 'enquiry', loadChildren: 'app/pages/booking/enquiry/enquiry.module#EnquiryModule' }
         ] },

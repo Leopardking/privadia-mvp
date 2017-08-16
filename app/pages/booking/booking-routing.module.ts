@@ -5,8 +5,10 @@ import { EnquiriesComponent } from './enquiries/enquiries.component'
 export const MODULE_ROUTES: Route[] =[
     { path: '', children: [
         { path: '', redirectTo: 'forthcoming', pathMatch: 'full' },
-        { path: 'forthcoming', component: BookingComponent },
-        { path: 'forthcoming', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
+        { path: 'tentative', component: BookingComponent },
+        { path: 'tentative', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
+        { path: 'confirmed', component: BookingComponent },
+        { path: 'confirmed', loadChildren: 'app/pages/booking/booking-id/booking-id.module#BookingIdModule' },
         { path: 'enquiry', component: EnquiriesComponent },
         { path: 'enquiry', loadChildren: 'app/pages/booking/enquiry/enquiry.module#EnquiryModule' }
     ]},
