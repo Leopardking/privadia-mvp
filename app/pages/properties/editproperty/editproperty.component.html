@@ -30,12 +30,12 @@
                                     Images
                                 </a>
                             </li>
-                            <li class="nav-pill" [ngClass]="{'form-error': !propertyForm.controls['MinimumStay'].valid && errorForm}">
-                                <a href="#metatab-availability" role="tab" data-toggle="tab" class="">
-                                    <i class="material-icons">check_circle</i>
-                                    Availability
-                                </a>
-                            </li>
+                            <!--<li class="nav-pill" [ngClass]="{'form-error': !propertyForm.controls['MinimumStay'].valid && errorForm}">-->
+                                <!--<a href="#metatab-availability" role="tab" data-toggle="tab" class="">-->
+                                    <!--<i class="material-icons">check_circle</i>-->
+                                    <!--Availability-->
+                                <!--</a>-->
+                            <!--</li>-->
                             <li class="nav-pill">
                                 <a href="#metatab-marketing" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">assessment</i>
@@ -86,11 +86,11 @@
                                                    [group]="propertyForm"></propertyimage-cmp>
                             </div>
                             <!--  Property Availability -->
-                            <div id="metatab-availability" class="fade card-content p-b-none p-t-none">
-                                <calendar-cmp *ngIf="!propertiesService.isReading"
-                                              [group]="propertyForm"
-                                              [errorForm]="errorForm"></calendar-cmp>
-                            </div>
+                            <!--<div id="metatab-availability" class="fade card-content p-b-none p-t-none">-->
+                                <!--<calendar-cmp *ngIf="!propertiesService.isReading"-->
+                                              <!--[group]="propertyForm"-->
+                                              <!--[errorForm]="errorForm"></calendar-cmp>-->
+                            <!--</div>-->
                             <!--  Property Marketing  -->
                             <div id="metatab-marketing" class="fade card-content p-b-none p-l-r-none p-t-none">
                                 <propertymarketing-cmp *ngIf="!propertiesService.isReading"
