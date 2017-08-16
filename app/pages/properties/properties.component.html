@@ -16,7 +16,8 @@
                                 <i class="material-icons">store</i>
                             </div>
                             <h4 class="card-title m-t-15" *ngIf="!search.value">All Properties</h4>
-                            <h4 class="card-title m-t-15" *ngIf="search.value">Properties Search Results for '{{search.value}}'</h4>
+                            <h4 class="card-title m-t-15" *ngIf="search.value">Properties Search Results for
+                                '{{search.value}}'</h4>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
                             <div class="form-group label-floating m-r-25">
@@ -31,85 +32,94 @@
                             </div>
                             <table id="datatables" class="table table-properties">
                                 <thead>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th class="disabled-sorting text-right"></th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="disabled-sorting text-right"></th>
+                                    <th></th>
+                                </tr>
                                 </thead>
                                 <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th class="disabled-sorting text-right"></th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th class="disabled-sorting text-right"></th>
+                                    <th></th>
+                                </tr>
                                 </tfoot>
                                 <tbody id="bookingTableBody" *ngIf="!propertiesService.isReading">
-                                    <tr *ngFor="let item of propertiesService.properties; let i = index; let last = last ">
-                                        <td></td>
-                                        <td class="thumb">
-                                            <cl-image *ngIf="item.ImageId"
-                                                      data-u="image"
-                                                      public-id="{{item.ImageId}}"
-                                                      cloud-name="privadia"
-                                                      class="md-card-image"
-                                                      crop="fill"
-                                                      gravity="auto"
-                                                      quality="80"
-                                                      height="55"
-                                                      width="84"
-                                                      format="jpg">
-                                            </cl-image>
-                                            <img *ngIf="!item.ImageId" class="img" src="../assets/img/image_placeholder.jpg">
-                                        </td>
-                                        <td>
-                                            <div class="property-name">{{item.Name}}</div>
-                                            <div class="property-id">ID {{item.Id}}</div>
-                                            <div class="property-status" *ngIf="!item.Active">Inactive</div>
-                                            <div class="property-status active" *ngIf="item.Active">Active</div>
-                                        </td>
-                                        <td class="text-right">
-                                            <button *ngIf="true" class="btn btn-simple btn-set-rates btn-icon">
-                                                <i class="material-icons">date_range</i>Availability
+                                <tr *ngFor="let item of propertiesService.properties; let i = index; let last = last ">
+                                    <td></td>
+                                    <td class="thumb">
+                                        <cl-image *ngIf="item.ImageId"
+                                                  data-u="image"
+                                                  public-id="{{item.ImageId}}"
+                                                  cloud-name="privadia"
+                                                  class="md-card-image"
+                                                  crop="fill"
+                                                  gravity="auto"
+                                                  quality="80"
+                                                  height="55"
+                                                  width="84"
+                                                  format="jpg">
+                                        </cl-image>
+                                        <img *ngIf="!item.ImageId" class="img"
+                                             src="../assets/img/image_placeholder.jpg">
+                                    </td>
+                                    <td>
+                                        <div class="property-name">{{item.Name}}</div>
+                                        <div class="property-id">ID {{item.Id}}</div>
+                                        <div class="property-status" *ngIf="!item.Active">Inactive</div>
+                                        <div class="property-status active" *ngIf="item.Active">Active</div>
+                                    </td>
+                                    <td class="text-right">
+                                        <button *ngIf="true"
+                                                class="btn btn-simple btn-set-rates btn-icon"
+                                                [routerLink]="['/properties/availability', item.Id]">
+                                            <i class="material-icons">date_range</i>Availability
+                                        </button>
+                                        <button *ngIf="loginService.getPermission('Properties/Post')"
+                                                class="btn btn-simple btn-set-rates btn-icon"
+                                                [routerLink]="['/properties/setrates', item.Id]">
+                                            <i class="material-icons">attach_money</i>Set Rates
+                                        </button>
+                                        <button *ngIf="loginService.getPermission('Properties/Put')"
+                                                class="btn btn-simple btn-edit btn-icon"
+                                                [routerLink]="['/properties/edit', item.Id]">
+                                            <i class="material-icons">edit</i>Edit
+                                        </button>
+                                        <button *ngIf="loginService.getPermission('Properties/Delete')"
+                                                class="btn btn-simple btn-delete btn-icon"
+                                                type="button"
+                                                [popover]="i"
+                                        >
+                                            <i class="material-icons">delete</i>Remove
+                                        </button>
+                                        <button *ngIf="!loginService.getPermission('Properties/Put')"
+                                                class="btn btn-simple btn-edit btn-icon"
+                                                [routerLink]="['/properties/view', item.Id]">
+                                            <i class="material-icons">remove_red_eye</i>View
+                                        </button>
+                                        <popover-content #i
+                                                         placement="left"
+                                                         [animation]="true"
+                                                         [closeOnClickOutside]="true">
+                                            <h3>Are you sure?</h3>
+                                            <button type="button" class="btn btn-danger font-14"
+                                                    (click)="removeProperty({index: i, propertyId: item.Id})">Yes,
+                                                remove
                                             </button>
-                                            <button *ngIf="loginService.getPermission('Properties/Post')"
-                                                    class="btn btn-simple btn-set-rates btn-icon"
-                                                    [routerLink]="['/properties/setrates', item.Id]">
-                                                <i class="material-icons">attach_money</i>Set Rates
+                                            <button type="button" class="btn btn-success-green font-14"
+                                                    (click)="i.hide($event)">Cancel
                                             </button>
-                                            <button *ngIf="loginService.getPermission('Properties/Put')"
-                                                    class="btn btn-simple btn-edit btn-icon"
-                                                    [routerLink]="['/properties/edit', item.Id]">
-                                                <i class="material-icons">edit</i>Edit
-                                            </button>
-                                            <button *ngIf="loginService.getPermission('Properties/Delete')"
-                                                    class="btn btn-simple btn-delete btn-icon"
-                                                    type="button"
-                                                    [popover]="i"
-                                            >
-                                                <i class="material-icons">delete</i>Remove
-                                            </button>
-                                            <button *ngIf="!loginService.getPermission('Properties/Put')"
-                                                    class="btn btn-simple btn-edit btn-icon"
-                                                    [routerLink]="['/properties/view', item.Id]">
-                                                <i class="material-icons">remove_red_eye</i>View
-                                            </button>
-                                            <popover-content #i
-                                                     placement="left"
-                                                     [animation]="true"
-                                                     [closeOnClickOutside]="true">
-                                                <h3>Are you sure?</h3>
-                                                <button type="button" class="btn btn-danger font-14" (click)="removeProperty({index: i, propertyId: item.Id})">Yes, remove</button>
-                                                <button type="button" class="btn btn-success-green font-14" (click)="i.hide($event)">Cancel</button>
-                                            </popover-content>
-                                        </td>
-                                        <td></td>
-                                        {{ !propertiesService.isReading && last && !datatableInited ? finishReading() : "" }}
-                                    </tr>
+                                        </popover-content>
+                                    </td>
+                                    <td></td>
+                                    {{ !propertiesService.isReading && last && !datatableInited ? finishReading() : ""
+                                    }}
+                                </tr>
                                 </tbody>
                             </table>
                         </div>

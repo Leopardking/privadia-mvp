@@ -1,0 +1,16 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="card">
+                <calendar-cmp *ngIf="!propertiesService.isReading"
+                    [errorForm]="errorForm">
+                </calendar-cmp>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="loader" [hidden]="!propertiesService.isReading">-->
+    <!--<svg class="circular" viewBox="25 25 50 50">-->
+        <!--<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>-->
+    <!--</svg>-->
+<!--</div>-->
