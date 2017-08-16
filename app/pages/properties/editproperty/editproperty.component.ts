@@ -87,7 +87,7 @@ export class EditpropertyComponent implements OnInit {
                 WheelchairAccessible: { value: this.propertiesService.property.WheelchairAccessible, disabled: this.permission },
                 PetsAllowed: { value: this.propertiesService.property.PetsAllowed, disabled: this.permission },
                 EventsAllowed: { value: this.propertiesService.property.EventsAllowed, disabled: this.permission },
-                LiftAvailable: { value: this.propertiesService.property.LiftAvailable, disabled: this.permission },
+                // LiftAvailable: { value: this.propertiesService.property.LiftAvailable, disabled: this.permission },
                 Benefits: { value: this.propertiesService.property.Benefits, disabled: this.permission },
                 Housekeeping: { value: this.propertiesService.property.Housekeeping, disabled: this.permission },
                 OtherHousekeepingInfo: { value: this.propertiesService.property.OtherHousekeepingInfo, disabled: this.permission },

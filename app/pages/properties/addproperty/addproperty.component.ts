@@ -78,7 +78,7 @@ export class AddpropertyComponent implements OnInit {
         MetaDataTmp: new FormGroup({}),
         OtherHousekeepingInfo: new FormControl(),
         Housekeeping: new FormControl(0),
-        LiftAvailable: new FormControl(false),
+        // LiftAvailable: new FormControl(false),
         Benefits: new FormControl(),
     });
 
