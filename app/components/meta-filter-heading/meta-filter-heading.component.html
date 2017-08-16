@@ -74,6 +74,10 @@
 
     </div>
 </div>
+
+<div [formGroup]="propertyForm" *ngIf="name == 'Trip'" class="">
+    <h5>The property is suitable for...</h5>
+</div>
 <div [formGroup]="propertyForm" *ngIf="name == 'Features'" class="features">
     <!--<div class="checkbox">-->
         <!--<label>-->
