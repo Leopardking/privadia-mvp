@@ -75,7 +75,7 @@ var EditpropertyComponent = (function () {
                 WheelchairAccessible: { value: _this.propertiesService.property.WheelchairAccessible, disabled: _this.permission },
                 PetsAllowed: { value: _this.propertiesService.property.PetsAllowed, disabled: _this.permission },
                 EventsAllowed: { value: _this.propertiesService.property.EventsAllowed, disabled: _this.permission },
-                LiftAvailable: { value: _this.propertiesService.property.LiftAvailable, disabled: _this.permission },
+                // LiftAvailable: { value: this.propertiesService.property.LiftAvailable, disabled: this.permission },
                 Benefits: { value: _this.propertiesService.property.Benefits, disabled: _this.permission },
                 Housekeeping: { value: _this.propertiesService.property.Housekeeping, disabled: _this.permission },
                 OtherHousekeepingInfo: { value: _this.propertiesService.property.OtherHousekeepingInfo, disabled: _this.permission },

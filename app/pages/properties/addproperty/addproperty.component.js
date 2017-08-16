@@ -80,7 +80,7 @@ var AddpropertyComponent = (function () {
             MetaDataTmp: new forms_1.FormGroup({}),
             OtherHousekeepingInfo: new forms_1.FormControl(),
             Housekeeping: new forms_1.FormControl(0),
-            LiftAvailable: new forms_1.FormControl(false),
+            // LiftAvailable: new FormControl(false),
             Benefits: new forms_1.FormControl(),
         });
         propertiesService.readDataMetadata();
