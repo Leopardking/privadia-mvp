@@ -1,0 +1,50 @@
+.c-button-group {
+	text-align: center;
+	margin-bottom: 40px;
+}
+.c-button-group .btn-white {
+	border: solid 1px #e8e8e8;
+}
+.c-button-group .yearNumber {
+	font-size: 24px;
+	font-weight: 100;
+	color: #0b5a7c;
+	padding: 0 40px;
+	line-height: 40px;
+	display: inline-block;
+}
+.month-container {
+	margin-bottom: 40px;
+}
+.month-container .month{
+	max-width: 80%;
+	margin: 0 auto;
+}
+.month-container table {
+	width: 100%;
+}
+.month-container .month-label {
+	font-size: 18px;
+	font-weight: 100;
+	color: #0b5a7c;
+}
+.month-container table .day {
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #3a3a3a;
+}
+.month-container table th.day, .month-container td.day.different-month {
+	color: #a2a2a2;
+}
+.month-container {
+
+}
+.form-text .control-label {
+	font-size: 16px;
+	color: #3a3a3a;
+}
+.form-text span {
+	font-size: 16px;
+	color: #5399bc;
+}
