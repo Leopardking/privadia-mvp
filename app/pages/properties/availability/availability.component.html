@@ -1,34 +1,79 @@
 <div class="main-content">
-    <div class="container-fluid">
-        <div class="toolbar row">
-            <div class="col-xs-12 buttons-bar">
-                <button class="btn btn-simple btn-switch btn-icon">
-                    <i class="material-icons">date_range</i>Calendar
-                </button>
-                <button class="btn btn-simple btn-switch btn-icon available">
-                    <i class="material-icons">list</i>List
-                </button>
-                <button class="btn btn-simple btn-success btn-icon secondary-color shadow-grey">
-                    <i class="material-icons">refresh</i> Update Availability
-                </button>
+    <div class="panels-wrp">
+        <div class="left-panel">
+            <div class="container-fluid">
+                <div class="toolbar row">
+                    <div class="col-xs-12 buttons-bar">
+                        <button class="btn btn-simple btn-switch btn-icon">
+                            <i class="material-icons">date_range</i>Calendar
+                        </button>
+                        <button class="btn btn-simple btn-switch btn-icon available">
+                            <i class="material-icons">list</i>List
+                        </button>
+                        <button class="btn btn-simple btn-success btn-icon secondary-color shadow-grey">
+                            <i class="material-icons">refresh</i> Update Availability
+                        </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card">
+                            <div class="col-xs-12">
+                                <div class="card-header card-header-icon" data-background-color="blue">
+                                    <i class="material-icons">date_range</i>
+                                </div>
+                                <h4 class="card-title m-t-15">Villa name</h4>
+                            </div>
+                            <calendar-cmp *ngIf="!propertiesService.isReading"
+                                          [errorForm]="errorForm">
+                            </calendar-cmp>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="col-md-12">
-                        <div class="card-header card-header-icon" data-background-color="blue">
-                            <i class="material-icons">date_range</i>
+        <div class="right-panel">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="card">
+                            <div class="col-md-12">
+                                <div class="card-header card-header-text" data-background-color="green">
+                                    <span class="font-16">Update Availability</span>
+                                </div>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <datetimepicker-field-cmp
+                                                [data]="{title: 'Check In'}"
+                                                [classes]="{withIcon: true}"
+                                                [field]="availabilityForm.controls.CheckIn"></datetimepicker-field-cmp>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <datetimepicker-field-cmp
+                                                [data]="{title: 'Check Out'}"
+                                                [classes]="{withIcon: false}"
+                                                [field]="availabilityForm.controls.CheckOut"></datetimepicker-field-cmp>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <singleselect-field-cmp
+                                                [dataList]="UpdateTypeList"
+                                                [options]="{title: 'Update type'}"
+                                                [errorForm]="errorForm"
+                                                [field]="availabilityForm.controls.UpdateType"></singleselect-field-cmp>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="card-title m-t-15">Villa name</h4>
                     </div>
-                    <calendar-cmp *ngIf="!propertiesService.isReading"
-                                  [errorForm]="errorForm">
-                    </calendar-cmp>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 <div class="loader" [hidden]="!propertiesService.isReading">
     <svg class="circular" viewBox="25 25 50 50">

@@ -1,3 +1,28 @@
+.panels-wrp {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.panels-wrp .left-panel {
+    flex: 2;
+}
+
+.panels-wrp .right-panel {
+    flex: 1;
+    transition: flex 0.25s ease-out;
+}
+
+.panels-wrp .right-panel.toggle {
+    flex: 0;
+    overflow: hidden;
+}
+
+.panels-wrp .right-panel .card-header {
+    display: block;
+    text-align: center;
+}
+
 .toolbar .buttons-bar {
     text-align: right;
 }

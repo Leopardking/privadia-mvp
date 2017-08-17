@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var login_service_1 = require("../../../providers/login/login.service");
@@ -19,6 +20,21 @@ var AvailabilityComponent = (function () {
         this.route = route;
     }
     AvailabilityComponent.prototype.ngOnInit = function () {
+        this.UpdateTypeList = [
+            { Id: 1, Name: 'Internal Booking' },
+            { Id: 2, Name: 'External Booking' },
+            { Id: 3, Name: 'Owner Present' },
+            { Id: 4, Name: 'Not Available for Rent' },
+            { Id: 5, Name: 'Other' }
+        ];
+        this.availabilityForm = new forms_1.FormGroup({
+            CheckIn: new forms_1.FormControl('08/16/2017'),
+            CheckOut: new forms_1.FormControl('08/18/2017'),
+            UpdateType: new forms_1.FormControl({
+                Id: null,
+                Name: null,
+            })
+        });
     };
     AvailabilityComponent = __decorate([
         core_1.Component({

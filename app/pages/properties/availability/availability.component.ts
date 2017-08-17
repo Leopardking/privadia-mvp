@@ -18,6 +18,8 @@ declare const _:any;
 })
 
 export class AvailabilityComponent implements OnInit {
+    private availabilityForm: FormGroup;
+    private UpdateTypeList: Array<{ Id: number, Name: string }>;
 
     constructor ( public propertiesService: PropertiesService,
                   private loginService: LoginService,
@@ -25,6 +27,21 @@ export class AvailabilityComponent implements OnInit {
     }
 
     ngOnInit(){
+        this.UpdateTypeList = [
+            {Id: 1, Name: 'Internal Booking'},
+            {Id: 2, Name: 'External Booking'},
+            {Id: 3, Name: 'Owner Present'},
+            {Id: 4, Name: 'Not Available for Rent'},
+            {Id: 5, Name: 'Other'}
+        ];
+        this.availabilityForm = new FormGroup({
+            CheckIn: new FormControl('08/16/2017'),
+            CheckOut: new FormControl('08/18/2017'),
+            UpdateType: new FormControl({
+                Id: null,
+                Name: null,
+            })
+        })
 
     }
 }
