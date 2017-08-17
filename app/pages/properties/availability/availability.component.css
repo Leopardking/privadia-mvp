@@ -54,6 +54,14 @@
     text-align: center;
 }
 
+.panels-wrp .right-panel .input-group .input-group-addon i {
+    font-size: 18px;
+    color: #5399bc;
+    font-weight: 400;
+    padding-bottom: 2px;
+    padding-left: 6px;
+}
+
 .toolbar .buttons-bar {
     text-align: right;
 }

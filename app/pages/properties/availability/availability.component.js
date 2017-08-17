@@ -33,10 +33,17 @@ var AvailabilityComponent = (function () {
             CheckIn: new forms_1.FormControl('08/16/2017'),
             CheckOut: new forms_1.FormControl('08/18/2017'),
             UpdateType: new forms_1.FormControl({
-                Id: null,
-                Name: null,
+                Id: 1,
+                Name: 'Internal Booking',
             })
         });
+        // this.availabilityForm.valueChanges.subscribe(data => {
+        //     console.log('Form changes', data);
+        //     this.output = data
+        // });
+    };
+    AvailabilityComponent.prototype.autosize = function (e) {
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     };
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
         this.UpdateBlock = !this.UpdateBlock;

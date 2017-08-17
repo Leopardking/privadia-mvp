@@ -8,7 +8,6 @@ import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
 
 declare const $:any;
-declare const _:any;
 
 @Component({
     moduleId: module.id,
@@ -40,11 +39,20 @@ export class AvailabilityComponent implements OnInit {
             CheckIn: new FormControl('08/16/2017'),
             CheckOut: new FormControl('08/18/2017'),
             UpdateType: new FormControl({
-                Id: null,
-                Name: null,
+                Id: 1,
+                Name: 'Internal Booking',
             })
-        })
+        });
 
+        // this.availabilityForm.valueChanges.subscribe(data => {
+        //     console.log('Form changes', data);
+        //     this.output = data
+        // });
+
+    }
+
+    private autosize(e){
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     }
 
     toggleUpdateBlock() {
