@@ -42,7 +42,16 @@ export class AvailabilityComponent implements OnInit {
                 Id: 1,
                 Name: 'Internal Booking',
             }),
-            Notes: new FormControl()
+            Notes: new FormControl(),
+            isAgency: new FormControl(false),
+            FirstName: new FormControl(),
+            LastName: new FormControl(),
+            Email: new FormControl(),
+            Phone: new FormControl(),
+            CompanyName: new FormControl(),
+            ContactName: new FormControl(),
+            AgencyEmail: new FormControl(),
+            AgencyPhone: new FormControl()
         });
 
         // this.availabilityForm.valueChanges.subscribe(data => {

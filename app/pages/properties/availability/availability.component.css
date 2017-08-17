@@ -62,6 +62,16 @@
     padding-left: 6px;
 }
 
+.panels-wrp .right-panel .divider-line {
+    font-size: 14px;
+    text-align: center;
+    color: #747879;
+    background-color: #f3f5f6;
+    height: 24px;
+    line-height: 24px;
+    margin: 20px 0;
+}
+
 .toolbar .buttons-bar {
     text-align: right;
 }

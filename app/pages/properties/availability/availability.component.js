@@ -36,7 +36,16 @@ var AvailabilityComponent = (function () {
                 Id: 1,
                 Name: 'Internal Booking',
             }),
-            Notes: new forms_1.FormControl()
+            Notes: new forms_1.FormControl(),
+            isAgency: new forms_1.FormControl(false),
+            FirstName: new forms_1.FormControl(),
+            LastName: new forms_1.FormControl(),
+            Email: new forms_1.FormControl(),
+            Phone: new forms_1.FormControl(),
+            CompanyName: new forms_1.FormControl(),
+            ContactName: new forms_1.FormControl(),
+            AgencyEmail: new forms_1.FormControl(),
+            AgencyPhone: new forms_1.FormControl()
         });
         // this.availabilityForm.valueChanges.subscribe(data => {
         //     console.log('Form changes', data);

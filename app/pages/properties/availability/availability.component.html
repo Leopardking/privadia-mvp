@@ -45,7 +45,7 @@
                 </div>
             </div>
         </div>
-        <div class="right-panel" [class.in]="!UpdateBlock" [class.out]="UpdateBlock">
+        <div class="right-panel" [class.in]="!UpdateBlock" [class.out]="UpdateBlock" [formGroup]="availabilityForm">
             <div class="container-fluid">
                 <div class="card">
                     <div class="col-md-12">
@@ -76,8 +76,94 @@
                                             [field]="availabilityForm.controls.UpdateType"></singleselect-field-cmp>
                                 </div>
                             </div>
-                            <div class="row" *ngIf="availabilityForm.controls.UpdateType.value.Id === 1">Internal</div>
-                            <div class="row" *ngIf="availabilityForm.controls.UpdateType.value.Id !== 1">
+                            <div *ngIf="availabilityForm.controls.UpdateType.value.Id === 1">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input
+                                                        type="radio"
+                                                        name="isAgency"
+                                                        [formControl]="availabilityForm.controls.isAgency"
+                                                        formControlName="isAgency"
+                                                        [checked]="true"
+                                                        [value]="false"> Direct to client
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="radio">
+                                            <label>
+                                                <input
+                                                        type="radio"
+                                                        name="isAgency"
+                                                        [formControl]="availabilityForm.controls.isAgency"
+                                                        formControlName="isAgency"
+                                                        [value]="true"> Via a 3rd party agency
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="divider-line">Client Info</div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input-field-cmp
+                                                    [data]="{title: 'First Name', name: 'FirstName', type: 'text'}"
+                                                    [errorForm]="errorForm"
+                                                    [field]="availabilityForm.controls.FirstName"></input-field-cmp>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input-field-cmp
+                                                    [data]="{title: 'Last Name', name: 'LastName', type: 'text'}"
+                                                    [errorForm]="errorForm"
+                                                    [field]="availabilityForm.controls.LastName"></input-field-cmp>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input-field-cmp [data]="{title: 'EMail', name: 'EMail', type: 'text'}"
+                                                             [errorForm]="errorForm"
+                                                             [field]="availabilityForm.controls.Email"></input-field-cmp>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input-field-cmp [data]="{title: 'Phone', name: 'Phone', type: 'text'}"
+                                                             [errorForm]="errorForm"
+                                                             [field]="availabilityForm.controls.Phone"></input-field-cmp>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="availabilityForm.controls.isAgency.value">
+                                    <div class="divider-line">Agency Info</div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input-field-cmp
+                                                    [data]="{title: 'Company Name', name: 'CompanyName', type: 'text'}"
+                                                    [errorForm]="errorForm"
+                                                    [field]="availabilityForm.controls.CompanyName"></input-field-cmp>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input-field-cmp
+                                                    [data]="{title: 'Contact Name', name: 'ContactName', type: 'text'}"
+                                                    [errorForm]="errorForm"
+                                                    [field]="availabilityForm.controls.ContactName"></input-field-cmp>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <input-field-cmp [data]="{title: 'EMail', name: 'AgencyEMail', type: 'text'}"
+                                                             [errorForm]="errorForm"
+                                                             [field]="availabilityForm.controls.AgencyEmail"></input-field-cmp>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <input-field-cmp [data]="{title: 'Phone', name: 'AgencyPhone', type: 'text'}"
+                                                             [errorForm]="errorForm"
+                                                             [field]="availabilityForm.controls.AgencyPhone"></input-field-cmp>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-xs-12">
                                     <div class="input-group">
                                         <span class="input-group-addon"><i class="material-icons">assignment</i></span>
@@ -93,8 +179,10 @@
                                 </div>
                             </div>
                             <div class="col-xs-12">
-                                <button class="btn btn-success pull-right font-16 m-r-10">Save</button>
-                                <button class="btn btn-danger font-16 m-l-10">Cancel</button>
+                                <div class="btn-group-bottom">
+                                    <button class="btn btn-success pull-right font-16 m-r-10">Save</button>
+                                    <button class="btn btn-danger font-16 m-l-10">Cancel</button>
+                                </div>
                             </div>
                         </div>
                     </div>
