@@ -10,7 +10,9 @@
                         <button class="btn btn-simple btn-switch btn-icon available">
                             <i class="material-icons">list</i>List
                         </button>
-                        <button class="btn btn-simple btn-success btn-icon secondary-color shadow-grey">
+                        <button
+                            class="btn btn-simple btn-success btn-icon secondary-color shadow-grey"
+                            (click)="toggleUpdateBlock()">
                             <i class="material-icons">refresh</i> Update Availability
                         </button>
                     </div>
@@ -32,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="right-panel">
+        <div class="right-panel" [class.toggle]="UpdateBlock">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12">

@@ -20,6 +20,7 @@ var AvailabilityComponent = (function () {
         this.route = route;
     }
     AvailabilityComponent.prototype.ngOnInit = function () {
+        this.UpdateBlock = true;
         this.UpdateTypeList = [
             { Id: 1, Name: 'Internal Booking' },
             { Id: 2, Name: 'External Booking' },
@@ -35,6 +36,9 @@ var AvailabilityComponent = (function () {
                 Name: null,
             })
         });
+    };
+    AvailabilityComponent.prototype.toggleUpdateBlock = function () {
+        this.UpdateBlock = !this.UpdateBlock;
     };
     AvailabilityComponent = __decorate([
         core_1.Component({
