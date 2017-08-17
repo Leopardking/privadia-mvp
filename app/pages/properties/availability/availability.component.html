@@ -4,10 +4,16 @@
             <div class="container-fluid">
                 <div class="toolbar row">
                     <div class="col-xs-12 buttons-bar">
-                        <button class="btn btn-simple btn-switch btn-icon">
+                        <button
+                            class="btn btn-simple btn-switch btn-icon"
+                            [class.available]="!isCalendarView"
+                            (click)="toggleCalendarView()">
                             <i class="material-icons">date_range</i>Calendar
                         </button>
-                        <button class="btn btn-simple btn-switch btn-icon available">
+                        <button
+                            class="btn btn-simple btn-switch btn-icon"
+                            [class.available]="isCalendarView"
+                            (click)="toggleCalendarView()">
                             <i class="material-icons">list</i>List
                         </button>
                         <button
@@ -26,7 +32,7 @@
                                 </div>
                                 <h4 class="card-title m-t-15">Villa name</h4>
                             </div>
-                            <calendar-cmp *ngIf="!propertiesService.isReading"
+                            <calendar-cmp *ngIf="isCalendarView"
                                           [errorForm]="errorForm">
                             </calendar-cmp>
                         </div>

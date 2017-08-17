@@ -20,7 +20,8 @@ declare const _:any;
 export class AvailabilityComponent implements OnInit {
     private availabilityForm: FormGroup;
     private UpdateTypeList: Array<{ Id: number, Name: string }>;
-    private UpdateBlock: boolean;
+    private UpdateBlock: boolean = true;
+    private isCalendarView: boolean = true;
 
     constructor ( public propertiesService: PropertiesService,
                   private loginService: LoginService,
@@ -28,7 +29,6 @@ export class AvailabilityComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.UpdateBlock = true;
         this.UpdateTypeList = [
             {Id: 1, Name: 'Internal Booking'},
             {Id: 2, Name: 'External Booking'},
@@ -49,5 +49,9 @@ export class AvailabilityComponent implements OnInit {
 
     toggleUpdateBlock() {
         this.UpdateBlock = !this.UpdateBlock;
+    }
+
+    toggleCalendarView() {
+        this.isCalendarView = !this.isCalendarView;
     }
 }

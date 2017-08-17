@@ -18,9 +18,10 @@ var AvailabilityComponent = (function () {
         this.propertiesService = propertiesService;
         this.loginService = loginService;
         this.route = route;
+        this.UpdateBlock = true;
+        this.isCalendarView = true;
     }
     AvailabilityComponent.prototype.ngOnInit = function () {
-        this.UpdateBlock = true;
         this.UpdateTypeList = [
             { Id: 1, Name: 'Internal Booking' },
             { Id: 2, Name: 'External Booking' },
@@ -39,6 +40,9 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
         this.UpdateBlock = !this.UpdateBlock;
+    };
+    AvailabilityComponent.prototype.toggleCalendarView = function () {
+        this.isCalendarView = !this.isCalendarView;
     };
     AvailabilityComponent = __decorate([
         core_1.Component({
