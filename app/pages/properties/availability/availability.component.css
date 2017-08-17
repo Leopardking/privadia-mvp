@@ -19,6 +19,15 @@
     overflow: hidden;
 }
 
+.panels-wrp .right-panel .container-fluid,
+.panels-wrp .right-panel .container-fluid .card {
+    height: 100%;
+}
+
+.panels-wrp .right-panel .container-fluid {
+    padding-bottom: 50px;
+}
+
 .panels-wrp .right-panel .card-header {
     display: block;
     text-align: center;
