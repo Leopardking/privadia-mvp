@@ -11,13 +11,34 @@
 .panels-wrp .right-panel {
     padding-top: 5px;
     flex: 1;
-    transition: flex 0.2s ease;
 }
 
-.panels-wrp .right-panel.toggle {
-    flex: 0;
-    overflow: hidden;
+@keyframes panel-in {
+    0%   {flex: 0; opacity: 0;}
+    70%  {flex: 1; opacity: 0;}
+    100% {opacity: 1; flex: 1;}
 }
+
+@keyframes panel-out {
+    0%   {opacity: 1; flex: 1;}
+    30%  {flex: 1; opacity: 0;}
+    100% {flex: 0; opacity: 0;}
+}
+
+.panels-wrp .right-panel.in {
+    flex: 1;
+    opacity: 1;
+    overflow: hidden;
+    animation: panel-in 0.3s linear 1;
+}
+
+.panels-wrp .right-panel.out {
+    flex: 0;
+    opacity: 0;
+    overflow: hidden;
+    animation: panel-out 0.3s linear 1;
+}
+
 
 .panels-wrp .right-panel .container-fluid,
 .panels-wrp .right-panel .container-fluid .card {
