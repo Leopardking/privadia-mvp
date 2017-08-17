@@ -41,7 +41,8 @@ export class AvailabilityComponent implements OnInit {
             UpdateType: new FormControl({
                 Id: 1,
                 Name: 'Internal Booking',
-            })
+            }),
+            Notes: new FormControl()
         });
 
         // this.availabilityForm.valueChanges.subscribe(data => {

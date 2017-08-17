@@ -35,7 +35,8 @@ var AvailabilityComponent = (function () {
             UpdateType: new forms_1.FormControl({
                 Id: 1,
                 Name: 'Internal Booking',
-            })
+            }),
+            Notes: new forms_1.FormControl()
         });
         // this.availabilityForm.valueChanges.subscribe(data => {
         //     console.log('Form changes', data);
