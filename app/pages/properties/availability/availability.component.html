@@ -35,6 +35,9 @@
                             <calendar-cmp *ngIf="isCalendarView"
                                           [errorForm]="errorForm">
                             </calendar-cmp>
+                            <calendar-list-cmp *ngIf="!isCalendarView"
+                                          [errorForm]="errorForm">
+                            </calendar-list-cmp>
                         </div>
                     </div>
                 </div>

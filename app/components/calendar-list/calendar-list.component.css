@@ -1,50 +1,68 @@
-.c-button-group {
-	text-align: center;
-	margin-bottom: 40px;
+.table-availability thead th {
+    font-size: 16px;
+    text-align: left;
+    color: #999999;
+    border-bottom: 1px solid #c6c6c6;
 }
-.c-button-group .btn-white {
-	border: solid 1px #e8e8e8;
-}
-.c-button-group .yearNumber {
-	font-size: 24px;
-	font-weight: 100;
-	color: #0b5a7c;
-	padding: 0 40px;
-	line-height: 40px;
-	display: inline-block;
-}
-.month-container {
-	margin-bottom: 40px;
-}
-.month-container .month{
-	max-width: 80%;
-	margin: 0 auto;
-}
-.month-container table {
-	width: 100%;
-}
-.month-container .month-label {
-	font-size: 18px;
-	font-weight: 100;
-	color: #0b5a7c;
-}
-.month-container table .day {
-	font-size: 16px;
-	font-weight: 400;
-	line-height: 1.5;
-	color: #3a3a3a;
-}
-.month-container table th.day, .month-container td.day.different-month {
-	color: #a2a2a2;
-}
-.month-container {
 
+.table-availability tbody td {
+    font-size: 16px;
+    text-align: left;
+    color: #0b5a7c;
+    font-weight: 400;
 }
-.form-text .control-label {
-	font-size: 16px;
-	color: #3a3a3a;
+
+.table-availability tbody td.text-right {
+    text-align: right;
 }
-.form-text span {
-	font-size: 16px;
-	color: #5399bc;
+
+.table-availability tbody td .date-group .material-icons {
+    float: left;
+    font-size: 16px;
+    line-height: 36px;
+    margin-right: 15px;
+}
+
+.table-availability tbody td .form-control {
+    height: 35px;
+    font-size: 16px;
+    text-align: left;
+    color: #0b5a7c;
+}
+
+.table-availability tbody td .text-value {
+    line-height: 36px;
+}
+
+.table-availability .text-right {
+    min-width: 240px;
+    padding: 0 !important;
+}
+
+.table-availability .text-right button {
+    min-width: 80px;
+    padding: 14px 0;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    text-transform: none;
+    border-radius: 0;
+}
+
+.table-availability .text-right .btn-view-more {
+    color: #0b5a7c;
+}
+
+.table-availability .text-right .btn-edit {
+    color: #5399bc;
+}
+
+.table-availability .text-right .btn-delete {
+    color: #b71c1c;
+}
+
+.table-availability .text-right i {
+    font-size: 24px;
+    padding: 4px 0;
+    display: block;
 }

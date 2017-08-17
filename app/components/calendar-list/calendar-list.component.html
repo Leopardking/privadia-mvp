@@ -2,7 +2,111 @@
 <div class="list-container">
     <div class="row">
         <div class="col-xs-12">
-
+            <div class="card-content">
+                <div class="material-datatables">
+                    <table id="datatables" class="table table-availability">
+                        <thead>
+                        <tr>
+                            <th>Booking Type</th>
+                            <th>Check-In Date</th>
+                            <th>Check-Out Date</th>
+                            <th class="disabled-sorting text-right"></th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th class="disabled-sorting text-right"></th>
+                        </tr>
+                        </tfoot>
+                        <tbody id="bookingTableBody">
+                        <tr>
+                            <td>Exchange</td>
+                            <td>
+                                <div class="form-group date-group">
+                                    <i class="material-icons">insert_invitation</i>
+                                    <span class="text-value">08/17/2017</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group date-group">
+                                    <i class="material-icons">insert_invitation</i>
+                                    <span class="text-value">08/17/2017</span>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <button class="btn btn-simple btn-view-more btn-icon">
+                                    <i class="material-icons">more</i>View More
+                                </button>
+                                <button class="btn btn-simple btn-edit btn-icon">
+                                    <i class="material-icons">edit</i>Edit
+                                </button>
+                                <button class="btn btn-simple btn-delete btn-icon"
+                                        type="button"
+                                        [popover]="i">
+                                    <i class="material-icons">delete</i>Remove
+                                </button>
+                                <popover-content #i
+                                                 placement="left"
+                                                 [animation]="true"
+                                                 [closeOnClickOutside]="true">
+                                    <h3>Are you sure?</h3>
+                                    <button type="button" class="btn btn-danger font-14">
+                                        Yes, remove
+                                    </button>
+                                    <button type="button" class="btn btn-success-green font-14"
+                                            (click)="i.hide($event)">Cancel
+                                    </button>
+                                </popover-content>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Internal</td>
+                            <td>
+                                <div class="form-group date-group">
+                                    <i class="material-icons">insert_invitation</i>
+                                    <span class="text-value">08/17/2017</span>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group date-group">
+                                    <i class="material-icons">insert_invitation</i>
+                                    <span class="text-value">08/17/2017</span>
+                                </div>
+                            </td>
+                            <td class="text-right">
+                                <button class="btn btn-simple btn-view-more btn-icon">
+                                    <i class="material-icons">more</i>View More
+                                </button>
+                                <button class="btn btn-simple btn-edit btn-icon">
+                                    <i class="material-icons">edit</i>Edit
+                                </button>
+                                <button class="btn btn-simple btn-delete btn-icon"
+                                        type="button"
+                                        [popover]="i">
+                                    <i class="material-icons">delete</i>Remove
+                                </button>
+                                <popover-content #i
+                                                 placement="left"
+                                                 [animation]="true"
+                                                 [closeOnClickOutside]="true">
+                                    <h3>Are you sure?</h3>
+                                    <button type="button" class="btn btn-danger font-14">
+                                        Yes, remove
+                                    </button>
+                                    <button type="button" class="btn btn-success-green font-14"
+                                            (click)="i.hide($event)">Cancel
+                                    </button>
+                                </popover-content>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    {{!datatableInited ? finishReading() : "" }}
+                </div>
+            </div>
         </div>
     </div>
 </div>
