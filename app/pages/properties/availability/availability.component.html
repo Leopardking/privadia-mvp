@@ -7,12 +7,14 @@
                         <button
                                 class="btn btn-simple btn-switch btn-icon"
                                 [class.available]="!isCalendarView"
+                                [disabled]="isCalendarView"
                                 (click)="toggleCalendarView()">
                             <i class="material-icons">date_range</i>Calendar
                         </button>
                         <button
                                 class="btn btn-simple btn-switch btn-icon"
                                 [class.available]="isCalendarView"
+                                [disabled]="!isCalendarView"
                                 (click)="toggleCalendarView()">
                             <i class="material-icons">list</i>List
                         </button>
