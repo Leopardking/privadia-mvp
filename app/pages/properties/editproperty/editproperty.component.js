@@ -59,7 +59,7 @@ var EditpropertyComponent = (function () {
                 Summary: { value: _this.propertiesService.property.Summary, disabled: _this.permission },
                 Description: { value: _this.propertiesService.property.Description, disabled: _this.permission },
                 OtherInfo: { value: _this.propertiesService.property.OtherInfo, disabled: _this.permission },
-                CollaboratorInitials: { value: _this.propertiesService.property.CollaboratorInitials, disabled: _this.permission },
+                // CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
                 BoxUrl: [{ value: _this.propertiesService.property.BoxUrl, disabled: _this.permission }, forms_1.Validators.pattern('https?://.+')],
                 AgencyPackUrl: [{ value: _this.propertiesService.property.AgencyPackUrl, disabled: _this.permission }, forms_1.Validators.pattern('https?://.+')],
                 MinimumStay: [{ value: _this.propertiesService.property.MinimumStay, disabled: _this.permission }, forms_1.Validators.pattern('^[0-9]*$')],

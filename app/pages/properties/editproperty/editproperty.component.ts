@@ -71,7 +71,7 @@ export class EditpropertyComponent implements OnInit {
                 Summary: { value: this.propertiesService.property.Summary, disabled: this.permission },
                 Description: { value: this.propertiesService.property.Description, disabled: this.permission },
                 OtherInfo: { value: this.propertiesService.property.OtherInfo, disabled: this.permission },
-                CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
+                // CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
                 BoxUrl: [{ value: this.propertiesService.property.BoxUrl, disabled: this.permission }, Validators.pattern('https?://.+')],
                 AgencyPackUrl: [{ value: this.propertiesService.property.AgencyPackUrl, disabled: this.permission }, Validators.pattern('https?://.+')],
                 MinimumStay: [{ value: this.propertiesService.property.MinimumStay, disabled: this.permission }, Validators.pattern('^[0-9]*$')],
@@ -93,7 +93,7 @@ export class EditpropertyComponent implements OnInit {
                 OtherHousekeepingInfo: { value: this.propertiesService.property.OtherHousekeepingInfo, disabled: this.permission },
                 MetaDataTmp: {},
 
-                PropertyType: { value: 1}
+                PropertyType: {value: 1}
             });
             this.setContacts(this.propertiesService.property.Contacts);
             this.setRooms(this.propertiesService.property.Rooms);

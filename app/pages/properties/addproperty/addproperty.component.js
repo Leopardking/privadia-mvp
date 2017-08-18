@@ -56,7 +56,7 @@ var AddpropertyComponent = (function () {
             Summary: new forms_1.FormControl(),
             Description: new forms_1.FormControl(),
             OtherInfo: new forms_1.FormControl(),
-            CollaboratorInitials: new forms_1.FormControl(),
+            // CollaboratorInitials: new FormControl(),
             BoxUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
             AgencyPackUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
             Bathrooms: new forms_1.FormControl(null),
@@ -82,6 +82,7 @@ var AddpropertyComponent = (function () {
             Housekeeping: new forms_1.FormControl(0),
             // LiftAvailable: new FormControl(false),
             Benefits: new forms_1.FormControl(),
+            PropertyType: new forms_1.FormControl({ Id: 1, Name: 'Villa' })
         });
         propertiesService.readDataMetadata();
         propertiesService.readDataOwners();

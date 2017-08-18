@@ -54,7 +54,7 @@ export class AddpropertyComponent implements OnInit {
         Summary: new FormControl(),
         Description: new FormControl(),
         OtherInfo: new FormControl(),
-        CollaboratorInitials: new FormControl(),
+        // CollaboratorInitials: new FormControl(),
         BoxUrl: new FormControl(null, Validators.pattern('https?://.+')),
         AgencyPackUrl: new FormControl(null, Validators.pattern('https?://.+')),
         Bathrooms: new FormControl(null),
@@ -80,6 +80,8 @@ export class AddpropertyComponent implements OnInit {
         Housekeeping: new FormControl(0),
         // LiftAvailable: new FormControl(false),
         Benefits: new FormControl(),
+
+        PropertyType: new FormControl({Id: 1, Name: 'Villa'})
     });
 
     constructor ( private router:Router,
