@@ -19,7 +19,7 @@ declare const $:any;
 export class AvailabilityComponent implements OnInit {
     private availabilityForm: FormGroup;
     private UpdateTypeList: Array<{ Id: number, Name: string }>;
-    private UpdateBlock: boolean = true;
+    private UpdateBlock: boolean = null;
     private isCalendarView: boolean = true;
 
     constructor ( public propertiesService: PropertiesService,
@@ -66,7 +66,11 @@ export class AvailabilityComponent implements OnInit {
     }
 
     toggleUpdateBlock() {
-        this.UpdateBlock = !this.UpdateBlock;
+        if (this.UpdateBlock === null) {
+            this.UpdateBlock = true;
+        } else {
+            this.UpdateBlock = !this.UpdateBlock;
+        }
     }
 
     toggleCalendarView() {

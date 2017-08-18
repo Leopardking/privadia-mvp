@@ -40,7 +40,7 @@
                     </calendar-list-cmp>
                 </div>
             </div>
-            <div class="right-panel" [class.in]="!UpdateBlock" [class.out]="UpdateBlock" [formGroup]="availabilityForm">
+            <div class="right-panel" [class.in]="UpdateBlock === true" [class.out]="UpdateBlock === false" [formGroup]="availabilityForm">
                 <div class="container-fluid">
                     <div class="card">
                         <div class="col-md-12">

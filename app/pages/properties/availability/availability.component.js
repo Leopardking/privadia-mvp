@@ -18,7 +18,7 @@ var AvailabilityComponent = (function () {
         this.propertiesService = propertiesService;
         this.loginService = loginService;
         this.route = route;
-        this.UpdateBlock = true;
+        this.UpdateBlock = null;
         this.isCalendarView = true;
     }
     AvailabilityComponent.prototype.ngOnInit = function () {
@@ -56,7 +56,12 @@ var AvailabilityComponent = (function () {
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     };
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
-        this.UpdateBlock = !this.UpdateBlock;
+        if (this.UpdateBlock === null) {
+            this.UpdateBlock = true;
+        }
+        else {
+            this.UpdateBlock = !this.UpdateBlock;
+        }
     };
     AvailabilityComponent.prototype.toggleCalendarView = function () {
         this.isCalendarView = !this.isCalendarView;

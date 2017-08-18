@@ -10,6 +10,8 @@
 
 .panels-wrp .right-panel {
     flex: 0;
+    overflow: hidden;
+    opacity: 0;
 }
 
 @keyframes panel-in {
@@ -27,14 +29,12 @@
 .panels-wrp .right-panel.in {
     flex: 1;
     opacity: 1;
-    overflow: hidden;
     animation: panel-in 0.3s linear 1;
 }
 
 .panels-wrp .right-panel.out {
     flex: 0;
     opacity: 0;
-    overflow: hidden;
     animation: panel-out 0.3s linear 1;
 }
 
