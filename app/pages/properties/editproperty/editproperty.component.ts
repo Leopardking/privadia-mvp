@@ -83,9 +83,11 @@ export class EditpropertyComponent implements OnInit {
                 DiningCapacity: { value: this.propertiesService.property.DiningCapacity, disabled: this.permission },
                 KitchenInfo: { value: this.propertiesService.property.KitchenInfo, disabled: this.permission },
                 ChildrenAllowed: { value: this.propertiesService.property.ChildrenAllowed, disabled: this.permission },
+                ChildrenWelcome: {},
                 SmokingAllowed: { value: this.propertiesService.property.SmokingAllowed, disabled: this.permission },
                 WheelchairAccessible: { value: this.propertiesService.property.WheelchairAccessible, disabled: this.permission },
-                PetsAllowed: { value: this.propertiesService.property.PetsAllowed, disabled: this.permission },
+                PetsWelcome: {},
+                PetsConsidered: {},
                 EventsAllowed: { value: this.propertiesService.property.EventsAllowed, disabled: this.permission },
                 // LiftAvailable: { value: this.propertiesService.property.LiftAvailable, disabled: this.permission },
                 Benefits: { value: this.propertiesService.property.Benefits, disabled: this.permission },
@@ -93,7 +95,7 @@ export class EditpropertyComponent implements OnInit {
                 OtherHousekeepingInfo: { value: this.propertiesService.property.OtherHousekeepingInfo, disabled: this.permission },
                 MetaDataTmp: {},
 
-                PropertyType: {value: 1}
+                PropertyType: {value: 1},
             });
             this.setContacts(this.propertiesService.property.Contacts);
             this.setRooms(this.propertiesService.property.Rooms);

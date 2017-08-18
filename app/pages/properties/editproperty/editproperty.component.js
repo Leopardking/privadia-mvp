@@ -71,16 +71,18 @@ var EditpropertyComponent = (function () {
                 DiningCapacity: { value: _this.propertiesService.property.DiningCapacity, disabled: _this.permission },
                 KitchenInfo: { value: _this.propertiesService.property.KitchenInfo, disabled: _this.permission },
                 ChildrenAllowed: { value: _this.propertiesService.property.ChildrenAllowed, disabled: _this.permission },
+                ChildrenWelcome: {},
                 SmokingAllowed: { value: _this.propertiesService.property.SmokingAllowed, disabled: _this.permission },
                 WheelchairAccessible: { value: _this.propertiesService.property.WheelchairAccessible, disabled: _this.permission },
-                PetsAllowed: { value: _this.propertiesService.property.PetsAllowed, disabled: _this.permission },
+                PetsWelcome: {},
+                PetsConsidered: {},
                 EventsAllowed: { value: _this.propertiesService.property.EventsAllowed, disabled: _this.permission },
                 // LiftAvailable: { value: this.propertiesService.property.LiftAvailable, disabled: this.permission },
                 Benefits: { value: _this.propertiesService.property.Benefits, disabled: _this.permission },
                 Housekeeping: { value: _this.propertiesService.property.Housekeeping, disabled: _this.permission },
                 OtherHousekeepingInfo: { value: _this.propertiesService.property.OtherHousekeepingInfo, disabled: _this.permission },
                 MetaDataTmp: {},
-                PropertyType: { value: 1 }
+                PropertyType: { value: 1 },
             });
             _this.setContacts(_this.propertiesService.property.Contacts);
             _this.setRooms(_this.propertiesService.property.Rooms);
