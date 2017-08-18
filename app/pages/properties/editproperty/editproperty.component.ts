@@ -92,6 +92,8 @@ export class EditpropertyComponent implements OnInit {
                 Housekeeping: { value: this.propertiesService.property.Housekeeping, disabled: this.permission },
                 OtherHousekeepingInfo: { value: this.propertiesService.property.OtherHousekeepingInfo, disabled: this.permission },
                 MetaDataTmp: {},
+
+                PropertyType: { value: 1}
             });
             this.setContacts(this.propertiesService.property.Contacts);
             this.setRooms(this.propertiesService.property.Rooms);

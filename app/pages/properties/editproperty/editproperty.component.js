@@ -80,6 +80,7 @@ var EditpropertyComponent = (function () {
                 Housekeeping: { value: _this.propertiesService.property.Housekeeping, disabled: _this.permission },
                 OtherHousekeepingInfo: { value: _this.propertiesService.property.OtherHousekeepingInfo, disabled: _this.permission },
                 MetaDataTmp: {},
+                PropertyType: { value: 1 }
             });
             _this.setContacts(_this.propertiesService.property.Contacts);
             _this.setRooms(_this.propertiesService.property.Rooms);
