@@ -9,8 +9,7 @@
 }
 
 .panels-wrp .right-panel {
-    padding-top: 5px;
-    flex: 1;
+    flex: 0;
 }
 
 @keyframes panel-in {
@@ -40,13 +39,8 @@
 }
 
 
-.panels-wrp .right-panel .container-fluid,
 .panels-wrp .right-panel .container-fluid .card {
-    height: 100%;
-}
-
-.panels-wrp .right-panel .container-fluid {
-    padding-bottom: 55px;
+    padding-bottom: 42px;
 }
 
 .panels-wrp .right-panel .card-header {
