@@ -71,9 +71,15 @@ export class AvailabilityComponent implements OnInit {
         } else {
             this.UpdateBlock = !this.UpdateBlock;
         }
+        if (this.UpdateBlock === true && this.isCalendarView === false) {
+            this.isCalendarView = true;
+        }
     }
 
     toggleCalendarView() {
         this.isCalendarView = !this.isCalendarView;
+        if (this.isCalendarView === false && this.UpdateBlock === true) {
+            this.UpdateBlock = false;
+        }
     }
 }

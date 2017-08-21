@@ -62,9 +62,15 @@ var AvailabilityComponent = (function () {
         else {
             this.UpdateBlock = !this.UpdateBlock;
         }
+        if (this.UpdateBlock === true && this.isCalendarView === false) {
+            this.isCalendarView = true;
+        }
     };
     AvailabilityComponent.prototype.toggleCalendarView = function () {
         this.isCalendarView = !this.isCalendarView;
+        if (this.isCalendarView === false && this.UpdateBlock === true) {
+            this.UpdateBlock = false;
+        }
     };
     AvailabilityComponent = __decorate([
         core_1.Component({
