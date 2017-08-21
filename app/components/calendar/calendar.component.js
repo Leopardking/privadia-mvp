@@ -16,7 +16,7 @@ var CalendarComponent = (function () {
     CalendarComponent.prototype.ngOnInit = function () {
         this.months = [];
         this.selected = this._removeTime(this.selected || moment());
-        this.startCalendar = this.selected.month("May").clone();
+        this.startCalendar = this.selected.month(this.selected.month()).clone();
         for (var i = 0; i < 6; i++) {
             var start = this.startCalendar.clone();
             start.date(1);
@@ -44,7 +44,7 @@ var CalendarComponent = (function () {
             monthIndex = date.month();
         }
         this.months.push({
-            monthName: month.format('MMMM'),
+            monthName: month.format('MMMM YYYY'),
             weeks: this.weeks
         });
     };
@@ -87,10 +87,10 @@ var CalendarComponent = (function () {
         }
     };
     ;
-    CalendarComponent.prototype.changeYear = function (changer) {
+    CalendarComponent.prototype.changePeriod = function (changer) {
         this.months = [];
-        this.selected = this.startCalendar.add(changer, 'year');
-        this.startCalendar = this.selected.month("May").clone();
+        this.selected.add(changer, 'months');
+        this.startCalendar = this.selected.month(this.selected.month()).clone();
         for (var i = 0; i < 6; i++) {
             var start = this.startCalendar.clone();
             start.date(1);

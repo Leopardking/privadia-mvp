@@ -3,19 +3,14 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="cart-content">
-                <div class="c-button-group">
-                    <a (click)="changeYear(-1)"
+                <div class="c-button-group left">
+                    <a (click)="changePeriod(-6)"
                        class="btn btn-round btn-fab btn-fab-mini btn-white">
                         <i class="material-icons">keyboard_arrow_left</i>
                     </a>
-                    <span class="yearNumber">{{selected.format("YYYY")}}</span>
-                    <a (click)="changeYear(1)"
-                       class="btn btn-round btn-fab btn-fab-mini btn-white">
-                        <i class="material-icons">keyboard_arrow_right</i>
-                    </a>
                 </div>
-                <div class="row">
-                    <div class="month-container col-xs-4" *ngFor="let month of months">
+                <div class="months-container">
+                    <div class="month-container" *ngFor="let month of months">
                         <div class="month">
                             <span class="month-label">{{month.monthName}}</span><br/><br/>
                             <table>
@@ -41,6 +36,12 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="c-button-group right">
+                    <a (click)="changePeriod(6)"
+                       class="btn btn-round btn-fab btn-fab-mini btn-white">
+                        <i class="material-icons">keyboard_arrow_right</i>
+                    </a>
                 </div>
             </div>
         </div>
