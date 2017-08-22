@@ -33,6 +33,12 @@ export class CalendarComponent implements OnInit{
 	}
 
 	ngOnInit() {
+		this.bookingDays = [
+			{startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external'},
+			{startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal'},
+			{startDay: '08/20/2017', endDay: '08/24/2017', Type: 'other'}
+		];
+
 		this.months = [];
 		this.selected = this._removeTime(this.selected || moment());
         this.startCalendar = this.selected.month(this.selected.month()).clone();
@@ -75,19 +81,26 @@ export class CalendarComponent implements OnInit{
 
 	private _buildWeek(date, month) {
 		let days = [];
+        let dayType = {};
 		for (let i = 0; i < 7; i++) {
-			days.push({
+			if (date.month() === month.month()) {
+            	dayType = this.isBetween(date);
+			} else {
+				dayType = {}
+			}
+            days.push({
 				name: date.format("dd")
 					.substring(0, 1),
 				number: date.date(),
 				isCurrentMonth: date.month() === month.month(),
 				isToday: date.isSame(new Date(), "day"),
-				date: date
+				date: date,
+				dayType: dayType
 			});
 			date = date.clone();
 			date.add(1, "d");
 		}
-		return days;
+        return days;
 	};
 
 	private isIn(dayNumber, isCurrentMonth) {
@@ -112,6 +125,28 @@ export class CalendarComponent implements OnInit{
 			}
 		}
 	};
+
+	private isBetween(date) {
+		let day = {
+			type: <string> null,
+			typeStart: <string> null,
+			typeEnd: <string> null,
+			isStart: false,
+			isEnd: false
+		};
+		this.bookingDays.forEach((bookingDay) => {
+			if (moment(date).isBetween(moment(bookingDay.startDay), moment(bookingDay.endDay), null, '()' )) {
+				day.type = bookingDay.Type;
+			} else if (moment(date).isSame(moment(bookingDay.startDay))) {
+				day.typeStart = bookingDay.Type;
+				day.isStart = true;
+			} else if (moment(date).isSame(moment(bookingDay.endDay))) {
+                day.typeEnd = bookingDay.Type;
+                day.isEnd = true;
+			}
+		});
+		return day;
+	}
 
 	private changePeriod(changer) {
 		this.months = [];

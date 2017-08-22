@@ -76,29 +76,42 @@
 	position: relative;
 	z-index: 102;
 }
-.month-container table .day .internal-period-start {
-	background: linear-gradient(to right bottom, transparent 50%, rgba(229, 138, 229, 0.2) 50%);
+.month-container table .day .internal {
+	background-color: rgba(229, 138, 229, 0.4);
+}
+.month-container table .day .external {
+	background-color: rgba(83, 153, 188, 0.4);
+}
+.month-container table .day .other {
+	background-color: rgba(237, 237, 96, 0.4);
+}
+.month-container table .day .internal-start {
+	background: linear-gradient(to right bottom, transparent 50%, rgba(229, 138, 229, 0.4) 50%);
 	z-index: 100;
 }
-.month-container table .day .internal-period-end {
-	background: linear-gradient(to left top, transparent 50%, rgba(229, 138, 229, 0.2) 50%);
+.month-container table .day .internal-end {
+	background: linear-gradient(to left top, transparent 50%, rgba(229, 138, 229, 0.4) 50%);
 	z-index: 101;
 }
-.month-container table .day .external-period-start {
-	background: linear-gradient(to right bottom, transparent 50%, rgba(83, 153, 188, 0.2) 50%);
+.month-container table .day .external-start {
+	background: linear-gradient(to right bottom, transparent 50%, rgba(83, 153, 188, 0.4) 50%);
 	z-index: 100;
 }
-.month-container table .day .external-period-end {
-	background: linear-gradient(to left top, transparent 50%, rgba(83, 153, 188, 0.2) 50%);
+.month-container table .day .external-end {
+	background: linear-gradient(to left top, transparent 50%, rgba(83, 153, 188, 0.4) 50%);
 	z-index: 101;
 }
-.month-container table .day .other-period-start {
-	background: linear-gradient(to right bottom, transparent 50%, rgba(237, 237, 96, 0.2) 50%);
+.month-container table .day .other-start {
+	background: linear-gradient(to right bottom, transparent 50%, rgba(237, 237, 96, 0.4) 50%);
 	z-index: 100;
 }
-.month-container table .day .other-period-end {
-	background: linear-gradient(to left top, transparent 50%, rgba(237, 237, 96, 0.2) 50%);
+.month-container table .day .other-end {
+	background: linear-gradient(to left top, transparent 50%, rgba(237, 237, 96, 0.4) 50%);
 	z-index: 101;
+}
+.month-container table .day .split {
+	background: linear-gradient(to left top, transparent 48%, #fff 48%, #fff 52%, transparent 52%);
+	z-index: 102;
 }
 .form-text .control-label {
 	font-size: 16px;

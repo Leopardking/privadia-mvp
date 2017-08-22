@@ -31,11 +31,13 @@
                                         class="day {{isIn(day.number,day.isCurrentMonth)}}"
                                         [ngClass]="{'different-month': !day.isCurrentMonth }">
                                         <div class="cell">
-                                            <div class="period internal-period-start" *ngIf="false"></div>
+                                            <div class="period split" *ngIf="day.dayType.isStart && day.dayType.isEnd"></div>
+                                            <div class="period {{day.dayType.typeStart}}-start" *ngIf="day.dayType.isStart"></div>
+                                            <div class="period {{day.dayType.type}}" *ngIf="!day.dayType.isStart && !day.dayType.isEnd"></div>
+                                            <div class="period {{day.dayType.typeEnd}}-end" *ngIf="day.dayType.isEnd"></div>
                                             <div class="date">
                                                 {{day.number}}
                                             </div>
-                                            <div class="period internal-period-end" *ngIf="false"></div>
                                         </div>
                                     </td>
                                 </tr>
