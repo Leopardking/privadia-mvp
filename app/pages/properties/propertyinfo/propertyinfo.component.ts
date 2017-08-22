@@ -112,4 +112,20 @@ export class PropertyinfoComponent implements OnInit{
         const control = <FormArray>this.propertyForm.controls['Rooms'];
         control.removeAt(i);
     }
+
+    private addKitchen() {
+        const control = <FormArray>this.propertyForm.controls['Rooms'];
+        control.push(
+            new FormGroup({
+                Description: new FormControl({ value: null, disabled: this.permission }),
+                Name: new FormControl({ value: null, disabled: this.permission }),
+                PropertyRoomType: new FormControl({ value: 3, disabled: this.permission }),
+            }),
+        );
+    }
+
+    private removeKitchen(i: number) {
+        const control = <FormArray>this.propertyForm.controls['Rooms'];
+        control.removeAt(i);
+    }
 }

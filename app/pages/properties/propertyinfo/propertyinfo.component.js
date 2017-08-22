@@ -82,6 +82,18 @@ var PropertyinfoComponent = (function () {
         var control = this.propertyForm.controls['Rooms'];
         control.removeAt(i);
     };
+    PropertyinfoComponent.prototype.addKitchen = function () {
+        var control = this.propertyForm.controls['Rooms'];
+        control.push(new forms_1.FormGroup({
+            Description: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            Name: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            PropertyRoomType: new forms_1.FormControl({ value: 3, disabled: this.permission }),
+        }));
+    };
+    PropertyinfoComponent.prototype.removeKitchen = function (i) {
+        var control = this.propertyForm.controls['Rooms'];
+        control.removeAt(i);
+    };
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
