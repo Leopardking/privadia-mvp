@@ -113,6 +113,31 @@
 	background: linear-gradient(to left top, transparent 48%, #fff 48%, #fff 52%, transparent 52%);
 	z-index: 102;
 }
+.calendar-container .legend-block {
+	padding-bottom: 24px;
+}
+.calendar-container .legend {
+	text-align: center;
+}
+.calendar-container .legend:before {
+	vertical-align: middle;
+	content: " ";
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 10px;
+	background-color: transparent;
+}
+.calendar-container .legend-external:before {
+	background-color: #98c2d7;
+}
+.calendar-container .legend-internal:before {
+	background-color: #f7a3f8;
+}
+.calendar-container .legend-other:before {
+	background-color: #f7fa86;
+}
 .form-text .control-label {
 	font-size: 16px;
 	color: #3a3a3a;
