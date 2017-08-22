@@ -77,36 +77,36 @@
 	z-index: 102;
 }
 .month-container table .day .internal {
-	background-color: rgba(229, 138, 229, 0.4);
+	background-color: #f7a3f8;
 }
 .month-container table .day .external {
-	background-color: rgba(83, 153, 188, 0.4);
+	background-color: #98c2d7;
 }
 .month-container table .day .other {
-	background-color: rgba(237, 237, 96, 0.4);
+	background-color: #f7fa86;
 }
 .month-container table .day .internal-start {
-	background: linear-gradient(to right bottom, transparent 50%, rgba(229, 138, 229, 0.4) 50%);
+	background: linear-gradient(to right bottom, transparent 50%, #f7a3f8 50%);
 	z-index: 100;
 }
 .month-container table .day .internal-end {
-	background: linear-gradient(to left top, transparent 50%, rgba(229, 138, 229, 0.4) 50%);
+	background: linear-gradient(to left top, transparent 50%, #f7a3f8 50%);
 	z-index: 101;
 }
 .month-container table .day .external-start {
-	background: linear-gradient(to right bottom, transparent 50%, rgba(83, 153, 188, 0.4) 50%);
+	background: linear-gradient(to right bottom, transparent 50%, #98c2d7 50%);
 	z-index: 100;
 }
 .month-container table .day .external-end {
-	background: linear-gradient(to left top, transparent 50%, rgba(83, 153, 188, 0.4) 50%);
+	background: linear-gradient(to left top, transparent 50%, #98c2d7 50%);
 	z-index: 101;
 }
 .month-container table .day .other-start {
-	background: linear-gradient(to right bottom, transparent 50%, rgba(237, 237, 96, 0.4) 50%);
+	background: linear-gradient(to right bottom, transparent 50%, #f7fa86 50%);
 	z-index: 100;
 }
 .month-container table .day .other-end {
-	background: linear-gradient(to left top, transparent 50%, rgba(237, 237, 96, 0.4) 50%);
+	background: linear-gradient(to left top, transparent 50%, #f7fa86 50%);
 	z-index: 101;
 }
 .month-container table .day .split {
