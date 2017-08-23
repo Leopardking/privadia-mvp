@@ -56,9 +56,9 @@ var AddpropertyComponent = (function () {
             Summary: new forms_1.FormControl(),
             Description: new forms_1.FormControl(),
             OtherInfo: new forms_1.FormControl(),
-            CollaboratorInitials: new forms_1.FormControl(),
-            BoxUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
-            AgencyPackUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
+            // CollaboratorInitials: new FormControl(),
+            PropertyUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
+            AssetsUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
             Bathrooms: new forms_1.FormControl(null),
             Bedrooms: new forms_1.FormControl(null),
             Sleeps: new forms_1.FormControl(null),
@@ -66,10 +66,12 @@ var AddpropertyComponent = (function () {
             LivingAreaSize: new forms_1.FormControl(null),
             DiningCapacity: new forms_1.FormControl(null),
             KitchenInfo: new forms_1.FormControl(),
-            ChildrenAllowed: new forms_1.FormControl(0),
+            ChildrenAllowed: new forms_1.FormControl(false),
+            ChildrenWelcome: new forms_1.FormControl(false),
             SmokingAllowed: new forms_1.FormControl(false),
             WheelchairAccessible: new forms_1.FormControl(false),
-            PetsAllowed: new forms_1.FormControl(false),
+            PetsWelcome: new forms_1.FormControl(false),
+            PetsConsidered: new forms_1.FormControl(false),
             EventsAllowed: new forms_1.FormControl(false),
             Contacts: new forms_1.FormArray([]),
             Rooms: new forms_1.FormArray([]),
@@ -80,8 +82,9 @@ var AddpropertyComponent = (function () {
             MetaDataTmp: new forms_1.FormGroup({}),
             OtherHousekeepingInfo: new forms_1.FormControl(),
             Housekeeping: new forms_1.FormControl(0),
-            LiftAvailable: new forms_1.FormControl(false),
+            // LiftAvailable: new FormControl(false),
             Benefits: new forms_1.FormControl(),
+            PropertyType: new forms_1.FormControl({ Id: 1, Name: 'Villa' })
         });
         propertiesService.readDataMetadata();
         propertiesService.readDataOwners();

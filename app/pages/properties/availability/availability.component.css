@@ -1,0 +1,96 @@
+.panels-wrp {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.panels-wrp .left-panel {
+    flex: 2;
+}
+
+.panels-wrp .right-panel {
+    flex: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+
+@keyframes panel-in {
+    0%   {flex: 0; opacity: 0;}
+    70%  {flex: 1; opacity: 0;}
+    100% {opacity: 1; flex: 1;}
+}
+
+@keyframes panel-out {
+    0%   {opacity: 1; flex: 1;}
+    30%  {flex: 1; opacity: 0;}
+    100% {flex: 0; opacity: 0;}
+}
+
+.panels-wrp .right-panel.in {
+    flex: 1;
+    opacity: 1;
+    animation: panel-in 0.3s linear 1;
+}
+
+.panels-wrp .right-panel.out {
+    flex: 0;
+    opacity: 0;
+    animation: panel-out 0.3s linear 1;
+}
+
+
+.panels-wrp .right-panel .container-fluid .card {
+
+}
+
+.panels-wrp .right-panel .card-header {
+    display: block;
+    text-align: center;
+}
+
+.panels-wrp .right-panel .input-group .input-group-addon {
+    padding-left: 0;
+}
+
+.panels-wrp .right-panel .input-group .input-group-addon i {
+    font-size: 18px;
+    color: #5399bc;
+    font-weight: 400;
+}
+
+.panels-wrp .right-panel .divider-line {
+    font-size: 14px;
+    text-align: center;
+    color: #747879;
+    background-color: #f3f5f6;
+    height: 24px;
+    line-height: 24px;
+    margin: 20px 0;
+}
+
+.toolbar .buttons-bar {
+    text-align: right;
+}
+.btn-switch {
+    min-width: 80px;
+    padding: 14px 0;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    text-transform: none;
+    border-radius: 0;
+}
+
+.btn-switch:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.btn-switch.available {
+    color: #5399bc;
+}
+
+.btn-switch i {
+    font-size: 24px;
+    padding: 4px 0;
+    display: block;
+}

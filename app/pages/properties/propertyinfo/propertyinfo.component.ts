@@ -27,6 +27,7 @@ export class PropertyinfoComponent implements OnInit{
 
     private permission;
     public role = !this.loginService.getRoles('Admin');
+    private PropertyType: Array<{ Id: number, Name: string }>;
 
     constructor ( private propertiesService: PropertiesService,
                   private loginService: LoginService,
@@ -38,6 +39,16 @@ export class PropertyinfoComponent implements OnInit{
         initWizard();
         this.permission = !this.loginService.getPermission('Properties/Put');
         $('.property-tab a:first').tab('show')
+
+        this.PropertyType = [
+            {Id: 1, Name: 'Villa'},
+            {Id: 2, Name: 'Apartment'},
+            {Id: 3, Name: 'Chalet'},
+            {Id: 4, Name: 'Cottage'},
+            {Id: 5, Name: 'House'},
+            {Id: 6, Name: 'Lodge'},
+            {Id: 7, Name: 'Yacht'},
+        ]
     }
 
     private regionChanged(e) { }
@@ -98,6 +109,22 @@ export class PropertyinfoComponent implements OnInit{
     }
 
     private removeBathroom(i: number) {
+        const control = <FormArray>this.propertyForm.controls['Rooms'];
+        control.removeAt(i);
+    }
+
+    private addKitchen() {
+        const control = <FormArray>this.propertyForm.controls['Rooms'];
+        control.push(
+            new FormGroup({
+                Description: new FormControl({ value: null, disabled: this.permission }),
+                Name: new FormControl({ value: null, disabled: this.permission }),
+                PropertyRoomType: new FormControl({ value: 3, disabled: this.permission }),
+            }),
+        );
+    }
+
+    private removeKitchen(i: number) {
         const control = <FormArray>this.propertyForm.controls['Rooms'];
         control.removeAt(i);
     }

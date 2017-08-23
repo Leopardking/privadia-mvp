@@ -4,6 +4,7 @@ import { PropertiesComponent } from './properties.component';
 import { SetratesComponent } from './setrates/setrates.component';
 import { AvailabilityComponent } from './availability/availability.component';
 import {CalendarComponent} from "../../components/calendar/calendar.component";
+import {CalendarListComponent} from "../../components/calendar-list/calendar-list.component";
 
 export const MODULE_ROUTES: Route[] =[
     { path: '', children: [
@@ -23,5 +24,6 @@ export const MODULE_COMPONENTS = [
     PropertiesComponent,
     SetratesComponent,
     AvailabilityComponent,
-    CalendarComponent
+    CalendarComponent,
+    CalendarListComponent
 ];

@@ -1,0 +1,68 @@
+.table-availability thead th {
+    font-size: 16px;
+    text-align: left;
+    color: #999999;
+    border-bottom: 1px solid #c6c6c6;
+}
+
+.table-availability tbody td {
+    font-size: 16px;
+    text-align: left;
+    color: #0b5a7c;
+    font-weight: 400;
+}
+
+.table-availability tbody td.text-right {
+    text-align: right;
+}
+
+.table-availability tbody td .date-group .material-icons {
+    float: left;
+    font-size: 16px;
+    line-height: 36px;
+    margin-right: 15px;
+}
+
+.table-availability tbody td .form-control {
+    height: 35px;
+    font-size: 16px;
+    text-align: left;
+    color: #0b5a7c;
+}
+
+.table-availability tbody td .text-value {
+    line-height: 36px;
+}
+
+.table-availability .text-right {
+    min-width: 240px;
+    padding: 0 !important;
+}
+
+.table-availability .text-right button {
+    min-width: 80px;
+    padding: 14px 0;
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    text-transform: none;
+    border-radius: 0;
+}
+
+.table-availability .text-right .btn-view-more {
+    color: #0b5a7c;
+}
+
+.table-availability .text-right .btn-edit {
+    color: #5399bc;
+}
+
+.table-availability .text-right .btn-delete {
+    color: #b71c1c;
+}
+
+.table-availability .text-right i {
+    font-size: 24px;
+    padding: 4px 0;
+    display: block;
+}
