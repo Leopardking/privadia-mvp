@@ -64,17 +64,21 @@
 .month-container table .day .cell {
 	position:relative;
 	overflow:hidden;
+	min-width: 30px;
 }
 .month-container table .day .period {
 	position: absolute;
 	top: 0;
-	left: 0;
 	width: 100%;
 	height: 100%;
 }
 .month-container table .day .date {
 	position: relative;
 	z-index: 102;
+}
+.month-container table .day .date span {
+	position: relative;
+	z-index: 1010;
 }
 .month-container table .day .internal {
 	background-color: #f7a3f8;
@@ -85,34 +89,135 @@
 .month-container table .day .other {
 	background-color: #f7fa86;
 }
-.month-container table .day .internal-start {
+.month-container table .day .period:before {
+	position: absolute;
+	top:0px;
+	display: block;
+	content: '';
+	width: 24px;
+	height: 24px;
+	z-index: 100;
+}
+.month-container table .day .start,
+.month-container table .day .end {
+	width: 50%;
+}
+.month-container table .day .start {
+	left: 50%;
+	margin-left: 15px;
+}
+.month-container table .day .end {
+	right: 50%;
+	margin-right: 15px;
+}
+.month-container table .day .start:before,
+.month-container table .day .end:before {
+	width: 0;
+	height: 0;
+}
+.month-container table .day .start:before {
+	left:-24px;
+	border-bottom-width: 24px;
+	border-bottom-style: solid;
+	border-left: 24px solid transparent !important;
+}
+.month-container table .day .end:before {
+	right: -24px;
+	border-top-width: 24px;
+	border-top-style: solid;
+	border-right: 24px solid transparent !important;
+}
+.month-container table .day .internal:before {
+	border-color: #f7a3f8;
+}
+.month-container table .day .external:before {
+	border-color: #98c2d7;
+}
+.month-container table .day .other:before {
+	border-color: #f7fa86;
+}
+
+/*
+.month-container table .day .internal-start:before,
+.month-container table .day .internal-end:before,
+.month-container table .day .external-start:before,
+.month-container table .day .external-end:before,
+.month-container table .day .other-start:before,
+.month-container table .day .other-end:before {
+	position: absolute;
+	top:0px;
+	display: block;
+	content: '';
+	width: 24px;
+	height: 24px;
+	z-index: 100;
+}
+.month-container table .day .internal-start:before,
+.month-container table .day .internal-end:before,
+.month-container table .day .external-start:before,
+.month-container table .day .external-end:before,
+.month-container table .day .other-start:before,
+.month-container table .day .other-end:before {
+	position: absolute;
+	top:0px;
+	display: block;
+	content: '';
+	width: 24px;
+	height: 24px;
+	z-index: 100;
+}
+.month-container table .day .internal-start:before,
+.month-container table .day .external-start:before,
+.month-container table .day .other-start:before {
+	right: 50%;
+	margin-right: -15px;
+	height: 24px;
+	border-left1: 24px solid transparent;
+}
+.month-container table .day .internal-end:before,
+.month-container table .day .external-end:before,
+.month-container table .day .other-end:before {
+	left: 50%;
+	margin-left: -15px;
+	height: 24px;
+	border-right1: 24px solid transparent;
+}
+
+.month-container table .day .internal-start:before {
 	background: linear-gradient(to right bottom, transparent 50%, #f7a3f8 50%);
-	z-index: 100;
+	border-bottom1: 24px solid #f7a3f8;
 }
-.month-container table .day .internal-end {
+.month-container table .day .internal-end:before {
 	background: linear-gradient(to left top, transparent 50%, #f7a3f8 50%);
+	border-top1: 24px solid #f7a3f8;
 	z-index: 101;
 }
-.month-container table .day .external-start {
+.month-container table .day .external-start:before {
 	background: linear-gradient(to right bottom, transparent 50%, #98c2d7 50%);
-	z-index: 100;
+	border-bottom1: 24px solid #98c2d7;
 }
-.month-container table .day .external-end {
+.month-container table .day .external-end:before {
 	background: linear-gradient(to left top, transparent 50%, #98c2d7 50%);
+	border-top1: 24px solid #98c2d7;
 	z-index: 101;
 }
-.month-container table .day .other-start {
-	background: linear-gradient(to right bottom, transparent 50%, #f7fa86 50%);
-	z-index: 100;
+.month-container table .day .period.external-end {
+	background1: red;
 }
-.month-container table .day .other-end {
+.month-container table .day .other-start:before {
+	background: linear-gradient(to right bottom, transparent 50%, #f7fa86 50%);
+	border-bottom1: 24px solid #f7fa86;
+}
+.month-container table .day .other-end:before {
 	background: linear-gradient(to left top, transparent 50%, #f7fa86 50%);
+	border-top1: 24px solid #f7fa86;
 	z-index: 101;
 }
 .month-container table .day .split {
 	background: linear-gradient(to left top, transparent 48%, #fff 48%, #fff 52%, transparent 52%);
 	z-index: 102;
 }
+*/
 .calendar-container .legend-block {
 	padding-bottom: 24px;
 }

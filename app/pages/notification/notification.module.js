@@ -14,15 +14,11 @@ var router_1 = require('@angular/router');
 /**
  *  Providers
  */
-var enquiry_service_1 = require("../../providers/enquery/enquiry.service");
 /**
  *  Components
  */
 var notification_component_1 = require('./notification.component');
 var notification_routing_module_1 = require('./notification-routing.module');
-var ng2_cloudinary_1 = require("ng2-cloudinary");
-// import { EnquiriesTableComponent } from "../../components/tables/enquiries/enquiries.component";
-// import {ProposalsService} from "../../providers/proposals/proposals.service";
 var NotificationModule = (function () {
     function NotificationModule() {
     }
@@ -32,14 +28,10 @@ var NotificationModule = (function () {
                 common_1.CommonModule,
                 notification_routing_module_1.NotificationRoutingModule,
                 router_1.RouterModule,
-                ng2_cloudinary_1.Ng2CloudinaryModule
             ],
             declarations: [
                 notification_component_1.NotificationComponent,
             ],
-            providers: [
-                enquiry_service_1.EnquiryService,
-            ]
         }), 
         __metadata('design:paramtypes', [])
     ], NotificationModule);

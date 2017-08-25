@@ -17,7 +17,8 @@ var CalendarComponent = (function () {
         this.bookingDays = [
             { startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external' },
             { startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal' },
-            { startDay: '08/20/2017', endDay: '08/24/2017', Type: 'other' }
+            { startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other' },
+            { startDay: '08/26/2017', endDay: '08/30/2017', Type: 'external' },
         ];
         this.months = [];
         this.selected = this._removeTime(this.selected || moment());

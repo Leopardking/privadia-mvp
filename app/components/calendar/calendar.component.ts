@@ -36,7 +36,9 @@ export class CalendarComponent implements OnInit{
 		this.bookingDays = [
 			{startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external'},
 			{startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal'},
-			{startDay: '08/20/2017', endDay: '08/24/2017', Type: 'other'}
+			{startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other'},
+			{startDay: '08/26/2017', endDay: '08/30/2017', Type: 'external'},
+
 		];
 
 		this.months = [];
@@ -108,7 +110,7 @@ export class CalendarComponent implements OnInit{
 			if (this.bookingDays) {
 				const startIndex = _.findIndex(this.bookingDays.startDay, { 'day': dayNumber });
 				const selectedIndex = _.findIndex(this.bookingDays.selectedDay, { 'day': dayNumber });// scope.bookingDays.selectedDay.indexOf(dayNumber);
-				const endIndex = _.findIndex(this.bookingDays.endDay, { 'day': dayNumber });// scope.bookingDays.endDay.indexOf(dayNumber);
+				const endIndex = _.findIndex(this.bookingDays.endDay, { 'day': dayNumber });  // scope.bookingDays.endDay.indexOf(dayNumber);
 				if (startIndex > -1 && endIndex > -1) {
 					return "start end";
 				}
