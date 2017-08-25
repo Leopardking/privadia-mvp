@@ -2,58 +2,62 @@
 <div class="calendar-container">
     <div class="row">
         <div class="col-xs-12">
-            <div class="form-group form-text">
-                <label class="control-label">iCal url:</label>
-                <span class="form-control-static">http://privadia-api-dev.azurewebsites.net/Bookings/ICal/1</span>
+            <div class="cart-content">
+                <div class="c-button-group left">
+                    <a (click)="changePeriod(-6)"
+                       class="btn btn-round btn-fab btn-fab-mini btn-white">
+                        <i class="material-icons">keyboard_arrow_left</i>
+                    </a>
+                </div>
+                <div class="months-container">
+                    <div class="month-container" *ngFor="let month of months">
+                        <div class="month">
+                            <span class="month-label">{{month.monthName}}</span><br/><br/>
+                            <table>
+                                <thead>
+                                <tr class="week names">
+                                    <th class="day">S</th>
+                                    <th class="day">M</th>
+                                    <th class="day">T</th>
+                                    <th class="day">W</th>
+                                    <th class="day">T</th>
+                                    <th class="day">F</th>
+                                    <th class="day">S</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="week" *ngFor="let week of month.weeks">
+                                    <td *ngFor="let day of week.days"
+                                        class="day {{isIn(day.number,day.isCurrentMonth)}}"
+                                        [ngClass]="{'different-month': !day.isCurrentMonth }">
+                                        <div class="cell">
+                                            <div class="period split" *ngIf="day.dayType.isStart && day.dayType.isEnd"></div>
+                                            <div class="period {{day.dayType.typeStart}}-start" *ngIf="day.dayType.isStart"></div>
+                                            <div class="period {{day.dayType.type}}" *ngIf="!day.dayType.isStart && !day.dayType.isEnd"></div>
+                                            <div class="period {{day.dayType.typeEnd}}-end" *ngIf="day.dayType.isEnd"></div>
+                                            <div class="date">
+                                                {{day.number}}
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="c-button-group right">
+                    <a (click)="changePeriod(6)"
+                       class="btn btn-round btn-fab btn-fab-mini btn-white">
+                        <i class="material-icons">keyboard_arrow_right</i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-
-    <!--<div class="row">-->
-        <!--<div class="col-xs-3">-->
-            <!--<div class="form-group label-floating" [ngClass]="{'form-error': !propertyForm.controls['MinimumStay'].valid && errorForm}">-->
-                <!--<label class="control-label">Minimum Days Stay</label>-->
-                <!--<input type="number" min="0" class="form-control" formControlName="MinimumStay">-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <div class="c-button-group">
-        <a (click)="changeYear(-1)"
-           class="btn btn-round btn-fab btn-fab-mini btn-white">
-            <i class="material-icons">keyboard_arrow_left</i>
-        </a>
-        <span class="yearNumber">{{selected.format("YYYY")}}</span>
-        <a (click)="changeYear(1)"
-           class="btn btn-round btn-fab btn-fab-mini btn-white">
-            <i class="material-icons">keyboard_arrow_right</i>
-        </a>
-    </div>
-    <div class="row">
-        <div class="month-container col-xs-4" *ngFor="let month of months">
-            <div class="month">
-                <span class="month-label">{{month.monthName}}</span><br/><br/>
-                <table>
-                    <thead>
-                    <tr class="week names">
-                        <th class="day">S</th>
-                        <th class="day">M</th>
-                        <th class="day">T</th>
-                        <th class="day">W</th>
-                        <th class="day">T</th>
-                        <th class="day">F</th>
-                        <th class="day">S</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr class="week" *ngFor="let week of month.weeks">
-                        <td *ngFor="let day of week.days"
-                            class="day {{isIn(day.number,day.isCurrentMonth)}}"
-                            [ngClass]="{'different-month': !day.isCurrentMonth }">{{day.number}}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+    <div class="row legend-block">
+        <div class="col-xs-4 legend legend-external">External Booking</div>
+        <div class="col-xs-4 legend legend-internal">Internal Booking</div>
+        <div class="col-xs-4 legend legend-other">Other Blocking Periods</div>
     </div>
 </div>

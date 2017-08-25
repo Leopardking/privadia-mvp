@@ -8,8 +8,7 @@
                          propertyForm.controls['Name'] &&
                          propertyForm.controls['Bedrooms'] &&
                          propertyForm.controls['Sleeps'] &&
-                         propertyForm.controls['MinimumStay'] &&
-                         propertyForm.controls['BoxUrl']">
+                         propertyForm.controls['MinimumStay']">
                 <div class="card">
                     <div class="property-tabs card-content p-b-15">
                         <ul class="nav nav-pills main-nav-pills">
@@ -17,8 +16,7 @@
                                 [ngClass]="{'form-error': (!propertyForm.controls['Bathrooms'].valid ||
                                 !propertyForm.controls['Name'].valid ||
                                 !propertyForm.controls['Bedrooms'].valid ||
-                                !propertyForm.controls['Sleeps'].valid||
-                                !propertyForm.controls['BoxUrl'].valid) && errorForm}">
+                                !propertyForm.controls['Sleeps'].valid) && errorForm}">
                                 <a href="#metatab-info" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">store</i>
                                     Property Info
@@ -42,7 +40,7 @@
                                     Marketing
                                 </a>
                             </li>
-                            <li class="nav-pill">
+                            <!--<li class="nav-pill">
                                 <a href="#metatab-property-4" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">golf_course</i>
                                     Points of Interests
@@ -53,7 +51,7 @@
                                     <i class="material-icons">pin_drop</i>
                                     Local Activities
                                 </a>
-                            </li>
+                            </li>-->
                             <li class="nav-pill">
                                 <a href="#metatab-property-6" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">stars</i>
@@ -63,13 +61,13 @@
                             <li class="nav-pill">
                                 <a href="#metatab-property-2" role="tab" data-toggle="tab" class="">
                                     <i class="material-icons">hotel</i>
-                                    Services
+                                    Housekeeping
                                 </a>
                             </li>
                             <li class="nav-pill">
                                 <a href="#metatab-property-1" role="tab" data-toggle="tab" class="">
-                                    <i class="material-icons">flight_takeoff</i>
-                                    Trip
+                                    <i class="material-icons">thumb_up</i>
+                                    Suitability
                                 </a>
                             </li>
                         </ul>

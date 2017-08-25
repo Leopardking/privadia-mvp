@@ -1,16 +1,198 @@
 <div class="main-content">
     <div class="container-fluid">
-        <div class="row">
-            <div class="card">
-                <calendar-cmp *ngIf="!propertiesService.isReading"
-                    [errorForm]="errorForm">
-                </calendar-cmp>
+        <div class="toolbar row">
+            <div class="col-xs-12 buttons-bar">
+                <button
+                        class="btn btn-simple btn-switch btn-icon"
+                        [class.available]="!isCalendarView"
+                        [disabled]="isCalendarView"
+                        (click)="toggleCalendarView()">
+                    <i class="material-icons">date_range</i>Calendar
+                </button>
+                <button
+                        class="btn btn-simple btn-switch btn-icon"
+                        [class.available]="isCalendarView"
+                        [disabled]="!isCalendarView"
+                        (click)="toggleCalendarView()">
+                    <i class="material-icons">list</i>List
+                </button>
+                <button
+                        class="btn btn-simple btn-success btn-icon secondary-color shadow-grey"
+                        (click)="toggleUpdateBlock()">
+                    <i class="material-icons">refresh</i> Update Availability
+                </button>
+            </div>
+        </div>
+        <div class="panels-wrp">
+            <div class="left-panel">
+                <div class="card">
+                    <div class="col-xs-12">
+                        <div class="card-header card-header-icon" data-background-color="blue">
+                            <i class="material-icons">date_range</i>
+                        </div>
+                        <h4 class="card-title m-t-15">Villa name</h4>
+                    </div>
+                    <calendar-cmp *ngIf="isCalendarView"
+                                  [errorForm]="errorForm">
+                    </calendar-cmp>
+                    <calendar-list-cmp *ngIf="!isCalendarView"
+                                       [errorForm]="errorForm">
+                    </calendar-list-cmp>
+                </div>
+            </div>
+            <div class="right-panel" [class.in]="UpdateBlock === true" [class.out]="UpdateBlock === false" [formGroup]="availabilityForm">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="col-md-12">
+                            <div class="card-header card-header-text" data-background-color="green">
+                                <span class="font-16">Update Availability</span>
+                            </div>
+                            <div class="card-content">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <datetimepicker-field-cmp
+                                                [data]="{title: 'Check In'}"
+                                                [classes]="{withIcon: true}"
+                                                [field]="availabilityForm.controls.CheckIn"></datetimepicker-field-cmp>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <datetimepicker-field-cmp
+                                                [data]="{title: 'Check Out'}"
+                                                [classes]="{withIcon: false}"
+                                                [field]="availabilityForm.controls.CheckOut"></datetimepicker-field-cmp>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <singleselect-field-cmp
+                                                [dataList]="UpdateTypeList"
+                                                [options]="{title: 'Update type', default: 'Internal Booking'}"
+                                                [errorForm]="errorForm"
+                                                [field]="availabilityForm.controls.UpdateType"></singleselect-field-cmp>
+                                    </div>
+                                </div>
+                                <div *ngIf="availabilityForm.controls.UpdateType.value.Id === 1">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <div class="radio">
+                                                <label>
+                                                    <input
+                                                            type="radio"
+                                                            name="isAgency"
+                                                            [formControl]="availabilityForm.controls.isAgency"
+                                                            formControlName="isAgency"
+                                                            [checked]="true"
+                                                            [value]="false"> Direct to client
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="radio">
+                                                <label>
+                                                    <input
+                                                            type="radio"
+                                                            name="isAgency"
+                                                            [formControl]="availabilityForm.controls.isAgency"
+                                                            formControlName="isAgency"
+                                                            [value]="true"> Via a 3rd party agency
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="divider-line">Client Info</div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input-field-cmp
+                                                        [data]="{title: 'First Name', name: 'FirstName', type: 'text'}"
+                                                        [errorForm]="errorForm"
+                                                        [field]="availabilityForm.controls.FirstName"></input-field-cmp>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input-field-cmp
+                                                        [data]="{title: 'Last Name', name: 'LastName', type: 'text'}"
+                                                        [errorForm]="errorForm"
+                                                        [field]="availabilityForm.controls.LastName"></input-field-cmp>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input-field-cmp [data]="{title: 'EMail', name: 'EMail', type: 'text'}"
+                                                                 [errorForm]="errorForm"
+                                                                 [field]="availabilityForm.controls.Email"></input-field-cmp>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input-field-cmp [data]="{title: 'Phone', name: 'Phone', type: 'text'}"
+                                                                 [errorForm]="errorForm"
+                                                                 [field]="availabilityForm.controls.Phone"></input-field-cmp>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="availabilityForm.controls.isAgency.value">
+                                        <div class="divider-line">Agency Info</div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input-field-cmp
+                                                        [data]="{title: 'Company Name', name: 'CompanyName', type: 'text'}"
+                                                        [errorForm]="errorForm"
+                                                        [field]="availabilityForm.controls.CompanyName"></input-field-cmp>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input-field-cmp
+                                                        [data]="{title: 'Contact Name', name: 'ContactName', type: 'text'}"
+                                                        [errorForm]="errorForm"
+                                                        [field]="availabilityForm.controls.ContactName"></input-field-cmp>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <input-field-cmp
+                                                        [data]="{title: 'EMail', name: 'AgencyEMail', type: 'text'}"
+                                                        [errorForm]="errorForm"
+                                                        [field]="availabilityForm.controls.AgencyEmail"></input-field-cmp>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <input-field-cmp
+                                                        [data]="{title: 'Phone', name: 'AgencyPhone', type: 'text'}"
+                                                        [errorForm]="errorForm"
+                                                        [field]="availabilityForm.controls.AgencyPhone"></input-field-cmp>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="material-icons">assignment</i></span>
+                                            <div class="form-group label-floating">
+                                                <label class="control-label">Notes</label>
+                                                <textarea [formControl]="availabilityForm.controls.Notes"
+                                                          class="form-control"
+                                                          (keyup)="autosize($event)"
+                                                          (click)="autosize($event)"
+                                                ></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="btn-group-bottom">
+                                            <button class="btn btn-success pull-right font-16 m-r-10">Save</button>
+                                            <button class="btn btn-danger font-16 m-l-10">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-<!--<div class="loader" [hidden]="!propertiesService.isReading">-->
-    <!--<svg class="circular" viewBox="25 25 50 50">-->
-        <!--<circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>-->
-    <!--</svg>-->
-<!--</div>-->
+<div class="loader" [hidden]="!propertiesService.isReading">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>

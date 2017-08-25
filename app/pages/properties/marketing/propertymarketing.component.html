@@ -2,18 +2,18 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group label-floating"
-                 [ngClass]="{'form-error': !propertyForm.controls['BoxUrl'].valid}">
-                <label class="control-label">Unbranded PDF Url</label>
-                <input type="text" class="form-control" formControlName="BoxUrl" #pdfUrl>
+                 [ngClass]="{'form-error': !propertyForm.controls['PropertyUrl'].valid}">
+                <label class="control-label">Property URL</label>
+                <input type="text" class="form-control" formControlName="PropertyUrl" #pdfUrl>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
             <div class="form-group label-floating"
-                 [ngClass]="{'form-error': !propertyForm.controls['AgencyPackUrl'].valid}">
-                <label class="control-label">Agency Pack Download Url</label>
-                <input type="text" class="form-control" formControlName="AgencyPackUrl" #agencyUrl>
+                 [ngClass]="{'form-error': !propertyForm.controls['AssetsUrl'].valid}">
+                <label class="control-label">Property assets URL</label>
+                <input type="text" class="form-control" formControlName="AssetsUrl" #agencyUrl>
             </div>
         </div>
     </div>

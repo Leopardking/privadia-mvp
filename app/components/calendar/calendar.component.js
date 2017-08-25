@@ -14,9 +14,14 @@ var CalendarComponent = (function () {
     function CalendarComponent() {
     }
     CalendarComponent.prototype.ngOnInit = function () {
+        this.bookingDays = [
+            { startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external' },
+            { startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal' },
+            { startDay: '08/20/2017', endDay: '08/24/2017', Type: 'other' }
+        ];
         this.months = [];
         this.selected = this._removeTime(this.selected || moment());
-        this.startCalendar = this.selected.month("May").clone();
+        this.startCalendar = this.selected.month(this.selected.month()).clone();
         for (var i = 0; i < 6; i++) {
             var start = this.startCalendar.clone();
             start.date(1);
@@ -44,20 +49,28 @@ var CalendarComponent = (function () {
             monthIndex = date.month();
         }
         this.months.push({
-            monthName: month.format('MMMM'),
+            monthName: month.format('MMMM YYYY'),
             weeks: this.weeks
         });
     };
     CalendarComponent.prototype._buildWeek = function (date, month) {
         var days = [];
+        var dayType = {};
         for (var i = 0; i < 7; i++) {
+            if (date.month() === month.month()) {
+                dayType = this.isBetween(date);
+            }
+            else {
+                dayType = {};
+            }
             days.push({
                 name: date.format("dd")
                     .substring(0, 1),
                 number: date.date(),
                 isCurrentMonth: date.month() === month.month(),
                 isToday: date.isSame(new Date(), "day"),
-                date: date
+                date: date,
+                dayType: dayType
             });
             date = date.clone();
             date.add(1, "d");
@@ -87,10 +100,33 @@ var CalendarComponent = (function () {
         }
     };
     ;
-    CalendarComponent.prototype.changeYear = function (changer) {
+    CalendarComponent.prototype.isBetween = function (date) {
+        var day = {
+            type: null,
+            typeStart: null,
+            typeEnd: null,
+            isStart: false,
+            isEnd: false
+        };
+        this.bookingDays.forEach(function (bookingDay) {
+            if (moment(date).isBetween(moment(bookingDay.startDay), moment(bookingDay.endDay), null, '()')) {
+                day.type = bookingDay.Type;
+            }
+            else if (moment(date).isSame(moment(bookingDay.startDay))) {
+                day.typeStart = bookingDay.Type;
+                day.isStart = true;
+            }
+            else if (moment(date).isSame(moment(bookingDay.endDay))) {
+                day.typeEnd = bookingDay.Type;
+                day.isEnd = true;
+            }
+        });
+        return day;
+    };
+    CalendarComponent.prototype.changePeriod = function (changer) {
         this.months = [];
-        this.selected = this.startCalendar.add(changer, 'year');
-        this.startCalendar = this.selected.month("May").clone();
+        this.selected.add(changer, 'months');
+        this.startCalendar = this.selected.month(this.selected.month()).clone();
         for (var i = 0; i < 6; i++) {
             var start = this.startCalendar.clone();
             start.date(1);

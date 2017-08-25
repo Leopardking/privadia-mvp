@@ -1,6 +1,20 @@
+.cart-content {
+	padding: 24px 0;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
 .c-button-group {
+	width: 64px;
+	flex: 0 0 64px;
 	text-align: center;
 	margin-bottom: 40px;
+}
+.c-button-group.left {
+	margin-left: 40px;
+}
+.c-button-group.right {
+	margin-right: 40px;
 }
 .c-button-group .btn-white {
 	border: solid 1px #e8e8e8;
@@ -13,7 +27,13 @@
 	line-height: 40px;
 	display: inline-block;
 }
+.months-container {
+	display: flex;
+	flex-grow: 1;
+	flex-wrap: wrap;
+}
 .month-container {
+	width: 33%;
 	margin-bottom: 40px;
 }
 .month-container .month{
@@ -33,12 +53,90 @@
 	font-weight: 400;
 	line-height: 1.5;
 	color: #3a3a3a;
+	text-align: center;
 }
-.month-container table th.day, .month-container td.day.different-month {
+.month-container table th.day {
 	color: #a2a2a2;
 }
-.month-container {
-
+.month-container td.day.different-month {
+	color: transparent;
+}
+.month-container table .day .cell {
+	position:relative;
+	overflow:hidden;
+}
+.month-container table .day .period {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.month-container table .day .date {
+	position: relative;
+	z-index: 102;
+}
+.month-container table .day .internal {
+	background-color: #f7a3f8;
+}
+.month-container table .day .external {
+	background-color: #98c2d7;
+}
+.month-container table .day .other {
+	background-color: #f7fa86;
+}
+.month-container table .day .internal-start {
+	background: linear-gradient(to right bottom, transparent 50%, #f7a3f8 50%);
+	z-index: 100;
+}
+.month-container table .day .internal-end {
+	background: linear-gradient(to left top, transparent 50%, #f7a3f8 50%);
+	z-index: 101;
+}
+.month-container table .day .external-start {
+	background: linear-gradient(to right bottom, transparent 50%, #98c2d7 50%);
+	z-index: 100;
+}
+.month-container table .day .external-end {
+	background: linear-gradient(to left top, transparent 50%, #98c2d7 50%);
+	z-index: 101;
+}
+.month-container table .day .other-start {
+	background: linear-gradient(to right bottom, transparent 50%, #f7fa86 50%);
+	z-index: 100;
+}
+.month-container table .day .other-end {
+	background: linear-gradient(to left top, transparent 50%, #f7fa86 50%);
+	z-index: 101;
+}
+.month-container table .day .split {
+	background: linear-gradient(to left top, transparent 48%, #fff 48%, #fff 52%, transparent 52%);
+	z-index: 102;
+}
+.calendar-container .legend-block {
+	padding-bottom: 24px;
+}
+.calendar-container .legend {
+	text-align: center;
+}
+.calendar-container .legend:before {
+	vertical-align: middle;
+	content: " ";
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	display: inline-block;
+	margin-right: 10px;
+	background-color: transparent;
+}
+.calendar-container .legend-external:before {
+	background-color: #98c2d7;
+}
+.calendar-container .legend-internal:before {
+	background-color: #f7a3f8;
+}
+.calendar-container .legend-other:before {
+	background-color: #f7fa86;
 }
 .form-text .control-label {
 	font-size: 16px;

@@ -30,6 +30,15 @@ var PropertyinfoComponent = (function () {
         initWizard();
         this.permission = !this.loginService.getPermission('Properties/Put');
         $('.property-tab a:first').tab('show');
+        this.PropertyType = [
+            { Id: 1, Name: 'Villa' },
+            { Id: 2, Name: 'Apartment' },
+            { Id: 3, Name: 'Chalet' },
+            { Id: 4, Name: 'Cottage' },
+            { Id: 5, Name: 'House' },
+            { Id: 6, Name: 'Lodge' },
+            { Id: 7, Name: 'Yacht' },
+        ];
     };
     PropertyinfoComponent.prototype.regionChanged = function (e) { };
     PropertyinfoComponent.prototype.autosize = function (e) {
@@ -70,6 +79,18 @@ var PropertyinfoComponent = (function () {
         }));
     };
     PropertyinfoComponent.prototype.removeBathroom = function (i) {
+        var control = this.propertyForm.controls['Rooms'];
+        control.removeAt(i);
+    };
+    PropertyinfoComponent.prototype.addKitchen = function () {
+        var control = this.propertyForm.controls['Rooms'];
+        control.push(new forms_1.FormGroup({
+            Description: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            Name: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            PropertyRoomType: new forms_1.FormControl({ value: 3, disabled: this.permission }),
+        }));
+    };
+    PropertyinfoComponent.prototype.removeKitchen = function (i) {
         var control = this.propertyForm.controls['Rooms'];
         control.removeAt(i);
     };

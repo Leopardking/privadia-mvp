@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var login_service_1 = require("../../../providers/login/login.service");
@@ -17,8 +18,59 @@ var AvailabilityComponent = (function () {
         this.propertiesService = propertiesService;
         this.loginService = loginService;
         this.route = route;
+        this.UpdateBlock = null;
+        this.isCalendarView = true;
     }
     AvailabilityComponent.prototype.ngOnInit = function () {
+        this.UpdateTypeList = [
+            { Id: 1, Name: 'Internal Booking' },
+            { Id: 2, Name: 'External Booking' },
+            { Id: 3, Name: 'Owner Present' },
+            { Id: 4, Name: 'Not Available for Rent' },
+            { Id: 5, Name: 'Other' }
+        ];
+        this.availabilityForm = new forms_1.FormGroup({
+            CheckIn: new forms_1.FormControl('08/16/2017'),
+            CheckOut: new forms_1.FormControl('08/18/2017'),
+            UpdateType: new forms_1.FormControl({
+                Id: 1,
+                Name: 'Internal Booking',
+            }),
+            Notes: new forms_1.FormControl(),
+            isAgency: new forms_1.FormControl(false),
+            FirstName: new forms_1.FormControl(),
+            LastName: new forms_1.FormControl(),
+            Email: new forms_1.FormControl(),
+            Phone: new forms_1.FormControl(),
+            CompanyName: new forms_1.FormControl(),
+            ContactName: new forms_1.FormControl(),
+            AgencyEmail: new forms_1.FormControl(),
+            AgencyPhone: new forms_1.FormControl()
+        });
+        // this.availabilityForm.valueChanges.subscribe(data => {
+        //     console.log('Form changes', data);
+        //     this.output = data
+        // });
+    };
+    AvailabilityComponent.prototype.autosize = function (e) {
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
+    };
+    AvailabilityComponent.prototype.toggleUpdateBlock = function () {
+        if (this.UpdateBlock === null) {
+            this.UpdateBlock = true;
+        }
+        else {
+            this.UpdateBlock = !this.UpdateBlock;
+        }
+        if (this.UpdateBlock === true && this.isCalendarView === false) {
+            this.isCalendarView = true;
+        }
+    };
+    AvailabilityComponent.prototype.toggleCalendarView = function () {
+        this.isCalendarView = !this.isCalendarView;
+        if (this.isCalendarView === false && this.UpdateBlock === true) {
+            this.UpdateBlock = false;
+        }
     };
     AvailabilityComponent = __decorate([
         core_1.Component({
