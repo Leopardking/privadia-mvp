@@ -35,6 +35,19 @@ export class AvailabilityComponent implements OnInit {
             {Id: 4, Name: 'Not Available for Rent'},
             {Id: 5, Name: 'Other'}
         ];
+        this.resetForm();
+        // this.availabilityForm.valueChanges.subscribe(data => {
+        //     console.log('Form changes', data);
+        //     this.output = data
+        // });
+
+    }
+
+    private autosize(e){
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
+    }
+
+    private resetForm() {
         this.availabilityForm = new FormGroup({
             CheckIn: new FormControl('08/16/2017'),
             CheckOut: new FormControl('08/18/2017'),
@@ -53,16 +66,6 @@ export class AvailabilityComponent implements OnInit {
             AgencyEmail: new FormControl(),
             AgencyPhone: new FormControl()
         });
-
-        // this.availabilityForm.valueChanges.subscribe(data => {
-        //     console.log('Form changes', data);
-        //     this.output = data
-        // });
-
-    }
-
-    private autosize(e){
-        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     }
 
     toggleUpdateBlock() {
@@ -70,6 +73,7 @@ export class AvailabilityComponent implements OnInit {
             this.UpdateBlock = true;
         } else {
             this.UpdateBlock = !this.UpdateBlock;
+            this.resetForm();
         }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;

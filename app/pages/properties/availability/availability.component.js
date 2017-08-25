@@ -29,6 +29,16 @@ var AvailabilityComponent = (function () {
             { Id: 4, Name: 'Not Available for Rent' },
             { Id: 5, Name: 'Other' }
         ];
+        this.resetForm();
+        // this.availabilityForm.valueChanges.subscribe(data => {
+        //     console.log('Form changes', data);
+        //     this.output = data
+        // });
+    };
+    AvailabilityComponent.prototype.autosize = function (e) {
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
+    };
+    AvailabilityComponent.prototype.resetForm = function () {
         this.availabilityForm = new forms_1.FormGroup({
             CheckIn: new forms_1.FormControl('08/16/2017'),
             CheckOut: new forms_1.FormControl('08/18/2017'),
@@ -47,13 +57,6 @@ var AvailabilityComponent = (function () {
             AgencyEmail: new forms_1.FormControl(),
             AgencyPhone: new forms_1.FormControl()
         });
-        // this.availabilityForm.valueChanges.subscribe(data => {
-        //     console.log('Form changes', data);
-        //     this.output = data
-        // });
-    };
-    AvailabilityComponent.prototype.autosize = function (e) {
-        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     };
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
         if (this.UpdateBlock === null) {
@@ -61,6 +64,7 @@ var AvailabilityComponent = (function () {
         }
         else {
             this.UpdateBlock = !this.UpdateBlock;
+            this.resetForm();
         }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
