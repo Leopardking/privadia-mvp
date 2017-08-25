@@ -4,7 +4,7 @@ exports.ROUTES = [
     { path: 'dashboard', title: 'Dashboard', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'dashboard' },
     { path: 'booking', title: 'Bookings', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'confirmation_number' },
     { path: 'properties', title: 'Properties', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'store' },
-    { path: 'notifications', title: 'Notifications', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'mail' },
+    { path: 'notifications', title: 'Notifications', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'mail', disable: true },
     { path: 'users', title: 'Users', menuType: sidebar_metadata_1.MenuType.LEFT, icon: 'group' },
 ];
 //# sourceMappingURL=sidebar-routes.config.js.map

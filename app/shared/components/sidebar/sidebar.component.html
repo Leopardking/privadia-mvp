@@ -50,7 +50,11 @@
     <div class="nav-container">
         <ul class="nav">
             <li *ngFor="let item of menuItems" routerLinkActive="active">
-                <a *ngIf="!item.children" [routerLink]="['/' + item.path]">
+                <a *ngIf="!item.children && !item.disable" [routerLink]="['/' + item.path]">
+                    <i class="material-icons">{{item.icon}}</i>
+                    <p>{{item.title}}</p>
+                </a>
+                <a *ngIf="!item.children && item.disable">
                     <i class="material-icons">{{item.icon}}</i>
                     <p>{{item.title}}</p>
                 </a>
