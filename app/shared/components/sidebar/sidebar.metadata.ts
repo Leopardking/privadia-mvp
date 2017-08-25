@@ -10,6 +10,7 @@ export interface RouteInfo {
     title: string;
     menuType: MenuType;
     icon: string;
+    disable?: boolean;
     children?: Array<{
         path: string;
         hash: string;
