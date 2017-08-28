@@ -20,11 +20,15 @@ var AvailabilityComponent = (function () {
         this.route = route;
         this.builder = builder;
         this.availabilityForm = new forms_1.FormGroup({});
+        this.checkedDates = {
+            CheckIn: '',
+            CheckOut: '',
+        };
         this.UpdateBlock = null;
         this.isCalendarView = true;
         this.data = {
-            CheckIn: '08/16/2017',
-            CheckOut: '08/18/2017',
+            CheckIn: '08/01/2017',
+            CheckOut: '08/03/2017',
             UpdateType: {
                 Id: 1,
                 Name: 'Internal Booking',
@@ -40,6 +44,13 @@ var AvailabilityComponent = (function () {
             AgencyEmail: null,
             AgencyPhone: null
         };
+        this.bookingDays = [
+            { startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external' },
+            { startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal' },
+            { startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other' },
+            { startDay: '08/26/2017', endDay: '08/30/2017', Type: 'external' },
+            { startDay: null, endDay: null, Type: 'external' },
+        ];
     }
     AvailabilityComponent.prototype.ngOnInit = function () {
         this.UpdateTypeList = [
@@ -50,11 +61,6 @@ var AvailabilityComponent = (function () {
             { Id: 5, Name: 'Other' }
         ];
         this.initForm(this.data);
-        // this.availabilityForm.valueChanges.subscribe(data => {
-        //     console.log('Form changes', data);
-        //     this.output = data
-        // });
-        console.log('Init');
     };
     AvailabilityComponent.prototype.autosize = function (e) {
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
@@ -86,14 +92,13 @@ var AvailabilityComponent = (function () {
         }
         else {
             this.UpdateBlock = !this.UpdateBlock;
-            this.initForm(this.data);
         }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
-            this.initForm(this.data);
         }
     };
     AvailabilityComponent.prototype.handlerEditAvailability = function (data) {
+        var _this = this;
         var dataForm = {
             CheckIn: '09/16/2017',
             CheckOut: '09/18/2017',
@@ -120,6 +125,12 @@ var AvailabilityComponent = (function () {
             this.UpdateBlock = !this.UpdateBlock;
         }
         this.initForm(dataForm);
+        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(function (data) {
+            _this.bookingDays[4].startDay = data;
+        });
+        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(function (data) {
+            _this.bookingDays[4].endDay = data;
+        });
     };
     AvailabilityComponent.prototype.toggleCalendarView = function () {
         this.isCalendarView = !this.isCalendarView;
@@ -129,6 +140,9 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.saveForm = function () {
         console.log("save form", this.availabilityForm);
+    };
+    AvailabilityComponent.prototype.changeDate = function () {
+        console.log('changeDate ', this.availabilityForm);
     };
     AvailabilityComponent = __decorate([
         core_1.Component({

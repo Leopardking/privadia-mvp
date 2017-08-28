@@ -15,7 +15,11 @@ var CalendarListComponent = (function () {
         this.editAvailability = new core_1.EventEmitter();
         this.datatableInited = false;
     }
-    CalendarListComponent.prototype.ngOnInit = function () { };
+    CalendarListComponent.prototype.ngOnInit = function () {
+        this.availabilityForm.valueChanges.subscribe(function (data) {
+            console.log('sdfgsdg');
+        });
+    };
     CalendarListComponent.prototype.finishReading = function () {
         var DataTable = $('#datatables');
         DataTable.DataTable({
@@ -33,7 +37,7 @@ var CalendarListComponent = (function () {
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
-    ], CalendarListComponent.prototype, "propertyForm", void 0);
+    ], CalendarListComponent.prototype, "availabilityForm", void 0);
     __decorate([
         core_1.Input('errorForm'), 
         __metadata('design:type', Object)

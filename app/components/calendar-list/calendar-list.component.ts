@@ -13,7 +13,7 @@ declare var _: any;
 })  
 
 export class CalendarListComponent implements OnInit{
-    @Input('group') private propertyForm: FormGroup;
+    @Input('group') private availabilityForm: FormGroup;
     @Input('errorForm') public errorForm: any;
     @Output() editAvailability: EventEmitter<any> = new EventEmitter();
 
@@ -21,7 +21,11 @@ export class CalendarListComponent implements OnInit{
 
     constructor( ) { }
 
-	ngOnInit() {}
+	ngOnInit() {
+        this.availabilityForm.valueChanges.subscribe(data => {
+            console.log('sdfgsdg')
+        });
+    }
 
     private finishReading() {
         let DataTable: any = $('#datatables');

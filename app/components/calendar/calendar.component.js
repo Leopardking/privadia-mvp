@@ -14,12 +14,7 @@ var CalendarComponent = (function () {
     function CalendarComponent() {
     }
     CalendarComponent.prototype.ngOnInit = function () {
-        this.bookingDays = [
-            { startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external' },
-            { startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal' },
-            { startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other' },
-            { startDay: '08/26/2017', endDay: '08/30/2017', Type: 'external' },
-        ];
+        var _this = this;
         this.months = [];
         this.selected = this._removeTime(this.selected || moment());
         this.startCalendar = this.selected.month(this.selected.month()).clone();
@@ -30,6 +25,19 @@ var CalendarComponent = (function () {
             this._buildMonth(start, this.startCalendar);
             this.startCalendar.add(1, 'month');
         }
+        this.availabilityForm.valueChanges.subscribe(function (data) {
+            _this.months = [];
+            _this.selected = _this._removeTime(_this.selected || moment());
+            _this.startCalendar = _this.selected.month(_this.selected.month()).clone();
+            for (var i = 0; i < 6; i++) {
+                var start = _this.startCalendar.clone();
+                start.date(1);
+                _this._removeTime(start.day(0));
+                _this._buildMonth(start, _this.startCalendar);
+                _this.startCalendar.add(1, 'month');
+            }
+        });
+        console.log('Month ', this.months);
     };
     CalendarComponent.prototype._removeTime = function (date) {
         return date.day(0)
@@ -137,13 +145,13 @@ var CalendarComponent = (function () {
         }
     };
     __decorate([
+        core_1.Input('bookingDays'), 
+        __metadata('design:type', Object)
+    ], CalendarComponent.prototype, "bookingDays", void 0);
+    __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
-    ], CalendarComponent.prototype, "propertyForm", void 0);
-    __decorate([
-        core_1.Input('errorForm'), 
-        __metadata('design:type', Object)
-    ], CalendarComponent.prototype, "errorForm", void 0);
+    ], CalendarComponent.prototype, "availabilityForm", void 0);
     CalendarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

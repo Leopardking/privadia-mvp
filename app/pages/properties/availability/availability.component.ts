@@ -18,13 +18,17 @@ declare const $:any;
 
 export class AvailabilityComponent implements OnInit {
     public availabilityForm = new FormGroup({});
+    public checkedDates = {
+        CheckIn: '',
+        CheckOut: '',
+    };
     private UpdateTypeList: Array<{ Id: number, Name: string }>;
     private UpdateBlock: boolean = null;
     private isCalendarView: boolean = true;
 
     private data = {
-        CheckIn: '08/16/2017',
-        CheckOut: '08/18/2017',
+        CheckIn: '08/01/2017',
+        CheckOut: '08/03/2017',
         UpdateType: {
             Id: 1,
             Name: 'Internal Booking',
@@ -41,6 +45,14 @@ export class AvailabilityComponent implements OnInit {
         AgencyPhone: null
     };
 
+    public bookingDays = [
+        {startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external'},
+        {startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal'},
+        {startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other'},
+        {startDay: '08/26/2017', endDay: '08/30/2017', Type: 'external'},
+        {startDay: null, endDay: null, Type: 'external'},
+    ];
+
     constructor ( public propertiesService: PropertiesService,
                   private loginService: LoginService,
                   private route: ActivatedRoute,
@@ -56,11 +68,7 @@ export class AvailabilityComponent implements OnInit {
             {Id: 5, Name: 'Other'}
         ];
         this.initForm(this.data);
-        // this.availabilityForm.valueChanges.subscribe(data => {
-        //     console.log('Form changes', data);
-        //     this.output = data
-        // });
-        console.log('Init')
+
     }
 
     private autosize(e){
@@ -95,14 +103,11 @@ export class AvailabilityComponent implements OnInit {
             this.UpdateBlock = true;
         } else {
             this.UpdateBlock = !this.UpdateBlock;
-            this.initForm(this.data);
         }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
-
-            this.initForm(this.data);
         }
-    }
+   }
 
     handlerEditAvailability(data) {
         const dataForm = {
@@ -130,7 +135,15 @@ export class AvailabilityComponent implements OnInit {
             this.UpdateBlock = !this.UpdateBlock;
         }
 
+
         this.initForm(dataForm);
+        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
+            this.bookingDays[4].startDay = data;
+        });
+
+        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
+            this.bookingDays[4].endDay = data;
+        })
     }
 
     toggleCalendarView() {
@@ -142,5 +155,9 @@ export class AvailabilityComponent implements OnInit {
 
     saveForm() {
         console.log("save form", this.availabilityForm)
+    }
+
+    changeDate() {
+        console.log('changeDate ',this.availabilityForm)
     }
 }

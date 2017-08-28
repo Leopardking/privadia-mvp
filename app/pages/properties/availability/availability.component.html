@@ -33,9 +33,11 @@
                         <h4 class="card-title m-t-15">Villa name</h4>
                     </div>
                     <calendar-cmp *ngIf="isCalendarView"
-                                  [errorForm]="errorForm">
+                                  [bookingDays]="bookingDays"
+                                  [group]="availabilityForm">
                     </calendar-cmp>
                     <calendar-list-cmp *ngIf="!isCalendarView"
+                                       [group]="availabilityForm"
                                        (editAvailability)="handlerEditAvailability($event)"
                                        [errorForm]="errorForm">
                     </calendar-list-cmp>

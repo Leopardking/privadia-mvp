@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 import initFullCalendar = require('../../../assets/js/init/initFullCalendar.js');
@@ -14,33 +14,18 @@ declare var _: any;
 })  
 
 export class CalendarComponent implements OnInit{
-	@Input('group')
-	private propertyForm: FormGroup;
-
-	@Input('errorForm')
-	public errorForm: any;
+	@Input('bookingDays') public bookingDays;
+	@Input('group') private availabilityForm: FormGroup;
 
 	private selected;
-	//private month;
 	private months;
 	private weeks;
-	//private date;
-	private bookingDays;
-
 	private startCalendar;
 
 	constructor( ) {
 	}
 
 	ngOnInit() {
-		this.bookingDays = [
-			{startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external'},
-			{startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal'},
-			{startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other'},
-			{startDay: '08/26/2017', endDay: '08/30/2017', Type: 'external'},
-
-		];
-
 		this.months = [];
 		this.selected = this._removeTime(this.selected || moment());
         this.startCalendar = this.selected.month(this.selected.month()).clone();
@@ -51,6 +36,21 @@ export class CalendarComponent implements OnInit{
 			this._buildMonth(start, this.startCalendar);
 			this.startCalendar.add(1, 'month');
 		}
+
+		this.availabilityForm.valueChanges.subscribe(data => {
+			this.months = [];
+			this.selected = this._removeTime(this.selected || moment());
+			this.startCalendar = this.selected.month(this.selected.month()).clone();
+			for(let i = 0; i < 6; i++) {
+				let start = this.startCalendar.clone();
+				start.date(1);
+				this._removeTime(start.day(0));
+				this._buildMonth(start, this.startCalendar);
+				this.startCalendar.add(1, 'month');
+			}
+		});
+
+		console.log('Month ', this.months)
 	}
 
 	private _removeTime(date) {
