@@ -86,7 +86,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 }
 
 .card .card-header {
-	margin: -20px 25px 0;
+	margin: -20px 25px 20px;
 }
 
 .pagination .paginate_button a {
@@ -94,7 +94,7 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 }
 
 /**
- *  Text color
+ *   Text color
 */
 .text-primary {
 	color: #0b5a7c;
