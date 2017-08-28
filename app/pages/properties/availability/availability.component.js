@@ -27,8 +27,8 @@ var AvailabilityComponent = (function () {
         this.UpdateBlock = null;
         this.isCalendarView = true;
         this.data = {
-            CheckIn: '08/01/2017',
-            CheckOut: '08/03/2017',
+            CheckIn: moment().format('MM/DD/YYYY'),
+            CheckOut: moment().add(1, 'day').format('MM/DD/YYYY'),
             UpdateType: {
                 Id: 1,
                 Name: 'Internal Booking',
@@ -87,6 +87,7 @@ var AvailabilityComponent = (function () {
         });
     };
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
+        var _this = this;
         if (this.UpdateBlock === null) {
             this.UpdateBlock = true;
         }
@@ -96,6 +97,13 @@ var AvailabilityComponent = (function () {
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
         }
+        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(function (data) {
+            _this.bookingDays[4].startDay = data;
+            //console.log('Form changes', data)
+        });
+        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(function (data) {
+            _this.bookingDays[4].endDay = data;
+        });
     };
     AvailabilityComponent.prototype.handlerEditAvailability = function (data) {
         var _this = this;

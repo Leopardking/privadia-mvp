@@ -7,6 +7,7 @@ import {LoginService} from "../../../providers/login/login.service";
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
 
+declare const moment:any;
 declare const $:any;
 
 @Component({
@@ -27,8 +28,8 @@ export class AvailabilityComponent implements OnInit {
     private isCalendarView: boolean = true;
 
     private data = {
-        CheckIn: '08/01/2017',
-        CheckOut: '08/03/2017',
+        CheckIn: moment().format('MM/DD/YYYY'),
+        CheckOut: moment().add(1, 'day').format('MM/DD/YYYY'),
         UpdateType: {
             Id: 1,
             Name: 'Internal Booking',
@@ -107,7 +108,15 @@ export class AvailabilityComponent implements OnInit {
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
         }
-   }
+        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
+            this.bookingDays[4].startDay = data;
+            //console.log('Form changes', data)
+        });
+
+        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
+            this.bookingDays[4].endDay = data;
+        })
+    }
 
     handlerEditAvailability(data) {
         const dataForm = {
@@ -134,7 +143,6 @@ export class AvailabilityComponent implements OnInit {
         } else {
             this.UpdateBlock = !this.UpdateBlock;
         }
-
 
         this.initForm(dataForm);
         this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
