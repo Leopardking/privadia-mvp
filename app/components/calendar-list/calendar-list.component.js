@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var CalendarListComponent = (function () {
     function CalendarListComponent() {
+        this.editAvailability = new core_1.EventEmitter();
         this.datatableInited = false;
     }
     CalendarListComponent.prototype.ngOnInit = function () { };
@@ -26,6 +27,9 @@ var CalendarListComponent = (function () {
         });
         this.datatableInited = true;
     };
+    CalendarListComponent.prototype.editEvent = function (evt) {
+        this.editAvailability.next(evt);
+    };
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
@@ -34,6 +38,10 @@ var CalendarListComponent = (function () {
         core_1.Input('errorForm'), 
         __metadata('design:type', Object)
     ], CalendarListComponent.prototype, "errorForm", void 0);
+    __decorate([
+        core_1.Output(), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], CalendarListComponent.prototype, "editAvailability", void 0);
     CalendarListComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

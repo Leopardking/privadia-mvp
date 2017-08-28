@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from '@angular/core';
 
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 
@@ -13,15 +13,13 @@ declare var _: any;
 })  
 
 export class CalendarListComponent implements OnInit{
+    @Input('group') private propertyForm: FormGroup;
+    @Input('errorForm') public errorForm: any;
+    @Output() editAvailability: EventEmitter<any> = new EventEmitter();
+
     private datatableInited = false;
-	@Input('group')
-	private propertyForm: FormGroup;
 
-	@Input('errorForm')
-	public errorForm: any;
-
-	constructor( ) {
-	}
+    constructor( ) { }
 
 	ngOnInit() {}
 
@@ -37,4 +35,7 @@ export class CalendarListComponent implements OnInit{
         this.datatableInited = true;
     }
 
+    editEvent(evt) {
+        this.editAvailability.next(evt);
+    }
 }

@@ -36,12 +36,13 @@
                                   [errorForm]="errorForm">
                     </calendar-cmp>
                     <calendar-list-cmp *ngIf="!isCalendarView"
+                                       (editAvailability)="handlerEditAvailability($event)"
                                        [errorForm]="errorForm">
                     </calendar-list-cmp>
                 </div>
             </div>
-            <div class="right-panel" [class.in]="UpdateBlock === true" [class.out]="UpdateBlock === false" [formGroup]="availabilityForm">
-                <div class="container-fluid">
+            <div class="right-panel" [class.in]="UpdateBlock === true" [class.out]="UpdateBlock === false">
+                <div *ngIf="UpdateBlock" class="container-fluid" [formGroup]="availabilityForm">
                     <div class="card">
                         <div class="col-md-12">
                             <div class="card-header card-header-text" data-background-color="green">
@@ -178,7 +179,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="btn-group-bottom">
-                                            <button class="btn btn-success pull-right font-16 m-r-10">Save</button>
+                                            <button class="btn btn-success pull-right font-16 m-r-10" (click)="saveForm()">Save</button>
                                             <button class="btn btn-danger font-16 m-l-10" (click)="toggleUpdateBlock()">Cancel</button>
                                         </div>
                                     </div>

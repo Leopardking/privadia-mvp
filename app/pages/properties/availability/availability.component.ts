@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,14 +17,34 @@ declare const $:any;
 })
 
 export class AvailabilityComponent implements OnInit {
-    private availabilityForm: FormGroup;
+    public availabilityForm = new FormGroup({});
     private UpdateTypeList: Array<{ Id: number, Name: string }>;
     private UpdateBlock: boolean = null;
     private isCalendarView: boolean = true;
 
+    private data = {
+        CheckIn: '08/16/2017',
+        CheckOut: '08/18/2017',
+        UpdateType: {
+            Id: 1,
+            Name: 'Internal Booking',
+        },
+        Notes: null,
+        isAgency: null,
+        FirstName: null,
+        LastName: null,
+        Email: null,
+        Phone: null,
+        CompanyName: null,
+        ContactName: null,
+        AgencyEmail: null,
+        AgencyPhone: null
+    };
+
     constructor ( public propertiesService: PropertiesService,
                   private loginService: LoginService,
-                  private route: ActivatedRoute) {
+                  private route: ActivatedRoute,
+                  private builder: FormBuilder) {
     }
 
     ngOnInit(){
@@ -35,36 +55,38 @@ export class AvailabilityComponent implements OnInit {
             {Id: 4, Name: 'Not Available for Rent'},
             {Id: 5, Name: 'Other'}
         ];
-        this.resetForm();
+        this.initForm(this.data);
         // this.availabilityForm.valueChanges.subscribe(data => {
         //     console.log('Form changes', data);
         //     this.output = data
         // });
-
+        console.log('Init')
     }
 
     private autosize(e){
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     }
 
-    private resetForm() {
-        this.availabilityForm = new FormGroup({
-            CheckIn: new FormControl('08/16/2017'),
-            CheckOut: new FormControl('08/18/2017'),
+    public initForm(data) {
+
+        this.availabilityForm.reset();
+        this.availabilityForm = this.builder.group({
+            CheckIn: new FormControl(data.CheckIn),
+            CheckOut: new FormControl(data.CheckOut),
             UpdateType: new FormControl({
-                Id: 1,
-                Name: 'Internal Booking',
+                Id: data.UpdateType.Id,
+                Name: data.UpdateType.Name,
             }),
-            Notes: new FormControl(),
-            isAgency: new FormControl(false),
-            FirstName: new FormControl(),
-            LastName: new FormControl(),
-            Email: new FormControl(),
-            Phone: new FormControl(),
-            CompanyName: new FormControl(),
-            ContactName: new FormControl(),
-            AgencyEmail: new FormControl(),
-            AgencyPhone: new FormControl()
+            Notes: new FormControl(data.Notes),
+            isAgency: new FormControl(data.isAgency),
+            FirstName: new FormControl(data.FirstName),
+            LastName: new FormControl(data.LastName),
+            Email: new FormControl(data.Email),
+            Phone: new FormControl(data.Email),
+            CompanyName: new FormControl(data.CompanyName),
+            ContactName: new FormControl(data.ContactName),
+            AgencyEmail: new FormControl(data.AgencyEmail),
+            AgencyPhone: new FormControl(data.AgencyPhone)
         });
     }
 
@@ -73,11 +95,42 @@ export class AvailabilityComponent implements OnInit {
             this.UpdateBlock = true;
         } else {
             this.UpdateBlock = !this.UpdateBlock;
-            this.resetForm();
+            this.initForm(this.data);
         }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
+
+            this.initForm(this.data);
         }
+    }
+
+    handlerEditAvailability(data) {
+        const dataForm = {
+            CheckIn: '09/16/2017',
+            CheckOut: '09/18/2017',
+            UpdateType: {
+                Id: 1,
+                Name: 'Internal Booking',
+            },
+            Notes: null,
+            isAgency: null,
+            FirstName: 'Alex',
+            LastName: 'Loginov',
+            Email: null,
+            Phone: null,
+            CompanyName: null,
+            ContactName: null,
+            AgencyEmail: null,
+            AgencyPhone: null
+        };
+        this.isCalendarView = true;
+        if (this.UpdateBlock === null) {
+            this.UpdateBlock = true;
+        } else {
+            this.UpdateBlock = !this.UpdateBlock;
+        }
+
+        this.initForm(dataForm);
     }
 
     toggleCalendarView() {
@@ -85,5 +138,9 @@ export class AvailabilityComponent implements OnInit {
         if (this.isCalendarView === false && this.UpdateBlock === true) {
             this.UpdateBlock = false;
         }
+    }
+
+    saveForm() {
+        console.log("save form", this.availabilityForm)
     }
 }
