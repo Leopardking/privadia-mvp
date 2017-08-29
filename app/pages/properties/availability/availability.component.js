@@ -45,7 +45,7 @@ var AvailabilityComponent = (function () {
             AgencyPhone: null
         };
         this.bookingDays = [
-            { startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external' },
+            { startDay: '08/16/2017', endDay: '08/19/2017', Type: 'external' },
             { startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal' },
             { startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other' },
             { startDay: '08/26/2017', endDay: '08/30/2017', Type: 'external' },
@@ -88,6 +88,19 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
         var _this = this;
+        this.disabledDatesIn = [];
+        this.disabledDatesOut = [];
+        this.bookingDays.forEach(function (booking) {
+            var startDayMoment = moment(booking.startDay);
+            var endDayMoment = moment(booking.endDay);
+            var diff = endDayMoment.diff(startDayMoment, 'days');
+            _this.disabledDatesIn.push(startDayMoment.format('MM/DD/YYYY'));
+            _this.disabledDatesOut.push(endDayMoment.format('MM/DD/YYYY'));
+            for (var i = 1; i < diff; i++) {
+                _this.disabledDatesIn.push(startDayMoment.add(1, 'day').format('MM/DD/YYYY'));
+                _this.disabledDatesOut.push(endDayMoment.add(-1, 'day').format('MM/DD/YYYY'));
+            }
+        });
         if (this.UpdateBlock === null) {
             this.UpdateBlock = true;
         }

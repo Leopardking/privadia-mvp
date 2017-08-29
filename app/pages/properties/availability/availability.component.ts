@@ -26,6 +26,8 @@ export class AvailabilityComponent implements OnInit {
     private UpdateTypeList: Array<{ Id: number, Name: string }>;
     private UpdateBlock: boolean = null;
     private isCalendarView: boolean = true;
+    private disabledDatesIn: any;
+    private disabledDatesOut: any;
 
     private data = {
         CheckIn: moment().format('MM/DD/YYYY'),
@@ -47,7 +49,7 @@ export class AvailabilityComponent implements OnInit {
     };
 
     public bookingDays = [
-        {startDay: '08/16/2017', endDay: '08/20/2017', Type: 'external'},
+        {startDay: '08/16/2017', endDay: '08/19/2017', Type: 'external'},
         {startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal'},
         {startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other'},
         {startDay: '08/26/2017', endDay: '08/30/2017', Type: 'external'},
@@ -100,6 +102,21 @@ export class AvailabilityComponent implements OnInit {
     }
 
     toggleUpdateBlock() {
+        this.disabledDatesIn = [];
+        this.disabledDatesOut = [];
+        this.bookingDays.forEach((booking) => {
+            const startDayMoment = moment(booking.startDay);
+            const endDayMoment = moment(booking.endDay);
+            const diff = endDayMoment.diff(startDayMoment,'days');
+
+            this.disabledDatesIn.push(startDayMoment.format('MM/DD/YYYY'));
+            this.disabledDatesOut.push(endDayMoment.format('MM/DD/YYYY'));
+            for(let i = 1; i < diff; i++) {
+                this.disabledDatesIn.push(startDayMoment.add(1, 'day').format('MM/DD/YYYY'));
+                this.disabledDatesOut.push(endDayMoment.add(-1, 'day').format('MM/DD/YYYY'));
+            }
+        });
+
         if (this.UpdateBlock === null) {
             this.UpdateBlock = true;
         } else {

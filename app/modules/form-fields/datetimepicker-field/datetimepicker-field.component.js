@@ -10,12 +10,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
-var initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 var DatetimefieldComponent = (function () {
     function DatetimefieldComponent() {
     }
     DatetimefieldComponent.prototype.ngOnInit = function () {
-        initDatetimepickers();
+        var _this = this;
+        // initDatetimepickers();
+        console.log(this.field);
+        setTimeout(function () {
+            _this.dateTime = $("." + _this.idPicker);
+            _this.dateTime.datetimepicker({
+                format: 'MM/DD/YYYY',
+                disabledDates: _this.disabledDates,
+                minDate: _this.field.value,
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+                }
+            });
+        }, 1000);
     };
     __decorate([
         core_1.Input('data'), 
@@ -29,6 +50,14 @@ var DatetimefieldComponent = (function () {
         core_1.Input('field'), 
         __metadata('design:type', forms_1.FormControl)
     ], DatetimefieldComponent.prototype, "field", void 0);
+    __decorate([
+        core_1.Input('idPicker'), 
+        __metadata('design:type', String)
+    ], DatetimefieldComponent.prototype, "idPicker", void 0);
+    __decorate([
+        core_1.Input('disabledDates'), 
+        __metadata('design:type', Object)
+    ], DatetimefieldComponent.prototype, "disabledDates", void 0);
     DatetimefieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

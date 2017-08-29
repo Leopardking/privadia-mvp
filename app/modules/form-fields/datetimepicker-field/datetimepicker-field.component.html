@@ -4,6 +4,7 @@
         <label class="control-label">{{data.title}}</label>
         <input type="text"
                class="form-control datepicker"
+               [ngClass]="idPicker"
                #datePicker
                (blur)="field.setValue(datePicker.value)"
                [ngModel]="field.value"

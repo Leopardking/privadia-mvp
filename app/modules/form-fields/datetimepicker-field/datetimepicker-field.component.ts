@@ -16,10 +16,38 @@ export class DatetimefieldComponent implements OnInit{
     @Input('data') private data: any;
     @Input('classes') private classes: any;
     @Input('field') private field: FormControl;
+    @Input('idPicker') private idPicker: string;
+    @Input('disabledDates') private disabledDates: any;
+
+    public dateTime: any;
 
     constructor ( ) { }
 
     ngOnInit() {
-        initDatetimepickers();
+        // initDatetimepickers();
+        console.log(this.field);
+
+        setTimeout(() => {
+            this.dateTime = $(`.${this.idPicker}`);
+            this.dateTime.datetimepicker({
+                format: 'MM/DD/YYYY',
+                disabledDates: this.disabledDates,
+                minDate: this.field.value,
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-chevron-up",
+                    down: "fa fa-chevron-down",
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-screenshot',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-remove',
+                    inline: true
+                }
+            });
+
+        }, 1000)
+
     }
 }
