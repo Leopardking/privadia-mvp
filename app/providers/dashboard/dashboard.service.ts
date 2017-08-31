@@ -37,29 +37,10 @@ export class DashboardService {
 		this.propertiesService.getVillas(this.filter).subscribe(
 			d => {
 				this.villas = d;
-
-				/*
-				this.lookupsService.getMetaData().subscribe(
-					d => {
-						this.metadata = d;
-					},
-					e => { console.log("error metadata: ", e); }
-				);
-
-				this.lookupsService.getRegions().subscribe(
-					d => {
-						this.regions = d;
-					},
-					e => { console.log('error regions', e) }
-				);
-				*/
-
 				this.isReading = false;
 			},
 			e => {
 				console.log("error villas:", e);
-				// localStorage.removeItem('id_token');
-				// this.router.navigate(['/login']);
 			}
 		);
 	}

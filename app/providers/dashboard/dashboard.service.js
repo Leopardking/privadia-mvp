@@ -32,26 +32,9 @@ var DashboardService = (function () {
         //--------------		Reading data       -----------///////////
         this.propertiesService.getVillas(this.filter).subscribe(function (d) {
             _this.villas = d;
-            /*
-            this.lookupsService.getMetaData().subscribe(
-                d => {
-                    this.metadata = d;
-                },
-                e => { console.log("error metadata: ", e); }
-            );
-
-            this.lookupsService.getRegions().subscribe(
-                d => {
-                    this.regions = d;
-                },
-                e => { console.log('error regions', e) }
-            );
-            */
             _this.isReading = false;
         }, function (e) {
             console.log("error villas:", e);
-            // localStorage.removeItem('id_token');
-            // this.router.navigate(['/login']);
         });
     };
     DashboardService.prototype.readDataRegions = function () {
