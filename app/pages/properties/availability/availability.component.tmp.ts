@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnChanges, OnInit, Output} from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
+import {LoginService} from "../../../providers/login/login.service";
+import {LookupsService} from "../../../providers/lookups/lookups.service";
+import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
 
 declare const moment:any;
 declare const $:any;
@@ -24,7 +28,6 @@ export class AvailabilityComponent implements OnInit {
     private isCalendarView: boolean = true;
     private disabledDatesIn: any;
     private disabledDatesOut: any;
-    private maxDate: any;
 
     private data = {
         CheckIn: moment().format('MM/DD/YYYY'),
@@ -58,9 +61,9 @@ export class AvailabilityComponent implements OnInit {
     }
 
     ngOnInit(){
-        let nowDate = moment();
-        let CheckIn = moment();
-        let CheckOut = moment().add(1, 'day');
+        // let nowDate = moment();
+        // let CheckIn = moment('09/02/2017');
+        // let CheckOut = moment().add(1, 'day');
 
         this.UpdateTypeList = [
             {Id: 1, Name: 'Internal Booking'},
@@ -69,28 +72,17 @@ export class AvailabilityComponent implements OnInit {
             {Id: 4, Name: 'Not Available for Rent'},
             {Id: 5, Name: 'Other'}
         ];
-
-
-        this.bookingDays.every((booking, index) => {
-            const tmpStart = moment(booking.startDay);
-            const tmpEnd   = moment(booking.endDay);
-
-            //console.log('fgsd', index === 0, CheckIn < tmpStart, CheckOut <= tmpStart)
-            if(index === 0 && CheckIn < tmpStart && CheckOut <= tmpStart) {
-                this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
-                this.data.CheckOut = CheckOut.format('MM/DD/YYYY');
-                console.log('fgsd')
-                return true;
-            }
-            console.log(index)
-            if(CheckIn > tmpStart && CheckIn >= tmpEnd) {
-                this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
-                console.log('CheckIn ', index, CheckIn > tmpStart && CheckIn >= tmpEnd);
-                return true
-            }
-
-        });
-
+        // this.bookingDays.forEach((booking) => {
+        //     const tmpStart = moment(booking.startDay);
+        //     const tmpEnd   = moment(booking.endDay);
+        //     if(CheckIn > tmpEnd || CheckIn >) {
+        //         this.data.CheckIn = CheckIn.format('MM/DD/YYYY')
+        //     }
+        //     // this.data.CheckIn;
+        //     console.log('CheckIn ', this.data.CheckIn)
+        //     console.log('Diff ', tmpStart.format('MM/DD/YYYY'))
+        //     console.log('Diff ', CheckIn > tmpStart)
+        // });
         this.initForm(this.data);
     }
 
@@ -141,9 +133,6 @@ export class AvailabilityComponent implements OnInit {
             this.UpdateBlock = true;
         } else {
             this.UpdateBlock = !this.UpdateBlock;
-            this.bookingDays[4].startDay = null;
-            this.bookingDays[4].endDay = null;
-            console.log('toggle ', this.UpdateBlock,this.bookingDays)
         }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
@@ -151,24 +140,11 @@ export class AvailabilityComponent implements OnInit {
         this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
             this.bookingDays[4].startDay = data;
             this.bookingDays[4].endDay = moment(data).add(1,'day').format('MM/DD/YYYY');
-            this.disabledDatesIn.some((disabledDate) => {
-                if(moment(this.bookingDays[4].endDay).diff(moment(disabledDate), 'days') <= 0) {
-                    console.log("minDate ", moment(data).add(1,'day').format('MM/DD/YYYY'));
-                    console.log("maxDate ", moment(disabledDate).format('MM/DD/YYYY'));
-
-                    setTimeout(() => {
-                        $('.checkOut').data("DateTimePicker").maxDate(moment(disabledDate).format('MM/DD/YYYY'));
-                        $('.checkOut').data("DateTimePicker").minDate(moment(data).add(1,'day').format('MM/DD/YYYY'));
-                    },1500);
-                    return true;
-                }
-            });
 
             setTimeout(() => {
-                $('.checkOut').data("DateTimePicker").maxDate(false);
                 $('.checkOut').data("DateTimePicker").minDate(moment(data).add(1,'day').format('MM/DD/YYYY'));
-            },1600);
-            console.log('test',this.bookingDays);
+            },1000)
+            //console.log('Form changes', data)
         });
 
         this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {

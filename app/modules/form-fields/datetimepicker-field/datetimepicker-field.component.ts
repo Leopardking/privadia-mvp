@@ -24,15 +24,13 @@ export class DatetimefieldComponent implements OnInit{
     constructor ( ) { }
 
     ngOnInit() {
-        // initDatetimepickers();
-        console.log(this.field);
-
         setTimeout(() => {
             this.dateTime = $(`.${this.idPicker}`);
             this.dateTime.datetimepicker({
                 format: 'MM/DD/YYYY',
                 disabledDates: this.disabledDates,
                 minDate: this.field.value,
+                // maxDate: this.maxDate,
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",

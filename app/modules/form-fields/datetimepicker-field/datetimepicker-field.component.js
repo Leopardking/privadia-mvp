@@ -15,14 +15,13 @@ var DatetimefieldComponent = (function () {
     }
     DatetimefieldComponent.prototype.ngOnInit = function () {
         var _this = this;
-        // initDatetimepickers();
-        console.log(this.field);
         setTimeout(function () {
             _this.dateTime = $("." + _this.idPicker);
             _this.dateTime.datetimepicker({
                 format: 'MM/DD/YYYY',
                 disabledDates: _this.disabledDates,
                 minDate: _this.field.value,
+                // maxDate: this.maxDate,
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
