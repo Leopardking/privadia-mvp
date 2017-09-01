@@ -10,6 +10,7 @@ import {PropertiesService} from "../../providers/properties/properties.service";
 import {LookupsService} from "../../providers/lookups/lookups.service";
 import {FormFieldsModule} from "../../modules/form-fields/form-field.module";
 import { PopoverModule } from 'ng2-popover';
+import {CalendarService} from "../../providers/calendar/calendar.service";
 
 @NgModule({
     imports: [
@@ -22,7 +23,7 @@ import { PopoverModule } from 'ng2-popover';
         RouterModule.forChild(MODULE_ROUTES)
     ],
     declarations: [ MODULE_COMPONENTS ],
-    providers: [ DashboardService, PropertiesService, LookupsService ]
+    providers: [ DashboardService, PropertiesService, LookupsService, CalendarService ]
 })
 
 export class PropertiesModule{}

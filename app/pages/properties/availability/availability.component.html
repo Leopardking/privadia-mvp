@@ -32,7 +32,7 @@
                         </div>
                         <h4 class="card-title m-t-15">Villa name</h4>
                     </div>
-                    <calendar-cmp *ngIf="isCalendarView"
+                    <calendar-cmp *ngIf="isCalendarView && bookingDays"
                                   [bookingDays]="bookingDays"
                                   [group]="availabilityForm">
                     </calendar-cmp>

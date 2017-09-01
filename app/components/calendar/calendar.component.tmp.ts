@@ -27,29 +27,38 @@ export class CalendarComponent implements OnInit{
 
 	ngOnInit() {
 		this.months = [];
-
-        this.selected = moment().startOf('day');
+		this.selected = this._removeTime(this.selected || moment());
         this.startCalendar = this.selected.month(this.selected.month()).clone();
 		for(let i = 0; i < 6; i++) {
 			let start = this.startCalendar.clone();
-			this._buildMonth(start.date(1).day(0), this.startCalendar);
+			start.date(1);
+			this._removeTime(start.day(0));
+			this._buildMonth(start, this.startCalendar);
 			this.startCalendar.add(1, 'month');
 		}
 
-		// this.availabilityForm.valueChanges.subscribe(data => {
-		// 	this.months = [];
-		// 	this.selected = this._removeTime(this.selected || moment());
-		// 	this.startCalendar = this.selected.month(this.selected.month()).clone();
-		// 	for(let i = 0; i < 6; i++) {
-		// 		let start = this.startCalendar.clone();
-		// 		start.date(1);
-		// 		this._removeTime(start.day(0));
-		// 		this._buildMonth(start, this.startCalendar);
-		// 		this.startCalendar.add(1, 'month');
-		// 	}
-		// });
-        //
+		this.availabilityForm.valueChanges.subscribe(data => {
+			this.months = [];
+			this.selected = this._removeTime(this.selected || moment());
+			this.startCalendar = this.selected.month(this.selected.month()).clone();
+			for(let i = 0; i < 6; i++) {
+				let start = this.startCalendar.clone();
+				start.date(1);
+				this._removeTime(start.day(0));
+				this._buildMonth(start, this.startCalendar);
+				this.startCalendar.add(1, 'month');
+			}
+		});
+
 		console.log('Month ', this.months)
+	}
+
+	private _removeTime(date) {
+		return date.day(0)
+				.hour(0)
+				.minute(0)
+				.second(0)
+				.millisecond(0);
 	}
 
 	private _buildMonth(start, month) {
@@ -96,30 +105,28 @@ export class CalendarComponent implements OnInit{
         return days;
 	};
 
-	// private isIn(dayNumber, isCurrentMonth) {
-     //    // this.bookingDays[0].startDay = moment(this.bookingDays.startDay).format('MM/DD/YYYY')
-	// 	// if (isCurrentMonth) {
-	// 	// 	if (this.bookingDays) {
-	// 	// 		const startIndex = _.findIndex(this.bookingDays.CheckIn, { 'day': dayNumber });
-     //     //        const selectedIndex = _.findIndex(this.bookingDays.selectedDay, { 'day': dayNumber });// scope.bookingDays.selectedDay.indexOf(dayNumber);
-     //     //        const endIndex = _.findIndex(this.bookingDays.endDay, { 'day': dayNumber });  // scope.bookingDays.endDay.indexOf(dayNumber);
-     //     //        if (startIndex > -1 && endIndex > -1) {
-	// 	// 			return "start end";
-	// 	// 		}
-     //    //
-	// 	// 		if (endIndex > -1) {
-	// 	// 			return "end";
-	// 	// 		}
-	// 	// 		if (startIndex > -1) {
-     //     //            console.log('Booking start',startIndex,  _.findIndex(this.bookingDays.CheckIn, { 'day': dayNumber }));
-	// 	// 			return "start";
-	// 	// 		}
-	// 	// 		if (selectedIndex > -1) {
-	// 	// 			return "selected";
-	// 	// 		}
-	// 	// 	}
-	// 	// }
-	// };
+	private isIn(dayNumber, isCurrentMonth) {
+		if (isCurrentMonth) {
+			if (this.bookingDays) {
+				const startIndex = _.findIndex(this.bookingDays.startDay, { 'day': dayNumber });
+				const selectedIndex = _.findIndex(this.bookingDays.selectedDay, { 'day': dayNumber });// scope.bookingDays.selectedDay.indexOf(dayNumber);
+				const endIndex = _.findIndex(this.bookingDays.endDay, { 'day': dayNumber });  // scope.bookingDays.endDay.indexOf(dayNumber);
+				if (startIndex > -1 && endIndex > -1) {
+					return "start end";
+				}
+
+				if (endIndex > -1) {
+					return "end";
+				}
+				if (startIndex > -1) {
+					return "start";
+				}
+				if (selectedIndex > -1) {
+					return "selected";
+				}
+			}
+		}
+	};
 
 	private isBetween(date) {
 		let day = {
@@ -129,19 +136,17 @@ export class CalendarComponent implements OnInit{
 			isStart: false,
 			isEnd: false
 		};
-
 		this.bookingDays.forEach((bookingDay) => {
-			if (moment(date).isBetween(moment(bookingDay.CheckIn).startOf('day'), moment(bookingDay.CheckOut).startOf('day'), null, '()' )) {
-            	day.type = bookingDay.EntryTypeDesc.toLowerCase();
-			} else if (moment(date).isSame(moment(bookingDay.CheckIn).startOf('day'))) {
-            	day.typeStart = bookingDay.EntryTypeDesc.toLowerCase();
+			if (moment(date).isBetween(moment(bookingDay.startDay), moment(bookingDay.endDay), null, '()' )) {
+				day.type = bookingDay.Type;
+			} else if (moment(date).isSame(moment(bookingDay.startDay))) {
+				day.typeStart = bookingDay.Type;
 				day.isStart = true;
-			} else if (moment(date).isSame(moment(bookingDay.CheckOut).startOf('day'))) {
-                day.typeEnd = bookingDay.EntryTypeDesc.toLowerCase();
+			} else if (moment(date).isSame(moment(bookingDay.endDay))) {
+                day.typeEnd = bookingDay.Type;
                 day.isEnd = true;
 			}
 		});
-
 		return day;
 	}
 
@@ -151,7 +156,9 @@ export class CalendarComponent implements OnInit{
         this.startCalendar = this.selected.month(this.selected.month()).clone();
 		for(let i = 0; i < 6; i++) {
 			let start = this.startCalendar.clone();
-			this._buildMonth(start.date(1).day(0), this.startCalendar);
+			start.date(1);
+			this._removeTime(start.day(0));
+			this._buildMonth(start, this.startCalendar);
 			this.startCalendar.add(1, 'month')
 		}
 	}

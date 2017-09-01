@@ -21,7 +21,6 @@ var DatetimefieldComponent = (function () {
                 format: 'MM/DD/YYYY',
                 disabledDates: _this.disabledDates,
                 minDate: _this.field.value,
-                // maxDate: this.maxDate,
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -35,7 +34,7 @@ var DatetimefieldComponent = (function () {
                     inline: true
                 }
             });
-        }, 1000);
+        }, 300);
     };
     __decorate([
         core_1.Input('data'), 

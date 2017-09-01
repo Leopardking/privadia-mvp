@@ -27,8 +27,7 @@
                                 <tbody>
                                 <tr class="week" *ngFor="let week of month.weeks">
                                     <td *ngFor="let day of week.days"
-                                        class="day {{isIn(day.number,day.isCurrentMonth)}}"
-                                        [ngClass]="{'different-month': !day.isCurrentMonth }">
+                                        [ngClass]="{'day': true, 'different-month': !day.isCurrentMonth }">
                                         <div class="cell">
                                             <div *ngIf="day.dayType.isStart" class="period start {{day.dayType.typeStart}}"></div>
                                             <div *ngIf="day.dayType.isEnd" class="period end {{day.dayType.typeEnd}}"></div>

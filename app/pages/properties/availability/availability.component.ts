@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
+import {CalendarService} from "../../../providers/calendar/calendar.service";
 
 declare const moment:any;
 declare const $:any;
@@ -15,10 +16,9 @@ declare const $:any;
 
 export class AvailabilityComponent implements OnInit {
     public availabilityForm = new FormGroup({});
-    public checkedDates = {
-        CheckIn: '',
-        CheckOut: '',
-    };
+    public CheckIn = moment();
+    public CheckOut = moment().add(1, 'day');
+
     private UpdateTypeList: Array<{ Id: number, Name: string }>;
     private UpdateBlock: boolean = null;
     private isCalendarView: boolean = true;
@@ -44,8 +44,9 @@ export class AvailabilityComponent implements OnInit {
         AgencyEmail: null,
         AgencyPhone: null
     };
+    public bookingDays;
 
-    public bookingDays = [
+    public bookingDayss = [
         {startDay: '08/16/2017', endDay: '08/19/2017', Type: 'external'},
         {startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other'},
         {startDay: '08/26/2017', endDay: '08/31/2017', Type: 'external'},
@@ -54,7 +55,42 @@ export class AvailabilityComponent implements OnInit {
     ];
 
     constructor ( public propertiesService: PropertiesService,
+                  public calendarService: CalendarService,
                   private builder: FormBuilder) {
+        calendarService.getCalendarByProperty(2).subscribe(
+            d => {
+                this.bookingDays = d;
+                console.log('booking ', d, this.bookingDays, this.bookingDayss);
+                this.bookingDays.every((booking, index) => {
+                    const tmpStart = moment(booking.CheckIn);
+                    const tmpEnd   = moment(booking.CheckOut);
+
+                    if(index === 0 && this.CheckIn < tmpStart && this.CheckOut <= tmpStart) {
+                        this.data.CheckIn = this.CheckIn.format('MM/DD/YYYY');
+                        this.data.CheckOut = this.CheckOut.format('MM/DD/YYYY');
+                        return true;
+                    }
+                    console.log(index)
+                    if(this.CheckIn > tmpStart && this.CheckIn >= tmpEnd) {
+                        this.data.CheckIn = this.CheckIn.format('MM/DD/YYYY');
+                        return true
+                    }
+
+                });
+                this.bookingDays.push({
+                    CheckIn: null,
+                    CheckOut:null,
+                    EntryType: 4,
+                    EntryTypeDesc: "Other",
+                    Id: null,
+                    Notes: "Internal Test"
+                })
+
+            },
+            e => {
+                console.log('Error calendar', e);
+            }
+        )
     }
 
     ngOnInit(){
@@ -71,25 +107,25 @@ export class AvailabilityComponent implements OnInit {
         ];
 
 
-        this.bookingDays.every((booking, index) => {
-            const tmpStart = moment(booking.startDay);
-            const tmpEnd   = moment(booking.endDay);
-
-            //console.log('fgsd', index === 0, CheckIn < tmpStart, CheckOut <= tmpStart)
-            if(index === 0 && CheckIn < tmpStart && CheckOut <= tmpStart) {
-                this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
-                this.data.CheckOut = CheckOut.format('MM/DD/YYYY');
-                console.log('fgsd')
-                return true;
-            }
-            console.log(index)
-            if(CheckIn > tmpStart && CheckIn >= tmpEnd) {
-                this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
-                console.log('CheckIn ', index, CheckIn > tmpStart && CheckIn >= tmpEnd);
-                return true
-            }
-
-        });
+        // this.bookingDays.every((booking, index) => {
+        //     const tmpStart = moment(booking.startDay);
+        //     const tmpEnd   = moment(booking.endDay);
+        //
+        //     //console.log('fgsd', index === 0, CheckIn < tmpStart, CheckOut <= tmpStart)
+        //     if(index === 0 && CheckIn < tmpStart && CheckOut <= tmpStart) {
+        //         this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
+        //         this.data.CheckOut = CheckOut.format('MM/DD/YYYY');
+        //         console.log('fgsd')
+        //         return true;
+        //     }
+        //     console.log(index)
+        //     if(CheckIn > tmpStart && CheckIn >= tmpEnd) {
+        //         this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
+        //         console.log('CheckIn ', index, CheckIn > tmpStart && CheckIn >= tmpEnd);
+        //         return true
+        //     }
+        //
+        // });
 
         this.initForm(this.data);
     }
@@ -125,15 +161,15 @@ export class AvailabilityComponent implements OnInit {
         this.disabledDatesIn = [];
         this.disabledDatesOut = [];
         this.bookingDays.forEach((booking) => {
-            const startDayMoment = moment(booking.startDay);
-            const endDayMoment = moment(booking.endDay);
-            const diff = endDayMoment.diff(startDayMoment,'days');
+            const checkInMoment = moment(booking.CheckIn);
+            const checkOutMoment = moment(booking.CheckOut);
+            const diff = checkOutMoment.diff(checkInMoment,'days');
 
-            this.disabledDatesIn.push(startDayMoment.format('MM/DD/YYYY'));
-            this.disabledDatesOut.push(endDayMoment.format('MM/DD/YYYY'));
+            this.disabledDatesIn.push(checkInMoment.format('MM/DD/YYYY'));
+            this.disabledDatesOut.push(checkOutMoment.format('MM/DD/YYYY'));
             for(let i = 1; i < diff; i++) {
-                this.disabledDatesIn.push(startDayMoment.add(1, 'day').format('MM/DD/YYYY'));
-                this.disabledDatesOut.push(endDayMoment.add(-1, 'day').format('MM/DD/YYYY'));
+                this.disabledDatesIn.push(checkInMoment.add(1, 'day').format('MM/DD/YYYY'));
+                this.disabledDatesOut.push(checkOutMoment.add(-1, 'day').format('MM/DD/YYYY'));
             }
         });
 
@@ -141,38 +177,37 @@ export class AvailabilityComponent implements OnInit {
             this.UpdateBlock = true;
         } else {
             this.UpdateBlock = !this.UpdateBlock;
-            this.bookingDays[4].startDay = null;
-            this.bookingDays[4].endDay = null;
+            this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
+            this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
             console.log('toggle ', this.UpdateBlock,this.bookingDays)
         }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
         }
         this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
-            this.bookingDays[4].startDay = data;
-            this.bookingDays[4].endDay = moment(data).add(1,'day').format('MM/DD/YYYY');
+            this.bookingDays[this.bookingDays.length - 1].CheckIn = data;
+            this.bookingDays[this.bookingDays.length - 1].CheckOut = moment(data).add(1,'day').format('MM/DD/YYYY');
             this.disabledDatesIn.some((disabledDate) => {
-                if(moment(this.bookingDays[4].endDay).diff(moment(disabledDate), 'days') <= 0) {
-                    console.log("minDate ", moment(data).add(1,'day').format('MM/DD/YYYY'));
-                    console.log("maxDate ", moment(disabledDate).format('MM/DD/YYYY'));
-
+                if(moment(this.bookingDays[this.bookingDays.length - 1].CheckOut).diff(moment(disabledDate), 'days') <= 0) {
                     setTimeout(() => {
-                        $('.checkOut').data("DateTimePicker").maxDate(moment(disabledDate).format('MM/DD/YYYY'));
-                        $('.checkOut').data("DateTimePicker").minDate(moment(data).add(1,'day').format('MM/DD/YYYY'));
-                    },1500);
+                        $('.checkOut').data("DateTimePicker")
+                                      .minDate(moment(data).add(1,'day').format('MM/DD/YYYY'))
+                                      .maxDate(moment(disabledDate).format('MM/DD/YYYY'));
+                    }, 500);
                     return true;
+                }
+                else {
+                    $('.checkOut').data("DateTimePicker").maxDate(false);
                 }
             });
 
             setTimeout(() => {
-                $('.checkOut').data("DateTimePicker").maxDate(false);
                 $('.checkOut').data("DateTimePicker").minDate(moment(data).add(1,'day').format('MM/DD/YYYY'));
-            },1600);
-            console.log('test',this.bookingDays);
+            }, 600);
         });
 
         this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
-            this.bookingDays[4].endDay = data;
+            this.bookingDays[this.bookingDays.length - 1].CheckOut = data;
         })
     }
 
@@ -204,11 +239,11 @@ export class AvailabilityComponent implements OnInit {
 
         this.initForm(dataForm);
         this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
-            this.bookingDays[4].startDay = data;
+            this.bookingDays[this.bookingDays.length - 1].CheckIn = data;
         });
 
         this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
-            this.bookingDays[4].endDay = data;
+            this.bookingDays[this.bookingDays.length - 1].CheckOut = data;
         })
     }
 

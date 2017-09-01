@@ -30,7 +30,6 @@ export class DatetimefieldComponent implements OnInit{
                 format: 'MM/DD/YYYY',
                 disabledDates: this.disabledDates,
                 minDate: this.field.value,
-                // maxDate: this.maxDate,
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -45,7 +44,7 @@ export class DatetimefieldComponent implements OnInit{
                 }
             });
 
-        }, 1000)
+        }, 300)
 
     }
 }

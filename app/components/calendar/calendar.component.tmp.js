@@ -14,28 +14,37 @@ var CalendarComponent = (function () {
     function CalendarComponent() {
     }
     CalendarComponent.prototype.ngOnInit = function () {
+        var _this = this;
         this.months = [];
-        this.selected = moment().startOf('day');
+        this.selected = this._removeTime(this.selected || moment());
         this.startCalendar = this.selected.month(this.selected.month()).clone();
         for (var i = 0; i < 6; i++) {
             var start = this.startCalendar.clone();
-            this._buildMonth(start.date(1).day(0), this.startCalendar);
+            start.date(1);
+            this._removeTime(start.day(0));
+            this._buildMonth(start, this.startCalendar);
             this.startCalendar.add(1, 'month');
         }
-        // this.availabilityForm.valueChanges.subscribe(data => {
-        // 	this.months = [];
-        // 	this.selected = this._removeTime(this.selected || moment());
-        // 	this.startCalendar = this.selected.month(this.selected.month()).clone();
-        // 	for(let i = 0; i < 6; i++) {
-        // 		let start = this.startCalendar.clone();
-        // 		start.date(1);
-        // 		this._removeTime(start.day(0));
-        // 		this._buildMonth(start, this.startCalendar);
-        // 		this.startCalendar.add(1, 'month');
-        // 	}
-        // });
-        //
+        this.availabilityForm.valueChanges.subscribe(function (data) {
+            _this.months = [];
+            _this.selected = _this._removeTime(_this.selected || moment());
+            _this.startCalendar = _this.selected.month(_this.selected.month()).clone();
+            for (var i = 0; i < 6; i++) {
+                var start = _this.startCalendar.clone();
+                start.date(1);
+                _this._removeTime(start.day(0));
+                _this._buildMonth(start, _this.startCalendar);
+                _this.startCalendar.add(1, 'month');
+            }
+        });
         console.log('Month ', this.months);
+    };
+    CalendarComponent.prototype._removeTime = function (date) {
+        return date.day(0)
+            .hour(0)
+            .minute(0)
+            .second(0)
+            .millisecond(0);
     };
     CalendarComponent.prototype._buildMonth = function (start, month) {
         this.weeks = [];
@@ -78,30 +87,28 @@ var CalendarComponent = (function () {
         return days;
     };
     ;
-    // private isIn(dayNumber, isCurrentMonth) {
-    //    // this.bookingDays[0].startDay = moment(this.bookingDays.startDay).format('MM/DD/YYYY')
-    // 	// if (isCurrentMonth) {
-    // 	// 	if (this.bookingDays) {
-    // 	// 		const startIndex = _.findIndex(this.bookingDays.CheckIn, { 'day': dayNumber });
-    //     //        const selectedIndex = _.findIndex(this.bookingDays.selectedDay, { 'day': dayNumber });// scope.bookingDays.selectedDay.indexOf(dayNumber);
-    //     //        const endIndex = _.findIndex(this.bookingDays.endDay, { 'day': dayNumber });  // scope.bookingDays.endDay.indexOf(dayNumber);
-    //     //        if (startIndex > -1 && endIndex > -1) {
-    // 	// 			return "start end";
-    // 	// 		}
-    //    //
-    // 	// 		if (endIndex > -1) {
-    // 	// 			return "end";
-    // 	// 		}
-    // 	// 		if (startIndex > -1) {
-    //     //            console.log('Booking start',startIndex,  _.findIndex(this.bookingDays.CheckIn, { 'day': dayNumber }));
-    // 	// 			return "start";
-    // 	// 		}
-    // 	// 		if (selectedIndex > -1) {
-    // 	// 			return "selected";
-    // 	// 		}
-    // 	// 	}
-    // 	// }
-    // };
+    CalendarComponent.prototype.isIn = function (dayNumber, isCurrentMonth) {
+        if (isCurrentMonth) {
+            if (this.bookingDays) {
+                var startIndex = _.findIndex(this.bookingDays.startDay, { 'day': dayNumber });
+                var selectedIndex = _.findIndex(this.bookingDays.selectedDay, { 'day': dayNumber }); // scope.bookingDays.selectedDay.indexOf(dayNumber);
+                var endIndex = _.findIndex(this.bookingDays.endDay, { 'day': dayNumber }); // scope.bookingDays.endDay.indexOf(dayNumber);
+                if (startIndex > -1 && endIndex > -1) {
+                    return "start end";
+                }
+                if (endIndex > -1) {
+                    return "end";
+                }
+                if (startIndex > -1) {
+                    return "start";
+                }
+                if (selectedIndex > -1) {
+                    return "selected";
+                }
+            }
+        }
+    };
+    ;
     CalendarComponent.prototype.isBetween = function (date) {
         var day = {
             type: null,
@@ -111,15 +118,15 @@ var CalendarComponent = (function () {
             isEnd: false
         };
         this.bookingDays.forEach(function (bookingDay) {
-            if (moment(date).isBetween(moment(bookingDay.CheckIn).startOf('day'), moment(bookingDay.CheckOut).startOf('day'), null, '()')) {
-                day.type = bookingDay.EntryTypeDesc.toLowerCase();
+            if (moment(date).isBetween(moment(bookingDay.startDay), moment(bookingDay.endDay), null, '()')) {
+                day.type = bookingDay.Type;
             }
-            else if (moment(date).isSame(moment(bookingDay.CheckIn).startOf('day'))) {
-                day.typeStart = bookingDay.EntryTypeDesc.toLowerCase();
+            else if (moment(date).isSame(moment(bookingDay.startDay))) {
+                day.typeStart = bookingDay.Type;
                 day.isStart = true;
             }
-            else if (moment(date).isSame(moment(bookingDay.CheckOut).startOf('day'))) {
-                day.typeEnd = bookingDay.EntryTypeDesc.toLowerCase();
+            else if (moment(date).isSame(moment(bookingDay.endDay))) {
+                day.typeEnd = bookingDay.Type;
                 day.isEnd = true;
             }
         });
@@ -131,7 +138,9 @@ var CalendarComponent = (function () {
         this.startCalendar = this.selected.month(this.selected.month()).clone();
         for (var i = 0; i < 6; i++) {
             var start = this.startCalendar.clone();
-            this._buildMonth(start.date(1).day(0), this.startCalendar);
+            start.date(1);
+            this._removeTime(start.day(0));
+            this._buildMonth(start, this.startCalendar);
             this.startCalendar.add(1, 'month');
         }
     };
@@ -155,4 +164,4 @@ var CalendarComponent = (function () {
     return CalendarComponent;
 }());
 exports.CalendarComponent = CalendarComponent;
-//# sourceMappingURL=calendar.component.js.map
+//# sourceMappingURL=calendar.component.tmp.js.map

@@ -19,6 +19,7 @@ var properties_service_1 = require("../../providers/properties/properties.servic
 var lookups_service_1 = require("../../providers/lookups/lookups.service");
 var form_field_module_1 = require("../../modules/form-fields/form-field.module");
 var ng2_popover_1 = require('ng2-popover');
+var calendar_service_1 = require("../../providers/calendar/calendar.service");
 var PropertiesModule = (function () {
     function PropertiesModule() {
     }
@@ -34,7 +35,7 @@ var PropertiesModule = (function () {
                 router_1.RouterModule.forChild(properties_routes_1.MODULE_ROUTES)
             ],
             declarations: [properties_routes_1.MODULE_COMPONENTS],
-            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService]
+            providers: [dashboard_service_1.DashboardService, properties_service_1.PropertiesService, lookups_service_1.LookupsService, calendar_service_1.CalendarService]
         }), 
         __metadata('design:paramtypes', [])
     ], PropertiesModule);

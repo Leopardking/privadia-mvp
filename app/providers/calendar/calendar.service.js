@@ -13,15 +13,15 @@ var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 require('rxjs/add/operator/catch');
 require('rxjs/add/operator/map');
-var BookingService = (function () {
-    function BookingService(http) {
+var CalendarService = (function () {
+    function CalendarService(http) {
         this.http = http;
         this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
         // public apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
         this.bookings = [];
     }
-    BookingService.prototype.getCalendarByProperty = function (id) {
+    CalendarService.prototype.getCalendarByProperty = function (id) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + "/api/Calendar/GetByProperty/" + id, options)
@@ -29,25 +29,25 @@ var BookingService = (function () {
             .catch(this.handleError);
     };
     //Get Booking By Id
-    BookingService.prototype.getCalendar = function (id) {
+    CalendarService.prototype.getCalendar = function (id) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + "/api/Calendar/" + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    BookingService.prototype.addCalendar = function (data) {
+    CalendarService.prototype.addCalendar = function (data) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.post(this.apiUrl + "/api/Calendar", data, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
-    BookingService.prototype.extractData = function (res) {
+    CalendarService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};
     };
-    BookingService.prototype.handleError = function (error) {
+    CalendarService.prototype.handleError = function (error) {
         var errMsg;
         if (error instanceof http_1.Response) {
             errMsg = error.json() || '';
@@ -57,11 +57,11 @@ var BookingService = (function () {
         }
         return Observable_1.Observable.throw(errMsg);
     };
-    BookingService = __decorate([
+    CalendarService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])
-    ], BookingService);
-    return BookingService;
+    ], CalendarService);
+    return CalendarService;
 }());
-exports.BookingService = BookingService;
+exports.CalendarService = CalendarService;
 //# sourceMappingURL=calendar.service.js.map
