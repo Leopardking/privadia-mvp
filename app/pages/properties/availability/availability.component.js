@@ -12,10 +12,14 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var calendar_service_1 = require("../../../providers/calendar/calendar.service");
+var router_1 = require("@angular/router");
+var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var AvailabilityComponent = (function () {
-    function AvailabilityComponent(propertiesService, calendarService, builder) {
+    function AvailabilityComponent(route, propertiesService, lookupsService, calendarService, builder) {
         var _this = this;
+        this.route = route;
         this.propertiesService = propertiesService;
+        this.lookupsService = lookupsService;
         this.calendarService = calendarService;
         this.builder = builder;
         this.availabilityForm = new forms_1.FormGroup({});
@@ -27,9 +31,11 @@ var AvailabilityComponent = (function () {
             CheckIn: moment().format('MM/DD/YYYY'),
             CheckOut: moment().add(1, 'day').format('MM/DD/YYYY'),
             UpdateType: {
-                Id: 1,
-                Name: 'Internal Booking',
+                Id: 4,
+                Name: 'Other',
             },
+            EntryType: 4,
+            EntryTypeDesc: 'Other',
             Notes: null,
             isAgency: null,
             FirstName: null,
@@ -41,72 +47,49 @@ var AvailabilityComponent = (function () {
             AgencyEmail: null,
             AgencyPhone: null
         };
-        this.bookingDayss = [
-            { startDay: '08/16/2017', endDay: '08/19/2017', Type: 'external' },
-            { startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other' },
-            { startDay: '08/26/2017', endDay: '08/31/2017', Type: 'external' },
-            { startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal' },
-            { startDay: null, endDay: null, Type: 'external' },
-        ];
-        calendarService.getCalendarByProperty(2).subscribe(function (d) {
-            _this.bookingDays = d;
-            console.log('booking ', d, _this.bookingDays, _this.bookingDayss);
-            _this.bookingDays.every(function (booking, index) {
-                var tmpStart = moment(booking.CheckIn);
-                var tmpEnd = moment(booking.CheckOut);
-                if (index === 0 && _this.CheckIn < tmpStart && _this.CheckOut <= tmpStart) {
-                    _this.data.CheckIn = _this.CheckIn.format('MM/DD/YYYY');
-                    _this.data.CheckOut = _this.CheckOut.format('MM/DD/YYYY');
-                    return true;
-                }
-                console.log(index);
-                if (_this.CheckIn > tmpStart && _this.CheckIn >= tmpEnd) {
-                    _this.data.CheckIn = _this.CheckIn.format('MM/DD/YYYY');
-                    return true;
-                }
+        route.params.subscribe(function (params) {
+            lookupsService.getCalendarEntryTypes().subscribe(function (d) {
+                _this.calendarEntryTypes = d;
+            }, function (e) {
+                console.log('Error calendarEntryTypes', e);
             });
-            _this.bookingDays.push({
-                CheckIn: null,
-                CheckOut: null,
-                EntryType: 4,
-                EntryTypeDesc: "Other",
-                Id: null,
-                Notes: "Internal Test"
+            calendarService.getCalendarByProperty(params['id']).subscribe(function (d) {
+                _this.bookingDays = d;
+                _this.bookingDays.every(function (booking, index) {
+                    var tmpStart = moment(booking.CheckIn);
+                    var tmpEnd = moment(booking.CheckOut);
+                    if (index === 0 && _this.CheckIn < tmpStart && _this.CheckOut <= tmpStart) {
+                        _this.data.CheckIn = _this.CheckIn.format('MM/DD/YYYY');
+                        _this.data.CheckOut = _this.CheckOut.format('MM/DD/YYYY');
+                        return true;
+                    }
+                    console.log(index);
+                    if (_this.CheckIn > tmpStart && _this.CheckIn >= tmpEnd) {
+                        _this.data.CheckIn = _this.CheckIn.format('MM/DD/YYYY');
+                        return true;
+                    }
+                });
+                _this.bookingDays.push({
+                    CheckIn: null,
+                    CheckOut: null,
+                    EntryType: 4,
+                    EntryTypeDesc: "Other",
+                    Id: null,
+                    Notes: "Internal Test"
+                });
+            }, function (e) {
+                console.log('Error calendar', e);
             });
-        }, function (e) {
-            console.log('Error calendar', e);
         });
     }
     AvailabilityComponent.prototype.ngOnInit = function () {
-        var nowDate = moment();
-        var CheckIn = moment();
-        var CheckOut = moment().add(1, 'day');
         this.UpdateTypeList = [
             { Id: 1, Name: 'Internal Booking' },
             { Id: 2, Name: 'External Booking' },
             { Id: 3, Name: 'Owner Present' },
-            { Id: 4, Name: 'Not Available for Rent' },
-            { Id: 5, Name: 'Other' }
+            { Id: 5, Name: 'Not Available for Rent' },
+            { Id: 4, Name: 'Other' }
         ];
-        // this.bookingDays.every((booking, index) => {
-        //     const tmpStart = moment(booking.startDay);
-        //     const tmpEnd   = moment(booking.endDay);
-        //
-        //     //console.log('fgsd', index === 0, CheckIn < tmpStart, CheckOut <= tmpStart)
-        //     if(index === 0 && CheckIn < tmpStart && CheckOut <= tmpStart) {
-        //         this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
-        //         this.data.CheckOut = CheckOut.format('MM/DD/YYYY');
-        //         console.log('fgsd')
-        //         return true;
-        //     }
-        //     console.log(index)
-        //     if(CheckIn > tmpStart && CheckIn >= tmpEnd) {
-        //         this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
-        //         console.log('CheckIn ', index, CheckIn > tmpStart && CheckIn >= tmpEnd);
-        //         return true
-        //     }
-        //
-        // });
         this.initForm(this.data);
     };
     AvailabilityComponent.prototype.autosize = function (e) {
@@ -121,6 +104,8 @@ var AvailabilityComponent = (function () {
                 Id: data.UpdateType.Id,
                 Name: data.UpdateType.Name,
             }),
+            EntryType: new forms_1.FormControl(data.EntryType),
+            EntryTypeDesc: new forms_1.FormControl(data.EntryTypeDesc),
             Notes: new forms_1.FormControl(data.Notes),
             isAgency: new forms_1.FormControl(data.isAgency),
             FirstName: new forms_1.FormControl(data.FirstName),
@@ -161,6 +146,7 @@ var AvailabilityComponent = (function () {
             this.isCalendarView = true;
         }
         this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(function (data) {
+            console.log('change', _this.bookingDays);
             _this.bookingDays[_this.bookingDays.length - 1].CheckIn = data;
             _this.bookingDays[_this.bookingDays.length - 1].CheckOut = moment(data).add(1, 'day').format('MM/DD/YYYY');
             _this.disabledDatesIn.some(function (disabledDate) {
@@ -173,7 +159,9 @@ var AvailabilityComponent = (function () {
                     return true;
                 }
                 else {
-                    $('.checkOut').data("DateTimePicker").maxDate(false);
+                    setTimeout(function () {
+                        $('.checkOut').data("DateTimePicker").maxDate(false);
+                    }, 500);
                 }
             });
             setTimeout(function () {
@@ -238,7 +226,7 @@ var AvailabilityComponent = (function () {
             templateUrl: 'availability.component.html',
             styleUrls: ['availability.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, calendar_service_1.CalendarService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, properties_service_1.PropertiesService, lookups_service_1.LookupsService, calendar_service_1.CalendarService, forms_1.FormBuilder])
     ], AvailabilityComponent);
     return AvailabilityComponent;
 }());

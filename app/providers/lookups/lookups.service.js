@@ -105,6 +105,13 @@ var LookupsService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    LookupsService.prototype.getCalendarEntryTypes = function () {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/Lookups/GetCalendarEntryTypes', options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     LookupsService.prototype.extractData = function (res) {
         var body = res.json();
         return body || {};

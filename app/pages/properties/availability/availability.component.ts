@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import {CalendarService} from "../../../providers/calendar/calendar.service";
+import {ActivatedRoute, RouterLink} from "@angular/router";
+import {LookupsService} from "../../../providers/lookups/lookups.service";
 
 declare const moment:any;
 declare const $:any;
@@ -20,6 +22,7 @@ export class AvailabilityComponent implements OnInit {
     public CheckOut = moment().add(1, 'day');
 
     private UpdateTypeList: Array<{ Id: number, Name: string }>;
+    private calendarEntryTypes: Array<{ Id: number, Name: string }>;
     private UpdateBlock: boolean = null;
     private isCalendarView: boolean = true;
     private disabledDatesIn: any;
@@ -30,9 +33,11 @@ export class AvailabilityComponent implements OnInit {
         CheckIn: moment().format('MM/DD/YYYY'),
         CheckOut: moment().add(1, 'day').format('MM/DD/YYYY'),
         UpdateType: {
-            Id: 1,
-            Name: 'Internal Booking',
+            Id: 4,
+            Name: 'Other',
         },
+        EntryType: 4,
+        EntryTypeDesc: 'Other',
         Notes: null,
         isAgency: null,
         FirstName: null,
@@ -46,86 +51,65 @@ export class AvailabilityComponent implements OnInit {
     };
     public bookingDays;
 
-    public bookingDayss = [
-        {startDay: '08/16/2017', endDay: '08/19/2017', Type: 'external'},
-        {startDay: '08/20/2017', endDay: '08/26/2017', Type: 'other'},
-        {startDay: '08/26/2017', endDay: '08/31/2017', Type: 'external'},
-        {startDay: '09/02/2017', endDay: '09/10/2017', Type: 'internal'},
-        {startDay: null, endDay: null, Type: 'external'},
-    ];
-
-    constructor ( public propertiesService: PropertiesService,
+    constructor ( private route: ActivatedRoute,
+                  public propertiesService: PropertiesService,
+                  public lookupsService: LookupsService,
                   public calendarService: CalendarService,
                   private builder: FormBuilder) {
-        calendarService.getCalendarByProperty(2).subscribe(
-            d => {
-                this.bookingDays = d;
-                console.log('booking ', d, this.bookingDays, this.bookingDayss);
-                this.bookingDays.every((booking, index) => {
-                    const tmpStart = moment(booking.CheckIn);
-                    const tmpEnd   = moment(booking.CheckOut);
+        route.params.subscribe(params => {
+            lookupsService.getCalendarEntryTypes().subscribe(
+                d => {
+                    this.calendarEntryTypes = d
+                },
+                e => {
+                    console.log('Error calendarEntryTypes', e);
+                }
+            );
 
-                    if(index === 0 && this.CheckIn < tmpStart && this.CheckOut <= tmpStart) {
-                        this.data.CheckIn = this.CheckIn.format('MM/DD/YYYY');
-                        this.data.CheckOut = this.CheckOut.format('MM/DD/YYYY');
-                        return true;
-                    }
-                    console.log(index)
-                    if(this.CheckIn > tmpStart && this.CheckIn >= tmpEnd) {
-                        this.data.CheckIn = this.CheckIn.format('MM/DD/YYYY');
-                        return true
-                    }
+            calendarService.getCalendarByProperty(params['id']).subscribe(
+                d => {
+                    this.bookingDays = d;
+                    this.bookingDays.every((booking, index) => {
+                        const tmpStart = moment(booking.CheckIn);
+                        const tmpEnd   = moment(booking.CheckOut);
 
-                });
-                this.bookingDays.push({
-                    CheckIn: null,
-                    CheckOut:null,
-                    EntryType: 4,
-                    EntryTypeDesc: "Other",
-                    Id: null,
-                    Notes: "Internal Test"
-                })
+                        if(index === 0 && this.CheckIn < tmpStart && this.CheckOut <= tmpStart) {
+                            this.data.CheckIn = this.CheckIn.format('MM/DD/YYYY');
+                            this.data.CheckOut = this.CheckOut.format('MM/DD/YYYY');
+                            return true;
+                        }
+                        console.log(index)
+                        if(this.CheckIn > tmpStart && this.CheckIn >= tmpEnd) {
+                            this.data.CheckIn = this.CheckIn.format('MM/DD/YYYY');
+                            return true
+                        }
 
-            },
-            e => {
-                console.log('Error calendar', e);
-            }
-        )
+                    });
+                    this.bookingDays.push({
+                        CheckIn: null,
+                        CheckOut:null,
+                        EntryType: 4,
+                        EntryTypeDesc: "Other",
+                        Id: null,
+                        Notes: "Internal Test"
+                    })
+
+                },
+                e => {
+                    console.log('Error calendar', e);
+                }
+            )
+        });
     }
 
     ngOnInit(){
-        let nowDate = moment();
-        let CheckIn = moment();
-        let CheckOut = moment().add(1, 'day');
-
         this.UpdateTypeList = [
             {Id: 1, Name: 'Internal Booking'},
             {Id: 2, Name: 'External Booking'},
             {Id: 3, Name: 'Owner Present'},
-            {Id: 4, Name: 'Not Available for Rent'},
-            {Id: 5, Name: 'Other'}
+            {Id: 5, Name: 'Not Available for Rent'},
+            {Id: 4, Name: 'Other'}
         ];
-
-
-        // this.bookingDays.every((booking, index) => {
-        //     const tmpStart = moment(booking.startDay);
-        //     const tmpEnd   = moment(booking.endDay);
-        //
-        //     //console.log('fgsd', index === 0, CheckIn < tmpStart, CheckOut <= tmpStart)
-        //     if(index === 0 && CheckIn < tmpStart && CheckOut <= tmpStart) {
-        //         this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
-        //         this.data.CheckOut = CheckOut.format('MM/DD/YYYY');
-        //         console.log('fgsd')
-        //         return true;
-        //     }
-        //     console.log(index)
-        //     if(CheckIn > tmpStart && CheckIn >= tmpEnd) {
-        //         this.data.CheckIn = CheckIn.format('MM/DD/YYYY');
-        //         console.log('CheckIn ', index, CheckIn > tmpStart && CheckIn >= tmpEnd);
-        //         return true
-        //     }
-        //
-        // });
 
         this.initForm(this.data);
     }
@@ -144,6 +128,8 @@ export class AvailabilityComponent implements OnInit {
                 Id: data.UpdateType.Id,
                 Name: data.UpdateType.Name,
             }),
+            EntryType: new FormControl(data.EntryType),
+            EntryTypeDesc: new FormControl(data.EntryTypeDesc),
             Notes: new FormControl(data.Notes),
             isAgency: new FormControl(data.isAgency),
             FirstName: new FormControl(data.FirstName),
@@ -185,6 +171,7 @@ export class AvailabilityComponent implements OnInit {
             this.isCalendarView = true;
         }
         this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
+            console.log('change',this.bookingDays);
             this.bookingDays[this.bookingDays.length - 1].CheckIn = data;
             this.bookingDays[this.bookingDays.length - 1].CheckOut = moment(data).add(1,'day').format('MM/DD/YYYY');
             this.disabledDatesIn.some((disabledDate) => {
@@ -197,7 +184,9 @@ export class AvailabilityComponent implements OnInit {
                     return true;
                 }
                 else {
-                    $('.checkOut').data("DateTimePicker").maxDate(false);
+                    setTimeout(() => {
+                        $('.checkOut').data("DateTimePicker").maxDate(false);
+                    }, 500);
                 }
             });
 

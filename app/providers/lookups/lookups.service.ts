@@ -130,6 +130,15 @@ export class LookupsService {
             .catch(this.handleError);
 	}
 
+	public getCalendarEntryTypes() {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetCalendarEntryTypes', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
 	private extractData(res:Response) {
 		let body = res.json();
 

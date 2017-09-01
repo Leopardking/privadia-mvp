@@ -2,8 +2,8 @@ import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from '@angula
 
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 
-declare var moment: any;
-declare var _: any;
+declare const moment: any;
+declare const _: any;
 
 @Component({
     moduleId: module.id,
@@ -15,6 +15,7 @@ declare var _: any;
 export class CalendarListComponent implements OnInit{
     @Input('group') private availabilityForm: FormGroup;
     @Input('errorForm') public errorForm: any;
+    @Input('bookingDays') public bookingDays: any;
     @Output() editAvailability: EventEmitter<any> = new EventEmitter();
 
     private datatableInited = false;
@@ -39,6 +40,9 @@ export class CalendarListComponent implements OnInit{
         this.datatableInited = true;
     }
 
+    private formattedDate(date) {
+        return moment(date).format('MM/DD/YYYY')
+    }
     editEvent(evt) {
         this.editAvailability.next(evt);
     }

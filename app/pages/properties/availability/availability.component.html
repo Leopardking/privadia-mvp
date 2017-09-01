@@ -38,6 +38,7 @@
                     </calendar-cmp>
                     <calendar-list-cmp *ngIf="!isCalendarView"
                                        [group]="availabilityForm"
+                                       [bookingDays]="bookingDays"
                                        (editAvailability)="handlerEditAvailability($event)"
                                        [errorForm]="errorForm">
                     </calendar-list-cmp>
@@ -72,7 +73,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <singleselect-field-cmp
-                                                [dataList]="UpdateTypeList"
+                                                [dataList]="calendarEntryTypes"
                                                 [options]="{title: 'Update type', default: 'Internal Booking'}"
                                                 [errorForm]="errorForm"
                                                 [field]="availabilityForm.controls.UpdateType"></singleselect-field-cmp>

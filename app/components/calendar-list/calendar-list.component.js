@@ -31,6 +31,9 @@ var CalendarListComponent = (function () {
         });
         this.datatableInited = true;
     };
+    CalendarListComponent.prototype.formattedDate = function (date) {
+        return moment(date).format('MM/DD/YYYY');
+    };
     CalendarListComponent.prototype.editEvent = function (evt) {
         this.editAvailability.next(evt);
     };
@@ -42,6 +45,10 @@ var CalendarListComponent = (function () {
         core_1.Input('errorForm'), 
         __metadata('design:type', Object)
     ], CalendarListComponent.prototype, "errorForm", void 0);
+    __decorate([
+        core_1.Input('bookingDays'), 
+        __metadata('design:type', Object)
+    ], CalendarListComponent.prototype, "bookingDays", void 0);
     __decorate([
         core_1.Output(), 
         __metadata('design:type', core_1.EventEmitter)
