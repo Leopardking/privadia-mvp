@@ -30,12 +30,10 @@ var AvailabilityComponent = (function () {
         this.data = {
             CheckIn: moment().format('MM/DD/YYYY'),
             CheckOut: moment().add(1, 'day').format('MM/DD/YYYY'),
-            UpdateType: {
+            EntryType: {
                 Id: 4,
                 Name: 'Other',
             },
-            EntryType: 4,
-            EntryTypeDesc: 'Other',
             Notes: null,
             isAgency: null,
             FirstName: null,
@@ -96,16 +94,15 @@ var AvailabilityComponent = (function () {
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     };
     AvailabilityComponent.prototype.initForm = function (data) {
+        console.log('toggle ');
         this.availabilityForm.reset();
         this.availabilityForm = this.builder.group({
             CheckIn: new forms_1.FormControl(data.CheckIn),
             CheckOut: new forms_1.FormControl(data.CheckOut),
-            UpdateType: new forms_1.FormControl({
-                Id: data.UpdateType.Id,
-                Name: data.UpdateType.Name,
+            EntryType: new forms_1.FormControl({
+                Id: data.EntryType.Id,
+                Name: data.EntryType.Name,
             }),
-            EntryType: new forms_1.FormControl(data.EntryType),
-            EntryTypeDesc: new forms_1.FormControl(data.EntryTypeDesc),
             Notes: new forms_1.FormControl(data.Notes),
             isAgency: new forms_1.FormControl(data.isAgency),
             FirstName: new forms_1.FormControl(data.FirstName),
@@ -177,7 +174,7 @@ var AvailabilityComponent = (function () {
         var dataForm = {
             CheckIn: '09/16/2017',
             CheckOut: '09/18/2017',
-            UpdateType: {
+            EntryType: {
                 Id: 1,
                 Name: 'Internal Booking',
             },
@@ -213,8 +210,15 @@ var AvailabilityComponent = (function () {
             this.UpdateBlock = false;
         }
     };
-    AvailabilityComponent.prototype.saveForm = function () {
-        console.log("save form", this.availabilityForm);
+    AvailabilityComponent.prototype.saveForm = function (formData) {
+        var _this = this;
+        this.calendarService.addCalendar(formData).subscribe(function (d) {
+            console.log('Save availability', d);
+            _this.UpdateBlock = !_this.UpdateBlock;
+        }, function (e) {
+            console.log('Error save availability', e);
+        });
+        console.log("save form", formData);
     };
     AvailabilityComponent.prototype.changeDate = function () {
         console.log('changeDate ', this.availabilityForm);

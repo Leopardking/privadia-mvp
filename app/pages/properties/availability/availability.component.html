@@ -76,10 +76,10 @@
                                                 [dataList]="calendarEntryTypes"
                                                 [options]="{title: 'Update type', default: 'Internal Booking'}"
                                                 [errorForm]="errorForm"
-                                                [field]="availabilityForm.controls.UpdateType"></singleselect-field-cmp>
+                                                [field]="availabilityForm.controls.EntryType"></singleselect-field-cmp>
                                     </div>
                                 </div>
-                                <div *ngIf="availabilityForm.controls.UpdateType.value.Id === 1">
+                                <div *ngIf="availabilityForm.controls.EntryType.value.Id === 1">
                                     <div class="row">
                                         <div class="col-xs-6">
                                             <div class="radio">
@@ -186,7 +186,7 @@
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="btn-group-bottom">
-                                            <button class="btn btn-success pull-right font-16 m-r-10" (click)="saveForm()">Save</button>
+                                            <button class="btn btn-success pull-right font-16 m-r-10" (click)="saveForm(availabilityForm.value)">Save</button>
                                             <button class="btn btn-danger font-16 m-l-10" (click)="toggleUpdateBlock()">Cancel</button>
                                         </div>
                                     </div>

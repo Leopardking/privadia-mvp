@@ -32,12 +32,10 @@ export class AvailabilityComponent implements OnInit {
     private data = {
         CheckIn: moment().format('MM/DD/YYYY'),
         CheckOut: moment().add(1, 'day').format('MM/DD/YYYY'),
-        UpdateType: {
+        EntryType: {
             Id: 4,
             Name: 'Other',
         },
-        EntryType: 4,
-        EntryTypeDesc: 'Other',
         Notes: null,
         isAgency: null,
         FirstName: null,
@@ -120,16 +118,15 @@ export class AvailabilityComponent implements OnInit {
 
     public initForm(data) {
 
+        console.log('toggle ')
         this.availabilityForm.reset();
         this.availabilityForm = this.builder.group({
             CheckIn: new FormControl(data.CheckIn),
             CheckOut: new FormControl(data.CheckOut),
-            UpdateType: new FormControl({
-                Id: data.UpdateType.Id,
-                Name: data.UpdateType.Name,
+            EntryType: new FormControl({
+                Id: data.EntryType.Id,
+                Name: data.EntryType.Name,
             }),
-            EntryType: new FormControl(data.EntryType),
-            EntryTypeDesc: new FormControl(data.EntryTypeDesc),
             Notes: new FormControl(data.Notes),
             isAgency: new FormControl(data.isAgency),
             FirstName: new FormControl(data.FirstName),
@@ -204,7 +201,7 @@ export class AvailabilityComponent implements OnInit {
         const dataForm = {
             CheckIn: '09/16/2017',
             CheckOut: '09/18/2017',
-            UpdateType: {
+            EntryType: {
                 Id: 1,
                 Name: 'Internal Booking',
             },
@@ -243,8 +240,17 @@ export class AvailabilityComponent implements OnInit {
         }
     }
 
-    saveForm() {
-        console.log("save form", this.availabilityForm)
+    saveForm(formData) {
+        this.calendarService.addCalendar(formData).subscribe(
+            d => {
+                console.log('Save availability', d);
+                this.UpdateBlock = !this.UpdateBlock;
+            },
+            e => {
+                console.log('Error save availability', e);
+            }
+        )
+        console.log("save form", formData)
     }
 
     changeDate() {
