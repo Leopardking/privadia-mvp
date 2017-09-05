@@ -39,6 +39,7 @@
                     <calendar-list-cmp *ngIf="!isCalendarView"
                                        [group]="availabilityForm"
                                        [bookingDays]="bookingDays"
+                                       (deleteAvailability)="handlerDeleteAvailability($event)"
                                        (editAvailability)="handlerEditAvailability($event)"
                                        [errorForm]="errorForm">
                     </calendar-list-cmp>

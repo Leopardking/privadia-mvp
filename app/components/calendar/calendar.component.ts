@@ -26,6 +26,7 @@ export class CalendarComponent implements OnInit{
 	}
 
 	ngOnInit() {
+        console.log('Test calendar',);
 		this.months = [];
 
         this.selected = moment().startOf('day');
@@ -36,23 +37,22 @@ export class CalendarComponent implements OnInit{
 			this.startCalendar.add(1, 'month');
 		}
 
-		// this.availabilityForm.valueChanges.subscribe(data => {
-		// 	this.months = [];
-		// 	this.selected = this._removeTime(this.selected || moment());
-		// 	this.startCalendar = this.selected.month(this.selected.month()).clone();
-		// 	for(let i = 0; i < 6; i++) {
-		// 		let start = this.startCalendar.clone();
-		// 		start.date(1);
-		// 		this._removeTime(start.day(0));
-		// 		this._buildMonth(start, this.startCalendar);
-		// 		this.startCalendar.add(1, 'month');
-		// 	}
-		// });
-        //
+		this.availabilityForm.valueChanges.subscribe(data => {
+			this.months = [];
+            this.selected = moment().startOf('day');
+            this.startCalendar = this.selected.month(this.selected.month()).clone();
+    			for(let i = 0; i < 6; i++) {
+                let start = this.startCalendar.clone();
+                this._buildMonth(start.date(1).day(0), this.startCalendar);
+                this.startCalendar.add(1, 'month');
+			}
+		});
+
 		console.log('Month ', this.months)
 	}
 
 	private _buildMonth(start, month) {
+        // console.log('Rebuild calendar',this.availabilityForm.value);
 		this.weeks = [];
 		let done = false,
 			date = start.clone(),
@@ -131,15 +131,16 @@ export class CalendarComponent implements OnInit{
 		};
 
 		this.bookingDays.forEach((bookingDay) => {
-			if (moment(date).isBetween(moment(bookingDay.CheckIn).startOf('day'), moment(bookingDay.CheckOut).startOf('day'), null, '()' )) {
-            	day.type = bookingDay.EntryType.Name.toLowerCase();
-			} else if (moment(date).isSame(moment(bookingDay.CheckIn).startOf('day'))) {
-            	day.typeStart = bookingDay.EntryType.Name.toLowerCase();
-				day.isStart = true;
-			} else if (moment(date).isSame(moment(bookingDay.CheckOut).startOf('day'))) {
-                day.typeEnd = bookingDay.EntryType.Name.toLowerCase();
-                day.isEnd = true;
-			}
+		    if(bookingDay.EntryType.Name)
+                if (moment(date).isBetween(moment(bookingDay.CheckIn).startOf('day'), moment(bookingDay.CheckOut).startOf('day'), null, '()' )) {
+                    day.type = bookingDay.EntryType.Name.toLowerCase();
+                } else if (moment(date).isSame(moment(bookingDay.CheckIn).startOf('day'))) {
+                    day.typeStart = bookingDay.EntryType.Name.toLowerCase();
+                    day.isStart = true;
+                } else if (moment(date).isSame(moment(bookingDay.CheckOut).startOf('day'))) {
+                    day.typeEnd = bookingDay.EntryType.Name.toLowerCase();
+                    day.isEnd = true;
+                }
 		});
 
 		return day;

@@ -14,6 +14,8 @@ var CalendarComponent = (function () {
     function CalendarComponent() {
     }
     CalendarComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        console.log('Test calendar');
         this.months = [];
         this.selected = moment().startOf('day');
         this.startCalendar = this.selected.month(this.selected.month()).clone();
@@ -22,22 +24,20 @@ var CalendarComponent = (function () {
             this._buildMonth(start.date(1).day(0), this.startCalendar);
             this.startCalendar.add(1, 'month');
         }
-        // this.availabilityForm.valueChanges.subscribe(data => {
-        // 	this.months = [];
-        // 	this.selected = this._removeTime(this.selected || moment());
-        // 	this.startCalendar = this.selected.month(this.selected.month()).clone();
-        // 	for(let i = 0; i < 6; i++) {
-        // 		let start = this.startCalendar.clone();
-        // 		start.date(1);
-        // 		this._removeTime(start.day(0));
-        // 		this._buildMonth(start, this.startCalendar);
-        // 		this.startCalendar.add(1, 'month');
-        // 	}
-        // });
-        //
+        this.availabilityForm.valueChanges.subscribe(function (data) {
+            _this.months = [];
+            _this.selected = moment().startOf('day');
+            _this.startCalendar = _this.selected.month(_this.selected.month()).clone();
+            for (var i = 0; i < 6; i++) {
+                var start = _this.startCalendar.clone();
+                _this._buildMonth(start.date(1).day(0), _this.startCalendar);
+                _this.startCalendar.add(1, 'month');
+            }
+        });
         console.log('Month ', this.months);
     };
     CalendarComponent.prototype._buildMonth = function (start, month) {
+        // console.log('Rebuild calendar',this.availabilityForm.value);
         this.weeks = [];
         var done = false, date = start.clone(), monthIndex = date.month(), count = 0;
         while (!done) {
@@ -111,17 +111,18 @@ var CalendarComponent = (function () {
             isEnd: false
         };
         this.bookingDays.forEach(function (bookingDay) {
-            if (moment(date).isBetween(moment(bookingDay.CheckIn).startOf('day'), moment(bookingDay.CheckOut).startOf('day'), null, '()')) {
-                day.type = bookingDay.EntryType.Name.toLowerCase();
-            }
-            else if (moment(date).isSame(moment(bookingDay.CheckIn).startOf('day'))) {
-                day.typeStart = bookingDay.EntryType.Name.toLowerCase();
-                day.isStart = true;
-            }
-            else if (moment(date).isSame(moment(bookingDay.CheckOut).startOf('day'))) {
-                day.typeEnd = bookingDay.EntryType.Name.toLowerCase();
-                day.isEnd = true;
-            }
+            if (bookingDay.EntryType.Name)
+                if (moment(date).isBetween(moment(bookingDay.CheckIn).startOf('day'), moment(bookingDay.CheckOut).startOf('day'), null, '()')) {
+                    day.type = bookingDay.EntryType.Name.toLowerCase();
+                }
+                else if (moment(date).isSame(moment(bookingDay.CheckIn).startOf('day'))) {
+                    day.typeStart = bookingDay.EntryType.Name.toLowerCase();
+                    day.isStart = true;
+                }
+                else if (moment(date).isSame(moment(bookingDay.CheckOut).startOf('day'))) {
+                    day.typeEnd = bookingDay.EntryType.Name.toLowerCase();
+                    day.isEnd = true;
+                }
         });
         return day;
     };

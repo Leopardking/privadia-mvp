@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
-import {CalendarService} from "../../../providers/calendar/calendar.service";
-import {ActivatedRoute, RouterLink} from "@angular/router";
-import {LookupsService} from "../../../providers/lookups/lookups.service";
+import { CalendarService } from "../../../providers/calendar/calendar.service";
+import { LookupsService } from "../../../providers/lookups/lookups.service";
 
-declare const moment:any;
-declare const $:any;
+declare const moment: any;
+declare const $: any;
+declare const _: any;
 
 @Component({
     moduleId: module.id,
@@ -17,37 +18,38 @@ declare const $:any;
 })
 
 export class AvailabilityComponent implements OnInit {
-    public availabilityForm = new FormGroup({});
-    public CheckIn = moment();
-    public CheckOut = moment().add(1, 'day');
+    private availabilityForm = new FormGroup({
+        Id: new FormControl(null),
+        PropertyId: new FormControl(null),
+        CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
+        CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+        EntryType: new FormControl({
+            Id: 3,
+            Name: 'Internal',
+        }),
+        Notes: new FormControl(null),
+        isAgency: new FormControl(null),
+        FirstName: new FormControl(null),
+        LastName: new FormControl(null),
+        Email: new FormControl(null),
+        Phone: new FormControl(null),
+        CompanyName: new FormControl(null),
+        ContactName: new FormControl(null),
+        AgencyEmail: new FormControl(null),
+        AgencyPhone: new FormControl(null)
+    });
+    private CheckIn = moment();
+    private CheckOut = moment().add(1, 'day');
+    private propertyId: any;
 
-    private UpdateTypeList: Array<{ Id: number, Name: string }>;
     private calendarEntryTypes: Array<{ Id: number, Name: string }>;
-    private UpdateBlock: boolean = null;
+    private bookingDays;
     private isCalendarView: boolean = true;
+
+
+    private UpdateBlock: boolean = null;
     private disabledDatesIn: any;
     private disabledDatesOut: any;
-    private maxDate: any;
-
-    private data = {
-        CheckIn: moment().format('MM/DD/YYYY'),
-        CheckOut: moment().add(1, 'day').format('MM/DD/YYYY'),
-        EntryType: {
-            Id: 4,
-            Name: 'Other',
-        },
-        Notes: null,
-        isAgency: null,
-        FirstName: null,
-        LastName: null,
-        Email: null,
-        Phone: null,
-        CompanyName: null,
-        ContactName: null,
-        AgencyEmail: null,
-        AgencyPhone: null
-    };
-    public bookingDays;
 
     constructor ( private route: ActivatedRoute,
                   public propertiesService: PropertiesService,
@@ -55,6 +57,9 @@ export class AvailabilityComponent implements OnInit {
                   public calendarService: CalendarService,
                   private builder: FormBuilder) {
         route.params.subscribe(params => {
+            this.propertyId = params['id'];
+            this.availabilityForm.controls['PropertyId'].patchValue(this.propertyId);
+
             lookupsService.getCalendarEntryTypes().subscribe(
                 d => {
                     this.calendarEntryTypes = d
@@ -64,7 +69,7 @@ export class AvailabilityComponent implements OnInit {
                 }
             );
 
-            calendarService.getCalendarByProperty(params['id']).subscribe(
+            calendarService.getCalendarByProperty(this.propertyId).subscribe(
                 d => {
                     this.bookingDays = d;
                     this.bookingDays.every((booking, index) => {
@@ -72,26 +77,16 @@ export class AvailabilityComponent implements OnInit {
                         const tmpEnd   = moment(booking.CheckOut);
 
                         if(index === 0 && this.CheckIn < tmpStart && this.CheckOut <= tmpStart) {
-                            this.data.CheckIn = this.CheckIn.format('MM/DD/YYYY');
-                            this.data.CheckOut = this.CheckOut.format('MM/DD/YYYY');
+                            this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('MM/DD/YYYY'));
+                            this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('MM/DD/YYYY'));
                             return true;
                         }
-                        console.log(index)
                         if(this.CheckIn > tmpStart && this.CheckIn >= tmpEnd) {
-                            this.data.CheckIn = this.CheckIn.format('MM/DD/YYYY');
+                            this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('MM/DD/YYYY'));
                             return true
                         }
 
                     });
-                    this.bookingDays.push({
-                        CheckIn: null,
-                        CheckOut:null,
-                        EntryType: 4,
-                        EntryTypeDesc: "Other",
-                        Id: null,
-                        Notes: "Internal Test"
-                    })
-
                 },
                 e => {
                     console.log('Error calendar', e);
@@ -100,47 +95,80 @@ export class AvailabilityComponent implements OnInit {
         });
     }
 
-    ngOnInit(){
-        this.UpdateTypeList = [
-            {Id: 1, Name: 'Internal Booking'},
-            {Id: 2, Name: 'External Booking'},
-            {Id: 3, Name: 'Owner Present'},
-            {Id: 5, Name: 'Not Available for Rent'},
-            {Id: 4, Name: 'Other'}
-        ];
-
-        this.initForm(this.data);
-    }
-
-    private autosize(e){
-        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
-    }
-
-    public initForm(data) {
-
-        console.log('toggle ')
-        this.availabilityForm.reset();
-        this.availabilityForm = this.builder.group({
-            CheckIn: new FormControl(data.CheckIn),
-            CheckOut: new FormControl(data.CheckOut),
-            EntryType: new FormControl({
-                Id: data.EntryType.Id,
-                Name: data.EntryType.Name,
-            }),
-            Notes: new FormControl(data.Notes),
-            isAgency: new FormControl(data.isAgency),
-            FirstName: new FormControl(data.FirstName),
-            LastName: new FormControl(data.LastName),
-            Email: new FormControl(data.Email),
-            Phone: new FormControl(data.Email),
-            CompanyName: new FormControl(data.CompanyName),
-            ContactName: new FormControl(data.ContactName),
-            AgencyEmail: new FormControl(data.AgencyEmail),
-            AgencyPhone: new FormControl(data.AgencyPhone)
-        });
-    }
+    ngOnInit(){ }
 
     toggleUpdateBlock() {
+        if (this.UpdateBlock === null) {
+            this.disabledDates();
+            this.UpdateBlock = true;
+        } else {
+            // this.disabledDates();
+            this.UpdateBlock = !this.UpdateBlock;
+            // this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
+            // this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
+            // console.log('toggle ', this.UpdateBlock,this.bookingDays)
+        }
+
+
+        if (this.UpdateBlock === true && this.isCalendarView === false) {
+            this.isCalendarView = true;
+        }
+
+        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
+            // this.availabilityForm.controls['CheckOut'].patchValue(moment(data).add(1,'day').format('MM/DD/YYYY'));
+            this.disabledDatesIn.some((disabledDate) => {
+                if(moment(data).add(1,'day').diff(moment(disabledDate), 'days') <= 0) {
+                    setTimeout(() => {
+                        console.log('Disabled date 100 IF',);
+                        $('.checkOut').data("DateTimePicker")
+                                      .minDate(moment(data).add(1,'day').format('MM/DD/YYYY'))
+                                      .maxDate(moment(disabledDate).format('MM/DD/YYYY'));
+                    }, 100);
+                    return true;
+                }
+                else {
+                    setTimeout(() => {
+                        console.log('Disabled date 100 ELSE',);
+                        $('.checkOut').data("DateTimePicker").maxDate(false);
+                    }, 100);
+                }
+            });
+
+            setTimeout(() => {
+                console.log('Disabled date',);
+                $('.checkOut').data("DateTimePicker").minDate(moment(data).add(1,'day').format('MM/DD/YYYY'));
+            }, 200);
+
+            const index = _.findIndex(this.bookingDays, (o) => { return o.Id == null });
+            if(index < 0) {
+                console.log('if',);
+                this.bookingDays.push(this.availabilityForm.value);
+            }
+            else {
+                console.log('else',);
+                this.bookingDays[index] = this.availabilityForm.value;
+            }
+            // console.log('Booking Days CheckIN ',this.bookingDays);
+        });
+
+
+        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
+            // this.availabilityForm.controls['CheckIn'].patchValue(moment(data).add(-1,'day').format('MM/DD/YYYY'));
+            // const index = _.findIndex(this.bookingDays, (o) => { return o.Id == null });
+            // if(index < 0)
+            //     this.bookingDays.push(this.availabilityForm.value);
+            // else
+            //     this.bookingDays[index] = this.availabilityForm.value;
+            // console.log('Booking Days CheckIN after', this.availabilityForm.value);
+            // console.log('Booking Days CheckOUT ',this.bookingDays);
+            // this.bookingDays[this.bookingDays.length - 1].CheckOut = data;
+        })
+        // console.log('Data update ', data);
+        // console.log('Booking update ', _.unionBy(this.bookingDays, data, 'Id'));
+        // console.log('Booking update ', this.bookingDays);
+    }
+
+    private disabledDates() {
         this.disabledDatesIn = [];
         this.disabledDatesOut = [];
         this.bookingDays.forEach((booking) => {
@@ -155,83 +183,8 @@ export class AvailabilityComponent implements OnInit {
                 this.disabledDatesOut.push(checkOutMoment.add(-1, 'day').format('MM/DD/YYYY'));
             }
         });
-
-        if (this.UpdateBlock === null) {
-            this.UpdateBlock = true;
-        } else {
-            this.UpdateBlock = !this.UpdateBlock;
-            this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
-            this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
-            console.log('toggle ', this.UpdateBlock,this.bookingDays)
-        }
-        if (this.UpdateBlock === true && this.isCalendarView === false) {
-            this.isCalendarView = true;
-        }
-        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
-            console.log('change',this.bookingDays);
-            this.bookingDays[this.bookingDays.length - 1].CheckIn = data;
-            this.bookingDays[this.bookingDays.length - 1].CheckOut = moment(data).add(1,'day').format('MM/DD/YYYY');
-            this.disabledDatesIn.some((disabledDate) => {
-                if(moment(this.bookingDays[this.bookingDays.length - 1].CheckOut).diff(moment(disabledDate), 'days') <= 0) {
-                    setTimeout(() => {
-                        $('.checkOut').data("DateTimePicker")
-                                      .minDate(moment(data).add(1,'day').format('MM/DD/YYYY'))
-                                      .maxDate(moment(disabledDate).format('MM/DD/YYYY'));
-                    }, 500);
-                    return true;
-                }
-                else {
-                    setTimeout(() => {
-                        $('.checkOut').data("DateTimePicker").maxDate(false);
-                    }, 500);
-                }
-            });
-
-            setTimeout(() => {
-                $('.checkOut').data("DateTimePicker").minDate(moment(data).add(1,'day').format('MM/DD/YYYY'));
-            }, 600);
-        });
-
-        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
-            this.bookingDays[this.bookingDays.length - 1].CheckOut = data;
-        })
     }
 
-    handlerEditAvailability(data) {
-        const dataForm = {
-            CheckIn: '09/16/2017',
-            CheckOut: '09/18/2017',
-            EntryType: {
-                Id: 1,
-                Name: 'Internal Booking',
-            },
-            Notes: null,
-            isAgency: null,
-            FirstName: 'Alex',
-            LastName: 'Loginov',
-            Email: null,
-            Phone: null,
-            CompanyName: null,
-            ContactName: null,
-            AgencyEmail: null,
-            AgencyPhone: null
-        };
-        this.isCalendarView = true;
-        if (this.UpdateBlock === null) {
-            this.UpdateBlock = true;
-        } else {
-            this.UpdateBlock = !this.UpdateBlock;
-        }
-
-        this.initForm(dataForm);
-        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
-            this.bookingDays[this.bookingDays.length - 1].CheckIn = data;
-        });
-
-        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
-            this.bookingDays[this.bookingDays.length - 1].CheckOut = data;
-        })
-    }
 
     toggleCalendarView() {
         this.isCalendarView = !this.isCalendarView;
@@ -241,19 +194,83 @@ export class AvailabilityComponent implements OnInit {
     }
 
     saveForm(formData) {
-        this.calendarService.addCalendar(formData).subscribe(
-            d => {
-                console.log('Save availability', d);
-                this.UpdateBlock = !this.UpdateBlock;
-            },
-            e => {
-                console.log('Error save availability', e);
-            }
-        )
+        formData.EntryType = 4;
+        // formData.EntryType = formData.EntryType.Id;
+
+        if(formData.Id) {
+            this.calendarService.updateCalendar(formData).subscribe(
+                d => {
+                    _.replace(this.bookingDays, { Id: formData.Id }, d);
+                    this.UpdateBlock = !this.UpdateBlock;
+                },
+                e => {
+                    console.log('Error save availability', e);
+                }
+            );
+        } else {
+            this.calendarService.addCalendar(formData).subscribe(
+                d => {
+                    this.bookingDays.push(d);
+                    this.UpdateBlock = !this.UpdateBlock;
+                },
+                e => {
+                    console.log('Error save availability', e);
+                }
+            );
+        }
         console.log("save form", formData)
     }
 
-    changeDate() {
-        console.log('changeDate ',this.availabilityForm)
+    handlerEditAvailability(id) {
+        this.calendarService.getCalendar(id).subscribe(
+            d => {
+                this.availabilityForm = new FormGroup({
+                    Id: new FormControl(d.Id),
+                    PropertyId: new FormControl(this.propertyId),
+                    CheckIn: new FormControl(d.CheckIn),
+                    CheckOut: new FormControl(d.CheckOut),
+                    EntryType: new FormControl(d.EntryType),
+                    Notes: new FormControl(d.Notes),
+                });
+
+                this.isCalendarView = true;
+                if (this.UpdateBlock === null) {
+                    this.UpdateBlock = true;
+                } else {
+                    this.UpdateBlock = !this.UpdateBlock;
+                }
+            },
+            e => {
+                console.log('Error availability', e);
+            }
+        );
+
+        //     this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
+        //         this.bookingDays[this.bookingDays.length - 1].CheckIn = data;
+        //     });
+        //
+        //     this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
+        //         this.bookingDays[this.bookingDays.length - 1].CheckOut = data;
+        //     })
     }
+
+    handlerDeleteAvailability(id) {
+        this.bookingDays = _.remove(this.bookingDays, (o) => {
+            return o.Id != id;
+        });
+        this.calendarService.deleteAvailability(id).subscribe(
+            d => {
+                console.log('Deleted Availability  ', d);
+            },
+            e => {
+                console.log('Deleted Availability ERROR', e);
+
+            }
+        )
+    }
+
+    private autosize(e){
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
+    }
+
 }

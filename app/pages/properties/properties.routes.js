@@ -20,6 +20,6 @@ exports.MODULE_COMPONENTS = [
     setrates_component_1.SetratesComponent,
     availability_component_1.AvailabilityComponent,
     calendar_component_1.CalendarComponent,
-    calendar_list_component_1.CalendarListComponent
+    calendar_list_component_1.CalendarListComponent,
 ];
 //# sourceMappingURL=properties.routes.js.map

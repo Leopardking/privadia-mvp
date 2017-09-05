@@ -47,6 +47,15 @@ export class CalendarService {
 				.catch(this.handleError);
     }
 
+    public updateCalendar(data) {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.put(`${this.apiUrl}/api/Calendar`, data, options)
+				.map(this.extractData)
+				.catch(this.handleError);
+    }
+
     public deleteAvailability(id) {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );

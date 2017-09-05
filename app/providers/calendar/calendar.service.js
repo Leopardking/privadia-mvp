@@ -43,6 +43,13 @@ var CalendarService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    CalendarService.prototype.updateCalendar = function (data) {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.put(this.apiUrl + "/api/Calendar", data, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     CalendarService.prototype.deleteAvailability = function (id) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });

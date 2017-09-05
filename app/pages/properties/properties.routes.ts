@@ -25,5 +25,5 @@ export const MODULE_COMPONENTS = [
     SetratesComponent,
     AvailabilityComponent,
     CalendarComponent,
-    CalendarListComponent
+    CalendarListComponent,
 ];
