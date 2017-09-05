@@ -13,28 +13,26 @@ var forms_1 = require("@angular/forms");
 var DatetimefieldComponent = (function () {
     function DatetimefieldComponent() {
     }
-    DatetimefieldComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        setTimeout(function () {
-            _this.dateTime = $("." + _this.idPicker);
-            _this.dateTime.datetimepicker({
-                format: 'MM/DD/YYYY',
-                disabledDates: _this.disabledDates,
-                minDate: _this.field.value,
-                icons: {
-                    time: "fa fa-clock-o",
-                    date: "fa fa-calendar",
-                    up: "fa fa-chevron-up",
-                    down: "fa fa-chevron-down",
-                    previous: 'fa fa-chevron-left',
-                    next: 'fa fa-chevron-right',
-                    today: 'fa fa-screenshot',
-                    clear: 'fa fa-trash',
-                    close: 'fa fa-remove',
-                    inline: true
-                }
-            });
-        }, 300);
+    DatetimefieldComponent.prototype.ngOnInit = function () { };
+    DatetimefieldComponent.prototype.ngAfterContentChecked = function () {
+        this.dateTime = $("." + this.idPicker);
+        this.dateTime.datetimepicker({
+            format: 'MM/DD/YYYY',
+            disabledDates: this.disabledDates,
+            minDate: this.field.value,
+            icons: {
+                time: "fa fa-clock-o",
+                date: "fa fa-calendar",
+                up: "fa fa-chevron-up",
+                down: "fa fa-chevron-down",
+                previous: 'fa fa-chevron-left',
+                next: 'fa fa-chevron-right',
+                today: 'fa fa-screenshot',
+                clear: 'fa fa-trash',
+                close: 'fa fa-remove',
+                inline: true
+            }
+        });
     };
     __decorate([
         core_1.Input('data'), 
