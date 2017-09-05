@@ -43,11 +43,19 @@ var CalendarService = (function () {
             .map(this.extractData)
             .catch(this.handleError);
     };
+    CalendarService.prototype.deleteAvailability = function (id) {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.delete(this.apiUrl + "/api/Calendar/111" + id, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
     CalendarService.prototype.extractData = function (res) {
-        var body = res.json();
+        var body = res.text() && res.json();
         return body || {};
     };
     CalendarService.prototype.handleError = function (error) {
+        console.log('error data', http_1.Response);
         var errMsg;
         if (error instanceof http_1.Response) {
             errMsg = error.json() || '';

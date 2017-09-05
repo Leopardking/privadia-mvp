@@ -23,7 +23,7 @@
                         </tfoot>
                         <tbody id="bookingTableBody">
                         <tr *ngFor="let item of bookingDays">
-                            <td>{{item.EntryTypeDesc}}</td>
+                            <td>{{item.EntryType.Name}}</td>
                             <td>
                                 <div class="form-group date-group">
                                     <i class="material-icons">insert_invitation</i>
@@ -51,9 +51,10 @@
                                 <popover-content #i
                                                  placement="left"
                                                  [animation]="true"
+                                                 [closeOnMouseOutside]="true"
                                                  [closeOnClickOutside]="true">
                                     <h3>Are you sure?</h3>
-                                    <button type="button" class="btn btn-danger font-14">
+                                    <button type="button" class="btn btn-danger font-14" (click)="deleteEvent(item.Id)">
                                         Yes, remove
                                     </button>
                                     <button type="button" class="btn btn-success-green font-14"

@@ -47,13 +47,23 @@ export class CalendarService {
 				.catch(this.handleError);
     }
 
+    public deleteAvailability(id) {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.delete(`${this.apiUrl}/api/Calendar/111${id}`, options)
+				.map(this.extractData)
+				.catch(this.handleError);
+    }
+
 	private extractData(res:Response) {
-		let body = res.json();
+		let body = res.text() && res.json();
 
 	    return body || { };
 	}
 
 	private handleError(error: Response | any) {
+		console.log('error data',Response);
 		let errMsg: string;
 	    if (error instanceof Response) {
 			errMsg = error.json() || '';

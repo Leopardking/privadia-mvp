@@ -16,7 +16,8 @@ export class CalendarListComponent implements OnInit{
     @Input('group') private availabilityForm: FormGroup;
     @Input('errorForm') public errorForm: any;
     @Input('bookingDays') public bookingDays: any;
-    @Output() editAvailability: EventEmitter<any> = new EventEmitter();
+    @Output('deleteAvailability') deleteAvailability: EventEmitter<any> = new EventEmitter();
+    @Output('editAvailability') editAvailability: EventEmitter<any> = new EventEmitter();
 
     private datatableInited = false;
 
@@ -43,7 +44,12 @@ export class CalendarListComponent implements OnInit{
     private formattedDate(date) {
         return moment(date).format('MM/DD/YYYY')
     }
+
     editEvent(evt) {
         this.editAvailability.next(evt);
+    }
+
+    deleteEvent(evt) {
+        this.deleteAvailability.next(evt);
     }
 }

@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var CalendarListComponent = (function () {
     function CalendarListComponent() {
+        this.deleteAvailability = new core_1.EventEmitter();
         this.editAvailability = new core_1.EventEmitter();
         this.datatableInited = false;
     }
@@ -37,6 +38,9 @@ var CalendarListComponent = (function () {
     CalendarListComponent.prototype.editEvent = function (evt) {
         this.editAvailability.next(evt);
     };
+    CalendarListComponent.prototype.deleteEvent = function (evt) {
+        this.deleteAvailability.next(evt);
+    };
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
@@ -50,7 +54,11 @@ var CalendarListComponent = (function () {
         __metadata('design:type', Object)
     ], CalendarListComponent.prototype, "bookingDays", void 0);
     __decorate([
-        core_1.Output(), 
+        core_1.Output('deleteAvailability'), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], CalendarListComponent.prototype, "deleteAvailability", void 0);
+    __decorate([
+        core_1.Output('editAvailability'), 
         __metadata('design:type', core_1.EventEmitter)
     ], CalendarListComponent.prototype, "editAvailability", void 0);
     CalendarListComponent = __decorate([
