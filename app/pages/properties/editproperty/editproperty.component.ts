@@ -28,6 +28,7 @@ export class EditpropertyComponent implements OnInit {
     public propertyForm: FormGroup;
 
     constructor ( public propertiesService: PropertiesService,
+                  public lookupsService: LookupsService,
                   private loginService: LoginService,
                   private route: ActivatedRoute,
                   private builder: FormBuilder) {
@@ -37,6 +38,7 @@ export class EditpropertyComponent implements OnInit {
             propertiesService.readDataOwners();
             propertiesService.readDataRegions();
             propertiesService.readDataCompanies();
+
         });
     }
 
@@ -47,7 +49,7 @@ export class EditpropertyComponent implements OnInit {
         setTimeout(() => {
             this.propertyForm = this.builder.group({
                 Id: this.propertyId,
-                Active: { value: this.propertiesService.property.Active, disabled: this.permission },
+                Active: { value: this.propertiesService.property.Active || null, disabled: this.permission },
                 OwnerName: { value: this.propertiesService.property.OwnerName, disabled: this.permission },
                 InternalName: { value: this.propertiesService.property.InternalName, disabled: this.permission },
                 Name: [{ value: this.propertiesService.property.Name, disabled: this.permission}],
@@ -128,7 +130,7 @@ export class EditpropertyComponent implements OnInit {
             }, 1500);
             */
             localStorage.setItem('title', this.propertiesService.property.Name);
-        }, 1500);
+        }, 3000);
     }
 
     setContacts(contacts) {

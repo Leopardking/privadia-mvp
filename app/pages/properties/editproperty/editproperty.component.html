@@ -95,34 +95,37 @@
                                                        [group]="propertyForm"></propertymarketing-cmp>
                             </div>
 
-                            <div id="metatab-property-4" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="propertiesService.metadata[3] && !propertiesService.isReading"
-                                                         [group]="propertyForm"
-                                                         [metadata]="propertiesService.metadata[3]"></property-metafilter-cmp>
-                            </div>
+                            <!--<div id="metatab-property-4" class="fade card-content p-b-none p-t-none">-->
+                                <!--<property-metafilter-cmp *ngIf="propertiesService.metadata[3] && !propertiesService.isReading"-->
+                                                         <!--[group]="propertyForm"-->
+                                                         <!--[metadata]="propertiesService.metadata[3]"></property-metafilter-cmp>-->
+                            <!--</div>-->
 
-                            <div id="metatab-property-3" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="propertiesService.metadata[2] && !propertiesService.isReading"
-                                                         [group]="propertyForm"
-                                                         [metadata]="propertiesService.metadata[2]"></property-metafilter-cmp>
-                            </div>
+                            <!--<div id="metatab-property-3" class="fade card-content p-b-none p-t-none">-->
+                                <!--<property-metafilter-cmp *ngIf="propertiesService.metadata[2] && !propertiesService.isReading"-->
+                                                         <!--[group]="propertyForm"-->
+                                                         <!--[metadata]="propertiesService.metadata[2]"></property-metafilter-cmp>-->
+                            <!--</div>-->
 
                             <div id="metatab-property-6" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="propertiesService.metadata[5] && !propertiesService.isReading"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata && !propertiesService.isReading"
                                                          [group]="propertyForm"
-                                                         [metadata]="propertiesService.metadata[5]"></property-metafilter-cmp>
+                                                         [metadataId]="6"
+                                                         [metadata]="propertiesService.metadata"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-2" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="propertiesService.metadata[1] && !propertiesService.isReading"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata && !propertiesService.isReading"
                                                          [group]="propertyForm"
-                                                         [metadata]="propertiesService.metadata[1]"></property-metafilter-cmp>
+                                                         [metadataId]="3"
+                                                         [metadata]="propertiesService.metadata"></property-metafilter-cmp>
                             </div>
 
                             <div id="metatab-property-1" class="fade card-content p-b-none p-t-none">
-                                <property-metafilter-cmp *ngIf="propertiesService.metadata[0] && !propertiesService.isReading"
+                                <property-metafilter-cmp *ngIf="propertiesService.metadata && !propertiesService.isReading"
                                                          [group]="propertyForm"
-                                                         [metadata]="propertiesService.metadata[0]"></property-metafilter-cmp>
+                                                         [metadataId]="1"
+                                                         [metadata]="propertiesService.metadata"></property-metafilter-cmp>
                             </div>
                         </div>
                     </div>

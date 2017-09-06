@@ -13,11 +13,13 @@ var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var login_service_1 = require("../../../providers/login/login.service");
+var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var helpers_1 = require("../../../helpers/helpers");
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(propertiesService, loginService, route, builder) {
+    function EditpropertyComponent(propertiesService, lookupsService, loginService, route, builder) {
         var _this = this;
         this.propertiesService = propertiesService;
+        this.lookupsService = lookupsService;
         this.loginService = loginService;
         this.route = route;
         this.builder = builder;
@@ -37,7 +39,7 @@ var EditpropertyComponent = (function () {
         setTimeout(function () {
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,
-                Active: { value: _this.propertiesService.property.Active, disabled: _this.permission },
+                Active: { value: _this.propertiesService.property.Active || null, disabled: _this.permission },
                 OwnerName: { value: _this.propertiesService.property.OwnerName, disabled: _this.permission },
                 InternalName: { value: _this.propertiesService.property.InternalName, disabled: _this.permission },
                 Name: [{ value: _this.propertiesService.property.Name, disabled: _this.permission }],
@@ -114,7 +116,7 @@ var EditpropertyComponent = (function () {
             }, 1500);
             */
             localStorage.setItem('title', _this.propertiesService.property.Name);
-        }, 1500);
+        }, 3000);
     };
     EditpropertyComponent.prototype.setContacts = function (contacts) {
         var _this = this;
@@ -217,7 +219,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, router_1.ActivatedRoute, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService, login_service_1.LoginService, router_1.ActivatedRoute, forms_1.FormBuilder])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());

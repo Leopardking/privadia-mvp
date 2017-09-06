@@ -14,8 +14,9 @@ declare const $:any;
 
 export class PropertyMetafilterComponent implements OnInit{
 	@Input('metadata') metadata;
-	@Input('group')
-	public propertyForm: FormGroup;
+	@Input('metadataId') metadataId;
+	@Input('group') public propertyForm: FormGroup;
+	public metadataView;
 
 	public metafilters;
 	constructor(  ) {}
@@ -23,32 +24,35 @@ export class PropertyMetafilterComponent implements OnInit{
 	ngOnInit() {
         this.metafilters = [];
         const values = this.propertyForm.controls['MetaData'].value;
+		this.metadataView = _.find(this.metadata, (o) => {
+			return o['Id'] == this.metadataId;
+		});
 
 		const control = <FormGroup>this.propertyForm.controls['MetaDataTmp'];
 
-        for (let i = 0; i < this.metadata.MetaDataSubTypes.length; i++) {
-			control.addControl(
-				'type_' + this.metadata.MetaDataSubTypes[i].Id,
+        for (let i = 0; i < this.metadataView['MetaDataSubTypes'].length; i++) {
+		    control.addControl(
+				'type_' + this.metadataView['MetaDataSubTypes'][i].Id,
 				new FormArray([])
-			);
-			const controlSubtype = <FormArray>control.controls['type_' + this.metadata.MetaDataSubTypes[i].Id];
-            for (let j = 0; j < this.metadata.MetaDataSubTypes[i].MetaData.length; j++) {
+            );
+            const controlSubtype = <FormArray>control.controls['type_' + this.metadataView['MetaDataSubTypes'][i].Id];
+            for (let j = 0; j < this.metadataView['MetaDataSubTypes'][i].MetaData.length; j++) {
 				const obj = _.find(values, (el) => {
-					return el['MetaDataId'] == this.metadata.MetaDataSubTypes[i].MetaData[j].Id;
+					return el['MetaDataId'] == this.metadataView['MetaDataSubTypes'][i].MetaData[j].Id;
 				});
 
 				controlSubtype.push(
 					new FormGroup({
-						MetaDataId: new FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Id),
-						MetaDataName: new FormControl(this.metadata.MetaDataSubTypes[i].MetaData[j].Name),
+						MetaDataId: new FormControl(this.metadataView['MetaDataSubTypes'][i].MetaData[j].Id),
+						MetaDataName: new FormControl(this.metadataView['MetaDataSubTypes'][i].MetaData[j].Name),
 						Available: new FormControl(obj && obj['Available'] || false),
 					}),
 				);
-				this.metafilters[this.metadata.MetaDataSubTypes[i].MetaData[j].Id] = obj && obj['Available'] || false;
+				this.metafilters[this.metadataView['MetaDataSubTypes'][i].MetaData[j].Id] = obj && obj['Available'] || false;
             }
         }
 
-        setTimeout(() => {
+		setTimeout(() => {
 			$(".selectpicker").selectpicker({
 				selectedTextFormat: 'static'
 			});
