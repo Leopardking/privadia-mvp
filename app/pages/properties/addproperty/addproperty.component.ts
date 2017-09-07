@@ -62,7 +62,7 @@ export class AddpropertyComponent implements OnInit {
         OtherInfo: new FormControl(),
         // CollaboratorInitials: new FormControl(),
         PropertyUrl: new FormControl(null, Validators.pattern('https?://.+')),
-        AssetsUrl: new FormControl(null, Validators.pattern('https?://.+')),
+        PropertyAssetsUrl: new FormControl(null, Validators.pattern('https?://.+')),
         Bathrooms: new FormControl(null),
         Bedrooms: new FormControl(null),
         Sleeps: new FormControl(null),

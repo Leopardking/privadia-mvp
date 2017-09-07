@@ -63,7 +63,7 @@ var AddpropertyComponent = (function () {
             OtherInfo: new forms_1.FormControl(),
             // CollaboratorInitials: new FormControl(),
             PropertyUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
-            AssetsUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
+            PropertyAssetsUrl: new forms_1.FormControl(null, forms_1.Validators.pattern('https?://.+')),
             Bathrooms: new forms_1.FormControl(null),
             Bedrooms: new forms_1.FormControl(null),
             Sleeps: new forms_1.FormControl(null),
