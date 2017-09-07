@@ -31,7 +31,12 @@ var AddpropertyComponent = (function () {
             InternalName: new forms_1.FormControl(),
             OwnerName: new forms_1.FormControl(),
             Name: new forms_1.FormControl(null),
-            Address: new forms_1.FormControl(),
+            AddressLine1: new forms_1.FormControl(),
+            AddressLine2: new forms_1.FormControl(),
+            AddressPostalCode: new forms_1.FormControl(),
+            AddressCountry: new forms_1.FormControl(),
+            Longitude: new forms_1.FormControl(),
+            Latitude: new forms_1.FormControl(),
             Region: new forms_1.FormControl({
                 Id: '',
                 Name: '',
@@ -99,7 +104,7 @@ var AddpropertyComponent = (function () {
             setTimeout(function () {
                 _this.propertyForm.controls['ManagementCompany'].setValue(_this.propertiesService.companies[0]);
                 _this.propertiesService.readDataManagers(_this.propertiesService.companies[0].Id);
-            }, 500);
+            }, 1000);
         }
         this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe(function (company) {
             _this.propertiesService.readDataManagers(company.Id);

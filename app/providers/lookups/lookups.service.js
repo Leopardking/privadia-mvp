@@ -37,6 +37,18 @@ var LookupsService = (function () {
             _this.metadata = d;
         }, function (e) { console.log('Error ManagementCompanies', e); });
     };
+    LookupsService.prototype.readDataHousekeepingOptions = function () {
+        var _this = this;
+        this.getHousekeepingOptions().subscribe(function (d) {
+            _this.housekeepingOptions = d;
+        }, function (e) { console.log('Error ChildrenAllowed', e); });
+    };
+    LookupsService.prototype.readDataPropertyTypes = function () {
+        var _this = this;
+        this.getPropertyTypes().subscribe(function (d) {
+            _this.propertyTypes = d;
+        }, function (e) { console.log('Error PropertyTypes', e); });
+    };
     LookupsService.prototype.getManagementCompanies = function () {
         if (!this.loginService.getPermission('Lookups/GetManagementCompanies'))
             return Observable_1.Observable.throw(null);
@@ -102,6 +114,13 @@ var LookupsService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetChildrenOptions', options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    LookupsService.prototype.getPropertyTypes = function () {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/Lookups/GetPropertyTypes', options)
             .map(this.extractData)
             .catch(this.handleError);
     };

@@ -7,6 +7,7 @@ import * as _ from 'lodash'
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {LoginService} from "../../../providers/login/login.service";
 import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
+
 declare const $:any;
 //declare const _:any;
 
@@ -29,7 +30,12 @@ export class AddpropertyComponent implements OnInit {
         InternalName: new FormControl(),
         OwnerName: new FormControl(),
         Name: new FormControl(null),
-        Address: new FormControl(),
+        AddressLine1: new FormControl(),
+        AddressLine2: new FormControl(),
+        AddressPostalCode: new FormControl(),
+        AddressCountry: new FormControl(),
+        Longitude: new FormControl(),
+        Latitude: new FormControl(),
         Region: new FormControl({
             Id: '',
             Name: '',
@@ -103,7 +109,7 @@ export class AddpropertyComponent implements OnInit {
             setTimeout(() => {
                 this.propertyForm.controls['ManagementCompany'].setValue(this.propertiesService.companies[0])
                 this.propertiesService.readDataManagers(this.propertiesService.companies[0].Id);
-            }, 500);
+            }, 1000);
         }
 
         this.propertyForm.controls['ManagementCompany'].valueChanges.subscribe( company => {

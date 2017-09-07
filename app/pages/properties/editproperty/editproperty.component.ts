@@ -38,7 +38,6 @@ export class EditpropertyComponent implements OnInit {
             propertiesService.readDataOwners();
             propertiesService.readDataRegions();
             propertiesService.readDataCompanies();
-
         });
     }
 
@@ -47,13 +46,19 @@ export class EditpropertyComponent implements OnInit {
         this.permission = !this.loginService.getPermission('Properties/Put');
 
         setTimeout(() => {
+            console.log('Test ', this.propertiesService.property.PropertyType);
             this.propertyForm = this.builder.group({
                 Id: this.propertyId,
                 Active: { value: this.propertiesService.property.Active || null, disabled: this.permission },
                 OwnerName: { value: this.propertiesService.property.OwnerName, disabled: this.permission },
                 InternalName: { value: this.propertiesService.property.InternalName, disabled: this.permission },
                 Name: [{ value: this.propertiesService.property.Name, disabled: this.permission}],
-                Address: { value: this.propertiesService.property.Address, disabled: this.permission },
+                AddressLine1: { value: this.propertiesService.property.AddressLine1, disabled: this.permission },
+                AddressLine2: { value: this.propertiesService.property.AddressLine2, disabled: this.permission },
+                AddressPostalCode: { value: this.propertiesService.property.AddressPostalCode, disabled: this.permission },
+                AddressCountry: { value: this.propertiesService.property.AddressCountry, disabled: this.permission },
+                Longitude: { value: this.propertiesService.property.Longitude, disabled: this.permission },
+                Latitude: { value: this.propertiesService.property.Latitude, disabled: this.permission },
                 Region: { value: { Id: this.propertiesService.property.Region.Id, Name: this.propertiesService.property.Region.Name}, disabled: this.permission },
                 ManagementCompany: { value:
                     {
@@ -74,8 +79,8 @@ export class EditpropertyComponent implements OnInit {
                 Description: { value: this.propertiesService.property.Description, disabled: this.permission },
                 OtherInfo: { value: this.propertiesService.property.OtherInfo, disabled: this.permission },
                 // CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
-                PropertyUrl: {},
-                AssetsUrl: {},
+                PropertyUrl: null,
+                AssetsUrl: null,
                 MinimumStay: [{ value: this.propertiesService.property.MinimumStay, disabled: this.permission }, Validators.pattern('^[0-9]*$')],
                 Bathrooms: [{ value: this.propertiesService.property.Bathrooms, disabled: this.permission }],
                 Bedrooms: [{ value: this.propertiesService.property.Bedrooms, disabled: this.permission }],
@@ -96,8 +101,14 @@ export class EditpropertyComponent implements OnInit {
                 Housekeeping: { value: this.propertiesService.property.Housekeeping, disabled: this.permission },
                 OtherHousekeepingInfo: { value: this.propertiesService.property.OtherHousekeepingInfo, disabled: this.permission },
                 MetaDataTmp: {},
-
-                PropertyType: {value: 1},
+                PropertyType: {
+                    value:
+                    {
+                        Id: this.propertiesService.property.PropertyType && this.propertiesService.property.PropertyType.Id || null,
+                        Name: this.propertiesService.property.PropertyType && this.propertiesService.property.PropertyType.Name || null,
+                    },
+                    disabled: this.permission
+                },
             });
             this.setContacts(this.propertiesService.property.Contacts);
             this.setRooms(this.propertiesService.property.Rooms);

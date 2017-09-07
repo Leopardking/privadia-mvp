@@ -37,13 +37,19 @@ var EditpropertyComponent = (function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.permission = !this.loginService.getPermission('Properties/Put');
         setTimeout(function () {
+            console.log('Test ', _this.propertiesService.property.PropertyType);
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,
                 Active: { value: _this.propertiesService.property.Active || null, disabled: _this.permission },
                 OwnerName: { value: _this.propertiesService.property.OwnerName, disabled: _this.permission },
                 InternalName: { value: _this.propertiesService.property.InternalName, disabled: _this.permission },
                 Name: [{ value: _this.propertiesService.property.Name, disabled: _this.permission }],
-                Address: { value: _this.propertiesService.property.Address, disabled: _this.permission },
+                AddressLine1: { value: _this.propertiesService.property.AddressLine1, disabled: _this.permission },
+                AddressLine2: { value: _this.propertiesService.property.AddressLine2, disabled: _this.permission },
+                AddressPostalCode: { value: _this.propertiesService.property.AddressPostalCode, disabled: _this.permission },
+                AddressCountry: { value: _this.propertiesService.property.AddressCountry, disabled: _this.permission },
+                Longitude: { value: _this.propertiesService.property.Longitude, disabled: _this.permission },
+                Latitude: { value: _this.propertiesService.property.Latitude, disabled: _this.permission },
                 Region: { value: { Id: _this.propertiesService.property.Region.Id, Name: _this.propertiesService.property.Region.Name }, disabled: _this.permission },
                 ManagementCompany: { value: {
                         Id: _this.propertiesService.property.ManagementCompany.Id,
@@ -62,8 +68,8 @@ var EditpropertyComponent = (function () {
                 Description: { value: _this.propertiesService.property.Description, disabled: _this.permission },
                 OtherInfo: { value: _this.propertiesService.property.OtherInfo, disabled: _this.permission },
                 // CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
-                PropertyUrl: {},
-                AssetsUrl: {},
+                PropertyUrl: null,
+                AssetsUrl: null,
                 MinimumStay: [{ value: _this.propertiesService.property.MinimumStay, disabled: _this.permission }, forms_1.Validators.pattern('^[0-9]*$')],
                 Bathrooms: [{ value: _this.propertiesService.property.Bathrooms, disabled: _this.permission }],
                 Bedrooms: [{ value: _this.propertiesService.property.Bedrooms, disabled: _this.permission }],
@@ -84,7 +90,13 @@ var EditpropertyComponent = (function () {
                 Housekeeping: { value: _this.propertiesService.property.Housekeeping, disabled: _this.permission },
                 OtherHousekeepingInfo: { value: _this.propertiesService.property.OtherHousekeepingInfo, disabled: _this.permission },
                 MetaDataTmp: {},
-                PropertyType: { value: 1 },
+                PropertyType: {
+                    value: {
+                        Id: _this.propertiesService.property.PropertyType && _this.propertiesService.property.PropertyType.Id || null,
+                        Name: _this.propertiesService.property.PropertyType && _this.propertiesService.property.PropertyType.Name || null,
+                    },
+                    disabled: _this.permission
+                },
             });
             _this.setContacts(_this.propertiesService.property.Contacts);
             _this.setRooms(_this.propertiesService.property.Rooms);

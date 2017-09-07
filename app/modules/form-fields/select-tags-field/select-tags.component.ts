@@ -34,7 +34,7 @@ export class SelectTagsFieldComponent implements OnInit {
             selectQuery.on('show.bs.select', function (e) {
                 $('.dropdown-menu.open .inner').perfectScrollbar('update');
             });
-        }, 1)
+        }, 1000)
     }
 
     private subfilterModelChange(e, type) {

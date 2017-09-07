@@ -16,13 +16,10 @@ var SingleSelectfieldComponent = (function () {
         this.disabled = false;
     }
     SingleSelectfieldComponent.prototype.ngOnInit = function () {
-        console.log('disabled', this.disabled);
         var selectQuery = $(".custompicker");
         selectQuery.selectpicker();
-        console.log('ngInit');
     };
     SingleSelectfieldComponent.prototype.ngAfterViewInit = function () {
-        console.log('ngAfterViewInit');
         var selectQuery = $(".custompicker");
         setTimeout(function () {
             selectQuery.selectpicker('render');

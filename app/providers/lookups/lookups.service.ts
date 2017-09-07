@@ -16,6 +16,8 @@ export class LookupsService {
 	public managers = [];
 	public regions;
 	public metadata;
+	public housekeepingOptions;
+	public propertyTypes;
 
 	constructor ( private http: Http,
 				  private loginService: LoginService ) {
@@ -37,6 +39,24 @@ export class LookupsService {
 				this.metadata = d;
 			},
 			e => { console.log('Error ManagementCompanies', e) }
+		)
+	}
+
+	public readDataHousekeepingOptions() {
+		this.getHousekeepingOptions().subscribe(
+			d => {
+				this.housekeepingOptions = d;
+			},
+			e => { console.log('Error ChildrenAllowed', e) }
+		)
+	}
+
+	public readDataPropertyTypes() {
+		this.getPropertyTypes().subscribe(
+			d => {
+				this.propertyTypes = d;
+			},
+			e => { console.log('Error PropertyTypes', e) }
 		)
 	}
 
@@ -126,6 +146,15 @@ export class LookupsService {
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/Lookups/GetChildrenOptions', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getPropertyTypes() {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetPropertyTypes', options )
             .map(this.extractData)
             .catch(this.handleError);
 	}

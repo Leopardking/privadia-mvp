@@ -12,33 +12,30 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require("@angular/platform-browser");
 var properties_service_1 = require('../../../providers/properties/properties.service');
 var forms_1 = require("@angular/forms");
+var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var login_service_1 = require("../../../providers/login/login.service");
 var initWizard = require("../../../../assets/js/init/initWizard.js");
 var PropertyinfoComponent = (function () {
-    function PropertyinfoComponent(propertiesService, loginService, _sanitizer) {
+    function PropertyinfoComponent(propertiesService, loginService, lookupsService, _sanitizer) {
         var _this = this;
         this.propertiesService = propertiesService;
         this.loginService = loginService;
+        this.lookupsService = lookupsService;
         this._sanitizer = _sanitizer;
         this.role = !this.loginService.getRoles('Admin');
         this.autocompleListFormatter = function (data) {
             var html = "" + data.Name;
             return _this._sanitizer.bypassSecurityTrustHtml(html);
         };
+        this.PropertyType = this.lookupsService.readDataPropertyTypes();
     }
     PropertyinfoComponent.prototype.ngOnInit = function () {
         initWizard();
         this.permission = !this.loginService.getPermission('Properties/Put');
         $('.property-tab a:first').tab('show');
-        this.PropertyType = [
-            { Id: 1, Name: 'Villa' },
-            { Id: 2, Name: 'Apartment' },
-            { Id: 3, Name: 'Chalet' },
-            { Id: 4, Name: 'Cottage' },
-            { Id: 5, Name: 'House' },
-            { Id: 6, Name: 'Lodge' },
-            { Id: 7, Name: 'Yacht' },
-        ];
+    };
+    PropertyinfoComponent.prototype.ngAfterContentChecked = function () {
+        this.PropertyType = this.lookupsService.propertyTypes;
     };
     PropertyinfoComponent.prototype.regionChanged = function (e) { };
     PropertyinfoComponent.prototype.autosize = function (e) {
@@ -109,7 +106,7 @@ var PropertyinfoComponent = (function () {
             templateUrl: 'propertyinfo.component.html',
             styleUrls: ['propertyinfo.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, platform_browser_1.DomSanitizer])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, login_service_1.LoginService, lookups_service_1.LookupsService, platform_browser_1.DomSanitizer])
     ], PropertyinfoComponent);
     return PropertyinfoComponent;
 }());

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import {Component, OnInit, Input, ViewChild, AfterContentChecked} from '@angular/core';
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
 
 import { AutoComplete } from '../../../components/autocomplete/autocomplete.component';
@@ -21,34 +21,30 @@ declare const $: any;
     styleUrls: [ 'propertyinfo.component.css' ]
 })
 
-export class PropertyinfoComponent implements OnInit{
+export class PropertyinfoComponent implements OnInit, AfterContentChecked {
     @Input('group') public propertyForm: FormGroup;
     @Input() public errorForm: any;
 
     private permission;
     public role = !this.loginService.getRoles('Admin');
-    private PropertyType: Array<{ Id: number, Name: string }>;
+    // private PropertyType: Array<{ Id: number, Name: string }>;
+    private PropertyType;
 
     constructor ( private propertiesService: PropertiesService,
                   private loginService: LoginService,
+                  private lookupsService: LookupsService,
                   private _sanitizer: DomSanitizer ) {
-
+        this.PropertyType = this.lookupsService.readDataPropertyTypes();
     }
 
     ngOnInit(){
         initWizard();
         this.permission = !this.loginService.getPermission('Properties/Put');
-        $('.property-tab a:first').tab('show')
+        $('.property-tab a:first').tab('show');
+    }
 
-        this.PropertyType = [
-            {Id: 1, Name: 'Villa'},
-            {Id: 2, Name: 'Apartment'},
-            {Id: 3, Name: 'Chalet'},
-            {Id: 4, Name: 'Cottage'},
-            {Id: 5, Name: 'House'},
-            {Id: 6, Name: 'Lodge'},
-            {Id: 7, Name: 'Yacht'},
-        ]
+    ngAfterContentChecked() {
+        this.PropertyType = this.lookupsService.propertyTypes;
     }
 
     private regionChanged(e) { }

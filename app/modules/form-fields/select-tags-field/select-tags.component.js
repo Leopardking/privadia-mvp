@@ -26,7 +26,7 @@ var SelectTagsFieldComponent = (function () {
             selectQuery.on('show.bs.select', function (e) {
                 $('.dropdown-menu.open .inner').perfectScrollbar('update');
             });
-        }, 1);
+        }, 1000);
     };
     SelectTagsFieldComponent.prototype.subfilterModelChange = function (e, type) {
         var controlSubtype = this.field.controls[type];

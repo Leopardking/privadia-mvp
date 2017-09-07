@@ -21,15 +21,12 @@ export class SingleSelectfieldComponent implements OnInit, AfterViewInit {
     constructor ( ) {}
 
     ngOnInit() {
-        console.log('disabled', this.disabled)
         const selectQuery = $(".custompicker");
 
         selectQuery.selectpicker();
-        console.log('ngInit')
     }
 
     ngAfterViewInit() {
-        console.log('ngAfterViewInit')
         const selectQuery = $(".custompicker");
         setTimeout(() => {
             selectQuery.selectpicker('render');
