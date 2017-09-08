@@ -475,40 +475,97 @@
                         </div>
                         <div class="row m-t-15">
                             <div class="checkbox col-xs-3">
-                                <label>
-                                    <input type="checkbox" formControlName="SmokingAllowed"> Smoking Allowed
-                                </label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="false" formControlName="SmokingAllowed">No Smoking
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="true" formControlName="SmokingAllowed">Smoking Allowed
+                                    </label>
+                                </div>
                             </div>
                             <div class="checkbox col-xs-3">
-                                <label>
-                                    <input type="checkbox" formControlName="ChildrenAllowed"> Children Allowed
-                                </label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="false" formControlName="ChildrenAllowed">No Children
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="true" formControlName="ChildrenAllowed">Children Allowed
+                                    </label>
+                                </div>
                             </div>
                             <div class="checkbox col-xs-3">
-                                <label>
-                                    <input type="checkbox" formControlName="ChildrenWelcome"> Children Welcome
-                                </label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="false" formControlName="PetsAllowed">No Pets
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="true" formControlName="PetsAllowed">Pets Welcome
+                                    </label>
+                                </div>
                             </div>
                             <div class="checkbox col-xs-3">
-                                <label>
-                                    <input type="checkbox" formControlName="PetsWelcome"> Pets Welcome
-                                </label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="false" formControlName="WheelchairAccessible">No Wheelchair Access
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="true" formControlName="WheelchairAccessible">Wheelchair Accessible
+                                    </label>
+                                </div>
                             </div>
                             <div class="checkbox col-xs-3">
-                                <label>
-                                    <input type="checkbox" formControlName="PetsConsidered"> Pets Considered
-                                </label>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="false" formControlName="EventsAllowed">No Events
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" [value]="true" formControlName="EventsAllowed">Events Allowed
+                                    </label>
+                                </div>
                             </div>
-                            <div class="checkbox col-xs-3">
-                                <label>
-                                    <input type="checkbox" formControlName="WheelchairAccessible"> Wheelchairs Allowed
-                                </label>
-                            </div>
-                            <div class="checkbox col-xs-3">
-                                <label>
-                                    <input type="checkbox" formControlName="EventsAllowed"> Events Allowed
-                                </label>
-                            </div>
+
+
+                            <!--<div class="checkbox col-xs-3">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" formControlName="ChildrenAllowed"> Children Allowed-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox col-xs-3">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" formControlName="ChildrenWelcome"> Children Welcome-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox col-xs-3">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" formControlName="PetsWelcome"> Pets Welcome-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox col-xs-3">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" formControlName="PetsConsidered"> Pets Considered-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox col-xs-3">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" formControlName="WheelchairAccessible"> Wheelchairs Allowed-->
+                                <!--</label>-->
+                            <!--</div>-->
+                            <!--<div class="checkbox col-xs-3">-->
+                                <!--<label>-->
+                                    <!--<input type="checkbox" formControlName="EventsAllowed"> Events Allowed-->
+                                <!--</label>-->
+                            <!--</div>-->
                         </div>
                     </div>
                     <div class="row hidden">
