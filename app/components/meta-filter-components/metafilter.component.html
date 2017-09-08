@@ -1,6 +1,6 @@
 <metafilter-heading-cmp [name]="metadataView.Name" [group]="propertyForm"></metafilter-heading-cmp>
 
-<div [formGroup]="propertyForm">
+<div [formGroup]="propertyForm" *ngIf="metadataView.Id != 3">
     <div formGroupName="MetaDataTmp">
         <div *ngFor="let subtype of metadataView.MetaDataSubTypes">
             <select-tags-field-cmp [data]="propertyForm.controls.MetaDataTmp.controls['type_' + subtype.Id].value"
