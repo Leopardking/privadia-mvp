@@ -60,6 +60,8 @@ export class AvailabilityComponent implements OnInit {
             this.propertyId = params['id'];
             this.availabilityForm.controls['PropertyId'].patchValue(this.propertyId);
 
+            propertiesService.readDataProperty(params['id']);
+
             lookupsService.getCalendarEntryTypes().subscribe(
                 d => {
                     this.calendarEntryTypes = d

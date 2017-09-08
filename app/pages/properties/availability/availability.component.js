@@ -49,6 +49,7 @@ var AvailabilityComponent = (function () {
         route.params.subscribe(function (params) {
             _this.propertyId = params['id'];
             _this.availabilityForm.controls['PropertyId'].patchValue(_this.propertyId);
+            propertiesService.readDataProperty(params['id']);
             lookupsService.getCalendarEntryTypes().subscribe(function (d) {
                 _this.calendarEntryTypes = d;
             }, function (e) {

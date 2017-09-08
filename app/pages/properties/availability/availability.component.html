@@ -30,7 +30,9 @@
                         <div class="card-header card-header-icon" data-background-color="blue">
                             <i class="material-icons">date_range</i>
                         </div>
-                        <h4 class="card-title m-t-15">Villa name</h4>
+                        <h4 class="card-title m-t-15">
+                            {{propertiesService.property && propertiesService.property.InternalName}}
+                        </h4>
                     </div>
                     <calendar-cmp *ngIf="isCalendarView && bookingDays"
                                   [bookingDays]="bookingDays"
