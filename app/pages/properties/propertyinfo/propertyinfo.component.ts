@@ -29,12 +29,14 @@ export class PropertyinfoComponent implements OnInit, AfterContentChecked {
     public role = !this.loginService.getRoles('Admin');
     // private PropertyType: Array<{ Id: number, Name: string }>;
     private PropertyType;
+    private PropertyContactTypes;
 
     constructor ( private propertiesService: PropertiesService,
                   private loginService: LoginService,
                   private lookupsService: LookupsService,
                   private _sanitizer: DomSanitizer ) {
-        this.PropertyType = this.lookupsService.readDataPropertyTypes();
+        this.lookupsService.readDataPropertyTypes();
+        this.lookupsService.readDataPropertyContactTypes();
     }
 
     ngOnInit(){
@@ -45,6 +47,7 @@ export class PropertyinfoComponent implements OnInit, AfterContentChecked {
 
     ngAfterContentChecked() {
         this.PropertyType = this.lookupsService.propertyTypes;
+        this.PropertyContactTypes = this.lookupsService.propertyContactTypes;
     }
 
     private regionChanged(e) { }
@@ -62,7 +65,8 @@ export class PropertyinfoComponent implements OnInit, AfterContentChecked {
         const control = <FormArray>this.propertyForm.controls['Contacts'];
         control.push(
             new FormGroup({
-                JobTitle: new FormControl({ value: null, disabled: this.permission }),
+                JobTitle: new FormControl({ value: { Id: null, Name: null}, disabled: this.permission }),
+                PropertyContactType: new FormControl({ value: { Id: 1, Name: null}, disabled: this.permission }),
                 FirstName: new FormControl({ value: null, disabled: this.permission }),
                 LastName: new FormControl({ value: null, disabled: this.permission }),
                 EmailAddress: new FormControl({ value: null, disabled: this.permission }, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),

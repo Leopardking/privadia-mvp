@@ -27,7 +27,8 @@ var PropertyinfoComponent = (function () {
             var html = "" + data.Name;
             return _this._sanitizer.bypassSecurityTrustHtml(html);
         };
-        this.PropertyType = this.lookupsService.readDataPropertyTypes();
+        this.lookupsService.readDataPropertyTypes();
+        this.lookupsService.readDataPropertyContactTypes();
     }
     PropertyinfoComponent.prototype.ngOnInit = function () {
         initWizard();
@@ -36,6 +37,7 @@ var PropertyinfoComponent = (function () {
     };
     PropertyinfoComponent.prototype.ngAfterContentChecked = function () {
         this.PropertyType = this.lookupsService.propertyTypes;
+        this.PropertyContactTypes = this.lookupsService.propertyContactTypes;
     };
     PropertyinfoComponent.prototype.regionChanged = function (e) { };
     PropertyinfoComponent.prototype.autosize = function (e) {
@@ -44,7 +46,8 @@ var PropertyinfoComponent = (function () {
     PropertyinfoComponent.prototype.showAddContact = function () {
         var control = this.propertyForm.controls['Contacts'];
         control.push(new forms_1.FormGroup({
-            JobTitle: new forms_1.FormControl({ value: null, disabled: this.permission }),
+            JobTitle: new forms_1.FormControl({ value: { Id: null, Name: null }, disabled: this.permission }),
+            PropertyContactType: new forms_1.FormControl({ value: { Id: 1, Name: null }, disabled: this.permission }),
             FirstName: new forms_1.FormControl({ value: null, disabled: this.permission }),
             LastName: new forms_1.FormControl({ value: null, disabled: this.permission }),
             EmailAddress: new forms_1.FormControl({ value: null, disabled: this.permission }, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),

@@ -205,8 +205,11 @@
                         <div class="contact col-xs-12 col-sm-6 col-md-4"
                              *ngFor="let control of propertyForm.controls.Contacts.controls; let i = index">
                             <div class="form-group label-floating">
-                                <label class="control-label">Job Title</label>
-                                <input type="text" class="form-control" [formControl]="control.controls.JobTitle">
+                                <singleselect-field-cmp [dataList]="PropertyContactTypes"
+                                                        [errorForm]="errorForm"
+                                                        [options]="{title: 'Contact Type', default: 'Nothing selected'}"
+                                                        [field]="control.controls.PropertyContactType"></singleselect-field-cmp>
+                                <!--<input type="text" class="form-control" [formControl]="control.controls.JobTitle">-->
                             </div>
                             <div class="form-group label-floating">
                                 <label class="control-label">First Name</label>
@@ -268,6 +271,14 @@
                                         <div class="form-group label-floating">
                                             <label class="control-label">Living Area (m<sup>2</sup>)</label>
                                             <input type="number" class="form-control" formControlName="LivingAreaSize">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="form-group label-floating">
+                                            <label class="control-label">Dining Capacity</label>
+                                            <input type="number" class="form-control" formControlName="DiningCapacity">
                                         </div>
                                     </div>
                                 </div>

@@ -10,7 +10,6 @@ if ('undefined' !== typeof module) {
               console.log('Wizard next')
             },
             onInit : function(tab, navigation, index){
-              console.log('Wizard init')
               //check number of tabs and fill the entire row
               var $total = navigation.find('li').length;
               $width = 100/$total;
@@ -57,7 +56,6 @@ if ('undefined' !== typeof module) {
 
                 var button_text = navigation.find('li:nth-child(' + $current + ') a').html();
 
-                console.log('Current ', $current)
                 /*
                 if(navigation.find('li:nth-child(' + $current + ') a').parent().hasClass('form-error'))
                   $('.moving-tab').addClass('form-error');

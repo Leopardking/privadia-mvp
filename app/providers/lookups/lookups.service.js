@@ -49,6 +49,12 @@ var LookupsService = (function () {
             _this.propertyTypes = d;
         }, function (e) { console.log('Error PropertyTypes', e); });
     };
+    LookupsService.prototype.readDataPropertyContactTypes = function () {
+        var _this = this;
+        this.getPropertyContactTypes().subscribe(function (d) {
+            _this.propertyContactTypes = d;
+        }, function (e) { console.log('Error PropertyTypes', e); });
+    };
     LookupsService.prototype.getManagementCompanies = function () {
         if (!this.loginService.getPermission('Lookups/GetManagementCompanies'))
             return Observable_1.Observable.throw(null);
@@ -121,6 +127,13 @@ var LookupsService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/Lookups/GetPropertyTypes', options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    LookupsService.prototype.getPropertyContactTypes = function () {
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/Lookups/GetPropertyContactTypes', options)
             .map(this.extractData)
             .catch(this.handleError);
     };

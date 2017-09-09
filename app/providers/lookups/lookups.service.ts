@@ -18,6 +18,7 @@ export class LookupsService {
 	public metadata;
 	public housekeepingOptions;
 	public propertyTypes;
+	public propertyContactTypes;
 
 	constructor ( private http: Http,
 				  private loginService: LoginService ) {
@@ -55,6 +56,15 @@ export class LookupsService {
 		this.getPropertyTypes().subscribe(
 			d => {
 				this.propertyTypes = d;
+			},
+			e => { console.log('Error PropertyTypes', e) }
+		)
+	}
+
+	public readDataPropertyContactTypes() {
+		this.getPropertyContactTypes().subscribe(
+			d => {
+				this.propertyContactTypes = d;
 			},
 			e => { console.log('Error PropertyTypes', e) }
 		)
@@ -155,6 +165,15 @@ export class LookupsService {
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/Lookups/GetPropertyTypes', options )
+            .map(this.extractData)
+            .catch(this.handleError);
+	}
+
+	public getPropertyContactTypes() {
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Lookups/GetPropertyContactTypes', options )
             .map(this.extractData)
             .catch(this.handleError);
 	}

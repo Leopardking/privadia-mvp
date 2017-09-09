@@ -9,6 +9,7 @@ import {Ng2AutoCompleteModule} from "ng2-auto-complete";
 import {PropertiesService} from "../../../providers/properties/properties.service";
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {FormFieldsModule} from "../../../modules/form-fields/form-field.module";
+import {SortablejsModule} from "angular-sortablejs";
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import {FormFieldsModule} from "../../../modules/form-fields/form-field.module";
         Ng2CloudinaryModule,
         FileUploadModule,
         RouterModule.forChild(MODULE_ROUTES),
-        FormFieldsModule
+        FormFieldsModule,
+        SortablejsModule
     ],
     declarations: [ MODULE_COMPONENTS ],
     providers: [ PropertiesService, LookupsService ]
