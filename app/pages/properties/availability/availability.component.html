@@ -36,6 +36,7 @@
                     </div>
                     <calendar-cmp *ngIf="isCalendarView && bookingDays"
                                   [bookingDays]="bookingDays"
+                                  [calendarEntryTypes]="calendarEntryTypes"
                                   [group]="availabilityForm">
                     </calendar-cmp>
                     <calendar-list-cmp *ngIf="!isCalendarView"

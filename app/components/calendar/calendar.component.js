@@ -141,6 +141,10 @@ var CalendarComponent = (function () {
         __metadata('design:type', Object)
     ], CalendarComponent.prototype, "bookingDays", void 0);
     __decorate([
+        core_1.Input('calendarEntryTypes'), 
+        __metadata('design:type', Object)
+    ], CalendarComponent.prototype, "calendarEntryTypes", void 0);
+    __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
     ], CalendarComponent.prototype, "availabilityForm", void 0);

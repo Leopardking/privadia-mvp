@@ -144,6 +144,9 @@
 .month-container table .day .owner:before {
 	border-color: #c6ff00;
 }
+.month-container table .day .unavailable:before {
+	border-color: #D78A21;
+}
 .calendar-container .legend-block {
 	padding-bottom: 24px;
 }
@@ -168,6 +171,12 @@
 }
 .calendar-container .legend-other:before {
 	background-color: #f7fa86;
+}
+.calendar-container .legend-owner:before {
+	background-color: #c6ff00;
+}
+.calendar-container .legend-unavailable:before {
+	background-color: #D78A21;
 }
 .form-text .control-label {
 	font-size: 16px;

@@ -53,8 +53,8 @@
         </div>
     </div>
     <div class="row legend-block">
-        <div class="col-xs-4 legend legend-external">External Booking</div>
-        <div class="col-xs-4 legend legend-internal">Internal Booking</div>
-        <div class="col-xs-4 legend legend-other">Other Blocking Periods</div>
+        <div *ngFor="let type of calendarEntryTypes" class="col-xs-{{12 / calendarEntryTypes.length}} legend legend-{{type.Name.toLowerCase()}}">
+            {{type.Name}}
+        </div>
     </div>
 </div>

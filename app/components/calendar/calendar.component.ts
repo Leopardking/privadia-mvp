@@ -15,6 +15,7 @@ declare var _: any;
 
 export class CalendarComponent implements OnInit{
 	@Input('bookingDays') public bookingDays;
+	@Input('calendarEntryTypes') public calendarEntryTypes;
 	@Input('group') private availabilityForm: FormGroup;
 
 	private selected;
