@@ -24,8 +24,8 @@ export class AvailabilityComponent implements OnInit {
         CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
         CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
         EntryType: new FormControl({
-            Id: 3,
-            Name: 'Internal',
+            Id: null,
+            Name: null,
         }),
         Notes: new FormControl(null),
         isAgency: new FormControl(null),
@@ -196,8 +196,8 @@ export class AvailabilityComponent implements OnInit {
     }
 
     saveForm(formData) {
-        formData.EntryType = 4;
-        // formData.EntryType = formData.EntryType.Id;
+        // formData.EntryType = 4;
+        formData.EntryType = formData.EntryType.Id;
 
         if(formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(

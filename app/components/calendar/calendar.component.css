@@ -91,6 +91,9 @@
 .month-container table .day .other {
 	background-color: #f7fa86;
 }
+.month-container table .day .owner {
+	background-color: #c6ff00;
+}
 .month-container table .day .period:before {
 	position: absolute;
 	top:0px;
@@ -137,6 +140,9 @@
 }
 .month-container table .day .other:before {
 	border-color: #f7fa86;
+}
+.month-container table .day .owner:before {
+	border-color: #c6ff00;
 }
 .calendar-container .legend-block {
 	padding-bottom: 24px;

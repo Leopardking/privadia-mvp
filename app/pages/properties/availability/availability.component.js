@@ -28,8 +28,8 @@ var AvailabilityComponent = (function () {
             CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
             CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
             EntryType: new forms_1.FormControl({
-                Id: 3,
-                Name: 'Internal',
+                Id: null,
+                Name: null,
             }),
             Notes: new forms_1.FormControl(null),
             isAgency: new forms_1.FormControl(null),
@@ -162,8 +162,8 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.saveForm = function (formData) {
         var _this = this;
-        formData.EntryType = 4;
-        // formData.EntryType = formData.EntryType.Id;
+        // formData.EntryType = 4;
+        formData.EntryType = formData.EntryType.Id;
         if (formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(function (d) {
                 _.replace(_this.bookingDays, { Id: formData.Id }, d);
