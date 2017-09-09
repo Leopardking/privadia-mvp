@@ -46,7 +46,6 @@ export class EditpropertyComponent implements OnInit {
         this.permission = !this.loginService.getPermission('Properties/Put');
 
         setTimeout(() => {
-            console.log('Test ', this.propertiesService.property.PropertyType);
             this.propertyForm = this.builder.group({
                 Id: this.propertyId,
                 Active: { value: this.propertiesService.property.Active || null, disabled: this.permission },
@@ -146,12 +145,13 @@ export class EditpropertyComponent implements OnInit {
     setContacts(contacts) {
         const contactFGs = contacts.map(contact => this.builder.group({
                 JobTitle: { value: contact.JobTitle, disabled: this.permission },
+                PropertyContactType: { value: {Id: 1, Name: 'qwert'}, disabled: this.permission },
                 FirstName: { value: contact.FirstName, disabled: this.permission },
                 LastName: { value: contact.LastName, disabled: this.permission },
                 EmailAddress: { value: contact.EmailAddress, disabled: this.permission },
                 Telephone: { value: contact.Telephone, disabled: this.permission },
-
         }));
+
         const contactFormArray = this.builder.array(contactFGs);
         this.propertyForm.setControl('Contacts', contactFormArray);
     }
@@ -187,7 +187,6 @@ export class EditpropertyComponent implements OnInit {
             Distance: { value: point.Distance, disabled: this.permission },
         }));
         const pointFormArray = this.builder.array(pointFGs);
-        console.log('Point Form Array ',points)
         this.propertyForm.setControl('PointsOfInterest', pointFormArray);
     }
 

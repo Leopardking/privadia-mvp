@@ -37,7 +37,6 @@ var EditpropertyComponent = (function () {
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.permission = !this.loginService.getPermission('Properties/Put');
         setTimeout(function () {
-            console.log('Test ', _this.propertiesService.property.PropertyType);
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,
                 Active: { value: _this.propertiesService.property.Active || null, disabled: _this.permission },
@@ -133,6 +132,7 @@ var EditpropertyComponent = (function () {
         var _this = this;
         var contactFGs = contacts.map(function (contact) { return _this.builder.group({
             JobTitle: { value: contact.JobTitle, disabled: _this.permission },
+            PropertyContactType: { value: { Id: 1, Name: 'qwert' }, disabled: _this.permission },
             FirstName: { value: contact.FirstName, disabled: _this.permission },
             LastName: { value: contact.LastName, disabled: _this.permission },
             EmailAddress: { value: contact.EmailAddress, disabled: _this.permission },
@@ -173,7 +173,6 @@ var EditpropertyComponent = (function () {
             Distance: { value: point.Distance, disabled: _this.permission },
         }); });
         var pointFormArray = this.builder.array(pointFGs);
-        console.log('Point Form Array ', points);
         this.propertyForm.setControl('PointsOfInterest', pointFormArray);
     };
     EditpropertyComponent.prototype.setMetaData = function (metaDatas) {

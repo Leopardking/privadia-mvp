@@ -16,6 +16,12 @@ var PropertyimageoComponent = (function () {
     function PropertyimageoComponent(loginService) {
         this.loginService = loginService;
         this.images = [];
+        this.options = {
+            onUpdate: function (event) {
+                console.log('event', event);
+                //this.postChangesToServer();
+            }
+        };
         this.uploader = new ng2_cloudinary_1.CloudinaryUploader(new ng2_cloudinary_1.CloudinaryOptions({
             cloudName: 'privadia',
             uploadPreset: 'blmelyur',
@@ -25,6 +31,9 @@ var PropertyimageoComponent = (function () {
     PropertyimageoComponent.prototype.ngOnInit = function () {
         //$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
         var _this = this;
+        this.propertyForm.controls['Images'].valueChanges.subscribe(function () {
+            console.log('Value change');
+        });
         this.uploader.onSuccessItem = function (item, response, status, headers) {
             $.notify({
                 icon: "notifications",

@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 import {LoginService} from "../../../providers/login/login.service";
+import {SortablejsOptions} from "angular-sortablejs";
 
 declare var $:any;
 declare var window: any;
@@ -16,9 +17,17 @@ declare var window: any;
 export class PropertyimageoComponent implements OnInit{
 	private images = [];
 	private uploader: CloudinaryUploader;
+	private options: any;
 	@Input('group')	propertyForm: FormGroup;
 
 	constructor( private loginService: LoginService) {
+		this.options = {
+			onUpdate: (event: any) => {
+				console.log('event', event);
+				//this.postChangesToServer();
+			}
+		};
+
 		this.uploader = new CloudinaryUploader(
 			new CloudinaryOptions({
 				cloudName: 'privadia',
@@ -30,6 +39,10 @@ export class PropertyimageoComponent implements OnInit{
 
 	ngOnInit() {
 		//$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
+
+		this.propertyForm.controls['Images'].valueChanges.subscribe(() => {
+			console.log('Value change',);
+		});
 
 		this.uploader.onSuccessItem = ( item, response, status, headers) => {
 			$.notify({
