@@ -5,7 +5,7 @@ import { FormControl } from "@angular/forms";
     moduleId: module.id,
     selector: 'input-field-cmp',
     templateUrl: 'input-field.component.html',
-    styleUrls: [ 'input-field.component.css' ]
+    styleUrls: [ 'input-field.component.css' ],
 })
 
 export class InputfieldComponent implements OnInit{
@@ -13,6 +13,7 @@ export class InputfieldComponent implements OnInit{
     @Input('errorForm') private errorForm: any;
     @Input('static') private staticField: boolean = false;
     @Input('field') private field: FormControl;
+    @Input('inputMask') public inputMask = false;
 
     constructor ( ) {
 

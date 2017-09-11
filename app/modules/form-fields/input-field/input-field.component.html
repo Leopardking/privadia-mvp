@@ -3,6 +3,7 @@
     <span *ngIf="staticField" class="form-control-static">{{field.value}}</span>
     <input *ngIf="!staticField"
            [type]="data.type"
+           [textMask]="{mask: inputMask}"
            class="form-control"
            [formControl]="field">
     <div *ngIf="field.errors && field.errors.serverError" class="errors">
