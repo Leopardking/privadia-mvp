@@ -32,11 +32,11 @@
       'rxjs': 
       'npm:rxjs',
       'angular-sortablejs': 'npm:angular-sortablejs/dist/',
-      'sortablejs': 'node_modules/sortablejs/Sortable.min.js',
+      'sortablejs': 'npm:sortablejs/Sortable.min.js',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       'ng2-popover': 'npm:ng2-popover',
       'angular2-text-mask': 'npm:angular2-text-mask/dist/angular2TextMask.js',
-      'text-mask-core/dist/textMaskCore': 'npm:text-mask-core/dist/textMaskCore.js',
+      'text-mask-core/dist/textMaskCore': 'npm:text-mask-core/dist/textMaskCore.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
