@@ -94,6 +94,9 @@
 .month-container table .day .owner {
 	background-color: #c6ff00;
 }
+.month-container table .day .unavailable {
+	background-color: #D78A21;
+}
 .month-container table .day .period:before {
 	position: absolute;
 	top:0px;

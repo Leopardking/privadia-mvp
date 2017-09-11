@@ -57,7 +57,7 @@ var AvailabilityComponent = (function () {
             });
             calendarService.getCalendarByProperty(_this.propertyId).subscribe(function (d) {
                 _this.bookingDays = d;
-                _this.bookingDays.every(function (booking, index) {
+                _this.bookingDays.filter(function (booking, index) {
                     var tmpStart = moment(booking.CheckIn);
                     var tmpEnd = moment(booking.CheckOut);
                     if (index === 0 && _this.CheckIn < tmpStart && _this.CheckOut <= tmpStart) {

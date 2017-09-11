@@ -1,4 +1,4 @@
-<div [ngClass]="{'input-group': classes.withIcon}">
+<div [ngClass]="{'input-group': classes.withIcon, 'disable-picker-switch': classes.disablePickerSwitch}">
     <span *ngIf="classes.withIcon" class="input-group-addon"><i class="material-icons">insert_invitation</i></span>
     <div class="form-group label-floating" [ngClass]="{'form-error': !field.valid}" >
         <label class="control-label">{{data.title}}</label>

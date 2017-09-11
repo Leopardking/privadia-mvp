@@ -60,7 +60,7 @@
                                     <div class="col-xs-6">
                                         <datetimepicker-field-cmp
                                                 [data]="{title: 'Check In'}"
-                                                [classes]="{withIcon: true}"
+                                                [classes]="{withIcon: true, disablePickerSwitch: true}"
                                                 [idPicker]="'checkIn'"
                                                 [disabledDates]="disabledDatesIn"
                                                 [field]="availabilityForm.controls.CheckIn"></datetimepicker-field-cmp>
@@ -68,7 +68,7 @@
                                     <div class="col-xs-6">
                                         <datetimepicker-field-cmp
                                                 [data]="{title: 'Check Out'}"
-                                                [classes]="{withIcon: false}"
+                                                [classes]="{withIcon: false, disablePickerSwitch: true}"
                                                 [idPicker]="'checkOut'"
                                                 [disabledDates]="disabledDatesOut"
                                                 [field]="availabilityForm.controls.CheckOut"></datetimepicker-field-cmp>

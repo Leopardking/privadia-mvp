@@ -74,7 +74,7 @@ export class AvailabilityComponent implements OnInit {
             calendarService.getCalendarByProperty(this.propertyId).subscribe(
                 d => {
                     this.bookingDays = d;
-                    this.bookingDays.every((booking, index) => {
+                    this.bookingDays.filter((booking, index) => {
                         const tmpStart = moment(booking.CheckIn);
                         const tmpEnd   = moment(booking.CheckOut);
 
