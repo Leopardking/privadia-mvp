@@ -1,6 +1,6 @@
 <div class="card-content">
-    <div class="row" [sortablejs]="propertyForm.controls.Images.value" [sortablejsOptions]="{ animation: 150 }">
-        <div *ngFor="let item of propertyForm.controls.Images.value" class="col-xs-3 m-b-15 image-hover">
+    <div class="row" [sortablejs]="propertyForm.controls.Images.value" [sortablejsOptions]="sortablejsOptions">
+        <div *ngFor="let item of propertyForm.controls.Images.value; let i = index" class="col-xs-3 m-b-15 image-hover">
             <cl-image data-u="image"
                       public-id="{{item.ImageId}}"
                       cloud-name="privadia"
@@ -11,7 +11,7 @@
                       width="860"
                       format="jpg">
             </cl-image>
-            <a class="delete-image hidden" (click)="deleteImage(item)" >
+            <a class="delete-image" (click)="deleteImage(i)" >
                 <i class="material-icons">delete</i>
             </a>
         </div>

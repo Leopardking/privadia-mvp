@@ -18,6 +18,7 @@ export class PropertyimageoComponent implements OnInit{
 	private images = [];
 	private uploader: CloudinaryUploader;
 	private options: any;
+	private sortablejsOptions: any;
 	@Input('group')	propertyForm: FormGroup;
 
 	constructor( private loginService: LoginService) {
@@ -35,6 +36,16 @@ export class PropertyimageoComponent implements OnInit{
 				resourceType: 'image'
 			})
 		);
+		this.sortablejsOptions = {
+			animation: 150,
+			cursor: "move",
+			onEnd: (evt) => {
+				const control = <FormArray>this.propertyForm.controls['Images'];
+                control.value.forEach((currentValue, index) => {
+                	currentValue.OrderIdx = index;
+				});
+			}
+		};
 	}
 
 	ngOnInit() {
@@ -90,8 +101,9 @@ export class PropertyimageoComponent implements OnInit{
 		//$.getScript('../../../../assets/js/init/initImageGallery.js');
 	}
 
-	private deleteImage(item) {
-
+	private deleteImage(i: number) {
+		const control = <FormArray>this.propertyForm.controls['Images'];
+		control.removeAt(i);
 	}
 
 	private uploadImage() {

@@ -14,6 +14,7 @@ var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../../providers/login/login.service");
 var PropertyimageoComponent = (function () {
     function PropertyimageoComponent(loginService) {
+        var _this = this;
         this.loginService = loginService;
         this.images = [];
         this.options = {
@@ -27,6 +28,16 @@ var PropertyimageoComponent = (function () {
             uploadPreset: 'blmelyur',
             resourceType: 'image'
         }));
+        this.sortablejsOptions = {
+            animation: 150,
+            cursor: "move",
+            onEnd: function (evt) {
+                var control = _this.propertyForm.controls['Images'];
+                control.value.forEach(function (currentValue, index) {
+                    currentValue.OrderIdx = index;
+                });
+            }
+        };
     }
     PropertyimageoComponent.prototype.ngOnInit = function () {
         //$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
@@ -73,7 +84,9 @@ var PropertyimageoComponent = (function () {
         };
         //$.getScript('../../../../assets/js/init/initImageGallery.js');
     };
-    PropertyimageoComponent.prototype.deleteImage = function (item) {
+    PropertyimageoComponent.prototype.deleteImage = function (i) {
+        var control = this.propertyForm.controls['Images'];
+        control.removeAt(i);
     };
     PropertyimageoComponent.prototype.uploadImage = function () {
     };
