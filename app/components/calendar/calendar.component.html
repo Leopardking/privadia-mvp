@@ -52,9 +52,14 @@
             </div>
         </div>
     </div>
-    <div class="row legend-block">
-        <div *ngFor="let type of calendarEntryTypes" class="col-xs-{{12 / calendarEntryTypes.length}} legend legend-{{type.Name.toLowerCase()}}">
-            {{type.Name}}
+    <div class="legend-container">
+        <div class="legend-dummy"></div>
+        <div class="legend-block">
+            <div class="legend legend-external">External Booking</div>
+            <div *ngFor="let type of calendarEntryTypes" class="legend legend-{{type.Name.toLowerCase()}}">
+                {{type.Name}}
+            </div>
         </div>
+        <div class="legend-dummy"></div>
     </div>
 </div>

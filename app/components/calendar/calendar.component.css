@@ -147,8 +147,21 @@
 .month-container table .day .unavailable:before {
 	border-color: #D78A21;
 }
-.calendar-container .legend-block {
+.calendar-container .legend-container {
 	padding-bottom: 24px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.calendar-container .legend-block {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 100%;
+	margin: 0 10%;
+}
+.calendar-container .legend-dummy {
+	width: 80px;
 }
 .calendar-container .legend {
 	text-align: center;
