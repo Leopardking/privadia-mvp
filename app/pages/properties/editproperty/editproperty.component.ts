@@ -56,8 +56,20 @@ export class EditpropertyComponent implements OnInit {
                 AddressLine2: { value: this.propertiesService.property.AddressLine2, disabled: this.permission },
                 AddressPostalCode: { value: this.propertiesService.property.AddressPostalCode, disabled: this.permission },
                 AddressCountry: { value: this.propertiesService.property.AddressCountry, disabled: this.permission },
-                Longitude: { value: this.propertiesService.property.Longitude, disabled: this.permission },
-                Latitude: { value: this.propertiesService.property.Latitude, disabled: this.permission },
+                Longitude: [
+                    {
+                        value: this.propertiesService.property.Longitude,
+                        disabled: this.permission
+                    },
+                    Validators.pattern(/^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/)
+                ],
+                Latitude: [
+                    {
+                        value: this.propertiesService.property.Latitude,
+                        disabled: this.permission
+                    },
+                    Validators.pattern(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/)
+                ],
                 Region: { value: { Id: this.propertiesService.property.Region.Id, Name: this.propertiesService.property.Region.Name}, disabled: this.permission },
                 ManagementCompany: { value:
                     {
@@ -221,6 +233,11 @@ export class EditpropertyComponent implements OnInit {
         form.MetaData = newArr;
 
         console.log('save ',this.propertyForm)
+        if(!this.propertyForm.valid) {
+            handlerErrorNotify('There were errors with your submission, please see form for details.');
+            return false;
+        }
+
         this.propertiesService.addProperty(form).subscribe(
             d => {
                 this.errorForm = false;

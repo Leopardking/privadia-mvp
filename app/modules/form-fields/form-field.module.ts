@@ -6,7 +6,6 @@ import { SingleSelectfieldComponent } from "./single-select-field/single-select.
 import { DatetimefieldComponent } from "./datetimepicker-field/datetimepicker-field.component";
 import { SelectfieldComponent } from "./select-field/select.component";
 import { SelectTagsFieldComponent } from "./select-tags-field/select-tags.component";
-import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
     declarations: [
@@ -16,7 +15,7 @@ import { TextMaskModule } from 'angular2-text-mask';
         SelectfieldComponent,
         SelectTagsFieldComponent
     ],
-    imports: [ CommonModule, FormsModule, ReactiveFormsModule, TextMaskModule ],
+    imports: [ CommonModule, FormsModule, ReactiveFormsModule ],
     exports: [
         InputfieldComponent,
         SingleSelectfieldComponent,

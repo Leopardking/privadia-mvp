@@ -35,8 +35,8 @@ var AddpropertyComponent = (function () {
             AddressLine2: new forms_1.FormControl(),
             AddressPostalCode: new forms_1.FormControl(),
             AddressCountry: new forms_1.FormControl(),
-            Longitude: new forms_1.FormControl(),
-            Latitude: new forms_1.FormControl(),
+            Longitude: new forms_1.FormControl(null, forms_1.Validators.pattern(/^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/)),
+            Latitude: new forms_1.FormControl(null, forms_1.Validators.pattern(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/)),
             Region: new forms_1.FormControl({
                 Id: '',
                 Name: '',
@@ -143,6 +143,10 @@ var AddpropertyComponent = (function () {
             return newArr = _.concat(newArr, el);
         });
         form.MetaData = newArr;
+        if (!this.propertyForm.valid) {
+            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
+            return false;
+        }
         this.propertiesService.addProperty(form).subscribe(function (d) {
             _this.errorForm = false;
             $.notify({

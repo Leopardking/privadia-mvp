@@ -47,8 +47,20 @@ var EditpropertyComponent = (function () {
                 AddressLine2: { value: _this.propertiesService.property.AddressLine2, disabled: _this.permission },
                 AddressPostalCode: { value: _this.propertiesService.property.AddressPostalCode, disabled: _this.permission },
                 AddressCountry: { value: _this.propertiesService.property.AddressCountry, disabled: _this.permission },
-                Longitude: { value: _this.propertiesService.property.Longitude, disabled: _this.permission },
-                Latitude: { value: _this.propertiesService.property.Latitude, disabled: _this.permission },
+                Longitude: [
+                    {
+                        value: _this.propertiesService.property.Longitude,
+                        disabled: _this.permission
+                    },
+                    forms_1.Validators.pattern(/^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/)
+                ],
+                Latitude: [
+                    {
+                        value: _this.propertiesService.property.Latitude,
+                        disabled: _this.permission
+                    },
+                    forms_1.Validators.pattern(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/)
+                ],
                 Region: { value: { Id: _this.propertiesService.property.Region.Id, Name: _this.propertiesService.property.Region.Name }, disabled: _this.permission },
                 ManagementCompany: { value: {
                         Id: _this.propertiesService.property.ManagementCompany.Id,
@@ -203,6 +215,10 @@ var EditpropertyComponent = (function () {
         });
         form.MetaData = newArr;
         console.log('save ', this.propertyForm);
+        if (!this.propertyForm.valid) {
+            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
+            return false;
+        }
         this.propertiesService.addProperty(form).subscribe(function (d) {
             _this.errorForm = false;
             $.notify({

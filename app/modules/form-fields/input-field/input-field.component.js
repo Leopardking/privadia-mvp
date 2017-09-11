@@ -13,7 +13,6 @@ var forms_1 = require("@angular/forms");
 var InputfieldComponent = (function () {
     function InputfieldComponent() {
         this.staticField = false;
-        this.inputMask = false;
     }
     InputfieldComponent.prototype.ngOnInit = function () { };
     __decorate([
@@ -32,10 +31,6 @@ var InputfieldComponent = (function () {
         core_1.Input('field'), 
         __metadata('design:type', forms_1.FormControl)
     ], InputfieldComponent.prototype, "field", void 0);
-    __decorate([
-        core_1.Input('inputMask'), 
-        __metadata('design:type', Object)
-    ], InputfieldComponent.prototype, "inputMask", void 0);
     InputfieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

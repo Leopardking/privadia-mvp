@@ -11,6 +11,8 @@ import {FormGroup, FormArray, FormControl, Validators} from "@angular/forms";
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {LoginService} from "../../../providers/login/login.service";
 import initWizard = require("../../../../assets/js/init/initWizard.js");
+// import { MaskType } from 'angular2-text-mask';
+// import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 declare const $: any;
 

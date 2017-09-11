@@ -34,8 +34,8 @@ export class AddpropertyComponent implements OnInit {
         AddressLine2: new FormControl(),
         AddressPostalCode: new FormControl(),
         AddressCountry: new FormControl(),
-        Longitude: new FormControl(),
-        Latitude: new FormControl(),
+        Longitude: new FormControl(null, Validators.pattern(/^[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)$/)),
+        Latitude: new FormControl(null, Validators.pattern(/^[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)$/)),
         Region: new FormControl({
             Id: '',
             Name: '',
@@ -153,6 +153,11 @@ export class AddpropertyComponent implements OnInit {
             return newArr = _.concat(newArr, el)
         });
         form.MetaData = newArr;
+
+        if(!this.propertyForm.valid) {
+            handlerErrorNotify('There were errors with your submission, please see form for details.');
+            return false;
+        }
 
         this.propertiesService.addProperty(form).subscribe(
             d => {

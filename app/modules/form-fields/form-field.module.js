@@ -16,7 +16,6 @@ var single_select_component_1 = require("./single-select-field/single-select.com
 var datetimepicker_field_component_1 = require("./datetimepicker-field/datetimepicker-field.component");
 var select_component_1 = require("./select-field/select.component");
 var select_tags_component_1 = require("./select-tags-field/select-tags.component");
-var angular2_text_mask_1 = require('angular2-text-mask');
 var FormFieldsModule = (function () {
     function FormFieldsModule() {
     }
@@ -29,7 +28,7 @@ var FormFieldsModule = (function () {
                 select_component_1.SelectfieldComponent,
                 select_tags_component_1.SelectTagsFieldComponent
             ],
-            imports: [common_1.CommonModule, forms_1.FormsModule, forms_1.ReactiveFormsModule, angular2_text_mask_1.TextMaskModule],
+            imports: [common_1.CommonModule, forms_1.FormsModule, forms_1.ReactiveFormsModule],
             exports: [
                 input_field_component_1.InputfieldComponent,
                 single_select_component_1.SingleSelectfieldComponent,

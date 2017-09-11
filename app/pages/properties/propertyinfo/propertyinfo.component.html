@@ -106,13 +106,15 @@
                     </div>
                     <div class="row">
                         <div class="col-xs-6">
-                            <div class="form-group label-floating">
+                            <div class="form-group label-floating"
+                                 [ngClass]="{'form-error': !propertyForm.controls.Longitude.valid}">
                                 <label class="control-label">Longitude</label>
                                 <input type="text" class="form-control" formControlName="Longitude">
                             </div>
                         </div>
                         <div class="col-xs-6">
-                            <div class="form-group label-floating">
+                            <div class="form-group label-floating"
+                                 [ngClass]="{'form-error': !propertyForm.controls.Latitude.valid}">
                                 <label class="control-label">Latitude</label>
                                 <input type="text" class="form-control" formControlName="Latitude">
                             </div>
