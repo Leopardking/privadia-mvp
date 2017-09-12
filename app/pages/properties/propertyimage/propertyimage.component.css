@@ -27,6 +27,46 @@
     margin-top: -44px;
 }
 
+/*
+ * DropZone
+ */
+
+userdropzone.image-container-tab {
+    width: 367px;
+    height: 239px;
+}
+
+userdropzone {
+    text-transform: uppercase;
+    border: 2px dashed #bbb;
+    padding: 25px;
+    text-align: center;
+    font-size: 18px !important;
+    color: #bbb;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    background: #eee;
+    text-align: center;
+    height: 239px;
+}
+
+userdropzone i {
+    font-size: 60px;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+}
+
+userdropzone div {
+    margin: 0 auto;
+    font-size: 18px !important;
+}
+
+userdropzone.dragging {
+    border: 2px dashed #333;
+}
+
 
 /* jssor slider arrow navigator skin 05 css */
         /*

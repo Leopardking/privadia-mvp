@@ -20,6 +20,7 @@ var properties_service_1 = require("../../../providers/properties/properties.ser
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var form_field_module_1 = require("../../../modules/form-fields/form-field.module");
 var angular_sortablejs_1 = require("angular-sortablejs");
+var user_dropzone_1 = require("../../../directives/userdropzone/user.dropzone");
 var CommonsModule = (function () {
     function CommonsModule() {
     }
@@ -38,7 +39,7 @@ var CommonsModule = (function () {
                 form_field_module_1.FormFieldsModule,
                 angular_sortablejs_1.SortablejsModule
             ],
-            declarations: [commons_routes_1.MODULE_COMPONENTS],
+            declarations: [commons_routes_1.MODULE_COMPONENTS, user_dropzone_1.UserDropzone],
             providers: [properties_service_1.PropertiesService, lookups_service_1.LookupsService]
         }), 
         __metadata('design:paramtypes', [])

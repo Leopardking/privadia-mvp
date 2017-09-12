@@ -93,6 +93,12 @@ var PropertyimageoComponent = (function () {
     PropertyimageoComponent.prototype.fileChange = function () {
         this.uploader.uploadAll();
     };
+    PropertyimageoComponent.prototype.onFileDrop = function (files) {
+        if (files.length > 0) {
+            this.uploader.addToQueue(files);
+            this.fileChange();
+        }
+    };
     /**
      * Add the image to main Form
      *

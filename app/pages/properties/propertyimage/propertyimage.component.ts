@@ -4,6 +4,7 @@ import {FormGroup, FormArray, FormControl} from "@angular/forms";
 import {LoginService} from "../../../providers/login/login.service";
 import {SortablejsOptions} from "angular-sortablejs";
 
+
 declare var $:any;
 declare var window: any;
 
@@ -49,6 +50,7 @@ export class PropertyimageoComponent implements OnInit{
 	}
 
 	ngOnInit() {
+
 		//$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
 
 		this.propertyForm.controls['Images'].valueChanges.subscribe(() => {
@@ -111,6 +113,13 @@ export class PropertyimageoComponent implements OnInit{
 
 	private fileChange() {
 		this.uploader.uploadAll();
+	}
+
+	private onFileDrop(files) {
+		if (files.length > 0) {
+			this.uploader.addToQueue(files);
+			this.fileChange();
+		}
 	}
 
 	/**
