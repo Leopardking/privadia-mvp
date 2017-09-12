@@ -27,6 +27,48 @@
     margin-top: -44px;
 }
 
+/*
+ * DropZone
+ */
+
+userdropzone {
+    text-transform: uppercase;
+    border: 2px dashed #bbb;
+    text-align: center;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    background: #eee;
+    text-align: center;
+    padding: 0 25px;
+    width: 100%;
+}
+
+userdropzone i {
+    font-size: 60px;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+}
+
+userdropzone div {
+    margin: 0 auto;
+}
+
+.main-dropzone {
+    min-height: 250px;
+}
+
+@media (max-width: 1300px) {
+    userdropzone:not(.main-dropzone) div {
+        display: none;
+    }
+}
+
+userdropzone.dragging {
+    border: 2px dashed #333;
+}
+
 
 /* jssor slider arrow navigator skin 05 css */
         /*

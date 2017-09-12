@@ -10,6 +10,7 @@ import {PropertiesService} from "../../../providers/properties/properties.servic
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {FormFieldsModule} from "../../../modules/form-fields/form-field.module";
 import {SortablejsModule} from "angular-sortablejs";
+import {UserDropzone} from "../../../directives/userdropzone/user.dropzone";
 
 @NgModule({
     imports: [
@@ -25,7 +26,7 @@ import {SortablejsModule} from "angular-sortablejs";
         FormFieldsModule,
         SortablejsModule
     ],
-    declarations: [ MODULE_COMPONENTS ],
+    declarations: [ MODULE_COMPONENTS, UserDropzone ],
     providers: [ PropertiesService, LookupsService ]
 })
 

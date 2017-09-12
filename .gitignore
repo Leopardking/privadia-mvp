@@ -1,5 +1,7 @@
 node_modules
 documentation
 npm-debug.log
+semantic
+semantic.json
 .idea/
 .DS_Store

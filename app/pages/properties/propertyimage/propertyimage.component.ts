@@ -4,6 +4,7 @@ import {FormGroup, FormArray, FormControl} from "@angular/forms";
 import {LoginService} from "../../../providers/login/login.service";
 import {SortablejsOptions} from "angular-sortablejs";
 
+
 declare var $:any;
 declare var window: any;
 
@@ -18,6 +19,7 @@ export class PropertyimageoComponent implements OnInit{
 	private images = [];
 	private uploader: CloudinaryUploader;
 	private options: any;
+	private sortablejsOptions: any;
 	@Input('group')	propertyForm: FormGroup;
 
 	constructor( private loginService: LoginService) {
@@ -35,9 +37,20 @@ export class PropertyimageoComponent implements OnInit{
 				resourceType: 'image'
 			})
 		);
+		this.sortablejsOptions = {
+			animation: 150,
+			cursor: "move",
+			onEnd: (evt) => {
+				const control = <FormArray>this.propertyForm.controls['Images'];
+                control.value.forEach((currentValue, index) => {
+                	currentValue.OrderIdx = index;
+				});
+			}
+		};
 	}
 
 	ngOnInit() {
+
 		//$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
 
 		this.propertyForm.controls['Images'].valueChanges.subscribe(() => {
@@ -90,8 +103,9 @@ export class PropertyimageoComponent implements OnInit{
 		//$.getScript('../../../../assets/js/init/initImageGallery.js');
 	}
 
-	private deleteImage(item) {
-
+	private deleteImage(i: number) {
+		const control = <FormArray>this.propertyForm.controls['Images'];
+		control.removeAt(i);
 	}
 
 	private uploadImage() {
@@ -99,6 +113,13 @@ export class PropertyimageoComponent implements OnInit{
 
 	private fileChange() {
 		this.uploader.uploadAll();
+	}
+
+	private onFileDrop(files) {
+		if (files.length > 0) {
+			this.uploader.addToQueue(files);
+			this.fileChange();
+		}
 	}
 
 	/**
