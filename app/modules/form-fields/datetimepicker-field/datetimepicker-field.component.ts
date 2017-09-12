@@ -18,19 +18,25 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
     @Input('field') private field: FormControl;
     @Input('idPicker') private idPicker: string;
     @Input('disabledDates') private disabledDates: any;
+    @Input('linkedField') private linkedField: FormControl;
 
     public dateTime: any;
 
     constructor ( ) { }
 
-    ngOnInit() {}
+    ngOnInit() {
+        // this.field.valueChanges.subscribe((value) => {
+        //     this.linkedField.patchValue(moment(value).add(1,'day').format('MM/DD/YYYY'))
+        //     console.log('Change value ',value);
+        // })
+    }
 
     ngAfterContentChecked() {
         this.dateTime = $(`.${this.idPicker}`);
         this.dateTime.datetimepicker({
             format: 'MM/DD/YYYY',
             disabledDates: this.disabledDates,
-            minDate: this.field.value,
+            // minDate: this.field.value,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -44,6 +50,15 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
                 inline: true
             }
         });
+
+        // console.log('CheckIN',);
+        // if(this.idPicker == 'CheckIn' && this.linkedField) {
+        //     console.log('CheckIN',);
+        // }
+        //
+        // if(this.idPicker == 'CheckOut' && this.linkedField) {
+        //     console.log('CheckOUT',);
+        // }
 
     }
 }

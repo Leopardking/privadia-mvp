@@ -62,6 +62,7 @@
                                                 [data]="{title: 'Check In'}"
                                                 [classes]="{withIcon: true, disablePickerSwitch: true}"
                                                 [idPicker]="'checkIn'"
+                                                [linkedField]="availabilityForm.controls.CheckOut"
                                                 [disabledDates]="disabledDatesIn"
                                                 [field]="availabilityForm.controls.CheckIn"></datetimepicker-field-cmp>
                                     </div>
@@ -70,6 +71,7 @@
                                                 [data]="{title: 'Check Out'}"
                                                 [classes]="{withIcon: false, disablePickerSwitch: true}"
                                                 [idPicker]="'checkOut'"
+                                                [linkedField]="availabilityForm.controls.CheckIn"
                                                 [disabledDates]="disabledDatesOut"
                                                 [field]="availabilityForm.controls.CheckOut"></datetimepicker-field-cmp>
                                     </div>
