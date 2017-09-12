@@ -31,24 +31,17 @@
  * DropZone
  */
 
-userdropzone.image-container-tab {
-    width: 367px;
-    height: 239px;
-}
-
 userdropzone {
     text-transform: uppercase;
     border: 2px dashed #bbb;
-    padding: 25px;
     text-align: center;
-    font-size: 18px !important;
     color: #bbb;
-    margin-bottom: 20px;
     display: flex;
     align-items: center;
     background: #eee;
     text-align: center;
-    height: 239px;
+    padding: 0 25px;
+    width: 100%;
 }
 
 userdropzone i {
@@ -60,7 +53,16 @@ userdropzone i {
 
 userdropzone div {
     margin: 0 auto;
-    font-size: 18px !important;
+}
+
+.main-dropzone {
+    min-height: 250px;
+}
+
+@media (max-width: 1300px) {
+    userdropzone:not(.main-dropzone) div {
+        display: none;
+    }
 }
 
 userdropzone.dragging {

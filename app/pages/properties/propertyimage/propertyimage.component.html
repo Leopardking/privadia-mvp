@@ -1,5 +1,5 @@
 <div class="card-content">
-    <div class="row" [sortablejs]="propertyForm.controls.Images.value" [sortablejsOptions]="sortablejsOptions">
+    <div class="row" [sortablejs]="propertyForm.controls.Images.value" [sortablejsOptions]="sortablejsOptions" style="display: flex;">
         <div *ngFor="let item of propertyForm.controls.Images.value; let i = index" class="col-xs-3 m-b-15 image-hover">
             <cl-image data-u="image"
                       public-id="{{item.ImageId}}"
@@ -15,17 +15,19 @@
                 <i class="material-icons">delete</i>
             </a>
         </div>
-        <userdropzone (fileEvent)="onFileDrop($event)" *ngIf="propertyForm.controls.Images.value.length > 0" class="image-container-tab">
-            <div>
-                <i class="material-icons">photo</i>
-                Drag & Drop To Upload More
-            </div>
-        </userdropzone>
+        <div class="col-xs-3 m-b-15 image-hover" style="display: flex; align-content: stretch;">
+            <userdropzone (fileEvent)="onFileDrop($event)" *ngIf="propertyForm.controls.Images.value.length > 0">
+                <div>
+                    <i class="material-icons">photo</i>
+                    Drag & Drop To Upload More
+                </div>
+            </userdropzone>
+        </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
             <div [formGroup]="propertyForm" class="text-center" *ngIf="propertyForm.controls.Images.value.length == 0 && loginService.getPermission('Properties/Put')">
-                <userdropzone (fileEvent)="onFileDrop($event)">
+                <userdropzone (fileEvent)="onFileDrop($event)" class="main-dropzone">
                     <div>
                         <i class="material-icons">photo</i>
                         Drag & Drop To Upload More
