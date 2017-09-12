@@ -64,6 +64,10 @@ userdropzone div {
     align-content: stretch;
 }
 
+.row-image {
+    flex-flow: row wrap;
+}
+
 @media (max-width: 1300px) {
     userdropzone:not(.main-dropzone) div {
         display: none;

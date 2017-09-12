@@ -1,5 +1,5 @@
 <div class="card-content">
-    <div class="row" [sortablejs]="propertyForm.controls.Images.value" [sortablejsOptions]="sortablejsOptions" [style.display]="(propertyForm.controls.Images.value.length > 0) ? 'flex' : 'none'">
+    <div class="row row-image" [sortablejs]="propertyForm.controls.Images.value" [sortablejsOptions]="sortablejsOptions" [style.display]="(propertyForm.controls.Images.value.length > 0) ? 'flex' : 'none'">
         <div *ngFor="let item of propertyForm.controls.Images.value; let i = index" class="col-xs-3 m-b-15 image-hover">
             <cl-image data-u="image"
                       public-id="{{item.ImageId}}"
