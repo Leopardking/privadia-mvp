@@ -13,13 +13,18 @@ var forms_1 = require("@angular/forms");
 var DatetimefieldComponent = (function () {
     function DatetimefieldComponent() {
     }
-    DatetimefieldComponent.prototype.ngOnInit = function () { };
+    DatetimefieldComponent.prototype.ngOnInit = function () {
+        // this.field.valueChanges.subscribe((value) => {
+        //     this.linkedField.patchValue(moment(value).add(1,'day').format('MM/DD/YYYY'))
+        //     console.log('Change value ',value);
+        // })
+    };
     DatetimefieldComponent.prototype.ngAfterContentChecked = function () {
         this.dateTime = $("." + this.idPicker);
         this.dateTime.datetimepicker({
             format: 'MM/DD/YYYY',
             disabledDates: this.disabledDates,
-            minDate: this.field.value,
+            // minDate: this.field.value,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -33,6 +38,14 @@ var DatetimefieldComponent = (function () {
                 inline: true
             }
         });
+        // console.log('CheckIN',);
+        // if(this.idPicker == 'CheckIn' && this.linkedField) {
+        //     console.log('CheckIN',);
+        // }
+        //
+        // if(this.idPicker == 'CheckOut' && this.linkedField) {
+        //     console.log('CheckOUT',);
+        // }
     };
     __decorate([
         core_1.Input('data'), 
@@ -54,6 +67,10 @@ var DatetimefieldComponent = (function () {
         core_1.Input('disabledDates'), 
         __metadata('design:type', Object)
     ], DatetimefieldComponent.prototype, "disabledDates", void 0);
+    __decorate([
+        core_1.Input('linkedField'), 
+        __metadata('design:type', forms_1.FormControl)
+    ], DatetimefieldComponent.prototype, "linkedField", void 0);
     DatetimefieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
