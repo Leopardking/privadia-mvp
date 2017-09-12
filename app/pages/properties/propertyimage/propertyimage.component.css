@@ -59,6 +59,11 @@ userdropzone div {
     min-height: 250px;
 }
 
+.dropzone-container-image {
+    display: flex;
+    align-content: stretch;
+}
+
 @media (max-width: 1300px) {
     userdropzone:not(.main-dropzone) div {
         display: none;
