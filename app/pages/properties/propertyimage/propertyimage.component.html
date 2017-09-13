@@ -29,8 +29,8 @@
                            [uploader]="uploader" (change)="fileChange()">
                 </label>
             </div>
-            <div [formGroup]="propertyForm" class="" *ngIf="loginService.getPermission('Properties/Put')">
-                <label for="upload" class="upload-image">
+            <div [formGroup]="propertyForm" class="" *ngIf="propertyForm.controls.Images.value.length && loginService.getPermission('Properties/Put')">
+                <label for="upload_2" class="upload-image">
                     <i class="btn btn-success">Upload more</i><br/>
                     <input type="file" id="upload_2" multiple accept="image/jpeg" style="display:none" ng2FileSelect
                            [uploader]="uploader" (change)="fileChange()">
