@@ -27,11 +27,15 @@
     margin-top: -44px;
 }
 
+.dragged .delete-image {
+    display: none !important;
+}
+
 /*
  * DropZone
  */
 
-userdropzone {
+/*userdropzone {
     text-transform: uppercase;
     border: 2px dashed #bbb;
     text-align: center;
@@ -44,7 +48,7 @@ userdropzone {
     width: 100%;
 }
 
-/*userdropzone i {
+userdropzone i {
     font-size: 60px;
     display: block;
     text-align: center;

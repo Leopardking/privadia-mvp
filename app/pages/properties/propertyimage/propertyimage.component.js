@@ -36,6 +36,12 @@ var PropertyimageoComponent = (function () {
                 control.value.forEach(function (currentValue, index) {
                     currentValue.OrderIdx = index;
                 });
+                var item = evt.item;
+                $(item).parent().removeClass('dragged');
+            },
+            onStart: function (evt) {
+                var item = evt.item;
+                $(item).parent().addClass('dragged');
             }
         };
     }
