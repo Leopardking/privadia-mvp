@@ -48,7 +48,7 @@ var AvailabilityComponent = (function () {
         this.CheckIn = moment().startOf('days');
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
         this.isCalendarView = true;
-        this.UpdateBlock = true;
+        this.UpdateBlock = null;
         route.params.subscribe(function (params) {
             _this.propertyId = params['id'];
             _this.availabilityForm.controls['PropertyId'].patchValue(_this.propertyId);

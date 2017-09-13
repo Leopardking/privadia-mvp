@@ -50,7 +50,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     private isCalendarView: boolean = true;
 
 
-    private UpdateBlock: boolean = true;
+    private UpdateBlock: boolean = null;
     private disabledDatesIn: any;
     private disabledDatesOut: any;
 
