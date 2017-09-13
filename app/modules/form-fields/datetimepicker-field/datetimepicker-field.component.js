@@ -20,11 +20,13 @@ var DatetimefieldComponent = (function () {
         // })
     };
     DatetimefieldComponent.prototype.ngAfterContentChecked = function () {
+        console.log('MaxDate ', this.maxDate || false);
         this.dateTime = $("." + this.idPicker);
         this.dateTime.datetimepicker({
             format: 'MM/DD/YYYY',
-            disabledDates: this.disabledDates,
-            // minDate: this.field.value,
+            // disabledDates: this.disabledDates,
+            minDate: this.minDate || false,
+            maxDate: this.maxDate || false,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -71,6 +73,14 @@ var DatetimefieldComponent = (function () {
         core_1.Input('linkedField'), 
         __metadata('design:type', forms_1.FormControl)
     ], DatetimefieldComponent.prototype, "linkedField", void 0);
+    __decorate([
+        core_1.Input('minDate'), 
+        __metadata('design:type', forms_1.FormControl)
+    ], DatetimefieldComponent.prototype, "minDate", void 0);
+    __decorate([
+        core_1.Input('maxDate'), 
+        __metadata('design:type', forms_1.FormControl)
+    ], DatetimefieldComponent.prototype, "maxDate", void 0);
     DatetimefieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,

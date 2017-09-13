@@ -45,7 +45,7 @@ var AvailabilityComponent = (function () {
             AgencyEmail: new forms_1.FormControl(null),
             AgencyPhone: new forms_1.FormControl(null)
         });
-        this.CheckIn = moment().startOf('days');
+        this.CheckIn = moment('09/25/2017').startOf('days');
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
         this.isCalendarView = true;
         this.UpdateBlock = null;
@@ -78,6 +78,9 @@ var AvailabilityComponent = (function () {
                         if (_this.CheckIn.isBefore(_this.CheckOut) || tmpNextDate.done) {
                             _this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('MM/DD/YYYY'));
                             _this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('MM/DD/YYYY'));
+                            console.log('Next Date', tmpNextDate.value.CheckIn);
+                            _this.minDate = tmpEnd.format('MM/DD/YYYY');
+                            _this.maxDate = tmpNextDate.value.CheckIn;
                             return true;
                         }
                         else {
@@ -124,6 +127,7 @@ var AvailabilityComponent = (function () {
                     //     this.CheckIn = tmpEnd;
                     // return true;
                 });
+                // this.disabledDates();
             }, function (e) {
                 console.log('Error calendar', e);
             });

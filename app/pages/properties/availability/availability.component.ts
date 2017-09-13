@@ -41,7 +41,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
         AgencyEmail: new FormControl(null),
         AgencyPhone: new FormControl(null)
     });
-    private CheckIn = moment().startOf('days');
+    private CheckIn = moment('09/25/2017').startOf('days');
     private CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
     private propertyId: any;
 
@@ -53,6 +53,9 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     private UpdateBlock: boolean = null;
     private disabledDatesIn: any;
     private disabledDatesOut: any;
+
+    private maxDate: any;
+    private minDate: any;
 
     constructor ( private route: ActivatedRoute,
                   public propertiesService: PropertiesService,
@@ -98,7 +101,9 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                             if(this.CheckIn.isBefore(this.CheckOut) || tmpNextDate.done) {
                                 this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('MM/DD/YYYY'));
                                 this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('MM/DD/YYYY'));
-
+                                console.log('Next Date',tmpNextDate.value.CheckIn);
+                                this.minDate = tmpEnd.format('MM/DD/YYYY');
+                                this.maxDate = tmpNextDate.value.CheckIn;
                                 return true;
                             } else {
                                 return false;
@@ -151,6 +156,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                         // return true;
 
                     });
+                    // this.disabledDates();
                 },
                 e => {
                     console.log('Error calendar', e);

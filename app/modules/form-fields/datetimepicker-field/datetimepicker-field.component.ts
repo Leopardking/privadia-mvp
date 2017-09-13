@@ -20,6 +20,9 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
     @Input('disabledDates') private disabledDates: any;
     @Input('linkedField') private linkedField: FormControl;
 
+    @Input('minDate') private minDate: FormControl;
+    @Input('maxDate') private maxDate: FormControl;
+
     public dateTime: any;
 
     constructor ( ) { }
@@ -32,11 +35,13 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
     }
 
     ngAfterContentChecked() {
+        console.log('MaxDate ',this.maxDate || false);
         this.dateTime = $(`.${this.idPicker}`);
         this.dateTime.datetimepicker({
             format: 'MM/DD/YYYY',
-            disabledDates: this.disabledDates,
-            // minDate: this.field.value,
+            // disabledDates: this.disabledDates,
+            minDate: this.minDate || false,
+            maxDate: this.maxDate || false,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
