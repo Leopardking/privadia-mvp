@@ -31,8 +31,8 @@ var AvailabilityComponent = (function () {
             // CheckIn: new FormControl(moment('09/10/2017 14:23').format('MM/DD/YYYY')),
             // CheckOut: new FormControl(moment('09/10/2017 14:23').add(1, 'day').format('MM/DD/YYYY')),
             EntryType: new forms_1.FormControl({
-                Id: null,
-                Name: null,
+                Id: 3,
+                Name: 'Other',
             }),
             Notes: new forms_1.FormControl(null),
             isAgency: new forms_1.FormControl(null),
@@ -49,7 +49,6 @@ var AvailabilityComponent = (function () {
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
         this.isCalendarView = true;
         this.UpdateBlock = null;
-        console.log('Test');
         route.params.subscribe(function (params) {
             _this.propertyId = params['id'];
             _this.availabilityForm.controls['PropertyId'].patchValue(_this.propertyId);
