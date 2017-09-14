@@ -52,7 +52,7 @@
                     <div id="extend-filter" class="extend-filter-container collapse" *ngIf="dashboardService.metadata.length">
                         <div class="card">
                             <ul class="row m-l-r-none nav nav-pills">
-                                <li class="nav-pill col-xs-2 col-width-21" *ngFor="let metafilter of metafilters">
+                                <li class="nav-pill col-xs-3 col-width-21" *ngFor="let metafilter of metafilters" [ngClass]="{ hidden: metafilter.Name == 'Local Activities' }">
                                     <div class="form-group label-floating">
                                         <label class="control-label">{{metafilter.Name}}</label>
                                         <a class="form-control-static" data-toggle="tab" [href]="'#metafilter-' + metafilter.Id">
@@ -66,7 +66,7 @@
                                 <div class="col-xs-12">
                                     <div formArrayName="MetaDataFilters" class="tab-content">
                                         <div *ngFor="let metafilter of metafilters" [id]="'metafilter-' + metafilter.Id" class="tab-pane">
-                                            <div class="row">
+                                            <div class="row" *ngIf="metafilter.Name != 'Local Activities'">
                                                 <div *ngFor="let metadata of metafilter.MetaDataSubTypes" class="col-xs-3">
                                                     <h5 class="m-b-none">{{metadata.Name}}</h5>
                                                     <div class="checkbox" *ngFor="let meta of metadata.MetaData; let i = index">
