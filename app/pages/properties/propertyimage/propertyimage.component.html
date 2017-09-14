@@ -1,5 +1,6 @@
 <div class="card-content">
-    <div class="row row-image" [sortablejs]="propertyForm.controls.Images.value" [sortablejsOptions]="sortablejsOptions" [style.display]="(propertyForm.controls.Images.value.length > 0) ? 'flex' : 'none'">
+    <div class="row row-image" [sortablejs]="propertyForm.controls.Images.value"
+         [sortablejsOptions]="sortablejsOptions">
         <div *ngFor="let item of propertyForm.controls.Images.value; let i = index" class="col-xs-3 m-b-15 image-hover">
             <cl-image data-u="image"
                       public-id="{{item.ImageId}}"
@@ -11,33 +12,28 @@
                       width="860"
                       format="jpg">
             </cl-image>
-            <a class="delete-image" (click)="deleteImage(i)" >
+            <a class="delete-image" (click)="deleteImage(i)">
                 <i class="material-icons">delete</i>
             </a>
-        </div>
-        <div class="col-xs-3 m-b-15 image-hover dropzone-container-image" [style.minHeight]="((propertyForm.controls.Images.value.length % 4 === 0) ? '250' : '0')+'px'" [style.width]="((propertyForm.controls.Images.value.length % 4 === 0) ? '100' : '25')+'%'">
-            <userdropzone (fileEvent)="onFileDrop($event)" *ngIf="propertyForm.controls.Images.value.length > 0">
-                <div>
-                    <i class="material-icons">photo</i>
-                    Drag & Drop To Upload More
-                </div>
-            </userdropzone>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div [formGroup]="propertyForm" class="text-center" *ngIf="propertyForm.controls.Images.value.length == 0 && loginService.getPermission('Properties/Put')">
-                <userdropzone (fileEvent)="onFileDrop($event)" class="main-dropzone">
-                    <div>
-                        <i class="material-icons">photo</i>
-                        Drag & Drop To Upload More
-                    </div>
-                </userdropzone>
-            </div>
-            <div [formGroup]="propertyForm" class="" *ngIf="loginService.getPermission('Properties/Put')">
+            <div [formGroup]="propertyForm" class="text-center"
+                 *ngIf="propertyForm.controls.Images.value.length == 0 && loginService.getPermission('Properties/Put')">
                 <label for="upload" class="upload-image">
-                    <i class="btn btn-success">Upload more</i><br />
-                    <input type="file" id="upload" multiple accept="image/jpeg" style="display:none" ng2FileSelect [uploader]="uploader" (change)="fileChange()">
+                    <i class="material-icons">image</i><br/><br/>
+                    <i class="title">Upload a photo of your property</i><br/><br/>
+                    <i class="btn btn-success">Upload an Image</i><br/>
+                    <input type="file" id="upload" multiple accept="image/jpeg" style="display:none" ng2FileSelect
+                           [uploader]="uploader" (change)="fileChange()">
+                </label>
+            </div>
+            <div [formGroup]="propertyForm" class="" *ngIf="propertyForm.controls.Images.value.length && loginService.getPermission('Properties/Put')">
+                <label for="upload_2" class="upload-image">
+                    <i class="btn btn-success">Upload more</i><br/>
+                    <input type="file" id="upload_2" multiple accept="image/jpeg" style="display:none" ng2FileSelect
+                           [uploader]="uploader" (change)="fileChange()">
                 </label>
             </div>
             <div class="loading-gif" [hidden]="!uploader.isUploading">

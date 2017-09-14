@@ -45,6 +45,12 @@ export class PropertyimageoComponent implements OnInit{
                 control.value.forEach((currentValue, index) => {
                 	currentValue.OrderIdx = index;
 				});
+				var item = evt.item;
+				$(item).parent().removeClass('dragged');
+			},
+			onStart:  (evt) => {
+				var item = evt.item;
+				$(item).parent().addClass('dragged');
 			}
 		};
 	}

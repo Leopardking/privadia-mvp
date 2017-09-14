@@ -27,11 +27,15 @@
     margin-top: -44px;
 }
 
+.dragged .delete-image {
+    display: none !important;
+}
+
 /*
  * DropZone
  */
 
-userdropzone {
+/*userdropzone {
     text-transform: uppercase;
     border: 2px dashed #bbb;
     text-align: center;
@@ -70,13 +74,14 @@ userdropzone div {
 
 @media (max-width: 1300px) {
     userdropzone:not(.main-dropzone) div {
-        display: none;
+        zoom: 0.5;
+        line-height: 21px;
     }
 }
 
 userdropzone.dragging {
     border: 2px dashed #333;
-}
+}*/
 
 
 /* jssor slider arrow navigator skin 05 css */
