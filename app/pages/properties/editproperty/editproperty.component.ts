@@ -163,8 +163,7 @@ export class EditpropertyComponent implements OnInit {
 
     setContacts(contacts) {
         const contactFGs = contacts.map(contact => this.builder.group({
-                JobTitle: { value: contact.JobTitle, disabled: this.permission },
-                PropertyContactType: { value: {Id: 1, Name: 'qwert'}, disabled: this.permission },
+                ContactType: { value: {Id: contact.ContactType.Id, Name: contact.ContactType.Name}, disabled: this.permission },
                 FirstName: { value: contact.FirstName, disabled: this.permission },
                 LastName: { value: contact.LastName, disabled: this.permission },
                 EmailAddress: { value: contact.EmailAddress, disabled: this.permission },
@@ -238,6 +237,7 @@ export class EditpropertyComponent implements OnInit {
             return newArr = _.concat(newArr, el)
         });
         form.MetaData = newArr;
+        form.OwnerUser = null;
 
         console.log('save ',this.propertyForm)
         if(!this.propertyForm.valid) {

@@ -68,8 +68,7 @@ export class PropertyinfoComponent implements OnInit, AfterContentChecked {
         const control = <FormArray>this.propertyForm.controls['Contacts'];
         control.push(
             new FormGroup({
-                JobTitle: new FormControl({ value: { Id: null, Name: null}, disabled: this.permission }),
-                PropertyContactType: new FormControl({ value: { Id: 1, Name: null}, disabled: this.permission }),
+                ContactType: new FormControl({ value: { Id: 1, Name: null}, disabled: this.permission }),
                 FirstName: new FormControl({ value: null, disabled: this.permission }),
                 LastName: new FormControl({ value: null, disabled: this.permission }),
                 EmailAddress: new FormControl({ value: null, disabled: this.permission }, Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),
