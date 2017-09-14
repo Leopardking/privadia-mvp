@@ -21,3 +21,12 @@
 	padding-bottom: 15px;
 	box-shadow: none;
 }
+.coming-soon {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 396px;
+	font-size: 30px;
+	font-weight: 700;
+}
