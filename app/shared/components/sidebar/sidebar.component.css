@@ -48,3 +48,10 @@ p, span, a {
     background: none;
 }
 
+.nav li[disabled] > a:hover {
+    background: inherit;
+}
+
+.nav li[disabled] > a i, .nav li[disabled] > a p {
+    color: #3a3a3a;
+}

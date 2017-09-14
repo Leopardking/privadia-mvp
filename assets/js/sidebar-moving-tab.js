@@ -76,14 +76,17 @@ $(document).ready(function(){
 
 });
 
-$('.sidebar .nav-container .nav > li > a:not([data-toggle="collapse"])').click(function(){
+$('.sidebar .nav-container .nav > li > a:not([data-toggle="collapse"], [disabled])').click(function(){
     mda.misc.sidebarMenuActive = $(this);
     $parent = $(this).parent();
+
+    if ($parent.attr('disabled')) {
+        return;
+    }
 
     if(mda.misc.sidebarMenuActive.closest('.collapse').length == 0){
         mda.misc.isChild = false;
     }
-
     // we call the animation of the moving tab
     animateMovingTab();
 });
