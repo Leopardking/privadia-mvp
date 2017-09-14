@@ -27,8 +27,8 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
         // CheckIn: new FormControl(moment('09/10/2017 14:23').format('MM/DD/YYYY')),
         // CheckOut: new FormControl(moment('09/10/2017 14:23').add(1, 'day').format('MM/DD/YYYY')),
         EntryType: new FormControl({
-            Id: null,
-            Name: null,
+            Id: 3,
+            Name: 'Other',
         }),
         Notes: new FormControl(null),
         isAgency: new FormControl(null),
@@ -62,7 +62,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                   public lookupsService: LookupsService,
                   public calendarService: CalendarService,
                   private builder: FormBuilder ) {
-        console.log('Test');
+
         route.params.subscribe(params => {
             this.propertyId = params['id'];
             this.availabilityForm.controls['PropertyId'].patchValue(this.propertyId);
