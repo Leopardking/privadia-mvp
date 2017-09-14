@@ -12,19 +12,16 @@ var core_1 = require('@angular/core');
 var forms_1 = require("@angular/forms");
 var DatetimefieldComponent = (function () {
     function DatetimefieldComponent() {
+        this.updateDate = new core_1.EventEmitter();
     }
-    DatetimefieldComponent.prototype.ngOnInit = function () {
-        // this.field.valueChanges.subscribe((value) => {
-        //     this.linkedField.patchValue(moment(value).add(1,'day').format('MM/DD/YYYY'))
-        //     console.log('Change value ',value);
-        // })
-    };
+    DatetimefieldComponent.prototype.ngOnInit = function () { };
     DatetimefieldComponent.prototype.ngAfterContentChecked = function () {
         this.dateTime = $("." + this.idPicker);
         this.dateTime.datetimepicker({
             format: 'MM/DD/YYYY',
             disabledDates: this.disabledDates,
-            // minDate: this.field.value,
+            minDate: this.minDate || false,
+            maxDate: this.maxDate || false,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -38,14 +35,10 @@ var DatetimefieldComponent = (function () {
                 inline: true
             }
         });
-        // console.log('CheckIN',);
-        // if(this.idPicker == 'CheckIn' && this.linkedField) {
-        //     console.log('CheckIN',);
-        // }
-        //
-        // if(this.idPicker == 'CheckOut' && this.linkedField) {
-        //     console.log('CheckOUT',);
-        // }
+    };
+    DatetimefieldComponent.prototype.updateDateEvent = function (evt, value) {
+        this.field.setValue(value);
+        this.updateDate.next(value);
     };
     __decorate([
         core_1.Input('data'), 
@@ -71,6 +64,18 @@ var DatetimefieldComponent = (function () {
         core_1.Input('linkedField'), 
         __metadata('design:type', forms_1.FormControl)
     ], DatetimefieldComponent.prototype, "linkedField", void 0);
+    __decorate([
+        core_1.Output('updateDate'), 
+        __metadata('design:type', core_1.EventEmitter)
+    ], DatetimefieldComponent.prototype, "updateDate", void 0);
+    __decorate([
+        core_1.Input('minDate'), 
+        __metadata('design:type', forms_1.FormControl)
+    ], DatetimefieldComponent.prototype, "minDate", void 0);
+    __decorate([
+        core_1.Input('maxDate'), 
+        __metadata('design:type', forms_1.FormControl)
+    ], DatetimefieldComponent.prototype, "maxDate", void 0);
     DatetimefieldComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
