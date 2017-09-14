@@ -54,8 +54,9 @@ export class PropertyinfoComponent implements OnInit, AfterContentChecked {
 
     private regionChanged(e) { }
 
-    private autosize(e){
-        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
+    private autosize(e, minHeight){
+        console.log('min height', e.target);
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px !important';
     }
 
     private autocompleListFormatter = (data: any) : SafeHtml => {

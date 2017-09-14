@@ -40,8 +40,9 @@ var PropertyinfoComponent = (function () {
         this.PropertyContactTypes = this.lookupsService.propertyContactTypes;
     };
     PropertyinfoComponent.prototype.regionChanged = function (e) { };
-    PropertyinfoComponent.prototype.autosize = function (e) {
-        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
+    PropertyinfoComponent.prototype.autosize = function (e, minHeight) {
+        console.log('min height', e.target);
+        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px !important';
     };
     PropertyinfoComponent.prototype.showAddContact = function () {
         var control = this.propertyForm.controls['Contacts'];
