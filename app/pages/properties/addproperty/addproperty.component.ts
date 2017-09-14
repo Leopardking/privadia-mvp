@@ -28,7 +28,7 @@ export class AddpropertyComponent implements OnInit {
     public propertyForm = new FormGroup ({
         Active: new FormControl(true),
         InternalName: new FormControl(),
-        OwnerUser: new FormControl(),
+        // OwnerUser: new FormControl(),
         Name: new FormControl(null),
         AddressLine1: new FormControl(),
         AddressLine2: new FormControl(),
@@ -50,12 +50,10 @@ export class AddpropertyComponent implements OnInit {
             Id: null,
             Name: null,
         }),
-        /*
         OwnerUser: new FormControl({
             Id: null,
             Name: null,
         }, Validators.required),
-        */
         Headline: new FormControl(),
         Summary: new FormControl(),
         Description: new FormControl(),
