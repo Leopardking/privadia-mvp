@@ -29,7 +29,7 @@ var AddpropertyComponent = (function () {
         this.propertyForm = new forms_1.FormGroup({
             Active: new forms_1.FormControl(true),
             InternalName: new forms_1.FormControl(),
-            OwnerName: new forms_1.FormControl(),
+            OwnerUser: new forms_1.FormControl(),
             Name: new forms_1.FormControl(null),
             AddressLine1: new forms_1.FormControl(),
             AddressLine2: new forms_1.FormControl(),

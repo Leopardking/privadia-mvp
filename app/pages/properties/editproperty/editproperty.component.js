@@ -40,7 +40,7 @@ var EditpropertyComponent = (function () {
             _this.propertyForm = _this.builder.group({
                 Id: _this.propertyId,
                 Active: { value: _this.propertiesService.property.Active || null, disabled: _this.permission },
-                OwnerName: { value: _this.propertiesService.property.OwnerName, disabled: _this.permission },
+                OwnerUser: { value: _this.propertiesService.property.OwnerUser, disabled: _this.permission },
                 InternalName: { value: _this.propertiesService.property.InternalName, disabled: _this.permission },
                 Name: [{ value: _this.propertiesService.property.Name, disabled: _this.permission }],
                 AddressLine1: { value: _this.propertiesService.property.AddressLine1, disabled: _this.permission },

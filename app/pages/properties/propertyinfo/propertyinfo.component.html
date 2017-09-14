@@ -26,7 +26,7 @@
             <div class="tab-content p-b-none">
                 <div [formGroup]="propertyForm" class="tab-pane" id="heading-name_address">
                     <div class="row">
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <singleselect-field-cmp
                                     *ngIf="propertiesService.companies.length || propertyForm.controls.ManagementCompany.value"
                                     [dataList]="propertiesService.companies"
@@ -34,7 +34,7 @@
                                     [options]="{title: 'Management Company*', default: 'Select Company'}"
                                     [field]="propertyForm.controls.ManagementCompany"></singleselect-field-cmp>
                         </div>
-                        <div class="col-xs-6">
+                        <div class="col-xs-4">
                             <singleselect-field-cmp *ngIf="propertiesService.managers.length"
                                                     [dataList]="propertiesService.managers"
                                                     [options]="{title: 'Manager*', default: 'Select Manager'}"
@@ -47,18 +47,27 @@
                                     [errorForm]="errorForm"
                                     [field]="propertyForm.controls.ManagerUser"></singleselect-field-cmp>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="ownerName" class="form-group label-floating">
-                                <label class="control-label">Select Owner</label>
-                                <input class="form-control" id="owner-name" formControlName="OwnerName">
-                            </div>
-                            <!--<div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames"-->
-                                 <!--class="form-group label-floating">-->
+                        <div class="col-xs-4">
+                            <!--<div id="ownerName" class="form-group label-floating">-->
                                 <!--<label class="control-label">Select Owner</label>-->
                                 <!--<input class="form-control" id="owner-name" formControlName="OwnerName">-->
                             <!--</div>-->
+
+                            <!--<div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames"-->
+                                <!--class="form-group label-floating">-->
+                                <!--<label class="control-label">Select Owner</label>-->
+                                <!--<input class="form-control" id="owner-name" formControlName="OwnerName">-->
+                            <!--</div>-->
+
+                            <singleselect-field-cmp
+                                    [dataList]="propertiesService.owners"
+                                    [options]="{title: 'Select Owner', default: 'Select Owner'}"
+                                    [errorForm]="errorForm"
+                                    [field]="propertyForm.controls.OwnerUser"></singleselect-field-cmp>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
                         </div>
                     </div>
                     <div class="row">

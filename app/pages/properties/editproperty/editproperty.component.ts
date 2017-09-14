@@ -49,7 +49,7 @@ export class EditpropertyComponent implements OnInit {
             this.propertyForm = this.builder.group({
                 Id: this.propertyId,
                 Active: { value: this.propertiesService.property.Active || null, disabled: this.permission },
-                OwnerName: { value: this.propertiesService.property.OwnerName, disabled: this.permission },
+                OwnerUser: { value: this.propertiesService.property.OwnerUser, disabled: this.permission },
                 InternalName: { value: this.propertiesService.property.InternalName, disabled: this.permission },
                 Name: [{ value: this.propertiesService.property.Name, disabled: this.permission}],
                 AddressLine1: { value: this.propertiesService.property.AddressLine1, disabled: this.permission },
