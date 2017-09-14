@@ -282,7 +282,6 @@ var AvailabilityComponent = (function () {
                 AgencyEmail: new forms_1.FormControl(null),
                 AgencyPhone: new forms_1.FormControl(null)
             });
-            console.log('d ', d);
             _this.isCalendarView = true;
             if (_this.UpdateBlock === null) {
                 _this.UpdateBlock = true;

@@ -329,7 +329,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                     AgencyEmail: new FormControl(null),
                     AgencyPhone: new FormControl(null)
                 });
-                console.log('d ',d);
+
                 this.isCalendarView = true;
                 if (this.UpdateBlock === null) {
                     this.UpdateBlock = true;
