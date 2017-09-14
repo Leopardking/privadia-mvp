@@ -6,7 +6,7 @@
                class="form-control datepicker"
                [ngClass]="idPicker"
                #datePicker
-               (blur)="field.setValue(datePicker.value)"
+               (blur)="updateDateEvent($event, datePicker.value)"
                [ngModel]="field.value"
                [formControl]="field"/>
         <div *ngIf="field.errors" class="errors">
