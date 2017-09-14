@@ -47,7 +47,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
 
     private calendarEntryTypes: Array<{ Id: number, Name: string }>;
     private bookingDays;
-    private isCalendarView: boolean = true;
+    private isCalendarView: boolean = false;
 
 
     private UpdateBlock: boolean = null;
@@ -62,6 +62,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                   public lookupsService: LookupsService,
                   public calendarService: CalendarService,
                   private builder: FormBuilder ) {
+        console.log('Test');
         route.params.subscribe(params => {
             this.propertyId = params['id'];
             this.availabilityForm.controls['PropertyId'].patchValue(this.propertyId);
@@ -140,6 +141,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     }
 
     handlerUpdateDate(value) {
+        console.log('Udate date',);
         this.CheckIn = moment(value);
         this.CheckOut = this.CheckIn.add(1, 'day');
         $('.checkOut').data("DateTimePicker")
@@ -159,29 +161,24 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
             const tmpNextEnd   = moment(!tmpNextDate.done && tmpNextDate.value.CheckOut).startOf('days');
 
             if(index === 0 && this.CheckOut.isSameOrBefore(tmpStart)) {
-                console.log('1',);
                 return true;
             } else if(this.CheckOut.isBetween(tmpNextStart, tmpNextEnd, null, '[)')) {
-                console.log('2',);
                 if(this.CheckOut.isSameOrBefore(tmpNextStart) || tmpNextDate.done) {
-                    // console.log('3',);
                     this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('MM/DD/YYYY'));
                     this.minDate = tmpEnd.format('MM/DD/YYYY');
-                    this.maxDate = moment(tmpNextDate.value.CheckIn).format('MM/DD/YYYY');
+                    this.maxDate = tmpNextStart.format('MM/DD/YYYY');
                     $('.checkOut').data("DateTimePicker")
                                   .minDate(this.minDate)
                                   .maxDate(this.maxDate);
                     return true;
                 } else {
-                    console.log('4',);
                     return false;
                 }
             } else if(this.CheckOut.isBefore(tmpNextStart)) {
                 this.availabilityForm.controls['CheckOut'].patchValue(this.CheckIn.format('MM/DD/YYYY'));
                 $('.checkOut').data("DateTimePicker")
-                    .minDate(this.CheckIn.format('MM/DD/YYYY'))
-                    .maxDate(tmpNextStart.format('MM/DD/YYYY'));
-                console.log('5',this.CheckIn.format('MM/DD/YYYY'));
+                              .minDate(this.CheckIn.format('MM/DD/YYYY'))
+                              .maxDate(tmpNextStart.format('MM/DD/YYYY'));
                 return true;
             }
 
@@ -314,34 +311,41 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     handlerEditAvailability(id) {
         this.calendarService.getCalendar(id).subscribe(
             d => {
+                this.disabledDates();
                 this.availabilityForm = new FormGroup({
                     Id: new FormControl(d.Id),
                     PropertyId: new FormControl(this.propertyId),
-                    CheckIn: new FormControl(d.CheckIn),
-                    CheckOut: new FormControl(d.CheckOut),
+                    CheckIn: new FormControl(moment(d.CheckIn).format('MM/DD/YYYY')),
+                    CheckOut: new FormControl(moment(d.CheckOut).format('MM/DD/YYYY')),
                     EntryType: new FormControl(d.EntryType),
                     Notes: new FormControl(d.Notes),
+                    isAgency: new FormControl(null),
+                    FirstName: new FormControl(null),
+                    LastName: new FormControl(null),
+                    Email: new FormControl(null),
+                    Phone: new FormControl(null),
+                    CompanyName: new FormControl(null),
+                    ContactName: new FormControl(null),
+                    AgencyEmail: new FormControl(null),
+                    AgencyPhone: new FormControl(null)
                 });
-
+                console.log('d ',d);
                 this.isCalendarView = true;
                 if (this.UpdateBlock === null) {
                     this.UpdateBlock = true;
                 } else {
                     this.UpdateBlock = !this.UpdateBlock;
                 }
+
+                setTimeout(() => {
+                    this.availabilityForm.controls['CheckIn'].patchValue(moment(d.CheckIn).format('MM/DD/YYYY'));
+                    this.availabilityForm.controls['CheckOut'].patchValue(moment(d.CheckOut).format('MM/DD/YYYY'));
+                }, 1000);
             },
             e => {
                 console.log('Error availability', e);
             }
         );
-
-        //     this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
-        //         this.bookingDays[this.bookingDays.length - 1].CheckIn = data;
-        //     });
-        //
-        //     this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
-        //         this.bookingDays[this.bookingDays.length - 1].CheckOut = data;
-        //     })
     }
 
     handlerDeleteAvailability(id) {

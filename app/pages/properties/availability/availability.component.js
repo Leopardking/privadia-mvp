@@ -47,8 +47,9 @@ var AvailabilityComponent = (function () {
         });
         this.CheckIn = moment().startOf('days');
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
-        this.isCalendarView = true;
+        this.isCalendarView = false;
         this.UpdateBlock = null;
+        console.log('Test');
         route.params.subscribe(function (params) {
             _this.propertyId = params['id'];
             _this.availabilityForm.controls['PropertyId'].patchValue(_this.propertyId);
@@ -111,6 +112,7 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.handlerUpdateDate = function (value) {
         var _this = this;
+        console.log('Udate date');
         this.CheckIn = moment(value);
         this.CheckOut = this.CheckIn.add(1, 'day');
         $('.checkOut').data("DateTimePicker")
@@ -125,23 +127,19 @@ var AvailabilityComponent = (function () {
             var tmpNextStart = moment(!tmpNextDate.done && tmpNextDate.value.CheckIn).startOf('days');
             var tmpNextEnd = moment(!tmpNextDate.done && tmpNextDate.value.CheckOut).startOf('days');
             if (index === 0 && _this.CheckOut.isSameOrBefore(tmpStart)) {
-                console.log('1');
                 return true;
             }
             else if (_this.CheckOut.isBetween(tmpNextStart, tmpNextEnd, null, '[)')) {
-                console.log('2');
                 if (_this.CheckOut.isSameOrBefore(tmpNextStart) || tmpNextDate.done) {
-                    // console.log('3',);
                     _this.availabilityForm.controls['CheckOut'].patchValue(_this.CheckOut.format('MM/DD/YYYY'));
                     _this.minDate = tmpEnd.format('MM/DD/YYYY');
-                    _this.maxDate = moment(tmpNextDate.value.CheckIn).format('MM/DD/YYYY');
+                    _this.maxDate = tmpNextStart.format('MM/DD/YYYY');
                     $('.checkOut').data("DateTimePicker")
                         .minDate(_this.minDate)
                         .maxDate(_this.maxDate);
                     return true;
                 }
                 else {
-                    console.log('4');
                     return false;
                 }
             }
@@ -150,7 +148,6 @@ var AvailabilityComponent = (function () {
                 $('.checkOut').data("DateTimePicker")
                     .minDate(_this.CheckIn.format('MM/DD/YYYY'))
                     .maxDate(tmpNextStart.format('MM/DD/YYYY'));
-                console.log('5', _this.CheckIn.format('MM/DD/YYYY'));
                 return true;
             }
         });
@@ -267,14 +264,25 @@ var AvailabilityComponent = (function () {
     AvailabilityComponent.prototype.handlerEditAvailability = function (id) {
         var _this = this;
         this.calendarService.getCalendar(id).subscribe(function (d) {
+            _this.disabledDates();
             _this.availabilityForm = new forms_1.FormGroup({
                 Id: new forms_1.FormControl(d.Id),
                 PropertyId: new forms_1.FormControl(_this.propertyId),
-                CheckIn: new forms_1.FormControl(d.CheckIn),
-                CheckOut: new forms_1.FormControl(d.CheckOut),
+                CheckIn: new forms_1.FormControl(moment(d.CheckIn).format('MM/DD/YYYY')),
+                CheckOut: new forms_1.FormControl(moment(d.CheckOut).format('MM/DD/YYYY')),
                 EntryType: new forms_1.FormControl(d.EntryType),
                 Notes: new forms_1.FormControl(d.Notes),
+                isAgency: new forms_1.FormControl(null),
+                FirstName: new forms_1.FormControl(null),
+                LastName: new forms_1.FormControl(null),
+                Email: new forms_1.FormControl(null),
+                Phone: new forms_1.FormControl(null),
+                CompanyName: new forms_1.FormControl(null),
+                ContactName: new forms_1.FormControl(null),
+                AgencyEmail: new forms_1.FormControl(null),
+                AgencyPhone: new forms_1.FormControl(null)
             });
+            console.log('d ', d);
             _this.isCalendarView = true;
             if (_this.UpdateBlock === null) {
                 _this.UpdateBlock = true;
@@ -282,16 +290,13 @@ var AvailabilityComponent = (function () {
             else {
                 _this.UpdateBlock = !_this.UpdateBlock;
             }
+            setTimeout(function () {
+                _this.availabilityForm.controls['CheckIn'].patchValue(moment(d.CheckIn).format('MM/DD/YYYY'));
+                _this.availabilityForm.controls['CheckOut'].patchValue(moment(d.CheckOut).format('MM/DD/YYYY'));
+            }, 1000);
         }, function (e) {
             console.log('Error availability', e);
         });
-        //     this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
-        //         this.bookingDays[this.bookingDays.length - 1].CheckIn = data;
-        //     });
-        //
-        //     this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
-        //         this.bookingDays[this.bookingDays.length - 1].CheckOut = data;
-        //     })
     };
     AvailabilityComponent.prototype.handlerDeleteAvailability = function (id) {
         this.bookingDays = _.remove(this.bookingDays, function (o) {
