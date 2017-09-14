@@ -48,19 +48,26 @@
                                     [field]="propertyForm.controls.ManagerUser"></singleselect-field-cmp>
                         </div>
                         <div class="col-xs-4">
-                            <singleselect-field-cmp [dataList]="propertiesService.regions"
-                                                    [errorForm]="errorForm"
-                                                    [options]="{title: 'Select Region *', default: 'Select Region'}"
-                                                    [field]="propertyForm.controls.Region"></singleselect-field-cmp>
+                            <!--<div id="ownerName" class="form-group label-floating">-->
+                                <!--<label class="control-label">Select Owner</label>-->
+                                <!--<input class="form-control" id="owner-name" formControlName="OwnerName">-->
+                            <!--</div>-->
+
+                            <!--<div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames"-->
+                                <!--class="form-group label-floating">-->
+                                <!--<label class="control-label">Select Owner</label>-->
+                                <!--<input class="form-control" id="owner-name" formControlName="OwnerName">-->
+                            <!--</div>-->
+
+                            <singleselect-field-cmp
+                                    [dataList]="propertiesService.owners"
+                                    [options]="{title: 'Select Owner', default: 'Select Owner'}"
+                                    [errorForm]="errorForm"
+                                    [field]="propertyForm.controls.OwnerUser"></singleselect-field-cmp>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
-                            <div ng2-auto-complete id="ownerName" [max-num-list]="10" [source]="ownerNames"
-                                 class="form-group label-floating">
-                                <label class="control-label">Select Owner</label>
-                                <input class="form-control" id="owner-name" formControlName="OwnerName">
-                            </div>
                         </div>
                     </div>
                     <div class="row">
@@ -79,49 +86,66 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-3">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Address 1</label>
-                                <input type="text" class="form-control" formControlName="AddressLine1">
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Address 2</label>
-                                <input type="text" class="form-control" formControlName="AddressLine2">
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Post code / Zip Code</label>
-                                <input type="text" class="form-control" formControlName="AddressPostalCode">
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <div class="form-group label-floating">
-                                <label class="control-label">Country</label>
-                                <input type="text" class="form-control" formControlName="AddressCountry">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-xs-6">
-                            <div class="form-group label-floating"
-                                 [ngClass]="{'form-error': !propertyForm.controls.Longitude.valid}">
-                                <label class="control-label">Longitude</label>
-                                <input type="text" class="form-control" formControlName="Longitude">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Address 1</label>
+                                        <input type="text" class="form-control" formControlName="AddressLine1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Address 2</label>
+                                        <input type="text" class="form-control" formControlName="AddressLine2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <singleselect-field-cmp [dataList]="propertiesService.regions"
+                                                            [errorForm]="errorForm"
+                                                            [options]="{title: 'Select Region *', default: 'Select Region'}"
+                                                            [field]="propertyForm.controls.Region"></singleselect-field-cmp>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Country</label>
+                                        <input type="text" class="form-control" formControlName="AddressCountry">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group label-floating">
+                                        <label class="control-label">Post code / Zip Code</label>
+                                        <input type="text" class="form-control" formControlName="AddressPostalCode">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <div class="form-group label-floating"
+                                         [ngClass]="{'form-error': !propertyForm.controls.Longitude.valid}">
+                                        <label class="control-label">Longitude</label>
+                                        <input type="text" class="form-control" formControlName="Longitude">
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="form-group label-floating"
+                                         [ngClass]="{'form-error': !propertyForm.controls.Latitude.valid}">
+                                        <label class="control-label">Latitude</label>
+                                        <input type="text" class="form-control" formControlName="Latitude">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xs-6">
-                            <div class="form-group label-floating"
-                                 [ngClass]="{'form-error': !propertyForm.controls.Latitude.valid}">
-                                <label class="control-label">Latitude</label>
-                                <input type="text" class="form-control" formControlName="Latitude">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
+                            <div class="coming-soon">Map Coming Soon</div>
                         </div>
                     </div>
                     <!--
