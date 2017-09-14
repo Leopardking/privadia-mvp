@@ -47,7 +47,7 @@ var AvailabilityComponent = (function () {
         });
         this.CheckIn = moment().startOf('days');
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
-        this.isCalendarView = false;
+        this.isCalendarView = true;
         this.UpdateBlock = null;
         console.log('Test');
         route.params.subscribe(function (params) {

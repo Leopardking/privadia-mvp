@@ -47,7 +47,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
 
     private calendarEntryTypes: Array<{ Id: number, Name: string }>;
     private bookingDays;
-    private isCalendarView: boolean = false;
+    private isCalendarView: boolean = true;
 
 
     private UpdateBlock: boolean = null;
