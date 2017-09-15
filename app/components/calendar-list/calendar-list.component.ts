@@ -25,7 +25,7 @@ export class CalendarListComponent implements OnInit{
 
 	ngOnInit() {
         this.availabilityForm.valueChanges.subscribe(data => {
-            console.log('sdfgsdg')
+
         });
     }
 
@@ -42,7 +42,7 @@ export class CalendarListComponent implements OnInit{
     }
 
     private formattedDate(date) {
-        return moment(date).format('MM/DD/YYYY')
+        return moment(date).format('DD/MM/YYYY')
     }
 
     editEvent(evt) {

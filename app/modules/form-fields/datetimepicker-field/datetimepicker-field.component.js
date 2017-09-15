@@ -18,7 +18,7 @@ var DatetimefieldComponent = (function () {
     DatetimefieldComponent.prototype.ngAfterContentChecked = function () {
         this.dateTime = $("." + this.idPicker);
         this.dateTime.datetimepicker({
-            format: 'MM/DD/YYYY',
+            format: 'DD/MM/YYYY',
             disabledDates: this.disabledDates,
             minDate: this.minDate || false,
             maxDate: this.maxDate || false,

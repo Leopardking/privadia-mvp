@@ -68,7 +68,6 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                   private loginService: LoginService) {
 
         this.isAgent = this.loginService.getRoles('Agent');
-        console.log(this.isAgent);
 
         route.params.subscribe(params => {
             this.propertyId = params['id'];

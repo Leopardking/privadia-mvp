@@ -52,7 +52,6 @@ var AvailabilityComponent = (function () {
         this.isCalendarView = true;
         this.UpdateBlock = null;
         this.isAgent = this.loginService.getRoles('Agent');
-        console.log(this.isAgent);
         route.params.subscribe(function (params) {
             _this.propertyId = params['id'];
             _this.availabilityForm.controls['PropertyId'].patchValue(_this.propertyId);

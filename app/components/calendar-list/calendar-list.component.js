@@ -18,7 +18,6 @@ var CalendarListComponent = (function () {
     }
     CalendarListComponent.prototype.ngOnInit = function () {
         this.availabilityForm.valueChanges.subscribe(function (data) {
-            console.log('sdfgsdg');
         });
     };
     CalendarListComponent.prototype.finishReading = function () {
@@ -33,7 +32,7 @@ var CalendarListComponent = (function () {
         this.datatableInited = true;
     };
     CalendarListComponent.prototype.formattedDate = function (date) {
-        return moment(date).format('MM/DD/YYYY');
+        return moment(date).format('DD/MM/YYYY');
     };
     CalendarListComponent.prototype.editEvent = function (evt) {
         this.editAvailability.next(evt);
