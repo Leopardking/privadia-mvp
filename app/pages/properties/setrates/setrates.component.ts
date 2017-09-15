@@ -39,14 +39,16 @@ export class SetratesComponent implements OnInit{
     constructor ( private route: ActivatedRoute,
                   private propertyService: PropertiesService,
                   private builder: FormBuilder ) {
-        console.log('Form init')
+        console.log('Form init');
     }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
         this.route.params.subscribe(params => {
-            this.propertyService.readDataRates(this.propertyId = params['id']);
+            this.propertyId = params['id'];
+            this.propertyService.readDataRates(this.propertyId);
+            this.propertyService.readDataProperty(this.propertyId);
         });
     }
 
@@ -65,11 +67,11 @@ export class SetratesComponent implements OnInit{
     private initRateToForm(data) {
         this.rateForm = this.builder.group({
             Currency: data.Currency || 'EUR',
-            EndDate: moment(data.EndDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
+            EndDate: moment(data.EndDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
             LengthOfStay: 7,
             Id: data.Id,
             PropertyId: this.propertyId,
-            StartDate: moment(data.StartDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
+            StartDate: moment(data.StartDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
             Value: data.Value,
         });
         setTimeout(() => {
@@ -90,9 +92,9 @@ export class SetratesComponent implements OnInit{
         this.rateForm = this.builder.group({
             Currency: new FormControl('EUR'),
             LengthOfStay: 7,
-            EndDate: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            EndDate: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             PropertyId: new FormControl(this.propertyId),
-            StartDate: new FormControl(moment().format('MM/DD/YYYY')),
+            StartDate: new FormControl(moment().format('DD/MM/YYYY')),
             Value: new FormControl(),
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
@@ -144,7 +146,7 @@ export class SetratesComponent implements OnInit{
             e => {
                 console.log('Error ', e)
                 handlerErrorFieds(e, this.rateForm);
-                handlerErrorNotify('There were errors with your submission, please see form for details.')
+                handlerErrorNotify('There were errors with your submission, please see form for details.');
             }
         )
 

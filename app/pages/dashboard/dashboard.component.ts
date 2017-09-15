@@ -34,8 +34,8 @@ export class DashboardComponent implements OnInit{
 
         this.filterForm = this.builder.group({
             Bedrooms: new FormControl(),
-            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             MaxRate: new FormControl(),
             MinRate: new FormControl(),
             OrderBy: new FormControl(),
@@ -47,8 +47,8 @@ export class DashboardComponent implements OnInit{
             PropertyId: new FormControl(),
             ClientFirstName: new FormControl(),
             ClientLastName: new FormControl(),
-            CheckIn: new FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             Message: new FormControl(''),
         });
 

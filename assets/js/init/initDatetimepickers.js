@@ -2,6 +2,7 @@ if ('undefined' !== typeof module) {
 
     module.exports = function initDatetimepickers(){
             $('.datetimepicker').datetimepicker({
+                locale: 'uk',
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -17,8 +18,7 @@ if ('undefined' !== typeof module) {
              });
 
              $('.datepicker').datetimepicker({
-                format: 'MM/DD/YYYY',
-                 disabledDates: ['2015-08-25', '2015-08-26'],
+                format: 'DD/MM/YYYY',
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",

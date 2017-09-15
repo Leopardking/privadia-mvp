@@ -29,8 +29,8 @@ var DashboardComponent = (function () {
         $('.modal').appendTo("body");
         this.filterForm = this.builder.group({
             Bedrooms: new forms_1.FormControl(),
-            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             MaxRate: new forms_1.FormControl(),
             MinRate: new forms_1.FormControl(),
             OrderBy: new forms_1.FormControl(),
@@ -41,8 +41,8 @@ var DashboardComponent = (function () {
             PropertyId: new forms_1.FormControl(),
             ClientFirstName: new forms_1.FormControl(),
             ClientLastName: new forms_1.FormControl(),
-            CheckIn: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
-            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            CheckIn: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
+            CheckOut: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             Message: new forms_1.FormControl(''),
         });
         /*

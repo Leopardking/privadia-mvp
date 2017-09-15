@@ -18,8 +18,8 @@ var DatetimefieldComponent = (function () {
     DatetimefieldComponent.prototype.ngAfterContentChecked = function () {
         this.dateTime = $("." + this.idPicker);
         this.dateTime.datetimepicker({
-            format: 'MM/DD/YYYY',
-            disabledDates: this.disabledDates,
+            format: 'DD/MM/YYYY',
+            disabledDates: this.disabledDates || [],
             minDate: this.minDate || false,
             maxDate: this.maxDate || false,
             icons: {
@@ -37,6 +37,7 @@ var DatetimefieldComponent = (function () {
         });
     };
     DatetimefieldComponent.prototype.updateDateEvent = function (evt, value) {
+        console.log(value);
         this.field.setValue(value);
         this.updateDate.next(value);
     };

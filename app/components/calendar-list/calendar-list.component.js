@@ -16,11 +16,7 @@ var CalendarListComponent = (function () {
         this.editAvailability = new core_1.EventEmitter();
         this.datatableInited = false;
     }
-    CalendarListComponent.prototype.ngOnInit = function () {
-        // this.availabilityForm.valueChanges.subscribe(data => {
-        //     console.log('sdfgsdg')
-        // });
-    };
+    CalendarListComponent.prototype.ngOnInit = function () { };
     CalendarListComponent.prototype.finishReading = function () {
         var DataTable = $('#datatables');
         DataTable.DataTable({
@@ -33,7 +29,7 @@ var CalendarListComponent = (function () {
         this.datatableInited = true;
     };
     CalendarListComponent.prototype.formattedDate = function (date) {
-        return moment(date).format('MM/DD/YYYY');
+        return moment(date).format('DD/MM/YYYY');
     };
     CalendarListComponent.prototype.editEvent = function (evt) {
         this.editAvailability.next(evt);

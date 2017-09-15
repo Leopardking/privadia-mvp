@@ -31,7 +31,7 @@
                             <i class="material-icons">date_range</i>
                         </div>
                         <h4 class="card-title m-t-15">
-                            {{propertiesService.property && propertiesService.property.InternalName}}
+                            Availability for "{{propertiesService.property && propertiesService.property.InternalName}}"
                         </h4>
                     </div>
                     <calendar-cmp *ngIf="isCalendarView && bookingDays"
@@ -141,7 +141,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <input-field-cmp [data]="{title: 'EMail', name: 'ClientEmail', type: 'text'}"
+                                                <input-field-cmp [data]="{title: 'Email', name: 'ClientEmail', type: 'text'}"
                                                                  [errorForm]="errorForm"
                                                                  [field]="availabilityForm.controls.ClientEmail"></input-field-cmp>
                                             </div>

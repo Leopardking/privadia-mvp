@@ -37,7 +37,9 @@ var SetratesComponent = (function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.route.params.subscribe(function (params) {
-            _this.propertyService.readDataRates(_this.propertyId = params['id']);
+            _this.propertyId = params['id'];
+            _this.propertyService.readDataRates(_this.propertyId);
+            _this.propertyService.readDataProperty(_this.propertyId);
         });
     };
     SetratesComponent.prototype.finishReading = function () {
@@ -54,11 +56,11 @@ var SetratesComponent = (function () {
     SetratesComponent.prototype.initRateToForm = function (data) {
         this.rateForm = this.builder.group({
             Currency: data.Currency || 'EUR',
-            EndDate: moment(data.EndDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
+            EndDate: moment(data.EndDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
             LengthOfStay: 7,
             Id: data.Id,
             PropertyId: this.propertyId,
-            StartDate: moment(data.StartDate).format('MM/DD/YYYY') || moment().format('MM/DD/YYYY'),
+            StartDate: moment(data.StartDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
             Value: data.Value,
         });
         setTimeout(function () {
@@ -78,9 +80,9 @@ var SetratesComponent = (function () {
         this.rateForm = this.builder.group({
             Currency: new forms_1.FormControl('EUR'),
             LengthOfStay: 7,
-            EndDate: new forms_1.FormControl(moment().add(1, 'day').format('MM/DD/YYYY')),
+            EndDate: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             PropertyId: new forms_1.FormControl(this.propertyId),
-            StartDate: new forms_1.FormControl(moment().format('MM/DD/YYYY')),
+            StartDate: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
             Value: new forms_1.FormControl(),
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];

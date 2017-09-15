@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, Input} from '@angular/core';
-import {FormGroup} from "@angular/forms";
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
@@ -10,11 +10,17 @@ import {FormGroup} from "@angular/forms";
 
 export class PropertymarketingComponent implements OnInit{
 	@Input('group')	propertyForm: FormGroup;
-	private re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+	private re = new RegExp('^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?', '');
 
 	constructor() { }
 
-	ngOnInit() { }
+	ngOnInit() {
+
+		this.propertyForm = new FormGroup({
+			'PropertyUrl': new FormControl(this.propertyForm.controls['PropertyUrl'], [ Validators.pattern(this.re) ]),
+			'PropertyAssetsUrl': new FormControl(this.propertyForm.controls['PropertyAssetsUrl'], [ Validators.pattern(this.re) ]),
+		});
+	}
 
 	/*
 	private pdfUrlChanged(e) {

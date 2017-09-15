@@ -9,12 +9,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var forms_1 = require("@angular/forms");
+var forms_1 = require('@angular/forms');
 var PropertymarketingComponent = (function () {
     function PropertymarketingComponent() {
-        this.re = /^(http[s]?:\/\/){0,1}(www\.){0,1}[a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,5}[\.]{0,1}/;
+        this.re = new RegExp('^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?', '');
     }
-    PropertymarketingComponent.prototype.ngOnInit = function () { };
+    PropertymarketingComponent.prototype.ngOnInit = function () {
+        this.propertyForm = new forms_1.FormGroup({
+            'PropertyUrl': new forms_1.FormControl(this.propertyForm.controls['PropertyUrl'], [forms_1.Validators.pattern(this.re)]),
+            'PropertyAssetsUrl': new forms_1.FormControl(this.propertyForm.controls['PropertyAssetsUrl'], [forms_1.Validators.pattern(this.re)]),
+        });
+    };
     __decorate([
         core_1.Input('group'), 
         __metadata('design:type', forms_1.FormGroup)
