@@ -33,24 +33,25 @@ var AvailabilityComponent = (function () {
             // CheckIn: new FormControl(moment('09/10/2017 14:23').format('MM/DD/YYYY')),
             // CheckOut: new FormControl(moment('09/10/2017 14:23').add(1, 'day').format('MM/DD/YYYY')),
             EntryType: new forms_1.FormControl({
-                Id: 3,
-                Name: 'Other',
+                Id: 1,
+                Name: 'Internal Booking',
             }),
             Notes: new forms_1.FormControl(null),
-            isAgency: new forms_1.FormControl(null),
-            FirstName: new forms_1.FormControl(null),
-            LastName: new forms_1.FormControl(null),
-            Email: new forms_1.FormControl(null),
-            Phone: new forms_1.FormControl(null),
-            CompanyName: new forms_1.FormControl(null),
-            ContactName: new forms_1.FormControl(null),
-            AgencyEmail: new forms_1.FormControl(null),
-            AgencyPhone: new forms_1.FormControl(null)
+            Reference: new forms_1.FormControl(null, forms_1.Validators.required),
+            ViaAgency: new forms_1.FormControl(null),
+            ClientFirstName: new forms_1.FormControl(null),
+            ClientLastName: new forms_1.FormControl(null),
+            ClientTel: new forms_1.FormControl(null),
+            ClientEmail: new forms_1.FormControl(null),
+            AgencyCompanyName: new forms_1.FormControl(null),
+            AgentName: new forms_1.FormControl(null),
+            AgentTel: new forms_1.FormControl(null),
+            AgentEmail: new forms_1.FormControl(null)
         });
         this.CheckIn = moment().startOf('days');
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
         this.isCalendarView = true;
-        this.UpdateBlock = null;
+        this.UpdateBlock = false;
         this.isAgent = this.loginService.getRoles('Agent');
         console.log(this.isAgent);
         route.params.subscribe(function (params) {
@@ -60,8 +61,8 @@ var AvailabilityComponent = (function () {
             lookupsService.getCalendarEntryTypes().subscribe(function (d) {
                 _this.calendarEntryTypes = d;
             }, function (e) {
-                helpers_1.handlerErrorNotify('Error');
-                console.log('Error calendarEntryTypes', e);
+                helpers_1.handlerErrorNotify('Error ');
+                console.log('Error   calendarEntryTypes', e);
             });
             calendarService.getCalendarByProperty(_this.propertyId).subscribe(function (d) {
                 _this.bookingDays = d;
@@ -157,14 +158,17 @@ var AvailabilityComponent = (function () {
     };
     ;
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
-        if (this.UpdateBlock === null) {
-            this.disabledDates();
-            this.UpdateBlock = true;
-        }
-        else {
-            this.disabledDates();
-            this.UpdateBlock = !this.UpdateBlock;
-        }
+        this.UpdateBlock = !this.UpdateBlock;
+        // if (this.UpdateBlock === null) {
+        //     this.disabledDates();
+        //     this.UpdateBlock = true;
+        // } else {
+        //     this.disabledDates();
+        //     this.UpdateBlock = !this.UpdateBlock;
+        //     // this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
+        //     // this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
+        //     // console.log('toggle ', this.UpdateBlock,this.bookingDays)
+        // }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
         }
@@ -239,13 +243,18 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.toggleCalendarView = function () {
         this.isCalendarView = !this.isCalendarView;
-        if (this.isCalendarView === false && this.UpdateBlock === true) {
-            this.UpdateBlock = false;
-        }
+        // if (this.isCalendarView === false && this.UpdateBlock === true) {
+        //     this.UpdateBlock = false;
+        // }
     };
     AvailabilityComponent.prototype.saveForm = function (formData) {
         var _this = this;
         formData.EntryType = formData.EntryType.Id;
+        if (!this.availabilityForm.valid) {
+            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
+            this.errorForm = true;
+            return false;
+        }
         if (formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(function (d) {
                 _.replace(_this.bookingDays, { Id: formData.Id }, d);
@@ -275,15 +284,16 @@ var AvailabilityComponent = (function () {
                 CheckOut: new forms_1.FormControl(moment(d.CheckOut).format('MM/DD/YYYY')),
                 EntryType: new forms_1.FormControl(d.EntryType),
                 Notes: new forms_1.FormControl(d.Notes),
-                isAgency: new forms_1.FormControl(null),
-                FirstName: new forms_1.FormControl(null),
-                LastName: new forms_1.FormControl(null),
-                Email: new forms_1.FormControl(null),
-                Phone: new forms_1.FormControl(null),
-                CompanyName: new forms_1.FormControl(null),
-                ContactName: new forms_1.FormControl(null),
-                AgencyEmail: new forms_1.FormControl(null),
-                AgencyPhone: new forms_1.FormControl(null)
+                Reference: new forms_1.FormControl(null),
+                ViaAgency: new forms_1.FormControl(null),
+                ClientFirstName: new forms_1.FormControl(null),
+                ClientLastName: new forms_1.FormControl(null),
+                ClientTel: new forms_1.FormControl(null),
+                ClientEmail: new forms_1.FormControl(null),
+                AgencyCompanyName: new forms_1.FormControl(null),
+                AgentName: new forms_1.FormControl(null),
+                AgentTel: new forms_1.FormControl(null),
+                AgentEmail: new forms_1.FormControl(null)
             });
             _this.isCalendarView = true;
             if (_this.UpdateBlock === null) {
