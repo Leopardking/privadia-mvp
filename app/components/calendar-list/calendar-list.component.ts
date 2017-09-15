@@ -24,9 +24,9 @@ export class CalendarListComponent implements OnInit{
     constructor( ) { }
 
 	ngOnInit() {
-        this.availabilityForm.valueChanges.subscribe(data => {
-            console.log('sdfgsdg')
-        });
+        // this.availabilityForm.valueChanges.subscribe(data => {
+        //     console.log('sdfgsdg')
+        // });
     }
 
     private finishReading() {

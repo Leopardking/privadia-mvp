@@ -53,7 +53,7 @@ var CalendarService = (function () {
     CalendarService.prototype.deleteAvailability = function (id) {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
-        return this.http.delete(this.apiUrl + "/api/Calendar/111" + id, options)
+        return this.http.delete(this.apiUrl + "/api/Calendar/" + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };

@@ -17,9 +17,9 @@ var CalendarListComponent = (function () {
         this.datatableInited = false;
     }
     CalendarListComponent.prototype.ngOnInit = function () {
-        this.availabilityForm.valueChanges.subscribe(function (data) {
-            console.log('sdfgsdg');
-        });
+        // this.availabilityForm.valueChanges.subscribe(data => {
+        //     console.log('sdfgsdg')
+        // });
     };
     CalendarListComponent.prototype.finishReading = function () {
         var DataTable = $('#datatables');

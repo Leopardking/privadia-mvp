@@ -60,7 +60,7 @@ export class CalendarService {
 		let header = new Headers( {'Authorization': this.token} );
 		let options = new RequestOptions( {headers: header} );
 
-		return this.http.delete(`${this.apiUrl}/api/Calendar/111${id}`, options)
+		return this.http.delete(`${this.apiUrl}/api/Calendar/${id}`, options)
 				.map(this.extractData)
 				.catch(this.handleError);
     }

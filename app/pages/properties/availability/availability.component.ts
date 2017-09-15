@@ -19,7 +19,7 @@ declare const _: any;
     styleUrls: [ 'availability.component.css' ]
 })
 
-export class AvailabilityComponent implements OnInit, AfterContentInit, AfterViewInit, AfterContentChecked, AfterViewChecked {
+export class AvailabilityComponent implements OnInit {
     private availabilityForm = new FormGroup({
         Id: new FormControl(null),
         PropertyId: new FormControl(null),
@@ -112,13 +112,16 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                                 this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('MM/DD/YYYY'));
                                 this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('MM/DD/YYYY'));
                                 this.minDate = tmpEnd.format('MM/DD/YYYY');
-                                this.maxDate = tmpNextDate.value.CheckIn;
+                                //this.maxDate = tmpNextDate.value.CheckIn;
                                 return true;
                             } else {
                                 return false;
                             }
                         }
                     });
+                    setTimeout(() => {
+                        this.bookingDays.push({CheckIn: null, CheckOut: null, EntryType: {Id: 1, Name: 'Internal Booking'}})
+                    }, 3000);
                 },
                 e => {
                     console.log('Error calendar', e);
@@ -131,22 +134,6 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
 
     ngOnInit() {
         // console.log('',this.availabilityForm.value);
-    }
-
-    ngAfterContentInit() {
-        // console.log('Content Init qq', this.availabilityForm.value);
-    }
-
-    ngAfterViewInit() {
-        // console.log('View Init qq', this.availabilityForm.value);
-    }
-
-    ngAfterContentChecked() {
-        // console.log('Content Checked qq', this.availabilityForm.value);
-    }
-
-    ngAfterViewChecked() {
-        // console.log('View Checked qq', this.availabilityForm.value);
     }
 
     handlerUpdateDate(value) {
@@ -192,20 +179,22 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
             }
 
         });
+        // this.bookingDays.push(this.availabilityForm.value);
+        // console.log('Booking New ', this.bookingDays);
     };
 
     toggleUpdateBlock() {
-        this.UpdateBlock = !this.UpdateBlock;
-        // if (this.UpdateBlock === null) {
-        //     this.disabledDates();
-        //     this.UpdateBlock = true;
-        // } else {
-        //     this.disabledDates();
-        //     this.UpdateBlock = !this.UpdateBlock;
-        //     // this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
-        //     // this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
-        //     // console.log('toggle ', this.UpdateBlock,this.bookingDays)
-        // }
+        // this.UpdateBlock = !this.UpdateBlock;
+        if (this.UpdateBlock === null) {
+            this.disabledDates();
+            this.UpdateBlock = true;
+        } else {
+            this.disabledDates();
+            this.UpdateBlock = !this.UpdateBlock;
+            // this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
+            // this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
+            // console.log('toggle ', this.UpdateBlock,this.bookingDays)
+        }
 
 
         if (this.UpdateBlock === true && this.isCalendarView === false) {
@@ -248,8 +237,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
         //     }
         //     // console.log('Booking Days CheckIN ',this.bookingDays);
         // });
-        //
-        //
+
         // this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
         //     // this.availabilityForm.controls['CheckIn'].patchValue(moment(data).add(-1,'day').format('MM/DD/YYYY'));
         //     // const index = _.findIndex(this.bookingDays, (o) => { return o.Id == null });
@@ -286,20 +274,19 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
 
     toggleCalendarView() {
         this.isCalendarView = !this.isCalendarView;
-        // if (this.isCalendarView === false && this.UpdateBlock === true) {
-        //     this.UpdateBlock = false;
-        // }
+        if (this.isCalendarView === false && this.UpdateBlock === true) {
+            this.UpdateBlock = false;
+        }
     }
 
     saveForm(formData) {
-        formData.EntryType = formData.EntryType.Id;
-        if(!this.availabilityForm.valid) {
+        if(formData.EntryType.Id == 1 && !this.availabilityForm.valid) {
             handlerErrorNotify('There were errors with your submission, please see form for details.');
             this.errorForm = true;
             return false;
         }
 
-
+        formData.EntryType = formData.EntryType.Id;
         if(formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(
                 d => {
@@ -369,6 +356,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
         this.bookingDays = _.remove(this.bookingDays, (o) => {
             return o.Id != id;
         });
+
         this.calendarService.deleteAvailability(id).subscribe(
             d => {
                 console.log('Deleted Availability  ', d);
