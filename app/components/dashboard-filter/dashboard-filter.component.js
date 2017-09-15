@@ -33,6 +33,10 @@ var DashboardfilterComponent = (function () {
     };
     DashboardfilterComponent.prototype.onSubmit = function (form) {
         var _this = this;
+        // fixes with dates
+        form.CheckIn = moment(form.CheckIn, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        form.CheckOut = moment(form.CheckOut, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        // ----------------
         this.propertiesService.getVillas(form).subscribe(function (d) {
             _this.dashboardService.villas = d;
             _this.dashboardService.isReading = false;

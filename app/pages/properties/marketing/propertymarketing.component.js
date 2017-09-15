@@ -14,10 +14,6 @@ var PropertymarketingComponent = (function () {
     function PropertymarketingComponent() {
     }
     PropertymarketingComponent.prototype.ngOnInit = function () {
-        // this.propertyForm = new FormGroup({
-        // 	'PropertyUrl': new FormControl(this.propertyForm.controls['PropertyUrl'], [ Validators.pattern(this.re) ]),
-        // 	'PropertyAssetsUrl': new FormControl(this.propertyForm.controls['PropertyAssetsUrl'], [ Validators.pattern(this.re) ]),
-        // });
     };
     __decorate([
         core_1.Input('group'), 

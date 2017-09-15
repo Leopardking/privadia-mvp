@@ -242,6 +242,10 @@ var AvailabilityComponent = (function () {
             this.errorForm = true;
             return false;
         }
+        // fixes with dates
+        formData.CheckIn = moment(formData.CheckIn, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        formData.CheckOut = moment(formData.CheckOut, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        // ----------------
         formData.EntryType = formData.EntryType.Id;
         if (formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(function (d) {

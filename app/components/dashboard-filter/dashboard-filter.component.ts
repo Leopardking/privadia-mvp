@@ -41,6 +41,10 @@ export class DashboardfilterComponent implements OnInit{
     }
 
     public onSubmit(form) {
+        // fixes with dates
+        form.CheckIn = moment(form.CheckIn, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        form.CheckOut = moment(form.CheckOut, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        // ----------------
         this.propertiesService.getVillas(form).subscribe(
             d => {
                 this.dashboardService.villas = d;
