@@ -15,14 +15,16 @@ var properties_service_1 = require('../../../providers/properties/properties.ser
 var calendar_service_1 = require("../../../providers/calendar/calendar.service");
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var helpers_1 = require("../../../helpers/helpers");
+var login_service_1 = require("../../../providers/login/login.service");
 var AvailabilityComponent = (function () {
-    function AvailabilityComponent(route, propertiesService, lookupsService, calendarService, builder) {
+    function AvailabilityComponent(route, propertiesService, lookupsService, calendarService, builder, loginService) {
         var _this = this;
         this.route = route;
         this.propertiesService = propertiesService;
         this.lookupsService = lookupsService;
         this.calendarService = calendarService;
         this.builder = builder;
+        this.loginService = loginService;
         this.availabilityForm = new forms_1.FormGroup({
             Id: new forms_1.FormControl(null),
             PropertyId: new forms_1.FormControl(null),
@@ -49,6 +51,8 @@ var AvailabilityComponent = (function () {
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
         this.isCalendarView = true;
         this.UpdateBlock = null;
+        this.isAgent = this.loginService.getRoles('Agent');
+        console.log(this.isAgent);
         route.params.subscribe(function (params) {
             _this.propertyId = params['id'];
             _this.availabilityForm.controls['PropertyId'].patchValue(_this.propertyId);
@@ -316,7 +320,7 @@ var AvailabilityComponent = (function () {
             templateUrl: 'availability.component.html',
             styleUrls: ['availability.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, properties_service_1.PropertiesService, lookups_service_1.LookupsService, calendar_service_1.CalendarService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, properties_service_1.PropertiesService, lookups_service_1.LookupsService, calendar_service_1.CalendarService, forms_1.FormBuilder, login_service_1.LoginService])
     ], AvailabilityComponent);
     return AvailabilityComponent;
 }());

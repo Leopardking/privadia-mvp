@@ -53,5 +53,5 @@ p, span, a {
 }
 
 .nav li[disabled] > a i, .nav li[disabled] > a p {
-    color: #3a3a3a;
+    color: #999999;
 }

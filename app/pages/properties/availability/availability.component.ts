@@ -6,6 +6,7 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 import { CalendarService } from "../../../providers/calendar/calendar.service";
 import { LookupsService } from "../../../providers/lookups/lookups.service";
 import {handlerErrorNotify} from "../../../helpers/helpers";
+import {LoginService} from "../../../providers/login/login.service";
 
 declare const moment: any;
 declare const $: any;
@@ -57,11 +58,17 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     private maxDate: any;
     private minDate: any;
 
+    private isAgent: boolean;
+
     constructor ( private route: ActivatedRoute,
                   public propertiesService: PropertiesService,
                   public lookupsService: LookupsService,
                   public calendarService: CalendarService,
-                  private builder: FormBuilder ) {
+                  private builder: FormBuilder,
+                  private loginService: LoginService) {
+
+        this.isAgent = this.loginService.getRoles('Agent');
+        console.log(this.isAgent);
 
         route.params.subscribe(params => {
             this.propertyId = params['id'];
