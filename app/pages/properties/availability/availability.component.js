@@ -82,7 +82,7 @@ var AvailabilityComponent = (function () {
                         if (_this.CheckIn.isBefore(_this.CheckOut) || tmpNextDate.done) {
                             _this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('DD/MM/YYYY'));
                             _this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('DD/MM/YYYY'));
-                            _this.minDate = tmpEnd.format('DD/MM/YYYY');
+                            _this.minDate = tmpEnd;
                             _this.maxDate = tmpNextDate.value.CheckIn;
                             return true;
                         }

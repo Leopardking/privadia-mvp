@@ -110,7 +110,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                             if(this.CheckIn.isBefore(this.CheckOut) || tmpNextDate.done) {
                                 this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('DD/MM/YYYY'));
                                 this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('DD/MM/YYYY'));
-                                this.minDate = tmpEnd.format('DD/MM/YYYY');
+                                this.minDate = tmpEnd;
                                 this.maxDate = tmpNextDate.value.CheckIn;
                                 return true;
                             } else {
