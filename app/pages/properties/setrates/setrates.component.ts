@@ -39,14 +39,16 @@ export class SetratesComponent implements OnInit{
     constructor ( private route: ActivatedRoute,
                   private propertyService: PropertiesService,
                   private builder: FormBuilder ) {
-        console.log('Form init')
+        console.log('Form init');
     }
 
     ngOnInit(){
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
 
         this.route.params.subscribe(params => {
-            this.propertyService.readDataRates(this.propertyId = params['id']);
+            this.propertyId = params['id'];
+            this.propertyService.readDataRates(this.propertyId);
+            this.propertyService.readDataProperty(this.propertyId);
         });
     }
 

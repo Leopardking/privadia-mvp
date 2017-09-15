@@ -37,7 +37,9 @@ var SetratesComponent = (function () {
         var _this = this;
         $('.sidebar .sidebar-wrapper, .main-panel').scrollTop(0);
         this.route.params.subscribe(function (params) {
-            _this.propertyService.readDataRates(_this.propertyId = params['id']);
+            _this.propertyId = params['id'];
+            _this.propertyService.readDataRates(_this.propertyId);
+            _this.propertyService.readDataProperty(_this.propertyId);
         });
     };
     SetratesComponent.prototype.finishReading = function () {
