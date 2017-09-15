@@ -149,8 +149,7 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.setContacts = function (contacts) {
         var _this = this;
         var contactFGs = contacts.map(function (contact) { return _this.builder.group({
-            JobTitle: { value: contact.JobTitle, disabled: _this.permission },
-            PropertyContactType: { value: { Id: 1, Name: 'qwert' }, disabled: _this.permission },
+            ContactType: { value: { Id: contact.ContactType.Id, Name: contact.ContactType.Name }, disabled: _this.permission },
             FirstName: { value: contact.FirstName, disabled: _this.permission },
             LastName: { value: contact.LastName, disabled: _this.permission },
             EmailAddress: { value: contact.EmailAddress, disabled: _this.permission },
@@ -220,6 +219,7 @@ var EditpropertyComponent = (function () {
             return newArr = _.concat(newArr, el);
         });
         form.MetaData = newArr;
+        form.OwnerUser = null;
         console.log('save ', this.propertyForm);
         if (!this.propertyForm.valid) {
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');

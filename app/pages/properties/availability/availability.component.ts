@@ -28,19 +28,20 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
         // CheckIn: new FormControl(moment('09/10/2017 14:23').format('MM/DD/YYYY')),
         // CheckOut: new FormControl(moment('09/10/2017 14:23').add(1, 'day').format('MM/DD/YYYY')),
         EntryType: new FormControl({
-            Id: 3,
-            Name: 'Other',
+            Id: 1,
+            Name: 'Internal Booking',
         }),
         Notes: new FormControl(null),
-        isAgency: new FormControl(null),
-        FirstName: new FormControl(null),
-        LastName: new FormControl(null),
-        Email: new FormControl(null),
-        Phone: new FormControl(null),
-        CompanyName: new FormControl(null),
-        ContactName: new FormControl(null),
-        AgencyEmail: new FormControl(null),
-        AgencyPhone: new FormControl(null)
+        Reference: new FormControl(null, Validators.required),
+        ViaAgency: new FormControl(null),
+        ClientFirstName: new FormControl(null),
+        ClientLastName: new FormControl(null),
+        ClientTel: new FormControl(null),
+        ClientEmail: new FormControl(null),
+        AgencyCompanyName: new FormControl(null),
+        AgentName: new FormControl(null),
+        AgentTel: new FormControl(null),
+        AgentEmail: new FormControl(null)
     });
     private CheckIn = moment().startOf('days');
     private CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
@@ -51,7 +52,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     private isCalendarView: boolean = true;
 
 
-    private UpdateBlock: boolean = null;
+    private UpdateBlock: boolean = false;
     private disabledDatesIn: any;
     private disabledDatesOut: any;
 
@@ -59,6 +60,7 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     private minDate: any;
 
     private isAgent: boolean;
+    private errorForm: boolean;
 
     constructor ( private route: ActivatedRoute,
                   public propertiesService: PropertiesService,
@@ -80,8 +82,8 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                     this.calendarEntryTypes = d
                 },
                 e => {
-                    handlerErrorNotify('Error');
-                    console.log('Error calendarEntryTypes', e);
+                    handlerErrorNotify('Error ');
+                    console.log('Error   calendarEntryTypes', e);
                 }
             );
 
@@ -192,16 +194,17 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     };
 
     toggleUpdateBlock() {
-        if (this.UpdateBlock === null) {
-            this.disabledDates();
-            this.UpdateBlock = true;
-        } else {
-            this.disabledDates();
-            this.UpdateBlock = !this.UpdateBlock;
-            // this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
-            // this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
-            // console.log('toggle ', this.UpdateBlock,this.bookingDays)
-        }
+        this.UpdateBlock = !this.UpdateBlock;
+        // if (this.UpdateBlock === null) {
+        //     this.disabledDates();
+        //     this.UpdateBlock = true;
+        // } else {
+        //     this.disabledDates();
+        //     this.UpdateBlock = !this.UpdateBlock;
+        //     // this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
+        //     // this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
+        //     // console.log('toggle ', this.UpdateBlock,this.bookingDays)
+        // }
 
 
         if (this.UpdateBlock === true && this.isCalendarView === false) {
@@ -282,13 +285,19 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
 
     toggleCalendarView() {
         this.isCalendarView = !this.isCalendarView;
-        if (this.isCalendarView === false && this.UpdateBlock === true) {
-            this.UpdateBlock = false;
-        }
+        // if (this.isCalendarView === false && this.UpdateBlock === true) {
+        //     this.UpdateBlock = false;
+        // }
     }
 
     saveForm(formData) {
         formData.EntryType = formData.EntryType.Id;
+        if(!this.availabilityForm.valid) {
+            handlerErrorNotify('There were errors with your submission, please see form for details.');
+            this.errorForm = true;
+            return false;
+        }
+
 
         if(formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(
@@ -325,15 +334,16 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                     CheckOut: new FormControl(moment(d.CheckOut).format('MM/DD/YYYY')),
                     EntryType: new FormControl(d.EntryType),
                     Notes: new FormControl(d.Notes),
-                    isAgency: new FormControl(null),
-                    FirstName: new FormControl(null),
-                    LastName: new FormControl(null),
-                    Email: new FormControl(null),
-                    Phone: new FormControl(null),
-                    CompanyName: new FormControl(null),
-                    ContactName: new FormControl(null),
-                    AgencyEmail: new FormControl(null),
-                    AgencyPhone: new FormControl(null)
+                    Reference: new FormControl(null),
+                    ViaAgency: new FormControl(null),
+                    ClientFirstName: new FormControl(null),
+                    ClientLastName: new FormControl(null),
+                    ClientTel: new FormControl(null),
+                    ClientEmail: new FormControl(null),
+                    AgencyCompanyName: new FormControl(null),
+                    AgentName: new FormControl(null),
+                    AgentTel: new FormControl(null),
+                    AgentEmail: new FormControl(null)
                 });
 
                 this.isCalendarView = true;

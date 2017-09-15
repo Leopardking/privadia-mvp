@@ -234,7 +234,7 @@
                                 <singleselect-field-cmp [dataList]="PropertyContactTypes"
                                                         [errorForm]="errorForm"
                                                         [options]="{title: 'Contact Type', default: 'Nothing selected'}"
-                                                        [field]="control.controls.PropertyContactType"></singleselect-field-cmp>
+                                                        [field]="control.controls.ContactType"></singleselect-field-cmp>
                                 <!--<input type="text" class="form-control" [formControl]="control.controls.JobTitle">-->
                             </div>
                             <div class="form-group label-floating">
@@ -334,24 +334,24 @@
                                              *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
                                             <div *ngIf="control.controls.PropertyRoomType.value == 1">
                                                 <div class="">
-                                                    <div class="col-xs-12">
+                                                    <div class="col-sm-12 col-md-4 col-lg-4">
                                                         <div class="form-group label-floating">
                                                             <label class="control-label">Bedroom Name</label>
                                                             <input type="text" class="form-control"
                                                                    [formControl]="control.controls.Name">
                                                         </div>
                                                     </div>
-                                                    <div class="col-xs-12">
+                                                    <div class="col-sm-12 col-md-4 col-lg-4">
                                                         <div class="form-group label-floating">
                                                             <label class="control-label">Bedroom Description</label>
-                                                            <textarea class="form-control"
+                                                            <textarea class="form-control min-height-36"
                                                                       [formControl]="control.controls.Description"
                                                                       (keyup)="autosize($event)"
                                                                       (click)="autosize($event)"></textarea>
                                                         </div>
                                                     </div>
                                                     <div *ngIf="loginService.getPermission('Properties/Put')"
-                                                         class="col-xs-12">
+                                                         class="col-sm-12 col-md-4 col-lg-4">
                                                         <button class="btn btn-success btn-icon" type="button"
                                                                 (click)="addBedroom()" *ngIf="false">
                                                             <i class="material-icons">add</i> Add BEDROOM
@@ -393,22 +393,22 @@
                                         <div class="row"
                                              *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
                                             <div *ngIf="control.controls.PropertyRoomType.value == 2">
-                                                <div class="col-xs-12">
+                                                <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Bathroom Name</label>
                                                         <input type="text" class="form-control"
                                                                [formControl]="control.controls.Name">
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12">
+                                                <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Bathroom Description</label>
-                                                        <textarea class="form-control" [formControl]="control.controls.Description"
+                                                        <textarea class="form-control min-height-36" [formControl]="control.controls.Description"
                                                                   (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
                                                     </div>
                                                 </div>
                                                 <div *ngIf="loginService.getPermission('Properties/Put')"
-                                                     class="col-xs-12">
+                                                     class="col-sm-12 col-md-4 col-lg-4">
                                                     <button class="btn btn-success btn-icon" type="button"
                                                             (click)="addBathroom()" *ngIf="false">
                                                         <i class="material-icons">add</i> Add BATHROOM
@@ -446,22 +446,23 @@
                                         <div class="row"
                                              *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
                                             <div *ngIf="control.controls.PropertyRoomType.value == 3">
-                                                <div class="col-xs-12">
+                                                <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Kitchen Name</label>
                                                         <input type="text" class="form-control"
                                                                [formControl]="control.controls.Name">
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-12">
+                                                <div class="col-sm-12 col-md-4 col-lg-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Kitchen Description</label>
-                                                        <textarea class="form-control" [formControl]="control.controls.Description"
-                                                                  (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
+                                                        <textarea class="form-control min-height-36"
+                                                                  [formControl]="control.controls.Description"
+                                                                  (keyup)="autosize($event, 36)" (click)="autosize($event, 36)"></textarea>
                                                     </div>
                                                 </div>
                                                 <div *ngIf="loginService.getPermission('Properties/Put')"
-                                                     class="col-xs-12">
+                                                     class="col-sm-12 col-md-4 col-lg-4">
                                                     <button class="btn btn-success btn-icon" type="button"
                                                             (click)="addKitchen()" *ngIf="false">
                                                         <i class="material-icons">add</i> Add Kitchen

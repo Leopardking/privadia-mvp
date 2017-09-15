@@ -89,14 +89,22 @@
                                 </div>
                                 <div *ngIf="availabilityForm.controls.EntryType.value.Id === 1">
                                     <div class="row">
+                                        <div class="col-xs-12">
+                                            <input-field-cmp
+                                                    [data]="{title: 'Reference', name: 'Reference', type: 'text'}"
+                                                    [errorForm]="errorForm"
+                                                    [field]="availabilityForm.controls.Reference"></input-field-cmp>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col-xs-6">
                                             <div class="radio">
                                                 <label>
                                                     <input
                                                             type="radio"
-                                                            name="isAgency"
-                                                            [formControl]="availabilityForm.controls.isAgency"
-                                                            formControlName="isAgency"
+                                                            name="ViaAgency"
+                                                            [formControl]="availabilityForm.controls.ViaAgency"
+                                                            formControlName="ViaAgency"
                                                             [checked]="true"
                                                             [value]="false"> Direct to client
                                                 </label>
@@ -107,9 +115,9 @@
                                                 <label>
                                                     <input
                                                             type="radio"
-                                                            name="isAgency"
-                                                            [formControl]="availabilityForm.controls.isAgency"
-                                                            formControlName="isAgency"
+                                                            name="ViaAgency"
+                                                            [formControl]="availabilityForm.controls.ViaAgency"
+                                                            formControlName="ViaAgency"
                                                             [value]="true"> Via a 3rd party agency
                                                 </label>
                                             </div>
@@ -120,58 +128,58 @@
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <input-field-cmp
-                                                        [data]="{title: 'First Name', name: 'FirstName', type: 'text'}"
+                                                        [data]="{title: 'First Name', name: 'ClientFirstName', type: 'text'}"
                                                         [errorForm]="errorForm"
-                                                        [field]="availabilityForm.controls.FirstName"></input-field-cmp>
+                                                        [field]="availabilityForm.controls.ClientFirstName"></input-field-cmp>
                                             </div>
                                             <div class="col-xs-6">
                                                 <input-field-cmp
-                                                        [data]="{title: 'Last Name', name: 'LastName', type: 'text'}"
+                                                        [data]="{title: 'Last Name', name: 'ClientLastName', type: 'text'}"
                                                         [errorForm]="errorForm"
-                                                        [field]="availabilityForm.controls.LastName"></input-field-cmp>
+                                                        [field]="availabilityForm.controls.ClientLastName"></input-field-cmp>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <input-field-cmp [data]="{title: 'EMail', name: 'EMail', type: 'text'}"
+                                                <input-field-cmp [data]="{title: 'EMail', name: 'ClientEmail', type: 'text'}"
                                                                  [errorForm]="errorForm"
-                                                                 [field]="availabilityForm.controls.Email"></input-field-cmp>
+                                                                 [field]="availabilityForm.controls.ClientEmail"></input-field-cmp>
                                             </div>
                                             <div class="col-xs-6">
-                                                <input-field-cmp [data]="{title: 'Phone', name: 'Phone', type: 'text'}"
+                                                <input-field-cmp [data]="{title: 'Phone', name: 'ClientTel', type: 'text'}"
                                                                  [errorForm]="errorForm"
-                                                                 [field]="availabilityForm.controls.Phone"></input-field-cmp>
+                                                                 [field]="availabilityForm.controls.ClientTel"></input-field-cmp>
                                             </div>
                                         </div>
                                     </div>
-                                    <div *ngIf="availabilityForm.controls.isAgency.value">
+                                    <div *ngIf="availabilityForm.controls.ViaAgency.value">
                                         <div class="divider-line">Agency Info</div>
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <input-field-cmp
-                                                        [data]="{title: 'Company Name', name: 'CompanyName', type: 'text'}"
+                                                        [data]="{title: 'Company Name', name: 'AgencyCompanyName', type: 'text'}"
                                                         [errorForm]="errorForm"
-                                                        [field]="availabilityForm.controls.CompanyName"></input-field-cmp>
+                                                        [field]="availabilityForm.controls.AgencyCompanyName"></input-field-cmp>
                                             </div>
                                             <div class="col-xs-6">
                                                 <input-field-cmp
-                                                        [data]="{title: 'Contact Name', name: 'ContactName', type: 'text'}"
+                                                        [data]="{title: 'Contact Name', name: 'AgentName', type: 'text'}"
                                                         [errorForm]="errorForm"
-                                                        [field]="availabilityForm.controls.ContactName"></input-field-cmp>
+                                                        [field]="availabilityForm.controls.AgentName"></input-field-cmp>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <input-field-cmp
-                                                        [data]="{title: 'EMail', name: 'AgencyEMail', type: 'text'}"
+                                                        [data]="{title: 'EMail', name: 'AgentEmail', type: 'text'}"
                                                         [errorForm]="errorForm"
-                                                        [field]="availabilityForm.controls.AgencyEmail"></input-field-cmp>
+                                                        [field]="availabilityForm.controls.AgentEmail"></input-field-cmp>
                                             </div>
                                             <div class="col-xs-6">
                                                 <input-field-cmp
-                                                        [data]="{title: 'Phone', name: 'AgencyPhone', type: 'text'}"
+                                                        [data]="{title: 'Phone', name: 'AgentTel', type: 'text'}"
                                                         [errorForm]="errorForm"
-                                                        [field]="availabilityForm.controls.AgencyPhone"></input-field-cmp>
+                                                        [field]="availabilityForm.controls.AgentTel"></input-field-cmp>
                                             </div>
                                         </div>
                                     </div>
