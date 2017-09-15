@@ -260,6 +260,11 @@ var AvailabilityComponent = (function () {
                 _this.UpdateBlock = !_this.UpdateBlock;
             }, function (e) {
                 console.log('Error save availability', e);
+                var errors = [];
+                for (var error in e.ModelState) {
+                    errors.push(e.ModelState[error].join('<br />'));
+                }
+                helpers_1.handlerErrorNotify(errors.join('<br />'));
             });
         }
         else {

@@ -307,6 +307,11 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
                 },
                 e => {
                     console.log('Error save availability', e);
+                    let errors = [];
+                    for(let error in e.ModelState) {
+                        errors.push(e.ModelState[error].join('<br />'));
+                    }
+                    handlerErrorNotify(errors.join('<br />'));
                 }
             );
         } else {
