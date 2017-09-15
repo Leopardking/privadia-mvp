@@ -12,13 +12,12 @@ var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var PropertymarketingComponent = (function () {
     function PropertymarketingComponent() {
-        this.re = new RegExp('^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?', '');
     }
     PropertymarketingComponent.prototype.ngOnInit = function () {
-        this.propertyForm = new forms_1.FormGroup({
-            'PropertyUrl': new forms_1.FormControl(this.propertyForm.controls['PropertyUrl'], [forms_1.Validators.pattern(this.re)]),
-            'PropertyAssetsUrl': new forms_1.FormControl(this.propertyForm.controls['PropertyAssetsUrl'], [forms_1.Validators.pattern(this.re)]),
-        });
+        // this.propertyForm = new FormGroup({
+        // 	'PropertyUrl': new FormControl(this.propertyForm.controls['PropertyUrl'], [ Validators.pattern(this.re) ]),
+        // 	'PropertyAssetsUrl': new FormControl(this.propertyForm.controls['PropertyAssetsUrl'], [ Validators.pattern(this.re) ]),
+        // });
     };
     __decorate([
         core_1.Input('group'), 

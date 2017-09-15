@@ -23,6 +23,7 @@ var EditpropertyComponent = (function () {
         this.loginService = loginService;
         this.route = route;
         this.builder = builder;
+        this.urlPattern = new RegExp('^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?', '');
         this.errorForm = false;
         this.route.params.subscribe(function (params) {
             propertiesService.readDataProperty(_this.propertyId = params['id']);
@@ -85,8 +86,8 @@ var EditpropertyComponent = (function () {
                 Description: { value: _this.propertiesService.property.Description, disabled: _this.permission },
                 OtherInfo: { value: _this.propertiesService.property.OtherInfo, disabled: _this.permission },
                 // CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
-                PropertyUrl: { value: _this.propertiesService.property.PropertyUrl, disabled: _this.permission },
-                PropertyAssetsUrl: { value: _this.propertiesService.property.PropertyAssetsUrl, disabled: _this.permission },
+                PropertyUrl: [{ value: _this.propertiesService.property.PropertyUrl, disabled: _this.permission }, forms_1.Validators.pattern(_this.urlPattern)],
+                PropertyAssetsUrl: [{ value: _this.propertiesService.property.PropertyAssetsUrl, disabled: _this.permission }, forms_1.Validators.pattern(_this.urlPattern)],
                 MinimumStay: [{ value: _this.propertiesService.property.MinimumStay, disabled: _this.permission }, forms_1.Validators.pattern('^[0-9]*$')],
                 Bathrooms: [{ value: _this.propertiesService.property.Bathrooms, disabled: _this.permission }],
                 Bedrooms: [{ value: _this.propertiesService.property.Bedrooms, disabled: _this.permission }],
@@ -143,6 +144,7 @@ var EditpropertyComponent = (function () {
                 selectQuery.selectpicker('refresh');
             }, 1500);
             */
+            console.log('this.propertiesService.property', _this.propertyForm.value);
             localStorage.setItem('title', _this.propertiesService.property.Name);
         }, 3000);
     };

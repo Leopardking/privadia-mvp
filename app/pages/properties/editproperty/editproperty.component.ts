@@ -18,6 +18,7 @@ declare const _:any;
 })
 
 export class EditpropertyComponent implements OnInit {
+    private urlPattern = new RegExp('^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?', '');
     private property;
     private propertyId;
 
@@ -97,8 +98,8 @@ export class EditpropertyComponent implements OnInit {
                 Description: { value: this.propertiesService.property.Description, disabled: this.permission },
                 OtherInfo: { value: this.propertiesService.property.OtherInfo, disabled: this.permission },
                 // CollaboratorInitials: { value: this.propertiesService.property.CollaboratorInitials, disabled: this.permission },
-                PropertyUrl: { value: this.propertiesService.property.PropertyUrl, disabled: this.permission },
-                PropertyAssetsUrl: { value: this.propertiesService.property.PropertyAssetsUrl, disabled: this.permission },
+                PropertyUrl: [{ value: this.propertiesService.property.PropertyUrl, disabled: this.permission }, Validators.pattern(this.urlPattern)],
+                PropertyAssetsUrl: [{ value: this.propertiesService.property.PropertyAssetsUrl, disabled: this.permission }, Validators.pattern(this.urlPattern)],
                 MinimumStay: [{ value: this.propertiesService.property.MinimumStay, disabled: this.permission }, Validators.pattern('^[0-9]*$')],
                 Bathrooms: [{ value: this.propertiesService.property.Bathrooms, disabled: this.permission }],
                 Bedrooms: [{ value: this.propertiesService.property.Bedrooms, disabled: this.permission }],
@@ -157,6 +158,7 @@ export class EditpropertyComponent implements OnInit {
                 selectQuery.selectpicker('refresh');
             }, 1500);
             */
+            console.log('this.propertiesService.property',this.propertyForm.value);
             localStorage.setItem('title', this.propertiesService.property.Name);
         }, 3000);
     }
