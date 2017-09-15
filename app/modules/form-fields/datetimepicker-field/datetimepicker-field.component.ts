@@ -53,6 +53,7 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
     }
 
     updateDateEvent(evt, value) {
+        console.log(value);
         this.field.setValue(value);
         this.updateDate.next(value);
     }

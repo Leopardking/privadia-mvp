@@ -37,6 +37,7 @@ var DatetimefieldComponent = (function () {
         });
     };
     DatetimefieldComponent.prototype.updateDateEvent = function (evt, value) {
+        console.log(value);
         this.field.setValue(value);
         this.updateDate.next(value);
     };
