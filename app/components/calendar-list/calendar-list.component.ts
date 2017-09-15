@@ -23,11 +23,7 @@ export class CalendarListComponent implements OnInit{
 
     constructor( ) { }
 
-	ngOnInit() {
-        this.availabilityForm.valueChanges.subscribe(data => {
-
-        });
-    }
+	ngOnInit() { }
 
     private finishReading() {
         let DataTable: any = $('#datatables');

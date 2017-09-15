@@ -80,10 +80,10 @@ var AvailabilityComponent = (function () {
                         _this.CheckIn = tmpEnd;
                         _this.CheckOut = tmpNextStart;
                         if (_this.CheckIn.isBefore(_this.CheckOut) || tmpNextDate.done) {
-                            _this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('DD/MM/YYYY'));
-                            _this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('DD/MM/YYYY'));
-                            _this.minDate = tmpEnd;
-                            _this.maxDate = tmpNextDate.value.CheckIn;
+                            _this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('MM/DD/YYYY'));
+                            _this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('MM/DD/YYYY'));
+                            _this.minDate = tmpEnd.format('MM/DD/YYYY');
+                            //this.maxDate = tmpNextDate.value.CheckIn;
                             return true;
                         }
                         else {
@@ -91,6 +91,9 @@ var AvailabilityComponent = (function () {
                         }
                     }
                 });
+                setTimeout(function () {
+                    _this.bookingDays.push({ CheckIn: null, CheckOut: null, EntryType: { Id: 1, Name: 'Internal Booking' } });
+                }, 3000);
             }, function (e) {
                 console.log('Error calendar', e);
             });
@@ -100,18 +103,6 @@ var AvailabilityComponent = (function () {
     }
     AvailabilityComponent.prototype.ngOnInit = function () {
         // console.log('',this.availabilityForm.value);
-    };
-    AvailabilityComponent.prototype.ngAfterContentInit = function () {
-        // console.log('Content Init qq', this.availabilityForm.value);
-    };
-    AvailabilityComponent.prototype.ngAfterViewInit = function () {
-        // console.log('View Init qq', this.availabilityForm.value);
-    };
-    AvailabilityComponent.prototype.ngAfterContentChecked = function () {
-        // console.log('Content Checked qq', this.availabilityForm.value);
-    };
-    AvailabilityComponent.prototype.ngAfterViewChecked = function () {
-        // console.log('View Checked qq', this.availabilityForm.value);
     };
     AvailabilityComponent.prototype.handlerUpdateDate = function (value) {
         var _this = this;
@@ -154,20 +145,20 @@ var AvailabilityComponent = (function () {
                 return true;
             }
         });
+        // this.bookingDays.push(this.availabilityForm.value);
+        // console.log('Booking New ', this.bookingDays);
     };
     ;
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
-        this.UpdateBlock = !this.UpdateBlock;
-        // if (this.UpdateBlock === null) {
-        //     this.disabledDates();
-        //     this.UpdateBlock = true;
-        // } else {
-        //     this.disabledDates();
-        //     this.UpdateBlock = !this.UpdateBlock;
-        //     // this.bookingDays[this.bookingDays.length - 1].CheckIn = null;
-        //     // this.bookingDays[this.bookingDays.length - 1].CheckOut = null;
-        //     // console.log('toggle ', this.UpdateBlock,this.bookingDays)
-        // }
+        // this.UpdateBlock = !this.UpdateBlock;
+        if (this.UpdateBlock === null) {
+            this.disabledDates();
+            this.UpdateBlock = true;
+        }
+        else {
+            this.disabledDates();
+            this.UpdateBlock = !this.UpdateBlock;
+        }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
             this.isCalendarView = true;
         }
@@ -207,8 +198,6 @@ var AvailabilityComponent = (function () {
         //     }
         //     // console.log('Booking Days CheckIN ',this.bookingDays);
         // });
-        //
-        //
         // this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
         //     // this.availabilityForm.controls['CheckIn'].patchValue(moment(data).add(-1,'day').format('DD/MM/YYYY'));
         //     // const index = _.findIndex(this.bookingDays, (o) => { return o.Id == null });
@@ -242,18 +231,18 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.toggleCalendarView = function () {
         this.isCalendarView = !this.isCalendarView;
-        // if (this.isCalendarView === false && this.UpdateBlock === true) {
-        //     this.UpdateBlock = false;
-        // }
+        if (this.isCalendarView === false && this.UpdateBlock === true) {
+            this.UpdateBlock = false;
+        }
     };
     AvailabilityComponent.prototype.saveForm = function (formData) {
         var _this = this;
-        formData.EntryType = formData.EntryType.Id;
-        if (!this.availabilityForm.valid) {
+        if (formData.EntryType.Id == 1 && !this.availabilityForm.valid) {
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
             this.errorForm = true;
             return false;
         }
+        formData.EntryType = formData.EntryType.Id;
         if (formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(function (d) {
                 _.replace(_this.bookingDays, { Id: formData.Id }, d);

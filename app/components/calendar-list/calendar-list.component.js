@@ -16,10 +16,7 @@ var CalendarListComponent = (function () {
         this.editAvailability = new core_1.EventEmitter();
         this.datatableInited = false;
     }
-    CalendarListComponent.prototype.ngOnInit = function () {
-        this.availabilityForm.valueChanges.subscribe(function (data) {
-        });
-    };
+    CalendarListComponent.prototype.ngOnInit = function () { };
     CalendarListComponent.prototype.finishReading = function () {
         var DataTable = $('#datatables');
         DataTable.DataTable({
