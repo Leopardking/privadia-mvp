@@ -108,7 +108,10 @@ var SetratesComponent = (function () {
         else {
             this.saveMessage = 'Property Added Successfully';
         }
-        this.propertyService.saveRate(this.rateForm.value).subscribe(function (d) {
+        var form = Object.assign({}, this.rateForm.value);
+        form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        this.propertyService.saveRate(form).subscribe(function (d) {
             $.notify({
                 icon: "notifications",
                 message: _this.saveMessage

@@ -248,6 +248,8 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.saveForm = function (formData) {
         var _this = this;
+        formData.CheckIn = moment(formData.CheckIn, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        formData.CheckOut = moment(formData.CheckOut, 'DD/MM/YYYY').format('MM/DD/YYYY');
         formData.EntryType = formData.EntryType.Id;
         if (!this.availabilityForm.valid) {
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');

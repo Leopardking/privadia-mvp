@@ -19,7 +19,6 @@ if ('undefined' !== typeof module) {
 
              $('.datepicker').datetimepicker({
                 format: 'DD/MM/YYYY',
-                 disabledDates: ['2015-08-25', '2015-08-26'],
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",

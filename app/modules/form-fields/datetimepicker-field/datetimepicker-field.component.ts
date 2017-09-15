@@ -34,7 +34,7 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
         this.dateTime = $(`.${this.idPicker}`);
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
-            disabledDates: this.disabledDates,
+            disabledDates: this.disabledDates || [],
             minDate: this.minDate || false,
             maxDate: this.maxDate || false,
             icons: {

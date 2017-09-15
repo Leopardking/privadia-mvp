@@ -291,6 +291,8 @@ export class AvailabilityComponent implements OnInit, AfterContentInit, AfterVie
     }
 
     saveForm(formData) {
+        formData.CheckIn = moment(formData.CheckIn, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        formData.CheckOut = moment(formData.CheckOut, 'DD/MM/YYYY').format('MM/DD/YYYY');
         formData.EntryType = formData.EntryType.Id;
         if(!this.availabilityForm.valid) {
             handlerErrorNotify('There were errors with your submission, please see form for details.');

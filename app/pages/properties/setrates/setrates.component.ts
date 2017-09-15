@@ -123,7 +123,10 @@ export class SetratesComponent implements OnInit{
         } else {
             this.saveMessage = 'Property Added Successfully'
         }
-        this.propertyService.saveRate(this.rateForm.value).subscribe(
+        let form = Object.assign({}, this.rateForm.value);
+        form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        this.propertyService.saveRate(form).subscribe(
             d => {
                 $.notify({
                     icon: "notifications",
@@ -146,7 +149,7 @@ export class SetratesComponent implements OnInit{
             e => {
                 console.log('Error ', e)
                 handlerErrorFieds(e, this.rateForm);
-                handlerErrorNotify('There were errors with your submission, please see form for details.')
+                handlerErrorNotify('There were errors with your submission, please see form for details.');
             }
         )
 
