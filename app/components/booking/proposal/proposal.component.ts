@@ -52,8 +52,8 @@ export class ProposalComponent implements OnInit{
     private initForm(data) {
 		this.proposalManagerForm = this.builder.group({
 			EnquiryMessageThreadId: new FormControl(this.data.Id),
-			CheckIn: new FormControl({ value: moment(data.CheckIn).format('MM/DD/YYYY'), disabled: true}),
-			CheckOut: new FormControl({ value: moment(data.CheckOut).format('MM/DD/YYYY'), disabled: true}),
+			CheckIn: new FormControl({ value: moment(data.CheckIn).format('DD/MM/YYYY'), disabled: true}),
+			CheckOut: new FormControl({ value: moment(data.CheckOut).format('DD/MM/YYYY'), disabled: true}),
 			CustomerName: new FormControl({ value: data.ClientName, disabled: true}),
 			PropertyName: new FormControl({ value: data.PropertyName, disabled: true}),
 			RentalCost: new FormControl({
