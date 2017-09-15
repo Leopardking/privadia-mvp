@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild, Input} from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import {Component, OnInit, Input} from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
     moduleId: module.id,
@@ -14,10 +14,5 @@ export class PropertymarketingComponent implements OnInit{
 	constructor() { }
 
 	ngOnInit() {
-
-		// this.propertyForm = new FormGroup({
-		// 	'PropertyUrl': new FormControl(this.propertyForm.controls['PropertyUrl'], [ Validators.pattern(this.re) ]),
-		// 	'PropertyAssetsUrl': new FormControl(this.propertyForm.controls['PropertyAssetsUrl'], [ Validators.pattern(this.re) ]),
-		// });
 	}
 }
