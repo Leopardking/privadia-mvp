@@ -48,6 +48,7 @@ var PropertyinfoComponent = (function () {
         var control = this.propertyForm.controls['Contacts'];
         control.push(new forms_1.FormGroup({
             ContactType: new forms_1.FormControl({ value: { Id: 1, Name: null }, disabled: this.permission }),
+            ContactTypeOther: new forms_1.FormControl({ value: null, disabled: this.permission }),
             FirstName: new forms_1.FormControl({ value: null, disabled: this.permission }),
             LastName: new forms_1.FormControl({ value: null, disabled: this.permission }),
             EmailAddress: new forms_1.FormControl({ value: null, disabled: this.permission }, forms_1.Validators.pattern(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)),

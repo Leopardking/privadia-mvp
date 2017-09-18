@@ -156,8 +156,8 @@ export class EditpropertyComponent implements OnInit {
                 selectQuery.selectpicker('destroy');
                 selectQuery.selectpicker('render');
                 selectQuery.selectpicker('refresh');
-            }, 1500);
-            */
+            },  1500);
+             */
             console.log('this.propertiesService.property',this.propertyForm.value);
             localStorage.setItem('title', this.propertiesService.property.Name);
         }, 3000);
@@ -166,6 +166,7 @@ export class EditpropertyComponent implements OnInit {
     setContacts(contacts) {
         const contactFGs = contacts.map(contact => this.builder.group({
                 ContactType: { value: {Id: contact.ContactType.Id, Name: contact.ContactType.Name}, disabled: this.permission },
+                ContactTypeOther: { value: contact.ContactTypeOther, disabled: this.permission },
                 FirstName: { value: contact.FirstName, disabled: this.permission },
                 LastName: { value: contact.LastName, disabled: this.permission },
                 EmailAddress: { value: contact.EmailAddress, disabled: this.permission },

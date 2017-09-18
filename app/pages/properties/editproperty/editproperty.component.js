@@ -142,8 +142,8 @@ var EditpropertyComponent = (function () {
                 selectQuery.selectpicker('destroy');
                 selectQuery.selectpicker('render');
                 selectQuery.selectpicker('refresh');
-            }, 1500);
-            */
+            },  1500);
+             */
             console.log('this.propertiesService.property', _this.propertyForm.value);
             localStorage.setItem('title', _this.propertiesService.property.Name);
         }, 3000);
@@ -152,6 +152,7 @@ var EditpropertyComponent = (function () {
         var _this = this;
         var contactFGs = contacts.map(function (contact) { return _this.builder.group({
             ContactType: { value: { Id: contact.ContactType.Id, Name: contact.ContactType.Name }, disabled: _this.permission },
+            ContactTypeOther: { value: contact.ContactTypeOther, disabled: _this.permission },
             FirstName: { value: contact.FirstName, disabled: _this.permission },
             LastName: { value: contact.LastName, disabled: _this.permission },
             EmailAddress: { value: contact.EmailAddress, disabled: _this.permission },
