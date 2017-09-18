@@ -23,31 +23,27 @@ export class CalendarComponent implements OnInit {
 	private weeks;
 	private startCalendar;
 
-	constructor( ) {
-	}
+	constructor( ) { }
 
 	ngOnInit() {
-		this.months = [];
+		this._buildCalendar();
 
-        this.selected = moment().startOf('day');
-        this.startCalendar = this.selected.month(this.selected.month()).clone();
+		this.availabilityForm.valueChanges.subscribe(data => {
+			this._buildCalendar();
+
+			this.bookingDays[this.bookingDays.length - 1] = this.availabilityForm.value;
+		});
+	}
+
+	private _buildCalendar() {
+		this.months = [];
+		this.selected = moment().startOf('day');
+		this.startCalendar = this.selected.month(this.selected.month()).clone();
 		for(let i = 0; i < 1; i++) {
 			let start = this.startCalendar.clone();
 			this._buildMonth(start.date(1).day(0), this.startCalendar);
 			this.startCalendar.add(1, 'month');
 		}
-
-		this.availabilityForm.valueChanges.subscribe(data => {
-			this.months = [];
-            this.selected = moment().startOf('day');
-            this.startCalendar = this.selected.month(this.selected.month()).clone();
-    			for(let i = 0; i < 1; i++) {
-                let start = this.startCalendar.clone();
-                this._buildMonth(start.date(1).day(0), this.startCalendar);
-                this.startCalendar.add(1, 'month');
-			};
-			this.bookingDays[this.bookingDays.length - 1] = this.availabilityForm.value;
-		});
 	}
 
 	private _buildMonth(start, month) {

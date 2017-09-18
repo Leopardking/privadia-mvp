@@ -15,7 +15,7 @@ declare const _: any;
 export class CalendarListComponent implements OnInit{
     @Input('group') private availabilityForm: FormGroup;
     @Input('errorForm') public errorForm: any;
-    @Input('bookingDays') public bookingDays: any;
+    @Input('bookingDays') private bookingDays: any;
     @Output('deleteAvailability') deleteAvailability: EventEmitter<any> = new EventEmitter();
     @Output('editAvailability') editAvailability: EventEmitter<any> = new EventEmitter();
 
@@ -23,7 +23,11 @@ export class CalendarListComponent implements OnInit{
 
     constructor( ) { }
 
-	ngOnInit() { }
+	ngOnInit() {
+        _.remove(this.bookingDays, (o) => {
+            return !o.Id
+        })
+    }
 
     private finishReading() {
         let DataTable: any = $('#datatables');

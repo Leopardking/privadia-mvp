@@ -15,6 +15,13 @@ var CalendarComponent = (function () {
     }
     CalendarComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this._buildCalendar();
+        this.availabilityForm.valueChanges.subscribe(function (data) {
+            _this._buildCalendar();
+            _this.bookingDays[_this.bookingDays.length - 1] = _this.availabilityForm.value;
+        });
+    };
+    CalendarComponent.prototype._buildCalendar = function () {
         this.months = [];
         this.selected = moment().startOf('day');
         this.startCalendar = this.selected.month(this.selected.month()).clone();
@@ -23,18 +30,6 @@ var CalendarComponent = (function () {
             this._buildMonth(start.date(1).day(0), this.startCalendar);
             this.startCalendar.add(1, 'month');
         }
-        this.availabilityForm.valueChanges.subscribe(function (data) {
-            _this.months = [];
-            _this.selected = moment().startOf('day');
-            _this.startCalendar = _this.selected.month(_this.selected.month()).clone();
-            for (var i = 0; i < 1; i++) {
-                var start = _this.startCalendar.clone();
-                _this._buildMonth(start.date(1).day(0), _this.startCalendar);
-                _this.startCalendar.add(1, 'month');
-            }
-            ;
-            _this.bookingDays[_this.bookingDays.length - 1] = _this.availabilityForm.value;
-        });
     };
     CalendarComponent.prototype._buildMonth = function (start, month) {
         this.weeks = [];
