@@ -183,6 +183,7 @@ export class AvailabilityComponent implements OnInit {
     };
 
     toggleUpdateBlock() {
+        console.log('toggleUpdateBlock',);
         // this.UpdateBlock = !this.UpdateBlock;
         if (this.UpdateBlock === null) {
             this.disabledDates();
@@ -254,6 +255,7 @@ export class AvailabilityComponent implements OnInit {
     }
 
     private disabledDates() {
+        console.log('toggleUpdateBlock',);
         this.disabledDatesIn = [];
         this.disabledDatesOut = [];
         this.bookingDays.forEach((booking) => {
@@ -272,6 +274,7 @@ export class AvailabilityComponent implements OnInit {
 
 
     toggleCalendarView() {
+        console.log('toggleUpdateBlock',);
         this.isCalendarView = !this.isCalendarView;
         if (this.isCalendarView === false && this.UpdateBlock === true) {
             this.UpdateBlock = false;
@@ -279,6 +282,7 @@ export class AvailabilityComponent implements OnInit {
     }
 
     saveForm(formData) {
+        console.log('toggleUpdateBlock',);
         if(formData.EntryType.Id == 1 && !this.availabilityForm.valid) {
             handlerErrorNotify('There were errors with your submission, please see form for details.');
             this.errorForm = true;
@@ -319,6 +323,7 @@ export class AvailabilityComponent implements OnInit {
     }
 
     handlerEditAvailability(id) {
+        console.log('toggleUpdateBlock',);
         this.calendarService.getCalendar(id).subscribe(
             d => {
                 this.disabledDates();
@@ -360,6 +365,7 @@ export class AvailabilityComponent implements OnInit {
     }
 
     handlerDeleteAvailability(id) {
+        console.log('toggleUpdateBlock',);
         this.bookingDays = _.remove(this.bookingDays, (o) => {
             return o.Id != id;
         });

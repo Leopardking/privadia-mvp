@@ -150,6 +150,7 @@ var AvailabilityComponent = (function () {
     };
     ;
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
+        console.log('toggleUpdateBlock');
         // this.UpdateBlock = !this.UpdateBlock;
         if (this.UpdateBlock === null) {
             this.disabledDates();
@@ -215,6 +216,7 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.disabledDates = function () {
         var _this = this;
+        console.log('toggleUpdateBlock');
         this.disabledDatesIn = [];
         this.disabledDatesOut = [];
         this.bookingDays.forEach(function (booking) {
@@ -230,6 +232,7 @@ var AvailabilityComponent = (function () {
         });
     };
     AvailabilityComponent.prototype.toggleCalendarView = function () {
+        console.log('toggleUpdateBlock');
         this.isCalendarView = !this.isCalendarView;
         if (this.isCalendarView === false && this.UpdateBlock === true) {
             this.UpdateBlock = false;
@@ -237,6 +240,7 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.saveForm = function (formData) {
         var _this = this;
+        console.log('toggleUpdateBlock');
         if (formData.EntryType.Id == 1 && !this.availabilityForm.valid) {
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
             this.errorForm = true;
@@ -272,6 +276,7 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.handlerEditAvailability = function (id) {
         var _this = this;
+        console.log('toggleUpdateBlock');
         this.calendarService.getCalendar(id).subscribe(function (d) {
             _this.disabledDates();
             _this.availabilityForm = new forms_1.FormGroup({
@@ -308,6 +313,7 @@ var AvailabilityComponent = (function () {
         });
     };
     AvailabilityComponent.prototype.handlerDeleteAvailability = function (id) {
+        console.log('toggleUpdateBlock');
         this.bookingDays = _.remove(this.bookingDays, function (o) {
             return o.Id != id;
         });

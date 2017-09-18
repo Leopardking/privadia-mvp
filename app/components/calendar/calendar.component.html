@@ -9,7 +9,7 @@
                     </a>
                 </div>
                 <div class="months-container">
-                    <div class="month-container" *ngFor="let month of fullCalendar">
+                    <div class="month-container" *ngFor="let month of months">
                         <div class="month">
                             <span class="month-label">{{month.monthName}}</span><br/><br/>
                              <table>
@@ -27,19 +27,13 @@
                                 <tbody>
                                 <tr class="week" *ngFor="let week of month.weeks">
                                     <td *ngFor="let day of week.days"
-                                        [ngClass]="{'day': true }">
+                                        [ngClass]="{'day': true, 'different-month': !day.isCurrentMonth }">
                                         <div class="cell">
-                                            <div *ngIf="isBetweens(day).isStart" class="period start {{isBetweens(day).typeStart}}"></div>
-                                            <div *ngIf="isBetweens(day).isEnd" class="period end {{isBetweens(day).typeEnd}}"></div>
-                                            <div *ngIf="!isBetweens(day).isStart && !isBetweens(day).isEnd" class="period {{isBetweens(day).type}}"></div>
-                                            <!--<div *ngIf="day.dayType.isEnd" class="period end {{day.dayType.typeEnd}}"></div>-->
-                                            <!--<div *ngIf="!day.dayType.isStart && !day.dayType.isEnd" class="period {{day.dayType.type}}"></div>-->
-
-                                            <!--<div *ngIf="day.dayType.isStart" class="period start {{day.dayType.typeStart}}"></div>-->
-                                            <!--<div *ngIf="day.dayType.isEnd" class="period end {{day.dayType.typeEnd}}"></div>-->
-                                            <!--<div *ngIf="!day.dayType.isStart && !day.dayType.isEnd" class="period {{day.dayType.type}}"></div>-->
-                                            <div class="date" *ngIf="day.format('MMMM') == month.monthName">
-                                                <span>{{day.format('D')}}</span>
+                                            <div *ngIf="day.dayType.isStart" class="period start {{day.dayType.typeStart}}"></div>
+                                            <div *ngIf="day.dayType.isEnd" class="period end {{day.dayType.typeEnd}}"></div>
+                                            <div *ngIf="!day.dayType.isStart && !day.dayType.isEnd" class="period {{day.dayType.type}}"></div>
+                                            <div class="date">
+                                                <span>{{day.number}} </span>
                                             </div>
                                         </div>
                                     </td>
