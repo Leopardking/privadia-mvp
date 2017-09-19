@@ -31,10 +31,12 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
     ngOnInit( ) { }
 
     ngAfterContentChecked() {
+        // console.log('picker ', this.minDate, this.maxDate);
         this.dateTime = $(`.${this.idPicker}`);
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
-            disabledDates: this.disabledDates || [],
+            // disabledDates: ["09/13/2017"],
+            disabledDates: this.disabledDates,
             minDate: this.minDate || false,
             maxDate: this.maxDate || false,
             icons: {
