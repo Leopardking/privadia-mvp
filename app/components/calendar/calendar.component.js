@@ -16,7 +16,11 @@ var CalendarComponent = (function () {
     CalendarComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._buildCalendar();
-        this.availabilityForm.valueChanges.subscribe(function (data) {
+        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(function (data) {
+            _this._buildCalendar();
+            _this.bookingDays[_this.bookingDays.length - 1] = _this.availabilityForm.value;
+        });
+        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(function (data) {
             _this._buildCalendar();
             _this.bookingDays[_this.bookingDays.length - 1] = _this.availabilityForm.value;
         });

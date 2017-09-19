@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import { CalendarService } from "../../../providers/calendar/calendar.service";
 import { LookupsService } from "../../../providers/lookups/lookups.service";
-import {handlerErrorNotify} from "../../../helpers/helpers";
+import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
 import {LoginService} from "../../../providers/login/login.service";
 
 declare const moment: any;
@@ -166,9 +166,9 @@ export class AvailabilityComponent implements OnInit {
                     this.minDate = tmpEnd.format('DD/MM/YYYY');
                     this.maxDate = tmpNextStart.format('DD/MM/YYYY');
                     console.log('date ',this.minDate);
-                    $('.checkOut').data("DateTimePicker")
-                                  .minDate(this.minDate)
-                                  .maxDate(this.maxDate);
+                    // $('.checkOut').data("DateTimePicker")
+                    //               .minDate(this.minDate)
+                    //               .maxDate(this.maxDate);
                     return true;
                 } else {
                     return false;
@@ -176,9 +176,9 @@ export class AvailabilityComponent implements OnInit {
             } else if(this.CheckOut.isBefore(tmpNextStart)) {
                 console.log('Is Before',);
                 this.availabilityForm.controls['CheckOut'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
-                $('.checkOut').data("DateTimePicker")
-                              .minDate(this.CheckIn.format('MM/DD/YYYY'))
-                              .maxDate(tmpNextStart.format('MM/DD/YYYY'));
+                // $('.checkOut').data("DateTimePicker")
+                //               .minDate(this.CheckIn.format('MM/DD/YYYY'))
+                //               .maxDate(tmpNextStart.format('MM/DD/YYYY'));
                 return true;
             } else {
                 console.log('Else',);
@@ -313,12 +313,13 @@ export class AvailabilityComponent implements OnInit {
                     this.UpdateBlock = !this.UpdateBlock;
                 },
                 e => {
-                    console.log('Error save availability', e);
-                    let errors = [];
-                    for(let error in e.ModelState) {
-                        errors.push(e.ModelState[error].join('<br />'));
-                    }
-                    handlerErrorNotify(errors.join('<br />'));
+                    // console.log('Error save availability', e);
+                    // let errors = [];
+                    // for(let error in e.ModelState) {
+                    //     errors.push(e.ModelState[error].join('<br />'));
+                    // }
+                    // handlerErrorNotify(errors.join('<br />'));
+                    handlerErrorFieds(e, this.availabilityForm);
                 }
             );
         } else {
@@ -328,6 +329,7 @@ export class AvailabilityComponent implements OnInit {
                     this.UpdateBlock = !this.UpdateBlock;
                 },
                 e => {
+                    handlerErrorFieds(e, this.availabilityForm);
                     console.log('Error save availability', e);
                 }
             );

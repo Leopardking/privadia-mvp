@@ -190,8 +190,8 @@
                                             <span class="input-group-addon"><i class="material-icons">assignment</i></span>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Notes</label>
-                                                <textarea [formControl]="availabilityForm.controls.Notes"
-                                                          class="form-control"
+                                                <textarea class="form-control"
+                                                          [formControl]="availabilityForm.controls.Notes"
                                                           (keyup)="autosize($event)"
                                                           (click)="autosize($event)"
                                                 ></textarea>

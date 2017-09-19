@@ -28,9 +28,13 @@ export class CalendarComponent implements OnInit {
 	ngOnInit() {
 		this._buildCalendar();
 
-		this.availabilityForm.valueChanges.subscribe(data => {
+		this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(data => {
 			this._buildCalendar();
+			this.bookingDays[this.bookingDays.length - 1] = this.availabilityForm.value;
+		});
 
+		this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
+			this._buildCalendar();
 			this.bookingDays[this.bookingDays.length - 1] = this.availabilityForm.value;
 		});
 	}
