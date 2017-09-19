@@ -56,7 +56,7 @@
                                     *ngFor="let metafilter of metafilters"
                                     [ngClass]="{ hidden: metafilter.Name == 'Local Activities' || metafilter.Name == 'Points of Interest' }">
                                     <div class="form-group label-floating">
-                                        <label class="control-label">{{ metafilter.Name == 'Suitable For' ? '' : metafilter.Name }}</label>
+                                        <label class="control-label">{{ metafilter.Name == 'Trip' ? 'Suitable For' : metafilter.Name }}</label>
                                         <a class="form-control-static" data-toggle="tab" [href]="'#metafilter-' + metafilter.Id">
                                             Select
                                             <span class="bs-caret"><span class="caret"></span></span>
