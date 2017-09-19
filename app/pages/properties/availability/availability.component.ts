@@ -313,12 +313,6 @@ export class AvailabilityComponent implements OnInit {
                     this.UpdateBlock = !this.UpdateBlock;
                 },
                 e => {
-                    // console.log('Error save availability', e);
-                    // let errors = [];
-                    // for(let error in e.ModelState) {
-                    //     errors.push(e.ModelState[error].join('<br />'));
-                    // }
-                    // handlerErrorNotify(errors.join('<br />'));
                     handlerErrorFieds(e, this.availabilityForm);
                 }
             );
@@ -330,6 +324,7 @@ export class AvailabilityComponent implements OnInit {
                 },
                 e => {
                     handlerErrorFieds(e, this.availabilityForm);
+                    handlerErrorNotify(`Error Message: ${e.Message}`);
                     console.log('Error save availability', e);
                 }
             );

@@ -270,12 +270,6 @@ var AvailabilityComponent = (function () {
                 _.replace(_this.bookingDays, { Id: formData.Id }, d);
                 _this.UpdateBlock = !_this.UpdateBlock;
             }, function (e) {
-                // console.log('Error save availability', e);
-                // let errors = [];
-                // for(let error in e.ModelState) {
-                //     errors.push(e.ModelState[error].join('<br />'));
-                // }
-                // handlerErrorNotify(errors.join('<br />'));
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
             });
         }
@@ -285,6 +279,7 @@ var AvailabilityComponent = (function () {
                 _this.UpdateBlock = !_this.UpdateBlock;
             }, function (e) {
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
+                helpers_1.handlerErrorNotify("Error Message: " + e.Message);
                 console.log('Error save availability', e);
             });
         }
