@@ -48,7 +48,7 @@ var AvailabilityComponent = (function () {
             AgentTel: new forms_1.FormControl(null),
             AgentEmail: new forms_1.FormControl(null)
         });
-        this.CheckIn = moment('13/09/2017', 'DD/MM/YYYY').startOf('days');
+        this.CheckIn = moment().startOf('days');
         this.CheckOut = moment(this.CheckIn, 'DD/MM/YYYY').add(1, 'day').startOf('days');
         this.isCalendarView = true;
         this.UpdateBlock = false;
@@ -107,7 +107,7 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.handlerUpdateDate = function (value) {
         var _this = this;
-        console.log('Update date', value);
+        console.log('Update date TEST', value);
         this.CheckIn = moment(value, 'DD/MM/YYYY').startOf('days');
         this.CheckOut = this.CheckIn.add(1, 'day');
         // $('.checkOut').data("DateTimePicker")

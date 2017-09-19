@@ -39,7 +39,7 @@ export class CalendarComponent implements OnInit {
 		this.months = [];
 		this.selected = moment().startOf('day');
 		this.startCalendar = this.selected.month(this.selected.month()).clone();
-		for(let i = 0; i < 1; i++) {
+		for(let i = 0; i < 6; i++) {
 			let start = this.startCalendar.clone();
 			this._buildMonth(start.date(1).day(0), this.startCalendar);
 			this.startCalendar.add(1, 'month');

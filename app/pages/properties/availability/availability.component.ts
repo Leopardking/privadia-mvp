@@ -43,7 +43,7 @@ export class AvailabilityComponent implements OnInit {
         AgentTel: new FormControl(null),
         AgentEmail: new FormControl(null)
     });
-    private CheckIn = moment('13/09/2017', 'DD/MM/YYYY').startOf('days');
+    private CheckIn = moment().startOf('days');
     private CheckOut = moment(this.CheckIn, 'DD/MM/YYYY').add(1, 'day').startOf('days');
     private propertyId: any;
 
@@ -136,7 +136,7 @@ export class AvailabilityComponent implements OnInit {
     }
 
     handlerUpdateDate(value) {
-        console.log('Update date', value);
+        console.log('Update date TEST', value);
         this.CheckIn = moment(value, 'DD/MM/YYYY').startOf('days');
         this.CheckOut = this.CheckIn.add(1, 'day');
         // $('.checkOut').data("DateTimePicker")

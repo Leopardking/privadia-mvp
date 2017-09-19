@@ -25,7 +25,7 @@ var CalendarComponent = (function () {
         this.months = [];
         this.selected = moment().startOf('day');
         this.startCalendar = this.selected.month(this.selected.month()).clone();
-        for (var i = 0; i < 1; i++) {
+        for (var i = 0; i < 6; i++) {
             var start = this.startCalendar.clone();
             this._buildMonth(start.date(1).day(0), this.startCalendar);
             this.startCalendar.add(1, 'month');
