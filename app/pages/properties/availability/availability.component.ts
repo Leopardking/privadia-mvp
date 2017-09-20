@@ -44,8 +44,6 @@ export class AvailabilityComponent implements OnInit {
         AgentEmail: new FormControl(null)
     });
 
-    private CheckIn  = moment('04/12/2017', 'DD/MM/YYYY').startOf('days');
-    private CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
     private propertyId: any;
 
     private calendarEntryTypes: Array<{ Id: number, Name: string }>;
@@ -58,8 +56,8 @@ export class AvailabilityComponent implements OnInit {
     private disabledDatesIn: any;
     private disabledDatesOut: any;
 
-    private maxDate: any;
-    private minDate: any;
+    public maxDate: any;
+    public minDate: any;
 
     private isAgent: boolean;
     private errorForm: boolean;
@@ -93,40 +91,9 @@ export class AvailabilityComponent implements OnInit {
                 d => {
                     this.bookingDays = d;
                     this.bookingDaysClear = d;
-                    // const nextDate = _(d);
-                    // nextDate.next();
-                    //
-                    // this.bookingDays.some((booking, index) => {
-                    //     const tmpNextDate = nextDate.next();
-                    //
-                    //     const tmpStart = moment(booking.CheckIn, 'DD/MM/YYYY').startOf('days');
-                    //     const tmpEnd   = moment(booking.CheckOut, 'DD/MM/YYYY').startOf('days');
-                    //
-                    //     const tmpNextStart = moment(!tmpNextDate.done && tmpNextDate.value.CheckIn, 'DD/MM/YYYY').startOf('days');
-                    //     // const tmpNextEnd   = moment(!tmpNextDate.done && tmpNextDate.value.CheckOut).startOf('days');
-                    //
-                    //     if(index === 0 && this.CheckOut.isSameOrBefore(tmpStart)) {
-                    //         return true;
-                    //     } else if(this.CheckIn.isBetween(tmpStart, tmpEnd, null, '[)')) {
-                    //         this.CheckIn = tmpEnd;
-                    //         this.CheckOut = tmpNextStart;
-                    //         if(this.CheckIn.isBefore(this.CheckOut) || tmpNextDate.done) {
-                    //             this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('DD/MM/YYYY'));
-                    //             this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('DD/MM/YYYY'));
-                    //             this.minDate = tmpEnd.format('MM/DD/YYYY');
-                    //             //this.maxDate = tmpNextDate.value.CheckIn;
-                    //             return true;
-                    //         } else {
-                    //             return false;
-                    //         }
-                    //     }
-                    // });
-                    setTimeout(() => {
-                        this.bookingDays.push({CheckIn: null, CheckOut: null, EntryType: {Id: 1, Name: 'Internal Booking'}})
-                    }, 2000);
                 },
                 e => {
-                    console.log('Error calendar', e);
+                    console.log('Error calendar ', e);
                 }
             );
         });
@@ -136,17 +103,19 @@ export class AvailabilityComponent implements OnInit {
         // console.log('',this.availabilityForm.value);
     }
 
-    handlerUpdateDate(value) {
-        // console.log('Update date TEST', value);
-        // console.log('Booking New In 1', this.CheckIn.format('DD/MM/YYYY'));
-        // console.log('Booking New OUt 1', this.CheckOut.format('DD/MM/YYYY'));
+    private CheckIn  = moment().startOf('days');
+    private CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
+
+    public handlerUpdateDate(value) {
         this.CheckIn = moment(value, 'DD/MM/YYYY').startOf('days');
         this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
-        // console.log('Booking New In 2', this.CheckIn.format('DD/MM/YYYY'));
-        // console.log('Booking New OUt 2', this.CheckOut.format('DD/MM/YYYY'));
-        // $('.checkOut').data("DateTimePicker")
-        //               .minDate(false)
-        //               .maxDate(false);
+        this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
+        this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+
+        setTimeout(() => {
+            $('.checkIn').data("DateTimePicker")
+                .minDate(moment().format('DD/MM/YYYY'));
+        },1000);
 
         const nextDate = _(this.bookingDays);
         nextDate.next();
@@ -160,47 +129,51 @@ export class AvailabilityComponent implements OnInit {
             const tmpNextStart = moment(!tmpNextDate.done && tmpNextDate.value.CheckIn).startOf('days');
             const tmpNextEnd   = moment(!tmpNextDate.done && tmpNextDate.value.CheckOut).startOf('days');
 
-            console.log('Update', tmpNextStart.format("DD/MM/YYYY"));
             if(index === 0 && this.CheckOut.isSameOrBefore(tmpStart)) {
-                console.log('Is Same Or Before',);
+                setTimeout(() => {
+                    $('.checkOut').data("DateTimePicker")
+                        .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
+                        .maxDate(tmpStart.format('DD/MM/YYYY'));
+                },1000);
+
                 return true;
-            } else if(this.CheckOut.isBetween(tmpStart, tmpEnd, null, '[)')) {
-                this.availabilityForm.controls['CheckIn'].patchValue(tmpEnd.format('DD/MM/YYYY'));
-                this.availabilityForm.controls['CheckOut'].patchValue(tmpEnd.add(1, 'day').format('DD/MM/YYYY'));
-                console.log('Is Between',);
-                // if(this.CheckOut.isSameOrBefore(tmpNextStart) || tmpNextDate.done) {
-                //     this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
-                //     // this.minDate = tmpEnd.format('DD/MM/YYYY');
-                //     // this.maxDate = tmpNextStart.format('DD/MM/YYYY');
-                //     // console.log('date ',this.minDate);
-                //     // $('.checkOut').data("DateTimePicker")
-                //     //               .minDate(this.minDate)
-                //     //               .maxDate(this.maxDate);
-                //     return true;
-                // } else {
-                //     return false;
-                // }
-            } else if(this.CheckOut.isBefore(tmpNextStart)) {
-                console.log('Is Before',);
-                // this.availabilityForm.controls['CheckOut'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
-                // $('.checkOut').data("DateTimePicker")
-                //               .minDate(this.CheckIn.format('MM/DD/YYYY'))
-                //               .maxDate(tmpNextStart.format('MM/DD/YYYY'));
-                return true;
+            } else if(this.CheckOut.isBetween(tmpStart, tmpEnd, null, '(]')) {
+                this.CheckIn = tmpEnd.clone();
+                this.CheckOut = tmpEnd.add(1, 'days').clone();
+                setTimeout(() => {
+                    $('.checkOut').data("DateTimePicker")
+                        .minDate(this.CheckIn.format('DD/MM/YYYY'))
+                        .maxDate(tmpNextStart.format('DD/MM/YYYY'));
+                },1000);
+
+                if(this.CheckOut.isSameOrBefore(tmpNextStart)) {
+                    this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
+                    this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+
+                    return true;
+                } else if(tmpNextDate.done) {
+                    this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
+                    this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+
+                    return true;
+                } else {
+                    return false;
+                }
+            }  else if(this.CheckIn.isSameOrAfter(tmpEnd) && this.CheckOut.isSameOrBefore(tmpNextStart)) {
+                setTimeout(() => {
+                    $('.checkOut').data("DateTimePicker")
+                        .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
+                        .maxDate(tmpNextStart.format('DD/MM/YYYY'));
+                },1000);
+                return false;
             } else {
-                console.log('Else',);
                 return false;
             }
 
         });
-        console.log('Booking New In 3', this.CheckIn.format('DD/MM/YYYY'));
-        console.log('Booking New OUt 3', this.CheckOut.format('DD/MM/YYYY'));
-        // this.bookingDays.push(this.availabilityForm.value);
     };
 
     toggleUpdateBlock() {
-        console.log('Toggle Update Block',);
-
         if (this.UpdateBlock === null) {
             this.disabledDates();
             this.UpdateBlock = true;
@@ -274,7 +247,6 @@ export class AvailabilityComponent implements OnInit {
     }
 
     private disabledDates() {
-        console.log('toggleUpdateBlock',);
         this.disabledDatesIn = [];
         this.disabledDatesOut = [];
         this.bookingDaysClear.forEach((booking) => {

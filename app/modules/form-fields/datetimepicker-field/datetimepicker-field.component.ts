@@ -21,8 +21,8 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
     @Input('linkedField') private linkedField: FormControl;
     @Output('updateDate') updateDate: EventEmitter<any> = new EventEmitter();
 
-    @Input('minDate') private minDate: FormControl;
-    @Input('maxDate') private maxDate: FormControl;
+    @Input('minDate') private minDate: any;
+    @Input('maxDate') private maxDate: any;
 
     public dateTime: any;
 
@@ -31,7 +31,6 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
     ngOnInit( ) { }
 
     ngAfterContentChecked() {
-        // console.log('picker ', this.minDate, this.maxDate);
         this.dateTime = $(`.${this.idPicker}`);
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',

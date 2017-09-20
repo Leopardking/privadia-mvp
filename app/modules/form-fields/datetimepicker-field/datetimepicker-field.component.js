@@ -16,7 +16,6 @@ var DatetimefieldComponent = (function () {
     }
     DatetimefieldComponent.prototype.ngOnInit = function () { };
     DatetimefieldComponent.prototype.ngAfterContentChecked = function () {
-        // console.log('picker ', this.minDate, this.maxDate);
         this.dateTime = $("." + this.idPicker);
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
@@ -73,11 +72,11 @@ var DatetimefieldComponent = (function () {
     ], DatetimefieldComponent.prototype, "updateDate", void 0);
     __decorate([
         core_1.Input('minDate'), 
-        __metadata('design:type', forms_1.FormControl)
+        __metadata('design:type', Object)
     ], DatetimefieldComponent.prototype, "minDate", void 0);
     __decorate([
         core_1.Input('maxDate'), 
-        __metadata('design:type', forms_1.FormControl)
+        __metadata('design:type', Object)
     ], DatetimefieldComponent.prototype, "maxDate", void 0);
     DatetimefieldComponent = __decorate([
         core_1.Component({
