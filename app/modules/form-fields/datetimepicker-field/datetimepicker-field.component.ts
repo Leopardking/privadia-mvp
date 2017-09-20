@@ -1,6 +1,6 @@
 import {Component, OnInit, Input, AfterContentChecked, Output, EventEmitter} from '@angular/core';
 import { FormControl } from "@angular/forms";
-import initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
+// import initDatetimepickers = require("../../../../assets/js/init/initDatetimepickers.js");
 
 declare const $: any;
 declare const moment: any;
@@ -35,6 +35,8 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked {
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
             disabledDates: this.disabledDates,
+            inline: true,
+            sideBySide: true,
             // minDate: this.minDate || false,
             // maxDate: this.maxDate || false,
             icons: {

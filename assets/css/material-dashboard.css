@@ -2009,8 +2009,17 @@ svg {
   background: #eeeeee;
   cursor: pointer;
 }
-.bootstrap-datetimepicker-widget table td.old > div, .bootstrap-datetimepicker-widget table td.new > div {
+.bootstrap-datetimepicker-widget table td.old > div,
+.bootstrap-datetimepicker-widget table td.new > div,
+.bootstrap-datetimepicker-widget table td.old,
+.bootstrap-datetimepicker-widget table td.new {
   color: #999999;
+  height: 0px !important;
+  min-height: 0px !important;
+  overflow: hidden !important;
+  /*background: none !important;*/
+  cursor: not-allowed !important;
+  pointer-events: none !important;
 }
 .bootstrap-datetimepicker-widget table td.today > div {
   position: relative;
