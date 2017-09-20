@@ -83,7 +83,7 @@ var AvailabilityComponent = (function () {
         setTimeout(function () {
             $('.checkIn').data("DateTimePicker")
                 .minDate(moment().format('DD/MM/YYYY'));
-        }, 1000);
+        }, 900);
         var nextDate = _(this.bookingDays);
         nextDate.next();
         this.bookingDaysClear.some(function (booking, index) {

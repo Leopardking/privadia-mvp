@@ -13,9 +13,7 @@ export class ProposalsService {
 	private token: string = localStorage.getItem('id_token');
 
 	constructor ( private http: Http,
-				  private loginService: LoginService ) {
-		console.log('Load Proposals Service');
-	}
+				  private loginService: LoginService ) {}
 
 	public createProposals(data) {
 		if(!this.loginService.getPermission('Proposals/Post'))

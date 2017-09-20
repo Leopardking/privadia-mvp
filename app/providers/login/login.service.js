@@ -21,7 +21,6 @@ var LoginService = (function () {
         // private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
         this.isReading = true;
-        console.log('Load Login Service');
     }
     LoginService.prototype.getDataUser = function (header) {
         var _this = this;

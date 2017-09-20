@@ -16,14 +16,15 @@ var CalendarComponent = (function () {
     CalendarComponent.prototype.ngOnInit = function () {
         var _this = this;
         this._buildCalendar();
-        this.availabilityForm.valueChanges.subscribe(function (data) {
-            _this._buildCalendar();
-            console.log('Length ', _this.bookingDays);
-        });
-        // this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
+        // this.availabilityForm.valueChanges.subscribe(() => {
         // 	this._buildCalendar();
-        // 	this.bookingDays[this.bookingDays.length - 1] = this.availabilityForm.value;
         // });
+        this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(function () {
+            _this._buildCalendar();
+        });
+        this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(function () {
+            _this._buildCalendar();
+        });
     };
     CalendarComponent.prototype._buildCalendar = function () {
         this.months = [];

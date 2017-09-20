@@ -19,7 +19,6 @@ var DatetimefieldComponent = (function () {
         this.dateTime = $("." + this.idPicker);
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
-            // disabledDates: ["09/13/2017"],
             disabledDates: this.disabledDates,
             minDate: this.minDate || false,
             maxDate: this.maxDate || false,
@@ -38,7 +37,6 @@ var DatetimefieldComponent = (function () {
         });
     };
     DatetimefieldComponent.prototype.updateDateEvent = function (evt, value) {
-        console.log(value);
         this.field.setValue(value);
         this.updateDate.next(value);
     };

@@ -36,7 +36,6 @@ var PropertiesService = (function () {
             Id: '',
             Name: ''
         };
-        console.log('Load Properties Service');
     }
     PropertiesService.prototype.readDataProperties = function () {
         var _this = this;

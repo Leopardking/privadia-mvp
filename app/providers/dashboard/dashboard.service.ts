@@ -27,7 +27,6 @@ export class DashboardService {
 		this.readDataRegions();
 		this.readDataMetadata();
 
-		console.log('Load Dashboard Service');
 	}
 
 	public readDataVillas() {

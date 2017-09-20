@@ -16,9 +16,7 @@ export class MessagesService {
 	public enquiry;
 
 	constructor ( private http: Http,
-				  private loginService: LoginService ) {
-		console.log('Load Messages Service');
-	}
+				  private loginService: LoginService ) {}
 
 	public addMessage(data) {
 		if(!this.loginService.getPermission('Messages/Post'))

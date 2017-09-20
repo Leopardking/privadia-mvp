@@ -115,7 +115,7 @@ export class AvailabilityComponent implements OnInit {
         setTimeout(() => {
             $('.checkIn').data("DateTimePicker")
                 .minDate(moment().format('DD/MM/YYYY'));
-        },1000);
+        },900);
 
         const nextDate = _(this.bookingDays);
         nextDate.next();

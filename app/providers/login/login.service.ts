@@ -16,9 +16,7 @@ export class LoginService {
 	public userInfo: any;
 	public isReading = true;
 
-	constructor ( private http: Http ) {
-		console.log('Load Login Service');
-	}
+	constructor ( private http: Http ) {}
 
 	public getDataUser(header) {
 		this.getCurrentUser(header).subscribe(

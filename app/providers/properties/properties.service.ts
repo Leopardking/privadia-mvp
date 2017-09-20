@@ -33,9 +33,7 @@ export class PropertiesService {
 
 	constructor ( private http: Http,
 				  private loginService: LoginService,
-				  private lookupsService: LookupsService ) {
-		console.log('Load Properties Service');
-	}
+				  private lookupsService: LookupsService ) {}
 
 	public readDataProperties() {
 		this.getAllProperties().subscribe(

@@ -28,14 +28,15 @@ export class CalendarComponent implements OnInit {
 	ngOnInit() {
 		this._buildCalendar();
 
-		this.availabilityForm.valueChanges.subscribe(data => {
-			this._buildCalendar();
-			console.log('Length ', this.bookingDays);
-		});
-		// this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(data => {
+		// this.availabilityForm.valueChanges.subscribe(() => {
 		// 	this._buildCalendar();
-		// 	this.bookingDays[this.bookingDays.length - 1] = this.availabilityForm.value;
 		// });
+		this.availabilityForm.controls['CheckIn'].valueChanges.subscribe(() => {
+			this._buildCalendar();
+		});
+		this.availabilityForm.controls['CheckOut'].valueChanges.subscribe(() => {
+			this._buildCalendar();
+		});
 	}
 
 	private _buildCalendar() {

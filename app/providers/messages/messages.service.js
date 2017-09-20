@@ -21,7 +21,6 @@ var MessagesService = (function () {
         this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
         // private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
-        console.log('Load Messages Service');
     }
     MessagesService.prototype.addMessage = function (data) {
         if (!this.loginService.getPermission('Messages/Post'))

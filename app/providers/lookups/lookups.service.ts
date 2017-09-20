@@ -21,9 +21,7 @@ export class LookupsService {
 	public propertyContactTypes;
 
 	constructor ( private http: Http,
-				  private loginService: LoginService ) {
-		console.log('Load Lookups Service');
-	}
+				  private loginService: LoginService ) {}
 
 	public readDataRegions() {
 		this.getRegions().subscribe(

@@ -19,9 +19,7 @@ export class EnquiryService {
 
 	constructor ( private http: Http,
 				  private loginService: LoginService,
-				  private proposalsService: ProposalsService ) {
-		console.log('Load Enquiry Service');
-	}
+				  private proposalsService: ProposalsService ) {}
 
 	public readDataEnquiries() {
 		this.getEnquiries().subscribe(
