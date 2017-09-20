@@ -39,8 +39,9 @@
 }
 
 
-.panels-wrp .right-panel .container-fluid .card {
-
+.panels-wrp .right-panel .card {
+    margin-left: 30px;
+    width: auto;
 }
 
 .panels-wrp .right-panel .card-header {

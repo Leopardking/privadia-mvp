@@ -49,9 +49,9 @@
                 </div>
             </div>
             <div class="right-panel" [class.in]="UpdateBlock === true" [class.out]="UpdateBlock === false">
-                <div *ngIf="UpdateBlock" class="container-fluid" [formGroup]="availabilityForm">
-                    <div class="card">
-                        <div class="col-md-12">
+                <div>
+                    <div class="card" *ngIf="UpdateBlock" [formGroup]="availabilityForm">
+                        <div>
                             <div class="card-header card-header-text" data-background-color="green">
                                 <span class="font-16">Update Availability</span>
                             </div>
