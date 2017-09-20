@@ -1,5 +1,20 @@
 declare const $:any;
 
+export function handlerSuccessMessage(msg) {
+    $.notify({
+        icon: "notifications",
+        message: msg
+
+    },{
+        type: 'success',
+        timer: 3000,
+        placement: {
+            from: 'top',
+            align: 'right'
+        }
+    });
+}
+
 export function handlerErrorFieds(e, form) {
     const fileds = Object.keys( e.ModelState || {});
     this.errorsList = e.ModelState;

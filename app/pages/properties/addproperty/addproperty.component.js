@@ -147,17 +147,7 @@ var AddpropertyComponent = (function () {
         }
         this.propertiesService.addProperty(form).subscribe(function (d) {
             _this.errorForm = false;
-            $.notify({
-                icon: "notifications",
-                message: "Property Added Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
+            helpers_1.handlerSuccessMessage('Property Added Successfully');
             _this.router.navigate(['properties']);
             _this.sending = false;
         }, function (e) {

@@ -1,4 +1,18 @@
 "use strict";
+function handlerSuccessMessage(msg) {
+    $.notify({
+        icon: "notifications",
+        message: msg
+    }, {
+        type: 'success',
+        timer: 3000,
+        placement: {
+            from: 'top',
+            align: 'right'
+        }
+    });
+}
+exports.handlerSuccessMessage = handlerSuccessMessage;
 function handlerErrorFieds(e, form) {
     var fileds = Object.keys(e.ModelState || {});
     this.errorsList = e.ModelState;

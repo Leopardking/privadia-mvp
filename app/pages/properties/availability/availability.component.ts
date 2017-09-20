@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import { CalendarService } from "../../../providers/calendar/calendar.service";
 import { LookupsService } from "../../../providers/lookups/lookups.service";
-import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
+import {handlerErrorFieds, handlerErrorNotify, handlerSuccessMessage} from "../../../helpers/helpers";
 import {LoginService} from "../../../providers/login/login.service";
 
 declare const moment: any;
@@ -288,6 +288,7 @@ export class AvailabilityComponent implements OnInit {
             this.calendarService.updateCalendar(formData).subscribe(
                 d => {
                     _.replace(this.bookingDays, { Id: formData.Id }, d);
+                    handlerSuccessMessage('New Availability Successfully Updated');
                     this.UpdateBlock = !this.UpdateBlock;
                 },
                 e => {
@@ -298,6 +299,7 @@ export class AvailabilityComponent implements OnInit {
             this.calendarService.addCalendar(formData).subscribe(
                 d => {
                     this.bookingDays.push(d);
+                    handlerSuccessMessage('New Availability Successfully Added');
                     this.UpdateBlock = !this.UpdateBlock;
                 },
                 e => {

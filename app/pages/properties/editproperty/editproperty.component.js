@@ -230,17 +230,7 @@ var EditpropertyComponent = (function () {
         }
         this.propertiesService.addProperty(form).subscribe(function (d) {
             _this.errorForm = false;
-            $.notify({
-                icon: "notifications",
-                message: "Property Updated Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
-            });
+            helpers_1.handlerSuccessMessage('Property Updated Successfully');
         }, function (e) {
             _this.errorForm = true;
             helpers_1.handlerErrorFieds(e, _this.propertyForm);

@@ -6,7 +6,7 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 import * as _ from 'lodash'
 import {LookupsService} from "../../../providers/lookups/lookups.service";
 import {LoginService} from "../../../providers/login/login.service";
-import {handlerErrorFieds, handlerErrorNotify} from "../../../helpers/helpers";
+import {handlerErrorFieds, handlerErrorNotify, handlerSuccessMessage} from "../../../helpers/helpers";
 
 declare const $:any;
 //declare const _:any;
@@ -160,18 +160,7 @@ export class AddpropertyComponent implements OnInit {
         this.propertiesService.addProperty(form).subscribe(
             d => {
                 this.errorForm = false;
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
-
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
+                handlerSuccessMessage('Property Added Successfully');
 
                 this.router.navigate(['properties']);
                 this.sending = false;

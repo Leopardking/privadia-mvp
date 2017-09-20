@@ -241,6 +241,7 @@ var AvailabilityComponent = (function () {
         if (formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(function (d) {
                 _.replace(_this.bookingDays, { Id: formData.Id }, d);
+                helpers_1.handlerSuccessMessage('New Availability Successfully Updated');
                 _this.UpdateBlock = !_this.UpdateBlock;
             }, function (e) {
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
@@ -249,6 +250,7 @@ var AvailabilityComponent = (function () {
         else {
             this.calendarService.addCalendar(formData).subscribe(function (d) {
                 _this.bookingDays.push(d);
+                helpers_1.handlerSuccessMessage('New Availability Successfully Added');
                 _this.UpdateBlock = !_this.UpdateBlock;
             }, function (e) {
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
