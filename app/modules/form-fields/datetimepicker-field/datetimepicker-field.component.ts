@@ -12,7 +12,7 @@ declare const moment: any;
     styleUrls: [ 'datetimepicker-field.component.css' ]
 })
 
-export class DatetimefieldComponent implements OnInit, AfterContentChecked{
+export class DatetimefieldComponent implements OnInit, AfterContentChecked {
     @Input('data') private data: any;
     @Input('classes') private classes: any;
     @Input('field') private field: FormControl;
@@ -35,8 +35,8 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked{
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
             disabledDates: this.disabledDates,
-            minDate: this.minDate || false,
-            maxDate: this.maxDate || false,
+            // minDate: this.minDate || false,
+            // maxDate: this.maxDate || false,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",

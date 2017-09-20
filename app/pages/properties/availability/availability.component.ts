@@ -108,14 +108,20 @@ export class AvailabilityComponent implements OnInit {
 
     public handlerUpdateDate(value) {
         this.CheckIn = moment(value, 'DD/MM/YYYY').startOf('days');
-        this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
         this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
-        this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+
+        if(this.CheckIn.isSameOrAfter(this.CheckOut)) {
+            this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
+            this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+        }
 
         setTimeout(() => {
             $('.checkIn').data("DateTimePicker")
                 .minDate(moment().format('DD/MM/YYYY'));
-        },900);
+            $('.checkOut').data("DateTimePicker")
+                .minDate(false)
+                .maxDate(false);
+        },1000);
 
         const nextDate = _(this.bookingDays);
         nextDate.next();
@@ -134,7 +140,7 @@ export class AvailabilityComponent implements OnInit {
                     $('.checkOut').data("DateTimePicker")
                         .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
                         .maxDate(tmpStart.format('DD/MM/YYYY'));
-                },1000);
+                },1200);
 
                 return true;
             } else if(this.CheckOut.isBetween(tmpStart, tmpEnd, null, '(]')) {
@@ -144,7 +150,7 @@ export class AvailabilityComponent implements OnInit {
                     $('.checkOut').data("DateTimePicker")
                         .minDate(this.CheckIn.format('DD/MM/YYYY'))
                         .maxDate(tmpNextStart.format('DD/MM/YYYY'));
-                },1000);
+                }, 1200);
 
                 if(this.CheckOut.isSameOrBefore(tmpNextStart)) {
                     this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
@@ -160,11 +166,12 @@ export class AvailabilityComponent implements OnInit {
                     return false;
                 }
             }  else if(this.CheckIn.isSameOrAfter(tmpEnd) && this.CheckOut.isSameOrBefore(tmpNextStart)) {
+                this.maxDate = tmpNextStart.format('DD/MM/YYYY');
                 setTimeout(() => {
                     $('.checkOut').data("DateTimePicker")
                         .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
                         .maxDate(tmpNextStart.format('DD/MM/YYYY'));
-                },1000);
+                },1200);
                 return false;
             } else {
                 return false;

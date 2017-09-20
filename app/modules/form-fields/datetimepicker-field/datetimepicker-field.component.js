@@ -20,8 +20,8 @@ var DatetimefieldComponent = (function () {
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
             disabledDates: this.disabledDates,
-            minDate: this.minDate || false,
-            maxDate: this.maxDate || false,
+            // minDate: this.minDate || false,
+            // maxDate: this.maxDate || false,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
