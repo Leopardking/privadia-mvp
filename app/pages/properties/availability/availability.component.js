@@ -46,7 +46,7 @@ var AvailabilityComponent = (function () {
             AgentTel: new forms_1.FormControl(null),
             AgentEmail: new forms_1.FormControl(null)
         });
-        this.isCalendarView = false;
+        this.isCalendarView = true;
         this.UpdateBlock = false;
         this.CheckIn = moment().startOf('days');
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');

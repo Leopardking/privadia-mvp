@@ -47,7 +47,7 @@ export class AvailabilityComponent implements OnInit {
     private calendarEntryTypes: Array<{ Id: number, Name: string }>;
     private bookingDays;
     private bookingDaysClear;
-    private isCalendarView: boolean = false;
+    private isCalendarView: boolean = true;
 
 
     private UpdateBlock: boolean = false;
