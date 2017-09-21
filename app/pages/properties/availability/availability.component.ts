@@ -143,16 +143,16 @@ export class AvailabilityComponent implements OnInit {
             console.log('render ', tmpNextStart.format('DD/MM/YYYY'), this.CheckIn.format('DD/MM/YYYY'), this.CheckOut.format('DD/MM/YYYY'));
             console.log('render ', this.CheckIn.isSameOrAfter(tmpEnd), this.CheckOut.isSameOrBefore(tmpNextStart), tmpNextStart.format('DD/MM/YYYY'));
             if(index === 0 && this.CheckOut.isSameOrBefore(tmpStart)) {
-                this.minDatePicker = this.CheckIn.clone().add(1, 'days').format('DD/MM/YYYY');
-                this.maxDatePicker = tmpStart.clone().format('DD/MM/YYYY');
+                this.minDatePicker = this.CheckIn.clone().add(1, 'days');
+                this.maxDatePicker = tmpStart.clone();
 
                 return true;
             } else if(this.CheckOut.isBetween(tmpStart, tmpEnd, null, '(]')) {
                 this.CheckIn = tmpEnd.clone();
                 this.CheckOut = tmpEnd.add(1, 'days').clone();
 
-                this.minDatePicker = this.CheckIn.clone().format('DD/MM/YYYY');
-                this.maxDatePicker = tmpNextStart.clone().format('DD/MM/YYYY');
+                this.minDatePicker = this.CheckIn.clone();
+                this.maxDatePicker = tmpNextStart.clone();
 
                 console.log('render ', tmpNextStart.format('DD/MM/YYYY'), this.CheckIn.format('DD/MM/YYYY'), this.CheckOut.format('DD/MM/YYYY'));
                 if(this.CheckOut.isSameOrBefore(tmpNextStart) || tmpNextDate.done) {
@@ -166,18 +166,18 @@ export class AvailabilityComponent implements OnInit {
 
                     return true;
                 } else {
-                    this.minDatePicker = this.CheckIn.clone().add(1, 'days').format('DD/MM/YYYY');
-                    this.maxDatePicker = tmpNextStart.clone().format('DD/MM/YYYY');
+                    this.minDatePicker = this.CheckIn.clone().add(1, 'days');
+                    this.maxDatePicker = tmpNextStart.clone();
                     console.log('index 2',index);
                     return false;
                 }
             } else if(this.CheckIn.isSameOrAfter(tmpEnd) && this.CheckOut.isSameOrBefore(tmpNextStart)) {
-                this.minDatePicker = this.CheckIn.clone().add(1, 'days').format('DD/MM/YYYY');
-                this.maxDatePicker = tmpNextStart.clone().format('DD/MM/YYYY');
+                this.minDatePicker = this.CheckIn.clone().add(1, 'days');
+                this.maxDatePicker = tmpNextStart.clone();
                 console.log('index 4', index);
                 return false;
             } else {
-                this.minDatePicker = this.CheckIn.clone().add(1, 'days').format('DD/MM/YYYY');
+                this.minDatePicker = this.CheckIn.clone().add(1, 'days');
                 // if(tmpNextDate.done)
                 //     this.maxDatePicker = false;
                 // else
@@ -188,10 +188,13 @@ export class AvailabilityComponent implements OnInit {
 
         });
         setTimeout(() => {
-            console.log('this.minDatePicker',this.minDatePicker);
+            console.log('this.minDatePicker',this.minDatePicker,this.maxDatePicker);
+            if(this.maxDatePicker && this.maxDatePicker.isSameOrBefore((this.minDatePicker)))
+                this.maxDatePicker = false;
+
             $('.checkOut').data("DateTimePicker")
-                .minDate(this.minDatePicker)
-                .maxDate(this.maxDatePicker);
+                .minDate(this.minDatePicker.format('DD/MM/YYYY'))
+                .maxDate(this.maxDatePicker && this.maxDatePicker.format('DD/MM/YYYY') || false);
         },990);
         this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
         this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
