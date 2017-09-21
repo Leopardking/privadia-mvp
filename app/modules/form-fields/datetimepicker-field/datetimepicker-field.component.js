@@ -20,8 +20,6 @@ var DatetimefieldComponent = (function () {
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
             disabledDates: this.disabledDates,
-            // minDate: this.minDate || false,
-            // maxDate: this.maxDate || false,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -37,8 +35,10 @@ var DatetimefieldComponent = (function () {
         });
     };
     DatetimefieldComponent.prototype.updateDateEvent = function (evt, value) {
-        this.field.setValue(value);
-        this.updateDate.next(value);
+        if (!this.updateDate.observers.length)
+            this.field.setValue(value);
+        else
+            this.updateDate.next(value);
     };
     __decorate([
         core_1.Input('data'), 

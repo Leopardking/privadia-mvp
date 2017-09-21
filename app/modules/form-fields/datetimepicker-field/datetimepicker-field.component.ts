@@ -35,8 +35,6 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked {
         this.dateTime.datetimepicker({
             format: 'DD/MM/YYYY',
             disabledDates: this.disabledDates,
-            // minDate: this.minDate || false,
-            // maxDate: this.maxDate || false,
             icons: {
                 time: "fa fa-clock-o",
                 date: "fa fa-calendar",
@@ -53,7 +51,9 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked {
     }
 
     updateDateEvent(evt, value) {
-        this.field.setValue(value);
-        this.updateDate.next(value);
+        if(!this.updateDate.observers.length)
+            this.field.setValue(value);
+        else
+            this.updateDate.next(value);
     }
 }
