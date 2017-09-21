@@ -192,9 +192,7 @@ export class AvailabilityComponent implements OnInit {
                 this.handlerUpdateDate(this.CheckIn.format('DD/MM/YYYY'));
                 break;
             case false:
-                this.CheckIn  = moment().startOf('days');
-                this.availabilityForm.controls['CheckIn'].reset();
-                this.availabilityForm.controls['CheckOut'].reset();
+                this.resetForm();
                 break;
         }
 
@@ -247,6 +245,7 @@ export class AvailabilityComponent implements OnInit {
                     _.replace(this.bookingDays, { Id: formData.Id }, d);
                     handlerSuccessMessage('New Availability Successfully Updated');
                     this.UpdateBlock = !this.UpdateBlock;
+                    this.resetForm();
                 },
                 e => {
                     handlerErrorFieds(e, this.availabilityForm);
@@ -258,6 +257,8 @@ export class AvailabilityComponent implements OnInit {
                     this.bookingDays.push(d);
                     handlerSuccessMessage('New Availability Successfully Added');
                     this.UpdateBlock = !this.UpdateBlock;
+
+                    this.resetForm();
                 },
                 e => {
                     handlerErrorFieds(e, this.availabilityForm);
@@ -326,6 +327,15 @@ export class AvailabilityComponent implements OnInit {
         )
     }
 
+    private resetForm() {
+        this.CheckIn  = moment().startOf('days');
+        this.availabilityForm.reset({
+            EntryType: {
+                Id: 1,
+                Name: 'Internal Booking',
+            }
+        });
+    }
     private autosize(e){
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     }

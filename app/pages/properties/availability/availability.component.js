@@ -152,9 +152,7 @@ var AvailabilityComponent = (function () {
                 this.handlerUpdateDate(this.CheckIn.format('DD/MM/YYYY'));
                 break;
             case false:
-                this.CheckIn = moment().startOf('days');
-                this.availabilityForm.controls['CheckIn'].reset();
-                this.availabilityForm.controls['CheckOut'].reset();
+                this.resetForm();
                 break;
         }
         if (this.UpdateBlock === true && this.isCalendarView === false) {
@@ -202,6 +200,7 @@ var AvailabilityComponent = (function () {
                 _.replace(_this.bookingDays, { Id: formData.Id }, d);
                 helpers_1.handlerSuccessMessage('New Availability Successfully Updated');
                 _this.UpdateBlock = !_this.UpdateBlock;
+                _this.resetForm();
             }, function (e) {
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
             });
@@ -211,6 +210,7 @@ var AvailabilityComponent = (function () {
                 _this.bookingDays.push(d);
                 helpers_1.handlerSuccessMessage('New Availability Successfully Added');
                 _this.UpdateBlock = !_this.UpdateBlock;
+                _this.resetForm();
             }, function (e) {
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
                 helpers_1.handlerErrorNotify("Error Message: " + e.Message);
@@ -264,6 +264,15 @@ var AvailabilityComponent = (function () {
             console.log('Deleted Availability  ', d);
         }, function (e) {
             console.log('Deleted Availability ERROR', e);
+        });
+    };
+    AvailabilityComponent.prototype.resetForm = function () {
+        this.CheckIn = moment().startOf('days');
+        this.availabilityForm.reset({
+            EntryType: {
+                Id: 1,
+                Name: 'Internal Booking',
+            }
         });
     };
     AvailabilityComponent.prototype.autosize = function (e) {
