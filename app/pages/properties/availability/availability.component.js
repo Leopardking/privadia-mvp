@@ -88,10 +88,10 @@ var AvailabilityComponent = (function () {
         setTimeout(function () {
             $('.checkIn').data("DateTimePicker")
                 .minDate(moment().format('DD/MM/YYYY'));
-            // $('.checkOut').data("DateTimePicker")
-            //     .minDate(false)
-            //     .maxDate(false);
-        }, 1000);
+            $('.checkOut').data("DateTimePicker")
+                .minDate(false)
+                .maxDate(false);
+        }, 900);
         var nextDate = _(this.bookingDays);
         nextDate.next();
         console.log('bookingDays', this.bookingDays);
@@ -101,22 +101,19 @@ var AvailabilityComponent = (function () {
             var tmpEnd = moment(booking.CheckOut).startOf('days');
             var tmpNextStart = moment(!tmpNextDate.done && tmpNextDate.value.CheckIn).startOf('days');
             var tmpNextEnd = moment(!tmpNextDate.done && tmpNextDate.value.CheckOut).startOf('days');
+            console.log('render ', tmpNextStart.format('DD/MM/YYYY'), _this.CheckIn.format('DD/MM/YYYY'), _this.CheckOut.format('DD/MM/YYYY'));
+            console.log('render ', _this.CheckIn.isSameOrAfter(tmpEnd), _this.CheckOut.isSameOrBefore(tmpNextStart), tmpNextStart.format('DD/MM/YYYY'));
             if (index === 0 && _this.CheckOut.isSameOrBefore(tmpStart)) {
-                setTimeout(function () {
-                    // $('.checkOut').data("DateTimePicker")
-                    //     .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
-                    //     .maxDate(tmpStart.format('DD/MM/YYYY'));
-                }, 1200);
+                _this.minDatePicker = _this.CheckIn.clone().add(1, 'days').format('DD/MM/YYYY');
+                _this.maxDatePicker = tmpStart.clone().format('DD/MM/YYYY');
                 return true;
             }
             else if (_this.CheckOut.isBetween(tmpStart, tmpEnd, null, '(]')) {
                 _this.CheckIn = tmpEnd.clone();
                 _this.CheckOut = tmpEnd.add(1, 'days').clone();
-                setTimeout(function () {
-                    // $('.checkOut').data("DateTimePicker")
-                    //     .minDate(this.CheckIn.format('DD/MM/YYYY'))
-                    //     .maxDate(tmpNextStart.format('DD/MM/YYYY'));
-                }, 1200);
+                _this.minDatePicker = _this.CheckIn.clone().format('DD/MM/YYYY');
+                _this.maxDatePicker = tmpNextStart.clone().format('DD/MM/YYYY');
+                console.log('render ', tmpNextStart.format('DD/MM/YYYY'), _this.CheckIn.format('DD/MM/YYYY'), _this.CheckOut.format('DD/MM/YYYY'));
                 if (_this.CheckOut.isSameOrBefore(tmpNextStart) || tmpNextDate.done) {
                     //     this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
                     //     this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
@@ -128,22 +125,34 @@ var AvailabilityComponent = (function () {
                     return true;
                 }
                 else {
+                    _this.minDatePicker = _this.CheckIn.clone().add(1, 'days').format('DD/MM/YYYY');
+                    _this.maxDatePicker = tmpNextStart.clone().format('DD/MM/YYYY');
+                    console.log('index 2', index);
                     return false;
                 }
             }
             else if (_this.CheckIn.isSameOrAfter(tmpEnd) && _this.CheckOut.isSameOrBefore(tmpNextStart)) {
-                // this.maxDate = tmpNextStart.format('DD/MM/YYYY');
-                setTimeout(function () {
-                    // $('.checkOut').data("DateTimePicker")
-                    //     .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
-                    //     .maxDate(tmpNextStart.format('DD/MM/YYYY'));
-                }, 1200);
+                _this.minDatePicker = _this.CheckIn.clone().add(1, 'days').format('DD/MM/YYYY');
+                _this.maxDatePicker = tmpNextStart.clone().format('DD/MM/YYYY');
+                console.log('index 4', index);
                 return false;
             }
             else {
+                _this.minDatePicker = _this.CheckIn.clone().add(1, 'days').format('DD/MM/YYYY');
+                // if(tmpNextDate.done)
+                //     this.maxDatePicker = false;
+                // else
+                //     this.maxDatePicker = tmpNextStart.clone().format('DD/MM/YYYY');
+                console.log('index 3', _this.maxDatePicker);
                 return false;
             }
         });
+        setTimeout(function () {
+            console.log('this.minDatePicker', _this.minDatePicker);
+            $('.checkOut').data("DateTimePicker")
+                .minDate(_this.minDatePicker)
+                .maxDate(_this.maxDatePicker);
+        }, 990);
         this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
         this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
         console.log('End patch value', this.availabilityForm.controls['CheckOut'].value, this.CheckOut.format('DD/MM/YYYY'));
