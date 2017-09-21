@@ -312,7 +312,7 @@ export class AvailabilityComponent implements OnInit {
                     PropertyId: new FormControl(this.propertyId),
                     CheckIn: new FormControl(moment(d.CheckIn).format('DD/MM/YYYY')),
                     CheckOut: new FormControl(moment(d.CheckOut).format('DD/MM/YYYY')),
-                    EntryType: new FormControl(d.EntryType),
+                    EntryType: new FormControl({ value: d.EntryType, disabled: true }),
                     Notes: new FormControl(d.Notes),
                     Reference: new FormControl(d.Reference || null),
                     ViaAgency: new FormControl(d.ViaAgency || null),

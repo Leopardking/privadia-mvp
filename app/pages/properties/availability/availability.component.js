@@ -254,7 +254,7 @@ var AvailabilityComponent = (function () {
                 PropertyId: new forms_1.FormControl(_this.propertyId),
                 CheckIn: new forms_1.FormControl(moment(d.CheckIn).format('DD/MM/YYYY')),
                 CheckOut: new forms_1.FormControl(moment(d.CheckOut).format('DD/MM/YYYY')),
-                EntryType: new forms_1.FormControl(d.EntryType),
+                EntryType: new forms_1.FormControl({ value: d.EntryType, disabled: true }),
                 Notes: new forms_1.FormControl(d.Notes),
                 Reference: new forms_1.FormControl(d.Reference || null),
                 ViaAgency: new forms_1.FormControl(d.ViaAgency || null),
