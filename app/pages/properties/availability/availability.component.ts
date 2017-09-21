@@ -25,8 +25,6 @@ export class AvailabilityComponent implements OnInit {
         PropertyId: new FormControl(null),
         CheckIn: new FormControl(null),
         CheckOut: new FormControl(null),
-        // CheckIn: new FormControl(moment('09/09/2017 14:23', 'DD/MM/YYYY').format('DD/MM/YYYY')),
-        // CheckOut: new FormControl(moment('09/09/2017 14:23', 'DD/MM/YYYY').add(1, 'day').format('DD/MM/YYYY')),
         EntryType: new FormControl({
             Id: 1,
             Name: 'Internal Booking',
@@ -49,7 +47,7 @@ export class AvailabilityComponent implements OnInit {
     private calendarEntryTypes: Array<{ Id: number, Name: string }>;
     private bookingDays;
     private bookingDaysClear;
-    private isCalendarView: boolean = true;
+    private isCalendarView: boolean = false;
 
 
     private UpdateBlock: boolean = false;
@@ -106,26 +104,30 @@ export class AvailabilityComponent implements OnInit {
     private CheckIn  = moment().startOf('days');
     private CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
 
-    public handlerUpdateDate(value) {
+    public handlerUpdateDate(value, CheckOut = null) {
         this.CheckIn = moment(value, 'DD/MM/YYYY').startOf('days');
         // this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
-
-        // if(this.CheckIn.isSameOrAfter(this.CheckOut)) {
+        if(CheckOut)
+            this.CheckOut = moment(CheckOut, 'DD/MM/YYYY');
+        else
             this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
+        // if(this.CheckIn.isSameOrAfter(this.CheckOut)) {
+        //     this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
             // this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
         // }
 
         setTimeout(() => {
             $('.checkIn').data("DateTimePicker")
                 .minDate(moment().format('DD/MM/YYYY'));
-            $('.checkOut').data("DateTimePicker")
-                .minDate(false)
-                .maxDate(false);
+            // $('.checkOut').data("DateTimePicker")
+            //     .minDate(false)
+            //     .maxDate(false);
         },1000);
 
         const nextDate = _(this.bookingDays);
         nextDate.next();
 
+        console.log('bookingDays', this.bookingDays);
         this.bookingDays.some((booking, index) => {
             const tmpNextDate = nextDate.next();
 
@@ -137,9 +139,9 @@ export class AvailabilityComponent implements OnInit {
 
             if(index === 0 && this.CheckOut.isSameOrBefore(tmpStart)) {
                 setTimeout(() => {
-                    $('.checkOut').data("DateTimePicker")
-                        .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
-                        .maxDate(tmpStart.format('DD/MM/YYYY'));
+                    // $('.checkOut').data("DateTimePicker")
+                    //     .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
+                    //     .maxDate(tmpStart.format('DD/MM/YYYY'));
                 },1200);
 
                 return true;
@@ -147,30 +149,30 @@ export class AvailabilityComponent implements OnInit {
                 this.CheckIn = tmpEnd.clone();
                 this.CheckOut = tmpEnd.add(1, 'days').clone();
                 setTimeout(() => {
-                    $('.checkOut').data("DateTimePicker")
-                        .minDate(this.CheckIn.format('DD/MM/YYYY'))
-                        .maxDate(tmpNextStart.format('DD/MM/YYYY'));
+                    // $('.checkOut').data("DateTimePicker")
+                    //     .minDate(this.CheckIn.format('DD/MM/YYYY'))
+                    //     .maxDate(tmpNextStart.format('DD/MM/YYYY'));
                 }, 1200);
 
                 if(this.CheckOut.isSameOrBefore(tmpNextStart) || tmpNextDate.done) {
-                    // this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
-                    // this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
-
+                //     this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
+                //     this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+                //
                 //     return true;
                 // } else if(tmpNextDate.done) {
-                    // this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
-                    // this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+                //     this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
+                //     this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
 
                     return true;
                 } else {
                     return false;
                 }
             }  else if(this.CheckIn.isSameOrAfter(tmpEnd) && this.CheckOut.isSameOrBefore(tmpNextStart)) {
-                this.maxDate = tmpNextStart.format('DD/MM/YYYY');
+                // this.maxDate = tmpNextStart.format('DD/MM/YYYY');
                 setTimeout(() => {
-                    $('.checkOut').data("DateTimePicker")
-                        .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
-                        .maxDate(tmpNextStart.format('DD/MM/YYYY'));
+                    // $('.checkOut').data("DateTimePicker")
+                    //     .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
+                    //     .maxDate(tmpNextStart.format('DD/MM/YYYY'));
                 },1200);
                 return false;
             } else {
@@ -180,7 +182,7 @@ export class AvailabilityComponent implements OnInit {
         });
         this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
         this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
-        console.log('End patch value',);
+        console.log('End patch value',this.availabilityForm.controls['CheckOut'].value, this.CheckOut.format('DD/MM/YYYY'));
     };
 
     toggleUpdateBlock() {
@@ -188,6 +190,7 @@ export class AvailabilityComponent implements OnInit {
 
         switch (this.UpdateBlock) {
             case true:
+                this.resetForm();
                 this.disabledDates();
                 this.handlerUpdateDate(this.CheckIn.format('DD/MM/YYYY'));
                 break;
@@ -242,10 +245,20 @@ export class AvailabilityComponent implements OnInit {
         if(formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(
                 d => {
-                    _.replace(this.bookingDays, { Id: formData.Id }, d);
-                    handlerSuccessMessage('New Availability Successfully Updated');
-                    this.UpdateBlock = !this.UpdateBlock;
-                    this.resetForm();
+                    this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
+                        data => {
+                            this.bookingDays = data;
+                            handlerSuccessMessage('New Availability Successfully Added');
+                            this.UpdateBlock = !this.UpdateBlock;
+                        },
+                        e => {
+                            handlerErrorNotify(`Error Message: ${e.Message}`);
+                        }
+                    );
+                    // _.replace(this.bookingDays, { Id: formData.Id }, d);
+                    // handlerSuccessMessage('New Availability Successfully Updated');
+                    // this.UpdateBlock = !this.UpdateBlock;
+                    // this.resetForm();
                 },
                 e => {
                     handlerErrorFieds(e, this.availabilityForm);
@@ -254,16 +267,20 @@ export class AvailabilityComponent implements OnInit {
         } else {
             this.calendarService.addCalendar(formData).subscribe(
                 d => {
-                    this.bookingDays.push(d);
-                    handlerSuccessMessage('New Availability Successfully Added');
-                    this.UpdateBlock = !this.UpdateBlock;
-
-                    this.resetForm();
+                    this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
+                        data => {
+                            this.bookingDays = data;
+                            handlerSuccessMessage('New Availability Successfully Added');
+                            this.UpdateBlock = !this.UpdateBlock;
+                        },
+                        e => {
+                            handlerErrorNotify(`Error Message: ${e.Message}`);
+                        }
+                    );
                 },
                 e => {
                     handlerErrorFieds(e, this.availabilityForm);
                     handlerErrorNotify(`Error Message: ${e.Message}`);
-                    console.log('Error save availability', e);
                 }
             );
         }
@@ -281,28 +298,31 @@ export class AvailabilityComponent implements OnInit {
                     CheckOut: new FormControl(moment(d.CheckOut).format('DD/MM/YYYY')),
                     EntryType: new FormControl(d.EntryType),
                     Notes: new FormControl(d.Notes),
-                    Reference: new FormControl(null),
-                    ViaAgency: new FormControl(null),
-                    ClientFirstName: new FormControl(null),
-                    ClientLastName: new FormControl(null),
-                    ClientTel: new FormControl(null),
-                    ClientEmail: new FormControl(null),
-                    AgencyCompanyName: new FormControl(null),
-                    AgentName: new FormControl(null),
-                    AgentTel: new FormControl(null),
-                    AgentEmail: new FormControl(null)
+                    Reference: new FormControl(d.Reference || null),
+                    ViaAgency: new FormControl(d.ViaAgency || null),
+                    ClientFirstName: new FormControl(d.ClientFirstName || null),
+                    ClientLastName: new FormControl(d.ClientLastName || null),
+                    ClientTel: new FormControl(d.ClientTel || null),
+                    ClientEmail: new FormControl(d.ClientEmail || null),
+                    AgencyCompanyName: new FormControl(d.AgencyCompanyName || null),
+                    AgentName: new FormControl(d.AgentName || null),
+                    AgentTel: new FormControl(d.AgentTel || null),
+                    AgentEmail: new FormControl(d.AgentEmail || null)
                 });
 
                 this.isCalendarView = true;
-                if (this.UpdateBlock === null) {
-                    this.UpdateBlock = true;
-                } else {
-                    this.UpdateBlock = !this.UpdateBlock;
-                }
 
+                _.remove(this.bookingDays, (o) => {
+                    return o.Id == id;
+                });
+                this.UpdateBlock = !this.UpdateBlock;
+
+                this.disabledDates();
+                this.handlerUpdateDate(moment(d.CheckIn).format('DD/MM/YYYY'), moment(d.CheckOut).format('DD/MM/YYYY'));
                 setTimeout(() => {
-                    this.availabilityForm.controls['CheckIn'].patchValue(moment(d.CheckIn).format('DD/MM/YYYY'));
-                    this.availabilityForm.controls['CheckOut'].patchValue(moment(d.CheckOut).format('DD/MM/YYYY'));
+                    console.log('CheckIN', d.CheckIn);
+                    // this.availabilityForm.controls['CheckIn'].patchValue(moment(d.CheckIn).format('DD/MM/YYYY'));
+                    // this.availabilityForm.controls['CheckOut'].patchValue(moment(d.CheckOut).format('DD/MM/YYYY'));
                 }, 1000);
             },
             e => {
@@ -321,7 +341,7 @@ export class AvailabilityComponent implements OnInit {
                 console.log('Deleted Availability  ', d);
             },
             e => {
-                console.log('Deleted Availability ERROR', e);
+                console.log('Deleted Availability ERROR ', e);
 
             }
         )
@@ -329,7 +349,10 @@ export class AvailabilityComponent implements OnInit {
 
     private resetForm() {
         this.CheckIn  = moment().startOf('days');
-        this.availabilityForm.reset({
+        this.availabilityForm.patchValue({
+            CheckIn: null,
+            CheckOut: null,
+            PropertyId: this.propertyId,
             EntryType: {
                 Id: 1,
                 Name: 'Internal Booking',

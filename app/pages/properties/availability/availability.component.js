@@ -30,8 +30,6 @@ var AvailabilityComponent = (function () {
             PropertyId: new forms_1.FormControl(null),
             CheckIn: new forms_1.FormControl(null),
             CheckOut: new forms_1.FormControl(null),
-            // CheckIn: new FormControl(moment('09/09/2017 14:23', 'DD/MM/YYYY').format('DD/MM/YYYY')),
-            // CheckOut: new FormControl(moment('09/09/2017 14:23', 'DD/MM/YYYY').add(1, 'day').format('DD/MM/YYYY')),
             EntryType: new forms_1.FormControl({
                 Id: 1,
                 Name: 'Internal Booking',
@@ -48,7 +46,7 @@ var AvailabilityComponent = (function () {
             AgentTel: new forms_1.FormControl(null),
             AgentEmail: new forms_1.FormControl(null)
         });
-        this.isCalendarView = true;
+        this.isCalendarView = false;
         this.UpdateBlock = false;
         this.CheckIn = moment().startOf('days');
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
@@ -74,23 +72,29 @@ var AvailabilityComponent = (function () {
     AvailabilityComponent.prototype.ngOnInit = function () {
         // console.log('',this.availabilityForm.value);
     };
-    AvailabilityComponent.prototype.handlerUpdateDate = function (value) {
+    AvailabilityComponent.prototype.handlerUpdateDate = function (value, CheckOut) {
         var _this = this;
+        if (CheckOut === void 0) { CheckOut = null; }
         this.CheckIn = moment(value, 'DD/MM/YYYY').startOf('days');
         // this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
+        if (CheckOut)
+            this.CheckOut = moment(CheckOut, 'DD/MM/YYYY');
+        else
+            this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
         // if(this.CheckIn.isSameOrAfter(this.CheckOut)) {
-        this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
+        //     this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
         // this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
         // }
         setTimeout(function () {
             $('.checkIn').data("DateTimePicker")
                 .minDate(moment().format('DD/MM/YYYY'));
-            $('.checkOut').data("DateTimePicker")
-                .minDate(false)
-                .maxDate(false);
+            // $('.checkOut').data("DateTimePicker")
+            //     .minDate(false)
+            //     .maxDate(false);
         }, 1000);
         var nextDate = _(this.bookingDays);
         nextDate.next();
+        console.log('bookingDays', this.bookingDays);
         this.bookingDays.some(function (booking, index) {
             var tmpNextDate = nextDate.next();
             var tmpStart = moment(booking.CheckIn).startOf('days');
@@ -99,9 +103,9 @@ var AvailabilityComponent = (function () {
             var tmpNextEnd = moment(!tmpNextDate.done && tmpNextDate.value.CheckOut).startOf('days');
             if (index === 0 && _this.CheckOut.isSameOrBefore(tmpStart)) {
                 setTimeout(function () {
-                    $('.checkOut').data("DateTimePicker")
-                        .minDate(_this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
-                        .maxDate(tmpStart.format('DD/MM/YYYY'));
+                    // $('.checkOut').data("DateTimePicker")
+                    //     .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
+                    //     .maxDate(tmpStart.format('DD/MM/YYYY'));
                 }, 1200);
                 return true;
             }
@@ -109,17 +113,18 @@ var AvailabilityComponent = (function () {
                 _this.CheckIn = tmpEnd.clone();
                 _this.CheckOut = tmpEnd.add(1, 'days').clone();
                 setTimeout(function () {
-                    $('.checkOut').data("DateTimePicker")
-                        .minDate(_this.CheckIn.format('DD/MM/YYYY'))
-                        .maxDate(tmpNextStart.format('DD/MM/YYYY'));
+                    // $('.checkOut').data("DateTimePicker")
+                    //     .minDate(this.CheckIn.format('DD/MM/YYYY'))
+                    //     .maxDate(tmpNextStart.format('DD/MM/YYYY'));
                 }, 1200);
                 if (_this.CheckOut.isSameOrBefore(tmpNextStart) || tmpNextDate.done) {
-                    // this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
-                    // this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+                    //     this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
+                    //     this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+                    //
                     //     return true;
                     // } else if(tmpNextDate.done) {
-                    // this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
-                    // this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
+                    //     this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
+                    //     this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
                     return true;
                 }
                 else {
@@ -127,11 +132,11 @@ var AvailabilityComponent = (function () {
                 }
             }
             else if (_this.CheckIn.isSameOrAfter(tmpEnd) && _this.CheckOut.isSameOrBefore(tmpNextStart)) {
-                _this.maxDate = tmpNextStart.format('DD/MM/YYYY');
+                // this.maxDate = tmpNextStart.format('DD/MM/YYYY');
                 setTimeout(function () {
-                    $('.checkOut').data("DateTimePicker")
-                        .minDate(_this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
-                        .maxDate(tmpNextStart.format('DD/MM/YYYY'));
+                    // $('.checkOut').data("DateTimePicker")
+                    //     .minDate(this.CheckIn.add(1, 'days').format('DD/MM/YYYY'))
+                    //     .maxDate(tmpNextStart.format('DD/MM/YYYY'));
                 }, 1200);
                 return false;
             }
@@ -141,13 +146,14 @@ var AvailabilityComponent = (function () {
         });
         this.availabilityForm.controls['CheckIn'].patchValue(this.CheckIn.format('DD/MM/YYYY'));
         this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
-        console.log('End patch value');
+        console.log('End patch value', this.availabilityForm.controls['CheckOut'].value, this.CheckOut.format('DD/MM/YYYY'));
     };
     ;
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
         this.UpdateBlock = !this.UpdateBlock;
         switch (this.UpdateBlock) {
             case true:
+                this.resetForm();
                 this.disabledDates();
                 this.handlerUpdateDate(this.CheckIn.format('DD/MM/YYYY'));
                 break;
@@ -197,24 +203,33 @@ var AvailabilityComponent = (function () {
         formData.EntryType = formData.EntryType.Id;
         if (formData.Id) {
             this.calendarService.updateCalendar(formData).subscribe(function (d) {
-                _.replace(_this.bookingDays, { Id: formData.Id }, d);
-                helpers_1.handlerSuccessMessage('New Availability Successfully Updated');
-                _this.UpdateBlock = !_this.UpdateBlock;
-                _this.resetForm();
+                _this.calendarService.getCalendarByProperty(_this.propertyId).subscribe(function (data) {
+                    _this.bookingDays = data;
+                    helpers_1.handlerSuccessMessage('New Availability Successfully Added');
+                    _this.UpdateBlock = !_this.UpdateBlock;
+                }, function (e) {
+                    helpers_1.handlerErrorNotify("Error Message: " + e.Message);
+                });
+                // _.replace(this.bookingDays, { Id: formData.Id }, d);
+                // handlerSuccessMessage('New Availability Successfully Updated');
+                // this.UpdateBlock = !this.UpdateBlock;
+                // this.resetForm();
             }, function (e) {
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
             });
         }
         else {
             this.calendarService.addCalendar(formData).subscribe(function (d) {
-                _this.bookingDays.push(d);
-                helpers_1.handlerSuccessMessage('New Availability Successfully Added');
-                _this.UpdateBlock = !_this.UpdateBlock;
-                _this.resetForm();
+                _this.calendarService.getCalendarByProperty(_this.propertyId).subscribe(function (data) {
+                    _this.bookingDays = data;
+                    helpers_1.handlerSuccessMessage('New Availability Successfully Added');
+                    _this.UpdateBlock = !_this.UpdateBlock;
+                }, function (e) {
+                    helpers_1.handlerErrorNotify("Error Message: " + e.Message);
+                });
             }, function (e) {
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
                 helpers_1.handlerErrorNotify("Error Message: " + e.Message);
-                console.log('Error save availability', e);
             });
         }
         console.log("save form", formData);
@@ -230,27 +245,28 @@ var AvailabilityComponent = (function () {
                 CheckOut: new forms_1.FormControl(moment(d.CheckOut).format('DD/MM/YYYY')),
                 EntryType: new forms_1.FormControl(d.EntryType),
                 Notes: new forms_1.FormControl(d.Notes),
-                Reference: new forms_1.FormControl(null),
-                ViaAgency: new forms_1.FormControl(null),
-                ClientFirstName: new forms_1.FormControl(null),
-                ClientLastName: new forms_1.FormControl(null),
-                ClientTel: new forms_1.FormControl(null),
-                ClientEmail: new forms_1.FormControl(null),
-                AgencyCompanyName: new forms_1.FormControl(null),
-                AgentName: new forms_1.FormControl(null),
-                AgentTel: new forms_1.FormControl(null),
-                AgentEmail: new forms_1.FormControl(null)
+                Reference: new forms_1.FormControl(d.Reference || null),
+                ViaAgency: new forms_1.FormControl(d.ViaAgency || null),
+                ClientFirstName: new forms_1.FormControl(d.ClientFirstName || null),
+                ClientLastName: new forms_1.FormControl(d.ClientLastName || null),
+                ClientTel: new forms_1.FormControl(d.ClientTel || null),
+                ClientEmail: new forms_1.FormControl(d.ClientEmail || null),
+                AgencyCompanyName: new forms_1.FormControl(d.AgencyCompanyName || null),
+                AgentName: new forms_1.FormControl(d.AgentName || null),
+                AgentTel: new forms_1.FormControl(d.AgentTel || null),
+                AgentEmail: new forms_1.FormControl(d.AgentEmail || null)
             });
             _this.isCalendarView = true;
-            if (_this.UpdateBlock === null) {
-                _this.UpdateBlock = true;
-            }
-            else {
-                _this.UpdateBlock = !_this.UpdateBlock;
-            }
+            _.remove(_this.bookingDays, function (o) {
+                return o.Id == id;
+            });
+            _this.UpdateBlock = !_this.UpdateBlock;
+            _this.disabledDates();
+            _this.handlerUpdateDate(moment(d.CheckIn).format('DD/MM/YYYY'), moment(d.CheckOut).format('DD/MM/YYYY'));
             setTimeout(function () {
-                _this.availabilityForm.controls['CheckIn'].patchValue(moment(d.CheckIn).format('DD/MM/YYYY'));
-                _this.availabilityForm.controls['CheckOut'].patchValue(moment(d.CheckOut).format('DD/MM/YYYY'));
+                console.log('CheckIN', d.CheckIn);
+                // this.availabilityForm.controls['CheckIn'].patchValue(moment(d.CheckIn).format('DD/MM/YYYY'));
+                // this.availabilityForm.controls['CheckOut'].patchValue(moment(d.CheckOut).format('DD/MM/YYYY'));
             }, 1000);
         }, function (e) {
             console.log('Error availability', e);
@@ -263,12 +279,15 @@ var AvailabilityComponent = (function () {
         this.calendarService.deleteAvailability(id).subscribe(function (d) {
             console.log('Deleted Availability  ', d);
         }, function (e) {
-            console.log('Deleted Availability ERROR', e);
+            console.log('Deleted Availability ERROR ', e);
         });
     };
     AvailabilityComponent.prototype.resetForm = function () {
         this.CheckIn = moment().startOf('days');
-        this.availabilityForm.reset({
+        this.availabilityForm.patchValue({
+            CheckIn: null,
+            CheckOut: null,
+            PropertyId: this.propertyId,
             EntryType: {
                 Id: 1,
                 Name: 'Internal Booking',
