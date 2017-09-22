@@ -77,7 +77,7 @@ var AvailabilityComponent = (function () {
         this.CheckIn = moment(value, 'DD/MM/YYYY').startOf('days');
         if (CheckOut)
             this.CheckOut = moment(CheckOut, 'DD/MM/YYYY');
-        else
+        else if (!this.role)
             this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
         setTimeout(function () {
             $('.checkIn').data("DateTimePicker")

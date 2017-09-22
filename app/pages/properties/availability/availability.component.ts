@@ -112,7 +112,7 @@ export class AvailabilityComponent implements OnInit {
 
         if(CheckOut)
             this.CheckOut = moment(CheckOut, 'DD/MM/YYYY');
-        else
+        else if(!this.role)
             this.CheckOut = moment(this.CheckIn.format('DD/MM/YYYY'), 'DD/MM/YYYY').add(1, 'day');
 
         setTimeout(() => {
