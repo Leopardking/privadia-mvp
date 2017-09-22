@@ -48,6 +48,7 @@ var AvailabilityComponent = (function () {
         });
         this.isCalendarView = true;
         this.UpdateBlock = false;
+        this.role = false;
         this.CheckIn = moment().startOf('days');
         this.CheckOut = moment(this.CheckIn).add(1, 'day').startOf('days');
         this.isAgent = this.loginService.getRoles('Agent');
@@ -65,7 +66,7 @@ var AvailabilityComponent = (function () {
                 _this.bookingDays = d;
                 // this.bookingDaysClear = d;
             }, function (e) {
-                console.log('Error calendar ', e);
+                console.log('Error calendar  ', e);
             });
         });
     }
@@ -91,7 +92,7 @@ var AvailabilityComponent = (function () {
             $('.checkOut').data("DateTimePicker")
                 .minDate(false)
                 .maxDate(false);
-        }, 900);
+        }, 980);
         var nextDate = _(this.bookingDays);
         nextDate.next();
         console.log('bookingDays', this.bookingDays);
@@ -202,14 +203,15 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.saveForm = function (formData) {
         var _this = this;
+        console.log('Form save', this.availabilityForm.value, formData);
         if (formData.EntryType.Id == 1 && !this.availabilityForm.valid) {
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
             this.errorForm = true;
             return false;
         }
         // fixes with dates
-        formData.CheckIn = moment(formData.CheckIn, 'DD/MM/YYYY').format('MM/DD/YYYY');
-        formData.CheckOut = moment(formData.CheckOut, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        formData.CheckIn = moment(formData.CheckIn, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        formData.CheckOut = moment(formData.CheckOut, 'DD/MM/YYYY').format('YYYY-MM-DD');
         // ----------------
         formData.EntryType = formData.EntryType.Id;
         if (formData.Id) {
@@ -247,6 +249,7 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.handlerEditAvailability = function (id) {
         var _this = this;
+        this.role = true;
         this.calendarService.getCalendar(id).subscribe(function (d) {
             _this.disabledDates();
             _this.availabilityForm = new forms_1.FormGroup({
@@ -254,7 +257,7 @@ var AvailabilityComponent = (function () {
                 PropertyId: new forms_1.FormControl(_this.propertyId),
                 CheckIn: new forms_1.FormControl(moment(d.CheckIn).format('DD/MM/YYYY')),
                 CheckOut: new forms_1.FormControl(moment(d.CheckOut).format('DD/MM/YYYY')),
-                EntryType: new forms_1.FormControl({ value: d.EntryType, disabled: true }),
+                EntryType: new forms_1.FormControl(d.EntryType),
                 Notes: new forms_1.FormControl(d.Notes),
                 Reference: new forms_1.FormControl(d.Reference || null),
                 ViaAgency: new forms_1.FormControl(d.ViaAgency || null),

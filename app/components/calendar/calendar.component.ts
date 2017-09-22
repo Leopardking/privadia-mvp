@@ -106,6 +106,7 @@ export class CalendarComponent implements OnInit {
 		this.bookingDays.forEach((bookingDay) => {
 		    if(bookingDay.EntryType.Name)
                 if (moment(date).isBetween(moment(bookingDay.CheckIn).startOf('day'), moment(bookingDay.CheckOut).startOf('day'), null, '()' )) {
+					console.log('boo',bookingDay);
                     day.type = bookingDay.EntryType.Name.toLowerCase();
                 } else if (moment(date).isSame(moment(bookingDay.CheckIn).startOf('day'))) {
                     day.typeStart = bookingDay.EntryType.Name.toLowerCase();

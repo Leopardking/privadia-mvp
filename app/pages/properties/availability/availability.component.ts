@@ -57,6 +57,8 @@ export class AvailabilityComponent implements OnInit {
     public maxDate: any;
     public minDate: any;
 
+    public role = false;
+
     public maxDatePicker: any;
     public minDatePicker: any;
 
@@ -94,7 +96,7 @@ export class AvailabilityComponent implements OnInit {
                     // this.bookingDaysClear = d;
                 },
                 e => {
-                    console.log('Error calendar ', e);
+                    console.log('Error calendar  ', e);
                 }
             );
         });
@@ -125,7 +127,7 @@ export class AvailabilityComponent implements OnInit {
             $('.checkOut').data("DateTimePicker")
                 .minDate(false)
                 .maxDate(false);
-        },900);
+        },980);
 
         const nextDate = _(this.bookingDays);
         nextDate.next();
@@ -248,14 +250,15 @@ export class AvailabilityComponent implements OnInit {
     }
 
     saveForm(formData) {
+        console.log('Form save',this.availabilityForm.value, formData);
         if(formData.EntryType.Id == 1 && !this.availabilityForm.valid) {
             handlerErrorNotify('There were errors with your submission, please see form for details.');
             this.errorForm = true;
             return false;
         }
         // fixes with dates
-        formData.CheckIn = moment(formData.CheckIn, 'DD/MM/YYYY').format('MM/DD/YYYY');
-        formData.CheckOut = moment(formData.CheckOut, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        formData.CheckIn = moment(formData.CheckIn, 'DD/MM/YYYY').format('YYYY-MM-DD');
+        formData.CheckOut = moment(formData.CheckOut, 'DD/MM/YYYY').format('YYYY-MM-DD');
         // ----------------
         formData.EntryType = formData.EntryType.Id;
         if(formData.Id) {
@@ -304,6 +307,8 @@ export class AvailabilityComponent implements OnInit {
     }
 
     handlerEditAvailability(id) {
+        this.role = true;
+
         this.calendarService.getCalendar(id).subscribe(
             d => {
                 this.disabledDates();
@@ -312,7 +317,7 @@ export class AvailabilityComponent implements OnInit {
                     PropertyId: new FormControl(this.propertyId),
                     CheckIn: new FormControl(moment(d.CheckIn).format('DD/MM/YYYY')),
                     CheckOut: new FormControl(moment(d.CheckOut).format('DD/MM/YYYY')),
-                    EntryType: new FormControl({ value: d.EntryType, disabled: true }),
+                    EntryType: new FormControl(d.EntryType),
                     Notes: new FormControl(d.Notes),
                     Reference: new FormControl(d.Reference || null),
                     ViaAgency: new FormControl(d.ViaAgency || null),
