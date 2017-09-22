@@ -16,11 +16,7 @@ var CalendarListComponent = (function () {
         this.editAvailability = new core_1.EventEmitter();
         this.datatableInited = false;
     }
-    CalendarListComponent.prototype.ngOnInit = function () {
-        _.remove(this.bookingDays, function (o) {
-            return !o.Id;
-        });
-    };
+    CalendarListComponent.prototype.ngOnInit = function () { };
     CalendarListComponent.prototype.finishReading = function () {
         var DataTable = $('#datatables');
         DataTable.DataTable({

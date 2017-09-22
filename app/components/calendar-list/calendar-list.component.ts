@@ -23,11 +23,7 @@ export class CalendarListComponent implements OnInit{
 
     constructor( ) { }
 
-	ngOnInit() {
-        _.remove(this.bookingDays, (o) => {
-            return !o.Id
-        })
-    }
+	ngOnInit() {}
 
     private finishReading() {
         let DataTable: any = $('#datatables');
