@@ -265,25 +265,23 @@
 
                 <div class="tab-pane" id="heading-size_rooms">
                     <div [formGroup]="propertyForm">
-                        <div class="row">
-                            <div class="col-xs-6">
+                        <div class="row m-b-30">
+                            <div class="col-xs-12">
                                 <legend>General</legend>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-sm-12 col-md-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Maximum Capacity</label>
                                             <input type="number" class="form-control" formControlName="Capacity">
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-sm-12 col-md-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Living Area (m<sup>2</sup>)</label>
                                             <input type="number" class="form-control" formControlName="LivingAreaSize">
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-12">
+                                    <div class="col-sm-12 col-md-4">
                                         <div class="form-group label-floating">
                                             <label class="control-label">Dining Capacity</label>
                                             <input type="number" class="form-control" formControlName="DiningCapacity">
@@ -292,18 +290,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-t-10">
-                            <div class="col-xs-9">
+                        <div class="row p-t-10 m-b-30">
+                            <div class="col-xs-12">
                                 <legend>Bedrooms</legend>
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-xs-4">
                                         <div class="form-group label-floating"
                                              [ngClass]="{'form-error':!propertyForm.controls['Bedrooms'].valid && errorForm}">
                                             <label class="control-label">Number of bedrooms*</label>
                                             <input type="number" class="form-control" formControlName="Bedrooms">
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 col-md-6">
+                                    <div class="col-xs-4">
                                         <div class="form-group label-floating"
                                              [ngClass]="{'form-error':!propertyForm.controls['Sleeps'].valid && errorForm}">
                                             <label class="control-label">Sleeps*</label>
@@ -318,31 +316,25 @@
                                              *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
                                             <div *ngIf="control.controls.PropertyRoomType.value == 1">
                                                 <div class="">
-                                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                                    <div class="col-xs-4">
                                                         <div class="form-group label-floating">
                                                             <label class="control-label">Bedroom Name</label>
                                                             <input type="text" class="form-control"
                                                                    [formControl]="control.controls.Name">
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-12 col-md-4 col-lg-4">
+                                                    <div class="col-xs-7">
                                                         <div class="form-group label-floating">
                                                             <label class="control-label">Bedroom Description</label>
-                                                            <textarea class="form-control min-height-36"
-                                                                      [formControl]="control.controls.Description"
-                                                                      (keyup)="autosize($event)"
-                                                                      (click)="autosize($event)"></textarea>
+                                                            <input type="text" class="form-control"
+                                                                   [formControl]="control.controls.Description" />
                                                         </div>
                                                     </div>
                                                     <div *ngIf="loginService.getPermission('Properties/Put')"
-                                                         class="col-sm-12 col-md-4 col-lg-4">
-                                                        <button class="btn btn-success btn-icon" type="button"
-                                                                (click)="addBedroom()" *ngIf="false">
-                                                            <i class="material-icons">add</i> Add BEDROOM
-                                                        </button>
-                                                        <button class="btn btn-danger btn-icon pull-right" type="button"
-                                                                (click)="removeBedroom(i)">
-                                                            <i class="material-icons">delete</i> REMOVE BEDROOM
+                                                         class="col-xs-1">
+                                                        <button class="btn btn-simple btn-delete btn-icon pull-right"
+                                                                type="button" (click)="removeBedroom(i)">
+                                                            <i class="material-icons text-danger">delete</i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -359,8 +351,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-t-10">
-                            <div class="col-lg-9 col-xs-12">
+                        <div class="row p-t-10 m-b-30">
+                            <div class="col-xs-12">
                                 <legend>Bathrooms</legend>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
@@ -377,29 +369,25 @@
                                         <div class="row"
                                              *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
                                             <div *ngIf="control.controls.PropertyRoomType.value == 2">
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-xs-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Bathroom Name</label>
                                                         <input type="text" class="form-control"
                                                                [formControl]="control.controls.Name">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-xs-7">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Bathroom Description</label>
-                                                        <textarea class="form-control min-height-36" [formControl]="control.controls.Description"
-                                                                  (keyup)="autosize($event)" (click)="autosize($event)"></textarea>
+                                                        <input type="text" class="form-control"
+                                                               [formControl]="control.controls.Description" />
                                                     </div>
                                                 </div>
                                                 <div *ngIf="loginService.getPermission('Properties/Put')"
-                                                     class="col-sm-12 col-md-4 col-lg-4">
-                                                    <button class="btn btn-success btn-icon" type="button"
-                                                            (click)="addBathroom()" *ngIf="false">
-                                                        <i class="material-icons">add</i> Add BATHROOM
-                                                    </button>
-                                                    <button class="btn btn-danger btn-icon pull-right" type="button"
-                                                            (click)="removeBathroom(i)">
-                                                        <i class="material-icons">delete</i> REMOVE BATHROOM
+                                                     class="col-xs-1">
+                                                    <button class="btn btn-simple btn-delete btn-icon pull-right"
+                                                            type="button" (click)="removeBathroom(i)">
+                                                        <i class="material-icons text-danger">delete</i>
                                                     </button>
                                                 </div>
                                             </div>
@@ -415,8 +403,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-t-10">
-                            <div class="col-lg-9 col-xs-12">
+                        <div class="row p-t-10 m-b-30">
+                            <div class="col-xs-12">
                                 <legend>Kitchen</legend>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-6">
@@ -432,30 +420,25 @@
                                         <div class="row"
                                              *ngFor="let control of propertyForm.controls.Rooms.controls; let i = index">
                                             <div *ngIf="control.controls.PropertyRoomType.value == 3">
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-xs-4">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Kitchen Name</label>
                                                         <input type="text" class="form-control"
                                                                [formControl]="control.controls.Name">
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                <div class="col-xs-7">
                                                     <div class="form-group label-floating">
                                                         <label class="control-label">Kitchen Description</label>
-                                                        <textarea class="form-control min-height-36"
-                                                                  [formControl]="control.controls.Description"
-                                                                  (keyup)="autosize($event, 36)" (click)="autosize($event, 36)"></textarea>
+                                                        <input type="text" class="form-control"
+                                                               [formControl]="control.controls.Description" />
                                                     </div>
                                                 </div>
                                                 <div *ngIf="loginService.getPermission('Properties/Put')"
-                                                     class="col-sm-12 col-md-4 col-lg-4">
-                                                    <button class="btn btn-success btn-icon" type="button"
-                                                            (click)="addKitchen()" *ngIf="false">
-                                                        <i class="material-icons">add</i> Add Kitchen
-                                                    </button>
-                                                    <button class="btn btn-danger btn-icon pull-right" type="button"
-                                                            (click)="removeKitchen(i)">
-                                                        <i class="material-icons">delete</i> Remove Kitchen
+                                                     class="col-xs-1">
+                                                    <button class="btn btn-simple btn-delete btn-icon pull-right"
+                                                            type="button" (click)="removeKitchen(i)">
+                                                        <i class="material-icons text-danger">delete</i>
                                                     </button>
                                                 </div>
                                             </div>
