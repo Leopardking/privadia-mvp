@@ -200,6 +200,7 @@ var AvailabilityComponent = (function () {
                 });
             }, function (e) {
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
+                helpers_1.handlerErrorNotify("Error Message: " + e.Message);
             });
         }
         else {

@@ -252,6 +252,7 @@ export class AvailabilityComponent implements OnInit {
                 },
                 e => {
                     handlerErrorFieds(e, this.availabilityForm);
+                    handlerErrorNotify(`Error Message: ${e.Message}`);
                 }
             );
         } else {
