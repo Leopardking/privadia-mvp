@@ -501,10 +501,10 @@ body.sidebar-mini .sidebar .nav mainfilter-cmp {
 	color: #0b5a7c;
 	right: 10px;
 }
-.wizard-card .form-group.disabled {
+.wizard-card .form-group.disabled, .right-panel .form-group.disabled {
 	cursor: not-allowed;
 }
-.wizard-card .form-group.disabled button {
+.wizard-card .form-group.disabled button, .right-panel .form-group.disabled button {
 	pointer-events: none;
 }
 /**
