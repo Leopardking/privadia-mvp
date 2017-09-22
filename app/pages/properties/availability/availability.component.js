@@ -64,7 +64,7 @@ var AvailabilityComponent = (function () {
             });
             calendarService.getCalendarByProperty(_this.propertyId).subscribe(function (d) {
                 _this.bookingDays = d;
-                // this.bookingDaysClear = d;
+                _this.bookingDaysClear = d;
             }, function (e) {
                 console.log('Error calendar  ', e);
             });
@@ -218,6 +218,7 @@ var AvailabilityComponent = (function () {
             this.calendarService.updateCalendar(formData).subscribe(function (d) {
                 _this.calendarService.getCalendarByProperty(_this.propertyId).subscribe(function (data) {
                     _this.bookingDays = data;
+                    _this.bookingDaysClear = data;
                     helpers_1.handlerSuccessMessage('New Availability Successfully Added');
                     _this.UpdateBlock = !_this.UpdateBlock;
                 }, function (e) {
@@ -235,6 +236,7 @@ var AvailabilityComponent = (function () {
             this.calendarService.addCalendar(formData).subscribe(function (d) {
                 _this.calendarService.getCalendarByProperty(_this.propertyId).subscribe(function (data) {
                     _this.bookingDays = data;
+                    _this.bookingDaysClear = data;
                     helpers_1.handlerSuccessMessage('New Availability Successfully Added');
                     _this.UpdateBlock = !_this.UpdateBlock;
                 }, function (e) {

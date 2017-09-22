@@ -93,7 +93,7 @@ export class AvailabilityComponent implements OnInit {
             calendarService.getCalendarByProperty(this.propertyId).subscribe(
                 d => {
                     this.bookingDays = d;
-                    // this.bookingDaysClear = d;
+                    this.bookingDaysClear = d;
                 },
                 e => {
                     console.log('Error calendar  ', e);
@@ -267,6 +267,7 @@ export class AvailabilityComponent implements OnInit {
                     this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
                         data => {
                             this.bookingDays = data;
+                            this.bookingDaysClear = data;
                             handlerSuccessMessage('New Availability Successfully Added');
                             this.UpdateBlock = !this.UpdateBlock;
                         },
@@ -289,6 +290,7 @@ export class AvailabilityComponent implements OnInit {
                     this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
                         data => {
                             this.bookingDays = data;
+                            this.bookingDaysClear = data;
                             handlerSuccessMessage('New Availability Successfully Added');
                             this.UpdateBlock = !this.UpdateBlock;
                         },
