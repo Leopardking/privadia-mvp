@@ -88,7 +88,6 @@ var CalendarComponent = (function () {
         this.bookingDays.forEach(function (bookingDay) {
             if (bookingDay.EntryType.Name)
                 if (moment(date).isBetween(moment(bookingDay.CheckIn).startOf('day'), moment(bookingDay.CheckOut).startOf('day'), null, '()')) {
-                    console.log('boo', bookingDay);
                     day.type = bookingDay.EntryType.Name.toLowerCase();
                 }
                 else if (moment(date).isSame(moment(bookingDay.CheckIn).startOf('day'))) {
