@@ -26,6 +26,11 @@ var CalendarComponent = (function () {
             _this._buildCalendar();
         });
     };
+    CalendarComponent.prototype.ngOnChanges = function (changes) {
+        if (changes['bookingDays']) {
+            this._buildCalendar();
+        }
+    };
     CalendarComponent.prototype._buildCalendar = function () {
         this.months = [];
         this.selected = moment().startOf('day');

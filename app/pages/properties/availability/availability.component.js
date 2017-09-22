@@ -63,8 +63,8 @@ var AvailabilityComponent = (function () {
                 console.log('Error   calendarEntryTypes', e);
             });
             calendarService.getCalendarByProperty(_this.propertyId).subscribe(function (d) {
-                _this.bookingDays = d;
-                _this.bookingDaysClear = d;
+                _this.bookingDays = _.clone(d);
+                _this.bookingDaysClear = _.clone(d);
             }, function (e) {
                 console.log('Error calendar  ', e);
             });
@@ -137,6 +137,20 @@ var AvailabilityComponent = (function () {
     ;
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
         this.UpdateBlock = !this.UpdateBlock;
+        console.log('Update before', this.bookingDays);
+        this.bookingDays = this.bookingDaysClear;
+        console.log('Update after', this.bookingDays);
+        // this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
+        //     data => {
+        //         this.bookingDays = data;
+        //         this.bookingDaysClear = data;
+        //         handlerSuccessMessage('New Availability Successfully Added');
+        //         this.UpdateBlock = !this.UpdateBlock;
+        //     },
+        //     e => {
+        //         handlerErrorNotify(`Error Message: ${e.Message}`);
+        //     }
+        // );
         switch (this.UpdateBlock) {
             case true:
                 this.resetForm();

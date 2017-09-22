@@ -92,8 +92,8 @@ export class AvailabilityComponent implements OnInit {
 
             calendarService.getCalendarByProperty(this.propertyId).subscribe(
                 d => {
-                    this.bookingDays = d;
-                    this.bookingDaysClear = d;
+                    this.bookingDays = _.clone(d);
+                    this.bookingDaysClear = _.clone(d);
                 },
                 e => {
                     console.log('Error calendar  ', e);
@@ -179,7 +179,20 @@ export class AvailabilityComponent implements OnInit {
 
     toggleUpdateBlock() {
         this.UpdateBlock = !this.UpdateBlock;
-
+        console.log('Update before',this.bookingDays);
+        this.bookingDays = this.bookingDaysClear;
+        console.log('Update after',this.bookingDays);
+        // this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
+        //     data => {
+        //         this.bookingDays = data;
+        //         this.bookingDaysClear = data;
+        //         handlerSuccessMessage('New Availability Successfully Added');
+        //         this.UpdateBlock = !this.UpdateBlock;
+        //     },
+        //     e => {
+        //         handlerErrorNotify(`Error Message: ${e.Message}`);
+        //     }
+        // );
         switch (this.UpdateBlock) {
             case true:
                 this.resetForm();

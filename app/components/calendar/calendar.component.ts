@@ -1,4 +1,4 @@
-import {Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 import initFullCalendar = require('../../../assets/js/init/initFullCalendar.js');
@@ -13,7 +13,7 @@ declare var _: any;
     styleUrls: [ 'calendar.component.css' ]
 })  
 
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnChanges {
 	@Input('bookingDays') public bookingDays;
 	@Input('calendarEntryTypes') public calendarEntryTypes;
 	@Input('group') private availabilityForm: FormGroup;
@@ -37,6 +37,12 @@ export class CalendarComponent implements OnInit {
 		this.availabilityForm.controls['EntryType'].valueChanges.subscribe(() => {
 			this._buildCalendar();
 		});
+	}
+
+	ngOnChanges(changes: SimpleChanges) {
+		if (changes['bookingDays']) {
+			this._buildCalendar();
+		}
 	}
 
 	private _buildCalendar() {
