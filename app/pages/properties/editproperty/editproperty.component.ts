@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import {LoginService} from "../../../providers/login/login.service";
@@ -28,10 +28,12 @@ export class EditpropertyComponent implements OnInit {
 
     public propertyForm: FormGroup;
 
+
     constructor ( public propertiesService: PropertiesService,
                   public lookupsService: LookupsService,
                   private loginService: LoginService,
                   private route: ActivatedRoute,
+                  private router: Router,
                   private builder: FormBuilder) {
         this.route.params.subscribe(params => {
             propertiesService.readDataProperty(this.propertyId = params['id']);
@@ -121,10 +123,10 @@ export class EditpropertyComponent implements OnInit {
                 MetaDataTmp: {},
                 PropertyType: {
                     value:
-                    {
-                        Id: this.propertiesService.property.PropertyType && this.propertiesService.property.PropertyType.Id || null,
-                        Name: this.propertiesService.property.PropertyType && this.propertiesService.property.PropertyType.Name || null,
-                    },
+                        {
+                            Id: this.propertiesService.property.PropertyType && this.propertiesService.property.PropertyType.Id || null,
+                            Name: this.propertiesService.property.PropertyType && this.propertiesService.property.PropertyType.Name || null,
+                        },
                     disabled: this.permission
                 },
             });
@@ -158,19 +160,19 @@ export class EditpropertyComponent implements OnInit {
                 selectQuery.selectpicker('refresh');
             },  1500);
              */
-            console.log('this.propertiesService.property',this.propertyForm.value);
+            console.log('this.propertiesService.property',this.propertyForm);
             localStorage.setItem('title', this.propertiesService.property.Name);
         }, 3000);
     }
 
     setContacts(contacts) {
         const contactFGs = contacts.map(contact => this.builder.group({
-                ContactType: { value: {Id: contact.ContactType.Id, Name: contact.ContactType.Name}, disabled: this.permission },
-                ContactTypeOther: { value: contact.ContactTypeOther, disabled: this.permission },
-                FirstName: { value: contact.FirstName, disabled: this.permission },
-                LastName: { value: contact.LastName, disabled: this.permission },
-                EmailAddress: { value: contact.EmailAddress, disabled: this.permission },
-                Telephone: { value: contact.Telephone, disabled: this.permission },
+            ContactType: { value: {Id: contact.ContactType.Id, Name: contact.ContactType.Name}, disabled: this.permission },
+            ContactTypeOther: { value: contact.ContactTypeOther, disabled: this.permission },
+            FirstName: { value: contact.FirstName, disabled: this.permission },
+            LastName: { value: contact.LastName, disabled: this.permission },
+            EmailAddress: { value: contact.EmailAddress, disabled: this.permission },
+            Telephone: { value: contact.Telephone, disabled: this.permission },
         }));
 
         const contactFormArray = this.builder.array(contactFGs);
@@ -234,7 +236,9 @@ export class EditpropertyComponent implements OnInit {
         console.log('Discard Info form')
     }
 
-    private onSubmit(form) {
+    private onSubmit(isRedirect=false) {
+        let form = this.propertyForm.value;
+
         let newArr = [];
         _.mapValues(form.MetaDataTmp, (el) => {
             return newArr = _.concat(newArr, el)
@@ -242,20 +246,21 @@ export class EditpropertyComponent implements OnInit {
         form.MetaData = newArr;
         form.OwnerUser = null;
 
-        console.log('save ',this.propertyForm)
+        console.log('save ',form);
         if(!this.propertyForm.valid) {
-            handlerErrorNotify('There were errors with your submission, please see form for details.');
+            handlerErrorNotify('There were errors with your submission, please see form for details.)');
             return false;
         }
 
         this.propertiesService.addProperty(form).subscribe(
             d => {
                 this.errorForm = false;
+                console.log('@@@@@', isRedirect);
+                if(isRedirect) { this.router.navigate(['properties']);}
                 handlerSuccessMessage('Property Updated Successfully');
             },
             e => {
                 this.errorForm = true;
-
                 handlerErrorFieds(e, this.propertyForm);
                 handlerErrorNotify('There were errors with your submission, please see form for details.');
             }
