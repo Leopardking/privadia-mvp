@@ -2,7 +2,6 @@
     <div class="container-fluid">
         <div class="row" *ngIf="propertyForm">
             <form [formGroup]="propertyForm"
-                  (ngSubmit)="onSubmit(propertyForm.value)"
                   class="col-xs-12"
                   *ngIf="propertyForm.controls['Bathrooms'] &&
                          propertyForm.controls['Name'] &&
@@ -29,10 +28,10 @@
                                 </a>
                             </li>
                             <!--<li class="nav-pill" [ngClass]="{'form-error': !propertyForm.controls['MinimumStay'].valid && errorForm}">-->
-                                <!--<a href="#metatab-availability" role="tab" data-toggle="tab" class="">-->
-                                    <!--<i class="material-icons">check_circle</i>-->
-                                    <!--Availability-->
-                                <!--</a>-->
+                            <!--<a href="#metatab-availability" role="tab" data-toggle="tab" class="">-->
+                            <!--<i class="material-icons">check_circle</i>-->
+                            <!--Availability-->
+                            <!--</a>-->
                             <!--</li>-->
                             <li class="nav-pill">
                                 <a href="#metatab-marketing" role="tab" data-toggle="tab" class="">
@@ -85,9 +84,9 @@
                             </div>
                             <!--  Property Availability -->
                             <!--<div id="metatab-availability" class="fade card-content p-b-none p-t-none">-->
-                                <!--<calendar-cmp *ngIf="!propertiesService.isReading"-->
-                                              <!--[group]="propertyForm"-->
-                                              <!--[errorForm]="errorForm"></calendar-cmp>-->
+                            <!--<calendar-cmp *ngIf="!propertiesService.isReading"-->
+                            <!--[group]="propertyForm"-->
+                            <!--[errorForm]="errorForm"></calendar-cmp>-->
                             <!--</div>-->
                             <!--  Property Marketing  -->
                             <div id="metatab-marketing" class="fade card-content p-b-none p-l-r-none p-t-none">
@@ -96,15 +95,15 @@
                             </div>
 
                             <!--<div id="metatab-property-4" class="fade card-content p-b-none p-t-none">-->
-                                <!--<property-metafilter-cmp *ngIf="propertiesService.metadata[3] && !propertiesService.isReading"-->
-                                                         <!--[group]="propertyForm"-->
-                                                         <!--[metadata]="propertiesService.metadata[3]"></property-metafilter-cmp>-->
+                            <!--<property-metafilter-cmp *ngIf="propertiesService.metadata[3] && !propertiesService.isReading"-->
+                            <!--[group]="propertyForm"-->
+                            <!--[metadata]="propertiesService.metadata[3]"></property-metafilter-cmp>-->
                             <!--</div>-->
 
                             <!--<div id="metatab-property-3" class="fade card-content p-b-none p-t-none">-->
-                                <!--<property-metafilter-cmp *ngIf="propertiesService.metadata[2] && !propertiesService.isReading"-->
-                                                         <!--[group]="propertyForm"-->
-                                                         <!--[metadata]="propertiesService.metadata[2]"></property-metafilter-cmp>-->
+                            <!--<property-metafilter-cmp *ngIf="propertiesService.metadata[2] && !propertiesService.isReading"-->
+                            <!--[group]="propertyForm"-->
+                            <!--[metadata]="propertiesService.metadata[2]"></property-metafilter-cmp>-->
                             <!--</div>-->
 
                             <div id="metatab-property-6" class="fade card-content p-b-none p-t-none">
@@ -139,7 +138,8 @@
                         </button>
                     </div>
                     <div class="col-xs-8">
-                        <button id="wizard-form" *ngIf="!permission" class="btn btn-success pull-right m-r-20 p-l-r-20 font-16" type="submit">Save</button>
+                        <button id="wizard-form" *ngIf="!permission" class="btn btn-success pull-right m-r-20 p-l-r-20 font-16" type="button" (click)="onSubmit(true)">Save & Cancel</button>
+                        <button *ngIf="!permission" class="btn btn-success pull-right m-r-20 p-l-r-20 font-16" type="button" (click)="onSubmit()">Save & Continue</button>
                         <div class="togglebutton pull-right">
                             <label>
                                 <input type="checkbox" formControlName="Active" *ngIf="!propertiesService.isReading"> Active status
