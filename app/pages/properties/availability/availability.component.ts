@@ -1,11 +1,11 @@
-import {AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { PropertiesService } from '../../../providers/properties/properties.service';
 import { CalendarService } from "../../../providers/calendar/calendar.service";
 import { LookupsService } from "../../../providers/lookups/lookups.service";
-import {handlerErrorFieds, handlerErrorNotify, handlerSuccessMessage} from "../../../helpers/helpers";
+import { handlerErrorFieds, handlerErrorNotify, handlerSuccessMessage } from "../../../helpers/helpers";
 import {LoginService} from "../../../providers/login/login.service";
 
 declare const moment: any;
@@ -48,7 +48,6 @@ export class AvailabilityComponent implements OnInit {
     private bookingDays;
     private bookingDaysClear;
     private isCalendarView: boolean = true;
-
 
     private UpdateBlock: boolean = false;
     private disabledDatesIn: any;
@@ -126,7 +125,7 @@ export class AvailabilityComponent implements OnInit {
         const nextDate = _(this.bookingDays);
         nextDate.next();
 
-        console.log('bookingDays', this.bookingDays);
+        // console.log('bookingDays', this.bookingDays);
         this.bookingDays.some((booking, index) => {
             const tmpNextDate = nextDate.next();
 
@@ -139,9 +138,9 @@ export class AvailabilityComponent implements OnInit {
             if(index === 0 && this.CheckOut.isSameOrBefore(tmpStart)) {
                 this.minDatePicker = this.CheckIn.clone().add(1, 'days');
                 this.maxDatePicker = tmpStart.clone();
-
                 return true;
-            } else if(this.CheckOut.isBetween(tmpStart, tmpEnd, null, '(]')) {
+            }
+            else if(this.CheckOut.isBetween(tmpStart, tmpEnd, null, '(]')) {
                 this.CheckIn = tmpEnd.clone();
                 this.CheckOut = tmpEnd.add(1, 'days').clone();
 
@@ -150,21 +149,25 @@ export class AvailabilityComponent implements OnInit {
 
                 if(this.CheckOut.isSameOrBefore(tmpNextStart) || tmpNextDate.done) {
                     return true;
-                } else {
+                }
+                else {
                     this.minDatePicker = this.CheckIn.clone().add(1, 'days');
                     this.maxDatePicker = tmpNextStart.clone();
                     return false;
                 }
-            } else if(this.CheckIn.isSameOrAfter(tmpEnd) && this.CheckOut.isSameOrBefore(tmpNextStart)) {
+            }
+            else if(this.CheckIn.isSameOrAfter(tmpEnd) && this.CheckOut.isSameOrBefore(tmpNextStart)) {
                 this.minDatePicker = this.CheckIn.clone().add(1, 'days');
                 this.maxDatePicker = tmpNextStart.clone();
                 return false;
-            } else {
+            }
+            else {
                 this.minDatePicker = this.CheckIn.clone().add(1, 'days');
                 return false;
             }
 
         });
+
         setTimeout(() => {
             if(this.maxDatePicker && this.maxDatePicker.isSameOrBefore((this.minDatePicker)))
                 this.maxDatePicker = false;
@@ -177,11 +180,12 @@ export class AvailabilityComponent implements OnInit {
         this.availabilityForm.controls['CheckOut'].patchValue(this.CheckOut.format('DD/MM/YYYY'));
     };
 
+
     toggleUpdateBlock() {
         this.UpdateBlock = !this.UpdateBlock;
-        console.log('Update before',this.bookingDays);
+        // console.log('Update before',this.bookingDays);
         this.bookingDays = this.bookingDaysClear;
-        console.log('Update after',this.bookingDays);
+        // console.log('Update after',this.bookingDays);
         // this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
         //     data => {
         //         this.bookingDays = data;
@@ -236,6 +240,7 @@ export class AvailabilityComponent implements OnInit {
         }
     }
 
+
     saveForm(formData) {
         console.log('Form save',this.availabilityForm.value, formData);
         if(formData.EntryType.Id == 1 && !this.availabilityForm.valid) {
@@ -279,11 +284,13 @@ export class AvailabilityComponent implements OnInit {
                             this.UpdateBlock = !this.UpdateBlock;
                         },
                         e => {
+                            console.log('error',e)
                             handlerErrorNotify(`Error Message: ${e.Message}`);
                         }
                     );
                 },
                 e => {
+                    console.log('error',e)
                     handlerErrorFieds(e, this.availabilityForm);
                     handlerErrorNotify(`Error Message: ${e.Message}`);
                 }
@@ -292,7 +299,10 @@ export class AvailabilityComponent implements OnInit {
         console.log("save form", formData)
     }
 
+
+
     handlerEditAvailability(id) {
+        console.log("asdsadasdasd-=-=-=-=-=-=-=-=-=-=-");
         this.role = true;
 
         this.calendarService.getCalendar(id).subscribe(
@@ -319,9 +329,10 @@ export class AvailabilityComponent implements OnInit {
 
                 this.isCalendarView = true;
 
-                _.remove(this.bookingDays, (o) => {
-                    return o.Id == id;
-                });
+                // _.remove(this.bookingDays, (o) => {
+                //     return o.Id == id;
+                // });
+
                 this.UpdateBlock = !this.UpdateBlock;
 
                 this.disabledDates();
@@ -332,6 +343,8 @@ export class AvailabilityComponent implements OnInit {
             }
         );
     }
+
+
 
     handlerDeleteAvailability(id) {
         this.bookingDays = _.remove(this.bookingDays, (o) => {
@@ -361,6 +374,8 @@ export class AvailabilityComponent implements OnInit {
             }
         });
     }
+
+
     private autosize(e){
         e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     }

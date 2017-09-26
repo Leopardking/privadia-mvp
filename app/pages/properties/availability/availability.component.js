@@ -88,7 +88,7 @@ var AvailabilityComponent = (function () {
         }, 980);
         var nextDate = _(this.bookingDays);
         nextDate.next();
-        console.log('bookingDays', this.bookingDays);
+        // console.log('bookingDays', this.bookingDays);
         this.bookingDays.some(function (booking, index) {
             var tmpNextDate = nextDate.next();
             var tmpStart = moment(booking.CheckIn).startOf('days');
@@ -137,9 +137,9 @@ var AvailabilityComponent = (function () {
     ;
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
         this.UpdateBlock = !this.UpdateBlock;
-        console.log('Update before', this.bookingDays);
+        // console.log('Update before',this.bookingDays);
         this.bookingDays = this.bookingDaysClear;
-        console.log('Update after', this.bookingDays);
+        // console.log('Update after',this.bookingDays);
         // this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
         //     data => {
         //         this.bookingDays = data;
@@ -225,9 +225,11 @@ var AvailabilityComponent = (function () {
                     helpers_1.handlerSuccessMessage('New Availability Successfully Added');
                     _this.UpdateBlock = !_this.UpdateBlock;
                 }, function (e) {
+                    console.log('error', e);
                     helpers_1.handlerErrorNotify("Error Message: " + e.Message);
                 });
             }, function (e) {
+                console.log('error', e);
                 helpers_1.handlerErrorFieds(e, _this.availabilityForm);
                 helpers_1.handlerErrorNotify("Error Message: " + e.Message);
             });
@@ -236,6 +238,7 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.handlerEditAvailability = function (id) {
         var _this = this;
+        console.log("asdsadasdasd-=-=-=-=-=-=-=-=-=-=-");
         this.role = true;
         this.calendarService.getCalendar(id).subscribe(function (d) {
             _this.disabledDates();
@@ -258,9 +261,9 @@ var AvailabilityComponent = (function () {
                 AgentEmail: new forms_1.FormControl(d.AgentEmail || null)
             });
             _this.isCalendarView = true;
-            _.remove(_this.bookingDays, function (o) {
-                return o.Id == id;
-            });
+            // _.remove(this.bookingDays, (o) => {
+            //     return o.Id == id;
+            // });
             _this.UpdateBlock = !_this.UpdateBlock;
             _this.disabledDates();
             _this.handlerUpdateDate(moment(d.CheckIn).format('DD/MM/YYYY'), moment(d.CheckOut).format('DD/MM/YYYY'));
