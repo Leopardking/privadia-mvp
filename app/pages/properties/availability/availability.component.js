@@ -287,13 +287,10 @@ var AvailabilityComponent = (function () {
             CheckOut: null,
             PropertyId: this.propertyId,
             EntryType: {
-                Id: 1,
-                Name: 'Internal Booking',
+                Id: 4,
+                Name: 'Other',
             }
         });
-    };
-    AvailabilityComponent.prototype.autosize = function (e) {
-        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
     };
     AvailabilityComponent = __decorate([
         core_1.Component({

@@ -6,7 +6,7 @@ import { PropertiesService } from '../../../providers/properties/properties.serv
 import { CalendarService } from "../../../providers/calendar/calendar.service";
 import { LookupsService } from "../../../providers/lookups/lookups.service";
 import { handlerErrorFieds, handlerErrorNotify, handlerSuccessMessage } from "../../../helpers/helpers";
-import {LoginService} from "../../../providers/login/login.service";
+import { LoginService } from "../../../providers/login/login.service";
 
 declare const moment: any;
 declare const $: any;
@@ -284,13 +284,13 @@ export class AvailabilityComponent implements OnInit {
                             this.UpdateBlock = !this.UpdateBlock;
                         },
                         e => {
-                            console.log('error',e)
+                            console.log('error',e);
                             handlerErrorNotify(`Error Message: ${e.Message}`);
                         }
                     );
                 },
                 e => {
-                    console.log('error',e)
+                    console.log('error',e);
                     handlerErrorFieds(e, this.availabilityForm);
                     handlerErrorNotify(`Error Message: ${e.Message}`);
                 }
@@ -368,15 +368,9 @@ export class AvailabilityComponent implements OnInit {
             CheckOut: null,
             PropertyId: this.propertyId,
             EntryType: {
-                Id: 1,
-                Name: 'Internal Booking',
+                Id: 4,
+                Name: 'Other',
             }
         });
     }
-
-
-    private autosize(e){
-        e.target.style.cssText = 'height:' + (e.target.scrollHeight) + 'px';
-    }
-
 }

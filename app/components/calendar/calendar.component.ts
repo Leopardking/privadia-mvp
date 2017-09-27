@@ -37,8 +37,6 @@ export class CalendarComponent implements OnInit, OnChanges {
 		this.availabilityForm.controls['EntryType'].valueChanges.subscribe(() => {
 			this._buildCalendar();
 		});
-
-		console.log(this.bookingDays, this.calendarEntryTypes)
 	}
 
 	ngOnChanges(changes: SimpleChanges) {

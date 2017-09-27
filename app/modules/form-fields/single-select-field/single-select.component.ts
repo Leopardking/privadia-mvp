@@ -31,7 +31,7 @@ export class SingleSelectfieldComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
             selectQuery.selectpicker('render');
             selectQuery.selectpicker('refresh');
-        })
+        });
 
         selectQuery.on('show.bs.select', function (e) {
             $('.dropdown-menu.inner').perfectScrollbar('update');

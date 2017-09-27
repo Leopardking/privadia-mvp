@@ -32,9 +32,9 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked {
     }
 
     ngOnInit( ) {
-        // console.log("567890--------", this.field.value)
-        console.log("567890--------", this.QQZ)
-        console.log(this.QQZ)
+
+        // console.log("567890--------", this.QQZ)
+        // console.log(this.QQZ)
         if(!this.QQZ){
             this.field.setValue(0)
 
