@@ -18,6 +18,7 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked {
     @Input('field') private field: FormControl;
     @Input('idPicker') private idPicker: string;
     @Input('disabledDates') private disabledDates: any;
+    @Input('QQZ') private QQZ: any;
     @Input('linkedField') private linkedField: FormControl;
     @Output('updateDate') updateDate: EventEmitter<any> = new EventEmitter();
 
@@ -26,9 +27,20 @@ export class DatetimefieldComponent implements OnInit, AfterContentChecked {
 
     public dateTime: any;
 
-    constructor( ) { }
+    constructor( ) {
 
-    ngOnInit( ) { }
+    }
+
+    ngOnInit( ) {
+        // console.log("567890--------", this.field.value)
+        console.log("567890--------", this.QQZ)
+        console.log(this.QQZ)
+        if(!this.QQZ){
+            this.field.setValue(0)
+
+        }
+        // this.field.setValue(0);
+    }
 
     ngAfterContentChecked() {
         this.dateTime = $(`.${this.idPicker}`);

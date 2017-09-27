@@ -238,7 +238,6 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.handlerEditAvailability = function (id) {
         var _this = this;
-        console.log("asdsadasdasd-=-=-=-=-=-=-=-=-=-=-");
         this.role = true;
         this.calendarService.getCalendar(id).subscribe(function (d) {
             _this.disabledDates();

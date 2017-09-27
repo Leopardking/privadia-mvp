@@ -25,6 +25,7 @@ var CalendarComponent = (function () {
         this.availabilityForm.controls['EntryType'].valueChanges.subscribe(function () {
             _this._buildCalendar();
         });
+        console.log(this.bookingDays, this.calendarEntryTypes);
     };
     CalendarComponent.prototype.ngOnChanges = function (changes) {
         if (changes['bookingDays']) {

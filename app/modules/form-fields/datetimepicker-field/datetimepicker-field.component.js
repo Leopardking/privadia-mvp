@@ -14,7 +14,15 @@ var DatetimefieldComponent = (function () {
     function DatetimefieldComponent() {
         this.updateDate = new core_1.EventEmitter();
     }
-    DatetimefieldComponent.prototype.ngOnInit = function () { };
+    DatetimefieldComponent.prototype.ngOnInit = function () {
+        // console.log("567890--------", this.field.value)
+        console.log("567890--------", this.QQZ);
+        console.log(this.QQZ);
+        if (!this.QQZ) {
+            this.field.setValue(0);
+        }
+        // this.field.setValue(0);
+    };
     DatetimefieldComponent.prototype.ngAfterContentChecked = function () {
         this.dateTime = $("." + this.idPicker);
         this.dateTime.datetimepicker({
@@ -60,6 +68,10 @@ var DatetimefieldComponent = (function () {
         core_1.Input('disabledDates'), 
         __metadata('design:type', Object)
     ], DatetimefieldComponent.prototype, "disabledDates", void 0);
+    __decorate([
+        core_1.Input('QQZ'), 
+        __metadata('design:type', Object)
+    ], DatetimefieldComponent.prototype, "QQZ", void 0);
     __decorate([
         core_1.Input('linkedField'), 
         __metadata('design:type', forms_1.FormControl)

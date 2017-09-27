@@ -302,7 +302,6 @@ export class AvailabilityComponent implements OnInit {
 
 
     handlerEditAvailability(id) {
-        console.log("asdsadasdasd-=-=-=-=-=-=-=-=-=-=-");
         this.role = true;
 
         this.calendarService.getCalendar(id).subscribe(
