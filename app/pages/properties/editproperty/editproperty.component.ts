@@ -261,6 +261,7 @@ export class EditpropertyComponent implements OnInit {
             },
             e => {
                 this.errorForm = true;
+                console.log('kekekekekkeke');
                 handlerErrorFieds(e, this.propertyForm);
                 handlerErrorNotify('There were errors with your submission, please see form for details.');
             }

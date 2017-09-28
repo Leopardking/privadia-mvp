@@ -34,11 +34,14 @@
                             Availability for "{{propertiesService.property && propertiesService.property.InternalName}}"
                         </h4>
                     </div>
+                    <!--tab Calendar-->
                     <calendar-cmp *ngIf="isCalendarView && bookingDays"
                                   [bookingDays]="bookingDays"
                                   [calendarEntryTypes]="calendarEntryTypes"
                                   [group]="availabilityForm">
                     </calendar-cmp>
+
+                    <!--tab List-->
                     <calendar-list-cmp *ngIf="!isCalendarView"
                                        [group]="availabilityForm"
                                        [bookingDays]="bookingDays"
@@ -64,6 +67,7 @@
                                                 [idPicker]="'checkIn'"
                                                 [linkedField]="availabilityForm.controls.CheckOut"
                                                 [disabledDates]="disabledDatesIn"
+                                                [QQZ]="false"
                                                 (updateDate)="handlerUpdateDate($event, value)"
                                                 [field]="availabilityForm.controls.CheckIn"></datetimepicker-field-cmp>
                                     </div>
@@ -75,6 +79,7 @@
                                                 [linkedField]="availabilityForm.controls.CheckIn"
                                                 [minDate]="minDate"
                                                 [maxDate]="maxDate"
+                                                [QQZ]="false"
                                                 [field]="availabilityForm.controls.CheckOut"></datetimepicker-field-cmp>
                                     </div>
                                 </div>
@@ -82,7 +87,7 @@
                                     <div class="col-xs-12">
                                         <singleselect-field-cmp
                                                 [dataList]="calendarEntryTypes"
-                                                [options]="{title: 'Type', default: 'Other'}"
+                                                [options]="{title: 'Type*', default: 'Other'}"
                                                 [disabled]="role"
                                                 [errorForm]="errorForm"
                                                 [field]="availabilityForm.controls.EntryType"></singleselect-field-cmp>

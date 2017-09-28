@@ -50,7 +50,7 @@
                                 </tr>
                                 </tfoot>
                                 <tbody id="bookingTableBody" *ngIf="!propertiesService.isReading">
-                                <tr *ngFor="let item of propertiesService.properties; let i = index; let last = last ">
+                                <tr *ngFor="let item of propertiesService.properties; let i = index; let last = last">
                                     <td></td>
                                     <td class="thumb">
                                         <cl-image *ngIf="item.ImageId"
@@ -93,7 +93,7 @@
                                         <button *ngIf="loginService.getPermission('Properties/Delete')"
                                                 class="btn btn-simple btn-delete btn-icon"
                                                 type="button"
-                                                [popover]="i"
+                                                [popover]="popever"
                                         >
                                             <i class="material-icons">delete</i>Remove
                                         </button>
@@ -102,17 +102,17 @@
                                                 [routerLink]="['/properties/view', item.Id]">
                                             <i class="material-icons">remove_red_eye</i>View
                                         </button>
-                                        <popover-content #i
+                                        <popover-content #popever
                                                          placement="left"
                                                          [animation]="true"
                                                          [closeOnClickOutside]="true">
                                             <h3>Are you sure?</h3>
                                             <button type="button" class="btn btn-danger font-14"
-                                                    (click)="removeProperty({index: i, propertyId: item.Id})">Yes,
-                                                remove
+                                                    (click)="removeProperty({index: i, propertyId: item.Id})">
+                                                Yes, remove
                                             </button>
                                             <button type="button" class="btn btn-success-green font-14"
-                                                    (click)="i.hide($event)">Cancel
+                                                    (click)="popever.hide($event)">Cancel
                                             </button>
                                         </popover-content>
                                     </td>

@@ -16,12 +16,13 @@ var login_service_1 = require("../../../providers/login/login.service");
 var lookups_service_1 = require("../../../providers/lookups/lookups.service");
 var helpers_1 = require("../../../helpers/helpers");
 var EditpropertyComponent = (function () {
-    function EditpropertyComponent(propertiesService, lookupsService, loginService, route, builder) {
+    function EditpropertyComponent(propertiesService, lookupsService, loginService, route, router, builder) {
         var _this = this;
         this.propertiesService = propertiesService;
         this.lookupsService = lookupsService;
         this.loginService = loginService;
         this.route = route;
+        this.router = router;
         this.builder = builder;
         this.urlPattern = new RegExp('^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?', '');
         this.errorForm = false;
@@ -144,7 +145,7 @@ var EditpropertyComponent = (function () {
                 selectQuery.selectpicker('refresh');
             },  1500);
              */
-            console.log('this.propertiesService.property', _this.propertyForm.value);
+            console.log('this.propertiesService.property', _this.propertyForm);
             localStorage.setItem('title', _this.propertiesService.property.Name);
         }, 3000);
     };
@@ -215,24 +216,31 @@ var EditpropertyComponent = (function () {
     EditpropertyComponent.prototype.discardInfo = function () {
         console.log('Discard Info form');
     };
-    EditpropertyComponent.prototype.onSubmit = function (form) {
+    EditpropertyComponent.prototype.onSubmit = function (isRedirect) {
         var _this = this;
+        if (isRedirect === void 0) { isRedirect = false; }
+        var form = this.propertyForm.value;
         var newArr = [];
         _.mapValues(form.MetaDataTmp, function (el) {
             return newArr = _.concat(newArr, el);
         });
         form.MetaData = newArr;
         form.OwnerUser = null;
-        console.log('save ', this.propertyForm);
+        console.log('save ', form);
         if (!this.propertyForm.valid) {
-            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
+            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.)');
             return false;
         }
         this.propertiesService.addProperty(form).subscribe(function (d) {
             _this.errorForm = false;
+            console.log('@@@@@', isRedirect);
+            if (isRedirect) {
+                _this.router.navigate(['properties']);
+            }
             helpers_1.handlerSuccessMessage('Property Updated Successfully');
         }, function (e) {
             _this.errorForm = true;
+            console.log('kekekekekkeke');
             helpers_1.handlerErrorFieds(e, _this.propertyForm);
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
         });
@@ -244,7 +252,7 @@ var EditpropertyComponent = (function () {
             templateUrl: 'editproperty.component.html',
             styleUrls: ['editproperty.component.css']
         }), 
-        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService, login_service_1.LoginService, router_1.ActivatedRoute, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [properties_service_1.PropertiesService, lookups_service_1.LookupsService, login_service_1.LoginService, router_1.ActivatedRoute, router_1.Router, forms_1.FormBuilder])
     ], EditpropertyComponent);
     return EditpropertyComponent;
 }());
