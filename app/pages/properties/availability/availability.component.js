@@ -141,6 +141,7 @@ var AvailabilityComponent = (function () {
     };
     ;
     AvailabilityComponent.prototype.toggleUpdateBlock = function () {
+        this.availabilityForm.reset();
         this.UpdateBlock = !this.UpdateBlock;
         this.bookingDays = this.bookingDaysClear;
         // this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
@@ -239,6 +240,7 @@ var AvailabilityComponent = (function () {
     };
     AvailabilityComponent.prototype.handlerEditAvailability = function (id) {
         var _this = this;
+        this.availabilityForm.reset();
         this.role = true;
         this.calendarService.getCalendar(id).subscribe(function (d) {
             _this.disabledDates();

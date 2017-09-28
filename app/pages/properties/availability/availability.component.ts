@@ -184,6 +184,7 @@ export class AvailabilityComponent implements OnInit {
     };
 
     toggleUpdateBlock() {
+        this.availabilityForm.reset()
         this.UpdateBlock = !this.UpdateBlock;
         this.bookingDays = this.bookingDaysClear;
         // this.calendarService.getCalendarByProperty(this.propertyId).subscribe(
@@ -297,6 +298,7 @@ export class AvailabilityComponent implements OnInit {
     }
 
     handlerEditAvailability(id) {
+        this.availabilityForm.reset();
         this.role = true;
 
         this.calendarService.getCalendar(id).subscribe(
