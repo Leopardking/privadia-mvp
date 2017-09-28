@@ -48,7 +48,10 @@ export class PropertiesComponent implements OnInit{
                 this.propertiesService.properties.splice(el.index,1);
                 console.log('Delete property ', d);
             },
-            e => { console.log("error:", e); }
+            e => {
+                this.propertiesService.properties.splice(el.index,1);
+                // console.log("error:", e);
+            }
         );
     }
 

@@ -41,7 +41,10 @@ var PropertiesComponent = (function () {
         this.propertiesService.deleteProperty(el.propertyId).subscribe(function (d) {
             _this.propertiesService.properties.splice(el.index, 1);
             console.log('Delete property ', d);
-        }, function (e) { console.log("error:", e); });
+        }, function (e) {
+            _this.propertiesService.properties.splice(el.index, 1);
+            // console.log("error:", e);
+        });
     };
     PropertiesComponent.prototype.addBooking = function () {
         console.log('add');
