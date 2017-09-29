@@ -70,6 +70,7 @@
                                     </td>
                                     <td>
                                         <div class="property-name">{{item.Name}}</div>
+                                        <div class="property-name" style="display: none">{{item.InternalName}}</div>
                                         <div class="property-id">ID {{item.Id}}</div>
                                         <div class="property-status" *ngIf="!item.Active">Inactive</div>
                                         <div class="property-status active" *ngIf="item.Active">Active</div>
