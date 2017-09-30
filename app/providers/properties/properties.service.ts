@@ -31,6 +31,9 @@ export class PropertiesService {
 		Name: ''
 	};
 
+	public commissionPercentage;
+	public fees;
+
 	constructor ( private http: Http,
 				  private loginService: LoginService,
 				  private lookupsService: LookupsService ) {}
@@ -53,6 +56,12 @@ export class PropertiesService {
 			d => {
 				this.property = d;
 				this.isReading = false;
+				this.getCompaniesById(d.ManagementCompany.Id).subscribe(data=>{
+					this.commissionPercentage = data.CommissionPercentage;
+					this.fees = data.Fees;
+				},error=>{
+					console.log("error company: ", error);
+				});
 			},
 			e => {
 				console.log("error properties: ", e);
@@ -126,7 +135,7 @@ export class PropertiesService {
 	public readDataRates(Id) {
 		this.getRates(Id).subscribe(
 			d => {
-				this.rates = d;
+				this.rates = d.Rates;
 			},
 			e => { console.log('Error readDataManagers', e) }
 		)
@@ -209,7 +218,7 @@ export class PropertiesService {
 		let options = new RequestOptions( {headers: header} );
 		this.isReading = true;
 
-		return this.http.get( this.apiUrl + '/api/Rates/ByProperty/' + id, options )
+		return this.http.get( this.apiUrl + '/api/Rates/GetByProperty/' + id, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}
@@ -228,7 +237,13 @@ export class PropertiesService {
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.delete( this.apiUrl + '/api/Rates/' + id, options )
-				.map(this.extractData)
+				.map(res=>{
+					if(res.status == 200){
+						return true
+					}else{
+						return false
+					}
+				})
 				.catch(this.handleError);
 	}
 
@@ -263,6 +278,18 @@ export class PropertiesService {
 		let options = new RequestOptions( {headers: header} );
 
 		return this.http.get( this.apiUrl + '/api/bookings/property/' + id, options)
+				.map(this.extractData)
+				.catch(this.handleError);
+	}
+	
+	public getCompaniesById(id){
+		if(!this.loginService.getPermission('Properties/GetById'))
+		return Observable.throw(null);
+
+		let header = new Headers( {'Authorization': this.token} );
+		let options = new RequestOptions( {headers: header} );
+
+		return this.http.get( this.apiUrl + '/api/Companies/' + id, options )
 				.map(this.extractData)
 				.catch(this.handleError);
 	}

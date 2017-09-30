@@ -21,7 +21,7 @@ declare const $: any
 
 export class SetratesComponent implements OnInit{
     private datatableInited = false;
-    private propertyId: number;
+    private propertyId: string;
 
     private isEdit = [];
     private saveMessage = '';
@@ -33,6 +33,8 @@ export class SetratesComponent implements OnInit{
         PropertyId: new FormControl(),
         StartDate: new FormControl(),
         Value: new FormControl(),
+        CommissionPercentage: new FormControl(),
+        Fees: new FormControl()
     });
     public date;
 
@@ -73,6 +75,8 @@ export class SetratesComponent implements OnInit{
             PropertyId: this.propertyId,
             StartDate: moment(data.StartDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
             Value: data.Value,
+            CommissionPercentage: data.CommissionPercentage,
+            Fees: data.Fees
         });
         setTimeout(() => {
             initDatetimepickers();
@@ -88,6 +92,8 @@ export class SetratesComponent implements OnInit{
             PropertyId: this.propertyId,
             StartDate: moment(),
             Value: null,
+            CommissionPercentage: this.propertyService.commissionPercentage,
+            Fees: this.propertyService.fees
         });
         this.rateForm = this.builder.group({
             Currency: new FormControl('EUR'),
@@ -96,6 +102,8 @@ export class SetratesComponent implements OnInit{
             PropertyId: new FormControl(this.propertyId),
             StartDate: new FormControl(moment().format('DD/MM/YYYY')),
             Value: new FormControl(),
+            CommissionPercentage: new FormControl(this.propertyService.commissionPercentage),
+            Fees: new FormControl(this.propertyService.fees)
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
 
@@ -106,7 +114,7 @@ export class SetratesComponent implements OnInit{
 
     private editRates(object) {
         this.isEdit[object.index] = !this.isEdit[object.index];
-        this.initRateToForm(this.propertyService.rates[object.index]);
+        this.initRateToForm(this.propertyService.rates[object.index],this.propertyService.commissionPercentage,this.propertyService.fees);
     }
 
     private formatDate(date, format) {
@@ -128,6 +136,8 @@ export class SetratesComponent implements OnInit{
         form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
         form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
         // ----------------
+        // console.log(JSON.stringify(form));
+        
         this.propertyService.saveRate(form).subscribe(
             d => {
                 $.notify({
@@ -159,31 +169,37 @@ export class SetratesComponent implements OnInit{
 
     private deleteRate(object) {
         console.log('delete ', this.propertyService.rates[object.index].Id)
-        this.propertyService.deleteRate(this.propertyService.rates[object.index].Id).subscribe(
-            d => {
-                $.notify({
-                    icon: "notifications",
-                    message: "Property Added Successfully"
-
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
+        if(typeof(this.propertyService.rates[object.index].Id) == undefined || this.propertyService.rates[object.index].Id == undefined){
+            this.propertyService.rates.splice(object.index, 1);
+        }else{
+            this.propertyService.deleteRate(this.propertyService.rates[object.index].Id).subscribe(
+                d => {
+                    if(d == true){
+                        $.notify({
+                            icon: "notifications",
+                            message: "Property Deleted Successfully"
+        
+                        },{
+                            type: 'success',
+                            timer: 3000,
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            }
+                        });
+                        this.propertyService.rates.splice(object.index, 1);
+        
+                        setTimeout(() => {
+                            initDatetimepickers();
+                        }, 100);
                     }
-                });
-                this.propertyService.rates.splice(object.index, 1);
-
-                setTimeout(() => {
-                    initDatetimepickers();
-                }, 100);
-            },
-            e => {
-                console.log('Error ', e)
-                handlerErrorNotify('Delete error')
-            }
-        )
+                },
+                e => {
+                    console.log('Error ', e)
+                    handlerErrorNotify('Delete error')
+                }
+            )
+        }
     }
 
 }

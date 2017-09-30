@@ -30,6 +30,8 @@ var SetratesComponent = (function () {
             PropertyId: new forms_1.FormControl(),
             StartDate: new forms_1.FormControl(),
             Value: new forms_1.FormControl(),
+            CommissionPercentage: new forms_1.FormControl(),
+            Fees: new forms_1.FormControl()
         });
         console.log('Form init');
     }
@@ -62,6 +64,8 @@ var SetratesComponent = (function () {
             PropertyId: this.propertyId,
             StartDate: moment(data.StartDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
             Value: data.Value,
+            CommissionPercentage: data.CommissionPercentage,
+            Fees: data.Fees
         });
         setTimeout(function () {
             initDatetimepickers();
@@ -76,6 +80,8 @@ var SetratesComponent = (function () {
             PropertyId: this.propertyId,
             StartDate: moment(),
             Value: null,
+            CommissionPercentage: this.propertyService.commissionPercentage,
+            Fees: this.propertyService.fees
         });
         this.rateForm = this.builder.group({
             Currency: new forms_1.FormControl('EUR'),
@@ -84,6 +90,8 @@ var SetratesComponent = (function () {
             PropertyId: new forms_1.FormControl(this.propertyId),
             StartDate: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
             Value: new forms_1.FormControl(),
+            CommissionPercentage: new forms_1.FormControl(this.propertyService.commissionPercentage),
+            Fees: new forms_1.FormControl(this.propertyService.fees)
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
         setTimeout(function () {
@@ -92,7 +100,7 @@ var SetratesComponent = (function () {
     };
     SetratesComponent.prototype.editRates = function (object) {
         this.isEdit[object.index] = !this.isEdit[object.index];
-        this.initRateToForm(this.propertyService.rates[object.index]);
+        this.initRateToForm(this.propertyService.rates[object.index], this.propertyService.commissionPercentage, this.propertyService.fees);
     };
     SetratesComponent.prototype.formatDate = function (date, format) {
         return moment(date).format(format);
@@ -113,6 +121,7 @@ var SetratesComponent = (function () {
         form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
         form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
         // ----------------
+        // console.log(JSON.stringify(form));
         this.propertyService.saveRate(form).subscribe(function (d) {
             $.notify({
                 icon: "notifications",
@@ -139,26 +148,33 @@ var SetratesComponent = (function () {
     SetratesComponent.prototype.deleteRate = function (object) {
         var _this = this;
         console.log('delete ', this.propertyService.rates[object.index].Id);
-        this.propertyService.deleteRate(this.propertyService.rates[object.index].Id).subscribe(function (d) {
-            $.notify({
-                icon: "notifications",
-                message: "Property Added Successfully"
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
+        if (typeof (this.propertyService.rates[object.index].Id) == undefined || this.propertyService.rates[object.index].Id == undefined) {
+            this.propertyService.rates.splice(object.index, 1);
+        }
+        else {
+            this.propertyService.deleteRate(this.propertyService.rates[object.index].Id).subscribe(function (d) {
+                if (d == true) {
+                    $.notify({
+                        icon: "notifications",
+                        message: "Property Deleted Successfully"
+                    }, {
+                        type: 'success',
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                    _this.propertyService.rates.splice(object.index, 1);
+                    setTimeout(function () {
+                        initDatetimepickers();
+                    }, 100);
                 }
+            }, function (e) {
+                console.log('Error ', e);
+                helpers_1.handlerErrorNotify('Delete error');
             });
-            _this.propertyService.rates.splice(object.index, 1);
-            setTimeout(function () {
-                initDatetimepickers();
-            }, 100);
-        }, function (e) {
-            console.log('Error ', e);
-            helpers_1.handlerErrorNotify('Delete error');
-        });
+        }
     };
     SetratesComponent = __decorate([
         core_1.Component({

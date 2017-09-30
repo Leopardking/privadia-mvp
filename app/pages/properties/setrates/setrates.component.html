@@ -14,26 +14,30 @@
                                    cellspacing="0" width="100%" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Value</th>
-                                        <th>Currency</th>
-                                        <th class="disabled-sorting text-right"></th>
+                                        <th width="25%">Start Date</th>
+                                        <th width="25%">End Date</th>
+                                        <th width="9%">Value</th>
+                                        <th width="12%">Commission Percentage</th>
+                                        <th width="9%">Fees</th>
+                                        <th width="10%">Currency</th>
+                                        <th width="10%" class="disabled-sorting text-right"></th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th class="disabled-sorting text-right"></th>
+                                    <th width="25%"></th>
+                                    <th width="25%"></th>
+                                    <th width="9%"></th>
+                                    <th width="12%"></th>
+                                    <th width="9%"></th>
+                                    <th width="10%"></th>
+                                    <th width="10%" class="disabled-sorting text-right"></th>
                                 </tr>
                                 </tfoot>
                                 <tbody id="bookingTableBody" *ngIf="propertyService.rates.length">
                                 <!-- <tbody formArrayName="Rates" id="bookingTableBody" *ngIf="ratesForm.controls.Rates">-->
                                     <tr *ngFor="let rate of propertyService.rates; let i = index">
-                                        <td width="30%">
+                                        <td width="25%">
                                             <div class="form-group date-group" *ngIf="isEdit[i]">
                                                 <i class="material-icons">insert_invitation</i>
                                                 <input type="text"
@@ -54,7 +58,7 @@
                                                 <span class="text-value">{{formatDate(rate.StartDate, 'DD/MM/YYYY')}}</span>
                                             </div>
                                         </td>
-                                        <td width="30%">
+                                        <td width="25%">
                                             <div class="form-group date-group" *ngIf="isEdit[i]">
                                                 <i class="material-icons">insert_invitation</i>
                                                 <input type="text"
@@ -75,7 +79,7 @@
                                                 <span class="text-value">{{formatDate(rate.EndDate, 'DD/MM/YYYY')}}</span>
                                             </div>
                                         </td>
-                                        <td width="20%">
+                                        <td width="9%">
                                             <div class="form-group" *ngIf="isEdit[i]">
                                                 <input type="text"
                                                        class="form-control"
@@ -83,6 +87,26 @@
                                             </div>
                                             <div class="form-group" *ngIf="!isEdit[i]">
                                                 <span class="text-value">{{rate.Value}}</span>
+                                            </div>
+                                        </td>
+                                        <td width="12%">
+                                            <div class="form-group" *ngIf="isEdit[i]">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       [formControl]="rateForm.controls.CommissionPercentage" />
+                                            </div>
+                                            <div class="form-group" *ngIf="!isEdit[i]">
+                                                <span class="text-value">{{rate.CommissionPercentage}}</span>
+                                            </div>
+                                        </td>
+                                        <td width="9%">
+                                            <div class="form-group" *ngIf="isEdit[i]">
+                                                <input type="text"
+                                                       class="form-control"
+                                                       [formControl]="rateForm.controls.Fees" />
+                                            </div>
+                                            <div class="form-group" *ngIf="!isEdit[i]">
+                                                <span class="text-value">{{rate.Fees}}</span>
                                             </div>
                                         </td>
                                         <td width="10%">

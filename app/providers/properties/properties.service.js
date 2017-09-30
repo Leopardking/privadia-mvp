@@ -51,6 +51,12 @@ var PropertiesService = (function () {
         this.getPropertyById(id).subscribe(function (d) {
             _this.property = d;
             _this.isReading = false;
+            _this.getCompaniesById(d.ManagementCompany.Id).subscribe(function (data) {
+                _this.commissionPercentage = data.CommissionPercentage;
+                _this.fees = data.Fees;
+            }, function (error) {
+                console.log("error company: ", error);
+            });
         }, function (e) {
             console.log("error properties: ", e);
         });
@@ -102,7 +108,7 @@ var PropertiesService = (function () {
     PropertiesService.prototype.readDataRates = function (Id) {
         var _this = this;
         this.getRates(Id).subscribe(function (d) {
-            _this.rates = d;
+            _this.rates = d.Rates;
         }, function (e) { console.log('Error readDataManagers', e); });
     };
     PropertiesService.prototype.getAllProperties = function () {
@@ -163,7 +169,7 @@ var PropertiesService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         this.isReading = true;
-        return this.http.get(this.apiUrl + '/api/Rates/ByProperty/' + id, options)
+        return this.http.get(this.apiUrl + '/api/Rates/GetByProperty/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
@@ -178,7 +184,14 @@ var PropertiesService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.delete(this.apiUrl + '/api/Rates/' + id, options)
-            .map(this.extractData)
+            .map(function (res) {
+            if (res.status == 200) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        })
             .catch(this.handleError);
     };
     PropertiesService.prototype.getQuote = function (data) {
@@ -203,6 +216,15 @@ var PropertiesService = (function () {
         var header = new http_1.Headers({ 'Authorization': this.token });
         var options = new http_1.RequestOptions({ headers: header });
         return this.http.get(this.apiUrl + '/api/bookings/property/' + id, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    };
+    PropertiesService.prototype.getCompaniesById = function (id) {
+        if (!this.loginService.getPermission('Properties/GetById'))
+            return Observable_1.Observable.throw(null);
+        var header = new http_1.Headers({ 'Authorization': this.token });
+        var options = new http_1.RequestOptions({ headers: header });
+        return this.http.get(this.apiUrl + '/api/Companies/' + id, options)
             .map(this.extractData)
             .catch(this.handleError);
     };
