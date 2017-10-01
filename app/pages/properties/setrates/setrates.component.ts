@@ -114,7 +114,7 @@ export class SetratesComponent implements OnInit{
 
     private editRates(object) {
         this.isEdit[object.index] = !this.isEdit[object.index];
-        this.initRateToForm(this.propertyService.rates[object.index],this.propertyService.commissionPercentage,this.propertyService.fees);
+        this.initRateToForm(this.propertyService.rates[object.index]);
     }
 
     private formatDate(date, format) {

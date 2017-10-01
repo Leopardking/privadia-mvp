@@ -100,7 +100,7 @@ var SetratesComponent = (function () {
     };
     SetratesComponent.prototype.editRates = function (object) {
         this.isEdit[object.index] = !this.isEdit[object.index];
-        this.initRateToForm(this.propertyService.rates[object.index], this.propertyService.commissionPercentage, this.propertyService.fees);
+        this.initRateToForm(this.propertyService.rates[object.index]);
     };
     SetratesComponent.prototype.formatDate = function (date, format) {
         return moment(date).format(format);
