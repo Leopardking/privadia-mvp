@@ -109,6 +109,9 @@ var PropertiesService = (function () {
         var _this = this;
         this.getRates(Id).subscribe(function (d) {
             _this.rates = d.Rates;
+            _this.rates.sort(function (a, b) {
+                return new Date(b.StartDate).getTime() - new Date(a.StartDate).getTime();
+            });
         }, function (e) { console.log('Error readDataManagers', e); });
     };
     PropertiesService.prototype.getAllProperties = function () {

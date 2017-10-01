@@ -34,3 +34,6 @@
 .table-rates tbody td .text-value {
 	line-height: 36px;
 }
+.danger{
+	color:red;
+}

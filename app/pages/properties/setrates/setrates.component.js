@@ -110,7 +110,7 @@ var SetratesComponent = (function () {
     };
     SetratesComponent.prototype.saveRates = function (object) {
         var _this = this;
-        if (this.rateForm.controls['Id']) {
+        if (this.rateForm.controls['Id'] && this.rateForm.controls['Id'].value != null) {
             this.saveMessage = 'Property Updated Successfully';
             var form = Object.assign({}, this.rateForm.value);
             form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
@@ -128,14 +128,19 @@ var SetratesComponent = (function () {
                         align: 'right'
                     }
                 });
+                if (d.Warning != null) {
+                    _this.showWarning(d.Warning);
+                }
                 _this.isEdit[object.index] = !_this.isEdit[object.index];
                 _this.propertyService.rates[object.index] = d;
+                // getting rate data again and sort it
+                _this.propertyService.readDataRates(_this.propertyId);
                 setTimeout(function () {
                     initDatetimepickers();
                 }, 100);
             }, function (e) {
                 console.log('Error ', e);
-                helpers_1.handlerErrorFieds(e, _this.rateForm);
+                _this.specialHandleErrorFields(e, _this.rateForm);
                 helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
             });
         }
@@ -159,17 +164,35 @@ var SetratesComponent = (function () {
                         align: 'right'
                     }
                 });
+                if (d.Warning != null) {
+                    _this.showWarning(d.Warning);
+                }
                 _this.isEdit[object.index] = !_this.isEdit[object.index];
                 _this.propertyService.rates[object.index] = d;
+                // getting rate data again and sort it
+                _this.propertyService.readDataRates(_this.propertyId);
                 setTimeout(function () {
                     initDatetimepickers();
                 }, 100);
             }, function (e) {
                 console.log('Error ', e);
-                helpers_1.handlerErrorFieds(e, _this.rateForm);
+                _this.specialHandleErrorFields(e, _this.rateForm);
                 helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
             });
         }
+    };
+    SetratesComponent.prototype.showWarning = function (message) {
+        $.notify({
+            icon: "notifications",
+            message: message
+        }, {
+            type: 'warning',
+            timer: 3000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
     };
     SetratesComponent.prototype.deleteRate = function (object) {
         var _this = this;
@@ -201,6 +224,20 @@ var SetratesComponent = (function () {
                 helpers_1.handlerErrorNotify('Delete error');
             });
         }
+    };
+    SetratesComponent.prototype.specialHandleErrorFields = function (e, form) {
+        var fileds = Object.keys(e.ModelState || {});
+        fileds.forEach(function (field) {
+            var f = field;
+            if (field === 'CheckOut') {
+                f = 'EndDate';
+            }
+            if (field === 'CheckIn') {
+                f = 'StartDate';
+            }
+            form.controls[f].setErrors({ serverError: e.ModelState[field] });
+        });
+        console.log(form);
     };
     SetratesComponent = __decorate([
         core_1.Component({

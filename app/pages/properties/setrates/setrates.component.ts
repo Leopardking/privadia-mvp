@@ -126,7 +126,7 @@ export class SetratesComponent implements OnInit{
     }
 
     private saveRates(object) {
-        if (this.rateForm.controls['Id']) {
+        if (this.rateForm.controls['Id'] && this.rateForm.controls['Id'].value != null) {
             this.saveMessage = 'Property Updated Successfully';
             let form = Object.assign({}, this.rateForm.value);
             form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
@@ -146,8 +146,14 @@ export class SetratesComponent implements OnInit{
                             align: 'right'
                         }
                     });
+                    if(d.Warning != null){
+                        this.showWarning(d.Warning);
+                    }
                     this.isEdit[object.index] = !this.isEdit[object.index];
                     this.propertyService.rates[object.index] = d;
+                    
+                    // getting rate data again and sort it
+                    this.propertyService.readDataRates(this.propertyId);
 
                     setTimeout(() => {
                         initDatetimepickers();
@@ -155,7 +161,7 @@ export class SetratesComponent implements OnInit{
                 },
                 e => {
                     console.log('Error ', e)
-                    handlerErrorFieds(e, this.rateForm);
+                    this.specialHandleErrorFields(e, this.rateForm);
                     handlerErrorNotify('There were errors with your submission, please see form for details.');
                 }
             )
@@ -181,8 +187,14 @@ export class SetratesComponent implements OnInit{
                             align: 'right'
                         }
                     });
+                    if(d.Warning != null){
+                        this.showWarning(d.Warning);
+                    }
                     this.isEdit[object.index] = !this.isEdit[object.index];
                     this.propertyService.rates[object.index] = d;
+                    
+                    // getting rate data again and sort it
+                    this.propertyService.readDataRates(this.propertyId);
 
                     setTimeout(() => {
                         initDatetimepickers();
@@ -190,11 +202,25 @@ export class SetratesComponent implements OnInit{
                 },
                 e => {
                     console.log('Error ', e)
-                    handlerErrorFieds(e, this.rateForm);
+                    this.specialHandleErrorFields(e, this.rateForm);
                     handlerErrorNotify('There were errors with your submission, please see form for details.');
                 }
             )
         }
+    }
+    
+    private showWarning(message){
+        $.notify({
+            icon: "notifications",
+            message: message
+        },{
+            type: 'warning',
+            timer: 3000,
+            placement: {
+                from: 'top',
+                align: 'right'
+            }
+        });
     }
 
     private deleteRate(object) {
@@ -231,5 +257,18 @@ export class SetratesComponent implements OnInit{
             )
         }
     }
-
+    private specialHandleErrorFields(e,form:FormGroup){
+        const fileds = Object.keys( e.ModelState || {});
+        fileds.forEach((field) => {
+            let f = field;
+            if(field === 'CheckOut'){
+                f = 'EndDate'
+            }
+            if(field === 'CheckIn'){
+                f = 'StartDate'
+            }
+            form.controls[f].setErrors({ serverError: e.ModelState[field] });
+        });
+        console.log(form);
+    }
 }

@@ -136,6 +136,9 @@ export class PropertiesService {
 		this.getRates(Id).subscribe(
 			d => {
 				this.rates = d.Rates;
+				this.rates.sort((a,b)=>{
+					return new Date(b.StartDate).getTime() - new Date(a.StartDate).getTime();
+				});
 			},
 			e => { console.log('Error readDataManagers', e) }
 		)
