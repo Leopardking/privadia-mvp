@@ -127,44 +127,74 @@ export class SetratesComponent implements OnInit{
 
     private saveRates(object) {
         if (this.rateForm.controls['Id']) {
-            this.saveMessage = 'Property Updated Successfully'
+            this.saveMessage = 'Property Updated Successfully';
+            let form = Object.assign({}, this.rateForm.value);
+            form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+            form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+
+            // modified to have update with PUT HTTP request
+            this.propertyService.updateRate(form).subscribe(
+                d => {
+                    $.notify({
+                        icon: "notifications",
+                        message: this.saveMessage
+                    },{
+                        type: 'success',
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                    this.isEdit[object.index] = !this.isEdit[object.index];
+                    this.propertyService.rates[object.index] = d;
+
+                    setTimeout(() => {
+                        initDatetimepickers();
+                    }, 100);
+                },
+                e => {
+                    console.log('Error ', e)
+                    handlerErrorFieds(e, this.rateForm);
+                    handlerErrorNotify('There were errors with your submission, please see form for details.');
+                }
+            )
         } else {
             this.saveMessage = 'Property Added Successfully'
+            // fixes with dates
+            let form = Object.assign({}, this.rateForm.value);
+            form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+            form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+            // ----------------
+            console.log(JSON.stringify(form));
+            
+            this.propertyService.saveRate(form).subscribe(
+                d => {
+                    $.notify({
+                        icon: "notifications",
+                        message: this.saveMessage
+                    },{
+                        type: 'success',
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        }
+                    });
+                    this.isEdit[object.index] = !this.isEdit[object.index];
+                    this.propertyService.rates[object.index] = d;
+
+                    setTimeout(() => {
+                        initDatetimepickers();
+                    }, 100);
+                },
+                e => {
+                    console.log('Error ', e)
+                    handlerErrorFieds(e, this.rateForm);
+                    handlerErrorNotify('There were errors with your submission, please see form for details.');
+                }
+            )
         }
-        // fixes with dates
-        let form = Object.assign({}, this.rateForm.value);
-        form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-        form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-        // ----------------
-        // console.log(JSON.stringify(form));
-        
-        this.propertyService.saveRate(form).subscribe(
-            d => {
-                $.notify({
-                    icon: "notifications",
-                    message: this.saveMessage
-                },{
-                    type: 'success',
-                    timer: 3000,
-                    placement: {
-                        from: 'top',
-                        align: 'right'
-                    }
-                });
-                this.isEdit[object.index] = !this.isEdit[object.index];
-                this.propertyService.rates[object.index] = d;
-
-                setTimeout(() => {
-                    initDatetimepickers();
-                }, 100);
-            },
-            e => {
-                console.log('Error ', e)
-                handlerErrorFieds(e, this.rateForm);
-                handlerErrorNotify('There were errors with your submission, please see form for details.');
-            }
-        )
-
     }
 
     private deleteRate(object) {

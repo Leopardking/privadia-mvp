@@ -112,38 +112,64 @@ var SetratesComponent = (function () {
         var _this = this;
         if (this.rateForm.controls['Id']) {
             this.saveMessage = 'Property Updated Successfully';
+            var form = Object.assign({}, this.rateForm.value);
+            form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+            form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+            // modified to have update with PUT HTTP request
+            this.propertyService.updateRate(form).subscribe(function (d) {
+                $.notify({
+                    icon: "notifications",
+                    message: _this.saveMessage
+                }, {
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                _this.isEdit[object.index] = !_this.isEdit[object.index];
+                _this.propertyService.rates[object.index] = d;
+                setTimeout(function () {
+                    initDatetimepickers();
+                }, 100);
+            }, function (e) {
+                console.log('Error ', e);
+                helpers_1.handlerErrorFieds(e, _this.rateForm);
+                helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
+            });
         }
         else {
             this.saveMessage = 'Property Added Successfully';
-        }
-        // fixes with dates
-        var form = Object.assign({}, this.rateForm.value);
-        form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-        form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-        // ----------------
-        // console.log(JSON.stringify(form));
-        this.propertyService.saveRate(form).subscribe(function (d) {
-            $.notify({
-                icon: "notifications",
-                message: _this.saveMessage
-            }, {
-                type: 'success',
-                timer: 3000,
-                placement: {
-                    from: 'top',
-                    align: 'right'
-                }
+            // fixes with dates
+            var form = Object.assign({}, this.rateForm.value);
+            form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+            form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+            // ----------------
+            console.log(JSON.stringify(form));
+            this.propertyService.saveRate(form).subscribe(function (d) {
+                $.notify({
+                    icon: "notifications",
+                    message: _this.saveMessage
+                }, {
+                    type: 'success',
+                    timer: 3000,
+                    placement: {
+                        from: 'top',
+                        align: 'right'
+                    }
+                });
+                _this.isEdit[object.index] = !_this.isEdit[object.index];
+                _this.propertyService.rates[object.index] = d;
+                setTimeout(function () {
+                    initDatetimepickers();
+                }, 100);
+            }, function (e) {
+                console.log('Error ', e);
+                helpers_1.handlerErrorFieds(e, _this.rateForm);
+                helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
             });
-            _this.isEdit[object.index] = !_this.isEdit[object.index];
-            _this.propertyService.rates[object.index] = d;
-            setTimeout(function () {
-                initDatetimepickers();
-            }, 100);
-        }, function (e) {
-            console.log('Error ', e);
-            helpers_1.handlerErrorFieds(e, _this.rateForm);
-            helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
-        });
+        }
     };
     SetratesComponent.prototype.deleteRate = function (object) {
         var _this = this;
