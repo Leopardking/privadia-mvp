@@ -243,6 +243,7 @@ var PropertiesService = (function () {
         return body || {};
     };
     PropertiesService.prototype.handleError = function (error) {
+        console.log('error:', error);
         var errMsg;
         if (error instanceof http_1.Response) {
             errMsg = error.json() || '';

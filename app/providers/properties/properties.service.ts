@@ -313,6 +313,7 @@ export class PropertiesService {
 	}
 
 	public handleError(error: Response | any) {
+		console.log('error:',  error);
 		let errMsg: string;
 		if (error instanceof Response) {
 			errMsg = error.json() || '';
