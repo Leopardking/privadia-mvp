@@ -21,6 +21,7 @@ var PropertiesService = (function () {
         this.http = http;
         this.loginService = loginService;
         this.lookupsService = lookupsService;
+        this.warning = null;
         this.apiUrl = 'http://privadia-mvp-api-dev.azurewebsites.net';
         // private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
         this.token = localStorage.getItem('id_token');
@@ -109,6 +110,9 @@ var PropertiesService = (function () {
         var _this = this;
         this.getRates(Id).subscribe(function (d) {
             _this.rates = d.Rates;
+            if (d.Warning != null) {
+                _this.warning = d.Warning;
+            }
             _this.rates.sort(function (a, b) {
                 return new Date(b.StartDate).getTime() - new Date(a.StartDate).getTime();
             });

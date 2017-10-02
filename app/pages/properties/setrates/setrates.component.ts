@@ -25,6 +25,7 @@ export class SetratesComponent implements OnInit{
 
     private isEdit = [];
     private saveMessage = '';
+    private isEditing:boolean = false;
     public rateForm = new FormGroup ({
         Currency: new FormControl(),
         EndDate: new FormControl(),
@@ -67,6 +68,7 @@ export class SetratesComponent implements OnInit{
     }
 
     private initRateToForm(data) {
+        this.isEditing = true ;
         this.rateForm = this.builder.group({
             Currency: data.Currency || 'EUR',
             EndDate: moment(data.EndDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
@@ -85,6 +87,7 @@ export class SetratesComponent implements OnInit{
 
     private addRow() {
         this.isEdit = [];
+        this.isEditing = true ;
         this.propertyService.rates.push({
             Currency: 'EUR',
             LengthOfStay: 7,
@@ -123,11 +126,12 @@ export class SetratesComponent implements OnInit{
 
     private clearRates(rate) {
         this.isEdit[rate.index] = !this.isEdit[rate.index];
+        this.isEditing = false ;
     }
 
     private saveRates(object) {
         if (this.rateForm.controls['Id'] && this.rateForm.controls['Id'].value != null) {
-            this.saveMessage = 'Property Updated Successfully';
+            this.saveMessage = 'Property Rate Updated Successfully';
             let form = Object.assign({}, this.rateForm.value);
             form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
             form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
@@ -158,6 +162,8 @@ export class SetratesComponent implements OnInit{
                     setTimeout(() => {
                         initDatetimepickers();
                     }, 100);
+
+                    this.isEditing = false ;
                 },
                 e => {
                     console.log('Error ', e)
@@ -166,7 +172,7 @@ export class SetratesComponent implements OnInit{
                 }
             )
         } else {
-            this.saveMessage = 'Property Added Successfully'
+            this.saveMessage = 'Property Rate Added Successfully'
             // fixes with dates
             let form = Object.assign({}, this.rateForm.value);
             form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
@@ -199,6 +205,8 @@ export class SetratesComponent implements OnInit{
                     setTimeout(() => {
                         initDatetimepickers();
                     }, 100);
+
+                    this.isEditing = false ;
                 },
                 e => {
                     console.log('Error ', e)
