@@ -13,9 +13,10 @@ var ng2_cloudinary_1 = require('ng2-cloudinary');
 var forms_1 = require("@angular/forms");
 var login_service_1 = require("../../../providers/login/login.service");
 var PropertyimageoComponent = (function () {
-    function PropertyimageoComponent(loginService) {
+    function PropertyimageoComponent(loginService, change) {
         var _this = this;
         this.loginService = loginService;
+        this.change = change;
         this.images = [];
         this.options = {
             onUpdate: function (event) {
@@ -46,8 +47,8 @@ var PropertyimageoComponent = (function () {
         };
     }
     PropertyimageoComponent.prototype.ngOnInit = function () {
-        //$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
         var _this = this;
+        var self = this;
         this.propertyForm.controls['Images'].valueChanges.subscribe(function () {
             console.log('Value change');
         });
@@ -72,6 +73,8 @@ var PropertyimageoComponent = (function () {
             //$.getScript('../../../../assets/js/init/initImageGallery.js');
             //Add a new image to Main Form
             _this.addImage(image);
+            self.imageUrl = img.url;
+            self.change.detectChanges();
             return { item: item, response: response, status: status, headers: headers };
         };
         this.uploader.onErrorItem = function (item, response, status, headers) {
@@ -128,7 +131,7 @@ var PropertyimageoComponent = (function () {
             templateUrl: 'propertyimage.component.html',
             styleUrls: ['propertyimage.component.css']
         }), 
-        __metadata('design:paramtypes', [login_service_1.LoginService])
+        __metadata('design:paramtypes', [login_service_1.LoginService, core_1.ChangeDetectorRef])
     ], PropertyimageoComponent);
     return PropertyimageoComponent;
 }());

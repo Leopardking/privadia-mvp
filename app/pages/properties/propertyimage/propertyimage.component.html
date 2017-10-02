@@ -22,7 +22,8 @@
             <div [formGroup]="propertyForm" class="text-center"
                  *ngIf="propertyForm.controls.Images.value.length == 0 && loginService.getPermission('Properties/Put')">
                 <label for="upload" class="upload-image">
-                    <i class="material-icons">image</i><br/><br/>
+                    <i *ngIf="!imageUrl" class="material-icons">image</i>
+                    <img *ngIf="imageUrl" [src]="imageUrl" />
                     <i class="title">Upload a photo of your property</i><br/><br/>
                     <i class="btn btn-success">Upload an Image</i><br/>
                     <input type="file" id="upload" multiple accept="image/jpeg" style="display:none" ng2FileSelect
@@ -36,9 +37,9 @@
                            [uploader]="uploader" (change)="fileChange()">
                 </label>
             </div>
-            <div class="loading-gif" [hidden]="!uploader.isUploading">
+          <!--   <div class="loading-gif" [hidden]="!uploader.isUploading">
                 <img src="../assets/img/loading.gif"/>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>

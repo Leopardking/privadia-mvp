@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ChangeDetectorRef} from '@angular/core';
 import { CloudinaryOptions, CloudinaryUploader } from 'ng2-cloudinary';
 import {FormGroup, FormArray, FormControl} from "@angular/forms";
 import {LoginService} from "../../../providers/login/login.service";
@@ -20,9 +20,10 @@ export class PropertyimageoComponent implements OnInit{
 	private uploader: CloudinaryUploader;
 	private options: any;
 	private sortablejsOptions: any;
+	private imageUrl: string;
 	@Input('group')	propertyForm: FormGroup;
 
-	constructor( private loginService: LoginService) {
+	constructor( private loginService: LoginService, private change: ChangeDetectorRef) {
 		this.options = {
 			onUpdate: (event: any) => {
 				console.log('event', event);
@@ -57,7 +58,7 @@ export class PropertyimageoComponent implements OnInit{
 
 	ngOnInit() {
 
-		//$.getScript('../../../../assets/js/plugins/jssor.slider-23.1.6.mini.js');
+		const self = this;
 
 		this.propertyForm.controls['Images'].valueChanges.subscribe(() => {
 			console.log('Value change',);
@@ -87,9 +88,13 @@ export class PropertyimageoComponent implements OnInit{
 
 			//Add a new image to Main Form
 			this.addImage(image);
+			self.imageUrl = img.url;
+			self.change.detectChanges();
 
 			return {item, response, status, headers};
 		};
+
+	
 
 		this.uploader.onErrorItem = ( item, response, status, headers) => {
 			$.notify({
