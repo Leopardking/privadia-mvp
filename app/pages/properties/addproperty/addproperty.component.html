@@ -102,7 +102,7 @@
                             <div id="metatab-property-6" class="card-content p-b-none p-t-none">
                                 <property-metafilter-cmp *ngIf="propertiesService.metadata.length"
                                                          [group]="propertyForm"
-                                                         [metadataId]="6"
+                                                         [metadataId]="5"
                                                          [metadata]="propertiesService.metadata"></property-metafilter-cmp>
                             </div>
 
@@ -131,7 +131,8 @@
                         </button>
                     </div>
                     <div class="col-xs-8">
-                        <button id="wizard-form" class="btn btn-success pull-right font-16 m-r-20 p-l-r-20" type="submit" [disabled]="sending">Save</button>
+                        <button id="wizard-form" class="btn btn-success pull-right font-16 m-r-20 p-l-r-20" type="submit" [disabled]="sending">Save & Close</button>
+                        <button *ngIf="!permission" class="btn btn-success pull-right m-r-20 p-l-r-20 font-16" type="button" [disabled]="propertyForm.invalid"  (click)="onSubmit()">Save & Continue</button>
                         <div class="togglebutton pull-right">
                             <label>
                                 <input type="checkbox" formControlName="Active" *ngIf="isLoad"> Active status

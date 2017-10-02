@@ -132,9 +132,11 @@ var AddpropertyComponent = (function () {
     AddpropertyComponent.prototype.discardInfo = function () {
         console.log('Discard Info form');
     };
-    AddpropertyComponent.prototype.onSubmit = function (form) {
+    AddpropertyComponent.prototype.onSubmit = function (isRedirect) {
         var _this = this;
+        if (isRedirect === void 0) { isRedirect = false; }
         console.log('Form ', this.propertyForm);
+        var form = this.propertyForm.value;
         this.sending = true;
         var newArr = [];
         _.mapValues(form.MetaDataTmp, function (el) {
@@ -148,7 +150,9 @@ var AddpropertyComponent = (function () {
         this.propertiesService.addProperty(form).subscribe(function (d) {
             _this.errorForm = false;
             helpers_1.handlerSuccessMessage('Property Added Successfully');
-            _this.router.navigate(['properties']);
+            if (isRedirect) {
+                _this.router.navigate(['properties']);
+            }
             _this.sending = false;
         }, function (e) {
             console.log("error:", e);

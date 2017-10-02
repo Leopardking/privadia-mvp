@@ -43,6 +43,7 @@ var PropertiesComponent = (function () {
             console.log('Delete property ', d);
         }, function (e) {
             _this.propertiesService.properties.splice(el.index, 1);
+            // window.location.reload();
             // console.log("error:", e);
         });
     };

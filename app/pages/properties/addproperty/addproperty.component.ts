@@ -143,8 +143,9 @@ export class AddpropertyComponent implements OnInit {
         console.log('Discard Info form')
     }
 
-    private onSubmit(form) {
+    private onSubmit(isRedirect=false) {
         console.log('Form ', this.propertyForm)
+        let form = this.propertyForm.value;
         this.sending = true;
         let newArr = [];
         _.mapValues(form.MetaDataTmp, (el) => {
@@ -162,7 +163,7 @@ export class AddpropertyComponent implements OnInit {
                 this.errorForm = false;
                 handlerSuccessMessage('Property Added Successfully');
 
-                this.router.navigate(['properties']);
+                if(isRedirect) { this.router.navigate(['properties']);}
                 this.sending = false;
             },
             e => {
