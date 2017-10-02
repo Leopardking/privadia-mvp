@@ -22,6 +22,7 @@ var SetratesComponent = (function () {
         this.datatableInited = false;
         this.isEdit = [];
         this.saveMessage = '';
+        this.isEditing = false;
         this.rateForm = new forms_1.FormGroup({
             Currency: new forms_1.FormControl(),
             EndDate: new forms_1.FormControl(),
@@ -56,6 +57,7 @@ var SetratesComponent = (function () {
         this.datatableInited = true;
     };
     SetratesComponent.prototype.initRateToForm = function (data) {
+        this.isEditing = true;
         this.rateForm = this.builder.group({
             Currency: data.Currency || 'EUR',
             EndDate: moment(data.EndDate).format('DD/MM/YYYY') || moment().format('DD/MM/YYYY'),
@@ -73,6 +75,7 @@ var SetratesComponent = (function () {
     };
     SetratesComponent.prototype.addRow = function () {
         this.isEdit = [];
+        this.isEditing = true;
         this.propertyService.rates.push({
             Currency: 'EUR',
             LengthOfStay: 7,
@@ -107,11 +110,12 @@ var SetratesComponent = (function () {
     };
     SetratesComponent.prototype.clearRates = function (rate) {
         this.isEdit[rate.index] = !this.isEdit[rate.index];
+        this.isEditing = false;
     };
     SetratesComponent.prototype.saveRates = function (object) {
         var _this = this;
         if (this.rateForm.controls['Id'] && this.rateForm.controls['Id'].value != null) {
-            this.saveMessage = 'Property Updated Successfully';
+            this.saveMessage = 'Property Rate Updated Successfully';
             var form = Object.assign({}, this.rateForm.value);
             form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
             form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
@@ -138,6 +142,7 @@ var SetratesComponent = (function () {
                 setTimeout(function () {
                     initDatetimepickers();
                 }, 100);
+                _this.isEditing = false;
             }, function (e) {
                 console.log('Error ', e);
                 _this.specialHandleErrorFields(e, _this.rateForm);
@@ -145,7 +150,7 @@ var SetratesComponent = (function () {
             });
         }
         else {
-            this.saveMessage = 'Property Added Successfully';
+            this.saveMessage = 'Property Rate Added Successfully';
             // fixes with dates
             var form = Object.assign({}, this.rateForm.value);
             form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
@@ -174,6 +179,7 @@ var SetratesComponent = (function () {
                 setTimeout(function () {
                     initDatetimepickers();
                 }, 100);
+                _this.isEditing = false;
             }, function (e) {
                 console.log('Error ', e);
                 _this.specialHandleErrorFields(e, _this.rateForm);

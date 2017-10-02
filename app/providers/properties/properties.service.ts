@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { handlerErrorNotify } from "./../../helpers/helpers";
 import { Http, Response, Headers, RequestOptions  } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +11,7 @@ import {LookupsService} from "../lookups/lookups.service";
 
 @Injectable()
 export class PropertiesService {
+	warning: string = null;
 	private apiUrl: string = 'http://privadia-mvp-api-dev.azurewebsites.net';
 	// private apiUrl:string = 'http://privadia-mvp-api-2-dev.azurewebsites.net';
 	private token: string = localStorage.getItem('id_token');
@@ -136,6 +138,9 @@ export class PropertiesService {
 		this.getRates(Id).subscribe(
 			d => {
 				this.rates = d.Rates;
+				if(d.Warning != null){
+					this.warning = d.Warning;
+				}
 				this.rates.sort((a,b)=>{
 					return new Date(b.StartDate).getTime() - new Date(a.StartDate).getTime();
 				});

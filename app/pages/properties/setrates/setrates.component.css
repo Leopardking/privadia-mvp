@@ -37,3 +37,12 @@
 .danger{
 	color:red;
 }
+.datepicker{
+	width: 86% !important;
+}
+.date-err{
+	background-image: linear-gradient(#f44336, #f44336),linear-gradient(#f44336, #f44336);
+}
+.tool-tip-err{
+	line-height: 36px;
+}

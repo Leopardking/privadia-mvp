@@ -8,6 +8,7 @@
                     </div>
                     <div class="card-content">
                         <h4 class="card-title">Rates for "{{propertyService.property && propertyService.property.InternalName}}"</h4>
+                        <h5 class="danger" *ngIf="propertyService.warning != null">{{propertyService.warning}}</h5>
                         <div class="material-datatables">
                             <table id="datatables"
                                    class="table table-rates"
@@ -39,11 +40,21 @@
                                     <tr *ngFor="let rate of propertyService.rates; let i = index">
                                         <td width="25%">
                                             <div class="form-group date-group" *ngIf="isEdit[i]">
-                                                <span class="danger" *ngIf="rateForm.controls.StartDate.invalid">{{rateForm.controls.StartDate.errors.serverError}}</span>
+                                                <popover-content #StartDate placement="bottom" 
+                                                                 class="danger" 
+                                                                 [closeOnMouseOutside]="false"
+                                                                 [closeOnClickOutside]="false">
+                                                    <i class="material-icons text-danger">error</i>
+                                                    <span class="tool-tip-err text-danger">{{rateForm.controls.StartDate?.errors?.serverError}}</span>
+                                                </popover-content>
                                                 <i class="material-icons">insert_invitation</i>
                                                 <input type="text"
                                                        class="form-control datepicker"
-                                                       #datePicker
+                                                       [class.date-err]="rateForm.controls.StartDate.invalid"
+                                                       #datePicker 
+                                                       [popover]="StartDate" 
+                                                       [popoverDisabled]="!rateForm.controls.StartDate.invalid"
+                                                       [popoverOnHover]="rateForm.controls.StartDate.invalid"
                                                        [ngModel]="rateForm.controls.StartDate.value"
                                                        (blur)="rateForm.controls.StartDate.setValue(datePicker.value)"
                                                        [formControl]="rateForm.controls.StartDate"/>
@@ -61,11 +72,21 @@
                                         </td>
                                         <td width="25%">
                                             <div class="form-group date-group" *ngIf="isEdit[i]">
-                                                <span class="danger" *ngIf="rateForm.controls.EndDate.invalid">{{rateForm.controls.EndDate.errors.serverError}}</span>
+                                                    <popover-content #EndDate placement="bottom" 
+                                                                    class="danger" 
+                                                                    [closeOnMouseOutside]="false"
+                                                                    [closeOnClickOutside]="false">
+                                                        <i class="material-icons text-danger">error</i>
+                                                        <span class="tool-tip-err text-danger">{{rateForm.controls.EndDate?.errors?.serverError}}</span>
+                                                    </popover-content>
                                                 <i class="material-icons">insert_invitation</i>
                                                 <input type="text"
                                                        class="form-control datepicker"
-                                                       #datePicker
+                                                       [class.date-err]="rateForm.controls.EndDate.invalid"
+                                                       #datePicker 
+                                                       [popover]="EndDate" 
+                                                       [popoverDisabled]="!rateForm.controls.EndDate.invalid"
+                                                       [popoverOnHover]="rateForm.controls.EndDate.invalid" 
                                                        [ngModel]="rateForm.controls.EndDate.value"
                                                        (blur)="rateForm.controls.EndDate.setValue(datePicker.value)"
                                                        [formControl]="rateForm.controls.EndDate"/>
@@ -83,10 +104,19 @@
                                         </td>
                                         <td width="9%">
                                             <div class="form-group" *ngIf="isEdit[i]">
-                                                <span class="danger" *ngIf="rateForm.controls.Value.invalid">{{rateForm.controls.Value.errors.serverError}}</span>
-                                                <input type="text"
-                                                       class="form-control"
-                                                       [formControl]="rateForm.controls.Value" />
+                                                    <popover-content #Value placement="bottom" 
+                                                                    class="danger" 
+                                                                    [closeOnMouseOutside]="false"
+                                                                    [closeOnClickOutside]="false">
+                                                        <i class="material-icons text-danger">error</i>
+                                                        <span class="tool-tip-err text-danger">{{rateForm.controls.Value?.errors?.serverError}}</span>
+                                                    </popover-content>
+                                                <input type="number"
+                                                       class="form-control" 
+                                                       [popover]="Value" 
+                                                       [popoverDisabled]="!rateForm.controls.Value.invalid"
+                                                       [popoverOnHover]="rateForm.controls.Value.invalid"
+                                                       [formControl]="rateForm.controls.Value" min="0" />
                                             </div>
                                             <div class="form-group" *ngIf="!isEdit[i]">
                                                 <span class="text-value">{{rate.Value}}</span>
@@ -94,10 +124,19 @@
                                         </td>
                                         <td width="12%">
                                             <div class="form-group" *ngIf="isEdit[i]">
-                                                <span class="danger" *ngIf="rateForm.controls.CommissionPercentage.invalid">{{rateForm.controls.CommissionPercentage.errors.serverError}}</span>
-                                                <input type="text"
-                                                       class="form-control"
-                                                       [formControl]="rateForm.controls.CommissionPercentage" />
+                                                    <popover-content #CommissionPercentage placement="bottom" 
+                                                                    class="danger" 
+                                                                    [closeOnMouseOutside]="false"
+                                                                    [closeOnClickOutside]="false">
+                                                        <i class="material-icons text-danger">error</i>
+                                                        <span class="tool-tip-err text-danger">{{rateForm.controls.CommissionPercentage?.errors?.serverError}}</span>
+                                                    </popover-content>
+                                                <input type="number"
+                                                       class="form-control" 
+                                                       [popover]="CommissionPercentage" 
+                                                       [popoverDisabled]="!rateForm.controls.CommissionPercentage.invalid"
+                                                       [popoverOnHover]="rateForm.controls.CommissionPercentage.invalid"
+                                                       [formControl]="rateForm.controls.CommissionPercentage" min="0" max="100" />
                                             </div>
                                             <div class="form-group" *ngIf="!isEdit[i]">
                                                 <span class="text-value">{{rate.CommissionPercentage}}</span>
@@ -105,10 +144,19 @@
                                         </td>
                                         <td width="9%">
                                             <div class="form-group" *ngIf="isEdit[i]">
-                                                <span class="danger" *ngIf="rateForm.controls.Fees.invalid">{{rateForm.controls.Fees.errors.serverError}}</span>
-                                                <input type="text"
-                                                       class="form-control"
-                                                       [formControl]="rateForm.controls.Fees" />
+                                                    <popover-content #Fees placement="bottom" 
+                                                                    class="danger" 
+                                                                    [closeOnMouseOutside]="false"
+                                                                    [closeOnClickOutside]="false">
+                                                        <i class="material-icons text-danger">error</i>
+                                                        <span class="tool-tip-err text-danger">{{rateForm.controls.Fees?.errors?.serverError}}</span>
+                                                    </popover-content>
+                                                <input type="number"
+                                                       class="form-control" 
+                                                       [popover]="Fees" 
+                                                       [popoverDisabled]="!rateForm.controls.Fees.invalid"
+                                                       [popoverOnHover]="rateForm.controls.Fees.invalid"
+                                                       [formControl]="rateForm.controls.Fees" min="0" />
                                             </div>
                                             <div class="form-group" *ngIf="!isEdit[i]">
                                                 <span class="text-value">{{rate.Fees}}</span>
@@ -235,7 +283,7 @@
                             </table>
                             <div class="row">
                                 <div class="col-xs-12 text-right">
-                                    <button class="btn btn-success btn-edit btn-icon"
+                                    <button [disabled]="isEditing" class="btn btn-success btn-edit btn-icon"
                                             type="button"
                                             (click)="addRow()">
                                         <i class="material-icons">add</i>Add Rate
