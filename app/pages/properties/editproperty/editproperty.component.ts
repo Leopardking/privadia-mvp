@@ -246,7 +246,6 @@ export class EditpropertyComponent implements OnInit {
         form.MetaData = newArr;
         form.OwnerUser = null;
 
-        console.log('save ',form);
         if(!this.propertyForm.valid) {
             handlerErrorNotify('There were errors with your submission, please see form for details.)');
             return false;
@@ -255,13 +254,11 @@ export class EditpropertyComponent implements OnInit {
         this.propertiesService.addProperty(form).subscribe(
             d => {
                 this.errorForm = false;
-                console.log('@@@@@', isRedirect);
                 if(isRedirect) { this.router.navigate(['properties']);}
                 handlerSuccessMessage('Property Updated Successfully');
             },
             e => {
                 this.errorForm = true;
-                console.log('kekekekekkeke');
                 handlerErrorFieds(e, this.propertyForm);
                 handlerErrorNotify('There were errors with your submission, please see form for details.');
             }

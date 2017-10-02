@@ -243,7 +243,10 @@ var PropertiesService = (function () {
             .catch(this.handleError);
     };
     PropertiesService.prototype.extractData = function (res) {
-        var body = res.json();
+        var body = null;
+        if (res["_body"]) {
+            body = res.json();
+        }
         return body || {};
     };
     PropertiesService.prototype.handleError = function (error) {

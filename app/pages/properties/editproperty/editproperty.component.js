@@ -226,21 +226,18 @@ var EditpropertyComponent = (function () {
         });
         form.MetaData = newArr;
         form.OwnerUser = null;
-        console.log('save ', form);
         if (!this.propertyForm.valid) {
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.)');
             return false;
         }
         this.propertiesService.addProperty(form).subscribe(function (d) {
             _this.errorForm = false;
-            console.log('@@@@@', isRedirect);
             if (isRedirect) {
                 _this.router.navigate(['properties']);
             }
             helpers_1.handlerSuccessMessage('Property Updated Successfully');
         }, function (e) {
             _this.errorForm = true;
-            console.log('kekekekekkeke');
             helpers_1.handlerErrorFieds(e, _this.propertyForm);
             helpers_1.handlerErrorNotify('There were errors with your submission, please see form for details.');
         });

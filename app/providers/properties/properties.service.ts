@@ -312,8 +312,9 @@ export class PropertiesService {
 	}
 
 	public extractData(res:Response) {
-		let body = res.json();
-
+        let body = null;
+		if (res["_body"])
+			{body = res.json();}
 	    return body || { };
 	}
 

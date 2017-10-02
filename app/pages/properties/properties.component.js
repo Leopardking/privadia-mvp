@@ -44,7 +44,7 @@ var PropertiesComponent = (function () {
         }, function (e) {
             _this.propertiesService.properties.splice(el.index, 1);
             // window.location.reload();
-            // console.log("error:", e);
+            console.log("error:", e);
         });
     };
     PropertiesComponent.prototype.addBooking = function () {
