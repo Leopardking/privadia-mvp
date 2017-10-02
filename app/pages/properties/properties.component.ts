@@ -50,6 +50,7 @@ export class PropertiesComponent implements OnInit{
             },
             e => {
                 this.propertiesService.properties.splice(el.index,1);
+                window.location.reload();
                 // console.log("error:", e);
             }
         );

@@ -2,8 +2,8 @@
   "name": "material-dashboard-pro-angular2",
   "version": "1.0.0",
   "scripts": {
-    "dev": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
-    "start": "lite-server",
+    "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
+    "dev": "lite-server",
     "lite": "lite-server",
     "tsc": "tsc",
     "tsc:w": "tsc -w"
