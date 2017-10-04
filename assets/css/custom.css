@@ -726,7 +726,12 @@ div.dataTables_wrapper div.dataTables_paginate {
 .popover .popover-content {
 	padding: 12px;
 }
-
+setrates-cmp popover-content .popover.bottom .popover-content{
+	white-space: nowrap !important;
+}
+setrates-cmp popover-content .popover.bottom .popover-content i.material-icons{
+	vertical-align: middle !important;
+}
 .popover .popover-content h3 {
 	font-size: 18px;
 	text-align: center;

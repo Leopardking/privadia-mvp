@@ -18,7 +18,7 @@
                                         <th width="25%">Start Date</th>
                                         <th width="25%">End Date</th>
                                         <th width="9%">Value</th>
-                                        <th width="12%">Commission Percentage</th>
+                                        <th width="12%">Commission %</th>
                                         <th width="9%">Fees</th>
                                         <th width="10%">Currency</th>
                                         <th width="10%" class="disabled-sorting text-right"></th>
@@ -49,8 +49,8 @@
                                                 </popover-content>
                                                 <i class="material-icons">insert_invitation</i>
                                                 <input type="text"
-                                                       class="form-control datepicker"
-                                                       [class.date-err]="rateForm.controls.StartDate.invalid"
+                                                       class="form-control datepicker datepicker-max-86"
+                                                       [class.data-err]="rateForm.controls.StartDate.invalid"
                                                        #datePicker 
                                                        [popover]="StartDate" 
                                                        [popoverDisabled]="!rateForm.controls.StartDate.invalid"
@@ -81,8 +81,8 @@
                                                     </popover-content>
                                                 <i class="material-icons">insert_invitation</i>
                                                 <input type="text"
-                                                       class="form-control datepicker"
-                                                       [class.date-err]="rateForm.controls.EndDate.invalid"
+                                                       class="form-control datepicker datepicker-max-86"
+                                                       [class.data-err]="rateForm.controls.EndDate.invalid"
                                                        #datePicker 
                                                        [popover]="EndDate" 
                                                        [popoverDisabled]="!rateForm.controls.EndDate.invalid"
@@ -113,10 +113,12 @@
                                                     </popover-content>
                                                 <input type="number"
                                                        class="form-control" 
-                                                       [popover]="Value" 
+                                                       [class.data-err]="validateValue()"
+                                                       (change)="validateValue()"
+                                                       [popover]="Value"
                                                        [popoverDisabled]="!rateForm.controls.Value.invalid"
                                                        [popoverOnHover]="rateForm.controls.Value.invalid"
-                                                       [formControl]="rateForm.controls.Value" min="0" />
+                                                       [formControl]="rateForm.controls.Value" />
                                             </div>
                                             <div class="form-group" *ngIf="!isEdit[i]">
                                                 <span class="text-value">{{rate.Value}}</span>
@@ -133,10 +135,12 @@
                                                     </popover-content>
                                                 <input type="number"
                                                        class="form-control" 
-                                                       [popover]="CommissionPercentage" 
+                                                       [class.data-err]="validateCommissionPercentage()"
+                                                       (change)="validateCommissionPercentage()"
+                                                       [popover]="CommissionPercentage"
                                                        [popoverDisabled]="!rateForm.controls.CommissionPercentage.invalid"
                                                        [popoverOnHover]="rateForm.controls.CommissionPercentage.invalid"
-                                                       [formControl]="rateForm.controls.CommissionPercentage" min="0" max="100" />
+                                                       [formControl]="rateForm.controls.CommissionPercentage" />
                                             </div>
                                             <div class="form-group" *ngIf="!isEdit[i]">
                                                 <span class="text-value">{{rate.CommissionPercentage}}</span>
@@ -153,10 +157,12 @@
                                                     </popover-content>
                                                 <input type="number"
                                                        class="form-control" 
-                                                       [popover]="Fees" 
+                                                       [class.data-err]="validateFees()"
+                                                       (change)="validateFees()"
+                                                       [popover]="Fees"
                                                        [popoverDisabled]="!rateForm.controls.Fees.invalid"
                                                        [popoverOnHover]="rateForm.controls.Fees.invalid"
-                                                       [formControl]="rateForm.controls.Fees" min="0" />
+                                                       [formControl]="rateForm.controls.Fees"/>
                                             </div>
                                             <div class="form-group" *ngIf="!isEdit[i]">
                                                 <span class="text-value">{{rate.Fees}}</span>
@@ -183,6 +189,7 @@
                                             <button class="btn btn-simple btn-edit btn-icon"
                                                     type="button"
                                                     *ngIf="isEdit[i]"
+                                                    [disabled]="validateValue() || validateCommissionPercentage() || validateFees()"
                                                     (click)="saveRates({index: i})">
                                                 <i class="material-icons text-primary">done</i>
                                             </button>

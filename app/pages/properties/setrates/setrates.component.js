@@ -92,9 +92,9 @@ var SetratesComponent = (function () {
             EndDate: new forms_1.FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             PropertyId: new forms_1.FormControl(this.propertyId),
             StartDate: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
-            Value: new forms_1.FormControl(),
-            CommissionPercentage: new forms_1.FormControl(this.propertyService.commissionPercentage),
-            Fees: new forms_1.FormControl(this.propertyService.fees)
+            Value: new forms_1.FormControl([null, forms_1.Validators.pattern(/^[0-9]*$/)]),
+            CommissionPercentage: new forms_1.FormControl([null, forms_1.Validators.pattern(/^[0-9][0-9]?$|^100$/)]),
+            Fees: new forms_1.FormControl([null, forms_1.Validators.pattern(/^[0-9]*$/)])
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
         setTimeout(function () {
@@ -109,16 +109,39 @@ var SetratesComponent = (function () {
         return moment(date).format(format);
     };
     SetratesComponent.prototype.clearRates = function (rate) {
-        this.isEdit[rate.index] = !this.isEdit[rate.index];
+        if (typeof (this.propertyService.rates[rate.index].Id) == undefined || this.propertyService.rates[rate.index].Id == undefined) {
+            this.isEdit[rate.index] = !this.isEdit[rate.index];
+            this.propertyService.rates.splice(rate.index, 1);
+        }
+        else {
+            this.isEdit[rate.index] = !this.isEdit[rate.index];
+        }
         this.isEditing = false;
     };
     SetratesComponent.prototype.saveRates = function (object) {
         var _this = this;
+        // fixes with dates
+        var form = Object.assign({}, this.rateForm.value);
+        form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        // ----------------
+        // set commition persentage and fees to default if null
+        if (this.rateForm.controls['CommissionPercentage'].value == null || this.rateForm.controls['CommissionPercentage'].value.length == 0) {
+            form.CommissionPercentage = this.propertyService.commissionPercentage;
+        }
+        else {
+            form.CommissionPercentage = this.rateForm.controls['CommissionPercentage'].value;
+        }
+        if (this.rateForm.controls['Fees'].value == null || this.rateForm.controls['Fees'].value.length == 0) {
+            form.Fees = this.propertyService.fees;
+        }
+        else {
+            form.Fees = this.rateForm.controls['Fees'].value;
+        }
+        //-----------------------
+        console.log(JSON.stringify(form));
         if (this.rateForm.controls['Id'] && this.rateForm.controls['Id'].value != null) {
             this.saveMessage = 'Property Rate Updated Successfully';
-            var form = Object.assign({}, this.rateForm.value);
-            form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-            form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
             // modified to have update with PUT HTTP request
             this.propertyService.updateRate(form).subscribe(function (d) {
                 $.notify({
@@ -151,12 +174,6 @@ var SetratesComponent = (function () {
         }
         else {
             this.saveMessage = 'Property Rate Added Successfully';
-            // fixes with dates
-            var form = Object.assign({}, this.rateForm.value);
-            form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-            form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-            // ----------------
-            console.log(JSON.stringify(form));
             this.propertyService.saveRate(form).subscribe(function (d) {
                 $.notify({
                     icon: "notifications",
@@ -244,6 +261,30 @@ var SetratesComponent = (function () {
             form.controls[f].setErrors({ serverError: e.ModelState[field] });
         });
         console.log(form);
+    };
+    SetratesComponent.prototype.validateFees = function () {
+        if (parseInt(this.rateForm.controls['Fees'].value) <= 0) {
+            // this.rateForm.controls.Fees.invalid = true;
+            this.rateForm.controls['Fees'].setErrors({ serverError: 'Must be a postive number or 0' });
+            return true;
+        }
+        return false;
+    };
+    SetratesComponent.prototype.validateCommissionPercentage = function () {
+        if (parseInt(this.rateForm.controls['CommissionPercentage'].value) < 0 || parseInt(this.rateForm.controls['CommissionPercentage'].value) > 100) {
+            // this.rateForm.controls.CommissionPercentage.invalid = true;
+            this.rateForm.controls['CommissionPercentage'].setErrors({ serverError: 'Must be a number from 0 to 100' });
+            return true;
+        }
+        return false;
+    };
+    SetratesComponent.prototype.validateValue = function () {
+        if (parseInt(this.rateForm.controls['Value'].value) <= 0) {
+            // this.rateForm.controls.Value.invalid = true;
+            this.rateForm.controls['Value'].setErrors({ serverError: 'Must be a postive number or 0' });
+            return true;
+        }
+        return false;
     };
     SetratesComponent = __decorate([
         core_1.Component({

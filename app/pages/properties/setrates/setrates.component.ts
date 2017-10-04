@@ -104,9 +104,9 @@ export class SetratesComponent implements OnInit{
             EndDate: new FormControl(moment().add(1, 'day').format('DD/MM/YYYY')),
             PropertyId: new FormControl(this.propertyId),
             StartDate: new FormControl(moment().format('DD/MM/YYYY')),
-            Value: new FormControl(),
-            CommissionPercentage: new FormControl(this.propertyService.commissionPercentage),
-            Fees: new FormControl(this.propertyService.fees)
+            Value: new FormControl([null,Validators.pattern(/^[0-9]*$/)]),
+            CommissionPercentage: new FormControl([null,Validators.pattern(/^[0-9][0-9]?$|^100$/)]),
+            Fees: new FormControl([null,Validators.pattern(/^[0-9]*$/)])
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
 
@@ -125,17 +125,38 @@ export class SetratesComponent implements OnInit{
     }
 
     private clearRates(rate) {
-        this.isEdit[rate.index] = !this.isEdit[rate.index];
+        if(typeof(this.propertyService.rates[rate.index].Id) == undefined || this.propertyService.rates[rate.index].Id == undefined){
+            this.isEdit[rate.index] = !this.isEdit[rate.index];
+            this.propertyService.rates.splice(rate.index, 1);
+        }else{
+            this.isEdit[rate.index] = !this.isEdit[rate.index];
+        }        
         this.isEditing = false ;
     }
 
     private saveRates(object) {
+        // fixes with dates
+        let form = Object.assign({}, this.rateForm.value);
+        form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
+        // ----------------
+        // set commition persentage and fees to default if null
+        if(this.rateForm.controls['CommissionPercentage'].value == null || this.rateForm.controls['CommissionPercentage'].value.length == 0 ){
+            form.CommissionPercentage =this.propertyService.commissionPercentage
+        }else{
+            form.CommissionPercentage =this.rateForm.controls['CommissionPercentage'].value 
+        }
+
+        if(this.rateForm.controls['Fees'].value == null || this.rateForm.controls['Fees'].value.length == 0 ){
+            form.Fees =this.propertyService.fees
+        }else{
+            form.Fees =this.rateForm.controls['Fees'].value 
+        }
+        //-----------------------
+        console.log(JSON.stringify(form));
+
         if (this.rateForm.controls['Id'] && this.rateForm.controls['Id'].value != null) {
             this.saveMessage = 'Property Rate Updated Successfully';
-            let form = Object.assign({}, this.rateForm.value);
-            form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-            form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-
             // modified to have update with PUT HTTP request
             this.propertyService.updateRate(form).subscribe(
                 d => {
@@ -172,14 +193,8 @@ export class SetratesComponent implements OnInit{
                 }
             )
         } else {
-            this.saveMessage = 'Property Rate Added Successfully'
-            // fixes with dates
-            let form = Object.assign({}, this.rateForm.value);
-            form.EndDate = moment(form.EndDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-            form.StartDate = moment(form.StartDate, 'DD/MM/YYYY').format('MM/DD/YYYY');
-            // ----------------
-            console.log(JSON.stringify(form));
-            
+            this.saveMessage = 'Property Rate Added Successfully';
+
             this.propertyService.saveRate(form).subscribe(
                 d => {
                     $.notify({
@@ -278,5 +293,29 @@ export class SetratesComponent implements OnInit{
             form.controls[f].setErrors({ serverError: e.ModelState[field] });
         });
         console.log(form);
+    }
+    validateFees(){
+        if(parseInt(this.rateForm.controls['Fees'].value) <= 0 ){
+            // this.rateForm.controls.Fees.invalid = true;
+            this.rateForm.controls['Fees'].setErrors({ serverError: 'Must be a postive number or 0' });
+            return true
+        }
+        return false
+    }
+    validateCommissionPercentage(){
+        if(parseInt(this.rateForm.controls['CommissionPercentage'].value) < 0 || parseInt(this.rateForm.controls['CommissionPercentage'].value) > 100 ){
+            // this.rateForm.controls.CommissionPercentage.invalid = true;
+            this.rateForm.controls['CommissionPercentage'].setErrors({ serverError: 'Must be a number from 0 to 100' });
+            return true
+        }
+        return false
+    }
+    validateValue(){
+        if(parseInt(this.rateForm.controls['Value'].value) <= 0 ){
+            // this.rateForm.controls.Value.invalid = true;
+            this.rateForm.controls['Value'].setErrors({ serverError: 'Must be a postive number or 0' });
+            return true
+        }
+        return false
     }
 }
