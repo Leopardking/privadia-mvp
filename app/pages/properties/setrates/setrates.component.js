@@ -93,8 +93,8 @@ var SetratesComponent = (function () {
             PropertyId: new forms_1.FormControl(this.propertyId),
             StartDate: new forms_1.FormControl(moment().format('DD/MM/YYYY')),
             Value: new forms_1.FormControl([null, forms_1.Validators.pattern(/^[0-9]*$/)]),
-            CommissionPercentage: new forms_1.FormControl([null, forms_1.Validators.pattern(/^[0-9][0-9]?$|^100$/)]),
-            Fees: new forms_1.FormControl([null, forms_1.Validators.pattern(/^[0-9]*$/)])
+            CommissionPercentage: new forms_1.FormControl(this.propertyService.commissionPercentage, forms_1.Validators.pattern(/^[0-9][0-9]?$|^100$/)),
+            Fees: new forms_1.FormControl(this.propertyService.fees, forms_1.Validators.pattern(/^[0-9]*$/))
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
         setTimeout(function () {

@@ -105,8 +105,8 @@ export class SetratesComponent implements OnInit{
             PropertyId: new FormControl(this.propertyId),
             StartDate: new FormControl(moment().format('DD/MM/YYYY')),
             Value: new FormControl([null,Validators.pattern(/^[0-9]*$/)]),
-            CommissionPercentage: new FormControl([null,Validators.pattern(/^[0-9][0-9]?$|^100$/)]),
-            Fees: new FormControl([null,Validators.pattern(/^[0-9]*$/)])
+            CommissionPercentage: new FormControl(this.propertyService.commissionPercentage,Validators.pattern(/^[0-9][0-9]?$|^100$/)),
+            Fees: new FormControl(this.propertyService.fees,Validators.pattern(/^[0-9]*$/))
         });
         this.isEdit[this.propertyService.rates.length - 1] = !this.isEdit[this.propertyService.rates.length - 1];
 
