@@ -1,3 +1,4 @@
+import { LoginService } from './../../../providers/login/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -38,9 +39,9 @@ export class SetratesComponent implements OnInit{
         Fees: new FormControl()
     });
     public date;
-
     constructor ( private route: ActivatedRoute,
                   private propertyService: PropertiesService,
+                  private loginService:LoginService,
                   private builder: FormBuilder ) {
         console.log('Form init');
     }

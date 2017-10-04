@@ -103,6 +103,11 @@
                                                 [routerLink]="['/properties/view', item.Id]">
                                             <i class="material-icons">remove_red_eye</i>View
                                         </button>
+                                        <button *ngIf="loginService.getPermission('Rates/Get') && loginService.getRoles('Agent')"
+                                                class="btn btn-simple btn-edit btn-icon"
+                                                [routerLink]="['/properties/setrates', item.Id]">
+                                            <i class="material-icons">attach_money</i>View Rates
+                                        </button>
                                         <popover-content #popever
                                                          placement="left"
                                                          [animation]="true"

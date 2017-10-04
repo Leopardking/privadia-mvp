@@ -8,7 +8,7 @@
                     </div>
                     <div class="card-content">
                         <h4 class="card-title">Rates for "{{propertyService.property && propertyService.property.InternalName}}"</h4>
-                        <h5 class="danger" *ngIf="propertyService.warning != null">{{propertyService.warning}}</h5>
+                        <h5 class="danger" *ngIf="propertyService.warning != null && !loginService.getRoles('Agent')">{{propertyService.warning}}</h5>
                         <div class="material-datatables">
                             <table id="datatables"
                                    class="table table-rates"
@@ -176,26 +176,26 @@
                                         <td width="10%" class="text-right">
                                             <button class="btn btn-simple btn-edit btn-icon"
                                                     type="button"
-                                                    *ngIf="!isEdit[i]"
+                                                    *ngIf="!isEdit[i] && !loginService.getRoles('Agent')"
                                                     (click)="editRates({index: i})">
                                                 <i class="material-icons text-primary">edit</i>
                                             </button>
                                             <button class="btn btn-simple btn-delete btn-icon"
                                                     type="button"
-                                                    *ngIf="!isEdit[i]"
+                                                    *ngIf="!isEdit[i] && !loginService.getRoles('Agent')"
                                                     [popover]="deleteRatePopover">
                                                 <i class="material-icons text-danger">delete</i>
                                             </button>
                                             <button class="btn btn-simple btn-edit btn-icon"
                                                     type="button"
-                                                    *ngIf="isEdit[i]"
+                                                    *ngIf="isEdit[i] && !loginService.getRoles('Agent')"
                                                     [disabled]="validateValue() || validateCommissionPercentage() || validateFees()"
                                                     (click)="saveRates({index: i})">
                                                 <i class="material-icons text-primary">done</i>
                                             </button>
                                             <button class="btn btn-simple btn-delete btn-icon"
                                                     type="button"
-                                                    *ngIf="isEdit[i]"
+                                                    *ngIf="isEdit[i] && !loginService.getRoles('Agent')"
                                                     (click)="clearRates({rate: rate, index: i})">
                                                 <i class="material-icons text-danger">clear</i>
                                             </button>
@@ -288,7 +288,7 @@
                                     -->
                                 </tbody>
                             </table>
-                            <div class="row">
+                            <div *ngIf="!loginService.getRoles('Agent')"  class="row">
                                 <div class="col-xs-12 text-right">
                                     <button [disabled]="isEditing" class="btn btn-success btn-edit btn-icon"
                                             type="button"

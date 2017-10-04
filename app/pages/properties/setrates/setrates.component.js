@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var login_service_1 = require('./../../../providers/login/login.service');
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var router_1 = require('@angular/router');
@@ -15,9 +16,10 @@ var properties_service_1 = require('../../../providers/properties/properties.ser
 var initDatetimepickers = require('../../../../assets/js/init/initDatetimepickers.js');
 var helpers_1 = require("../../../helpers/helpers");
 var SetratesComponent = (function () {
-    function SetratesComponent(route, propertyService, builder) {
+    function SetratesComponent(route, propertyService, loginService, builder) {
         this.route = route;
         this.propertyService = propertyService;
+        this.loginService = loginService;
         this.builder = builder;
         this.datatableInited = false;
         this.isEdit = [];
@@ -293,7 +295,7 @@ var SetratesComponent = (function () {
             templateUrl: 'setrates.component.html',
             styleUrls: ['setrates.component.css']
         }), 
-        __metadata('design:paramtypes', [router_1.ActivatedRoute, properties_service_1.PropertiesService, forms_1.FormBuilder])
+        __metadata('design:paramtypes', [router_1.ActivatedRoute, properties_service_1.PropertiesService, login_service_1.LoginService, forms_1.FormBuilder])
     ], SetratesComponent);
     return SetratesComponent;
 }());
