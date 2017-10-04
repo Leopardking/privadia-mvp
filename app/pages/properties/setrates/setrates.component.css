@@ -38,7 +38,7 @@
 	color:red;
 }
 .datepicker-max-86{
-	width: 86% !important;
+	width: 80% !important;
 }
 .data-err{
 	background-image: linear-gradient(#f44336, #f44336),linear-gradient(#f44336, #f44336);
